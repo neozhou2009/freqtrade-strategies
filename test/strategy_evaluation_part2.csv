@@ -1,0 +1,151 @@
+key,status,error,trades,profit_mean,profit_mean_pct,profit_total_abs,profit_total,profit_total_pct,duration_avg,wins,draws,losses,winrate,cagr,expectancy,expectancy_ratio,sortino,sharpe,calmar,sqn,profit_factor,max_drawdown_account,max_drawdown_abs
+ClucHAnix_hhll,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+ClucHAwerk,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+ClucMay72018,,,0.0,0.0,0.0,0.0,0.0,0.0,0:00,0.0,0.0,0.0,0.0,0.0,0.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0
+CofiBitStrategy,,,83.0,-0.0012764816438010564,-0.13,-31.10699428,-0.031106994279999998,-3.11,0:31:00,28.0,0.0,55.0,0.3373493975903614,-0.36958435291363334,-0.3747830636144578,-0.4883158742793624,-22.373551216156745,-22.59501707610591,-67.29262914442883,-3.2258,0.26308695336023497,0.03532620429999997,35.326
+CombinedBinHAndCluc,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+CombinedBinHAndCluc2021,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+CombinedBinHAndCluc2021Bull,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+CombinedBinHAndClucHyperV0,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+CombinedBinHAndClucHyperV3,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+CombinedBinHAndClucV2,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+CombinedBinHAndClucV3,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+CombinedBinHAndClucV4,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+CombinedBinHAndClucV5,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+CombinedBinHAndClucV5Hyperoptable,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+CombinedBinHAndClucV6,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+CombinedBinHAndClucV6H,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+CombinedBinHAndClucV7,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+CombinedBinHAndClucV8,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+CombinedBinHAndClucV8Hyper,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+CombinedBinHAndClucV8XH,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+CombinedBinHAndClucV8XHO,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+CombinedBinHClucAndMADV3,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+CombinedBinHClucAndMADV5,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+CombinedBinHClucAndMADV6,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+CombinedBinHClucAndMADV9,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+Combined_Indicators,,,0.0,0.0,0.0,0.0,0.0,0.0,0:00,0.0,0.0,0.0,0.0,0.0,0.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0
+Combined_NFIv6_SMA,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+Combined_NFIv7_SMA,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+Combined_NFIv7_SMA_Rallipanos_20210707,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+Combined_NFIv7_SMA_bAdBoY_20211204,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+CoreStrategy,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+CrossEMAStrategy,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+CryptoFrog,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+CryptoFrogHO,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+CryptoFrogHO2,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+CryptoFrogHO2A,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+CryptoFrogHO3A1,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+CryptoFrogHO3A2,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+CryptoFrogHO3A3,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+CryptoFrogHO3A4,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+CryptoFrogNFI,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+CryptoFrogNFIHO1A,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+CryptoFrogOffset,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+CustomStoplossWithPSAR,,,2.0,0.09504543747526728,9.5,57.34935252,0.057349352519999994,5.73,"24 days, 23:45:00",2.0,0.0,0.0,1.0,1.257304532986757,28.67467626,100.0,-100.0,5.365294285507156,-100.0,3.5104,0.0,0.0,0
+DCBBBounce,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+DD,,,164.0,0.00021282825968241896,0.02,11.711495989999998,0.011711495989999997,1.17,2:54:00,92.0,4.0,68.0,0.5609756097560976,0.1852981297485503,0.07141156091463419,0.027385482804016537,4.636274623597554,4.636164246424332,32.8712410858238,0.4723,1.1248708702920396,0.0272271820998216,27.527
+DIV_v1,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+DevilStra,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+Diamond,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+Divergences,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+Dracula,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+Dyna_opti,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+EI3v2_tag_cofi_green,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+EMA50,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+EMA520015_V17,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+EMABBRSI,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+EMABreakout,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+EMASkipPump,,,186.0,0.00021264371022032674,0.02,13.201265470000003,0.013201265470000003,1.32,3:01:00,119.0,0.0,67.0,0.6397849462365591,0.211037423019101,0.07097454553763427,0.04466969854715441,5.0826169532766485,5.346546263616764,34.13632622136398,0.5116,1.1240084168622497,0.029553247298946237,29.877
+EMAVolume,,,126.0,-0.0012218970076357785,-0.12,-46.71962813999998,-0.04671962813999998,-4.67,2:47:00,26.0,0.0,100.0,0.20634920634920634,-0.5026965137047086,-0.3707906995238097,-0.37942243555808164,-47.22689661200841,-21.816042510376764,-59.81571457351764,-2.5331,0.5219277311968172,0.0596884781,59.688
+EMA_CROSSOVER_STRATEGY,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+EXPERIMENTAL_STRATEGY,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+ElliotV2,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+ElliotV4,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+ElliotV531,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+ElliotV5HO,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+ElliotV5HOMod2,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+ElliotV5HOMod3,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+ElliotV7,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+ElliotV8HO,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+ElliotV8_original,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+ElliotV8_original_ichiv2,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+ElliotV8_original_ichiv3,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+Elliotv8,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+FRAYSTRAT,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+Fakebuy,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+FastSupertrend,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+FastSupertrendOpt,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+FiveMinCrossAbove,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+FixedRiskRewardLoss,,,2.0,0.09538416462801383,9.54,57.527041319999995,0.05752704131999999,5.75,"24 days, 23:55:00",2.0,0.0,0.0,1.0,1.2628492695363138,28.763520659999998,100.0,-100.0,5.3948029292796384,-100.0,3.5297,0.0,0.0,0
+ForexSignal,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+FrostAuraM115mStrategy,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+FrostAuraM11hStrategy,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+FrostAuraM21hStrategy,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+FrostAuraM315mStrategy,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+FrostAuraM31hStrategy,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+FrostAuraRandomStrategy,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+GodCard,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+GodStraNew,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+GodStraNew40,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+GodStraNew_SMAonly,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+Guacamole,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+Gumbo1,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+Hacklemore2,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+Hacklemore3,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+HansenSmaOffsetV1,,,0.0,0.0,0.0,0.0,0.0,0.0,0:00,0.0,0.0,0.0,0.0,0.0,0.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0
+HarmonicDivergence,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+Heracles,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+HourBasedStrategy,,,20.0,0.006256039191225174,0.63,38.34718122000001,0.03834718122000001,3.83,"2 days, 11:19:00",12.0,0.0,8.0,0.6,0.7322149749261022,1.917359061,8.482015162622579,308.56412951454985,11.73768738964126,2864.990970638871,3.3475,22.20503790655645,0.0010228609807647142,1.028
+HyperStra_GSN_SMAOnly,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+HyperStra_SMAOnly,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+INSIDEUP,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+Ichess,,,187.0,-0.00039007154908552176,-0.04,-22.69728267,-0.02269728267,-2.27,3:45:00,58.0,0.0,129.0,0.31016042780748665,-0.2848042055963709,-0.12137584315508021,-0.11951417075965765,-19.53774345770572,-8.11648934753429,-32.71341616244361,-0.7746,0.8267507757204962,0.053021790740789936,53.029
+Ichi,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+Ichimoku,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+Ichimoku_SenkouSpanCross,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+Ichimoku_v12,,,5.0,0.03472082308746935,3.47,53.19958699,0.05319958699,5.32,"9 days, 18:51:00",5.0,0.0,0.0,1.0,1.131355675826847,10.639917398,100.0,-100.0,7.181656528032337,-100.0,3.7591,0.0,0.0,0
+Ichimoku_v30,,,12.0,0.012108968836821209,1.21,43.914527639999996,0.04391452763999999,4.39,"3 days, 20:41:00",9.0,0.0,3.0,0.75,0.8728722107108542,3.65954397,1.1528936187911176,38.11988248660475,5.515746565660331,469.21470912220326,1.9949,5.611574475164469,0.007152255513084615,7.328
+Ichimoku_v31,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+Ichimoku_v32,,,35.0,0.0018990388043969703,0.19,19.49227168,0.019492271680000003,1.95,"1 day, 3:33:00",11.0,0.0,24.0,0.3142857142857143,0.32557862913985125,0.5569220480000003,0.25101550287039354,7.455273446318922,2.6904510126558234,47.080306463710635,0.5865,1.3660642750193237,0.03163949902019815,32.361
+Ichimoku_v33,,,168.0,-0.0012722391716597466,-0.13,-64.34855866,-0.06434855866,-6.43,0:52:00,34.0,0.0,134.0,0.20238095238095238,-0.6213257902370315,-0.3830271348809525,-0.5268288912552701,-80.50353114406772,-48.34569870393953,-74.19233571003933,-4.8663,0.33949810648593,0.0662805652500001,66.281
+Ichimoku_v37,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+InformativeSample,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+Inverse,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+InverseV2,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+JustROCR,,,0.0,0.0,0.0,0.0,0.0,0.0,0:00,0.0,0.0,0.0,0.0,0.0,0.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0
+JustROCR3,,,0.0,0.0,0.0,0.0,0.0,0.0,0:00,0.0,0.0,0.0,0.0,0.0,0.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0
+JustROCR5,,,0.0,0.0,0.0,0.0,0.0,0.0,0:00,0.0,0.0,0.0,0.0,0.0,0.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0
+JustROCR6,,,0.0,0.0,0.0,0.0,0.0,0.0,0:00,0.0,0.0,0.0,0.0,0.0,0.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0
+KAMACCIRSI,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+KC_BB,,,0.0,0.0,0.0,0.0,0.0,0.0,0:00,0.0,0.0,0.0,0.0,0.0,0.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0
+Kamaflage,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+Leveraged,,,87.0,2.794482708645196e-05,0.0,0.5066600199999984,0.0005066600199999984,0.05,2:55:00,39.0,18.0,30.0,0.4482758620689655,0.007422776214875526,0.005823678390804443,-0.2029955876562043,0.187006145326029,0.20886803228788647,1.8660045715269793,0.0291,1.0113127957970074,0.02074962995999999,20.75
+LookaheadStrategy,,,1.0,0.04744528829252364,4.74,15.5471454,0.0155471454,1.55,0:35:00,1.0,0.0,0.0,1.0,0.2526256780594893,15.5471454,100.0,-100.0,-100.0,-100.0,-100.0,0.0,0.0,0
+Low_BB,,,0.0,0.0,0.0,0.0,0.0,0.0,0:00,0.0,0.0,0.0,0.0,0.0,0.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0
+LuxOSC,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+MAC,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+MACDCCI,,,2.0,0.10230373628661686,10.23,62.30583144,0.06230583144,6.23,"22 days, 1:52:00",2.0,0.0,0.0,1.0,1.4168163839246768,31.15291572,100.0,-100.0,4.522783939826885,-100.0,2.9592,0.0,0.0,0
+MACDRSI200,,,23.0,0.002981937245270684,0.3,20.659819349999996,0.020659819349999997,2.07,"1 day, 9:40:00",13.0,0.0,10.0,0.5652173913043478,0.3479161107354576,0.8982530152173909,0.1749030750077296,2.5555601201438654,2.253219486550994,62.376657676554245,0.6013,1.4022770725177784,0.02531108970405829,25.9
+MACDStrategy,,,15.0,0.009584580291408148,0.96,43.97047078,0.04397047078,4.4,"2 days, 21:05:00",15.0,0.0,0.0,1.0,0.8743380999853243,2.9313647186666665,100.0,-100.0,95.809403045475,-100.0,31.2734,0.0,0.0,0
+MACDStrategy_crossed,,,14.0,0.008107740047455216,0.81,33.977326950000005,0.033977326950000004,3.4,20:30:00,13.0,0.0,1.0,0.9285714285714286,0.6287740017305758,2.4269519250000005,0.4975761962163987,-100.0,12.63693744242802,546.3433704989736,4.2587,7.966066747029583,0.004752585681269027,4.878
+MACD_EMA,,,103.0,-0.0006855759758772586,-0.07,-22.17825615,-0.02217825615,-2.22,5:43:00,39.0,0.0,64.0,0.3786407766990291,-0.2792386656407926,-0.21532287524271831,-0.11008889308674819,-8.937759481267488,-6.156510185055099,-30.307045869371613,-0.7899,0.8228256876885147,0.05592296796331395,56.344
+MACD_TRIPLE_MA,,,56.0,-0.0005524719512760892,-0.06,-9.664288909999998,-0.009664288909999997,-0.97,4:27:00,20.0,7.0,29.0,0.35714285714285715,-0.1321920563481197,-0.17257658767857142,-0.2974693225244258,-3.6353505460036435,-4.101042764143832,-38.875396510335676,-0.7107,0.6669557909873156,0.018997720609999987,18.998
+MACD_TRI_EMA,,,485.0,-0.0009914828485370931,-0.1,-138.63307095,-0.13863307095,-13.86,1:00:00,117.0,2.0,366.0,0.24123711340206186,-0.8868257495061241,-0.2858413834020618,-0.4150834543152002,-189.28644389962662,-101.48859580451294,-74.97497319934283,-6.0241,0.45542219851674276,0.14130481084999996,141.305
+MADisplaceV3,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+MFI,,,63.0,0.0007186361692452818,0.07,14.511350620000002,0.014511350620000002,1.45,3:10:00,39.0,0.0,24.0,0.6190476190476191,0.23410153302695957,0.23033889873015878,0.1624699986036091,6.660284968642421,5.8862671453549025,84.13421264478745,0.9627,1.426483746334474,0.01318079556966824,13.352
+Macd,,,0.0,0.0,0.0,0.0,0.0,0.0,0:00,0.0,0.0,0.0,0.0,0.0,0.0,100.0,0.0,0.0,0.0,0.0,0.0,0.0,0
+MacheteV8b,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+MacheteV8bRallimod2,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+MarketChyperHyperStrategy,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+Maro4hMacdSd,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+Martin,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+MiniLambo,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+Minmax,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+MomStrategy,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+Momentumv2,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+MontrealStrategy,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+MostOfAll,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+MultiMA_TSL,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+MultiMA_TSL3,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,
+MultiMA_TSL3_Mod,Error,Return code non-zero,,,,,,,,,,,,,,,,,,,,,

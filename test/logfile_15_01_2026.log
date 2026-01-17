@@ -1,0 +1,33 @@
+2026-01-15 21:08:44,760 :: test
+2026-01-15 21:08:44,761 :: Using resolved strategy Ichi from '/root/test_strategy/freqtrade-test/freqtrade-strategies/strategies/Ichi/Ichi.py'...
+2026-01-15 21:08:44,761 :: Found no parameter file.
+2026-01-15 21:08:44,761 :: Override strategy 'timeframe' with value from the configuration: 5m.
+2026-01-15 21:08:44,761 :: Override strategy 'stake_currency' with value from the configuration: USDT.
+2026-01-15 21:08:44,762 :: Override strategy 'stake_amount' with value from the configuration: unlimited.
+2026-01-15 21:08:44,762 :: Override strategy 'unfilledtimeout' with value from the configuration: {'entry': 10, 'exit': 10, 'exit_timeout_count': 0, 'unit': 'minutes'}.
+2026-01-15 21:08:44,762 :: Override strategy 'max_open_trades' with value from the configuration: 3.
+2026-01-15 21:08:44,762 :: Strategy using minimal_roi: {'60': 0, '45': 0.00125, '30': 0.0015, '15': 0.0025, '10': 0.0375, '5': 0.005, '0': 0.01}
+2026-01-15 21:08:44,762 :: Strategy using timeframe: 5m
+2026-01-15 21:08:44,762 :: Strategy using stoploss: -0.2
+2026-01-15 21:08:44,762 :: Strategy using trailing_stop: False
+2026-01-15 21:08:44,762 :: Strategy using trailing_stop_positive_offset: 0.0
+2026-01-15 21:08:44,762 :: Strategy using trailing_only_offset_is_reached: False
+2026-01-15 21:08:44,762 :: Strategy using use_custom_stoploss: False
+2026-01-15 21:08:44,762 :: Strategy using process_only_new_candles: True
+2026-01-15 21:08:44,762 :: Strategy using order_types: {'buy': 'limit', 'sell': 'limit', 'stoploss': 'limit', 'stoploss_on_exchange': True}
+2026-01-15 21:08:44,762 :: Strategy using order_time_in_force: {'entry': 'GTC', 'exit': 'GTC'}
+2026-01-15 21:08:44,762 :: Strategy using stake_currency: USDT
+2026-01-15 21:08:44,762 :: Strategy using stake_amount: unlimited
+2026-01-15 21:08:44,763 :: Strategy using startup_candle_count: 0
+2026-01-15 21:08:44,763 :: Strategy using unfilledtimeout: {'entry': 10, 'exit': 10, 'exit_timeout_count': 0, 'unit': 'minutes'}
+2026-01-15 21:08:44,763 :: Strategy using use_exit_signal: True
+2026-01-15 21:08:44,763 :: Strategy using exit_profit_only: False
+2026-01-15 21:08:44,763 :: Strategy using ignore_roi_if_entry_signal: False
+2026-01-15 21:08:44,763 :: Strategy using exit_profit_offset: 0.0
+2026-01-15 21:08:44,763 :: Strategy using disable_dataframe_checks: False
+2026-01-15 21:08:44,763 :: Strategy using ignore_buying_expired_candle_after: 0
+2026-01-15 21:08:44,763 :: Strategy using position_adjustment_enable: False
+2026-01-15 21:08:44,763 :: Strategy using max_entry_position_adjustment: -1
+2026-01-15 21:08:44,763 :: Strategy using max_open_trades: 3
+2026-01-15 21:08:44,763 :: Configuration error: Please migrate your order_types settings to use the new wording.
+Please make sure to review the documentation at https://www.freqtrade.io/en/stable.
