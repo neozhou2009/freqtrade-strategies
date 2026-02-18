@@ -38,6 +38,8 @@ class Combined_Indicators(IStrategy):
 
     timeframe = '1m'
 
+    process_only_new_candles = True
+
     def populate_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         # strategy BinHV45
         mid, lower = bollinger_bands(dataframe['close'], window_size=40, num_of_std=2)

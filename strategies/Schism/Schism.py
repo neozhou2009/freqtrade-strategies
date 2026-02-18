@@ -16,7 +16,11 @@ from cachetools import TTLCache
 class Schism(IStrategy):
 
     timeframe = '5m'
+
+    process_only_new_candles = True
     inf_timeframe = '1h'
+
+    process_only_new_candles = True
 
     buy_params = {
         'rmi-slow': 20,
@@ -39,9 +43,14 @@ class Schism(IStrategy):
 
     stoploss = -0.40
 
-    use_sell_signal = True
-    sell_profit_only = True
-    ignore_roi_if_buy_signal = True
+    trailing_stop = True
+    trailing_stop_positive = 0.03
+    trailing_stop_positive_offset = 0.05
+    trailing_only_offset_is_reached = True
+
+    use_exit_signal = True
+    exit_profit_only = False
+    ignore_roi_if_entry_signal = True
 
     startup_candle_count: int = 72
 

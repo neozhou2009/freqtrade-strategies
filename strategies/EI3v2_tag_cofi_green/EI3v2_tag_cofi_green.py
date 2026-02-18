@@ -31,7 +31,9 @@ def EWO(dataframe, ema_length=5, ema2_length=3):
 
 
 class EI3v2_tag_cofi_green(IStrategy):
-    INTERFACE_VERSION = 2
+    INTERFACE_VERSION = 3
+
+    can_short: bool = False
     """
     # ROI table:
     minimal_roi = {
@@ -112,7 +114,7 @@ class EI3v2_tag_cofi_green(IStrategy):
     }
 
     # Stoploss:
-    stoploss = -0.10
+    stoploss = -0.99
 
     # SMAOffset
     base_nb_candles_buy = IntParameter(8, 20, default=buy_params['base_nb_candles_buy'], space='buy', optimize=False)
@@ -150,15 +152,15 @@ class EI3v2_tag_cofi_green(IStrategy):
     
 
     # Sell signal
-    use_sell_signal = True
-    sell_profit_only = True
+    use_exit_signal = True
+    exit_profit_only = True
     sell_profit_offset = 0.01
-    ignore_roi_if_buy_signal = False
+    ignore_roi_if_entry_signal = False
 
     ## Optional order time in force.
     order_time_in_force = {
-        'buy': 'gtc',
-        'sell': 'gtc'
+        'entry': 'gtc',
+        'exit': 'gtc'
     }
 
     # Optimal timeframe for the strategy
@@ -451,7 +453,7 @@ class EI3v2_tag_cofi_dca_green(EI3v2_tag_cofi_green):
 
         count_of_buys = 0
         for order in trade.orders:
-            if order.ft_is_open or order.ft_order_side != 'buy':
+            if order.ft_is_open or order.ft_order_side != 'entry':
                 continue
             if order.status == "closed":
                 count_of_buys += 1

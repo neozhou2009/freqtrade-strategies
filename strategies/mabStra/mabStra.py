@@ -26,8 +26,15 @@ class MabStra(IStrategy):
 
     # Stoploss:
     stoploss = -0.128
+
+    trailing_stop = True
+    trailing_stop_positive = 0.03
+    trailing_stop_positive_offset = 0.05
+    trailing_only_offset_is_reached = True
     # Buy hypers
     timeframe = '4h'
+
+    process_only_new_candles = True
 
     # #################### END OF RESULT PLACE ####################
 

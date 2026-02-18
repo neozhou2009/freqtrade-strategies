@@ -46,7 +46,9 @@ def SSLChannels(dataframe, length = 7):
     return df['sslDown'], df['sslUp']
 
 class NostalgiaForInfinityV1(IStrategy):
-    INTERFACE_VERSION = 2
+    INTERFACE_VERSION = 3
+
+    can_short: bool = False
 
     minimal_roi = {
         "0": 0.25
@@ -60,10 +62,10 @@ class NostalgiaForInfinityV1(IStrategy):
     custom_info = {}
 
     # Sell signal
-    use_sell_signal = True
-    sell_profit_only = True
+    use_exit_signal = True
+    exit_profit_only = False
     sell_profit_offset = 0.001 # it doesn't meant anything, just to guarantee there is a minimal profit.
-    ignore_roi_if_buy_signal = True
+    ignore_roi_if_entry_signal = True
 
     # Trailing stoploss
     trailing_stop = True
@@ -82,8 +84,8 @@ class NostalgiaForInfinityV1(IStrategy):
 
     # Optional order type mapping.
     order_types = {
-        'buy': 'limit',
-        'sell': 'limit',
+        'entry': 'limit',
+        'exit': 'limit',
         'stoploss': 'market',
         'stoploss_on_exchange': False
     }

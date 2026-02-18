@@ -20,9 +20,11 @@ class CombinedBinHAndClucHyperV3(IStrategy):
     #   "max_open_trades" = 2 and minimal_roi = 0.01
     timeframe = '1m'
 
-    use_sell_signal = True
-    sell_profit_only = True
-    ignore_roi_if_buy_signal = False
+    process_only_new_candles = True
+
+    use_exit_signal = True
+    exit_profit_only = False
+    ignore_roi_if_entry_signal = False
 
     # ----------------------------------------------------------------
     # Hyper Params
@@ -74,14 +76,12 @@ class CombinedBinHAndClucHyperV3(IStrategy):
 
     # ROI table:
     minimal_roi = {
-        "0": 0.10,
-        "30": 0.05,
-        "60": 0.02,
+        "0": 3,
     }
 
     # Stoploss:
     stoploss = -0.06
-    trailing_stop = True
+    trailing_stop = False
     trailing_only_offset_is_reached = False
     use_custom_stoploss = True
 

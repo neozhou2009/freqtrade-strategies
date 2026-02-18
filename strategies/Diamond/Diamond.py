@@ -91,6 +91,8 @@ class Diamond(IStrategy):
     trailing_only_offset_is_reached = False
     # timeframe
     timeframe = '5m'
+
+    process_only_new_candles = True
     # #################### END OF RESULT PLACE ####################
 
     buy_vertical_push = DecimalParameter(0.5, 1.5, decimals=3, default=1, space='buy')

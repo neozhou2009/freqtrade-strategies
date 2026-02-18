@@ -236,9 +236,7 @@ class BBMod1(IStrategy):
     }
 
     minimal_roi = {
-        "0": 0.10,
-        "30": 0.05,
-        "60": 0.02
+        "0": 100
     }
 
     # Optimal timeframe for the strategy
@@ -250,8 +248,8 @@ class BBMod1(IStrategy):
     startup_candle_count = 120
 
     order_types = {
-        'buy': 'limit',
-        'sell': 'limit',
+        'entry': 'limit',
+        'exit': 'limit',
         'emergencysell': 'limit',
         'forcebuy': "limit",
         'forcesell': 'limit',
@@ -263,11 +261,16 @@ class BBMod1(IStrategy):
     }
 
     # Disabled
-    stoploss = -0.10
+    stoploss = -0.99
+
+    trailing_stop = True
+    trailing_stop_positive = 0.03
+    trailing_stop_positive_offset = 0.05
+    trailing_only_offset_is_reached = True
 
     # Custom stoploss
     use_custom_stoploss = True
-    use_sell_signal = True
+    use_exit_signal = True
 
     lower_trailing_list = ["vwap", "clucHA", "clucHA2", "nfi_38", "nfi7_33", "nfi7_37", "cofi"]
 

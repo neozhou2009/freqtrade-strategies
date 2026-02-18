@@ -132,16 +132,16 @@ class MiniLambo(IStrategy):
     stoploss = -0.10
 
     # Trailing stop:
-    trailing_stop = True
+    trailing_stop = False
     trailing_stop_positive = 0.3207
     trailing_stop_positive_offset = 0.3849
     trailing_only_offset_is_reached = False
 
     timeframe = '1m'
 
-    use_sell_signal = False
-    sell_profit_only = True
-    ignore_roi_if_buy_signal = False
+    use_exit_signal = False
+    exit_profit_only = False
+    ignore_roi_if_entry_signal = False
     use_custom_stoploss = True
     process_only_new_candles = True
     startup_candle_count = 200

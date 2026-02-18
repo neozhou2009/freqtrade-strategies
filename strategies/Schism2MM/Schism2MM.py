@@ -16,7 +16,11 @@ from scipy.signal import argrelextrema
 class Schism2MM(IStrategy):
 
     timeframe = '5m'
+
+    process_only_new_candles = True
     inf_timeframe = '1h'
+
+    process_only_new_candles = True
 
     buy_params = {
         'inf-pct-adr': 0.95,
@@ -36,11 +40,16 @@ class Schism2MM(IStrategy):
         "120": 0
     }
 
-    stoploss = -0.10
+    stoploss = -0.99
 
-    use_sell_signal = False
-    sell_profit_only = True
-    ignore_roi_if_buy_signal = True
+    trailing_stop = True
+    trailing_stop_positive = 0.03
+    trailing_stop_positive_offset = 0.05
+    trailing_only_offset_is_reached = True
+
+    use_exit_signal = False
+    exit_profit_only = False
+    ignore_roi_if_entry_signal = True
 
     startup_candle_count: int = 72
 

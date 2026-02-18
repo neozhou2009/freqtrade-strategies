@@ -26,7 +26,7 @@ from functools import reduce
 ##   Prefer stable coin (USDT, BUSDT etc) pairs, instead of BTC or ETH pairs.                            ##
 ##   Highly recommended to blacklist leveraged tokens (*BULL, *BEAR, *UP, *DOWN etc).                    ##
 ##   Ensure that you don't override any variables in you config.json. Especially                         ##
-##   the timeframe (must be 5m) & sell_profit_only (must be true).                                       ##
+##   the timeframe (must be 5m) & exit_profit_only (must be true).                                       ##
 ##                                                                                                       ##
 ###########################################################################################################
 ##               DONATIONS                                                                               ##
@@ -53,7 +53,9 @@ def SSLChannels(dataframe, length=7):
 
 
 class CombinedBinHAndClucV8XH(IStrategy):
-    INTERFACE_VERSION = 2
+    INTERFACE_VERSION = 3
+
+    can_short: bool = False
 
 
     # Buy hyperspace params:
@@ -100,9 +102,7 @@ class CombinedBinHAndClucV8XH(IStrategy):
 
 
     minimal_roi = {
-        "0": 0.10,
-        "30": 0.05,
-        "60": 0.02
+        "0": 10
     }
 
     stoploss = -0.99  # effectively disabled.
@@ -111,14 +111,14 @@ class CombinedBinHAndClucV8XH(IStrategy):
     inf_1h = '1h'  # informative tf
 
     # Sell signal
-    use_sell_signal = True
-    sell_profit_only = True
+    use_exit_signal = True
+    exit_profit_only = True
     # it doesn't meant anything, just to guarantee there is a minimal profit.
     sell_profit_offset = 0.001
-    ignore_roi_if_buy_signal = True
+    ignore_roi_if_entry_signal = True
 
     # Trailing stoploss
-    trailing_stop = True
+    trailing_stop = False
     trailing_only_offset_is_reached = True
     trailing_stop_positive = 0.01
     trailing_stop_positive_offset = 0.03
@@ -134,8 +134,8 @@ class CombinedBinHAndClucV8XH(IStrategy):
 
     # Optional order type mapping.
     order_types = {
-        'buy': 'limit',
-        'sell': 'limit',
+        'entry': 'limit',
+        'exit': 'limit',
         'stoploss': 'market',
         'stoploss_on_exchange': False
     }

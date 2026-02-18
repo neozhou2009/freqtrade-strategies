@@ -30,7 +30,9 @@ def EWO(dataframe, ema_length=5, ema2_length=35):
 
 
 class NotAnotherSMAOffsetStrategyX1(IStrategy):
-    INTERFACE_VERSION = 2
+    INTERFACE_VERSION = 3
+
+    can_short: bool = False
 
     # Buy hyperspace params:
     buy_params = {
@@ -133,7 +135,7 @@ class NotAnotherSMAOffsetStrategyX1(IStrategy):
     ]
 
     # Trailing stop:
-    trailing_stop = True
+    trailing_stop = False
     trailing_stop_positive = 0.005
     trailing_stop_positive_offset = 0.03
     trailing_only_offset_is_reached = True
@@ -143,10 +145,10 @@ class NotAnotherSMAOffsetStrategyX1(IStrategy):
 
 
     # Sell signal
-    use_sell_signal = True
-    sell_profit_only = True
+    use_exit_signal = True
+    exit_profit_only = False
     sell_profit_offset = 0.01
-    ignore_roi_if_buy_signal = False
+    ignore_roi_if_entry_signal = False
 
     # Optimal timeframe for the strategy
     timeframe = '5m'

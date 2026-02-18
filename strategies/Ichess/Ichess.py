@@ -36,8 +36,15 @@ class Ichess(IStrategy):
     # Stoploss:
     stoploss = -0.314
 
+    trailing_stop = True
+    trailing_stop_positive = 0.03
+    trailing_stop_positive_offset = 0.05
+    trailing_only_offset_is_reached = True
+
     # Opt Timeframe
-    timeframe = '1d'
+    timeframe = '4h'
+
+    process_only_new_candles = True
 
     buy_fast_timeperiod = IntParameter(2, 50, default=9, space="buy")
     buy_slow_timeperiod = IntParameter(2, 50, default=10, space="buy")

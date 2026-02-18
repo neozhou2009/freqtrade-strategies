@@ -1,4 +1,4 @@
-# for live trailing_stop = True and use_custom_stoploss = True
+# for live trailing_stop = False and use_custom_stoploss = True
 # for backtest trailing_stop = True and use_custom_stoploss = False
 
 # --- Do not remove these libs ---
@@ -45,7 +45,9 @@ def EWO(dataframe, ema_length=5, ema2_length=35):
 
 
 class Elliotv8(IStrategy):
-    INTERFACE_VERSION = 2
+    INTERFACE_VERSION = 3
+
+    can_short: bool = False
 
     # ROI table:
     minimal_roi = {
@@ -86,15 +88,15 @@ class Elliotv8(IStrategy):
     trailing_only_offset_is_reached = True
 
     # Sell signal
-    use_sell_signal = True
-    sell_profit_only = True
+    use_exit_signal = True
+    exit_profit_only = False
     sell_profit_offset = 0.01
-    ignore_roi_if_buy_signal = False
+    ignore_roi_if_entry_signal = False
 
     ## Optional order time in force.
     order_time_in_force = {
-        'buy': 'gtc',
-        'sell': 'ioc'
+        'entry': 'gtc',
+        'exit': 'ioc'
     }
 
     # Optimal timeframe for the strategy

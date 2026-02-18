@@ -40,7 +40,7 @@ class Guacamole(IStrategy):
         "244": 0.0025
     }
 
-    stoploss = -0.10
+    stoploss = -0.99
 
     # Trailing stop:
     trailing_stop = True
@@ -56,10 +56,10 @@ class Guacamole(IStrategy):
 
     timeframe = '5m'
 
-    use_sell_signal = True
-    sell_profit_only = True
+    use_exit_signal = True
+    exit_profit_only = False
     # sell_profit_offset = 0.01
-    ignore_roi_if_buy_signal = True
+    ignore_roi_if_entry_signal = True
 
     process_only_new_candles = False
 

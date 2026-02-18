@@ -31,7 +31,7 @@ from functools import reduce
 ##   Prefer stable coin (USDT, BUSDT etc) pairs, instead of BTC or ETH pairs.                            ##
 ##   Highly recommended to blacklist leveraged tokens (*BULL, *BEAR, *UP, *DOWN etc).                    ##
 ##   Ensure that you don't override any variables in you config.json. Especially                         ##
-##   the timeframe (must be 5m) & sell_profit_only (must be true).                                       ##
+##   the timeframe (must be 5m) & exit_profit_only (must be true).                                       ##
 ##                                                                                                       ##
 ###########################################################################################################
 ##               DONATIONS                                                                               ##
@@ -58,7 +58,7 @@ class CombinedBinHAndClucV6H(IStrategy):
     max_open_trades = 5
 
     # Using custom stoploss
-    stoploss = -0.10
+    stoploss = -0.99
     use_custom_stoploss = True
 
     # Trailing stoploss
@@ -77,10 +77,10 @@ class CombinedBinHAndClucV6H(IStrategy):
     process_only_new_candles = False
 
 
-    use_sell_signal = True
-    sell_profit_only = True
+    use_exit_signal = True
+    exit_profit_only = True
     sell_profit_offset = 0.001
-    ignore_roi_if_buy_signal = True
+    ignore_roi_if_entry_signal = True
 
     # hyperspace default buy params 
     buy_params = {

@@ -79,7 +79,9 @@ def EWO(dataframe, ema_length=5, ema2_length=35):
 
 
 class SMA_BBRSI(IStrategy):
-    INTERFACE_VERSION = 2
+    INTERFACE_VERSION = 3
+
+    can_short: bool = False
 
     # Modified ROI - 20210620
     # ROI table:
@@ -91,7 +93,7 @@ class SMA_BBRSI(IStrategy):
     }
 
     # Stoploss:
-    stoploss = -0.10
+    stoploss = -0.5
 
     antipump_threshold = DecimalParameter(0, 0.4, default=0.25, space='buy', optimize=True)
 
@@ -116,16 +118,16 @@ class SMA_BBRSI(IStrategy):
 
 
     # Trailing stop:
-    trailing_stop = True
+    trailing_stop = False
     trailing_stop_positive = 0.001
     trailing_stop_positive_offset = 0.01
     trailing_only_offset_is_reached = True
 
     # Sell signal
-    use_sell_signal = True
-    sell_profit_only = True
+    use_exit_signal = True
+    exit_profit_only = False
     sell_profit_offset = 0.01
-    ignore_roi_if_buy_signal = False
+    ignore_roi_if_entry_signal = False
 
     # Optimal timeframe for the strategy
     timeframe = '5m'

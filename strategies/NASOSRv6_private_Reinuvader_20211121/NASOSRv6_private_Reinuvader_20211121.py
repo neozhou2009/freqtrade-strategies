@@ -64,13 +64,13 @@ sell_params = {
 
 
 class NASOSRv6_private_Reinuvader_20211121(IStrategy):
-    INTERFACE_VERSION = 2
+    INTERFACE_VERSION = 3
+
+    can_short: bool = False
 
     # ROI table:
     minimal_roi = {
-        "0": 0.10,
-        "30": 0.05,
-        "60": 0.02
+        "0": 10
     }
 
     # Stoploss:
@@ -121,21 +121,21 @@ class NASOSRv6_private_Reinuvader_20211121(IStrategy):
     low_offset_ema2 = DecimalParameter(0.9, 1.1, default=buy_params['low_offset_ema2'], space='buy', optimize=False)
 
     # Trailing stop:
-    trailing_stop = True
+    trailing_stop = False
     #trailing_stop_positive = 0.001
     #trailing_stop_positive_offset = 0.016
     #trailing_only_offset_is_reached = True
 
     # Sell signal
-    use_sell_signal = True
-    #sell_profit_only = True
+    use_exit_signal = True
+    #exit_profit_only = False
     #sell_profit_offset = -0.0001
-    #ignore_roi_if_buy_signal = False
+    #ignore_roi_if_entry_signal = False
 
     # Optional order time in force.
     order_time_in_force = {
-        'buy': 'gtc',
-        'sell': 'gtc'
+        'entry': 'gtc',
+        'exit': 'gtc'
     }
 
     # Optimal timeframe for the strategy

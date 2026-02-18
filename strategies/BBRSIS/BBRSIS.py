@@ -18,23 +18,28 @@ class BBRSIS(IStrategy):
     }
 
     # Optimal stoploss designed for the strategy
-    stoploss = -0.10
+    stoploss = -0.99
+
+    trailing_stop = True
+    trailing_stop_positive = 0.03
+    trailing_stop_positive_offset = 0.05
+    trailing_only_offset_is_reached = True
 
     # Optimal ticker interval for the strategy
     ticker_interval = '5m'
 
     # Optional order type mapping
     order_types = {
-        'buy': 'limit',
-        'sell': 'limit',
+        'entry': 'limit',
+        'exit': 'limit',
         'stoploss': 'limit',
         'stoploss_on_exchange': False
     }
 
     # Optional time in force for orders
     order_time_in_force = {
-        'buy': 'gtc',
-        'sell': 'gtc',
+        'entry': 'gtc',
+        'exit': 'gtc',
     }
     
     def get_ticker_indicator(self):

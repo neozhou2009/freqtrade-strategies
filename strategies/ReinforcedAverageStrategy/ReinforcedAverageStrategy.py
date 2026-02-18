@@ -34,7 +34,7 @@ class ReinforcedAverageStrategy(IStrategy):
     timeframe = '4h'
 
     # trailing stoploss
-    trailing_stop = True
+    trailing_stop = False
     trailing_stop_positive = 0.01
     trailing_stop_positive_offset = 0.02
     trailing_only_offset_is_reached = False
@@ -43,9 +43,9 @@ class ReinforcedAverageStrategy(IStrategy):
     process_only_new_candles = False
 
     # Experimental settings (configuration will overide these if set)
-    use_sell_signal = True
-    sell_profit_only = True
-    ignore_roi_if_buy_signal = False
+    use_exit_signal = True
+    exit_profit_only = False
+    ignore_roi_if_entry_signal = False
 
     def populate_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
 

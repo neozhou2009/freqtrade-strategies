@@ -17,8 +17,8 @@ class EMA520015_V17(IStrategy):
     
    # Buy and sell at market price
     order_types = {
-        'buy': 'market',
-        'sell': 'market',
+        'entry': 'market',
+        'exit': 'market',
         'stoploss': 'market',
         'stoploss_on_exchange': False
     }
@@ -32,6 +32,8 @@ class EMA520015_V17(IStrategy):
     
     # Optimal timeframe for the strategy
     timeframe = '4h'
+
+    process_only_new_candles = True
 
     def populate_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
 

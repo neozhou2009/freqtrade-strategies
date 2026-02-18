@@ -71,8 +71,15 @@ class wtc(IStrategy):
         "7617": 0
     }
     stoploss = -0.128
+
+    trailing_stop = True
+    trailing_stop_positive = 0.03
+    trailing_stop_positive_offset = 0.05
+    trailing_only_offset_is_reached = True
     ############################## END SETTINGS ##############################
     timeframe = '30m'
+
+    process_only_new_candles = True
 
     buy_max = DecimalParameter(-1, 1, decimals=4, default=0.4393, space='buy')
     buy_min = DecimalParameter(-1, 1, decimals=4, default=-0.4676, space='buy')

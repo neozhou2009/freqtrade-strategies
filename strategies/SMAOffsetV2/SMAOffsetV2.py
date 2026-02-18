@@ -20,10 +20,15 @@ class SMAOffsetV2(IStrategy):
     }
 
     stoploss = -0.20
+
+    trailing_stop = True
+    trailing_stop_positive = 0.03
+    trailing_stop_positive_offset = 0.05
+    trailing_only_offset_is_reached = True
     timeframe = '5m'
     informative_timeframe = '1h'
-    use_sell_signal = True
-    sell_profit_only = True
+    use_exit_signal = True
+    exit_profit_only = False
     process_only_new_candles = True
 
     use_custom_stoploss = True

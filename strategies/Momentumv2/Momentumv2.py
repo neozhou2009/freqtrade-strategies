@@ -9,7 +9,9 @@ import freqtrade.vendor.qtpylib.indicators as qtpylib
 
 
 class Momentumv2(IStrategy):
-    INTERFACE_VERSION = 2
+    INTERFACE_VERSION = 3
+
+    can_short: bool = False
 
     minimal_roi = {
         "0": 0.22,
@@ -22,13 +24,15 @@ class Momentumv2(IStrategy):
     use_custom_stoploss = True
     trailing_stop = False
     timeframe = '4h'
-    use_sell_signal = True
-    sell_profit_only = True
-    ignore_roi_if_buy_signal = False
+
+    process_only_new_candles = True
+    use_exit_signal = True
+    exit_profit_only = False
+    ignore_roi_if_entry_signal = False
     startup_candle_count: int = 100
     order_types = {
-        'buy': 'limit',
-        'sell': 'limit',
+        'entry': 'limit',
+        'exit': 'limit',
         'stoploss': 'market',
         'stoploss_on_exchange': True
     }

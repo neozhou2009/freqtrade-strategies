@@ -99,16 +99,16 @@ def EWO(dataframe, ema_length=5, ema2_length=35):
 
 
 class NotAnotherSMAOffsetStrategyHOv3(IStrategy):
-    INTERFACE_VERSION = 2
+    INTERFACE_VERSION = 3
+
+    can_short: bool = False
 
     # ROI table:
     minimal_roi = {
         # "0": 0.283,
         # "40": 0.086,
         # "99": 0.036,
-        "0": 0.10,
-        "30": 0.05,
-        "60": 0.02
+        "0": 10
     }
 
     # Stoploss:
@@ -148,15 +148,15 @@ class NotAnotherSMAOffsetStrategyHOv3(IStrategy):
     trailing_only_offset_is_reached = True
 
     # Sell signal
-    use_sell_signal = True
-    sell_profit_only = True
+    use_exit_signal = True
+    exit_profit_only = False
     sell_profit_offset = 0.01
-    ignore_roi_if_buy_signal = False
+    ignore_roi_if_entry_signal = False
 
     # Optional order time in force.
     order_time_in_force = {
-        'buy': 'gtc',
-        'sell': 'ioc'
+        'entry': 'gtc',
+        'exit': 'ioc'
     }
 
     # Optimal timeframe for the strategy

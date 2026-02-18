@@ -38,8 +38,15 @@ class CofiBitStrategy(IStrategy):
     # This attribute will be overridden if the config file contains "stoploss"
     stoploss = -0.25
 
+    trailing_stop = True
+    trailing_stop_positive = 0.03
+    trailing_stop_positive_offset = 0.05
+    trailing_only_offset_is_reached = True
+
     # Optimal timeframe for the strategy
     timeframe = '5m'
+
+    process_only_new_candles = True
 
     buy_fastx = IntParameter(20, 30, default=25)
     buy_adx = IntParameter(20, 30, default=25)

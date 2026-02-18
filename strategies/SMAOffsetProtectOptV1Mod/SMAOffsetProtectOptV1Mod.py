@@ -50,7 +50,9 @@ def EWO(dataframe, ema_length=5, ema2_length=35):
 
 
 class SMAOffsetProtectOptV1Mod(IStrategy):
-    INTERFACE_VERSION = 2
+    INTERFACE_VERSION = 3
+
+    can_short: bool = False
 
     # Modified ROI - 20210619
     # ROI table:
@@ -61,7 +63,7 @@ class SMAOffsetProtectOptV1Mod(IStrategy):
     }
 
     # Stoploss:
-    stoploss = -0.10
+    stoploss = -0.5
 
     # SMAOffset
     base_nb_candles_buy = IntParameter(
@@ -84,16 +86,16 @@ class SMAOffsetProtectOptV1Mod(IStrategy):
 
 
     # Trailing stop:
-    trailing_stop = True
+    trailing_stop = False
     trailing_stop_positive = 0.001
     trailing_stop_positive_offset = 0.01
     trailing_only_offset_is_reached = True
 
     # Sell signal
-    use_sell_signal = True
-    sell_profit_only = True
+    use_exit_signal = True
+    exit_profit_only = False
     sell_profit_offset = 0.01
-    ignore_roi_if_buy_signal = False
+    ignore_roi_if_entry_signal = False
 
     # Optimal timeframe for the strategy
     timeframe = '5m'

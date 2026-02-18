@@ -112,7 +112,9 @@ def LUX_SuperTrendOscillator(dtloc, source = 'close', length = 6, mult = 9, smoo
  
 class LuxOSC(IStrategy):
 
-    INTERFACE_VERSION = 2
+    INTERFACE_VERSION = 3
+
+    can_short: bool = False
 
     # Buy hyperspace params:
     buy_params = {
@@ -132,7 +134,7 @@ class LuxOSC(IStrategy):
     cross_buy = IntParameter(-100, 100, default= int(buy_params['cross_buy']), space='buy')
     cross_sell = IntParameter(-100, 100, default= int(sell_params['cross_sell']), space='sell')
     
-    stoploss = -0.10
+    stoploss = -0.99
 
     # Trailing stoploss
     trailing_stop = False
@@ -144,25 +146,25 @@ class LuxOSC(IStrategy):
     process_only_new_candles = False
 
   
-    use_sell_signal = True
-    sell_profit_only = True
-    ignore_roi_if_buy_signal = False
+    use_exit_signal = True
+    exit_profit_only = False
+    ignore_roi_if_entry_signal = False
 
    
     startup_candle_count: int = 30
 
     # Optional order type mapping.
     order_types = {
-        'buy': 'limit',
-        'sell': 'limit',
+        'entry': 'limit',
+        'exit': 'limit',
         'stoploss': 'market',
         'stoploss_on_exchange': False
     }
 
     # Optional order time in force.
     order_time_in_force = {
-        'buy': 'gtc',
-        'sell': 'gtc'
+        'entry': 'gtc',
+        'exit': 'gtc'
     }
     
     plot_config = {

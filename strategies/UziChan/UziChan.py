@@ -22,6 +22,11 @@ class UziChan(IStrategy):
     }
 
     stoploss = -0.10
+
+    trailing_stop = True
+    trailing_stop_positive = 0.03
+    trailing_stop_positive_offset = 0.05
+    trailing_only_offset_is_reached = True
     timeframe = '5m'
 
     # def custom_sell(self, pair: str, trade: 'Trade', current_time: 'datetime', current_rate: float, current_profit: float, **kwargs):     

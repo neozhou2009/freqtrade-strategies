@@ -20,8 +20,15 @@ class CCIStrategy(IStrategy):
     # This attribute will be overridden if the config file contains "stoploss"
     stoploss = -0.02
 
+    trailing_stop = True
+    trailing_stop_positive = 0.03
+    trailing_stop_positive_offset = 0.05
+    trailing_only_offset_is_reached = True
+
     # Optimal timeframe for the strategy
     timeframe = '1m'
+
+    process_only_new_candles = True
 
     def populate_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe = self.resample(dataframe, self.timeframe, 5)

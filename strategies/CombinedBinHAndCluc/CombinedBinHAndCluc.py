@@ -24,11 +24,18 @@ class CombinedBinHAndCluc(IStrategy):
         "0": 0.05
     }
     stoploss = -0.05
+
+    trailing_stop = True
+    trailing_stop_positive = 0.03
+    trailing_stop_positive_offset = 0.05
+    trailing_only_offset_is_reached = True
     timeframe = '5m'
 
-    use_sell_signal = True
-    sell_profit_only = True
-    ignore_roi_if_buy_signal = False
+    process_only_new_candles = True
+
+    use_exit_signal = True
+    exit_profit_only = True
+    ignore_roi_if_entry_signal = False
 
     def populate_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         # strategy BinHV45

@@ -26,8 +26,15 @@ class Macd(IStrategy):
     # Optimal stoploss designed for the strategy
     stoploss = -0.1
 
+    trailing_stop = True
+    trailing_stop_positive = 0.03
+    trailing_stop_positive_offset = 0.05
+    trailing_only_offset_is_reached = True
+
     # Optimal timeframe for the strategy
     timeframe = '1h'
+
+    process_only_new_candles = True
 
     use_custom_stoploss = True
 

@@ -21,11 +21,13 @@ class BBRSI2(IStrategy):
 
     timeframe = '1m'
 
+    process_only_new_candles = True
+
     trailing_stop = True
 
     order_types = {
-        "buy": "limit",
-        "sell": "limit",
+        "entry": "limit",
+        "exit": "limit",
         "emergencysell": "market",
         "forcebuy": "market",
         "forcesell": "market",

@@ -24,9 +24,9 @@ from datetime import datetime
 ##   Highly recommended to blacklist leveraged tokens (*BULL, *BEAR, *UP, *DOWN etc).                    ##
 ##   Ensure that you don't override any variables in you config.json. Especially                         ##
 ##   the timeframe (must be 5m).                                                                         ##
-##     use_sell_signal must set to true (or not set at all).                                             ##
-##     sell_profit_only must set to false (or not set at all).                                           ##
-##     ignore_roi_if_buy_signal must set to true (or not set at all).                                    ##
+##     use_exit_signal must set to true (or not set at all).                                             ##
+##     exit_profit_only must set to false (or not set at all).                                           ##
+##     ignore_roi_if_entry_signal must set to true (or not set at all).                                    ##
 ##                                                                                                       ##
 ###########################################################################################################
 ##               DONATIONS                                                                               ##
@@ -46,12 +46,14 @@ from datetime import datetime
 # Thank you to those who created these strategies.
 
 class NostalgiaForInfinityV5MultiOffsetAndHO(IStrategy):
-    INTERFACE_VERSION = 2
+    INTERFACE_VERSION = 3
+
+    can_short: bool = False
 
     # Optional order type mapping.
     order_types = {
-        'buy': 'limit',
-        'sell': 'limit',
+        'entry': 'limit',
+        'exit': 'limit',
         'trailing_stop_loss': 'limit',
         'stoploss': 'limit',
         'stoploss_on_exchange': False
@@ -124,7 +126,7 @@ class NostalgiaForInfinityV5MultiOffsetAndHO(IStrategy):
         "0": 0.01,
     }
 
-    stoploss = -0.10
+    stoploss = -0.99
 
     # Multi Offset
     base_nb_candles_buy = IntParameter(
@@ -193,7 +195,7 @@ class NostalgiaForInfinityV5MultiOffsetAndHO(IStrategy):
     }
 
     # Trailing stoploss (not used)
-    trailing_stop = True
+    trailing_stop = False
     trailing_only_offset_is_reached = True
     trailing_stop_positive = 0.01
     trailing_stop_positive_offset = 0.03
@@ -208,9 +210,9 @@ class NostalgiaForInfinityV5MultiOffsetAndHO(IStrategy):
     process_only_new_candles = True
 
     # These values can be overridden in the "ask_strategy" section in the config.
-    use_sell_signal = True
-    sell_profit_only = True
-    ignore_roi_if_buy_signal = True
+    use_exit_signal = True
+    exit_profit_only = False
+    ignore_roi_if_entry_signal = True
 
     # Number of candles the strategy requires before producing valid signals
     startup_candle_count: int = 300

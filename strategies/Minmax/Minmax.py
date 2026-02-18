@@ -14,9 +14,7 @@ import numpy as np
 class Minmax(IStrategy):
 
     minimal_roi = {
-        "0":  0.10,
-        "30": 0.05,
-        "60": 0.02
+        "0":  10
     }
 
     stoploss = -0.05

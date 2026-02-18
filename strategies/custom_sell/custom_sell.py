@@ -30,8 +30,8 @@ class custom_sell(IStrategy):
     buy_signal_buy6 = CategoricalParameter([True, False], default=True, space="buy", optimize=False)
 
     order_types = {
-        "buy": 'limit',
-        "sell": 'market',
+        "entry": 'limit',
+        "exit": 'market',
         "stoploss": 'market',
         "stoploss_on_exchange": True,
         "stoploss_on_exchange_interval": 60,
@@ -76,7 +76,7 @@ class custom_sell(IStrategy):
     }
 
     # Trailing stop:
-    trailing_stop = True
+    trailing_stop = False
     trailing_stop_positive = 0.098
     trailing_stop_positive_offset = 0.193
     trailing_only_offset_is_reached = True
@@ -88,9 +88,9 @@ class custom_sell(IStrategy):
     startup_candle_count = 450
     process_only_new_candles = True
 
-    use_sell_signal = True
-    sell_profit_only = True
-    ignore_roi_if_buy_signal = False
+    use_exit_signal = True
+    exit_profit_only = False
+    ignore_roi_if_entry_signal = False
 
     # Custom stoploss
     use_custom_stoploss = False

@@ -27,8 +27,15 @@ class BinHV27(IStrategy):
         "0": 1
     }
 
-    stoploss = -0.10
+    stoploss = -0.50
+
+    trailing_stop = True
+    trailing_stop_positive = 0.03
+    trailing_stop_positive_offset = 0.05
+    trailing_only_offset_is_reached = True
     timeframe = '5m'
+
+    process_only_new_candles = True
 
     def populate_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe['rsi'] = numpy.nan_to_num(ta.RSI(dataframe, timeperiod=5))

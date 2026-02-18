@@ -36,14 +36,23 @@ class Gumbo1(IStrategy):
     # region Params
     minimal_roi = {"0": 0.10, "20": 0.05, "64": 0.03, "168": 0}
     stoploss = -0.25
+
+    trailing_stop = True
+    trailing_stop_positive = 0.03
+    trailing_stop_positive_offset = 0.05
+    trailing_only_offset_is_reached = True
     # endregion
     timeframe = '5m'
+
+    process_only_new_candles = True
     use_custom_stoploss = False
     inf_timeframe = '1h'
+
+    process_only_new_candles = True
     # Recommended
-    use_sell_signal = True
-    sell_profit_only = True
-    ignore_roi_if_buy_signal = True
+    use_exit_signal = True
+    exit_profit_only = False
+    ignore_roi_if_entry_signal = True
     startup_candle_count = 200
 
     def informative_pairs(self) -> ListPairsWithTimeframes:

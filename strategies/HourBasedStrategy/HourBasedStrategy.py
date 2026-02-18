@@ -25,12 +25,22 @@ class HourBasedStrategy(IStrategy):
     # minimal_roi = {"0": 0.18,"171": 0.155,"315": 0.075,"1035": 0}
     # stoploss = -0.292
 
+    trailing_stop = True
+    trailing_stop_positive = 0.03
+    trailing_stop_positive_offset = 0.05
+    trailing_only_offset_is_reached = True
+
     # SHIB/USDT, 1000$x1:100days
     # 36/1000:    113 trades. 55/14/44 Wins/Draws/Losses. Avg profit   2.06%. Median profit   0.00%. Total profit  5126.14785426 USDT ( 512.61%). Avg duration 16:48:00 min. Objective: -4.57837
     # buy_params = {"buy_hour_max": 21,"buy_hour_min": 6,}
     # sell_params = {"sell_hour_max": 6,"sell_hour_min": 4,}
     # minimal_roi = {"0": 0.247,"386": 0.186,"866": 0.052,"1119": 0}
     # stoploss = -0.302
+
+    trailing_stop = True
+    trailing_stop_positive = 0.03
+    trailing_stop_positive_offset = 0.05
+    trailing_only_offset_is_reached = True
 
     # SAND/USDT, 1000$x1:100days
     # 72/1000:    158 trades. 67/13/78 Wins/Draws/Losses. Avg profit   1.37%. Median profit   0.00%. Total profit  4274.73622346 USDT ( 427.47%). Avg duration 13:50:00 min. Objective: -4.87331
@@ -39,12 +49,22 @@ class HourBasedStrategy(IStrategy):
     # minimal_roi = {"0": 0.482,"266": 0.191,"474": 0.09,"1759": 0}
     # stoploss = -0.05
 
+    trailing_stop = True
+    trailing_stop_positive = 0.03
+    trailing_stop_positive_offset = 0.05
+    trailing_only_offset_is_reached = True
+
     # KDA/USDT, 1000$x1:100days
     # 7/1000:     65 trades. 40/23/2 Wins/Draws/Losses. Avg profit   6.42%. Median profit   7.59%. Total profit  41120.00939125 USDT ( 4112.00%). Avg duration 1 day, 9:40:00 min. Objective: -8.46089
     # buy_params = {"buy_hour_max": 22,"buy_hour_min": 9,}
     # sell_params = {"sell_hour_max": 1,"sell_hour_min": 7,}
     # minimal_roi = {"0": 0.517,"398": 0.206,"1003": 0.076,"1580": 0}
     # stoploss = -0.338
+
+    trailing_stop = True
+    trailing_stop_positive = 0.03
+    trailing_stop_positive_offset = 0.05
+    trailing_only_offset_is_reached = True
 
     # {KDA/USDT, BTC/USDT, DOGE/USDT, SAND/USDT, ETH/USDT, SOL/USDT}, 1000$x1:100days, ShuffleFilter42
     # 56/1000:     63 trades. 41/19/3 Wins/Draws/Losses. Avg profit   4.60%. Median profit   8.89%. Total profit  11596.50333022 USDT ( 1159.65%). Avg duration 1 day, 14:46:00 min. Objective: -5.76694
@@ -72,8 +92,15 @@ class HourBasedStrategy(IStrategy):
     # Stoploss:
     stoploss = -0.10
 
+    trailing_stop = True
+    trailing_stop_positive = 0.03
+    trailing_stop_positive_offset = 0.05
+    trailing_only_offset_is_reached = True
+
     # Optimal timeframe
     timeframe = '1h'
+
+    process_only_new_candles = True
 
     buy_hour_min = IntParameter(0, 24, default=1, space='buy')
     buy_hour_max = IntParameter(0, 24, default=0, space='buy')

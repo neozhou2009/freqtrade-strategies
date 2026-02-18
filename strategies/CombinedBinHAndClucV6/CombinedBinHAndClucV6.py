@@ -23,7 +23,7 @@ from datetime import datetime, timedelta
 ##   Prefer stable coin (USDT, BUSDT etc) pairs, instead of BTC or ETH pairs.                            ##
 ##   Highly recommended to blacklist leveraged tokens (*BULL, *BEAR, *UP, *DOWN etc).                    ##
 ##   Ensure that you don't override any variables in you config.json. Especially                         ##
-##   the timeframe (must be 5m) & sell_profit_only (must be true).                                       ##
+##   the timeframe (must be 5m) & exit_profit_only (must be true).                                       ##
 ##                                                                                                       ##
 ###########################################################################################################
 ##               DONATIONS                                                                               ##
@@ -49,7 +49,9 @@ def SSLChannels(dataframe, length = 7):
 
 
 class CombinedBinHAndClucV6(IStrategy):
-    INTERFACE_VERSION = 2
+    INTERFACE_VERSION = 3
+
+    can_short: bool = False
 
     minimal_roi = {
         "0": 0.0181
@@ -61,10 +63,10 @@ class CombinedBinHAndClucV6(IStrategy):
     inf_1h = '1h' # informative tf
 
     # Sell signal
-    use_sell_signal = True
-    sell_profit_only = True
+    use_exit_signal = True
+    exit_profit_only = True
     sell_profit_offset = 0.001 # it doesn't meant anything, just to guarantee there is a minimal profit.
-    ignore_roi_if_buy_signal = True
+    ignore_roi_if_entry_signal = True
 
     # Trailing stoploss
     trailing_stop = True
@@ -83,8 +85,8 @@ class CombinedBinHAndClucV6(IStrategy):
 
     # Optional order type mapping.
     order_types = {
-        'buy': 'limit',
-        'sell': 'limit',
+        'entry': 'limit',
+        'exit': 'limit',
         'stoploss': 'market',
         'stoploss_on_exchange': False
     }

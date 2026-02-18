@@ -18,7 +18,9 @@ def EWO(dataframe, ema_length=5, ema2_length=35):
 
 
 class ElliotV8HO(IStrategy):
-    INTERFACE_VERSION = 2
+    INTERFACE_VERSION = 3
+
+    can_short: bool = False
 
     # Sell hyperspace params: v1
     # sell_params = {
@@ -89,16 +91,16 @@ class ElliotV8HO(IStrategy):
     trailing_only_offset_is_reached = True
 
     # Sell signal
-    use_sell_signal = True
-    sell_profit_only = True
+    use_exit_signal = True
+    exit_profit_only = True
     sell_profit_offset = 0.01
-    ignore_roi_if_buy_signal = False
+    ignore_roi_if_entry_signal = False
 
     # Optional order time in force.
     order_time_in_force = {
-        'buy': 'gtc',
-        # 'sell': 'ioc'
-        'sell': 'gtc'
+        'entry': 'gtc',
+        # 'exit': 'ioc'
+        'exit': 'gtc'
     }
 
     # Optimal timeframe for the strategy

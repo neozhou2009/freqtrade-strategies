@@ -52,10 +52,12 @@ class ClucFiatROI(IStrategy):
     
     timeframe = '5m'
 
-    use_sell_signal = True
-    sell_profit_only = True
+    process_only_new_candles = True
+
+    use_exit_signal = True
+    exit_profit_only = False
     sell_profit_offset = 0.01
-    ignore_roi_if_buy_signal = True
+    ignore_roi_if_entry_signal = True
 
     startup_candle_count: int = 48
 
@@ -102,7 +104,7 @@ class ClucFiatROI(IStrategy):
 
         """
         If this is a fresh buy, apple additional conditions.
-        Idea is to leverage "ignore_roi_if_buy_signal = True" functionality by using certain
+        Idea is to leverage "ignore_roi_if_entry_signal = True" functionality by using certain
         indicators for active trades while applying additional protections to new trades.
         """
         if not active_trade:

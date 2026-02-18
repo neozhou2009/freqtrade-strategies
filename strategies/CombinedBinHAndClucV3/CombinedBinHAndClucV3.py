@@ -18,14 +18,14 @@ class CombinedBinHAndClucV3(IStrategy):
         "0": 0.018
     }
 
-    stoploss = -0.10
+    stoploss = -0.99
 
     timeframe = '5m'
 
-    use_sell_signal = True
-    sell_profit_only = True
+    use_exit_signal = True
+    exit_profit_only = True
     sell_profit_offset = 0.001
-    ignore_roi_if_buy_signal = True
+    ignore_roi_if_entry_signal = True
 
     # Trailing stoploss
     trailing_stop = True
@@ -43,8 +43,8 @@ class CombinedBinHAndClucV3(IStrategy):
 
     # Optional order type mapping.
     order_types = {
-        'buy': 'limit',
-        'sell': 'limit',
+        'entry': 'limit',
+        'exit': 'limit',
         'stoploss': 'market',
         'stoploss_on_exchange': False
     }

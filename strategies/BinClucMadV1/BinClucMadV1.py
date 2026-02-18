@@ -30,7 +30,9 @@ def SSLChannels(dataframe, length=7):
 
 
 class BinClucMadV1(IStrategy):
-    INTERFACE_VERSION = 2
+    INTERFACE_VERSION = 3
+
+    can_short: bool = False
 
     # minimal_roi = {
     #     "0": 0.028,  # I feel lucky!
@@ -44,16 +46,21 @@ class BinClucMadV1(IStrategy):
         "180": 0.018,  # We're going up?
     }
 
-    stoploss = -0.99  # effectively disabled.
+    stoploss = -0.99
+
+    trailing_stop = True
+    trailing_stop_positive = 0.03
+    trailing_stop_positive_offset = 0.05
+    trailing_only_offset_is_reached = True  # effectively disabled.
 
     timeframe = "5m"
     informative_timeframe = "1h"
 
     # Sell signal
-    use_sell_signal = True
-    sell_profit_only = True
+    use_exit_signal = True
+    exit_profit_only = False
     sell_profit_offset = 0.001  # it doesn't meant anything, just to guarantee there is a minimal profit.
-    ignore_roi_if_buy_signal = False
+    ignore_roi_if_entry_signal = False
 
     # Custom stoploss
     use_custom_stoploss = True

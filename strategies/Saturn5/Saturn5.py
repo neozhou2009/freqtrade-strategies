@@ -19,12 +19,14 @@ class Saturn5(IStrategy):
     # Original repo hosted at https://github.com/shanejones/goddard
     timeframe = "15m"
 
+    process_only_new_candles = True
+
     # Stoploss
     stoploss = -0.20
     startup_candle_count: int = 480
     trailing_stop = False
     use_custom_stoploss = False
-    use_sell_signal = False
+    use_exit_signal = False
 
     # signal controls
     buy_signal_1 = True

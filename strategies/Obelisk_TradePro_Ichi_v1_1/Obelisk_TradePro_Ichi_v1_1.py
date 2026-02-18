@@ -35,13 +35,16 @@ class Obelisk_TradePro_Ichi_v1_1(IStrategy):
 
     # no ROI
     minimal_roi = {
-        "0": 0.10,
-        "30": 0.05,
-        "60": 0.02,
+        "0": 10,
     }
 
     # Stoploss:
     stoploss = -0.015
+
+    trailing_stop = True
+    trailing_stop_positive = 0.03
+    trailing_stop_positive_offset = 0.05
+    trailing_only_offset_is_reached = True
 
     plot_config = {
         # Main plot indicators (Moving averages, ...)

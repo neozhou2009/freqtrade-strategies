@@ -30,13 +30,13 @@ pairlist setting:
 
 class HansenSmaOffsetV1(IStrategy):
     timeframe = '15m'
+
+    process_only_new_candles = True
     #I haven't found the optimal ROI yet
     minimal_roi = {
-        "0": 0.10,
-        "30": 0.05,
-        "60": 0.02,
+        "0": 10,
     }
-    stoploss = -0.10
+    stoploss = -99
     def populate_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:   
         dataframe['smau1'] = ta.SMA(dataframe['close'], timeperiod=20)+0.05*ta.SMA(dataframe['close'], timeperiod=20)
         dataframe['smad1'] = ta.SMA(dataframe['close'], timeperiod=20)-0.05*ta.SMA(dataframe['close'], timeperiod=20)

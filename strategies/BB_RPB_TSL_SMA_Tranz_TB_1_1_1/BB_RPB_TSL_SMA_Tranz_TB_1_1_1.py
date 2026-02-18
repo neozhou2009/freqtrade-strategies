@@ -267,11 +267,16 @@ class BB_RPB_TSL_SMA_Tranz_TB_1_1_1(IStrategy):
     process_only_new_candles = True
 
     # Disabled
-    stoploss = -0.10
+    stoploss = -0.99
+
+    trailing_stop = True
+    trailing_stop_positive = 0.03
+    trailing_stop_positive_offset = 0.05
+    trailing_only_offset_is_reached = True
 
     # Custom stoploss
     use_custom_stoploss = True
-    use_sell_signal = True
+    use_exit_signal = True
 
     startup_candle_count: int = 400
     ############################################################################

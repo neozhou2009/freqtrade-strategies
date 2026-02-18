@@ -63,6 +63,8 @@ class Supertrend(IStrategy):
 
     timeframe = '1h'
 
+    process_only_new_candles = True
+
     startup_candle_count = 18
 
     buy_m1 = IntParameter(1, 7, default=4)

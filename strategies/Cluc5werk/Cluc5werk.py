@@ -59,11 +59,13 @@ class Cluc5werk(IStrategy):
     
     timeframe = '1m'
 
+    process_only_new_candles = True
+
     # Make sure these match or are not overridden in config
-    use_sell_signal = True
-    sell_profit_only = True
+    use_exit_signal = True
+    exit_profit_only = False
     sell_profit_offset = 0.0
-    ignore_roi_if_buy_signal = True
+    ignore_roi_if_entry_signal = True
 
     def informative_pairs(self):
         pairs = self.dp.current_whitelist()

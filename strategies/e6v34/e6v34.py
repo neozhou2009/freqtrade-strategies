@@ -37,7 +37,7 @@ class e6v34(IStrategy):
     }
 
     # Stoploss:
-    stoploss = -0.10
+    stoploss = -0.54
 
     # Trailing stop:
     trailing_stop = True
@@ -47,6 +47,8 @@ class e6v34(IStrategy):
 
     # Optimal timeframe use it in your config
     timeframe = '15m'
+
+    process_only_new_candles = True
 
     def populate_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         # SMA - ex Moving Average

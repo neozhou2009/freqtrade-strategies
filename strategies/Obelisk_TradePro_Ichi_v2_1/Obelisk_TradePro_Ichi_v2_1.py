@@ -77,9 +77,7 @@ class Obelisk_TradePro_Ichi_v2_1(IStrategy):
     process_only_new_candles = True
 
     minimal_roi = {
-        "0": 0.10,
-        "30": 0.05,
-        "60": 0.02,
+        "0": 10,
     }
 
     # Stoploss:

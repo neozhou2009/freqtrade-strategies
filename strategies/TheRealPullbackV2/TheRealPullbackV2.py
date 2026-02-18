@@ -23,17 +23,20 @@ def chaikin_mf(df, periods=20):
 class TheRealPullbackV2(IStrategy):
 
     minimal_roi = {
-        "0": 0.10,
-        "30": 0.05,
-        "60": 0.02
+        "0": 100
     }
 
     stoploss = -0.035
 
+    trailing_stop = True
+    trailing_stop_positive = 0.03
+    trailing_stop_positive_offset = 0.05
+    trailing_only_offset_is_reached = True
+
     timeframe = '5m'
 
     process_only_new_candles = True
-    ignore_roi_if_buy_signal = True
+    ignore_roi_if_entry_signal = True
     startup_candle_count = 200
 
     def populate_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:

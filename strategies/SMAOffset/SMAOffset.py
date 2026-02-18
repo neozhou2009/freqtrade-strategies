@@ -22,7 +22,9 @@ ma_types = {
 }
 
 class SMAOffset(IStrategy):
-	INTERFACE_VERSION = 2
+	INTERFACE_VERSION = 3
+
+    can_short: bool = False
 
 	# hyperopt and paste results here
 	# Buy hyperspace params:
@@ -40,7 +42,7 @@ class SMAOffset(IStrategy):
 	}
 
 	# Stoploss:
-	stoploss = -0.10
+	stoploss = -0.5
 
 	# ROI table:
 	minimal_roi = {
@@ -55,7 +57,7 @@ class SMAOffset(IStrategy):
 	sell_trigger = CategoricalParameter(ma_types.keys(), default=sell_params['sell_trigger'], space='sell')
 
 	# Trailing stop:
-	trailing_stop = True
+	trailing_stop = False
 	trailing_stop_positive = 0.0001
 	trailing_stop_positive_offset = 0
 	trailing_only_offset_is_reached = False
@@ -63,8 +65,8 @@ class SMAOffset(IStrategy):
 	# Optimal timeframe for the strategy
 	timeframe = '5m'
 
-	use_sell_signal = True
-	sell_profit_only = True
+	use_exit_signal = True
+	exit_profit_only = False
 
 	process_only_new_candles = True
 	startup_candle_count = 30

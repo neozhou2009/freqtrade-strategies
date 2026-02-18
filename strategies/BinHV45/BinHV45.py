@@ -18,14 +18,23 @@ def bollinger_bands(stock_price, window_size, num_of_std):
 
 
 class BinHV45(IStrategy):
-    INTERFACE_VERSION = 2
+    INTERFACE_VERSION = 3
+
+    can_short: bool = False
 
     minimal_roi = {
         "0": 0.0125
     }
 
     stoploss = -0.05
+
+    trailing_stop = True
+    trailing_stop_positive = 0.03
+    trailing_stop_positive_offset = 0.05
+    trailing_only_offset_is_reached = True
     timeframe = '1m'
+
+    process_only_new_candles = True
 
     buy_bbdelta = IntParameter(low=1, high=15, default=30, space='buy', optimize=True)
     buy_closedelta = IntParameter(low=15, high=20, default=30, space='buy', optimize=True)

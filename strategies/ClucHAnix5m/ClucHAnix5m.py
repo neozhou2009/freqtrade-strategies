@@ -107,7 +107,7 @@ class ClucHAnix5m(IStrategy):
     stoploss = -0.99   # use custom stoploss
 
     # Trailing stop:
-    trailing_stop = True
+    trailing_stop = False
     trailing_stop_positive = 0.001
     trailing_stop_positive_offset = 0.012
     trailing_only_offset_is_reached = False
@@ -119,9 +119,9 @@ class ClucHAnix5m(IStrategy):
     timeframe = '5m'
 
     # Make sure these match or are not overridden in config
-    use_sell_signal = True
-    sell_profit_only = True
-    ignore_roi_if_buy_signal = False
+    use_exit_signal = True
+    exit_profit_only = False
+    ignore_roi_if_entry_signal = False
 
     # Custom stoploss
     use_custom_stoploss = True
@@ -130,8 +130,8 @@ class ClucHAnix5m(IStrategy):
     startup_candle_count = 200
 
     order_types = {
-        'buy': 'market',
-        'sell': 'market',
+        'entry': 'market',
+        'exit': 'market',
         'emergencysell': 'market',
         'forcebuy': "market",
         'forcesell': 'market',
@@ -323,7 +323,7 @@ class ClucHAnix5m(IStrategy):
 
         ### BTC protection
         dataframe['btc_1m']= self.dp.get_pair_dataframe('BTC/USDT', timeframe='1m')['close']
-        btc_1d = self.dp.get_pair_dataframe('BTC/USDT', timeframe='1d')[['date', 'close']].rename(columns={"close": "btc"}).shift(1)
+        btc_1d = self.dp.get_pair_dataframe('BTC/USDT', timeframe = '4h')[['date', 'close']].rename(columns={"close": "btc"}).shift(1)
         dataframe = merge_informative_pair(dataframe, btc_1d, '1m', '1d', ffill=True)
 
         # Pump strength

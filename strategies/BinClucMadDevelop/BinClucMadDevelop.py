@@ -27,22 +27,24 @@ def SSLChannels(dataframe, length=7):
 
 
 class BinClucMadDevelop(IStrategy):
-    INTERFACE_VERSION = 2
+    INTERFACE_VERSION = 3
+
+    can_short: bool = False
 
     # minimal_roi = {"0": 0.10, "10": 0.028, "40": 0.015, "180": 0.018 }
     # minimal_roi = {"0": 0.038, "20": 0.028, "40": 0.02, "60": 0.015, "180": 0.018 }
     minimal_roi = {"0": 0.20, "38": 0.074, "78": 0.025, "194": 0}
-    stoploss = -0.10
+    stoploss = -0.99
 
     timeframe = "5m"
     informative_timeframe = "1h"
 
 
     # Sell signal
-    use_sell_signal = True
-    sell_profit_only = True
+    use_exit_signal = True
+    exit_profit_only = False
     sell_profit_offset = 0.001
-    ignore_roi_if_buy_signal = True
+    ignore_roi_if_entry_signal = True
 
     # Trailing stoploss
     trailing_stop = True

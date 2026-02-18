@@ -20,9 +20,13 @@ __BTC_donation__ = "3FgFaG15yntZYSUzfEpxr5mDt1RArvcQrK"
 # 12520 trades. 6438/5337/745 Wins/Draws/Losses. Avg profit   1.55%. Median profit   0.17%. Total profit  194026.95473822 USDT ( 194.03%). Avg duration 1 day, 9:13:00 min. Objective: -63.61104
 
 class Trend_Strength_Directional(IStrategy):
-    INTERFACE_VERSION = 2
+    INTERFACE_VERSION = 3
+
+    can_short: bool = False
 
     timeframe = '15m'
+
+    process_only_new_candles = True
 
     # ROI table:
     minimal_roi = {

@@ -25,7 +25,11 @@ def bollinger_bands(stock_price, window_size, num_of_std):
 class Fakebuy(IStrategy):
 
     timeframe = '5m'
+
+    process_only_new_candles = True
     inf_timeframe = '1h'
+
+    process_only_new_candles = True
 
     buy_params = {
         'bbdelta-close': 0.01697,
@@ -47,9 +51,14 @@ class Fakebuy(IStrategy):
     # Stoploss:
     stoploss = -0.085
 
-    use_sell_signal = True
-    sell_profit_only = True
-    ignore_roi_if_buy_signal = True
+    trailing_stop = True
+    trailing_stop_positive = 0.03
+    trailing_stop_positive_offset = 0.05
+    trailing_only_offset_is_reached = True
+
+    use_exit_signal = True
+    exit_profit_only = False
+    ignore_roi_if_entry_signal = True
 
     startup_candle_count: int = 168
 
@@ -124,7 +133,7 @@ class Fakebuy(IStrategy):
         trade_data = self.custom_trade_info[metadata['pair']]
         conditions = []
 
-        # Persist a buy signal for existing trades to make use of ignore_roi_if_buy_signal = True
+        # Persist a buy signal for existing trades to make use of ignore_roi_if_entry_signal = True
         # when this buy signal is not present a sell can happen according to ROI table
         if trade_data['active_trade']:
             if (trade_data['peak_profit'] > 0):

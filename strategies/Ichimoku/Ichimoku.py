@@ -21,6 +21,8 @@ class Ichimoku(IStrategy):
     # Optimal timeframe for the strategy
     timeframe = '5m'
 
+    process_only_new_candles = True
+
     # trailing stoploss
     trailing_stop = True
     trailing_stop_positive = 0.01
@@ -31,14 +33,14 @@ class Ichimoku(IStrategy):
     ta_on_candle = False
 
     # Experimental settings (configuration will overide these if set)
-    use_sell_signal = True
-    sell_profit_only = True
-    ignore_roi_if_buy_signal = False
+    use_exit_signal = True
+    exit_profit_only = True
+    ignore_roi_if_entry_signal = False
 
     # Optional order type mapping
     order_types = {
-        'buy': 'limit',
-        'sell': 'limit',
+        'entry': 'limit',
+        'exit': 'limit',
         'stoploss': 'market',
         'stoploss_on_exchange': False
     }

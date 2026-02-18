@@ -232,17 +232,17 @@ class ichiV1_Marius(IStrategy):
 
     # ROI table:
     minimal_roi = {
-        "0": 0.215,
-        "40": 0.032,
-        "87": 0.016,
-        "201": 0
+        "0": 0.15,
+        "60": 0.10,
+        "120": 0.05,
+        "240": 0.03
     }
 
     # Stoploss:
     stoploss = -0.275  # value loaded from strategy
 
     # Trailing stop:
-    trailing_stop = True
+    trailing_stop = False
     #trailing_stop_positive = 0.001
     #trailing_stop_positive_offset = 0.016
     #trailing_only_offset_is_reached = True
@@ -253,8 +253,8 @@ class ichiV1_Marius(IStrategy):
 
     # Optional order time in force.
     order_time_in_force = {
-        'buy': 'gtc',
-        'sell': 'gtc'
+        'entry': 'gtc',
+        'exit': 'gtc'
     }
 
     use_custom_stoploss = True
@@ -279,9 +279,9 @@ class ichiV1_Marius(IStrategy):
         560 // timeframe_minutes,
     ]
 
-    use_sell_signal = False
-    sell_profit_only = True
-    ignore_roi_if_buy_signal = True
+    use_exit_signal = False
+    exit_profit_only = False
+    ignore_roi_if_entry_signal = True
 
     # trailing stoploss hyperopt parameters
     pHSL = DecimalParameter(-0.15, -0.08, default=sell_params['pHSL'], decimals=3, space='sell', optimize=True)
@@ -458,7 +458,7 @@ class ichiV1_Marius(IStrategy):
 
         ### BTC protection
         dataframe['btc_5m']= self.dp.get_pair_dataframe('BTC/USDT', timeframe='5m')['close']
-        btc_1d = self.dp.get_pair_dataframe('BTC/USDT', timeframe='1d')[['date', 'close']].rename(columns={"close": "btc"}).shift(1)
+        btc_1d = self.dp.get_pair_dataframe('BTC/USDT', timeframe = '4h')[['date', 'close']].rename(columns={"close": "btc"}).shift(1)
         dataframe = merge_informative_pair(dataframe, btc_1d, '5m', '1d', ffill=True)
 
         # BTC info

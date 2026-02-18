@@ -56,12 +56,12 @@ from functools import reduce
 
 
 class BigZ04_TSL3(IStrategy):
-    INTERFACE_VERSION = 2
+    INTERFACE_VERSION = 3
+
+    can_short: bool = False
 
     minimal_roi = {
-        "0": 0.10,
-        "30": 0.05,
-        "60": 0.02
+        "0": 100.0
     }
     
     stoploss = -0.99 # effectively disabled.
@@ -70,13 +70,13 @@ class BigZ04_TSL3(IStrategy):
     inf_1h = '1h'
 
     # Sell signal
-    use_sell_signal = True
-    sell_profit_only = True
+    use_exit_signal = True
+    exit_profit_only = False
     sell_profit_offset = 0.001 # it doesn't meant anything, just to guarantee there is a minimal profit.
-    ignore_roi_if_buy_signal = False
+    ignore_roi_if_entry_signal = False
 
     # Trailing stoploss
-    trailing_stop = True
+    trailing_stop = False
     trailing_only_offset_is_reached = False
     trailing_stop_positive = 0.01
     trailing_stop_positive_offset = 0.025
@@ -92,8 +92,8 @@ class BigZ04_TSL3(IStrategy):
 
     # Optional order type mapping.
     order_types = {
-        'buy': 'market',
-        'sell': 'market',
+        'entry': 'market',
+        'exit': 'market',
         'stoploss': 'market',
         'stoploss_on_exchange': False
     }

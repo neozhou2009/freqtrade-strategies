@@ -567,9 +567,14 @@ class BB_RPB_TSL_SMA_Tranz_TB_MOD(IStrategy):
     # Disabled
     stoploss = -0.15
 
+    trailing_stop = True
+    trailing_stop_positive = 0.03
+    trailing_stop_positive_offset = 0.05
+    trailing_only_offset_is_reached = True
+
     # Custom stoploss
     use_custom_stoploss = True
-    use_sell_signal = True
+    use_exit_signal = True
 
     startup_candle_count: int = 400
     ############################################################################
@@ -2124,7 +2129,7 @@ class BB_RPB_TSL_SMA_Tranz_TB_MOD(IStrategy):
 
         ### BTC protection
         dataframe['btc_5m']= self.dp.get_pair_dataframe('BTC/USDT', timeframe='5m')['close']
-        btc_1d = self.dp.get_pair_dataframe('BTC/USDT', timeframe='1d')[['date', 'close']].rename(columns={"close": "btc"}).shift(1)
+        btc_1d = self.dp.get_pair_dataframe('BTC/USDT', timeframe = '4h')[['date', 'close']].rename(columns={"close": "btc"}).shift(1)
         dataframe = merge_informative_pair(dataframe, btc_1d, '5m', '1d', ffill=True)
 
         return dataframe

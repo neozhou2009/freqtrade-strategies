@@ -63,13 +63,15 @@ class ClucHAwerk(IStrategy):
     
     timeframe = '1m'
 
+    process_only_new_candles = True
+
     startup_candle_count: int = 168
 
     # Make sure these match or are not overridden in config
-    use_sell_signal = True
-    sell_profit_only = True
+    use_exit_signal = True
+    exit_profit_only = False
     sell_profit_offset = 0.0
-    ignore_roi_if_buy_signal = True
+    ignore_roi_if_entry_signal = True
 
     def informative_pairs(self):
         pairs = self.dp.current_whitelist()
@@ -152,10 +154,10 @@ class ClucHAwerk(IStrategy):
 
 class ClucHAwerk_ETH(ClucHAwerk):
 
-    use_sell_signal = True
-    sell_profit_only = True
+    use_exit_signal = True
+    exit_profit_only = True
     sell_profit_offset = 0.02
-    ignore_roi_if_buy_signal = True
+    ignore_roi_if_entry_signal = True
 
     # hyperopt --config user_data/config-backtest-ETH.json --hyperopt ClucHAwerkHyperopt_ETH --hyperopt-loss SortinoHyperOptLoss --strategy ClucHAwerk_ETH -e 500 --spaces buy --timeframe 1m --timerange 20210101-
     # 483/500:   1880 trades. 1054/0/826 Wins/Draws/Losses. Avg profit   0.76%. Median profit   1.12%. Total profit  0.14286503 ETH ( 1426.37Σ%). Avg duration  45.3 min. Objective: -623.10584

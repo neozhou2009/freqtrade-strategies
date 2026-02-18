@@ -54,14 +54,19 @@ class Slowbro(IStrategy):
     }
 
     # Stoploss:
-    stoploss = -0.10
+    stoploss = -0.99
+
+    trailing_stop = True
+    trailing_stop_positive = 0.03
+    trailing_stop_positive_offset = 0.05
+    trailing_only_offset_is_reached = True
 
     timeframe = '1h'
-    inf_timeframe = '1d'
+    inf_timeframe = '4h'
 
-    use_sell_signal = True
-    sell_profit_only = True
-    ignore_roi_if_buy_signal = False
+    use_exit_signal = True
+    exit_profit_only = True
+    ignore_roi_if_entry_signal = False
 
     startup_candle_count: int = 30
     process_only_new_candles = False

@@ -78,7 +78,7 @@ class MacheteV8b(IStrategy):
     stoploss = -0.1#-0.046
 
     # Trailing stop:
-    trailing_stop = True
+    trailing_stop = False
     #trailing_stop_positive = 0.0247
     #trailing_stop_positive_offset = 0.0248
     #trailing_only_offset_is_reached = True
@@ -136,9 +136,9 @@ class MacheteV8b(IStrategy):
     process_only_new_candles = False
 
     # Experimental settings (configuration will overide these if set)
-    use_sell_signal = True
-    sell_profit_only = True
-    ignore_roi_if_buy_signal = False
+    use_exit_signal = True
+    exit_profit_only = False
+    ignore_roi_if_entry_signal = False
     startup_candle_count = 500#149
 
     use_dynamic_roi = True
@@ -148,8 +148,8 @@ class MacheteV8b(IStrategy):
 
     # Optional order type mapping
     order_types = {
-        'buy': 'limit',
-        'sell': 'limit',
+        'entry': 'limit',
+        'exit': 'limit',
         'stoploss': 'market',
         'stoploss_on_exchange': False
     }

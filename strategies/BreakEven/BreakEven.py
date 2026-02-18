@@ -45,8 +45,15 @@ class BreakEven(IStrategy):
     # Optimal stoploss designed for the strategy
     stoploss = -0.05
 
+    trailing_stop = True
+    trailing_stop_positive = 0.03
+    trailing_stop_positive_offset = 0.05
+    trailing_only_offset_is_reached = True
+
     # Optimal timeframe for the strategy
     timeframe = '5m'
+
+    process_only_new_candles = True
 
     # don't generate any buy or sell signals, everything is handled by ROI and stop_loss
     def populate_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:

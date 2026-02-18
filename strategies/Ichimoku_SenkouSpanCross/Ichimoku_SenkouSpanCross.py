@@ -9,12 +9,12 @@ class Ichimoku_SenkouSpanCross(IStrategy):
     """
     """
     minimal_roi = {
-        "0": 0.10,
-        "30": 0.05,
-        "60": 0.02
+        "0": 1000
     }
-    stoploss = -0.10
+    stoploss = -0.99
     timeframe = '4h'
+
+    process_only_new_candles = True
     # startup_candle_count: int = 300
     # trailing stoploss
     trailing_stop = True
@@ -22,14 +22,14 @@ class Ichimoku_SenkouSpanCross(IStrategy):
     trailing_stop_positive_offset = 0.50
     trailing_only_offset_is_reached = True
     order_types = {
-        'buy': 'market',
-        'sell': 'market',
+        'entry': 'market',
+        'exit': 'market',
         'stoploss': 'market',
         'stoploss_on_exchange': False
     }
     order_time_in_force = {
-        'buy': 'gtc',
-        'sell': 'gtc'
+        'entry': 'gtc',
+        'exit': 'gtc'
     }
     def informative_pairs(self):
         return [

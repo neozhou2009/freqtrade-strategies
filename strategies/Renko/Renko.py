@@ -10,19 +10,19 @@ pd.set_option("display.precision", 10)
 class Renko(IStrategy):
  
     minimal_roi = {
-        "0": 0.10,
-        "30": 0.05,
-        "60": 0.02
+        "0": 100
     }
 
-    stoploss = -0.10
+    stoploss = -100
 
-    timeframe = '15m'    
+    timeframe = '15m'
+
+    process_only_new_candles = True    
     
-    use_sell_signal = True
-    sell_profit_only = True
+    use_exit_signal = True
+    exit_profit_only = True
     sell_profit_offset = 0.1
-    ignore_roi_if_buy_signal = True
+    ignore_roi_if_entry_signal = True
  
     def populate_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
 

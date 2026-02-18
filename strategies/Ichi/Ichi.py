@@ -36,8 +36,8 @@ logging.info("test")
 
 class Ichi(IStrategy):
     order_types = {
-        'buy': 'limit',
-        'sell': 'limit',
+        'entry': 'limit',
+        'exit': 'limit',
         'stoploss': 'limit',
         'stoploss_on_exchange': True
     }
@@ -52,9 +52,18 @@ class Ichi(IStrategy):
         "0": 0.02 / 2,
     }
     timeframe = '15m'
+
+    process_only_new_candles = True
     stoploss = -0.20
 
-    INTERFACE_VERSION = 2
+    trailing_stop = True
+    trailing_stop_positive = 0.03
+    trailing_stop_positive_offset = 0.05
+    trailing_only_offset_is_reached = True
+
+    INTERFACE_VERSION = 3
+
+    can_short: bool = False
 
     def populate_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         ichi = ichimoku(dataframe)

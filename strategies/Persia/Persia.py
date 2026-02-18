@@ -135,7 +135,14 @@ class Persia(IStrategy):
     # Stoploss:
     stoploss = -0.19
 
+    trailing_stop = True
+    trailing_stop_positive = 0.03
+    trailing_stop_positive_offset = 0.05
+    trailing_only_offset_is_reached = True
+
     timeframe = '5m'
+
+    process_only_new_candles = True
     # #################### END OF RESULT PLACE ####################
 
     ###############################################################

@@ -126,12 +126,12 @@ class Dracula(IStrategy):
     }
     # ROI table:
     minimal_roi = {
-        "0": 0.10,
-        "30": 0.05,
-        "60": 0.02
+        "0": 10
     }
 
     info_timeframe = "5m"
+
+    process_only_new_candles = True
     # Stoploss:
     stoploss = -0.2
     min_lost = -0.005
@@ -140,11 +140,13 @@ class Dracula(IStrategy):
         0, 100, decimals=4, default=0.023, space='buy')
     # Buy hypers
     timeframe = '1m'
+
+    process_only_new_candles = True
     # Protection
     fast_ewo = 50
     slow_ewo = 200
     # Trailing stoploss (not used)
-    trailing_stop = True
+    trailing_stop = False
     trailing_only_offset_is_reached = True
     trailing_stop_positive = 0.01
     trailing_stop_positive_offset = 0.03

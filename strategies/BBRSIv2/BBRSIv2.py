@@ -28,13 +28,18 @@ class BBRSIv2(IStrategy):
     }
 
     # Optimal stoploss designed for the strategy
-    stoploss = -0.10
+    stoploss = -0.99
+
+    trailing_stop = True
+    trailing_stop_positive = 0.03
+    trailing_stop_positive_offset = 0.05
+    trailing_only_offset_is_reached = True
     
     process_only_new_candles = True  
-    use_sell_signal = True
-    sell_profit_only = True
+    use_exit_signal = True
+    exit_profit_only = True
     sell_profit_offset= 0.01
-    ignore_roi_if_buy_signal = False    
+    ignore_roi_if_entry_signal = False    
     use_custom_stoploss = True
   
 

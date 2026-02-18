@@ -20,9 +20,13 @@ __BTC_donation__ = "3FgFaG15yntZYSUzfEpxr5mDt1RArvcQrK"
 # 199/40000:  30918 trades. 18982/3408/8528 Wins/Draws/Losses. Avg profit   0.39%. Median profit   0.65%. Total profit  119934.26007495 USDT ( 119.93%). Avg duration 8:12:00 min. Objective: -127.60220
 
 class Bandtastic(IStrategy):
-    INTERFACE_VERSION = 2
+    INTERFACE_VERSION = 3
+
+    can_short: bool = False
 
     timeframe = '15m'
+
+    process_only_new_candles = True
 
     # ROI table:
     minimal_roi = {

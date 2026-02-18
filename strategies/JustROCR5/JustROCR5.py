@@ -9,7 +9,14 @@ class JustROCR5(IStrategy):
     }
 
     stoploss = -0.01
+
+    trailing_stop = True
+    trailing_stop_positive = 0.03
+    trailing_stop_positive_offset = 0.05
+    trailing_only_offset_is_reached = True
     timeframe = '1m'
+
+    process_only_new_candles = True
 
     def populate_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe['rocr'] = ta.ROCR(dataframe, timeperiod=5)

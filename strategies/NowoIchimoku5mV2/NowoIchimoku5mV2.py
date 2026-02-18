@@ -120,22 +120,24 @@ def bollinger_bands(series: Series, moving_average='sma', length=20, mult=2.0) -
 class NowoIchimoku5mV2(IStrategy):
     # Optimal timeframe for the strategy
     timeframe = '5m'
+
+    process_only_new_candles = True
     informative_timeframe = '1h'
+
+    process_only_new_candles = True
 
     time_factor = int(60 / 5)
 
     startup_candle_count = int(100 * time_factor)
 
-    use_sell_signal = False
+    use_exit_signal = False
 
     use_custom_stoploss = True
 
     trailing_stop = True
 
     minimal_roi = {
-        "0": 0.10,
-        "30": 0.05,
-        "60": 0.02
+        "0": 999
     }
 
     stoploss = -0.293

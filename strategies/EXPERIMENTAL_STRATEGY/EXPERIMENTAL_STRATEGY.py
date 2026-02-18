@@ -21,7 +21,9 @@ class EXPERIMENTAL_STRATEGY(IStrategy):
     or strategy repository https://github.com/freqtrade/freqtrade-strategies
     for samples and inspiration.
     """
-    INTERFACE_VERSION = 2
+    INTERFACE_VERSION = 3
+
+    can_short: bool = False
 
     # Minimal ROI designed for the strategy
     minimal_roi = {
@@ -34,21 +36,26 @@ class EXPERIMENTAL_STRATEGY(IStrategy):
     # Optimal stoploss designed for the strategy
     stoploss = -0.10
 
+    trailing_stop = True
+    trailing_stop_positive = 0.03
+    trailing_stop_positive_offset = 0.05
+    trailing_only_offset_is_reached = True
+
     # Optimal ticker interval for the strategy
     ticker_interval = '5m'
 
     # Optional order type mapping
     order_types = {
-        'buy': 'limit',
-        'sell': 'limit',
+        'entry': 'limit',
+        'exit': 'limit',
         'stoploss': 'limit',
         'stoploss_on_exchange': False
     }
 
     # Optional time in force for orders
     order_time_in_force = {
-        'buy': 'gtc',
-        'sell': 'gtc',
+        'entry': 'gtc',
+        'exit': 'gtc',
     }
 
     def informative_pairs(self):

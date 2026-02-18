@@ -533,9 +533,11 @@ class GodStraNew40(IStrategy):
     sell_real_num2 = DecimalParameter(0, 1, decimals=DECIMALS, default=sell_params["sell_real_num2"], space='sell')
 
     # Stoploss:
-    stoploss = -0.10
+    stoploss = -1
     # Buy hypers
     timeframe = '4h'
+
+    process_only_new_candles = True
 
     def populate_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         '''

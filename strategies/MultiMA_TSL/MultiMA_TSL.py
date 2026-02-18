@@ -23,7 +23,9 @@ from technical.indicators import zema
 # Any profits and losses are all your responsibility
 
 class MultiMA_TSL(IStrategy):
-    INTERFACE_VERSION = 2
+    INTERFACE_VERSION = 3
+
+    can_short: bool = False
 
     buy_params = {
         "base_nb_candles_buy_ema": 50,
@@ -53,9 +55,7 @@ class MultiMA_TSL(IStrategy):
 
     # ROI table:
     minimal_roi = {
-        "0": 0.10,
-        "30": 0.05,
-        "60": 0.02
+        "0": 100
     }
 
     stoploss = -0.15
@@ -92,7 +92,7 @@ class MultiMA_TSL(IStrategy):
     buy_rsi_fast = IntParameter(0, 50, default=35, space='buy', optimize=False)
 
     # Trailing stoploss (not used)
-    trailing_stop = True
+    trailing_stop = False
     trailing_only_offset_is_reached = True
     trailing_stop_positive = 0.01
     trailing_stop_positive_offset = 0.018
@@ -141,9 +141,9 @@ class MultiMA_TSL(IStrategy):
     process_only_new_candles = True
 
     # These values can be overridden in the "ask_strategy" section in the config.
-    use_sell_signal = True
-    sell_profit_only = True
-    ignore_roi_if_buy_signal = False
+    use_exit_signal = True
+    exit_profit_only = False
+    ignore_roi_if_entry_signal = False
 
     # Number of candles the strategy requires before producing valid signals
     startup_candle_count: int = 200

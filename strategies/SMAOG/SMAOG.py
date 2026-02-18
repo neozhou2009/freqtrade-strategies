@@ -14,7 +14,9 @@ ma_types = {
     'EMA': ta.EMA,
 }
 class SMAOG(IStrategy):
-    INTERFACE_VERSION = 2
+    INTERFACE_VERSION = 3
+
+    can_short: bool = False
     buy_params = {
         "base_nb_candles_buy": 26,
         "buy_trigger": "SMA",
@@ -40,16 +42,14 @@ class SMAOG(IStrategy):
 
     timeframe = '5m'
     stoploss = -0.23
-    minimal_roi = {"0": 0.10,
-        "30": 0.05,
-        "60": 0.02,}
+    minimal_roi = {"0": 10,}
     trailing_stop = True
     trailing_only_offset_is_reached = True
     trailing_stop_positive = 0.005
     trailing_stop_positive_offset = 0.02
-    use_sell_signal = True
-    sell_profit_only = True
-    ignore_roi_if_buy_signal = False
+    use_exit_signal = True
+    exit_profit_only = False
+    ignore_roi_if_entry_signal = False
     process_only_new_candles = True
     startup_candle_count = 400
 

@@ -46,8 +46,8 @@ class cryptohassle(IStrategy):
     ticker_interval = '1h'
     # Optional order type mapping.
     order_types = {
-        'buy': 'market',
-        'sell': 'market',
+        'entry': 'market',
+        'exit': 'market',
         'stoploss': 'market',
         'stoploss_on_exchange': True
     }

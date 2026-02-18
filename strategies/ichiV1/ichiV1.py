@@ -48,14 +48,14 @@ class ichiV1(IStrategy):
     startup_candle_count = 96
     process_only_new_candles = False
 
-    trailing_stop = True
+    trailing_stop = False
     #trailing_stop_positive = 0.002
     #trailing_stop_positive_offset = 0.025
     #trailing_only_offset_is_reached = True
 
-    use_sell_signal = True
-    sell_profit_only = True
-    ignore_roi_if_buy_signal = False
+    use_exit_signal = True
+    exit_profit_only = False
+    ignore_roi_if_entry_signal = False
 
     plot_config = {
         'main_plot': {

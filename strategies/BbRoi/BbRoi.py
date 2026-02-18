@@ -28,12 +28,12 @@ class BbRoi(IStrategy):
     ticker_interval = '15m'
 
     # Experimental settings (configuration will overide these if set)
-    use_sell_signal = True
-    ignore_roi_if_buy_signal = False
+    use_exit_signal = True
+    ignore_roi_if_entry_signal = False
 
     order_types = {
-        'buy': 'market',
-        'sell': 'market',
+        'entry': 'market',
+        'exit': 'market',
         'stoploss': 'limit',
         'stoploss_on_exchange': True
     }

@@ -29,15 +29,14 @@ class epretrace(IStrategy):
     # adjust based on market conditions. We would recommend to keep it low for quick turn arounds
     # This attribute will be overridden if the config file contains "minimal_roi"
     minimal_roi = {
-        #"14400": 0.001,    # non loosing after 10 days
-        #"0": 0.
-        "0": 0.10,
-        "30": 0.05,
-        "60": 0.02
+        "0": 0.15,
+        "60": 0.10,
+        "120": 0.05,
+        "240": 0.03
     }
 
     # Stoploss -disable
-    stoploss = -0.10
+    stoploss = -0.999
     #stoploss = -0.05
     use_custom_stoploss = True
     # Trailing stoploss
@@ -47,6 +46,8 @@ class epretrace(IStrategy):
     #trailing_stop_positive_offset = 0.02
     # Optimal timeframe for the strategy
     timeframe = '5m'
+
+    process_only_new_candles = True
 	
     #buy params
     ep_retracement_window = IntParameter(1, 100, default=50, space='buy')

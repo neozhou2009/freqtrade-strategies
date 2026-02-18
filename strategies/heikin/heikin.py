@@ -18,13 +18,18 @@ import numpy
 class heikin(IStrategy):
     #do not use this strategy in live mod. It is not good enough yet and can only be use to find trends.
     timeframe = '1h'
+
+    process_only_new_candles = True
     #I haven't found the best roi and stoplost, so feel free to explore.
     minimal_roi = {
-        "0": 0.10,
-        "30": 0.05,
-        "60": 0.02,
+        "0": 10,
     }
-    stoploss = -0.10
+    stoploss = -0.99
+
+    trailing_stop = True
+    trailing_stop_positive = 0.03
+    trailing_stop_positive_offset = 0.05
+    trailing_only_offset_is_reached = True
     
     def populate_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:   
         dataframe['hclose']=(dataframe['open'] + dataframe['high'] + dataframe['low'] + dataframe['close']) / 4

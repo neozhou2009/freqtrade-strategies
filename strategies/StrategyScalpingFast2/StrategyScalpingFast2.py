@@ -51,9 +51,14 @@ class StrategyScalpingFast2(IStrategy):
         "51": 0.012,
         "123": 0
     }
-    use_sell_signal = False
+    use_exit_signal = False
     # Stoploss:
     stoploss = -0.326
+
+    trailing_stop = True
+    trailing_stop_positive = 0.03
+    trailing_stop_positive_offset = 0.05
+    trailing_only_offset_is_reached = True
     # Minimal ROI designed for the strategy.
     # This attribute will be overridden if the config file contains "minimal_roi"
     #minimal_roi = {
@@ -64,9 +69,16 @@ class StrategyScalpingFast2(IStrategy):
     # should not be below 3% loss
 
     #stoploss = -0.1
+
+    trailing_stop = True
+    trailing_stop_positive = 0.03
+    trailing_stop_positive_offset = 0.05
+    trailing_only_offset_is_reached = True
     # Optimal timeframe for the strategy
     # the shorter the better
     timeframe = '1m'
+
+    process_only_new_candles = True
 
     # resample factor to establish our general trend. Basically don't buy if a trend is not given
     resample_factor = 5

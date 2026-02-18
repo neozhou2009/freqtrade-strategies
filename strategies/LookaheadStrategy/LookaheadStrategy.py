@@ -46,12 +46,16 @@ class LookaheadStrategy(IStrategy):
     trailing_only_offset_is_reached = True
     # Buy hypers
     timeframe = "5m"
+
+    process_only_new_candles = True
     # #################### END OF RESULT PLACE ####################
 
     def informative_1h_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         assert self.dp, "DataProvider is required for multiple timeframes."
         # Get the informative pair
-        informative_1h = self.dp.get_pair_dataframe(pair=metadata["pair"], timeframe="1h")
+        informative_1h = self.dp.get_pair_dataframe(pair=metadata["pair"], timeframe="1h"
+
+    process_only_new_candles = True)
         # EMA
         informative_1h["ema_50"] = ta.EMA(informative_1h, timeperiod=50)
 

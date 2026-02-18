@@ -197,9 +197,14 @@ class BB_RPB_TSL_2(IStrategy):
     # Disabled
     stoploss = -0.15
 
+    trailing_stop = True
+    trailing_stop_positive = 0.03
+    trailing_stop_positive_offset = 0.05
+    trailing_only_offset_is_reached = True
+
     # Custom stoploss
     use_custom_stoploss = True
-    use_sell_signal = True
+    use_exit_signal = True
 
     ############################################################################
 

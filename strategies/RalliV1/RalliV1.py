@@ -46,7 +46,9 @@ def EWO(dataframe, ema_length=5, ema2_length=35):
 
 
 class RalliV1(IStrategy):
-    INTERFACE_VERSION = 2
+    INTERFACE_VERSION = 3
+
+    can_short: bool = False
 
     # ROI table:
     minimal_roi = {
@@ -88,21 +90,21 @@ class RalliV1(IStrategy):
     rsi_buy_2 = IntParameter(30, 70, default=buy_params['rsi_buy_2'], space='buy', optimize=True)
 
     # Trailing stop:
-    trailing_stop = True
+    trailing_stop = False
     trailing_stop_positive = 0.005
     trailing_stop_positive_offset = 0.03
     trailing_only_offset_is_reached = True
 
     # Sell signal
-    use_sell_signal = True
-    sell_profit_only = True
+    use_exit_signal = True
+    exit_profit_only = False
     sell_profit_offset = 0.01
-    ignore_roi_if_buy_signal = False
+    ignore_roi_if_entry_signal = False
 
     ## Optional order time in force.
     order_time_in_force = {
-        'buy': 'gtc',
-        'sell': 'gtc'
+        'entry': 'gtc',
+        'exit': 'gtc'
     }
 
     # Optimal timeframe for the strategy

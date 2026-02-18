@@ -65,7 +65,9 @@ sell_params = {
 
 
 class custom(IStrategy):
-    INTERFACE_VERSION = 2
+    INTERFACE_VERSION = 3
+
+    can_short: bool = False
 
     # Modified ROI - 20210620
     # ROI table:
@@ -112,16 +114,16 @@ class custom(IStrategy):
     rsi_buy2 = IntParameter(30, 70, default=buy_params['rsi_buy2'], space='buy', optimize=True)
 
     # Trailing stop:
-    trailing_stop = True
+    trailing_stop = False
     #trailing_stop_positive = 0.005
     #trailing_stop_positive_offset = 0.03
     #trailing_only_offset_is_reached = True
 
     # Sell signal
-    use_sell_signal = False
-    sell_profit_only = True
+    use_exit_signal = False
+    exit_profit_only = False
     sell_profit_offset = 0.01
-    ignore_roi_if_buy_signal = False
+    ignore_roi_if_entry_signal = False
 
     # Optimal timeframe for the strategy
     timeframe = '5m'

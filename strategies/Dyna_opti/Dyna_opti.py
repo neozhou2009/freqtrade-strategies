@@ -304,6 +304,11 @@ class Dyna_opti(IStrategy):
     # Stoploss:
     stoploss = -0.28819
 
+    trailing_stop = True
+    trailing_stop_positive = 0.03
+    trailing_stop_positive_offset = 0.05
+    trailing_only_offset_is_reached = True
+
     # Enable or disable these as desired
     # Must be enabled when hyperopting the respective spaces
     use_dynamic_roi = True
@@ -312,10 +317,15 @@ class Dyna_opti(IStrategy):
     # If custom_stoploss disabled
     #stoploss = -0.234
 
+    trailing_stop = True
+    trailing_stop_positive = 0.03
+    trailing_stop_positive_offset = 0.05
+    trailing_only_offset_is_reached = True
+
     # Recommended
-    use_sell_signal = False
-    sell_profit_only = True
-    ignore_roi_if_buy_signal = True
+    use_exit_signal = False
+    exit_profit_only = False
+    ignore_roi_if_entry_signal = True
 
     # Required
     startup_candle_count: int = 233
@@ -606,9 +616,9 @@ class Dyna_opti(IStrategy):
                         dynamic_roi = custom_params['dynamic_roi']
                     break
             
-        if params == 'buy':
+        if params == 'entry':
             return buy_params
-        if params == 'sell':
+        if params == 'exit':
             return sell_params
         if params == 'minimal_roi':
             return minimal_roi

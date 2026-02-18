@@ -13,9 +13,7 @@ class Ichimoku_v32(IStrategy):
     """
 
     minimal_roi = {
-        "0": 0.10,
-        "30": 0.05,
-        "60": 0.02
+        "0": 100
     }
 
     stoploss = -1 #-0.35

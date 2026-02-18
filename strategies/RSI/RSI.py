@@ -24,14 +24,14 @@ class RSI(IStrategy):
 
     # Optimal stoploss designed for the strategy
     # This attribute will be overridden if the config file contains "stoploss"
-    stoploss = -0.10
+    stoploss = -0.99
     # custom_stop = -0.1
     # Optimal timeframe for the strategy
     timeframe = '15m'
 
 
     # trailing stoploss
-    trailing_stop = True
+    trailing_stop = False
     trailing_stop_positive = 0.01
     trailing_stop_positive_offset = 0.02
 
@@ -39,14 +39,14 @@ class RSI(IStrategy):
     process_only_new_candles = True
 
     # Experimental settings (configuration will overide these if set)
-    use_sell_signal = True
-    sell_profit_only = True
-    ignore_roi_if_buy_signal = False
+    use_exit_signal = True
+    exit_profit_only = True
+    ignore_roi_if_entry_signal = False
 
     # Optional order type mapping
     order_types = {
-        'buy': 'limit',
-        'sell': 'limit',
+        'entry': 'limit',
+        'exit': 'limit',
         'stoploss': 'market',
         'stoploss_on_exchange': False
     }

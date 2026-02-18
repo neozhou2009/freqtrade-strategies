@@ -42,13 +42,15 @@ class MultiMa(IStrategy):
     stoploss = -0.345
 
     # Trailing stop:
-    trailing_stop = True  # value loaded from strategy
+    trailing_stop = False  # value loaded from strategy
     trailing_stop_positive = None  # value loaded from strategy
     trailing_stop_positive_offset = 0.0  # value loaded from strategy
     trailing_only_offset_is_reached = False  # value loaded from strategy
 
     # Opimal Timeframe
     timeframe = "4h"
+
+    process_only_new_candles = True
 
     count_max = 20
     gap_max = 100

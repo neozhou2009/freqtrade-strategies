@@ -17,7 +17,9 @@ from datetime import datetime
 
 
 class Uptrend(IStrategy):
-    INTERFACE_VERSION = 2
+    INTERFACE_VERSION = 3
+
+    can_short: bool = False
 
     buy_params = {
         'buy_rsi_uplimit': 50,
@@ -29,9 +31,10 @@ class Uptrend(IStrategy):
     # Minimal ROI designed for the strategy.
     # This attribute will be overridden if the config file contains "minimal_roi".
     minimal_roi = {
-        "60": 0.1,
-        "30": 0.02,
-        "0": 0.04
+        "0": 0.15,
+        "60": 0.10,
+        "120": 0.05,
+        "240": 0.03
     }
 
     # Optimal stoploss designed for the strategy.
@@ -39,7 +42,7 @@ class Uptrend(IStrategy):
     stoploss = -0.10
 
     # Trailing stoploss
-    trailing_stop = True
+    trailing_stop = False
     # trailing_only_offset_is_reached = False
     # trailing_stop_positive = 0.01
     # trailing_stop_positive_offset = 0.0  # Disabled / not configured
@@ -51,9 +54,9 @@ class Uptrend(IStrategy):
     process_only_new_candles = False
 
     # These values can be overridden in the "ask_strategy" section in the config.
-    use_sell_signal = True
-    sell_profit_only = True
-    ignore_roi_if_buy_signal = False
+    use_exit_signal = True
+    exit_profit_only = False
+    ignore_roi_if_entry_signal = False
 
     # Number of candles the strategy requires before producing valid signals
     startup_candle_count: int = 30

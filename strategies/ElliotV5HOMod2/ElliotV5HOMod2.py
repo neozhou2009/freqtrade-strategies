@@ -24,7 +24,9 @@ def EWO(dataframe, ema_length=5, ema2_length=35):
 
 
 class ElliotV5HOMod2(IStrategy):
-    INTERFACE_VERSION = 2
+    INTERFACE_VERSION = 3
+
+    can_short: bool = False
 
     # Buy hyperspace params:
     buy_params = {
@@ -50,7 +52,7 @@ class ElliotV5HOMod2(IStrategy):
     }
 
     # Stoploss:
-    stoploss = -0.10
+    stoploss = -0.99
 
     # SMAOffset
     base_nb_candles_buy = IntParameter(
@@ -82,22 +84,22 @@ class ElliotV5HOMod2(IStrategy):
     trailing_only_offset_is_reached = True
 
     # Sell signal
-    use_sell_signal = True
-    sell_profit_only = True
+    use_exit_signal = True
+    exit_profit_only = True
     sell_profit_offset = 0.01
-    ignore_roi_if_buy_signal = True
+    ignore_roi_if_entry_signal = True
 
     order_types = {
-        'buy': 'limit',
-        'sell': 'limit',
+        'entry': 'limit',
+        'exit': 'limit',
         'stoploss': 'market',
         'stoploss_on_exchange': False
     }
 
     # Optional order time in force.
     order_time_in_force = {
-        'buy': 'gtc',
-        'sell': 'gtc'
+        'entry': 'gtc',
+        'exit': 'gtc'
     }
 
     # Optimal timeframe for the strategy

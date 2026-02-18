@@ -15,9 +15,11 @@ import math
 class CombinedBinHAndClucHyperV0(IStrategy):
     timeframe = '1m'
 
-    use_sell_signal = True
-    sell_profit_only = True
-    ignore_roi_if_buy_signal = False
+    process_only_new_candles = True
+
+    use_exit_signal = True
+    exit_profit_only = False
+    ignore_roi_if_entry_signal = False
 
     # ----------------------------------------------------------------
     # Hyper Params
@@ -63,14 +65,12 @@ class CombinedBinHAndClucHyperV0(IStrategy):
 
     # ROI table:
     minimal_roi = {
-        "0": 0.10,
-        "30": 0.05,
-        "60": 0.02
+        "0": 100
     }
 
     # Stoploss:
     stoploss = -0.1
-    trailing_stop = True
+    trailing_stop = False
     trailing_only_offset_is_reached = False
     use_custom_stoploss = True
 

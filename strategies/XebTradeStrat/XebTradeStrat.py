@@ -27,6 +27,8 @@ class XebTradeStrat(IStrategy):
 
     stoploss = -0.01
     timeframe = '1m'
+
+    process_only_new_candles = True
     trailing_stop = True
     trailing_only_offset_is_reached = True
     trailing_stop_positive_offset = 0.001  # Trigger positive stoploss once crosses above this percentage

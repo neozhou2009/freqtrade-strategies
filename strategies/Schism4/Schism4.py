@@ -24,7 +24,11 @@ class Schism4(IStrategy):
     Strategy Configuration Items
     """
     timeframe = '5m'
+
+    process_only_new_candles = True
     inf_timeframe = '1h'
+
+    process_only_new_candles = True
 
     # Global Buy/Sell Params
     buy_params = {
@@ -57,9 +61,14 @@ class Schism4(IStrategy):
 
     stoploss = -0.30
 
-    use_sell_signal = False
-    sell_profit_only = True
-    ignore_roi_if_buy_signal = True
+    trailing_stop = True
+    trailing_stop_positive = 0.03
+    trailing_stop_positive_offset = 0.05
+    trailing_only_offset_is_reached = True
+
+    use_exit_signal = False
+    exit_profit_only = False
+    ignore_roi_if_entry_signal = True
 
     startup_candle_count: int = 72
 
@@ -145,7 +154,7 @@ class Schism4(IStrategy):
         trade_data = self.custom_trade_info[metadata['pair']]
         conditions = []
 
-        # Persist a buy signal for existing trades to make use of ignore_roi_if_buy_signal = True
+        # Persist a buy signal for existing trades to make use of ignore_roi_if_entry_signal = True
         # when this buy signal is not present a sell can happen according to the defined ROI table
         if trade_data['active_trade']:
             # peak_profit factor f(x)=1-x/400, rmi 30 -> 0.925, rmi 80 -> 0.80
@@ -353,7 +362,7 @@ class Schism4(IStrategy):
             buy_params = self.buy_params_QRD
             sell_params = self.sell_params_QRD
 
-        if side == 'sell':
+        if side == 'exit':
             return sell_params
 
         return buy_params
@@ -397,7 +406,11 @@ Anything not explicity defined here will follow the settings in the base strateg
 class Schism4_BTC(Schism4):
 
     timeframe = '1h'
+
+    process_only_new_candles = True
     inf_timeframe = '4h'
+
+    process_only_new_candles = True
 
     buy_params = {
         'inf-rsi': 64,
@@ -416,13 +429,17 @@ class Schism4_BTC(Schism4):
         "4320": 0
     }
 
-    use_sell_signal = False
+    use_exit_signal = False
 
 # Sub-strategy with parameters specific to ETH stake
 class Schism4_ETH(Schism4):
 
     timeframe = '1h'
+
+    process_only_new_candles = True
     inf_timeframe = '4h'
+
+    process_only_new_candles = True
 
     buy_params = {
         'inf-rsi': 13,
@@ -441,4 +458,4 @@ class Schism4_ETH(Schism4):
         "4320": 0
     }
 
-    use_sell_signal = False
+    use_exit_signal = False

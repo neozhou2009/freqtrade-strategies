@@ -49,16 +49,14 @@ class ClucHAnix(IStrategy):
 
     # ROI table:
     minimal_roi = {
-        "0": 0.10,
-        "30": 0.05,
-        "60": 0.02
+        "0": 100
     }
 
     # Stoploss:
     stoploss = -0.99   # use custom stoploss
 
     # Trailing stop:
-    trailing_stop = True
+    trailing_stop = False
     trailing_stop_positive = 0.001
     trailing_stop_positive_offset = 0.012
     trailing_only_offset_is_reached = False
@@ -70,9 +68,9 @@ class ClucHAnix(IStrategy):
     timeframe = '1m'
 
     # Make sure these match or are not overridden in config
-    use_sell_signal = True
-    sell_profit_only = True
-    ignore_roi_if_buy_signal = False
+    use_exit_signal = True
+    exit_profit_only = False
+    ignore_roi_if_entry_signal = False
 
     # Custom stoploss
     use_custom_stoploss = True
@@ -81,8 +79,8 @@ class ClucHAnix(IStrategy):
     startup_candle_count = 168
 
     order_types = {
-        'buy': 'market',
-        'sell': 'market',
+        'entry': 'market',
+        'exit': 'market',
         'emergencysell': 'market',
         'forcebuy': "market",
         'forcesell': 'market',

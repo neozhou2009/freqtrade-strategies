@@ -63,8 +63,8 @@ class MADisplaceV3(IStrategy):
 
     timeframe = '5m'
 
-    use_sell_signal = True
-    sell_profit_only = True
+    use_exit_signal = True
+    exit_profit_only = False
 
     process_only_new_candles = True
 

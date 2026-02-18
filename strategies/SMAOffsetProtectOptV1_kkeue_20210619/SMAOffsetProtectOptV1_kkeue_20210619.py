@@ -51,7 +51,9 @@ class SMAOffsetProtectOptV1_kkeue_20210619(IStrategy):
         "base_nb_candles_sell": 20,
         "high_offset": 1.010,
     }
-    INTERFACE_VERSION = 2
+    INTERFACE_VERSION = 3
+
+    can_short: bool = False
 
     # Modified ROI - 20210620
     # ROI table:
@@ -63,7 +65,7 @@ class SMAOffsetProtectOptV1_kkeue_20210619(IStrategy):
     }
 
     # Stoploss:
-    stoploss = -0.10
+    stoploss = -0.5
 
     # SMAOffset
     base_nb_candles_buy = IntParameter(
@@ -86,16 +88,16 @@ class SMAOffsetProtectOptV1_kkeue_20210619(IStrategy):
 
 
     # Trailing stop:
-    trailing_stop = True
+    trailing_stop = False
     trailing_stop_positive = 0.001
     trailing_stop_positive_offset = 0.01
     trailing_only_offset_is_reached = True
 
     # Sell signal
-    use_sell_signal = True
-    sell_profit_only = True
+    use_exit_signal = True
+    exit_profit_only = False
     sell_profit_offset = 0.01
-    ignore_roi_if_buy_signal = False
+    ignore_roi_if_entry_signal = False
 
     # Optimal timeframe for the strategy
     timeframe = '5m'
@@ -225,7 +227,7 @@ class SMAOffsetProtectOptV1_1(SMAOffsetProtectOptV1_kkeue_20210619):
     stoploss = -0.5  # value loaded from strategy
 
     # Trailing stop:
-    trailing_stop = True  # value loaded from strategy
+    trailing_stop = False  # value loaded from strategy
     trailing_stop_positive = 0.001  # value loaded from strategy
     trailing_stop_positive_offset = 0.01  # value loaded from strategy
     trailing_only_offset_is_reached = True  # value loaded from strategy

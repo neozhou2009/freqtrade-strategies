@@ -72,7 +72,7 @@ class fahmibah(IStrategy):
     stoploss = -0.10  # use custom stoploss
 
     # Trailing stop:
-    trailing_stop = True
+    trailing_stop = False
     trailing_stop_positive = 0.001
     trailing_stop_positive_offset = 0.012
     trailing_only_offset_is_reached = False
@@ -84,9 +84,9 @@ class fahmibah(IStrategy):
     timeframe = '5m'
 
     # Make sure these match or are not overridden in config
-    use_sell_signal = False
-    sell_profit_only = True
-    ignore_roi_if_buy_signal = False
+    use_exit_signal = False
+    exit_profit_only = False
+    ignore_roi_if_entry_signal = False
 
     # Custom stoploss
     use_custom_stoploss = True
@@ -95,8 +95,8 @@ class fahmibah(IStrategy):
     startup_candle_count = 168
 
     order_types = {
-        'buy': 'limit',
-        'sell': 'limit',
+        'entry': 'limit',
+        'exit': 'limit',
         'emergencysell': 'limit',
         'forcebuy': "limit",
         'forcesell': 'limit',

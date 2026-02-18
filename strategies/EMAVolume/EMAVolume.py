@@ -26,6 +26,11 @@ class EMAVolume(IStrategy):
     # This attribute will be overridden if the config file contains "stoploss"
     stoploss = -0.2
 
+    trailing_stop = True
+    trailing_stop_positive = 0.03
+    trailing_stop_positive_offset = 0.05
+    trailing_only_offset_is_reached = True
+
     # Optimal ticker interval for the strategy
     ticker_interval = '15m'
 

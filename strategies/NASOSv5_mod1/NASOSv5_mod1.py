@@ -36,7 +36,9 @@ def EWO(dataframe, ema_length=5, ema2_length=35):
 
 
 class NASOSv5_mod1(IStrategy):
-    INTERFACE_VERSION = 2
+    INTERFACE_VERSION = 3
+
+    can_short: bool = False
 
     # Buy hyperspace params:
     buy_params = {
@@ -113,15 +115,15 @@ class NASOSv5_mod1(IStrategy):
 
 
     # Sell signal
-    use_sell_signal = True
-    sell_profit_only = True
+    use_exit_signal = True
+    exit_profit_only = False
     sell_profit_offset = 0.01
-    ignore_roi_if_buy_signal = False
+    ignore_roi_if_entry_signal = False
 
     # Optional order time in force.
     order_time_in_force = {
-        'buy': 'gtc',
-        'sell': 'ioc'
+        'entry': 'gtc',
+        'exit': 'ioc'
     }
 
     # Optimal timeframe for the strategy
@@ -533,7 +535,7 @@ class NASOSv5SL(NASOSv5_mod1):
     pSL_2 = DecimalParameter(0.020, 0.070, default=0.040, decimals=3, space='sell', load=True)
 
 
-    trailing_stop = True
+    trailing_stop = False
     use_custom_stoploss = True
 
     ## Custom Trailing stoploss ( credit to Perkmeister for this custom stoploss to help the strategy ride a green candle )
@@ -616,7 +618,7 @@ class TrailingBuyStrat(NASOSv5_mod1):
             return pd.Series(x).rolling(window=win).min().iloc[-1]
 
         dataframe = super(TrailingBuyStrat, self).populate_buy_trend(dataframe, metadata)
-        dataframe = dataframe.rename(columns={"buy": "pre_buy"})
+        dataframe = dataframe.rename(columns={"entry": "pre_buy"})
 
         if self.trailing_buy_order_enabled and self.config['runmode'].value in ('live', 'dry_run'):  # trailing live dry ticker, 1m
             last_candle = dataframe.iloc[-1].squeeze()

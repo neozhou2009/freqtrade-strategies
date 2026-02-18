@@ -16,7 +16,7 @@ class ONUR(IStrategy):
         "226": 0.03
     }
 
-    stoploss = -0.10
+    stoploss = -0.99
     trailing_stop = True
     trailing_stop_positive = 0.293
     trailing_stop_positive_offset = 0.362
@@ -24,9 +24,11 @@ class ONUR(IStrategy):
 
     timeframe = '15m'
 
+    process_only_new_candles = True
+
     order_types = {
-        "buy": "limit",
-        "sell": "limit",
+        "entry": "limit",
+        "exit": "limit",
         "emergencysell": "market",
         "forcebuy": "market",
         "forcesell": "market",

@@ -8,7 +8,9 @@ from freqtrade.strategy.interface import IStrategy
 
 class strato(IStrategy):
 
-    INTERFACE_VERSION = 2
+    INTERFACE_VERSION = 3
+
+    can_short: bool = False
 
     minimal_roi = {
         "0": 0.012
@@ -16,11 +18,18 @@ class strato(IStrategy):
 
     stoploss = -0.1
 
+    trailing_stop = True
+    trailing_stop_positive = 0.03
+    trailing_stop_positive_offset = 0.05
+    trailing_only_offset_is_reached = True
+
     timeframe = '1m'
 
+    process_only_new_candles = True
+
     order_types = {
-        'buy': 'market',
-        'sell': 'market',
+        'entry': 'market',
+        'exit': 'market',
         'stoploss': 'market',
         'stoploss_on_exchange': False
     }
@@ -28,8 +37,8 @@ class strato(IStrategy):
     startup_candle_count: int = 20
 
     order_time_in_force = {
-        'buy': 'gtc',
-        'sell': 'gtc',
+        'entry': 'gtc',
+        'exit': 'gtc',
     }
 
     def informative_pairs(self):

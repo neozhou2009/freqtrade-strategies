@@ -34,6 +34,11 @@ class Chispei(IStrategy):
     }
 
     stoploss = -0.32336
+
+    trailing_stop = True
+    trailing_stop_positive = 0.03
+    trailing_stop_positive_offset = 0.05
+    trailing_only_offset_is_reached = True
     ticker_interval = '4h'
 
     def populate_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:

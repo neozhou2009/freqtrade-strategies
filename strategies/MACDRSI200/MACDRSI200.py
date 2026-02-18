@@ -30,6 +30,11 @@ class MACDRSI200(IStrategy):
     # Stoploss:
     stoploss = -0.04032
 
+    trailing_stop = True
+    trailing_stop_positive = 0.03
+    trailing_stop_positive_offset = 0.05
+    trailing_only_offset_is_reached = True
+
     def populate_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe['ema200'] = ta.EMA(dataframe, timeperiod=200)
         macd = ta.MACD(dataframe, fastperiod=24, slowperiod=56, signalperiod=6)

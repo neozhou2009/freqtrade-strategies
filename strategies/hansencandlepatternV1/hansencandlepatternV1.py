@@ -21,12 +21,17 @@ class hansencandlepatternV1(IStrategy):
     """
 
     timeframe = '1h'
+
+    process_only_new_candles = True
     minimal_roi = {
-        "0": 0.10,
-        "30": 0.05,
-        "60": 0.02,
+        "0": 10,
     }
     stoploss = -0.1
+
+    trailing_stop = True
+    trailing_stop_positive = 0.03
+    trailing_stop_positive_offset = 0.05
+    trailing_only_offset_is_reached = True
     def populate_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:   
         dataframe['3LINESTRIKE'] = ta.CDL3LINESTRIKE(dataframe['open'], dataframe['high'], dataframe['low'], dataframe['close'])
         dataframe['EVENINGSTAR'] = ta.CDLEVENINGSTAR(dataframe['open'], dataframe['high'], dataframe['low'], dataframe['close'])

@@ -28,7 +28,7 @@ class redditMA(IStrategy):
 
     # Optimal stoploss designed for the strategy
     # This attribute will be overridden if the config file contains "stoploss"
-    stoploss = -0.10
+    stoploss = -0.5
 
     # Optimal ticker interval for the strategy
     ticker_interval = '15m'
@@ -40,14 +40,14 @@ class redditMA(IStrategy):
     process_only_new_candles = True
 
     # Experimental settings (configuration will overide these if set)
-    use_sell_signal = True
-    sell_profit_only = True
-    ignore_roi_if_buy_signal = True
+    use_exit_signal = True
+    exit_profit_only = True
+    ignore_roi_if_entry_signal = True
 
     # Optional order type mapping
     order_types = {
-        'buy': 'limit',
-        'sell': 'limit',
+        'entry': 'limit',
+        'exit': 'limit',
         'stoploss': 'market',
         'stoploss_on_exchange': False
     }

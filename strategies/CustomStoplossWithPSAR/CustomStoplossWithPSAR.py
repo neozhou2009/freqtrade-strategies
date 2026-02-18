@@ -24,7 +24,14 @@ class CustomStoplossWithPSAR(IStrategy):
     the populate_buy_trend() function is pretty nonsencial
     """
     timeframe = '1h'
+
+    process_only_new_candles = True
     stoploss = -0.2
+
+    trailing_stop = True
+    trailing_stop_positive = 0.03
+    trailing_stop_positive_offset = 0.05
+    trailing_only_offset_is_reached = True
     custom_info = {}
     use_custom_stoploss = True
 

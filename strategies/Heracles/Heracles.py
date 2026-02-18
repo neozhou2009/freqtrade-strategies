@@ -71,6 +71,8 @@ class Heracles(IStrategy):
     # Buy hypers
     timeframe = '12h'
 
+    process_only_new_candles = True
+
     def populate_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         # Add all ta features
         dataframe = dropna(dataframe)

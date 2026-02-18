@@ -31,10 +31,17 @@ class SmoothScalp(IStrategy):
     # This attribute will be overridden if the config file contains "stoploss"
     # should not be below 3% loss
 
-    stoploss = -0.10
+    stoploss = -0.5
+
+    trailing_stop = True
+    trailing_stop_positive = 0.03
+    trailing_stop_positive_offset = 0.05
+    trailing_only_offset_is_reached = True
     # Optimal timeframe for the strategy
     # the shorter the better
     timeframe = '1m'
+
+    process_only_new_candles = True
 
     def populate_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe['ema_high'] = ta.EMA(dataframe, timeperiod=5, price='high')

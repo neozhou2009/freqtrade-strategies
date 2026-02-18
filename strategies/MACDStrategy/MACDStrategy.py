@@ -29,7 +29,9 @@ class MACDStrategy(IStrategy):
     - Sell side: CCI between 0 and 700
 
     """
-    INTERFACE_VERSION = 2
+    INTERFACE_VERSION = 3
+
+    can_short: bool = False
 
     # Minimal ROI designed for the strategy.
     # This attribute will be overridden if the config file contains "minimal_roi"
@@ -44,8 +46,15 @@ class MACDStrategy(IStrategy):
     # This attribute will be overridden if the config file contains "stoploss"
     stoploss = -0.3
 
+    trailing_stop = True
+    trailing_stop_positive = 0.03
+    trailing_stop_positive_offset = 0.05
+    trailing_only_offset_is_reached = True
+
     # Optimal timeframe for the strategy
     timeframe = '5m'
+
+    process_only_new_candles = True
 
     buy_cci = IntParameter(low=-700, high=0, default=-50, space='buy', optimize=True)
     sell_cci = IntParameter(low=0, high=700, default=100, space='sell', optimize=True)

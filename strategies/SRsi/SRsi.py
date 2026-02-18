@@ -6,7 +6,9 @@ from freqtrade.strategy.interface import IStrategy
 
 class SRsi(IStrategy):
 
-    INTERFACE_VERSION = 2
+    INTERFACE_VERSION = 3
+
+    can_short: bool = False
 
     minimal_roi = {
         "0": 0.012
@@ -14,10 +16,17 @@ class SRsi(IStrategy):
 
     stoploss = -0.15
 
+    trailing_stop = True
+    trailing_stop_positive = 0.03
+    trailing_stop_positive_offset = 0.05
+    trailing_only_offset_is_reached = True
+
     timeframe = '1m'
+
+    process_only_new_candles = True
     order_types = {
-        'buy': 'limit',
-        'sell': 'limit',
+        'entry': 'limit',
+        'exit': 'limit',
         'stoploss': 'market',
         'stoploss_on_exchange': False
     }
@@ -25,8 +34,8 @@ class SRsi(IStrategy):
     startup_candle_count: int = 120
 
     order_time_in_force = {
-        'buy': 'gtc',
-        'sell': 'gtc',
+        'entry': 'gtc',
+        'exit': 'gtc',
     }
 
     def informative_pairs(self):

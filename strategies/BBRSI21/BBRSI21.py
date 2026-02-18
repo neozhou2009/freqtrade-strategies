@@ -40,6 +40,8 @@ class BBRSI21(IStrategy):
     # Optimal timeframe for the strategy
     timeframe = '5m'
 
+    process_only_new_candles = True
+
     def populate_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe['rsi'] = ta.RSI(dataframe, timeperiod=14)
 

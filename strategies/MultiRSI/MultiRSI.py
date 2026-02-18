@@ -21,8 +21,15 @@ class MultiRSI(IStrategy):
     # Optimal stoploss designed for the strategy
     stoploss = -0.05
 
+    trailing_stop = True
+    trailing_stop_positive = 0.03
+    trailing_stop_positive_offset = 0.05
+    trailing_only_offset_is_reached = True
+
     # Optimal timeframe for the strategy
     timeframe = '5m'
+
+    process_only_new_candles = True
 
     def get_ticker_indicator(self):
         return int(self.timeframe[:-1])

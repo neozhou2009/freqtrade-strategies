@@ -21,7 +21,9 @@ class TDSequentialStrategy(IStrategy):
 
     Created by @bmoulkaf
     """
-    INTERFACE_VERSION = 2
+    INTERFACE_VERSION = 3
+
+    can_short: bool = False
 
     # Minimal ROI designed for the strategy
     minimal_roi = {'0': 5}
@@ -30,7 +32,7 @@ class TDSequentialStrategy(IStrategy):
     stoploss = -0.05
 
     # Trailing stoploss
-    trailing_stop = True
+    trailing_stop = False
     # trailing_only_offset_is_reached = False
     # trailing_stop_positive = 0.01
     # trailing_stop_positive_offset = 0.0  # Disabled / not configured
@@ -38,15 +40,17 @@ class TDSequentialStrategy(IStrategy):
     # Optimal timeframe for the strategy
     timeframe = '1h'
 
+    process_only_new_candles = True
+
     # These values can be overridden in the "ask_strategy" section in the config.
-    use_sell_signal = True
-    sell_profit_only = True
-    ignore_roi_if_buy_signal = False
+    use_exit_signal = True
+    exit_profit_only = False
+    ignore_roi_if_entry_signal = False
 
     # Optional order type mapping
     order_types = {
-        'buy': 'limit',
-        'sell': 'limit',
+        'entry': 'limit',
+        'exit': 'limit',
         'stoploss': 'limit',
         'stoploss_on_exchange': False
     }
@@ -56,8 +60,8 @@ class TDSequentialStrategy(IStrategy):
 
     # Optional time in force for orders
     order_time_in_force = {
-        'buy': 'gtc',
-        'sell': 'gtc',
+        'entry': 'gtc',
+        'exit': 'gtc',
     }
 
     def informative_pairs(self):

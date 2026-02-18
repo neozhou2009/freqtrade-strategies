@@ -58,6 +58,11 @@ class Obelisk_Ichimoku_ZEMA_v1(IStrategy):
 
     stoploss = -0.294
 
+    trailing_stop = True
+    trailing_stop_positive = 0.03
+    trailing_stop_positive_offset = 0.05
+    trailing_only_offset_is_reached = True
+
     # Buy hyperspace params:
     buy_params = {
      'low_offset': 0.964, 'zema_len_buy': 51

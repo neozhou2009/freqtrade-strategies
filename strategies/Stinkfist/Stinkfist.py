@@ -29,7 +29,11 @@ class Stinkfist(IStrategy):
     Strategy Configuration Items
     """
     timeframe = '5m'
+
+    process_only_new_candles = True
     inf_timeframe = '1h'
+
+    process_only_new_candles = True
 
     buy_params = {
         'inf-pct-adr': 0.80,
@@ -50,9 +54,9 @@ class Stinkfist(IStrategy):
     stoploss = -0.40
 
     # Probably don't change these
-    use_sell_signal = True
-    sell_profit_only = True
-    ignore_roi_if_buy_signal = True
+    use_exit_signal = True
+    exit_profit_only = False
+    ignore_roi_if_entry_signal = True
 
     startup_candle_count: int = 72
 
@@ -386,20 +390,28 @@ Anything not explicity defined here will follow the settings in the base strateg
 class Stinkfist_BTC(Stinkfist):
 
     timeframe = '5m'
+
+    process_only_new_candles = True
     inf_timeframe = '1h'
+
+    process_only_new_candles = True
 
     buy_params = {
         'inf-pct-adr': 0.91556,
         'mp': 66,
     }
 
-    use_sell_signal = False
+    use_exit_signal = False
 
 # Sub-strategy with parameters specific to ETH stake
 class Stinkfist_ETH(Stinkfist):
 
     timeframe = '5m'
+
+    process_only_new_candles = True
     inf_timeframe = '1h'
+
+    process_only_new_candles = True
 
     buy_params = {
         'inf-pct-adr': 0.81628,
@@ -411,4 +423,4 @@ class Stinkfist_ETH(Stinkfist):
     trailing_stop_positive_offset = 0.022
     trailing_only_offset_is_reached = False
 
-    use_sell_signal = False
+    use_exit_signal = False

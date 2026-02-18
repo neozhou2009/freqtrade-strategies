@@ -63,9 +63,11 @@ class NowoIchimoku1hV2(IStrategy):
     # Optimal timeframe for the strategy
     timeframe = '1h'
 
+    process_only_new_candles = True
+
     startup_candle_count = 100
 
-    use_sell_signal = False
+    use_exit_signal = False
 
     use_custom_stoploss = True
 

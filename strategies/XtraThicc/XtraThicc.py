@@ -15,9 +15,7 @@ XtraThicc v69
 class XtraThicc(IStrategy):
 
     minimal_roi = {
-         "0": 0.10,
-        "30": 0.05,
-        "60": 0.02
+         "0": 100
     }
 
     # Stoploss:
@@ -26,11 +24,11 @@ class XtraThicc(IStrategy):
     timeframe = '5m'
     inf_timeframe = '1h'
 
-    use_sell_signal = True
-    sell_profit_only = True
-    ignore_roi_if_buy_signal = True
+    use_exit_signal = True
+    exit_profit_only = True
+    ignore_roi_if_entry_signal = True
 
-    trailing_stop = True
+    trailing_stop = False
     trailing_stop_positive = 0.002
     trailing_stop_positive_offset = 0.02
     trailing_only_offset_is_reached = True

@@ -37,6 +37,8 @@ class adxbbrsi2(IStrategy):
     # Optimal timeframe for the strategy
     timeframe = '1h'
 
+    process_only_new_candles = True
+
     # Number of candles the strategy requires before producing valid signals
     startup_candle_count: int = 20
 

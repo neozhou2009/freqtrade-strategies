@@ -43,6 +43,8 @@ class TemaMaster3(IStrategy):
     # Optimal timeframe for the strategy
     timeframe = '1m'
 
+    process_only_new_candles = True
+
     # Trailing stop:
     trailing_stop = True
     trailing_stop_positive = 0.12943
@@ -53,9 +55,9 @@ class TemaMaster3(IStrategy):
     ta_on_candle = False
 
     # Experimental settings (configuration will overide these if set)
-    use_sell_signal = True
-    sell_profit_only = True
-    ignore_roi_if_buy_signal = False
+    use_exit_signal = True
+    exit_profit_only = False
+    ignore_roi_if_entry_signal = False
 
 
     def informative_pairs(self):

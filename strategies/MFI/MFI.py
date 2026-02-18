@@ -37,8 +37,10 @@ class MFI(IStrategy):
     # Optimal timeframe for the strateg
     timeframe = '5m'
 
+    process_only_new_candles = True
+
     # trailing stoploss
-    trailing_stop = True
+    trailing_stop = False
     trailing_stop_positive = 0.01
     trailing_stop_positive_offset = 0.02
 

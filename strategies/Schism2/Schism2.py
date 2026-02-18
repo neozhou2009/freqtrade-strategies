@@ -20,7 +20,7 @@ This strategy is an evolution of our previous framework "Schism" which we are ha
 
 FEATURES:
     - Sticking buy signal for extending ROI
-        - Idea is to use a completely different buy signal for active trades to force the "ignore_roi_if_buy_signal = True" setting to stop a sell to ROI
+        - Idea is to use a completely different buy signal for active trades to force the "ignore_roi_if_entry_signal = True" setting to stop a sell to ROI
           during a strong upward trend.
             - This is not compatible with backtest or hyperopt and can only be tested in dry-run or live.
     - Dynamic Sell
@@ -46,7 +46,11 @@ class Schism2(IStrategy):
     Strategy Configuration Items
     """
     timeframe = '5m'
+
+    process_only_new_candles = True
     inf_timeframe = '1h'
+
+    process_only_new_candles = True
 
     buy_params = {
         'inf-pct-adr': 0.83534,
@@ -74,10 +78,15 @@ class Schism2(IStrategy):
 
     stoploss = -0.30
 
+    trailing_stop = True
+    trailing_stop_positive = 0.03
+    trailing_stop_positive_offset = 0.05
+    trailing_only_offset_is_reached = True
+
     # Recommended
-    use_sell_signal = True
-    sell_profit_only = True
-    ignore_roi_if_buy_signal = True
+    use_exit_signal = True
+    exit_profit_only = False
+    ignore_roi_if_entry_signal = True
 
     startup_candle_count: int = 72
 
@@ -168,7 +177,7 @@ class Schism2(IStrategy):
         trade_data = self.custom_trade_info[metadata['pair']]
         conditions = []
 
-        # Persist a buy signal for existing trades to make use of ignore_roi_if_buy_signal = True
+        # Persist a buy signal for existing trades to make use of ignore_roi_if_entry_signal = True
         # when this buy signal is not present a sell can happen according to the defined ROI table
         if trade_data['active_trade']:
             # peak_profit factor f(x)=1-x/400, rmi 30 -> 0.925, rmi 80 -> 0.80
@@ -375,9 +384,9 @@ class Schism2(IStrategy):
             if custom_params['minimal_roi']:
                 custom_stop = custom_params['minimal_roi']
             
-        if params == 'buy':
+        if params == 'entry':
             return buy_params
-        if params == 'sell':
+        if params == 'exit':
             return sell_params
         if params == 'minimal_roi':
             return minimal_roi
@@ -442,7 +451,11 @@ Anything not explicity defined here will follow the settings in the base strateg
 class Schism2_BTC(Schism2):
 
     timeframe = '15m'
+
+    process_only_new_candles = True
     inf_timeframe = '1h'
+
+    process_only_new_candles = True
 
     minimal_roi = {
         "0": 0.05,
@@ -464,13 +477,17 @@ class Schism2_BTC(Schism2):
         'xtf-stake-rsi': 53
     }
 
-    use_sell_signal = False
+    use_exit_signal = False
 
 # Sub-strategy with parameters specific to ETH stake
 class Schism2_ETH(Schism2):
 
     timeframe = '5m'
+
+    process_only_new_candles = True
     inf_timeframe = '1h'
+
+    process_only_new_candles = True
 
     buy_params = {
         'inf-pct-adr': 0.81628,
@@ -483,4 +500,4 @@ class Schism2_ETH(Schism2):
         'xtf-stake-rsi': 92
     }
 
-    use_sell_signal = False
+    use_exit_signal = False

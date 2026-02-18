@@ -34,8 +34,15 @@ class FixedRiskRewardLoss(IStrategy):
         'set_to_break_even_at_profit': 1,
     }
     use_custom_stoploss = True
-    stoploss = -0.10
+    stoploss = -0.9
+
+    trailing_stop = True
+    trailing_stop_positive = 0.03
+    trailing_stop_positive_offset = 0.05
+    trailing_only_offset_is_reached = True
     timeframe = '5m'
+
+    process_only_new_candles = True
 
     def custom_stoploss(self, pair: str, trade: 'Trade', current_time: datetime,
                         current_rate: float, current_profit: float, **kwargs) -> float:

@@ -21,16 +21,21 @@ class WaveTrendStra(IStrategy):
     # adjust based on market conditions. We would recommend to keep it low for quick turn arounds
     # This attribute will be overridden if the config file contains "minimal_roi"
     minimal_roi = {
-        "0": 0.10,
-        "30": 0.05,
-        "60": 0.02   #disable roi
+        "0": 100   #disable roi
     }
 
     # Optimal stoploss designed for the strategy
     stoploss = -0.25
 
+    trailing_stop = True
+    trailing_stop_positive = 0.03
+    trailing_stop_positive_offset = 0.05
+    trailing_only_offset_is_reached = True
+
     # Optimal timeframe for the strategy
     timeframe = '4h'
+
+    process_only_new_candles = True
 
     def populate_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
 

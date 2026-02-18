@@ -30,7 +30,9 @@ def moderi(dataframe: DataFrame, len_slow_ma: int = 32) -> Series:
     return slow_ma >= slow_ma.shift(1)  # we just need true & false for ERI trend
 
 class BBRSITV(IStrategy):
-    INTERFACE_VERSION = 2
+    INTERFACE_VERSION = 3
+
+    can_short: bool = False
 
     # Buy hyperspace params:
     buy_params = {
@@ -55,16 +57,16 @@ class BBRSITV(IStrategy):
     stoploss = -0.25  # value loaded from strategy
 
     # Trailing stop:
-    trailing_stop = True  # value loaded from strategy
+    trailing_stop = False  # value loaded from strategy
     trailing_stop_positive = 0.005  # value loaded from strategy
     trailing_stop_positive_offset = 0.025  # value loaded from strategy
     trailing_only_offset_is_reached = True  # value loaded from strategy
 
     # Sell signal
-    use_sell_signal = True
-    sell_profit_only = True
+    use_exit_signal = True
+    exit_profit_only = False
     sell_profit_offset = 0.01
-    ignore_roi_if_buy_signal = False
+    ignore_roi_if_entry_signal = False
     process_only_new_candles = True
     startup_candle_count = 30
 
@@ -225,7 +227,7 @@ class BBRSITV4(BBRSITV):
     minimal_roi = {
         "0": 0.07
     }
-    ignore_roi_if_buy_signal = True
+    ignore_roi_if_entry_signal = True
     startup_candle_count = 400
 
     stoploss = -0.3  # value loaded from strategy
@@ -270,7 +272,9 @@ class BBRSITV1(BBRSITV):
 |               BBRSITV |    309 |           1.10 |         340.17 |          3869.800 |         128.99 |        2:53:00 |   223     0    86  72.2 |  261.984 USDT  25.84% |
 ============================================================================================================================================================================
     """
-    INTERFACE_VERSION = 2
+    INTERFACE_VERSION = 3
+
+    can_short: bool = False
 
     # Buy hyperspace params:
     buy_params = {
@@ -295,7 +299,7 @@ class BBRSITV1(BBRSITV):
     stoploss = -0.25  # value loaded from strategy
 
     # Trailing stop:
-    trailing_stop = True  # value loaded from strategy
+    trailing_stop = False  # value loaded from strategy
     trailing_stop_positive = 0.005  # value loaded from strategy
     trailing_stop_positive_offset = 0.025  # value loaded from strategy
     trailing_only_offset_is_reached = True  # value loaded from strategy
@@ -334,7 +338,7 @@ class BBRSITV2(BBRSITV):
     stoploss = -0.25  # value loaded from strategy
 
     # Trailing stop:
-    trailing_stop = True  # value loaded from strategy
+    trailing_stop = False  # value loaded from strategy
     trailing_stop_positive = 0.005  # value loaded from strategy
     trailing_stop_positive_offset = 0.025  # value loaded from strategy
     trailing_only_offset_is_reached = True  # value loaded from strategy
@@ -351,7 +355,9 @@ class BBRSITV3(BBRSITV):
     | SMAOffsetProtectOptV1 |    417 |           1.33 |         555.91 |          8423.809 |         280.79 |        1:44:00 |   300     0   117  71.9 | 1056.072 USDT   61.08% |
     |               BBRSITV |    627 |           1.14 |         715.85 |         12998.605 |         433.29 |        5:35:00 |   374     0   253  59.6 | 2294.408 USDT  100.60% |
     ============================================================================================================================================================================="""
-    INTERFACE_VERSION = 2
+    INTERFACE_VERSION = 3
+
+    can_short: bool = False
 
     # Buy hyperspace params:
     buy_params = {
@@ -385,7 +391,7 @@ class BBRSITV5(BBRSITV):
     minimal_roi = {
         "0": 0.04
     }
-    ignore_roi_if_buy_signal = True
+    ignore_roi_if_entry_signal = True
     startup_candle_count = 400
     use_custom_stoploss = True
 

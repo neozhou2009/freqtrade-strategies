@@ -21,7 +21,9 @@ class flawless_lambo(IStrategy):
     logger = logging.getLogger(__name__)
     # Strategy interface version - allow new iterations of the strategy interface.
     # Check the documentation or the Sample strategy to get the latest version.
-    INTERFACE_VERSION = 2
+    INTERFACE_VERSION = 3
+
+    can_short: bool = False
 
     @property
     def protections(self):
@@ -793,7 +795,7 @@ class flawless_lambo(IStrategy):
     stoploss = -1 #-0.10
 
     # Trailing stop:
-    trailing_stop = True
+    trailing_stop = False
     trailing_stop_positive = 0.006
     trailing_stop_positive_offset = 0.019
     trailing_only_offset_is_reached = False
@@ -806,10 +808,10 @@ class flawless_lambo(IStrategy):
     timeframe = '15m'
 
     # These values can be overridden in the "ask_strategy" section in the config.
-    use_sell_signal = True
-    sell_profit_only = True
+    use_exit_signal = True
+    exit_profit_only = False
     # sell_profit_offset = 0.019
-    ignore_roi_if_buy_signal = False
+    ignore_roi_if_entry_signal = False
 
 
     # hyperopt params
@@ -844,16 +846,16 @@ class flawless_lambo(IStrategy):
 
     # Optional order type mapping.
     order_types = {
-        'buy': 'limit',
-        'sell': 'limit',
+        'entry': 'limit',
+        'exit': 'limit',
         'stoploss': 'market',
         'stoploss_on_exchange': False
     }
 
     # Optional order time in force.
     order_time_in_force = {
-        'buy': 'gtc',
-        'sell': 'gtc'
+        'entry': 'gtc',
+        'exit': 'gtc'
     }
     
     @property

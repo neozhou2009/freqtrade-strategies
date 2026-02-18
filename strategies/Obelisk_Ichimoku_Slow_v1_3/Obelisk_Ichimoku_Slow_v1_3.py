@@ -103,7 +103,7 @@ class Obelisk_Ichimoku_Slow_v1_3(IStrategy):
     # in which case it would sell anyway.
 
     # Stoploss:
-    stoploss = -0.10
+    stoploss = -0.99
 
 
     def informative_pairs(self):

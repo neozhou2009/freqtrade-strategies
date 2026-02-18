@@ -19,6 +19,8 @@ class SuperHV27(IStrategy):
 
     timeframe = '5m'
 
+    process_only_new_candles = True
+
     # Buy hyperspace params:
     buy_params = {
         'adx1': 49,
@@ -49,6 +51,11 @@ class SuperHV27(IStrategy):
     # Stoploss:
     stoploss = -0.40
 
+    trailing_stop = True
+    trailing_stop_positive = 0.03
+    trailing_stop_positive_offset = 0.05
+    trailing_only_offset_is_reached = True
+
     # connect will participate in hyperopted tables, other methods will not
     dynamic_roi = {
         'enabled': True,
@@ -60,9 +67,9 @@ class SuperHV27(IStrategy):
     }
 
     # Probably don't change these
-    use_sell_signal = True
-    sell_profit_only = True
-    ignore_roi_if_buy_signal = True
+    use_exit_signal = True
+    exit_profit_only = False
+    ignore_roi_if_entry_signal = True
 
     # Custom Dicts for storing trade data and other custom things this strategy does
     custom_trade_info = {}
@@ -394,15 +401,19 @@ class SuperHV27_BTC(SuperHV27):
 
     timeframe = '5m'
 
+    process_only_new_candles = True
 
 
-    use_sell_signal = False
+
+    use_exit_signal = False
 
 # Sub-strategy with parameters specific to ETH stake
 class SuperHV27_ETH(SuperHV27):
 
     timeframe = '5m'
 
+    process_only_new_candles = True
 
 
-    use_sell_signal = False
+
+    use_exit_signal = False

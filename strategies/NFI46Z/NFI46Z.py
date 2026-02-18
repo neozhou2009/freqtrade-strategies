@@ -24,9 +24,9 @@ from datetime import datetime, timedelta
 ##   Highly recommended to blacklist leveraged tokens (*BULL, *BEAR, *UP, *DOWN etc).                    ##
 ##   Ensure that you don't override any variables in you config.json. Especially                         ##
 ##   the timeframe (must be 5m).                                                                         ##
-##     use_sell_signal must set to true (or not set at all).                                             ##
-##     sell_profit_only must set to false (or not set at all).                                           ##
-##     ignore_roi_if_buy_signal must set to true (or not set at all).                                    ##
+##     use_exit_signal must set to true (or not set at all).                                             ##
+##     exit_profit_only must set to false (or not set at all).                                           ##
+##     ignore_roi_if_entry_signal must set to true (or not set at all).                                    ##
 ##                                                                                                       ##
 ###########################################################################################################
 ##               DONATIONS                                                                               ##
@@ -41,7 +41,9 @@ from datetime import datetime, timedelta
 
 
 class NFI46Z(IStrategy):
-    INTERFACE_VERSION = 2
+    INTERFACE_VERSION = 3
+
+    can_short: bool = False
 
     # ROI table:
     minimal_roi = {
@@ -51,10 +53,10 @@ class NFI46Z(IStrategy):
         "180": 0.018,        # We're going up?
     }
 
-    stoploss = -0.10
+    stoploss = -0.99
 
     # Trailing stoploss (not used)
-    trailing_stop = True
+    trailing_stop = False
     trailing_only_offset_is_reached = False
     trailing_stop_positive = 0.01
     trailing_stop_positive_offset = 0.025
@@ -70,18 +72,18 @@ class NFI46Z(IStrategy):
     process_only_new_candles = True
 
     # These values can be overridden in the "ask_strategy" section in the config.
-    use_sell_signal = True
-    sell_profit_only = True
+    use_exit_signal = True
+    exit_profit_only = False
     sell_profit_offset = 0.001 # it doesn't meant anything, just to guarantee there is a minimal profit.
-    ignore_roi_if_buy_signal = False
+    ignore_roi_if_entry_signal = False
 
     # Number of candles the strategy requires before producing valid signals
     startup_candle_count: int = 400
 
     # Optional order type mapping.
     order_types = {
-        'buy': 'market',
-        'sell': 'market',
+        'entry': 'market',
+        'exit': 'market',
         'trailing_stop_loss': 'market',
         'stoploss': 'market',
         'stoploss_on_exchange': False

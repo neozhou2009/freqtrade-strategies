@@ -126,9 +126,7 @@ class BB_RPB_TSL_RNG_VWAP(IStrategy):
 
     # really hard to use this
     minimal_roi = {
-        "0": 0.10,
-        "30": 0.05,
-        "60": 0.02,
+        "0": 100,
     }
 
     # Optimal timeframe for the strategy
@@ -136,18 +134,23 @@ class BB_RPB_TSL_RNG_VWAP(IStrategy):
     inf_1h = '1h'
 
     # Disabled
-    stoploss = -0.10
+    stoploss = -0.99
+
+    trailing_stop = True
+    trailing_stop_positive = 0.03
+    trailing_stop_positive_offset = 0.05
+    trailing_only_offset_is_reached = True
 
     # Custom stoploss
     use_custom_stoploss = True
-    use_sell_signal = True
+    use_exit_signal = True
 
     process_only_new_candles = True
     startup_candle_count = 120
 
     order_types = {
-        'buy': 'limit',
-        'sell': 'limit',
+        'entry': 'limit',
+        'exit': 'limit',
         'emergencysell': 'limit',
         'forcebuy': "limit",
         'forcesell': 'limit',

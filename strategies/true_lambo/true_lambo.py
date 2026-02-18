@@ -202,14 +202,19 @@ class true_lambo(IStrategy):
     inf_1h = '1h'
 
     # Disabled
-    stoploss = -0.10
+    stoploss = -0.99
+
+    trailing_stop = True
+    trailing_stop_positive = 0.03
+    trailing_stop_positive_offset = 0.05
+    trailing_only_offset_is_reached = True
 
     # Run "populate_indicators()" only for new candle.
     process_only_new_candles = True
 
     # Custom stoploss
     use_custom_stoploss = True
-    use_sell_signal = True
+    use_exit_signal = True
     startup_candle_count: int = 400
 
     ############################################################################

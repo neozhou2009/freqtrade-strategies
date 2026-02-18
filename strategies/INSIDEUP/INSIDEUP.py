@@ -27,7 +27,9 @@ import json
 
 
 class INSIDEUP(IStrategy):
-    INTERFACE_VERSION = 2
+    INTERFACE_VERSION = 3
+
+    can_short: bool = False
 
     # ROI table:
     minimal_roi = {
@@ -47,15 +49,15 @@ class INSIDEUP(IStrategy):
     trailing_only_offset_is_reached = True  # value loaded from strategy
 
     # Optimal timeframe for the strategy.
-    timeframe = '1d'
+    timeframe = '4h'
 
     # Run "populate_indicators()" only for new candle.
     process_only_new_candles = True
 
     # These values can be overridden in the "ask_strategy" section in the config.
-    use_sell_signal = False
-    sell_profit_only = True
-    ignore_roi_if_buy_signal = False
+    use_exit_signal = False
+    exit_profit_only = False
+    ignore_roi_if_entry_signal = False
 
 
     def populate_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:

@@ -38,7 +38,9 @@ class StochRSITEMA(IStrategy):
 
     # Strategy interface version - allow new iterations of the strategy interface.
     # Check the documentation or the Sample strategy to get the latest version.
-    INTERFACE_VERSION = 2
+    INTERFACE_VERSION = 3
+
+    can_short: bool = False
 
     """
     PASTE OUTPUT FROM HYPEROPT HERE
@@ -90,10 +92,10 @@ class StochRSITEMA(IStrategy):
     slowdPeriod = 3
 
     # Make sure these match or are not overridden in config
-    use_sell_signal = True
-    sell_profit_only = True
+    use_exit_signal = True
+    exit_profit_only = True
     sell_profit_offset = 0.01
-    ignore_roi_if_buy_signal = False
+    ignore_roi_if_entry_signal = False
 
     timeframe = '5m'
 

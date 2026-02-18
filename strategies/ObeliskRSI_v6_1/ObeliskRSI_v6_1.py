@@ -108,6 +108,11 @@ class ObeliskRSI_v6_1(IStrategy):
     # Stoploss:
     stoploss = -0.30
 
+    trailing_stop = True
+    trailing_stop_positive = 0.03
+    trailing_stop_positive_offset = 0.05
+    trailing_only_offset_is_reached = True
+
     use_custom_stoploss = True
     custom_stop_ramp_minutes = 110
 

@@ -31,7 +31,14 @@ class BinHV45HO(IStrategy):
     }
 
     stoploss = -0.19
+
+    trailing_stop = True
+    trailing_stop_positive = 0.03
+    trailing_stop_positive_offset = 0.05
+    trailing_only_offset_is_reached = True
     timeframe = '1m'
+
+    process_only_new_candles = True
 
     df_close_bbdelta = DecimalParameter(0.005, 0.06, default=0.008, space='buy', optimize=False, load=True)
     df_close_closedelta = DecimalParameter(0.01, 0.03, default=0.0175, space='buy', optimize=False, load=True)

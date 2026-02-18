@@ -217,7 +217,9 @@ sell_params = {
 
 
 class ElliotV4(IStrategy):
-    INTERFACE_VERSION = 2
+    INTERFACE_VERSION = 3
+
+    can_short: bool = False
 
     # ROI table:
     minimal_roi = {
@@ -228,7 +230,7 @@ class ElliotV4(IStrategy):
     }
 
     # Stoploss:
-    stoploss = -0.10
+    stoploss = -0.97
 
     # SMAOffset
     base_nb_candles_buy = IntParameter(
@@ -257,15 +259,15 @@ class ElliotV4(IStrategy):
     trailing_only_offset_is_reached = True
 
     # Sell signal
-    use_sell_signal = False
-    sell_profit_only = True
+    use_exit_signal = False
+    exit_profit_only = True
     sell_profit_offset = 0.01
-    ignore_roi_if_buy_signal = True
+    ignore_roi_if_entry_signal = True
 
     # Optional order time in force.
     order_time_in_force = {
-        'buy': 'gtc',
-        'sell': 'ioc'
+        'entry': 'gtc',
+        'exit': 'ioc'
     }
 
     # Optimal timeframe for the strategy

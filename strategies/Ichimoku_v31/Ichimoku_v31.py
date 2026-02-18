@@ -15,13 +15,16 @@ from technical.indicators import ichimoku
 class Ichimoku_v31(IStrategy):
   # ROI table:
   minimal_roi = {
-    "0": 0.10,
-        "30": 0.05,
-        "60": 0.02
+    "0": 100
   }
 
   # Stoploss:
-  stoploss = -0.10
+  stoploss = -0.99
+
+    trailing_stop = True
+    trailing_stop_positive = 0.03
+    trailing_stop_positive_offset = 0.05
+    trailing_only_offset_is_reached = True
 
   # Optimal timeframe for the strategy.
   timeframe = '1h'
@@ -32,17 +35,17 @@ class Ichimoku_v31(IStrategy):
   process_only_new_candles = True
 
   # These values can be overridden in the "ask_strategy" section in the config.
-  use_sell_signal = True
-  sell_profit_only = True
-  ignore_roi_if_buy_signal = True
+  use_exit_signal = True
+  exit_profit_only = False
+  ignore_roi_if_entry_signal = True
 
   # Number of candles the strategy requires before producing valid signals
   startup_candle_count = 150
 
   # Optional order type mapping.
   order_types = {
-    'buy': 'market',
-    'sell': 'market',
+    'entry': 'market',
+    'exit': 'market',
     'stoploss': 'market',
     'stoploss_on_exchange': False
   }

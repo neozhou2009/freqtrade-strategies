@@ -38,7 +38,7 @@ class BBRSI4cust(IStrategy):
     stoploss = -0.1
 
     # Trailing stoploss
-    trailing_stop = True
+    trailing_stop = False
     # trailing_only_offset_is_reached = False
     # trailing_stop_positive = 0.01
     # trailing_stop_positive_offset = 0.0  # Disabled / not configured

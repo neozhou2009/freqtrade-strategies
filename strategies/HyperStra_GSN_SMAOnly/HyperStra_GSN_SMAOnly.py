@@ -27,7 +27,9 @@ from talib import abstract
 MA_Indicator = abstract.SMA
 
 class HyperStra_GSN_SMAOnly(IStrategy):
-    INTERFACE_VERSION = 2
+    INTERFACE_VERSION = 3
+
+    can_short: bool = False
 
     # ##################################################################
     # Hyperopt Params Paste Here
@@ -80,7 +82,7 @@ class HyperStra_GSN_SMAOnly(IStrategy):
     stoploss = -0.05
 
     # Trailing stop:
-    trailing_stop = True
+    trailing_stop = False
     trailing_stop_positive = 0.005
     trailing_stop_positive_offset = 0.016
     trailing_only_offset_is_reached = True
@@ -109,13 +111,13 @@ class HyperStra_GSN_SMAOnly(IStrategy):
 
     # Sell signal
     use_custom_stoploss = False
-    use_sell_signal = True
+    use_exit_signal = True
     timeframe = '5m'
-    ignore_roi_if_buy_signal = False
+    ignore_roi_if_entry_signal = False
     process_only_new_candles = False
     startup_candle_count = 440
 
-    sell_profit_only = True
+    exit_profit_only = False
     sell_profit_offset = 0.01
 
     # ##################################################################

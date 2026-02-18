@@ -22,7 +22,9 @@ def ewo(dataframe, ema_length=5, ema2_length=35):
 
 
 class NotAnotherSMAOffsetStrategyLite(IStrategy):
-    INTERFACE_VERSION = 2
+    INTERFACE_VERSION = 3
+
+    can_short: bool = False
 
     # Buy hyperspace params:
     buy_params = {
@@ -38,6 +40,11 @@ class NotAnotherSMAOffsetStrategyLite(IStrategy):
 
     minimal_roi = {'0': 0.025}
     stoploss = -0.1
+
+    trailing_stop = True
+    trailing_stop_positive = 0.03
+    trailing_stop_positive_offset = 0.05
+    trailing_only_offset_is_reached = True
     # use_custom_stoploss = True
 
     # SMAOffset
@@ -50,11 +57,11 @@ class NotAnotherSMAOffsetStrategyLite(IStrategy):
     fast_ewo = 50
     slow_ewo = 200
 
-    use_sell_signal = True
-    sell_profit_only = True
+    use_exit_signal = True
+    exit_profit_only = False
     sell_profit_offset = 0.01
-    ignore_roi_if_buy_signal = False
-    order_time_in_force = {'buy': 'gtc', 'sell': 'ioc'}
+    ignore_roi_if_entry_signal = False
+    order_time_in_force = {'entry': 'gtc', 'exit': 'ioc'}
     timeframe = '5m'
     process_only_new_candles = True
     startup_candle_count = 200

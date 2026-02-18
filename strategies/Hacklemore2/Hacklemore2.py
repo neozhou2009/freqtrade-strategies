@@ -26,7 +26,7 @@ class Hacklemore2(IStrategy):
     }
 
     # Stoploss:
-    stoploss = -0.10
+    stoploss = -0.99
 
     trailing_stop = True
     trailing_stop_positive = 0.02
@@ -39,10 +39,12 @@ class Hacklemore2(IStrategy):
     
     timeframe = '15m'
 
-    use_sell_signal = True
-    sell_profit_only = True
+    process_only_new_candles = True
+
+    use_exit_signal = True
+    exit_profit_only = False
     #sell_profit_offset = 0.01
-    ignore_roi_if_buy_signal = True
+    ignore_roi_if_entry_signal = True
     
     def populate_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe['volume_mean_slow'] = dataframe['volume'].rolling(window=24).mean()

@@ -39,7 +39,9 @@ def top_percent_change(dataframe: DataFrame, length: int) -> float:
         return (dataframe['open'].rolling(length).max() - dataframe['close']) / dataframe['close']
 
 class NASOSv5_mod1_DanMod(IStrategy):
-    INTERFACE_VERSION = 2
+    INTERFACE_VERSION = 3
+
+    can_short: bool = False
 
     buy_params = {
         "base_nb_candles_buy": 20,
@@ -105,14 +107,14 @@ class NASOSv5_mod1_DanMod(IStrategy):
     rsi_fast_buy = IntParameter(
         10, 50, default=buy_params['rsi_fast_buy'], space='buy', optimize=True)
 
-    use_sell_signal = True
-    sell_profit_only = True
+    use_exit_signal = True
+    exit_profit_only = False
     sell_profit_offset = 0.01
-    ignore_roi_if_buy_signal = False
+    ignore_roi_if_entry_signal = False
 
     order_time_in_force = {
-        'buy': 'gtc',
-        'sell': 'ioc'
+        'entry': 'gtc',
+        'exit': 'ioc'
     }
 
     timeframe = '5m'

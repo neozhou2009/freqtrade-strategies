@@ -34,11 +34,20 @@ rsiSellVal = 88
 
 
 class SwingHighToSky(IStrategy):
-    INTERFACE_VERSION = 2
+    INTERFACE_VERSION = 3
+
+    can_short: bool = False
 
     timeframe = '15m'
 
+    process_only_new_candles = True
+
     stoploss = -0.34338
+
+    trailing_stop = True
+    trailing_stop_positive = 0.03
+    trailing_stop_positive_offset = 0.05
+    trailing_only_offset_is_reached = True
 
     minimal_roi = {"0": 0.27058, "33": 0.0853, "64": 0.04093, "244": 0}
 

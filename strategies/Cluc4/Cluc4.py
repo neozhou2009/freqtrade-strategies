@@ -19,12 +19,19 @@ class Cluc4(IStrategy):
     }
 
     stoploss = -0.01
+
+    trailing_stop = True
+    trailing_stop_positive = 0.03
+    trailing_stop_positive_offset = 0.05
+    trailing_only_offset_is_reached = True
     
     timeframe = '1m'
 
-    use_sell_signal = True
-    sell_profit_only = True
-    ignore_roi_if_buy_signal = True
+    process_only_new_candles = True
+
+    use_exit_signal = True
+    exit_profit_only = True
+    ignore_roi_if_entry_signal = True
 
     def informative_pairs(self):
         pairs = self.dp.current_whitelist()

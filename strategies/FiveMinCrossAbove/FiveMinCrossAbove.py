@@ -30,7 +30,7 @@ class FiveMinCrossAbove(IStrategy):
 
     # Optimal stoploss designed for the strategy
     # This attribute will be overridden if the config file contains "stoploss"
-    stoploss = -0.10
+    stoploss = -0.99
 
     # Optimal timeframe for the strategy
     timeframe = '5m'
@@ -45,14 +45,14 @@ class FiveMinCrossAbove(IStrategy):
     process_only_new_candles = False
 
     # Experimental settings (configuration will overide these if set)
-    use_sell_signal = False
-    sell_profit_only = True
-    ignore_roi_if_buy_signal = False
+    use_exit_signal = False
+    exit_profit_only = True
+    ignore_roi_if_entry_signal = False
 
     # Optional order type mapping
     order_types = {
-        'buy': 'market',
-        'sell': 'market',
+        'entry': 'market',
+        'exit': 'market',
         'stoploss': 'market',
         'stoploss_on_exchange': False
     }

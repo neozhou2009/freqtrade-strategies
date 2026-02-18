@@ -8,34 +8,32 @@ import freqtrade.vendor.qtpylib.indicators as qtpylib
 class Babico_SMA5xBBmid(IStrategy):
 
     minimal_roi = {
-        "0": 0.10,
-        "30": 0.05,
-        "60": 0.02
+        "0": 99999999
     }
 
-    stoploss = -0.10
+    stoploss = -0.99
 
     # Trailing stoploss (not used)
-    trailing_stop = True
+    trailing_stop = False
     trailing_only_offset_is_reached = True
     trailing_stop_positive = 0.01
     trailing_stop_positive_offset = 0.03
 
-    use_sell_signal = True
-    sell_profit_only = True
+    use_exit_signal = True
+    exit_profit_only = True
     process_only_new_candles = True
 
     # Optional order type mapping.
     order_types = {
-        'buy': 'limit',
-        'sell': 'limit',
+        'entry': 'limit',
+        'exit': 'limit',
         'trailing_stop_loss': 'limit',
         'stoploss': 'limit',
         'stoploss_on_exchange': False
     }
 
     # Optimal timeframe for the strategy
-    timeframe = '1d'
+    timeframe = '4h'
 
     def populate_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
 

@@ -36,6 +36,8 @@ class MACD_TRIPLE_MA(IStrategy):
 
     # Optimal timeframe for the strategy
     timeframe = '5m'
+
+    process_only_new_candles = True
     # Number of candles the strategy requires before producing valid signals
     startup_candle_count: int = 26
 

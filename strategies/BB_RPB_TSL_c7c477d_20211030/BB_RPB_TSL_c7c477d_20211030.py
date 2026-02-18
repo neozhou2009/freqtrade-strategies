@@ -127,14 +127,21 @@ class BB_RPB_TSL_c7c477d_20211030(IStrategy):
 
     # Optimal timeframe for the strategy
     timeframe = '5m'
+
+    process_only_new_candles = True
     inf_1h = '1h'
 
     # Disabled
-    stoploss = -0.10
+    stoploss = -0.99
+
+    trailing_stop = True
+    trailing_stop_positive = 0.03
+    trailing_stop_positive_offset = 0.05
+    trailing_only_offset_is_reached = True
 
     # Custom stoploss
     use_custom_stoploss = True
-    use_sell_signal = True
+    use_exit_signal = True
 
     ############################################################################
 

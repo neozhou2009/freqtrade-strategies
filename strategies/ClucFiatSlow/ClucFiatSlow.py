@@ -51,10 +51,12 @@ class ClucFiatSlow(IStrategy):
     
     timeframe = '5m'
 
-    use_sell_signal = True
-    sell_profit_only = True
+    process_only_new_candles = True
+
+    use_exit_signal = True
+    exit_profit_only = False
     sell_profit_offset = 0.01
-    ignore_roi_if_buy_signal = True
+    ignore_roi_if_entry_signal = True
 
     startup_candle_count: int = 48
 

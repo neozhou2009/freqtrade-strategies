@@ -21,12 +21,14 @@ class Apollo11(IStrategy):
     # Original repo hosted at https://github.com/shanejones/goddard
     timeframe = "15m"
 
+    process_only_new_candles = True
+
     # Stoploss
     stoploss = -0.16
     startup_candle_count: int = 480
     trailing_stop = False
     use_custom_stoploss = True
-    use_sell_signal = False
+    use_exit_signal = False
 
     # signal controls
     buy_signal_1 = True
@@ -35,9 +37,10 @@ class Apollo11(IStrategy):
 
     # ROI table:
     minimal_roi = {
-        "0": 0.10,
-        "30": 0.05,
-        "60": 0.02,  # This is 10000%, which basically disables ROI
+        "0": 0.15,
+        "60": 0.10,
+        "120": 0.05,
+        "240": 0.03
     }
 
     # Indicator values:
