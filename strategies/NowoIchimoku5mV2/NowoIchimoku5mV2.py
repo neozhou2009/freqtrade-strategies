@@ -133,7 +133,9 @@ class NowoIchimoku5mV2(IStrategy):
     trailing_stop = True
 
     minimal_roi = {
-        "0": 999
+        "0": 0.10,
+        "30": 0.05,
+        "60": 0.02
     }
 
     stoploss = -0.293
@@ -268,7 +270,7 @@ class NowoIchimoku5mV2(IStrategy):
 
         return -0.99
 
-    def populate_buy_trend(self, df: DataFrame, metadata: dict) -> DataFrame:
+    def populate_entry_trend(self, df: DataFrame, metadata: dict) -> DataFrame:
         df.info(verbose=True)
 
         double_shifted_upper_cloud = df['upper_cloud'].shift(50 * self.time_factor)
@@ -305,6 +307,6 @@ class NowoIchimoku5mV2(IStrategy):
 
         return df
 
-    def populate_sell_trend(self, df: DataFrame, metadata: dict) -> DataFrame:
+    def populate_exit_trend(self, df: DataFrame, metadata: dict) -> DataFrame:
         df['sell'] = 0
         return df

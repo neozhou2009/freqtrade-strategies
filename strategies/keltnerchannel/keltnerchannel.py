@@ -17,7 +17,9 @@ class keltnerchannel(IStrategy):
     timeframe = "6h"
     # Both stoploss and roi are set to 100 to prevent them to give a sell signal.
     stoploss = -0.254
-    minimal_roi = {"0": 100}
+    minimal_roi = {"0": 0.10,
+        "30": 0.05,
+        "60": 0.02}
 
     plot_config = {
         "main_plot": {
@@ -52,7 +54,7 @@ class keltnerchannel(IStrategy):
         # print(dataframe.tail(20))
         return dataframe
 
-    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (qtpylib.crossed_above(dataframe['close'], dataframe['kc_upperband'])
             & (dataframe["rsi"] > dataframe['hline'])
@@ -63,7 +65,7 @@ class keltnerchannel(IStrategy):
 
         return dataframe
 
-    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (qtpylib.crossed_below(dataframe['close'], dataframe['kc_middleband'])),
 

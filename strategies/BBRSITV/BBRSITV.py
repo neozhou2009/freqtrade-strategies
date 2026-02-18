@@ -55,14 +55,14 @@ class BBRSITV(IStrategy):
     stoploss = -0.25  # value loaded from strategy
 
     # Trailing stop:
-    trailing_stop = False  # value loaded from strategy
+    trailing_stop = True  # value loaded from strategy
     trailing_stop_positive = 0.005  # value loaded from strategy
     trailing_stop_positive_offset = 0.025  # value loaded from strategy
     trailing_only_offset_is_reached = True  # value loaded from strategy
 
     # Sell signal
     use_sell_signal = True
-    sell_profit_only = False
+    sell_profit_only = True
     sell_profit_offset = 0.01
     ignore_roi_if_buy_signal = False
     process_only_new_candles = True
@@ -187,7 +187,7 @@ class BBRSITV(IStrategy):
         dataframe['EWO'] = EWO(dataframe, self.fast_ewo, self.slow_ewo)
         return dataframe
 
-    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (
                 # upper = basis + dev
@@ -204,7 +204,7 @@ class BBRSITV(IStrategy):
             'buy'] = 1
         return dataframe
 
-    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (
                 (
@@ -230,7 +230,7 @@ class BBRSITV4(BBRSITV):
 
     stoploss = -0.3  # value loaded from strategy
 
-    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (
                 (dataframe['rsi'] < (dataframe[f'basis_{self.for_ma_length.value}'] - (dataframe[f'dev_{self.for_ma_length.value}'] * self.for_sigma.value)))
@@ -295,7 +295,7 @@ class BBRSITV1(BBRSITV):
     stoploss = -0.25  # value loaded from strategy
 
     # Trailing stop:
-    trailing_stop = False  # value loaded from strategy
+    trailing_stop = True  # value loaded from strategy
     trailing_stop_positive = 0.005  # value loaded from strategy
     trailing_stop_positive_offset = 0.025  # value loaded from strategy
     trailing_only_offset_is_reached = True  # value loaded from strategy
@@ -334,7 +334,7 @@ class BBRSITV2(BBRSITV):
     stoploss = -0.25  # value loaded from strategy
 
     # Trailing stop:
-    trailing_stop = False  # value loaded from strategy
+    trailing_stop = True  # value loaded from strategy
     trailing_stop_positive = 0.005  # value loaded from strategy
     trailing_stop_positive_offset = 0.025  # value loaded from strategy
     trailing_only_offset_is_reached = True  # value loaded from strategy
@@ -436,7 +436,7 @@ class BBRSITV5(BBRSITV):
 
         return stoploss_from_open(sl_profit, current_profit)
 
-    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (
                 (dataframe['rsi'] < (dataframe[f'basis_{self.for_ma_length.value}'] - (dataframe[f'dev_{self.for_ma_length.value}'] * self.for_sigma.value)))

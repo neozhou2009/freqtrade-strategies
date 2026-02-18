@@ -132,7 +132,7 @@ class MiniLambo(IStrategy):
     stoploss = -0.10
 
     # Trailing stop:
-    trailing_stop = False
+    trailing_stop = True
     trailing_stop_positive = 0.3207
     trailing_stop_positive_offset = 0.3849
     trailing_only_offset_is_reached = False
@@ -140,7 +140,7 @@ class MiniLambo(IStrategy):
     timeframe = '1m'
 
     use_sell_signal = False
-    sell_profit_only = False
+    sell_profit_only = True
     ignore_roi_if_buy_signal = False
     use_custom_stoploss = True
     process_only_new_candles = True
@@ -251,7 +251,7 @@ class MiniLambo(IStrategy):
 
         return dataframe
 
-    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
         dataframe.loc[:, 'buy_tag'] = ''
 
@@ -269,7 +269,7 @@ class MiniLambo(IStrategy):
         dataframe.loc[reduce(lambda x, y: x | y, conditions), 'buy'] = 1
         return dataframe
 
-    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         return dataframe
 
     def confirm_trade_exit(self, pair: str, trade: Trade, order_type: str, amount: float,
@@ -506,7 +506,7 @@ class MiniLambo_TBS(MiniLambo):
 
         return val
 
-    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe = super().populate_buy_trend(dataframe, metadata)
 
         if self.trailing_buy_order_enabled and self.config['runmode'].value in ('live', 'dry_run'):

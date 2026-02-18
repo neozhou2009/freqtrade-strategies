@@ -50,7 +50,7 @@ class ElliotV5HOMod2(IStrategy):
     }
 
     # Stoploss:
-    stoploss = -0.99
+    stoploss = -0.10
 
     # SMAOffset
     base_nb_candles_buy = IntParameter(
@@ -168,7 +168,7 @@ class ElliotV5HOMod2(IStrategy):
 
         return dataframe
 
-    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
 
         conditions.append(
@@ -197,7 +197,7 @@ class ElliotV5HOMod2(IStrategy):
 
         return dataframe
 
-    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
 
         conditions.append(

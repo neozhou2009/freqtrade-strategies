@@ -33,7 +33,7 @@ class BinClucMadSMADevelop(IStrategy):
 
     # Sell signal
     use_sell_signal = True
-    sell_profit_only = False
+    sell_profit_only = True
     sell_profit_offset = 0.001
     ignore_roi_if_buy_signal = True
 
@@ -561,7 +561,7 @@ class BinClucMadSMADevelop(IStrategy):
 
         return dataframe
 
-    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
         # reset additional dataframe rows
         dataframe.loc[:, "v9_buy_condition_1_enable"] = False
@@ -1119,7 +1119,7 @@ class BinClucMadSMADevelop(IStrategy):
 
         return dataframe
 
-    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
         dataframe["ma_sell"] = (
             dataframe[f"ma_sell_{self.base_nb_candles_sell.value}"]

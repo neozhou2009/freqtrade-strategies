@@ -57,14 +57,16 @@ class ClucHAnix_5m1(IStrategy):
 
     # ROI table:
     minimal_roi = {
-        "0": 100
+        "0": 0.10,
+        "30": 0.05,
+        "60": 0.02
     }
 
     # Stoploss:
     stoploss = -0.99  # use custom stoploss
 
     # Trailing stop:
-    trailing_stop = False
+    trailing_stop = True
     trailing_stop_positive = 0.001
     trailing_stop_positive_offset = 0.012
     trailing_only_offset_is_reached = False
@@ -77,7 +79,7 @@ class ClucHAnix_5m1(IStrategy):
 
     # Make sure these match or are not overridden in config
     use_sell_signal = True
-    sell_profit_only = False
+    sell_profit_only = True
     ignore_roi_if_buy_signal = False
 
     # Custom stoploss
@@ -202,7 +204,7 @@ class ClucHAnix_5m1(IStrategy):
 
         return dataframe
 
-    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
 
         dataframe.loc[
             (
@@ -225,7 +227,7 @@ class ClucHAnix_5m1(IStrategy):
 
         return dataframe
 
-    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
 
         dataframe.loc[
             (dataframe['fisher'] > self.sell_fisher.value) &
@@ -437,7 +439,7 @@ class ClucHAnix_5mTB1(ClucHAnix_5m1):
         
         return val
 
-    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe = super().populate_buy_trend(dataframe, metadata)
 
         if self.trailing_buy_order_enabled and self.config['runmode'].value in ('live', 'dry_run'): 

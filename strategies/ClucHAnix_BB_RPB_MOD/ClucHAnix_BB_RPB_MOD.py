@@ -95,7 +95,7 @@ class ClucHAnix_BB_RPB_MOD(IStrategy):
     stoploss = -0.99   # use custom stoploss
 
     # Trailing stop:
-    trailing_stop = False
+    trailing_stop = True
     trailing_stop_positive = 0.001
     trailing_stop_positive_offset = 0.012
     trailing_only_offset_is_reached = False
@@ -108,7 +108,7 @@ class ClucHAnix_BB_RPB_MOD(IStrategy):
 
     # Make sure these match or are not overridden in config
     use_sell_signal = True
-    sell_profit_only = False
+    sell_profit_only = True
     ignore_roi_if_buy_signal = False
 
     # Custom stoploss
@@ -321,7 +321,7 @@ class ClucHAnix_BB_RPB_MOD(IStrategy):
 
         return dataframe
 
-    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
         dataframe.loc[:, 'buy_tag'] = ''
 
@@ -438,7 +438,7 @@ class ClucHAnix_BB_RPB_MOD(IStrategy):
 
         return dataframe
 
-    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         params = self.sell_params
         
         dataframe.loc[

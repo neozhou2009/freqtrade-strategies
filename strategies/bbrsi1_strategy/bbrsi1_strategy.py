@@ -33,7 +33,7 @@ class bbrsi1_strategy (IStrategy):
     stoploss = -0.10
 
     # Trailing stoploss
-    trailing_stop = False
+    trailing_stop = True
     # trailing_only_offset_is_reached = False
     # trailing_stop_positive = 0.01
     # trailing_stop_positive_offset = 0.0  # Disabled / not configured
@@ -46,7 +46,7 @@ class bbrsi1_strategy (IStrategy):
 
     # These values can be overridden in the "ask_strategy" section in the config.
     use_sell_signal = True
-    sell_profit_only = False
+    sell_profit_only = True
     ignore_roi_if_buy_signal = False
 
     # Number of candles the strategy requires before producing valid signals
@@ -127,7 +127,7 @@ class bbrsi1_strategy (IStrategy):
     sell_trigger = CategoricalParameter(["bb_middleband_2", "bb_middleband_3", "bb_middleband_4", "bb_upperband_2", "bb_upperband_3", 	"bb_upperband_4"], default="bb_upperband_2", space="sell")
 
 
-    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (
                     (dataframe['rsi'] < 30) &
@@ -138,7 +138,7 @@ class bbrsi1_strategy (IStrategy):
             'buy'] = 1
         return dataframe
 
-    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (
                     (dataframe['rsi'] > 70) &

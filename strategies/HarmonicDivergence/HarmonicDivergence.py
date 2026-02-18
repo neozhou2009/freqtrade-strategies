@@ -214,7 +214,7 @@ class HarmonicDivergence(IStrategy):
 
     # Optimal stoploss designed for the strategy.
     # This attribute will be overridden if the config file contains "stoploss".
-    stoploss = -0.5
+    stoploss = -0.10
 
     use_custom_stoploss = True
 
@@ -232,7 +232,7 @@ class HarmonicDivergence(IStrategy):
 
     # These values can be overridden in the "ask_strategy" section in the config.
     use_sell_signal = True
-    sell_profit_only = False
+    sell_profit_only = True
     ignore_roi_if_buy_signal = False
 
     # Number of candles the strategy requires before producing valid signals
@@ -380,7 +380,7 @@ class HarmonicDivergence(IStrategy):
 
         return dataframe
 
-    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         """
         Based on TA indicators, populates the buy signal for the given dataframe
         :param dataframe: DataFrame populated with indicators
@@ -408,7 +408,7 @@ class HarmonicDivergence(IStrategy):
 
         return dataframe
 
-    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         """
         Based on TA indicators, populates the sell signal for the given dataframe
         :param dataframe: DataFrame populated with indicators
@@ -427,7 +427,7 @@ class HarmonicDivergence(IStrategy):
 
         dataframe, _ = self.dp.get_analyzed_dataframe(pair, self.timeframe)
         takeprofit = 999999
-        # self.trailing_stop = False
+        # self.trailing_stop = True
         
         for i in range(1,len(dataframe['close'])):
             if dataframe.iloc[-i]['date'].to_pydatetime().replace(tzinfo=datetime.timezone.utc) == trade.open_date_utc:

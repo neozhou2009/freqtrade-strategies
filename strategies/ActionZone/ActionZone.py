@@ -23,19 +23,22 @@ class ActionZone(IStrategy):
     # Minimal ROI designed for the strategy.
     # This attribute will be overridden if the config file contains "minimal_roi".
     minimal_roi = {
-        "0": 100000
+        "0": 0.10,
+        "60": 0.05,
+        "120": 0.02,
+        "180": 0.01,
     }
 
     # Optimal stoploss designed for the strategy.
     # This attribute will be overridden if the config file contains "stoploss".
-    stoploss = -1.00
+    stoploss = -0.10
     use_custom_stoploss = True
 
     # Trailing stoploss
-    trailing_stop = False
-    # trailing_only_offset_is_reached = False
-    # trailing_stop_positive = 0.01
-    # trailing_stop_positive_offset = 0.0  # Disabled / not configured
+    trailing_stop = True
+    trailing_only_offset_is_reached = True
+    trailing_stop_positive = 0.02
+    trailing_stop_positive_offset = 0.01
 
 
     # Optimal timeframe for the strategy.
@@ -44,9 +47,12 @@ class ActionZone(IStrategy):
     # Run "populate_indicators()" only for new candle.
     process_only_new_candles = False
 
+    # Maximum number of open trades
+    max_open_trades = 3
+
     # These values can be overridden in the "ask_strategy" section in the config.
     use_sell_signal = True
-    sell_profit_only = False
+    sell_profit_only = True
     ignore_roi_if_buy_signal = False
 
     # Number of candles the strategy requires before producing valid signals
@@ -146,7 +152,7 @@ class ActionZone(IStrategy):
 
         return dataframe
 
-    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         """
         Based on TA indicators, populates the buy signal for the given dataframe
         :param dataframe: DataFrame populated with indicators
@@ -163,7 +169,7 @@ class ActionZone(IStrategy):
 
         return dataframe
 
-    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         """
         Based on TA indicators, populates the sell signal for the given dataframe
         :param dataframe: DataFrame populated with indicators
@@ -179,5 +185,14 @@ class ActionZone(IStrategy):
             'sell'] = 1
         return dataframe
     
+    def custom_sell(self, pair: str, trade: 'Trade', current_time: datetime, current_rate: float, current_profit: float, **kwargs) -> bool:
+        dataframe, _ = self.dp.get_analyzed_dataframe(pair, self.timeframe)
+        last_candle = dataframe.iloc[-1].squeeze()
+        
+        # Sell when trend turns bearish
+        if last_candle['fastMA'] < last_candle['slowMA']:
+            return True
+        
+        return False
     
 

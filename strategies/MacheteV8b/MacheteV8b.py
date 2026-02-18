@@ -78,7 +78,7 @@ class MacheteV8b(IStrategy):
     stoploss = -0.1#-0.046
 
     # Trailing stop:
-    trailing_stop = False
+    trailing_stop = True
     #trailing_stop_positive = 0.0247
     #trailing_stop_positive_offset = 0.0248
     #trailing_only_offset_is_reached = True
@@ -137,7 +137,7 @@ class MacheteV8b(IStrategy):
 
     # Experimental settings (configuration will overide these if set)
     use_sell_signal = True
-    sell_profit_only = False
+    sell_profit_only = True
     ignore_roi_if_buy_signal = False
     startup_candle_count = 500#149
 
@@ -418,7 +418,7 @@ class MacheteV8b(IStrategy):
     # Processing buy signals
     #
 
-    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (
                 (self.get_buy_signal_awesome_macd(dataframe) == True)
@@ -607,7 +607,7 @@ class MacheteV8b(IStrategy):
     # Processing sell signals
     #
 
-    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (qtpylib.crossed_above(dataframe['sslDown_inf'], dataframe['sslUp_inf']))
             & (

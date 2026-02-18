@@ -36,7 +36,7 @@ class Kamaflage(IStrategy):
     }
 
     # Stoploss:
-    stoploss = -1
+    stoploss = -0.10
 
     # Trailing stop:
     trailing_stop = True
@@ -51,7 +51,7 @@ class Kamaflage(IStrategy):
     timeframe = '5m'
 
     use_sell_signal = True
-    sell_profit_only = False
+    sell_profit_only = True
     # sell_profit_offset = 0.01
     ignore_roi_if_buy_signal = True
 
@@ -76,7 +76,7 @@ class Kamaflage(IStrategy):
         
         return dataframe
 
-    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         params = self.buy_params
         conditions = []
 
@@ -105,7 +105,7 @@ class Kamaflage(IStrategy):
 
         return dataframe
 
-    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         params = self.sell_params
         conditions = []
 

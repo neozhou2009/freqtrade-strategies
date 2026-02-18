@@ -202,7 +202,7 @@ class true_lambo(IStrategy):
     inf_1h = '1h'
 
     # Disabled
-    stoploss = -0.99
+    stoploss = -0.10
 
     # Run "populate_indicators()" only for new candle.
     process_only_new_candles = True
@@ -529,7 +529,7 @@ class true_lambo(IStrategy):
 
         return dataframe
 
-    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
 
 
         conditions = []
@@ -763,7 +763,7 @@ class true_lambo(IStrategy):
 
         return dataframe
 
-    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
 
         conditions.append(

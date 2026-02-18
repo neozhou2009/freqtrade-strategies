@@ -28,7 +28,7 @@ class redditMA(IStrategy):
 
     # Optimal stoploss designed for the strategy
     # This attribute will be overridden if the config file contains "stoploss"
-    stoploss = -0.5
+    stoploss = -0.10
 
     # Optimal ticker interval for the strategy
     ticker_interval = '15m'
@@ -64,12 +64,12 @@ class redditMA(IStrategy):
         # dataframe = self.mods(dataframe)
         return dataframe
 
-    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[qtpylib.crossed_above(dataframe['FASTMA'], dataframe['SLOWMA']) ,'buy'] = 1
 
         return dataframe
 
-    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[qtpylib.crossed_below(dataframe['FASTMA'], dataframe['SLOWMA']) ,'sell'] = 1
         
         return dataframe

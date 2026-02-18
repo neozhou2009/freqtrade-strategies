@@ -54,7 +54,9 @@ class CombinedBinHAndClucV8Hyper(IStrategy):
     INTERFACE_VERSION = 2
 
     minimal_roi = {
-        "0": 10
+        "0": 0.10,
+        "30": 0.05,
+        "60": 0.02
     }
 
     stoploss = -0.99 # effectively disabled.
@@ -69,7 +71,7 @@ class CombinedBinHAndClucV8Hyper(IStrategy):
     ignore_roi_if_buy_signal = True
 
     # Trailing stoploss
-    trailing_stop = False
+    trailing_stop = True
     trailing_only_offset_is_reached = True
     trailing_stop_positive = 0.01
     trailing_stop_positive_offset = 0.03
@@ -284,7 +286,7 @@ class CombinedBinHAndClucV8Hyper(IStrategy):
 
         return dataframe
 
-    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
 
         conditions.append(
@@ -383,7 +385,7 @@ class CombinedBinHAndClucV8Hyper(IStrategy):
 
         return dataframe
 
-    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
 
         conditions.append(

@@ -80,7 +80,9 @@ class TrixStrategy(IStrategy):
     # Minimal ROI designed for the strategy.
     # This attribute will be overridden if the config file contains "minimal_roi".
     minimal_roi = {
-        "0": 100 # inactive
+        "0": 0.10,
+        "30": 0.05,
+        "60": 0.02 # inactive
     }
 
     # Optimal stoploss designed for the strategy.
@@ -88,7 +90,7 @@ class TrixStrategy(IStrategy):
     stoploss = -0.99 # inactive
 
     # Trailing stoploss
-    trailing_stop = False
+    trailing_stop = True
     # trailing_only_offset_is_reached = False
     # trailing_stop_positive = 0.01
     # trailing_stop_positive_offset = 0.0  # Disabled / not configured
@@ -105,7 +107,7 @@ class TrixStrategy(IStrategy):
 
     # These values can be overridden in the "ask_strategy" section in the config.
     use_sell_signal = True
-    sell_profit_only = False
+    sell_profit_only = True
     ignore_roi_if_buy_signal = False
 
     # Number of candles the strategy requires before producing valid signals
@@ -185,7 +187,7 @@ class TrixStrategy(IStrategy):
 
         return dataframe
 
-    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         """
         Based on TA indicators, populates the buy signal for the given dataframe
         :param dataframe: DataFrame populated with indicators
@@ -202,7 +204,7 @@ class TrixStrategy(IStrategy):
 
         return dataframe
 
-    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         """
         Based on TA indicators, populates the sell signal for the given dataframe
         :param dataframe: DataFrame populated with indicators

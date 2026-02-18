@@ -10,17 +10,17 @@ class BuyAllSellAllStrategy(IStrategy):
     timeframe = '5m'
 
     use_sell_signal = True
-    sell_profit_only = False
+    sell_profit_only = True
     ignore_roi_if_buy_signal = False
 
     def populate_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         return dataframe
 
-    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe["buy"] = np.random.randint(0, 2, size=len(dataframe))
         return dataframe
 
-    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe["sell"] = 0
         return dataframe
 

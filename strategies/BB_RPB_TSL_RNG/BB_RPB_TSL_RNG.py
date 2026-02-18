@@ -107,7 +107,7 @@ class BB_RPB_TSL_RNG(IStrategy):
     inf_1h = '1h'
 
     # Disabled
-    stoploss = -0.99
+    stoploss = -0.10
 
     # Custom stoploss
     use_custom_stoploss = True
@@ -324,7 +324,7 @@ class BB_RPB_TSL_RNG(IStrategy):
 
         return dataframe
 
-    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
 
 
         conditions = []
@@ -449,7 +449,7 @@ class BB_RPB_TSL_RNG(IStrategy):
 
         return dataframe
 
-    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
 
         conditions.append(

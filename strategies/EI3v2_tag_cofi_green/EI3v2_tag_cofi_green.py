@@ -112,7 +112,7 @@ class EI3v2_tag_cofi_green(IStrategy):
     }
 
     # Stoploss:
-    stoploss = -0.99
+    stoploss = -0.10
 
     # SMAOffset
     base_nb_candles_buy = IntParameter(8, 20, default=buy_params['base_nb_candles_buy'], space='buy', optimize=False)
@@ -303,7 +303,7 @@ class EI3v2_tag_cofi_green(IStrategy):
 
         return dataframe
 
-    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
         dataframe.loc[:, 'buy_tag'] = ''
 
@@ -372,7 +372,7 @@ class EI3v2_tag_cofi_green(IStrategy):
 
 
 
-    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
 
         conditions.append(

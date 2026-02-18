@@ -50,10 +50,12 @@ class NostalgiaForInfinityV2(IStrategy):
     INTERFACE_VERSION = 2
 
     minimal_roi = {
-        "0": 10
+        "0": 0.10,
+        "30": 0.05,
+        "60": 0.02
     }
 
-    stoploss = -1.0
+    stoploss = -0.10
 
     timeframe = '5m'
     inf_1h = '1h'
@@ -62,12 +64,12 @@ class NostalgiaForInfinityV2(IStrategy):
 
     # Sell signal
     use_sell_signal = True
-    sell_profit_only = False
+    sell_profit_only = True
     sell_profit_offset = 0.001 # it doesn't meant anything, just to guarantee there is a minimal profit.
     ignore_roi_if_buy_signal = True
 
     # Trailing stoploss
-    trailing_stop = False
+    trailing_stop = True
     trailing_only_offset_is_reached = True
     trailing_stop_positive = 0.02
     trailing_stop_positive_offset = 0.04
@@ -186,7 +188,7 @@ class NostalgiaForInfinityV2(IStrategy):
 
         return dataframe
 
-    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (
                 (dataframe['close'] < dataframe['sma_9']) &
@@ -229,7 +231,7 @@ class NostalgiaForInfinityV2(IStrategy):
         ] = 1
         return dataframe
 
-    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (
                 (dataframe['rsi'] > self.sell_rsi_bb.value) &

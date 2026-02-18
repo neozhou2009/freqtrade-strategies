@@ -30,7 +30,7 @@ class FiveMinCrossAbove(IStrategy):
 
     # Optimal stoploss designed for the strategy
     # This attribute will be overridden if the config file contains "stoploss"
-    stoploss = -0.99
+    stoploss = -0.10
 
     # Optimal timeframe for the strategy
     timeframe = '5m'
@@ -87,7 +87,7 @@ class FiveMinCrossAbove(IStrategy):
 
         return dataframe
 
-    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         """
         Based on TA indicators, populates the buy signal for the given dataframe
         :param metadata:
@@ -104,7 +104,7 @@ class FiveMinCrossAbove(IStrategy):
 
         return dataframe
 
-    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         """
         Based on TA indicators, populates the sell signal for the given dataframe
         :param metadata:

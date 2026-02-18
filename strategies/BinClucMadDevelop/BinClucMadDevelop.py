@@ -32,7 +32,7 @@ class BinClucMadDevelop(IStrategy):
     # minimal_roi = {"0": 0.10, "10": 0.028, "40": 0.015, "180": 0.018 }
     # minimal_roi = {"0": 0.038, "20": 0.028, "40": 0.02, "60": 0.015, "180": 0.018 }
     minimal_roi = {"0": 0.20, "38": 0.074, "78": 0.025, "194": 0}
-    stoploss = -0.99
+    stoploss = -0.10
 
     timeframe = "5m"
     informative_timeframe = "1h"
@@ -40,7 +40,7 @@ class BinClucMadDevelop(IStrategy):
 
     # Sell signal
     use_sell_signal = True
-    sell_profit_only = False
+    sell_profit_only = True
     sell_profit_offset = 0.001
     ignore_roi_if_buy_signal = True
 
@@ -376,7 +376,7 @@ class BinClucMadDevelop(IStrategy):
 
         return dataframe
 
-    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
         # reset additional dataframe rows
         dataframe.loc[:, "v9_buy_condition_1_enable"] = False
@@ -733,7 +733,7 @@ class BinClucMadDevelop(IStrategy):
 
         return dataframe
 
-    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
         if self.v9_sell_condition_0_enable.value:
             conditions.append(

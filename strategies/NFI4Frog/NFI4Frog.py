@@ -50,13 +50,15 @@ class NFI4Frog(IStrategy):
 
     # # ROI table:
     minimal_roi = {
-        "0": 10,
+        "0": 0.10,
+        "30": 0.05,
+        "60": 0.02,
     }
 
-    stoploss = -1.0
+    stoploss = -0.10
 
     # Trailing stoploss (not used)
-    trailing_stop = False
+    trailing_stop = True
     trailing_only_offset_is_reached = True
     trailing_stop_positive = 0.01
     trailing_stop_positive_offset = 0.03
@@ -74,7 +76,7 @@ class NFI4Frog(IStrategy):
 
     # These values can be overridden in the "ask_strategy" section in the config.
     use_sell_signal = True
-    sell_profit_only = False
+    sell_profit_only = True
     ignore_roi_if_buy_signal = True
 
     use_dynamic_roi = False
@@ -613,7 +615,7 @@ class NFI4Frog(IStrategy):
 
         return dataframe
 
-    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
 
         conditions.append(
@@ -1009,7 +1011,7 @@ class NFI4Frog(IStrategy):
 
         return dataframe
 
-    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
 
         conditions.append(

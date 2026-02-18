@@ -39,7 +39,7 @@ class Uptrend(IStrategy):
     stoploss = -0.10
 
     # Trailing stoploss
-    trailing_stop = False
+    trailing_stop = True
     # trailing_only_offset_is_reached = False
     # trailing_stop_positive = 0.01
     # trailing_stop_positive_offset = 0.0  # Disabled / not configured
@@ -52,7 +52,7 @@ class Uptrend(IStrategy):
 
     # These values can be overridden in the "ask_strategy" section in the config.
     use_sell_signal = True
-    sell_profit_only = False
+    sell_profit_only = True
     ignore_roi_if_buy_signal = False
 
     # Number of candles the strategy requires before producing valid signals
@@ -96,7 +96,7 @@ class Uptrend(IStrategy):
 
         return dataframe
 
-    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (
                 (dataframe['rsi'] < 80) &
@@ -108,7 +108,7 @@ class Uptrend(IStrategy):
 
         return dataframe
 
-    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (
                 (dataframe['mama_diff_ratio'] < 0.01) &
@@ -413,7 +413,7 @@ class SuperBuy(Uptrend):
             return []
         return buy_conds
 
-    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         buy_conds = self.generate_superbuy_signal(dataframe, metadata)
 
         if self.config['runmode'].value in ('backtest'):  # backtest, we want to check must common buy tags...

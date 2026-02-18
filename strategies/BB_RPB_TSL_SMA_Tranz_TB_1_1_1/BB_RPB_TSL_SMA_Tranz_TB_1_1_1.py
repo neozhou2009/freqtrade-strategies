@@ -267,7 +267,7 @@ class BB_RPB_TSL_SMA_Tranz_TB_1_1_1(IStrategy):
     process_only_new_candles = True
 
     # Disabled
-    stoploss = -0.99
+    stoploss = -0.10
 
     # Custom stoploss
     use_custom_stoploss = True
@@ -1711,7 +1711,7 @@ class BB_RPB_TSL_SMA_Tranz_TB_1_1_1(IStrategy):
 
         return dataframe
 
-    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
 
         conditions = []
         dataframe.loc[:, 'buy_tag'] = ''
@@ -2638,7 +2638,7 @@ class BB_RPB_TSL_SMA_Tranz_TB_1_1_1(IStrategy):
 
         return dataframe
 
-    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
 
         conditions.append(
@@ -2933,7 +2933,7 @@ class BB_RPB_TSL_Tranz_TrailingBuy(BB_RPB_TSL_SMA_Tranz_TB_1_1_1):
 
         return val
 
-    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe = super().populate_buy_trend(dataframe, metadata)
 
         if self.trailing_buy_order_enabled and self.config['runmode'].value in ('live', 'dry_run'):

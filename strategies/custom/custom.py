@@ -112,14 +112,14 @@ class custom(IStrategy):
     rsi_buy2 = IntParameter(30, 70, default=buy_params['rsi_buy2'], space='buy', optimize=True)
 
     # Trailing stop:
-    trailing_stop = False
+    trailing_stop = True
     #trailing_stop_positive = 0.005
     #trailing_stop_positive_offset = 0.03
     #trailing_only_offset_is_reached = True
 
     # Sell signal
     use_sell_signal = False
-    sell_profit_only = False
+    sell_profit_only = True
     sell_profit_offset = 0.01
     ignore_roi_if_buy_signal = False
 
@@ -347,7 +347,7 @@ class custom(IStrategy):
 
         return dataframe
 
-    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
         dont_buy_conditions = []
 
@@ -435,7 +435,7 @@ class custom(IStrategy):
 
         return dataframe
 
-    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
         dataframe.loc[:, 'sell'] = 0
 
@@ -504,7 +504,7 @@ class custom(IStrategy):
 
 class SMAoffset_antipump_div(custom):
 
-    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
         dont_buy_conditions = []
 

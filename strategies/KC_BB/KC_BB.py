@@ -24,11 +24,13 @@ class KC_BB(IStrategy):
     # adjust based on market conditions. We would recommend to keep it low for quick turn arounds
     # This attribute will be overridden if the config file contains "minimal_roi"
     minimal_roi = {
-        "0": 20.5
+        "0": 0.10,
+        "30": 0.05,
+        "60": 0.02
     }
 
     # Optimal stoploss designed for the strategy
-    stoploss = -0.99
+    stoploss = -0.10
 
     use_custom_stoploss = True
 
@@ -102,7 +104,7 @@ class KC_BB(IStrategy):
 
         return dataframe
 
-    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
 
         dataframe.loc[
 
@@ -118,7 +120,7 @@ class KC_BB(IStrategy):
 
         return dataframe
 
-    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
 
         dataframe.loc[
 

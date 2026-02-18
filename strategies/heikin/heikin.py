@@ -20,9 +20,11 @@ class heikin(IStrategy):
     timeframe = '1h'
     #I haven't found the best roi and stoplost, so feel free to explore.
     minimal_roi = {
-        "0": 10,
+        "0": 0.10,
+        "30": 0.05,
+        "60": 0.02,
     }
-    stoploss = -0.99
+    stoploss = -0.10
     
     def populate_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:   
         dataframe['hclose']=(dataframe['open'] + dataframe['high'] + dataframe['low'] + dataframe['close']) / 4
@@ -35,7 +37,7 @@ class heikin(IStrategy):
         return dataframe
         
 
-    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (
                 (dataframe['emao'] < dataframe['emac'])
@@ -43,7 +45,7 @@ class heikin(IStrategy):
             'buy'] = 1
         return dataframe
 
-    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (
                 (dataframe['emao'] > dataframe['emac'])

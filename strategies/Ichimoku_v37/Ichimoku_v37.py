@@ -15,11 +15,13 @@ from technical.indicators import ichimoku
 class Ichimoku_v37(IStrategy):
   # ROI table:
   minimal_roi = {
-    "0": 100
+    "0": 0.10,
+        "30": 0.05,
+        "60": 0.02
   }
 
   # Stoploss:
-  stoploss = -0.99
+  stoploss = -0.10
 
   # Optimal timeframe for the strategy.
   timeframe = '4h'
@@ -31,7 +33,7 @@ class Ichimoku_v37(IStrategy):
 
   # These values can be overridden in the "ask_strategy" section in the config.
   use_sell_signal = True
-  sell_profit_only = False
+  sell_profit_only = True
   ignore_roi_if_buy_signal = True
 
   # Number of candles the strategy requires before producing valid signals
@@ -99,7 +101,7 @@ class Ichimoku_v37(IStrategy):
     """
     return dataframe
 
-  def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+  def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
     dataframe.loc[
       (
         (
@@ -117,7 +119,7 @@ class Ichimoku_v37(IStrategy):
 
     return dataframe
 
-  def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+  def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
     dataframe.loc[
       (
         (dataframe['ha_4h_close'] < dataframe['senkou_a_1d']) |

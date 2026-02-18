@@ -51,7 +51,7 @@ class BBandsRSI(IStrategy):
     stoploss = -0.15
 
     # Trailing stoploss
-    trailing_stop = False
+    trailing_stop = True
     # trailing_only_offset_is_reached = False
     # trailing_stop_positive = 0.01
     # trailing_stop_positive_offset = 0.0  # Disabled / not configured
@@ -61,7 +61,7 @@ class BBandsRSI(IStrategy):
 
     # These values can be overridden in the "ask_strategy" section in the config.
     use_sell_signal = True
-    sell_profit_only = False
+    sell_profit_only = True
     ignore_roi_if_buy_signal = False
 
     # Number of candles the strategy requires before producing valid signals
@@ -142,7 +142,7 @@ class BBandsRSI(IStrategy):
 
         return dataframe
 
-    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         """
         Based on TA indicators, populates the buy signal for the given dataframe
         :param dataframe: DataFrame populated with indicators
@@ -159,7 +159,7 @@ class BBandsRSI(IStrategy):
 
         return dataframe
 
-    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         """
         Based on TA indicators, populates the sell signal for the given dataframe
         :param dataframe: DataFrame populated with indicators

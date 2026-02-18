@@ -77,7 +77,7 @@ class CryptoFrog(IStrategy):
 
     # Experimental settings (configuration will overide these if set)
     use_sell_signal = True
-    sell_profit_only = False
+    sell_profit_only = True
     ignore_roi_if_buy_signal = False
 
     use_dynamic_roi = True    
@@ -292,7 +292,7 @@ class CryptoFrog(IStrategy):
         return dataframe
 
     ## cryptofrog signals
-    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (
                 (
@@ -355,7 +355,7 @@ class CryptoFrog(IStrategy):
         return dataframe
     
     ## more going on here
-    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (
                 (

@@ -32,7 +32,7 @@ class RobotradingBody(IStrategy):
     }
 
  
-    stoploss = -0.99
+    stoploss = -0.10
 
     for_mult = IntParameter(1, 20, default=3, space='buy', optimize=True)
     for_sma_length = IntParameter(20, 200, default=100, space='buy', optimize=True)
@@ -45,7 +45,7 @@ class RobotradingBody(IStrategy):
 
     # These values can be overridden in the "ask_strategy" section in the config.
     use_sell_signal = True
-    sell_profit_only = False
+    sell_profit_only = True
     ignore_roi_if_buy_signal = False
 
     # Number of candles the strategy requires before producing valid signals
@@ -77,7 +77,7 @@ class RobotradingBody(IStrategy):
 
         return dataframe
 
-    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
 
         dataframe.loc[
             (
@@ -89,7 +89,7 @@ class RobotradingBody(IStrategy):
 
         return dataframe
 
-    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
 
         dataframe.loc[
             (

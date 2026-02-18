@@ -21,7 +21,7 @@ class CombinedBinHAndClucHyperV3(IStrategy):
     timeframe = '1m'
 
     use_sell_signal = True
-    sell_profit_only = False
+    sell_profit_only = True
     ignore_roi_if_buy_signal = False
 
     # ----------------------------------------------------------------
@@ -74,12 +74,14 @@ class CombinedBinHAndClucHyperV3(IStrategy):
 
     # ROI table:
     minimal_roi = {
-        "0": 3,
+        "0": 0.10,
+        "30": 0.05,
+        "60": 0.02,
     }
 
     # Stoploss:
     stoploss = -0.06
-    trailing_stop = False
+    trailing_stop = True
     trailing_only_offset_is_reached = False
     use_custom_stoploss = True
 
@@ -138,7 +140,7 @@ class CombinedBinHAndClucHyperV3(IStrategy):
 
         return dataframe
 
-    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         buy_a_time_window = self.buy_a_time_window.value if isinstance(self.buy_a_time_window, ABC) else self.buy_a_time_window
         buy_a_bbdelta_rate = self.buy_a_bbdelta_rate.value if isinstance(self.buy_a_bbdelta_rate, ABC) else self.buy_a_bbdelta_rate
         buy_a_closedelta_rate = self.buy_a_closedelta_rate.value if isinstance(self.buy_a_closedelta_rate, ABC) else self.buy_a_closedelta_rate
@@ -177,7 +179,7 @@ class CombinedBinHAndClucHyperV3(IStrategy):
 
         return dataframe
 
-    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         sell_bb_mid_slow_window = self.sell_bb_mid_slow_window.value if isinstance(self.sell_bb_mid_slow_window, ABC) else self.sell_bb_mid_slow_window
         dataframe.loc[(dataframe['close'] > dataframe[f'bb_typical_mid_{sell_bb_mid_slow_window}']), 'sell'] = 1
         return dataframe

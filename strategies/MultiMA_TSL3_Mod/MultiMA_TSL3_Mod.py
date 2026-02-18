@@ -79,14 +79,16 @@ class MultiMA_TSL3_Mod(IStrategy):
 
     # ROI table:
     minimal_roi = {
-        "0": 100
+        "0": 0.10,
+        "30": 0.05,
+        "60": 0.02
     }
 
     stoploss = -0.15
     use_custom_stoploss = True
 
     # Trailing stoploss (not used)
-    trailing_stop = False
+    trailing_stop = True
     trailing_only_offset_is_reached = True
     trailing_stop_positive = 0.01
     trailing_stop_positive_offset = 0.018
@@ -193,7 +195,7 @@ class MultiMA_TSL3_Mod(IStrategy):
 
     # These values can be overridden in the "ask_strategy" section in the config.
     use_sell_signal = True
-    sell_profit_only = False
+    sell_profit_only = True
     ignore_roi_if_buy_signal = False
 
     # Number of candles the strategy requires before producing valid signals
@@ -360,7 +362,7 @@ class MultiMA_TSL3_Mod(IStrategy):
         
         return dataframe
 
-    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
         """dataframe['ema_offset_buy'] = ta.EMA(dataframe, int(self.base_nb_candles_buy_ema.value)) *self.low_offset_ema.value
         dataframe['ema_offset_buy2'] = ta.EMA(dataframe, int(self.base_nb_candles_buy_ema2.value)) *self.low_offset_ema2.value"""
@@ -533,7 +535,7 @@ class MultiMA_TSL3_Mod(IStrategy):
 
         return dataframe
 
-    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[:, 'sell'] = 0
 
         return dataframe

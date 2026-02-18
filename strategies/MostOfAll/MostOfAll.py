@@ -69,7 +69,7 @@ class MostOfAll(IStrategy):
     stoploss = -0.2
 
     # Trailing stoploss
-    trailing_stop = False
+    trailing_stop = True
     trailing_only_offset_is_reached = True
     trailing_stop_positive = 0.01
     trailing_stop_positive_offset = 0.015
@@ -177,7 +177,7 @@ class MostOfAll(IStrategy):
         return dataframe
 
 
-    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         """
         Based on TA indicators, populates the buy signal for the given dataframe
         If the bullish fractal is active and below the teeth of the gator -> buy
@@ -200,7 +200,7 @@ class MostOfAll(IStrategy):
         return dataframe
 
 
-    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         """
         Based on TA indicators, populates the sell signal for the given dataframe
         If the bearish fractal is active and above the teeth of the gator -> sell

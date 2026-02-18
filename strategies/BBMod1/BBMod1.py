@@ -236,7 +236,9 @@ class BBMod1(IStrategy):
     }
 
     minimal_roi = {
-        "0": 100
+        "0": 0.10,
+        "30": 0.05,
+        "60": 0.02
     }
 
     # Optimal timeframe for the strategy
@@ -261,7 +263,7 @@ class BBMod1(IStrategy):
     }
 
     # Disabled
-    stoploss = -0.99
+    stoploss = -0.10
 
     # Custom stoploss
     use_custom_stoploss = True
@@ -765,7 +767,7 @@ class BBMod1(IStrategy):
 
         return dataframe
 
-    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
 
         conditions = []
         dataframe.loc[:, 'buy_tag'] = ''
@@ -1047,7 +1049,7 @@ class BBMod1(IStrategy):
 
         return dataframe
 
-    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[(dataframe['volume'] > 0), 'sell'] = 0
         return dataframe
 

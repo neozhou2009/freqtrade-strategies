@@ -54,7 +54,7 @@ class INSIDEUP(IStrategy):
 
     # These values can be overridden in the "ask_strategy" section in the config.
     use_sell_signal = False
-    sell_profit_only = False
+    sell_profit_only = True
     ignore_roi_if_buy_signal = False
 
 
@@ -81,7 +81,7 @@ class INSIDEUP(IStrategy):
         return dataframe
 
 
-    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dateTime = datetime.now()
 
         dataframe.loc[
@@ -103,7 +103,7 @@ class INSIDEUP(IStrategy):
 
         return dataframe
 
-    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         """
         no sell signal
         """

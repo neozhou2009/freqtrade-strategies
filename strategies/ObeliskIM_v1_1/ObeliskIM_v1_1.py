@@ -39,7 +39,9 @@ class ObeliskIM_v1_1(IStrategy):
     process_only_new_candles = True
 
     minimal_roi = {
-        "0": 5,
+        "0": 0.10,
+        "30": 0.05,
+        "60": 0.02,
     }
 
     # Stoploss:
@@ -138,7 +140,7 @@ class ObeliskIM_v1_1(IStrategy):
         return dataframe
 
 
-    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         # params = self.buy_params
 
         conditions = []
@@ -159,7 +161,7 @@ class ObeliskIM_v1_1(IStrategy):
 
         return dataframe
 
-    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         # params = self.sell_params
 
         conditions = []

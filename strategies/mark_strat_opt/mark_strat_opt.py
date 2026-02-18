@@ -58,7 +58,7 @@ class mark_strat_opt (IStrategy):
     process_only_new_candles = False
     # These values can be overridden in the "ask_strategy" section in the config.
     use_sell_signal = True
-    sell_profit_only = False
+    sell_profit_only = True
     ignore_roi_if_buy_signal = False
     # Number of candles the strategy requires before producing valid signals
     startup_candle_count: int = 20
@@ -144,7 +144,7 @@ class mark_strat_opt (IStrategy):
         dataframe['macd'] = macd['macd']
         dataframe['macdsignal'] = macd['macdsignal']
         return dataframe
-    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         """
         Based on TA indicators, populates the buy signal for the given dataframe
         :param dataframe: DataFrame populated with indicators
@@ -161,7 +161,7 @@ class mark_strat_opt (IStrategy):
             ),
             'buy'] = 1
         return dataframe
-    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         """
         Based on TA indicators, populates the sell signal for the given dataframe
         :param dataframe: DataFrame populated with indicators

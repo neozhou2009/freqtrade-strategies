@@ -314,7 +314,7 @@ class Dyna_opti(IStrategy):
 
     # Recommended
     use_sell_signal = False
-    sell_profit_only = False
+    sell_profit_only = True
     ignore_roi_if_buy_signal = True
 
     # Required
@@ -426,7 +426,7 @@ class Dyna_opti(IStrategy):
     """
     Buy Signal
     """ 
-    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
         if self.inf_guard.value == 'upper' or self.inf_guard.value == 'both':
             conditions.append(
@@ -462,7 +462,7 @@ class Dyna_opti(IStrategy):
     """
     Sell Signal
     """
-    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
   
         dataframe['sell'] = 0
 

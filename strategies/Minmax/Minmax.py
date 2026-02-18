@@ -14,7 +14,9 @@ import numpy as np
 class Minmax(IStrategy):
 
     minimal_roi = {
-        "0":  10
+        "0":  0.10,
+        "30": 0.05,
+        "60": 0.02
     }
 
     stoploss = -0.05
@@ -80,7 +82,7 @@ class Minmax(IStrategy):
 
         return dataframe
 
-    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         print(dataframe.tail(30))
 
 
@@ -92,7 +94,7 @@ class Minmax(IStrategy):
 
         return dataframe
 
-    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
 
 
         dataframe.loc[

@@ -40,13 +40,15 @@ class SMAOG(IStrategy):
 
     timeframe = '5m'
     stoploss = -0.23
-    minimal_roi = {"0": 10,}
+    minimal_roi = {"0": 0.10,
+        "30": 0.05,
+        "60": 0.02,}
     trailing_stop = True
     trailing_only_offset_is_reached = True
     trailing_stop_positive = 0.005
     trailing_stop_positive_offset = 0.02
     use_sell_signal = True
-    sell_profit_only = False
+    sell_profit_only = True
     ignore_roi_if_buy_signal = False
     process_only_new_candles = True
     startup_candle_count = 400
@@ -67,7 +69,7 @@ class SMAOG(IStrategy):
             dataframe['rsi_exit'] = ta.RSI(dataframe, timeperiod=2)
         return dataframe
 
-    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         if self.config['runmode'].value == 'hyperopt':
             dataframe['ma_offset_buy'] = ma_types[self.buy_trigger.value](dataframe, int(self.base_nb_candles_buy.value)) * self.low_offset.value
             dataframe['pair_is_bad'] = (
@@ -90,7 +92,7 @@ class SMAOG(IStrategy):
             'buy'] = 1
         return dataframe
 
-    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         if self.config['runmode'].value == 'hyperopt':
             dataframe['ma_offset_sell'] = ta.EMA(dataframe, int(self.base_nb_candles_sell.value)) * self.high_offset.value
         dataframe.loc[

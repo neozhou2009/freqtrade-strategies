@@ -67,7 +67,9 @@ class BigPete(IStrategy):
     INTERFACE_VERSION = 2
 
     minimal_roi = {
-        "0": 100.0
+        "0": 0.10,
+        "30": 0.05,
+        "60": 0.02
     }
     
     stoploss = -0.99 # effectively disabled.
@@ -77,7 +79,7 @@ class BigPete(IStrategy):
 
     # Sell signal
     use_sell_signal = True
-    sell_profit_only = False
+    sell_profit_only = True
     sell_profit_offset = 0.001 # it doesn't meant anything, just to guarantee there is a minimal profit.
     ignore_roi_if_buy_signal = False
 
@@ -335,7 +337,7 @@ class BigPete(IStrategy):
 
         return dataframe
 
-    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
 
         conditions = []
 
@@ -503,7 +505,7 @@ class BigPete(IStrategy):
 
         return dataframe
 
-    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (
                 (dataframe['close'] > dataframe['bb_middleband'] * 1.01) &                  # Don't be gready, sell fast

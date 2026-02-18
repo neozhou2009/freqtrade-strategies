@@ -111,7 +111,7 @@ class NotAnotherSMAOffsetStrategyModHO_LamineDz_20210901(IStrategy):
     # }
 
     # Stoploss:
-    stoploss = -0.9
+    stoploss = -0.10
 
     # SMAOffset
     base_nb_candles_buy = IntParameter(
@@ -144,7 +144,7 @@ class NotAnotherSMAOffsetStrategyModHO_LamineDz_20210901(IStrategy):
 
     # Sell signal
     use_sell_signal = True
-    sell_profit_only = False
+    sell_profit_only = True
     sell_profit_offset = 0.01
     ignore_roi_if_buy_signal = True
 
@@ -277,7 +277,7 @@ class NotAnotherSMAOffsetStrategyModHO_LamineDz_20210901(IStrategy):
 
         return dataframe
 
-    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
 
         conditions.append(
@@ -317,7 +317,7 @@ class NotAnotherSMAOffsetStrategyModHO_LamineDz_20210901(IStrategy):
 
         return dataframe
 
-    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
 
         conditions.append(

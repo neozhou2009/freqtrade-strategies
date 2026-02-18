@@ -38,7 +38,7 @@ class MFI(IStrategy):
     timeframe = '5m'
 
     # trailing stoploss
-    trailing_stop = False
+    trailing_stop = True
     trailing_stop_positive = 0.01
     trailing_stop_positive_offset = 0.02
 
@@ -50,7 +50,7 @@ class MFI(IStrategy):
 
         return dataframe
 
-    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (
 
@@ -60,7 +60,7 @@ class MFI(IStrategy):
             'buy'] = 1
         return dataframe
 
-    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (
                     (dataframe['MFI'] >= 75)

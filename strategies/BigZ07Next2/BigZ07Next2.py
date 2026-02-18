@@ -53,10 +53,10 @@ class BigZ07Next2(IStrategy):
         "180": 0.018,        # We're going up?
     }
 
-    stoploss = -0.99
+    stoploss = -0.10
 
     # Trailing stoploss
-    trailing_stop = False
+    trailing_stop = True
     trailing_only_offset_is_reached = False
     trailing_stop_positive = 0.01
     trailing_stop_positive_offset = 0.025
@@ -74,7 +74,7 @@ class BigZ07Next2(IStrategy):
 
     # These values can be overridden in the "ask_strategy" section in the config.
     use_sell_signal = True
-    sell_profit_only = False
+    sell_profit_only = True
     sell_profit_offset = 0.001 # it doesn't meant anything, just to guarantee there is a minimal profit.
     ignore_roi_if_buy_signal = False
 
@@ -886,7 +886,7 @@ class BigZ07Next2(IStrategy):
         return dataframe
 
 
-    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
 
         conditions = []
 
@@ -1151,7 +1151,7 @@ class BigZ07Next2(IStrategy):
 
         return dataframe
 
-    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
 
         conditions.append(

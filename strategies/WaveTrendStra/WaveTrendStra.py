@@ -21,7 +21,9 @@ class WaveTrendStra(IStrategy):
     # adjust based on market conditions. We would recommend to keep it low for quick turn arounds
     # This attribute will be overridden if the config file contains "minimal_roi"
     minimal_roi = {
-        "0": 100   #disable roi
+        "0": 0.10,
+        "30": 0.05,
+        "60": 0.02   #disable roi
     }
 
     # Optimal stoploss designed for the strategy
@@ -44,13 +46,13 @@ class WaveTrendStra(IStrategy):
 
         return dataframe
 
-    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (qtpylib.crossed_above(dataframe["wt1"], dataframe["wt2"]))
             ,'buy'] = 1
         return dataframe
 
-    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (qtpylib.crossed_below(dataframe['wt1'], dataframe['wt2']))
             ,'sell'] = 1

@@ -76,7 +76,7 @@ class custom_sell(IStrategy):
     }
 
     # Trailing stop:
-    trailing_stop = False
+    trailing_stop = True
     trailing_stop_positive = 0.098
     trailing_stop_positive_offset = 0.193
     trailing_only_offset_is_reached = True
@@ -89,7 +89,7 @@ class custom_sell(IStrategy):
     process_only_new_candles = True
 
     use_sell_signal = True
-    sell_profit_only = False
+    sell_profit_only = True
     ignore_roi_if_buy_signal = False
 
     # Custom stoploss
@@ -144,7 +144,7 @@ class custom_sell(IStrategy):
         dataframe['keltner_upper'] = keltner['upper']
         return dataframe
 
-    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         # BUY6
         if (self.buy_signal_buy6.value):
           dataframe.loc[
@@ -158,6 +158,6 @@ class custom_sell(IStrategy):
 
         return dataframe
 
-    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[:, 'sell'] = 0
         return dataframe

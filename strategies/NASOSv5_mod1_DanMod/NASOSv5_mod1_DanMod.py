@@ -106,7 +106,7 @@ class NASOSv5_mod1_DanMod(IStrategy):
         10, 50, default=buy_params['rsi_fast_buy'], space='buy', optimize=True)
 
     use_sell_signal = True
-    sell_profit_only = False
+    sell_profit_only = True
     sell_profit_offset = 0.01
     ignore_roi_if_buy_signal = False
 
@@ -281,7 +281,7 @@ class NASOSv5_mod1_DanMod(IStrategy):
 
         return dataframe
 
-    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
 
         dont_buy_conditions = []
 
@@ -335,7 +335,7 @@ class NASOSv5_mod1_DanMod(IStrategy):
 
         return dataframe
 
-    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
 
         conditions.append(

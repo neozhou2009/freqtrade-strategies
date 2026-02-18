@@ -28,7 +28,7 @@ class BBRSIv2(IStrategy):
     }
 
     # Optimal stoploss designed for the strategy
-    stoploss = -0.99
+    stoploss = -0.10
     
     process_only_new_candles = True  
     use_sell_signal = True
@@ -104,7 +104,7 @@ class BBRSIv2(IStrategy):
 
         return dataframe 
 
-    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[:, 'buy_tag'] = ''
         conditions = []
 #        dont_buy_conditions = []     
@@ -139,7 +139,7 @@ class BBRSIv2(IStrategy):
                            reduce(lambda x, y: x | y, conditions),'buy'] = 1
         return dataframe
 
-    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
         dataframe.loc[:, 'exit_tag'] = ''
         #sell_now = []     

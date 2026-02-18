@@ -195,7 +195,7 @@ class BB_RPB_TSL_BIV1(IStrategy):
     process_only_new_candles = True
 
     # Disabled
-    stoploss = -0.99
+    stoploss = -0.10
 
     # Custom stoploss
     use_custom_stoploss = True
@@ -654,7 +654,7 @@ class BB_RPB_TSL_BIV1(IStrategy):
 
         return dataframe
 
-    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
 
         conditions = []
         dataframe.loc[:, 'buy_tag'] = ''
@@ -875,7 +875,7 @@ class BB_RPB_TSL_BIV1(IStrategy):
 
         return dataframe
 
-    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
 
         dataframe.loc[ (dataframe['volume'] > 0), 'sell' ] = 0
 

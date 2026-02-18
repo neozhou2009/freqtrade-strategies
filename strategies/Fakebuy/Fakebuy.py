@@ -48,7 +48,7 @@ class Fakebuy(IStrategy):
     stoploss = -0.085
 
     use_sell_signal = True
-    sell_profit_only = False
+    sell_profit_only = True
     ignore_roi_if_buy_signal = True
 
     startup_candle_count: int = 168
@@ -119,7 +119,7 @@ class Fakebuy(IStrategy):
 
         return dataframe
 
-    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         params = self.buy_params
         trade_data = self.custom_trade_info[metadata['pair']]
         conditions = []
@@ -166,7 +166,7 @@ class Fakebuy(IStrategy):
 
         return dataframe
 
-    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         trade_data = self.custom_trade_info[metadata['pair']]
         conditions = []
         

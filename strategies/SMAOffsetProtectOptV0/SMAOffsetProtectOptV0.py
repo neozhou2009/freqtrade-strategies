@@ -77,7 +77,7 @@ class SMAOffsetProtectOptV0(IStrategy):
     }
 
     # Stoploss:
-    stoploss = -0.5
+    stoploss = -0.10
 
     # SMAOffset
     base_nb_candles_buy = IntParameter(
@@ -109,7 +109,7 @@ class SMAOffsetProtectOptV0(IStrategy):
     #     100, 200, default=buy_params['slow_ewo'], space='buy', optimize=True)
 
     # Trailing stop:
-    trailing_stop = False
+    trailing_stop = True
     trailing_stop_positive = 0.001
     trailing_stop_positive_offset = 0.01
     trailing_only_offset_is_reached = True
@@ -125,7 +125,7 @@ class SMAOffsetProtectOptV0(IStrategy):
     informative_timeframe = '1h'
 
     use_sell_signal = True
-    sell_profit_only = False
+    sell_profit_only = True
 
     process_only_new_candles = True
     startup_candle_count = 30
@@ -203,7 +203,7 @@ class SMAOffsetProtectOptV0(IStrategy):
 
         return dataframe
 
-    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
 
         conditions.append(
@@ -250,7 +250,7 @@ class SMAOffsetProtectOptV0(IStrategy):
 
         return dataframe
 
-    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
 
         conditions.append(

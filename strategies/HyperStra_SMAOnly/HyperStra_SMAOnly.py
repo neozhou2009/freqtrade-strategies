@@ -81,7 +81,7 @@ class HyperStra_SMAOnly(IStrategy):
     stoploss = -0.05
 
     # Trailing stop:
-    trailing_stop = False
+    trailing_stop = True
     trailing_stop_positive = 0.005
     trailing_stop_positive_offset = 0.016
     trailing_only_offset_is_reached = True
@@ -116,7 +116,7 @@ class HyperStra_SMAOnly(IStrategy):
     process_only_new_candles = False
     startup_candle_count = 440
 
-    sell_profit_only = False
+    sell_profit_only = True
     sell_profit_offset = 0.01
 
     # ##################################################################
@@ -204,7 +204,7 @@ class HyperStra_SMAOnly(IStrategy):
 
         return dataframe
 
-    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
 
         conditions.append(
@@ -242,7 +242,7 @@ class HyperStra_SMAOnly(IStrategy):
             dataframe.loc[reduce(lambda x, y: x | y, conditions), 'buy'] = 1
         return dataframe
 
-    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
 
         conditions.append(

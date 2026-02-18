@@ -34,7 +34,7 @@ class FixedRiskRewardLoss(IStrategy):
         'set_to_break_even_at_profit': 1,
     }
     use_custom_stoploss = True
-    stoploss = -0.9
+    stoploss = -0.10
     timeframe = '5m'
 
     def custom_stoploss(self, pair: str, trade: 'Trade', current_time: datetime,
@@ -97,7 +97,7 @@ class FixedRiskRewardLoss(IStrategy):
         # dataframe['rsi'] = ta.RSI(dataframe)
         return dataframe
 
-    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         """
         Placeholder Strategy: buys when SAR is smaller then candle before
         Based on TA indicators, populates the buy signal for the given dataframe
@@ -108,7 +108,7 @@ class FixedRiskRewardLoss(IStrategy):
         dataframe.loc[:, 'buy'] = 1
         return dataframe
 
-    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         """
         Placeholder Strategy: does nothing
         Based on TA indicators, populates the sell signal for the given dataframe

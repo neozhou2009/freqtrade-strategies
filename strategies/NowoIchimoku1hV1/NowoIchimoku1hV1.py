@@ -71,7 +71,9 @@ class NowoIchimoku1hV1(IStrategy):
     use_custom_stoploss = True
 
     minimal_roi = {
-        "0": 999
+        "0": 0.10,
+        "30": 0.05,
+        "60": 0.02
     }
 
     stoploss = -0.08
@@ -166,7 +168,7 @@ class NowoIchimoku1hV1(IStrategy):
 
         return df
 
-    def populate_buy_trend(self, df: DataFrame, metadata: dict) -> DataFrame:
+    def populate_entry_trend(self, df: DataFrame, metadata: dict) -> DataFrame:
         df['is_cloud_green'] = df['lead_1'] > df['lead_2']
 
         double_shifted_upper_cloud = df['upper_cloud'].shift(50)
@@ -202,6 +204,6 @@ class NowoIchimoku1hV1(IStrategy):
 
         return df
 
-    def populate_sell_trend(self, df: DataFrame, metadata: dict) -> DataFrame:
+    def populate_exit_trend(self, df: DataFrame, metadata: dict) -> DataFrame:
         df['sell'] = 0
         return df

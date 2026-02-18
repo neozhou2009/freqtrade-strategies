@@ -32,9 +32,11 @@ class HansenSmaOffsetV1(IStrategy):
     timeframe = '15m'
     #I haven't found the optimal ROI yet
     minimal_roi = {
-        "0": 10,
+        "0": 0.10,
+        "30": 0.05,
+        "60": 0.02,
     }
-    stoploss = -99
+    stoploss = -0.10
     def populate_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:   
         dataframe['smau1'] = ta.SMA(dataframe['close'], timeperiod=20)+0.05*ta.SMA(dataframe['close'], timeperiod=20)
         dataframe['smad1'] = ta.SMA(dataframe['close'], timeperiod=20)-0.05*ta.SMA(dataframe['close'], timeperiod=20)
@@ -47,7 +49,7 @@ class HansenSmaOffsetV1(IStrategy):
         return dataframe
         
 
-    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (
                 (dataframe['high']<dataframe['smad1'])&
@@ -56,7 +58,7 @@ class HansenSmaOffsetV1(IStrategy):
             'buy'] = 1
         return dataframe
 
-    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (
                 (dataframe['low']>dataframe['smau1'])&

@@ -126,7 +126,9 @@ class BB_RPB_TSL_RNG_VWAP(IStrategy):
 
     # really hard to use this
     minimal_roi = {
-        "0": 100,
+        "0": 0.10,
+        "30": 0.05,
+        "60": 0.02,
     }
 
     # Optimal timeframe for the strategy
@@ -134,7 +136,7 @@ class BB_RPB_TSL_RNG_VWAP(IStrategy):
     inf_1h = '1h'
 
     # Disabled
-    stoploss = -0.99
+    stoploss = -0.10
 
     # Custom stoploss
     use_custom_stoploss = True
@@ -386,7 +388,7 @@ class BB_RPB_TSL_RNG_VWAP(IStrategy):
 
         return dataframe
 
-    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
 
 
         conditions = []
@@ -524,7 +526,7 @@ class BB_RPB_TSL_RNG_VWAP(IStrategy):
 
         return dataframe
 
-    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
 
         conditions.append(

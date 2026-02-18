@@ -45,7 +45,7 @@ class hlhb(IStrategy):
 
     # These values can be overridden in the "ask_strategy" section in the config.
     use_sell_signal = True
-    sell_profit_only = False
+    sell_profit_only = True
     ignore_roi_if_buy_signal = True
 
     # Number of candles the strategy requires before producing valid signals
@@ -103,7 +103,7 @@ class hlhb(IStrategy):
 
         return dataframe
 
-    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (
                 (qtpylib.crossed_above(dataframe['rsi'], 50)) &
@@ -115,7 +115,7 @@ class hlhb(IStrategy):
 
         return dataframe
 
-    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (
                 (qtpylib.crossed_below(dataframe['rsi'], 50)) &

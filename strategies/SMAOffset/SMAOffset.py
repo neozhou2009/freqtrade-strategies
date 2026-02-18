@@ -40,7 +40,7 @@ class SMAOffset(IStrategy):
 	}
 
 	# Stoploss:
-	stoploss = -0.5
+	stoploss = -0.10
 
 	# ROI table:
 	minimal_roi = {
@@ -55,7 +55,7 @@ class SMAOffset(IStrategy):
 	sell_trigger = CategoricalParameter(ma_types.keys(), default=sell_params['sell_trigger'], space='sell')
 
 	# Trailing stop:
-	trailing_stop = False
+	trailing_stop = True
 	trailing_stop_positive = 0.0001
 	trailing_stop_positive_offset = 0
 	trailing_only_offset_is_reached = False
@@ -64,7 +64,7 @@ class SMAOffset(IStrategy):
 	timeframe = '5m'
 
 	use_sell_signal = True
-	sell_profit_only = False
+	sell_profit_only = True
 
 	process_only_new_candles = True
 	startup_candle_count = 30
@@ -88,7 +88,7 @@ class SMAOffset(IStrategy):
 			dataframe['ma_offset_sell'] = ma_types[self.sell_trigger.value](dataframe, int(self.base_nb_candles_sell.value)) * self.high_offset.value
 		return dataframe
 
-	def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+	def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
 		if self.config['runmode'].value == 'hyperopt':
 			dataframe['ma_offset_buy'] = ma_types[self.buy_trigger.value](dataframe, int(self.base_nb_candles_buy.value)) * self.low_offset.value
 
@@ -100,7 +100,7 @@ class SMAOffset(IStrategy):
 			'buy'] = 1
 		return dataframe
 
-	def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+	def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
 		if self.config['runmode'].value == 'hyperopt':
 			dataframe['ma_offset_sell'] = ma_types[self.sell_trigger.value](dataframe, int(self.base_nb_candles_sell.value)) * self.high_offset.value
 

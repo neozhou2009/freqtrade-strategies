@@ -58,7 +58,7 @@ class Schism4(IStrategy):
     stoploss = -0.30
 
     use_sell_signal = False
-    sell_profit_only = False
+    sell_profit_only = True
     ignore_roi_if_buy_signal = True
 
     startup_candle_count: int = 72
@@ -140,7 +140,7 @@ class Schism4(IStrategy):
     """
     Buy Trigger Signals
     """
-    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         params = self.get_pair_params(metadata['pair'], 'buy')
         trade_data = self.custom_trade_info[metadata['pair']]
         conditions = []
@@ -192,7 +192,7 @@ class Schism4(IStrategy):
         In this strategy all sells for profit happen according to ROI
         This sell signal is designed only as a "dynamic stoploss"
     """
-    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         params = self.get_pair_params(metadata['pair'], 'sell')
         trade_data = self.custom_trade_info[metadata['pair']]
         conditions = []

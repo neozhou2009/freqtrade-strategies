@@ -40,7 +40,7 @@ class Strategy005(IStrategy):
     timeframe = '5m'
 
     # trailing stoploss
-    trailing_stop = False
+    trailing_stop = True
     trailing_stop_positive = 0.01
     trailing_stop_positive_offset = 0.02
 
@@ -142,7 +142,7 @@ class Strategy005(IStrategy):
 
         return dataframe
 
-    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         """
         Based on TA indicators, populates the buy signal for the given dataframe
         :param dataframe: DataFrame
@@ -163,7 +163,7 @@ class Strategy005(IStrategy):
 
         return dataframe
 
-    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         """
         Based on TA indicators, populates the sell signal for the given dataframe
         :param dataframe: DataFrame

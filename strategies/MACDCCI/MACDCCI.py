@@ -24,14 +24,16 @@ class MACDCCI(IStrategy):
     # Disable ROI
     # Could be replaced with new ROI from hyperopt.
     minimal_roi = {
-         "0":  100
+         "0":  0.10,
+        "30": 0.05,
+        "60": 0.02
     }
 
     stoploss = -0.30
 
     ### Do extra hyperopt for trailing seperat. Use "--spaces default" and then "--spaces trailing".
     ### See here for more information: https://www.freqtrade.io/en/latest/hyperopt
-    trailing_stop = False
+    trailing_stop = True
     trailing_stop_positive = 0.08
     trailing_stop_positive_offset = 0.10
     trailing_only_offset_is_reached = False
@@ -56,7 +58,7 @@ class MACDCCI(IStrategy):
 
         return dataframe
 
-    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
 
         dataframe.loc[
             (
@@ -67,7 +69,7 @@ class MACDCCI(IStrategy):
 
         return dataframe
 
-    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
 
         dataframe.loc[
             (

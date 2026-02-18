@@ -130,7 +130,7 @@ class BB_RPB_TSL_c7c477d_20211030(IStrategy):
     inf_1h = '1h'
 
     # Disabled
-    stoploss = -0.99
+    stoploss = -0.10
 
     # Custom stoploss
     use_custom_stoploss = True
@@ -374,7 +374,7 @@ class BB_RPB_TSL_c7c477d_20211030(IStrategy):
 
         return dataframe
 
-    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
 
         conditions = []
         dataframe.loc[:, 'buy_tag'] = ''
@@ -500,7 +500,7 @@ class BB_RPB_TSL_c7c477d_20211030(IStrategy):
 
         return dataframe
 
-    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
 
         dataframe.loc[
             (

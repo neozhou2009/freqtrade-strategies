@@ -242,7 +242,7 @@ class ichiV1_Marius(IStrategy):
     stoploss = -0.275  # value loaded from strategy
 
     # Trailing stop:
-    trailing_stop = False
+    trailing_stop = True
     #trailing_stop_positive = 0.001
     #trailing_stop_positive_offset = 0.016
     #trailing_only_offset_is_reached = True
@@ -280,7 +280,7 @@ class ichiV1_Marius(IStrategy):
     ]
 
     use_sell_signal = False
-    sell_profit_only = False
+    sell_profit_only = True
     ignore_roi_if_buy_signal = True
 
     # trailing stoploss hyperopt parameters
@@ -590,7 +590,7 @@ class ichiV1_Marius(IStrategy):
 
         return True
 
-    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         
         conditions = []
         dataframe.loc[:, 'buy_tag'] = ''
@@ -628,7 +628,7 @@ class ichiV1_Marius(IStrategy):
         return dataframe
 
 
-    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
 
         conditions = []
 

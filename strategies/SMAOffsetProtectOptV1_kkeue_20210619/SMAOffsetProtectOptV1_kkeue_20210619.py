@@ -63,7 +63,7 @@ class SMAOffsetProtectOptV1_kkeue_20210619(IStrategy):
     }
 
     # Stoploss:
-    stoploss = -0.5
+    stoploss = -0.10
 
     # SMAOffset
     base_nb_candles_buy = IntParameter(
@@ -86,14 +86,14 @@ class SMAOffsetProtectOptV1_kkeue_20210619(IStrategy):
 
 
     # Trailing stop:
-    trailing_stop = False
+    trailing_stop = True
     trailing_stop_positive = 0.001
     trailing_stop_positive_offset = 0.01
     trailing_only_offset_is_reached = True
 
     # Sell signal
     use_sell_signal = True
-    sell_profit_only = False
+    sell_profit_only = True
     sell_profit_offset = 0.01
     ignore_roi_if_buy_signal = False
 
@@ -145,7 +145,7 @@ class SMAOffsetProtectOptV1_kkeue_20210619(IStrategy):
 
         return dataframe
 
-    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
 
         conditions.append(
@@ -173,7 +173,7 @@ class SMAOffsetProtectOptV1_kkeue_20210619(IStrategy):
 
         return dataframe
 
-    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
 
         conditions.append(
@@ -225,7 +225,7 @@ class SMAOffsetProtectOptV1_1(SMAOffsetProtectOptV1_kkeue_20210619):
     stoploss = -0.5  # value loaded from strategy
 
     # Trailing stop:
-    trailing_stop = False  # value loaded from strategy
+    trailing_stop = True  # value loaded from strategy
     trailing_stop_positive = 0.001  # value loaded from strategy
     trailing_stop_positive_offset = 0.01  # value loaded from strategy
     trailing_only_offset_is_reached = True  # value loaded from strategy

@@ -132,7 +132,7 @@ class LuxOSC(IStrategy):
     cross_buy = IntParameter(-100, 100, default= int(buy_params['cross_buy']), space='buy')
     cross_sell = IntParameter(-100, 100, default= int(sell_params['cross_sell']), space='sell')
     
-    stoploss = -0.99
+    stoploss = -0.10
 
     # Trailing stoploss
     trailing_stop = False
@@ -145,7 +145,7 @@ class LuxOSC(IStrategy):
 
   
     use_sell_signal = True
-    sell_profit_only = False
+    sell_profit_only = True
     ignore_roi_if_buy_signal = False
 
    
@@ -185,7 +185,7 @@ class LuxOSC(IStrategy):
         dataframe['osc'],  dataframe['signal'] , dataframe['histogram'], dataframe['supertrend'] = LUX_SuperTrendOscillator(dataframe, length = int(self.length_buy.value), mult = int(self.mult_buy.value), smooth = int(self.smooth_buy.value)) 
         return dataframe
 
-    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (
                 
@@ -196,7 +196,7 @@ class LuxOSC(IStrategy):
             'buy'] = 1
         return dataframe
 
-    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (
                 (qtpylib.crossed_below(dataframe['osc'], int(self.cross_sell.value))) &  

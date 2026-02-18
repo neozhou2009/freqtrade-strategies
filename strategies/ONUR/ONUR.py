@@ -16,7 +16,7 @@ class ONUR(IStrategy):
         "226": 0.03
     }
 
-    stoploss = -0.99
+    stoploss = -0.10
     trailing_stop = True
     trailing_stop_positive = 0.293
     trailing_stop_positive_offset = 0.362
@@ -48,7 +48,7 @@ class ONUR(IStrategy):
 
         return dataframe
 
-    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (
                 (dataframe['rsi'] < 74)
@@ -58,7 +58,7 @@ class ONUR(IStrategy):
 
         return dataframe
 
-    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (
                 # (dataframe['close'] > dataframe['bb_upperband'])
