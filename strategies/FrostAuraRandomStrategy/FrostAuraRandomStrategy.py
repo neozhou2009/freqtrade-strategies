@@ -1,5 +1,5 @@
 from pandas import DataFrame
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from freqtrade.strategy import (IntParameter, IStrategy, CategoricalParameter)
 from random import random
 import numpy as np

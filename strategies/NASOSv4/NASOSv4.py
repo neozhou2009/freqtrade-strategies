@@ -4,7 +4,7 @@
 # --- Do not remove these libs ---
 # --- Do not remove these libs ---
 from logging import FATAL
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from typing import Dict, List
 from functools import reduce
 from pandas import DataFrame

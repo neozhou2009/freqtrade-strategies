@@ -10,7 +10,7 @@
 # - EDIT: "Maybe the sucess of a trading system is part of strategy and also a good config.son too!"
 #
 #
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from pandas import DataFrame
 # --------------------------------
 

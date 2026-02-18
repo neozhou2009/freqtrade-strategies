@@ -5,7 +5,7 @@ import pandas
 from pandas import DataFrame
 
 import freqtrade.vendor.qtpylib.indicators as qtpylib
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 pandas.set_option("display.precision",8)
 
 class BBRSIoriginal(IStrategy):

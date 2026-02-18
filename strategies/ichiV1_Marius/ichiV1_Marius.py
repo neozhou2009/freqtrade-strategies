@@ -1,6 +1,6 @@
 # --- Do not remove these libs ---
 from sqlalchemy import true
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from pandas import DataFrame, Series
 import copy
 import logging

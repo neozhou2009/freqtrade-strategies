@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta, timezone
 from functools import reduce
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from typing import Dict, List
 from pandas import DataFrame, Series
 from freqtrade.persistence import Trade

@@ -8,7 +8,7 @@ import technical.indicators as ftt
 from datetime import datetime, timedelta
 from freqtrade.persistence import Trade
 from freqtrade.strategy import stoploss_from_open, merge_informative_pair, DecimalParameter, IntParameter, CategoricalParameter
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from functools import reduce
 from logging import FATAL
 from pandas import DataFrame

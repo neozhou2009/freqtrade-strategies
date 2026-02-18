@@ -1,4 +1,4 @@
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from pandas import DataFrame
 from technical.indicators import ichimoku
 import freqtrade.vendor.qtpylib.indicators as qtpylib

@@ -9,7 +9,7 @@ import pandas_ta as pta
 import talib.abstract as ta
 
 from freqtrade.persistence import Trade
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from freqtrade.strategy import merge_informative_pair, DecimalParameter, stoploss_from_open, RealParameter, IntParameter, BooleanParameter
 from pandas import DataFrame, Series
 from datetime import datetime, timedelta, timezone

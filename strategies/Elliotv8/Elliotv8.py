@@ -2,7 +2,7 @@
 # for backtest trailing_stop = True and use_custom_stoploss = False
 
 # --- Do not remove these libs ---
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from typing import Dict, List
 from functools import reduce
 from pandas import DataFrame

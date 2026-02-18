@@ -4,7 +4,7 @@ import numpy as np  # noqa
 import pandas as pd  # noqa
 from pandas import DataFrame
 
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 
 import talib.abstract as ta
 import freqtrade.vendor.qtpylib.indicators as qtpylib

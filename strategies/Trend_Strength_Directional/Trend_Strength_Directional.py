@@ -4,7 +4,7 @@ import pandas as pd
 from functools import reduce
 from pandas import DataFrame
 import freqtrade.vendor.qtpylib.indicators as qtpylib
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from freqtrade.strategy import CategoricalParameter, DecimalParameter, IntParameter, RealParameter
 
 __author__ = "Robert Roman"

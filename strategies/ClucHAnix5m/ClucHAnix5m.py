@@ -2,7 +2,7 @@ from datetime import datetime, timedelta, timezone
 from functools import reduce
 from typing import List
 # --- Do not remove these libs ---
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from typing import Dict, List
 from pandas import DataFrame, Series
 import logging

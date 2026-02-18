@@ -4,7 +4,7 @@ import pandas as pd
 import numpy as np
 #import pdb 
 import freqtrade.vendor.qtpylib.indicators as qtpylib
-from freqtrade.strategy.interface import IStrategy 
+from freqtrade.strategy import IStrategy 
 pd.set_option("display.precision", 10) 
 
 class Renko(IStrategy):

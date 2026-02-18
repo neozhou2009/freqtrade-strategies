@@ -1,5 +1,5 @@
 # --- Do not remove these libs ---
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from freqtrade.strategy import timeframe_to_minutes
 from pandas import DataFrame
 from technical.util import resample_to_interval, resampled_merge

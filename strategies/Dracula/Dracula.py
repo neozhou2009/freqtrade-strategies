@@ -1,7 +1,7 @@
 
 from freqtrade.strategy import DecimalParameter, IntParameter
 
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from pandas import DataFrame
 # --------------------------------
 

@@ -17,7 +17,7 @@ import freqtrade.vendor.qtpylib.indicators as qtpylib
 from freqtrade.persistence import Trade
 from freqtrade.strategy import (BooleanParameter, DecimalParameter,
                                 IntParameter, merge_informative_pair)
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 
 logger = logging.getLogger(__name__)
 

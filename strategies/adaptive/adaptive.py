@@ -1,5 +1,5 @@
 # --- Do not remove these libs ---
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from pandas import DataFrame, Series, DatetimeIndex, merge
 import freqtrade.vendor.qtpylib.indicators as qtpylib
 import pandas_ta as pta

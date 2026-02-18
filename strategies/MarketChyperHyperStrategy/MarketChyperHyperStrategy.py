@@ -4,7 +4,7 @@ import pandas as pd  # noqa
 import talib.abstract as ta
 from pandas import DataFrame
 import freqtrade.vendor.qtpylib.indicators as qtpylib
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from freqtrade.strategy.hyper import (CategoricalParameter, DecimalParameter, IntParameter,
                                       RealParameter)
 

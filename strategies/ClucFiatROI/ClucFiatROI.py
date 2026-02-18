@@ -2,7 +2,7 @@ import freqtrade.vendor.qtpylib.indicators as qtpylib
 import numpy as np
 from functools import reduce
 import talib.abstract as ta
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from freqtrade.strategy import merge_informative_pair
 from datetime import datetime
 from freqtrade.persistence import Trade

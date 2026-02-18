@@ -23,7 +23,7 @@ import random
 from freqtrade.strategy.hyper import CategoricalParameter, DecimalParameter, IntParameter
 
 from numpy.lib import math
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from pandas import DataFrame
 
 # ########################## SETTINGS ##############################

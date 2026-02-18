@@ -1,7 +1,7 @@
 # --- Do not remove these libs ---
 import freqtrade.vendor.qtpylib.indicators as qtpylib
 import talib.abstract as ta
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from freqtrade.strategy import RealParameter, IntParameter
 from functools import reduce
 from pandas import DataFrame

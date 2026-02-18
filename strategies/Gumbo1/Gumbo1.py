@@ -16,7 +16,7 @@ from freqtrade.strategy import (
     DecimalParameter,
     merge_informative_pair,
 )
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from pandas import DataFrame
 
 sys.path.append(str(Path(__file__).parent))

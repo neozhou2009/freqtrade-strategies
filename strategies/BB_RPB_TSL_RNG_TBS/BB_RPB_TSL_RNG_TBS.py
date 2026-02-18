@@ -6,7 +6,7 @@ import pandas_ta as pta
 from typing import Dict, List
 
 from freqtrade.persistence import Trade
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from pandas import DataFrame, Series, DatetimeIndex, merge
 from datetime import datetime, timedelta
 from freqtrade.strategy import merge_informative_pair, CategoricalParameter, DecimalParameter, IntParameter, stoploss_from_open

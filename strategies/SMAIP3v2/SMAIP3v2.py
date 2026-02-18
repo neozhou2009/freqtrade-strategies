@@ -9,7 +9,7 @@ from pandas import DataFrame
 from freqtrade.persistence import Trade
 from freqtrade.strategy import CategoricalParameter
 from freqtrade.strategy import DecimalParameter, IntParameter
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 
 # author @tirail
 

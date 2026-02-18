@@ -7,7 +7,7 @@ from pandas import DataFrame
 import numpy
 import tabulate
 
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 
 # --------------------------------
 # Add your lib to import here

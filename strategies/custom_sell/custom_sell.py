@@ -10,7 +10,7 @@ import numpy as np
 import sys
 # --------------------------------
 import talib.abstract as ta
-#from freqtrade.strategy.interface import IStrategy
+#from freqtrade.strategy import IStrategy
 from freqtrade.strategy import IStrategy, merge_informative_pair, informative
 from pandas import DataFrame, Series, DatetimeIndex, merge, to_numeric
 from freqtrade.persistence import Trade

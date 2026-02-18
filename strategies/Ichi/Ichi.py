@@ -4,7 +4,7 @@
 import numpy as np  # noqa
 import pandas as pd  # noqa
 from pandas import DataFrame, Series
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from freqtrade.strategy import stoploss_from_open, merge_informative_pair, DecimalParameter, IntParameter, \
     CategoricalParameter
 from technical.indicators import ichimoku
