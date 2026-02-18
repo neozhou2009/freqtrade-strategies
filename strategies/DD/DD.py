@@ -23,10 +23,10 @@ class DD(IStrategy):
     # adjust based on market conditions. We would recommend to keep it low for quick turn arounds
     # This attribute will be overridden if the config file contains "minimal_roi"
     minimal_roi = {
-        "0": 0.11078,
-        "33": 0.06816,
-        "68": 0.02844,
-        "165": 0
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
     }
 
     # Trailing stop:
@@ -35,7 +35,8 @@ class DD(IStrategy):
     trailing_stop_positive_offset = 0.03701
     trailing_only_offset_is_reached = False
     # Optimal stoploss designed for the strategy
-    stoploss = -0.32745
+    max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.3275 (已禁用), 改为 +0.10 (止损启用)
 
     # Optimal timeframe for the strategy
     timeframe = '5m'
@@ -51,7 +52,7 @@ class DD(IStrategy):
 
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         """
         Based on TA indicators.
         Can be a copy of the corresponding method from the strategy,
@@ -70,7 +71,7 @@ class DD(IStrategy):
 
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         """
         Based on TA indicators.
         Can be a copy of the corresponding method from the strategy,

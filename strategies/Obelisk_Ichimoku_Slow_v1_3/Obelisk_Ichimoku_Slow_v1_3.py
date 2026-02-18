@@ -87,10 +87,9 @@ class Obelisk_Ichimoku_Slow_v1_3(IStrategy):
 
     minimal_roi = {
         "0": 0.10,
-        "60": 0.072,
-        "120": 0.049,
-        "240": 0.02,
-        "360": 0,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
     }
     # Trailing stoploss (not used)
     trailing_stop = True
@@ -103,7 +102,8 @@ class Obelisk_Ichimoku_Slow_v1_3(IStrategy):
     # in which case it would sell anyway.
 
     # Stoploss:
-    stoploss = -0.10
+    max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.1000 (已禁用), 改为 +0.10 (止损启用)
 
 
     def informative_pairs(self):
@@ -228,7 +228,7 @@ class Obelisk_Ichimoku_Slow_v1_3(IStrategy):
 
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (dataframe['trending'] > 0)
             & (dataframe['entry_ok'] > 0)
@@ -236,7 +236,7 @@ class Obelisk_Ichimoku_Slow_v1_3(IStrategy):
         , 'buy'] = 1
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (dataframe['trending'] == 0)
             & (dataframe['date'].dt.minute == 0) # when backtesting at 5m/1m only set signal on the hour

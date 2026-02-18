@@ -20,9 +20,10 @@ class Saturn5(IStrategy):
     timeframe = "15m"
 
     # Stoploss
-    stoploss = -0.20
+    max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.2000 (已禁用), 改为 +0.10 (止损启用)
     startup_candle_count: int = 480
-    trailing_stop = False
+    trailing_stop = True
     use_custom_stoploss = False
     use_sell_signal = False
 
@@ -151,7 +152,7 @@ class Saturn5(IStrategy):
 
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         # basic buy methods to keep the strategy simple
 
         if self.buy_signal_1:
@@ -187,7 +188,7 @@ class Saturn5(IStrategy):
 
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         # This is essentailly ignored as we're using strict ROI / Stoploss / TTP sale scenarios
         dataframe.loc[(), "sell"] = 0
         return dataframe

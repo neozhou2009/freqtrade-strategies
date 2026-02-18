@@ -221,9 +221,10 @@ class BB_RPB_TSL_Tranz(IStrategy):
     }
 
     minimal_roi = {
-        "0": 0.205,
-        "81": 0.038,
-        "292": 0.005,
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
     }
 
     # Optimal timeframe for the strategy
@@ -239,7 +240,8 @@ class BB_RPB_TSL_Tranz(IStrategy):
     process_only_new_candles = True
 
     # Disabled
-    stoploss = -0.10
+    max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.1000 (已禁用), 改为 +0.10 (止损启用)
 
     # Custom stoploss
     use_custom_stoploss = True
@@ -922,7 +924,7 @@ class BB_RPB_TSL_Tranz(IStrategy):
         
         return dataframe
         
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
 
         conditions = []
         dataframe.loc[:, 'buy_tag'] = ''
@@ -1541,7 +1543,7 @@ class BB_RPB_TSL_Tranz(IStrategy):
 
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
 
         dataframe.loc[ (dataframe['volume'] > 0), 'sell' ] = 0
 
@@ -1754,7 +1756,7 @@ class BB_RPB_TSL_Tranz_TrailingBuy(BB_RPB_TSL_Tranz):
         
         return val
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe = super().populate_buy_trend(dataframe, metadata)
 
         if self.trailing_buy_order_enabled and self.config['runmode'].value in ('live', 'dry_run'): 

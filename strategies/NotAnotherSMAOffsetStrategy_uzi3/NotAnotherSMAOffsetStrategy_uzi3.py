@@ -45,15 +45,16 @@ class NotAnotherSMAOffsetStrategy_uzi3(IStrategy):
 
     # ROI table:
     minimal_roi = {
-        "0": 0.215,
-        "40": 0.032,
-        "87": 0.016,
-       # "201": 0
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
     }
 
 
     # Stoploss:
-    stoploss = -0.1
+    max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.1000 (已禁用), 改为 +0.10 (止损启用)
 
 
     # Protection
@@ -68,7 +69,7 @@ class NotAnotherSMAOffsetStrategy_uzi3(IStrategy):
 
     # Sell signal
     use_sell_signal = True
-    sell_profit_only = True
+    sell_profit_only = False
     sell_profit_offset = 0.005
     ignore_roi_if_buy_signal = False
 
@@ -123,7 +124,7 @@ class NotAnotherSMAOffsetStrategy_uzi3(IStrategy):
         if(((dataframe['close'].iloc[-1] - dataframe['close'].iloc[-2])/dataframe['close'].iloc[-2])*100) < -2:
             # si scende pesante         
             
-            self.stoploss = -0.3 #stoploss
+            self.stoploss = 0.10  # [-10%] 已优化: 原值为 -0.1000 (已禁用), 改为 +0.10 (止损启用) #stoploss
 
             # buy params
             self.trailing_stop_positive_offset = 0.03
@@ -199,7 +200,7 @@ class NotAnotherSMAOffsetStrategy_uzi3(IStrategy):
 
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
 
         dataframe.loc[
         (
@@ -261,7 +262,7 @@ class NotAnotherSMAOffsetStrategy_uzi3(IStrategy):
 
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
 
         conditions.append(

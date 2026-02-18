@@ -52,9 +52,14 @@ class MADisplaceV3(IStrategy):
     ma_upper_length = IntParameter(15, 25, default=sell_params['ma_upper_length'], space='sell')
     ma_upper_offset = DecimalParameter(1.005, 1.025, default=sell_params['ma_upper_offset'], space='sell')
 
-    minimal_roi = {"0": 1}
+    minimal_roi = {  # 已优化: 从最大 100% 改为阶梯式
 
-    stoploss = -0.2
+        "0": 0.10,  # 10%
+        "24": 0.07,  # 7%
+        "72": 0.05,  # 5%
+        "168": 0.03  # 3%
+    }max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.2000 (已禁用), 改为 +0.10 (止损启用)
 
     trailing_stop = True
     trailing_stop_positive = 0.01
@@ -64,7 +69,7 @@ class MADisplaceV3(IStrategy):
     timeframe = '5m'
 
     use_sell_signal = True
-    sell_profit_only = True
+    sell_profit_only = False
 
     process_only_new_candles = True
 
@@ -142,7 +147,7 @@ class MADisplaceV3(IStrategy):
 
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
 
         # calculate indicators with adjustable params for hyperopt
         # it's calling multiple times and dataframe overrides same columns
@@ -170,7 +175,7 @@ class MADisplaceV3(IStrategy):
 
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
 
         if self.config['runmode'].value == 'hyperopt' and 'uptrend' not in dataframe:
             informative = self.get_informative_indicators(metadata)

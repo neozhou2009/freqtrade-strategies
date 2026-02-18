@@ -6,21 +6,22 @@ import numpy as np
 
 
 class BuyAllSellAllStrategy(IStrategy):
-    stoploss = -0.25
+    max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.2500 (已禁用), 改为 +0.10 (止损启用)
     timeframe = '5m'
 
     use_sell_signal = True
-    sell_profit_only = True
+    sell_profit_only = False
     ignore_roi_if_buy_signal = False
 
     def populate_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe["buy"] = np.random.randint(0, 2, size=len(dataframe))
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe["sell"] = 0
         return dataframe
 

@@ -27,14 +27,15 @@ class Ichess(IStrategy):
     
     # ROI table:
     minimal_roi = {
-        "0": 0.642,
-        "8834": 0.37,
-        "25392": 0.118,
-        "55146": 0
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
     }
 
     # Stoploss:
-    stoploss = -0.314
+    max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.3140 (已禁用), 改为 +0.10 (止损启用)
 
     # Opt Timeframe
     timeframe = '1d'
@@ -314,7 +315,7 @@ class Ichess(IStrategy):
         return dataframe
 
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         # exit()
         dataframe.loc[
             # (dataframe['Ichimoku_Score']>0)&
@@ -324,7 +325,7 @@ class Ichess(IStrategy):
             ), 'buy'] = 1
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
                 # (dataframe['Ichimoku_Score']<0)|
                 (

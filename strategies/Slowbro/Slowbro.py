@@ -46,15 +46,14 @@ SLOWBRO v100
 
 class Slowbro(IStrategy):
 
-    minimal_roi = {
-         "0": 0.10,
-         "1440": 0.20,
-         "2880": 0.30,
-         "10080": 1.0
-    }
+    minimal_roi = {  # 已优化: 从最大 100% 改为阶梯式
 
-    # Stoploss:
-    stoploss = -0.10
+        "0": 0.10,  # 10%
+        "24": 0.07,  # 7%
+        "72": 0.05,  # 5%
+        "168": 0.03  # 3%
+    }# Stoploss:
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.9900 (已禁用), 改为 +0.10 (止损启用)
 
     timeframe = '1h'
     inf_timeframe = '1d'
@@ -83,7 +82,7 @@ class Slowbro(IStrategy):
 
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (
                 qtpylib.crossed_above(dataframe['close'],dataframe[f"30d-low_{self.inf_timeframe}"])
@@ -92,7 +91,7 @@ class Slowbro(IStrategy):
 
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (
                 qtpylib.crossed_above(dataframe['close'],dataframe[f"30d-high_{self.inf_timeframe}"])

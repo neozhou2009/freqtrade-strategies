@@ -49,14 +49,15 @@ class FastSupertrendOpt(IStrategy):
 
     # ROI table:
     minimal_roi = {
-        "0": 0.087,
-        "372": 0.058,
-        "861": 0.029,
-        "2221": 0
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
     }
 
     # Stoploss:
-    stoploss = -0.265
+    max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.2650 (已禁用), 改为 +0.10 (止损启用)
 
     # Trailing stop:
     trailing_stop = True
@@ -85,7 +86,7 @@ class FastSupertrendOpt(IStrategy):
     def populate_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe['supertrend_1_buy'] = self.supertrend(dataframe, self.buy_m1.value, int(self.buy_p1.value))['STX'] 
         dataframe['supertrend_2_buy'] = self.supertrend(dataframe, self.buy_m2.value, int(self.buy_p2.value))['STX'] 
         dataframe['supertrend_3_buy'] = self.supertrend(dataframe, self.buy_m3.value, int(self.buy_p3.value))['STX'] 
@@ -104,7 +105,7 @@ class FastSupertrendOpt(IStrategy):
 
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (
                (dataframe[f'supertrend_1_sell'] == 'down') &

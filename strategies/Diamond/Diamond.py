@@ -75,14 +75,15 @@ class Diamond(IStrategy):
 
     # ROI table:
     minimal_roi = {
-        "0": 0.242,
-        "13": 0.044,
-        "51": 0.02,
-        "170": 0
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
     }
 
     # Stoploss:
-    stoploss = -0.271
+    max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.2710 (已禁用), 改为 +0.10 (止损启用)
 
     # Trailing stop:
     trailing_stop = True
@@ -122,7 +123,7 @@ class Diamond(IStrategy):
         # dataframe['{...}'] = ta.{...}(dataframe, timeperiod={...})
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
         conditions.append(
             qtpylib.crossed_above
@@ -139,7 +140,7 @@ class Diamond(IStrategy):
 
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
         conditions.append(
             qtpylib.crossed_below

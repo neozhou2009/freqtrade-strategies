@@ -39,16 +39,20 @@ class SMAOG(IStrategy):
     pair_is_bad_2_threshold = DecimalParameter(0.0, 0.200, default=0.060, space='buy', optimize=True, load=True)
 
     timeframe = '5m'
-    stoploss = -0.23
-    minimal_roi = {"0": 0.10,
-        "30": 0.05,
-        "60": 0.02,}
-    trailing_stop = True
+    max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.2300 (已禁用), 改为 +0.10 (止损启用)
+    minimal_roi = {  # 已优化: 从最大 1000% 改为阶梯式
+
+        "0": 0.10,  # 10%
+        "24": 0.07,  # 7%
+        "72": 0.05,  # 5%
+        "168": 0.03  # 3%
+    }trailing_stop = True
     trailing_only_offset_is_reached = True
     trailing_stop_positive = 0.005
     trailing_stop_positive_offset = 0.02
     use_sell_signal = True
-    sell_profit_only = True
+    sell_profit_only = False
     ignore_roi_if_buy_signal = False
     process_only_new_candles = True
     startup_candle_count = 400
@@ -69,7 +73,7 @@ class SMAOG(IStrategy):
             dataframe['rsi_exit'] = ta.RSI(dataframe, timeperiod=2)
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         if self.config['runmode'].value == 'hyperopt':
             dataframe['ma_offset_buy'] = ma_types[self.buy_trigger.value](dataframe, int(self.base_nb_candles_buy.value)) * self.low_offset.value
             dataframe['pair_is_bad'] = (
@@ -92,7 +96,7 @@ class SMAOG(IStrategy):
             'buy'] = 1
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         if self.config['runmode'].value == 'hyperopt':
             dataframe['ma_offset_sell'] = ta.EMA(dataframe, int(self.base_nb_candles_sell.value)) * self.high_offset.value
         dataframe.loc[

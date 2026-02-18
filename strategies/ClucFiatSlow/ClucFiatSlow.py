@@ -27,17 +27,15 @@ class ClucFiatSlow(IStrategy):
 
     # ROI table:
     minimal_roi = {
-        "0": 0.04354,
-        "5": 0.03734,
-        "8": 0.02569,
-        "10": 0.019,
-        "76": 0.01283,
-        "235": 0.007,
-        "415": 0
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
     }
 	
     # Stoploss:
-    stoploss = -0.34299
+    max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.3430 (已禁用), 改为 +0.10 (止损启用)
 	
     # Trailing stop:
     trailing_stop = True
@@ -52,7 +50,7 @@ class ClucFiatSlow(IStrategy):
     timeframe = '5m'
 
     use_sell_signal = True
-    sell_profit_only = True
+    sell_profit_only = False
     sell_profit_offset = 0.01
     ignore_roi_if_buy_signal = True
 
@@ -85,7 +83,7 @@ class ClucFiatSlow(IStrategy):
         
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         params = self.buy_params
 
         dataframe.loc[
@@ -109,7 +107,7 @@ class ClucFiatSlow(IStrategy):
 
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         params = self.sell_params
 
         dataframe.loc[

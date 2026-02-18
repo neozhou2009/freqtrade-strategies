@@ -38,17 +38,15 @@ class Cluc4werk(IStrategy):
 
     # ROI table:
     minimal_roi = {
-        "0": 0.0155,
-        "109": 0.01075,
-        "393": 0.00771,
-        "587": 0.00643,
-        "711": 0.00377,
-        "770": 0.00114,
-        "1039": 0
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
     }
 
     # Stoploss:
-    stoploss = -0.31742
+    max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.3174 (已禁用), 改为 +0.10 (止损启用)
 
     # Trailing stop:
     trailing_stop = True
@@ -64,7 +62,7 @@ class Cluc4werk(IStrategy):
 
     # Make sure these match or are not overridden in config
     use_sell_signal = True
-    sell_profit_only = True
+    sell_profit_only = False
     sell_profit_offset = 0.0
     ignore_roi_if_buy_signal = True
 
@@ -121,7 +119,7 @@ class Cluc4werk(IStrategy):
 
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         params = self.buy_params
 
         dataframe.loc[
@@ -145,7 +143,7 @@ class Cluc4werk(IStrategy):
         ] = 1
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         params = self.sell_params
 
         dataframe.loc[

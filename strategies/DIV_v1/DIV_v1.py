@@ -10,15 +10,13 @@ from freqtrade.strategy import (IStrategy)
 class DIV_v1(IStrategy):
 
     minimal_roi = {
-        "0": 0.10347601757573865,
-        "3": 0.050495605759981035,
-        "5": 0.03350898081823659,
-        "61": 0.0275218557571848,
-        "292": 0.005185372158403069,
-        "399": 0,
-        
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
     }
-    stoploss = -0.15
+    max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.1500 (已禁用), 改为 +0.10 (止损启用)
 
     timeframe = '5m'
     startup_candle_count = 200
@@ -79,7 +77,7 @@ class DIV_v1(IStrategy):
 
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (
                 (dataframe["bullish_divergence"] == True) &
@@ -90,7 +88,7 @@ class DIV_v1(IStrategy):
 
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         return dataframe
 
 

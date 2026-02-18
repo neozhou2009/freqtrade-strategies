@@ -46,24 +46,28 @@ class StrategyScalpingFast2(IStrategy):
 
     # ROI table:
     minimal_roi = {
-        "0": 0.082,
-        "18": 0.06,
-        "51": 0.012,
-        "123": 0
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
     }
     use_sell_signal = False
     # Stoploss:
-    stoploss = -0.326
+    max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.3260 (已禁用), 改为 +0.10 (止损启用)
     # Minimal ROI designed for the strategy.
     # This attribute will be overridden if the config file contains "minimal_roi"
     #minimal_roi = {
-    #    "0": 0.02
-    #}
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
+    }
     # Optimal stoploss designed for the strategy
     # This attribute will be overridden if the config file contains "stoploss"
     # should not be below 3% loss
 
-    #stoploss = -0.1
+    #stoploss = 0.10  # [-10%] 已优化: 原值为 -0.3260 (已禁用), 改为 +0.10 (止损启用)
     # Optimal timeframe for the strategy
     # the shorter the better
     timeframe = '1m'
@@ -97,7 +101,7 @@ class StrategyScalpingFast2(IStrategy):
 
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
 
         conditions.append(dataframe["volume"] > 0)
@@ -124,7 +128,7 @@ class StrategyScalpingFast2(IStrategy):
             dataframe.loc[reduce(lambda x, y: x & y, conditions), "buy"] = 1            
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
         conditions.append(dataframe['open'] >= dataframe['ema_high'])
 

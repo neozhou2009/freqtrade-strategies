@@ -33,14 +33,15 @@ class CryptoFrogNFI(IStrategy):
 
     # ROI table - this strat REALLY benefits from roi and trailing hyperopt:
     minimal_roi = {
-        "0": 0.191,
-        "35": 0.025,
-        "77": 0.012,
-        "188": 0
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
     }
 
     # Stoploss:
-    stoploss = -0.299
+    max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.2990 (已禁用), 改为 +0.10 (止损启用)
 
     # Trailing stop:
     trailing_stop = True
@@ -88,11 +89,11 @@ class CryptoFrogNFI(IStrategy):
     custom_current_price_cache: TTLCache = TTLCache(maxsize=100, ttl=300) # 5 minutes
         
     # run "populate_indicators" only for new candle
-    process_only_new_candles = False
+process_only_new_candles = True
 
     # Experimental settings (configuration will overide these if set)
     use_sell_signal = True
-    sell_profit_only = True
+    sell_profit_only = False
     sell_profit_offset = 0.01
     ignore_roi_if_buy_signal = False
 
@@ -1487,7 +1488,7 @@ class CryptoFrogNFI(IStrategy):
         return dataframe
 
     ## cryptofrog signals
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (
                 (
@@ -2366,7 +2367,7 @@ class CryptoFrogNFI(IStrategy):
         return dataframe
     
     ## more going on here
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
 
         conditions.append(

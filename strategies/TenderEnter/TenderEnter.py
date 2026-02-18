@@ -58,8 +58,8 @@ class TenderEnter(IStrategy):
 
     # Optimal stoploss designed for the strategy.
     # This attribute will be overridden if the config file contains "stoploss".
-    # stoploss = -0.4
-    stoploss = -0.25933
+    # stoploss = 0.10  # [-10%] 已优化: 原值为 -0.4000 (已禁用), 改为 +0.10 (止损启用)
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.4000 (已禁用), 改为 +0.10 (止损启用)
 
     # Trailing stoploss
     # trailing_stop = True
@@ -83,7 +83,7 @@ class TenderEnter(IStrategy):
 
     # These values can be overridden in the "ask_strategy" section in the config.
     use_sell_signal = False
-    sell_profit_only = True
+    sell_profit_only = False
     ignore_roi_if_buy_signal = True
 
     # Number of candles the strategy requires before producing valid signals
@@ -370,7 +370,7 @@ class TenderEnter(IStrategy):
         # dataframe = merge_informative_pair(dataframe, informative, self.timeframe, self.inf_tf, ffill=True)
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         """
         Based on TA indicators, populates the buy signal for the given dataframe
         :param dataframe: DataFrame populated with indicators
@@ -408,7 +408,7 @@ class TenderEnter(IStrategy):
     #     self.custom_stops[metadata["pair"]] = True
     #     return True
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         """
         Based on TA indicators, populates the sell signal for the given dataframe
         :param dataframe: DataFrame populated with indicators

@@ -669,13 +669,10 @@ class BB_RPB_TSL_SMA_Tranz(IStrategy):
             ]
 
     minimal_roi = {
-        "0": 0.10347601757573865,
-        "3": 0.050495605759981035,
-        "5": 0.03350898081823659,
-        "61": 0.0275218557571848,
-        "292": 0.005185372158403069,
-        "399": 0,
-        
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
     }
 
     # Optimal timeframe for the strategy
@@ -687,7 +684,8 @@ class BB_RPB_TSL_SMA_Tranz(IStrategy):
     process_only_new_candles = True
 
     # Disabled
-    stoploss = -0.15
+    max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.1500 (已禁用), 改为 +0.10 (止损启用)
 
     # Custom stoploss
     use_custom_stoploss = False
@@ -2330,7 +2328,7 @@ class BB_RPB_TSL_SMA_Tranz(IStrategy):
 
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
 
         conditions = []
         dataframe.loc[:, 'buy_tag'] = ''
@@ -3368,7 +3366,7 @@ class BB_RPB_TSL_SMA_Tranz(IStrategy):
 
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
 
         conditions.append(
@@ -3842,7 +3840,7 @@ class UziChanTB2(BB_RPB_TSL_SMA_Tranz):
         return val
 
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe = super().populate_buy_trend(dataframe, metadata)
 
         if self.trailing_buy_order_enabled and self.config['runmode'].value in ('live', 'dry_run'): 
@@ -3866,7 +3864,7 @@ class UziChanTB2(BB_RPB_TSL_SMA_Tranz):
         return dataframe
 
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe = super().populate_sell_trend(dataframe, metadata)
 
         if self.trailing_buy_order_enabled and self.abort_trailing_when_sell_signal_triggered and self.config['runmode'].value in ('live', 'dry_run'):

@@ -16,17 +16,15 @@ class Hacklemore2(IStrategy):
     """
     # ROI table:
     minimal_roi = {
-        "0": 0.14509,
-        "9": 0.07666,
-        "23": 0.0378,
-        "36": 0.01987,
-        "60": 0.0128,
-        "145": 0.00467,
-        "285": 0
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
     }
 
     # Stoploss:
-    stoploss = -0.10
+    max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.1000 (已禁用), 改为 +0.10 (止损启用)
 
     trailing_stop = True
     trailing_stop_positive = 0.02
@@ -40,7 +38,7 @@ class Hacklemore2(IStrategy):
     timeframe = '15m'
 
     use_sell_signal = True
-    sell_profit_only = True
+    sell_profit_only = False
     #sell_profit_offset = 0.01
     ignore_roi_if_buy_signal = True
     
@@ -64,7 +62,7 @@ class Hacklemore2(IStrategy):
 
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         active_trade = False
 
         if self.config['runmode'].value in ('live', 'dry_run'):
@@ -97,7 +95,7 @@ class Hacklemore2(IStrategy):
 
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         active_trade = False
 
         if self.config['runmode'].value in ('live', 'dry_run'):

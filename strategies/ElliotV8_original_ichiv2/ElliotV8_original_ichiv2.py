@@ -46,11 +46,10 @@ class ElliotV8_original_ichiv2(IStrategy):
     """
     # ROI table:
     minimal_roi = {
-        "0": 0.08,
-        "20": 0.04,
-        "40": 0.032,
-        "87": 0.016,
-        "201": 0
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
     }
     """
     @property
@@ -92,11 +91,15 @@ class ElliotV8_original_ichiv2(IStrategy):
 
     # ROI table:
     minimal_roi = {
-        "0": 0.99,
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
     }
 
     # Stoploss:
-    stoploss = -0.20
+    max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.2000 (已禁用), 改为 +0.10 (止损启用)
 
     # SMAOffset
     base_nb_candles_buy = IntParameter(5, 80, default=buy_params['base_nb_candles_buy'], space='buy', optimize=True)
@@ -171,7 +174,7 @@ class ElliotV8_original_ichiv2(IStrategy):
 
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
 
         conditions.append(
@@ -209,7 +212,7 @@ class ElliotV8_original_ichiv2(IStrategy):
 
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
 
         conditions.append(

@@ -1,95 +1,139 @@
 # CombinedBinHAndClucHyperV0
 
-## 策略概述
+## 策略深度分析
 
-- **策略名称**: CombinedBinHAndClucHyperV0
-- **时间框架**: 1m
-- **止损设置**: -0.1
-- **最小ROI**: "0": 100
+> 分析: 2026-02-13 12:39
+> 状态: 🟡 需要修复
+> 问题: 1个
 
-## 策略意图和目的
+---
 
-本策略是一个**布林带突破、成交量确认、趋势判断**，旨在通过技术指标分析市场趋势，寻找买入和卖出机会。
+## 一、执行摘要
 
-### 核心逻辑
+核心: 策略存在 多个严重问题，会导致亏损。
 
-使用布林带判断价格是否突破支撑或阻力位；结合成交量验证价格信号的可靠性；使用移动平均线判断市场整体趋势方向
+建议:
+- 立即修复致命问题
+- 充分回测
+- 纸质交易
 
-### 适用市场
+---
 
-本策略适用于**数字货币市场**的交易，推荐在以下时间框架使用：
-- 主要: 1m
-- 根据市场波动性可适当调整
+## 二、代码结构
 
-## 使用技术指标
+| 项目 | 信息 |
+|------|------|
+| 买入 | ❌ 缺失 |
+| 卖出 | ✅ {sells}个 |
+| 周期 | 
 
-EMA (指数移动平均)
+    use_sell_signal = True
+    sell_profit_only = False
+    ignore_roi_if_buy_signal = False
 
-## 自定义功能
+    # ----------------------------------------------------------------
+    # Hyper Params
+    # 
+    # # Buy 
+    buy_a_bbdelta_rate = DecimalParameter(0.004, 0.016, default=0.016, decimals=3)
+    buy_a_closedelta_rate = DecimalParameter(0.000, 0.010, default=0.0087, decimals=4)
+    buy_a_tail_rate = DecimalParameter(0.12, 0.5, default=0.28, decimals=2)
+    buy_a_time_window = IntParameter(40, 100, default=30)
+    buy_a_min_sell_rate = DecimalParameter(1.004, 1.1, default=0.004, decimals=3)
 
-- **自定义止损**: 是
-- **自定义卖出**: 否
-- **自定义入场**: 否
+    buy_b_close_rate = DecimalParameter(0.4, 1.8, default=0.979, decimals=3)
+    buy_b_volume_mean_slow_window = IntParameter(100, 300, default=30)
+    buy_b_ema_slow = IntParameter(40, 100, default=50)
+    buy_b_time_window = IntParameter(100, 300, default=20)
+    buy_b_volume_mean_slow_num = IntParameter(10, 100, default=20)
+    # Sell
+    sell_bb_middleband_window = IntParameter(50, 200, default=20)
+    sell_trailing_stop_positive_offset = DecimalParameter(0.01, 0.03, default=0.008, decimals=3)
+    sell_trailing_stop_positive = 0.001
 
-## 代码问题分析
+    # ----------------------------------------------------------------
+    # Buy hyperspace params:
+    buy_params = {
+         |
+| 指标 | 1个: EMA |
 
-本策略在代码层面存在以下问题：
+质量: ⚠️ 一般
 
-### 1. 导入方式问题
-1. 使用了已废弃的导入方式 `from freqtrade.strategy.interface import IStrategy`
+---
 
-### 2. 修复措施
-1. 已更新为 `from freqtrade.strategy import IStrategy`
+## 三、问题
 
-## 投资逻辑问题分析
+### 致命问题
 
-本策略在投资逻辑和风险管理方面存在以下问题：
+**1. 缺买入信号**
 
-- 最小ROI设置为 10000.0%，过于激进或不现实
-- 设置为亏损也可以卖出，可能导致不必要的损失
-- 未设置最大持仓数量限制，可能同时持仓过多交易对
-- 未找到买入信号逻辑
-- 虽然使用了成交量指标但未进行有效验证
+严重: 🔴 致命
 
-### 问题详解
+修复: 必须！
 
-- ROI设置问题：过于激进的ROI设置会导致策略无法执行，因为实际市场很少能在短时间内达到如此高的收益率。
-- 卖出时机问题：允许亏损时卖出可能导致过早平仓，应设置合理的止盈止损条件。
-- 仓位管理问题：无持仓限制会导致风险过度集中，建议设置max_open_trades参数。
-- 信号可靠性问题：没有成交量验证的信号可能产生假突破，建议增加成交量过滤条件。
+---
 
-### 改进建议
+## 四、修复方案
 
-1. 合理设置止损：建议将止损设置在3%-15%之间，根据交易对的历史波动性调整
-2. 调整ROI设置：根据实际市场情况设置合理的盈利目标，建议分阶段设置（如0.03, 0.05, 0.10等）
-3. 实现自定义止损：建议根据市场波动性动态调整止损位置
-4. 添加自定义卖出逻辑：根据技术指标设置止盈条件
-5. 启用追踪止损：可以锁定部分利润，同时给趋势行情留出空间
-6. 设置仓位管理：建议设置max_open_trades参数限制同时持仓数量
-7. 增加成交量过滤：验证信号的可靠性，避免假突破
+### 修复清单
+3. 添加ADX+MACD+RSI指标
+4. 启用止损上移
 
-## 版本历史
+### 代码修复
 
-- **原始版本**: 修复前的代码，存在上述投资逻辑问题
-- **修复版本**: 已更新为Freqtrade最新接口标准
+```python
+# ROI
+minimal_roi = {"0": 0.10, "60": 0.07, "120": 0.05, "240": 0.03}
 
-## 使用说明
+# 止损
+stoploss = -0.10
+trailing_stop = True
+trailing_stop_positive = 0.02
+trailing_stop_positive_offset = 0.06
 
-1. 将策略文件复制到Freqtrade的策略目录
-2. 运行回测测试策略效果: `freqtrade backtesting -s CombinedBinHAndClucHyperV0`
-3. 如有需要，使用hyperopt优化参数
-4. 实盘前务必进行充分测试
+# 指标
+dataframe['adx'] = ta.ADX(dataframe, 14)
+dataframe['rsi'] = ta.RSI(dataframe, 14)
+macd = ta.MACD(dataframe)
+dataframe['macd'] = macd['macd']
+```
+
+---
+
+## 五、参数优化
+
+### 保守型
+```python
+stoploss = -0.08
+max_open_trades = 3
+```
+
+### 平衡型（推荐）
+```python
+stoploss = -0.10
+max_open_trades = 5
+trailing_stop = True
+```
+
+---
+
+## 六、使用
+
+```bash
+freqtrade backtesting -s CombinedBinHAndClucHyperV0 --timerange 20240101-20240301
+freqtrade hyperopt -s CombinedBinHAndClucHyperV0 --hyperopt-loss SharpeHyperOptLoss
+```
+
+---
 
 ## 风险提示
 
-- 本策略仅供学习参考，不构成投资建议
-- 使用前请进行充分回测
-- 建议先用模拟盘验证策略效果
-- 数字货币交易风险较大，请谨慎操作
+⚠️ {"必须修复: " + ",".join(crit) if crit else "相对干净"}
 
-## 依赖要求
+⚠️ 充分测试: 回测3-6个月 + 纸质交易1-2周
 
-- freqtrade
-- pandas
-- numpy
-- talib
+免责: 后果自负。
+
+---
+
+更新: {datetime.now().strftime('%Y-%m-%d')}

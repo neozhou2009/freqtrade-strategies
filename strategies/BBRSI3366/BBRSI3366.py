@@ -35,7 +35,7 @@ class BBRSI3366(IStrategy):
     trailing_stop_positive_offset = 0.06189
     trailing_only_offset_is_reached = False
     # Optimal stoploss designed for the strategy
-    stoploss = -0.33233
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.3323 (已禁用), 改为 +0.10 (止损启用)
 
     # Optimal timeframe for the strategy
     timeframe = '5m'
@@ -56,7 +56,7 @@ class BBRSI3366(IStrategy):
 
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         """
         Based on TA indicators.
         Can be a copy of the corresponding method from the strategy,
@@ -78,7 +78,7 @@ class BBRSI3366(IStrategy):
 
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         """
         Based on TA indicators.
         Can be a copy of the corresponding method from the strategy,

@@ -24,6 +24,7 @@ from freqtrade.strategy import merge_informative_pair, CategoricalParameter, Dec
 ##        -  hard check is market if fallen                                                              ##
 ##        -  11 buy signals                                                                              ##
 ##        -  stoploss function preventing from big fall                                                  ##
+    max_open_trades = 5
 ##        -  no sell signal. Whether ROI or stoploss =)                                                  ##
 ##                                                                                                       ##
 ###########################################################################################################
@@ -55,20 +56,20 @@ class BigZ03(IStrategy):
     INTERFACE_VERSION = 2
 
     minimal_roi = {
-        "0": 0.028,         # I feel lucky!
-        "10": 0.018,
-        "40": 0.005,
-        "180": 0.018,        # We're going up?
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
     }
 
-    stoploss = -0.99 # effectively disabled.
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.1000 (已禁用), 改为 +0.10 (止损启用) # effectively disabled.
 
     timeframe = '5m'
     inf_1h = '1h'
 
     # Sell signal
     use_sell_signal = True
-    sell_profit_only = True
+    sell_profit_only = False
     sell_profit_offset = 0.001 # it doesn't meant anything, just to guarantee there is a minimal profit.
     ignore_roi_if_buy_signal = False
 
@@ -82,7 +83,7 @@ class BigZ03(IStrategy):
     use_custom_stoploss = True
 
     # Run "populate_indicators()" only for new candle.
-    process_only_new_candles = False
+process_only_new_candles = True
 
     # Number of candles the strategy requires before producing valid signals
     startup_candle_count: int = 200
@@ -247,7 +248,7 @@ class BigZ03(IStrategy):
 
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
 
         dataframe.loc[
             (    
@@ -440,7 +441,7 @@ class BigZ03(IStrategy):
 
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (
                 (dataframe['close'] > dataframe['bb_middleband'] * 1.01) &                  # Don't be gready, sell fast

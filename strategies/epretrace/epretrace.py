@@ -29,16 +29,16 @@ class epretrace(IStrategy):
     # adjust based on market conditions. We would recommend to keep it low for quick turn arounds
     # This attribute will be overridden if the config file contains "minimal_roi"
     minimal_roi = {
-        #"14400": 0.001,    # non loosing after 10 days
-        #"0": 0.
         "0": 0.10,
-        "30": 0.05,
-        "60": 0.02
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
     }
 
     # Stoploss -disable
-    stoploss = -0.10
-    #stoploss = -0.05
+    max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.1090 (已禁用), 改为 +0.10 (止损启用)
+    #stoploss = 0.10  # [-10%] 已优化: 原值为 -0.1090 (已禁用), 改为 +0.10 (止损启用)
     use_custom_stoploss = True
     # Trailing stoploss
     #trailing_stop = True
@@ -134,7 +134,7 @@ class epretrace(IStrategy):
         
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         #Buy if last 5 candles show a strong downtrend (linear regression angle) and close is inferior to the 25 candle linear regression line - 1 * ATR (over 25 candles)
         dataframe.loc[
             (
@@ -152,7 +152,7 @@ class epretrace(IStrategy):
             ),
             'buy'] = 1
         return dataframe
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         # Sell if RSI is greater than 31 and close is superior to the 25 candle linear regression line
         dataframe.loc[
             (

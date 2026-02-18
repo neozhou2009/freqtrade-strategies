@@ -48,11 +48,14 @@ def SSLChannels(dataframe, length = 7):
 class NostalgiaForInfinityV1(IStrategy):
     INTERFACE_VERSION = 2
 
-    minimal_roi = {
-        "0": 0.25
-    }
+    minimal_roi = {  # 已优化: 从最大 25% 改为阶梯式
 
-    stoploss = -0.36
+        "0": 0.10,  # 10%
+        "24": 0.07,  # 7%
+        "72": 0.05,  # 5%
+        "168": 0.03  # 3%
+    }max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.3600 (已禁用), 改为 +0.10 (止损启用)
 
     timeframe = '5m'
     inf_1h = '1h'
@@ -61,7 +64,7 @@ class NostalgiaForInfinityV1(IStrategy):
 
     # Sell signal
     use_sell_signal = True
-    sell_profit_only = True
+    sell_profit_only = False
     sell_profit_offset = 0.001 # it doesn't meant anything, just to guarantee there is a minimal profit.
     ignore_roi_if_buy_signal = True
 
@@ -75,7 +78,7 @@ class NostalgiaForInfinityV1(IStrategy):
     use_custom_stoploss = False
 
     # Run "populate_indicators()" only for new candle.
-    process_only_new_candles = False
+process_only_new_candles = True
 
     # Number of candles the strategy requires before producing valid signals
     startup_candle_count: int = 200
@@ -157,7 +160,7 @@ class NostalgiaForInfinityV1(IStrategy):
 
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (
                 (dataframe['close'] < dataframe['sma_9']) &
@@ -198,7 +201,7 @@ class NostalgiaForInfinityV1(IStrategy):
         ] = 1
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (
                 (dataframe['close'] > dataframe['bb_upperband']) &

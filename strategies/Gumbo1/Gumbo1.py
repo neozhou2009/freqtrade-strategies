@@ -34,15 +34,21 @@ class Gumbo1(IStrategy):
 
     # endregion
     # region Params
-    minimal_roi = {"0": 0.10, "20": 0.05, "64": 0.03, "168": 0}
-    stoploss = -0.25
+    minimal_roi = {
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
+    }
+    max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.2500 (已禁用), 改为 +0.10 (止损启用)
     # endregion
     timeframe = '5m'
     use_custom_stoploss = False
     inf_timeframe = '1h'
     # Recommended
     use_sell_signal = True
-    sell_profit_only = True
+    sell_profit_only = False
     ignore_roi_if_buy_signal = True
     startup_candle_count = 200
 
@@ -89,7 +95,7 @@ class Gumbo1(IStrategy):
         dataframe = self.populate_informative_indicators(dataframe, metadata)
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
         # ewo < 0
         conditions.append(dataframe['EWO'] < self.ewo_low.value)
@@ -101,7 +107,7 @@ class Gumbo1(IStrategy):
             dataframe.loc[reduce(lambda x, y: x & y, conditions), 'buy'] = 1
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
         # stoch > 80
         conditions.append(

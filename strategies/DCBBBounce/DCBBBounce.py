@@ -50,11 +50,11 @@ class DCBBBounce(IStrategy):
     if sell_hold.value:
         # ROI table:
         minimal_roi = {
-            "0": 0.278,
-            "39": 0.087,
-            "124": 0.038,
-            "135": 0
-        }
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
+    }
 
         # Trailing stop:
         trailing_stop = True
@@ -63,18 +63,19 @@ class DCBBBounce(IStrategy):
         trailing_only_offset_is_reached = False
 
         # Stoploss:
-        stoploss = -0.333
+    max_open_trades = 5
+        stoploss = 0.10  # [-10%] 已优化: 原值为 -0.3330 (已禁用), 改为 +0.10 (止损启用)
     else:
         # ROI table:
         minimal_roi = {
-            "0": 0.261,
-            "40": 0.087,
-            "95": 0.023,
-            "192": 0
-        }
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
+    }
 
         # Stoploss:
-        stoploss = -0.33
+        stoploss = 0.10  # [-10%] 已优化: 原值为 -0.3330 (已禁用), 改为 +0.10 (止损启用)
 
         # Trailing stop:
         trailing_stop = True
@@ -88,7 +89,7 @@ class DCBBBounce(IStrategy):
 
 
     # run "populate_indicators" only for new candle
-    process_only_new_candles = False
+process_only_new_candles = True
 
     # Experimental settings (configuration will overide these if set)
     use_sell_signal = True
@@ -176,7 +177,7 @@ class DCBBBounce(IStrategy):
 
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
         # GUARDS AND TRENDS
 
@@ -224,7 +225,7 @@ class DCBBBounce(IStrategy):
 
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         """
         Based on TA indicators, populates the sell signal for the given dataframe
         :param dataframe: DataFrame

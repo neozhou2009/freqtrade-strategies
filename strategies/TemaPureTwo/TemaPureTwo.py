@@ -30,17 +30,15 @@ class TemaPureTwo(IStrategy):
     # Minimal ROI designed for the strategy.
     # This attribute will be overridden if the config file contains "minimal_roi"
     # ROI table:
-    minimal_roi = {
-        "0": 0.12607,
-        "331": 0.12606,
-        "865": 0.12605,
-        "1945": 0.01
-    }
+    minimal_roi = {  # 已优化: 从 12.6% 标准化为阶梯式
 
-
-    # Optimal stoploss designed for the strategy
+        "0": 0.10,  # 10%
+        "24": 0.07,  # 7%
+        "72": 0.05,  # 5%
+        "168": 0.03  # 3%
+    }# Optimal stoploss designed for the strategy
     # This attribute will be overridden if the config file contains "stoploss"
-    stoploss = -0.11
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.1100 (已禁用), 改为 +0.10 (止损启用)
     
     # Optimal timeframe for the strategy
     timeframe = '5m'
@@ -56,7 +54,7 @@ class TemaPureTwo(IStrategy):
 
     # Experimental settings (configuration will overide these if set)
     use_sell_signal = True
-    sell_profit_only = True
+    sell_profit_only = False
     ignore_roi_if_buy_signal = False
 
 
@@ -111,7 +109,7 @@ class TemaPureTwo(IStrategy):
 
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         """
         Based on TA indicators, populates the buy signal for the given dataframe
         :param dataframe: DataFrame
@@ -132,7 +130,7 @@ class TemaPureTwo(IStrategy):
 
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         """
         Based on TA indicators, populates the sell signal for the given dataframe
         :param dataframe: DataFrame

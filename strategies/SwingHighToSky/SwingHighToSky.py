@@ -38,9 +38,15 @@ class SwingHighToSky(IStrategy):
 
     timeframe = '15m'
 
-    stoploss = -0.34338
+    max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.3434 (已禁用), 改为 +0.10 (止损启用)
 
-    minimal_roi = {"0": 0.27058, "33": 0.0853, "64": 0.04093, "244": 0}
+    minimal_roi = {
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
+    }
 
     buy_cci = IntParameter(low=-200, high=200, default=100, space='buy', optimize=True)
     buy_cciTime = IntParameter(low=10, high=80, default=20, space='buy', optimize=True)
@@ -87,7 +93,7 @@ class SwingHighToSky(IStrategy):
 
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
 
         dataframe.loc[
             (
@@ -98,7 +104,7 @@ class SwingHighToSky(IStrategy):
 
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
 
         dataframe.loc[
             (

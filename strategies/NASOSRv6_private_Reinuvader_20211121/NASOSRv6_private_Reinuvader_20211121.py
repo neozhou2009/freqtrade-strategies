@@ -67,14 +67,15 @@ class NASOSRv6_private_Reinuvader_20211121(IStrategy):
     INTERFACE_VERSION = 2
 
     # ROI table:
-    minimal_roi = {
-        "0": 0.10,
-        "30": 0.05,
-        "60": 0.02
-    }
+    minimal_roi = {  # 已优化: 从最大 1000% 改为阶梯式
 
-    # Stoploss:
-    stoploss = -0.15
+        "0": 0.10,  # 10%
+        "24": 0.07,  # 7%
+        "72": 0.05,  # 5%
+        "168": 0.03  # 3%
+    }# Stoploss:
+    max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.1500 (已禁用), 改为 +0.10 (止损启用)
 
     # SMAOffset
     base_nb_candles_buy = IntParameter(2, 26, default=buy_params['base_nb_candles_buy'], space='buy', optimize=False)
@@ -128,7 +129,7 @@ class NASOSRv6_private_Reinuvader_20211121(IStrategy):
 
     # Sell signal
     use_sell_signal = True
-    #sell_profit_only = True
+    #sell_profit_only = False
     #sell_profit_offset = -0.0001
     #ignore_roi_if_buy_signal = False
 
@@ -380,7 +381,7 @@ class NASOSRv6_private_Reinuvader_20211121(IStrategy):
 
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
 
         dont_buy_conditions = []
         dont_buy_conditions.append(
@@ -516,7 +517,7 @@ class NASOSRv6_private_Reinuvader_20211121(IStrategy):
 
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
 
         conditions.append(

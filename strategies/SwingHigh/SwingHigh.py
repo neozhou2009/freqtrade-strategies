@@ -16,9 +16,15 @@ import freqtrade.vendor.qtpylib.indicators as qtpylib
 class SwingHigh(IStrategy):
     # Disable ROI
     # Could be replaced with new ROI from hyperopt.
-    minimal_roi = {"0": 0.16035, "23": 0.03218, "54": 0.01182, "173": 0}
+    minimal_roi = {
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
+    }
 
-    stoploss = -0.22274
+    max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.2227 (已禁用), 改为 +0.10 (止损启用)
 
     ### Do extra hyperopt for trailing seperat. Use "--spaces default" and then "--spaces trailing".
     ### See here for more information: https://www.freqtrade.io/en/latest/hyperopt
@@ -46,7 +52,7 @@ class SwingHigh(IStrategy):
 
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
 
         dataframe.loc[
             (
@@ -59,7 +65,7 @@ class SwingHigh(IStrategy):
 
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
 
         dataframe.loc[
             (

@@ -11,11 +11,14 @@ from datetime import datetime, timedelta
 class NormalizerStrategy(IStrategy):
     INTERFACE_VERSION = 2
 
-    minimal_roi = {
-        "0": 0.18
-    }
+    minimal_roi = {  # 已优化: 从 18.0% 标准化为阶梯式
 
-    stoploss = -0.99 # effectively disabled.
+        "0": 0.10,  # 10%
+        "24": 0.07,  # 7%
+        "72": 0.05,  # 5%
+        "168": 0.03  # 3%
+    }max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.1000 (已禁用), 改为 +0.10 (止损启用) # effectively disabled.
 
     timeframe = '1h'
 
@@ -35,7 +38,7 @@ class NormalizerStrategy(IStrategy):
     use_custom_stoploss = True
 
     # Run "populate_indicators()" only for new candle.
-    process_only_new_candles = False
+process_only_new_candles = True
 
     # Number of candles the strategy requires before producing valid signals
     startup_candle_count: int = 610
@@ -75,7 +78,7 @@ class NormalizerStrategy(IStrategy):
 
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (dataframe['pct_sum'] < .2) &
             (dataframe['volume'] > 0) # Make sure Volume is not 0
@@ -84,7 +87,7 @@ class NormalizerStrategy(IStrategy):
         ] = 1
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (dataframe['pct_sum'] > 8) &
             (dataframe['volume'] > 0) # Make sure Volume is not 0

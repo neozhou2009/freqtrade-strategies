@@ -49,14 +49,15 @@ class ElliotV7(IStrategy):
 
     # ROI table:
     minimal_roi = {
-        "0": 0.051,
-        "10": 0.031,
-        "22": 0.018,
-        "66": 0
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
     }
 
     # Stoploss:
-    stoploss = -0.32
+    max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.3200 (已禁用), 改为 +0.10 (止损启用)
 
     # SMAOffset
     base_nb_candles_buy = IntParameter(
@@ -87,7 +88,7 @@ class ElliotV7(IStrategy):
 
     # Sell signal
     use_sell_signal = True
-    sell_profit_only = True
+    sell_profit_only = False
     sell_profit_offset = 0.01
     ignore_roi_if_buy_signal = False
 
@@ -176,7 +177,7 @@ class ElliotV7(IStrategy):
 
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
 
         conditions.append(
@@ -214,7 +215,7 @@ class ElliotV7(IStrategy):
 
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
 
         conditions.append(

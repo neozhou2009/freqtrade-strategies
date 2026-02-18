@@ -21,20 +21,24 @@ class CombinedBinHAndCluc2021(IStrategy):
     # - if the market is constantly green(like in JAN 2018) the best performance is reached with
     #   "max_open_trades" = 2 and minimal_roi = 0.01
     minimal_roi = {
-        "0": 0.0888,
-        "21": 0.06115,
-        "60": 0.02667,
-        "80": 0.00
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
     }
-    # minimal_roi = { "0": 0.01 }
+    # minimal_roi = {
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
+    }
 
-    stoploss = -0.09
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.0900 (已禁用), 改为 +0.10 (止损启用)
     timeframe = '5m'
-
-    process_only_new_candles = False
+process_only_new_candles = True
 
     use_sell_signal = True
-    sell_profit_only = True
+    sell_profit_only = False
     ignore_roi_if_buy_signal = False
 
     def populate_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
@@ -56,7 +60,7 @@ class CombinedBinHAndCluc2021(IStrategy):
         dataframe['bb_lowerband4'] = bollinger4['lower']
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (  # strategy BinHV45
                     dataframe['lower'].shift().gt(0) &
@@ -81,7 +85,7 @@ class CombinedBinHAndCluc2021(IStrategy):
         ] = 1
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         """
         """
         dataframe.loc[

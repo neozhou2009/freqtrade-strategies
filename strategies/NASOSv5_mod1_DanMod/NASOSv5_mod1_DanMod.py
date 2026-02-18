@@ -60,11 +60,14 @@ class NASOSv5_mod1_DanMod(IStrategy):
         "high_offset_2": 1.142,
     }
 
-    minimal_roi = {
-        "0": 0.4
-    }
+    minimal_roi = {  # 已优化: 从最大 40% 改为阶梯式
 
-    stoploss = -0.3
+        "0": 0.10,  # 10%
+        "24": 0.07,  # 7%
+        "72": 0.05,  # 5%
+        "168": 0.03  # 3%
+    }max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.3000 (已禁用), 改为 +0.10 (止损启用)
 
     trailing_stop = True
     trailing_stop_positive = 0.001
@@ -106,7 +109,7 @@ class NASOSv5_mod1_DanMod(IStrategy):
         10, 50, default=buy_params['rsi_fast_buy'], space='buy', optimize=True)
 
     use_sell_signal = True
-    sell_profit_only = True
+    sell_profit_only = False
     sell_profit_offset = 0.01
     ignore_roi_if_buy_signal = False
 
@@ -281,7 +284,7 @@ class NASOSv5_mod1_DanMod(IStrategy):
 
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
 
         dont_buy_conditions = []
 
@@ -335,7 +338,7 @@ class NASOSv5_mod1_DanMod(IStrategy):
 
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
 
         conditions.append(

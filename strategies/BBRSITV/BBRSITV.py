@@ -52,7 +52,8 @@ class BBRSITV(IStrategy):
     }
 
     # Stoploss:
-    stoploss = -0.25  # value loaded from strategy
+    max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.2500 (已禁用), 改为 +0.10 (止损启用)  # value loaded from strategy
 
     # Trailing stop:
     trailing_stop = True  # value loaded from strategy
@@ -62,7 +63,7 @@ class BBRSITV(IStrategy):
 
     # Sell signal
     use_sell_signal = True
-    sell_profit_only = True
+    sell_profit_only = False
     sell_profit_offset = 0.01
     ignore_roi_if_buy_signal = False
     process_only_new_candles = True
@@ -187,7 +188,7 @@ class BBRSITV(IStrategy):
         dataframe['EWO'] = EWO(dataframe, self.fast_ewo, self.slow_ewo)
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (
                 # upper = basis + dev
@@ -204,7 +205,7 @@ class BBRSITV(IStrategy):
             'buy'] = 1
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (
                 (
@@ -228,9 +229,9 @@ class BBRSITV4(BBRSITV):
     ignore_roi_if_buy_signal = True
     startup_candle_count = 400
 
-    stoploss = -0.3  # value loaded from strategy
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.2500 (已禁用), 改为 +0.10 (止损启用)  # value loaded from strategy
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (
                 (dataframe['rsi'] < (dataframe[f'basis_{self.for_ma_length.value}'] - (dataframe[f'dev_{self.for_ma_length.value}'] * self.for_sigma.value)))
@@ -292,7 +293,7 @@ class BBRSITV1(BBRSITV):
     }
 
     # Stoploss:
-    stoploss = -0.25  # value loaded from strategy
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.2500 (已禁用), 改为 +0.10 (止损启用)  # value loaded from strategy
 
     # Trailing stop:
     trailing_stop = True  # value loaded from strategy
@@ -331,7 +332,7 @@ class BBRSITV2(BBRSITV):
     }
 
     # Stoploss:
-    stoploss = -0.25  # value loaded from strategy
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.2500 (已禁用), 改为 +0.10 (止损启用)  # value loaded from strategy
 
     # Trailing stop:
     trailing_stop = True  # value loaded from strategy
@@ -373,7 +374,7 @@ class BBRSITV3(BBRSITV):
     }
 
     # Stoploss:
-    stoploss = -0.25  # value loaded from strategy
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.2500 (已禁用), 改为 +0.10 (止损启用)  # value loaded from strategy
 
     # Trailing stop:
     trailing_stop = True
@@ -389,7 +390,7 @@ class BBRSITV5(BBRSITV):
     startup_candle_count = 400
     use_custom_stoploss = True
 
-    stoploss = -0.3  # value loaded from strategy
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.2500 (已禁用), 改为 +0.10 (止损启用)  # value loaded from strategy
     sell_params = {
         ##
         "pHSL": -0.178,
@@ -436,7 +437,7 @@ class BBRSITV5(BBRSITV):
 
         return stoploss_from_open(sl_profit, current_profit)
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (
                 (dataframe['rsi'] < (dataframe[f'basis_{self.for_ma_length.value}'] - (dataframe[f'dev_{self.for_ma_length.value}'] * self.for_sigma.value)))

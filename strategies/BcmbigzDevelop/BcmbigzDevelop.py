@@ -23,18 +23,34 @@ logger = logging.getLogger(__name__)
 class BcmbigzDevelop(IStrategy):
     INTERFACE_VERSION = 2
 
-    # minimal_roi = {"0": 0.038, "20": 0.028, "40": 0.02, "60": 0.015, "180": 0.018, }
-    # minimal_roi = {"0": 0.038, "20": 0.028, "40": 0.02, "60": 0.015, "180": 0.018, }
-    minimal_roi = {"0": 0.20, "38": 0.074, "78": 0.025, "194": 0}
+    # minimal_roi = {
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
+    }
+    # minimal_roi = {
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
+    }
+    minimal_roi = {
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
+    }
 
-    stoploss = -0.99  # effectively disabled.
+    max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.1000 (已禁用), 改为 +0.10 (止损启用)  # effectively disabled.
 
     timeframe = "5m"
     inf_1h = "1h"
 
     # Sell signal
     use_sell_signal = True
-    sell_profit_only = True
+    sell_profit_only = False
     sell_profit_offset = (
         0.001  # it doesn't meant anything, just to guarantee there is a minimal profit.
     )
@@ -585,7 +601,7 @@ class BcmbigzDevelop(IStrategy):
 
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
 
         conditions = []
         # reset additional dataframe rows
@@ -1191,7 +1207,7 @@ class BcmbigzDevelop(IStrategy):
 
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
 
         conditions = []
         # dataframe.loc[:, "sell"] = 0

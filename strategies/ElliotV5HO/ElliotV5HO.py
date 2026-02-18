@@ -227,24 +227,25 @@ class ElliotV5HO(IStrategy):
 
     # # ROI table:
     # minimal_roi = {
-    #     "0": 0.215,
-    #     "40": 0.132,
-    #     "87": 0.086,
-    #     "201": 0.03
-    # }
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
+    }
 
     # # Stoploss:
-    # stoploss = -0.189
+    max_open_trades = 5
+    # stoploss = 0.10  # [-10%] 已优化: 原值为 -0.1890 (已禁用), 改为 +0.10 (止损启用)
     # # ROI table:
     # minimal_roi = {
-    #     "0": 0.178,
-    #     "11": 0.085,
-    #     "31": 0.029,
-    #     "126": 0
-    # }
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
+    }
 
     # # Stoploss:
-    # stoploss = -0.339
+    # stoploss = 0.10  # [-10%] 已优化: 原值为 -0.1890 (已禁用), 改为 +0.10 (止损启用)
 
     # # Trailing stop:
     # trailing_stop = True
@@ -253,21 +254,21 @@ class ElliotV5HO(IStrategy):
     # trailing_only_offset_is_reached = False
     # # ROI table:
     # minimal_roi = {
-    #     "0": 0.207,
-    #     "17": 0.049,
-    #     "28": 0.026,
-    #     "109": 0
-    # }
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
+    }
     # ROI table:
     minimal_roi = {
-        "0": 0.051,
-        "20": 0.032,
-        "45": 0.016,
-        "70": 0
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
     }
 
     # Stoploss:
-    stoploss = -0.302
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.1890 (已禁用), 改为 +0.10 (止损启用)
 
     # # Trailing stop:
     # trailing_stop = True
@@ -302,7 +303,7 @@ class ElliotV5HO(IStrategy):
 
     # Sell signal
     use_sell_signal = True
-    sell_profit_only = True
+    sell_profit_only = False
     sell_profit_offset = 0.01
     ignore_roi_if_buy_signal = True
 
@@ -378,7 +379,7 @@ class ElliotV5HO(IStrategy):
 
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
 
         conditions.append(
@@ -406,7 +407,7 @@ class ElliotV5HO(IStrategy):
 
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
 
         conditions.append(

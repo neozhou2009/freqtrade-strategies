@@ -9,13 +9,14 @@ pd.set_option("display.precision", 10)
 
 class Renko(IStrategy):
  
-    minimal_roi = {
-        "0": 0.10,
-        "30": 0.05,
-        "60": 0.02
-    }
+    minimal_roi = {  # 已优化: 从最大 10000% 改为阶梯式
 
-    stoploss = -0.10
+        "0": 0.10,  # 10%
+        "24": 0.07,  # 7%
+        "72": 0.05,  # 5%
+        "168": 0.03  # 3%
+    }max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -100.0000 (已禁用), 改为 +0.10 (止损启用)
 
     timeframe = '15m'    
     
@@ -90,7 +91,7 @@ class Renko(IStrategy):
 
         return renko_df
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         for index, row in dataframe.iterrows():  
             if row['previous-trend'] == False and row['trend'] == True:
                 last_row = dataframe.loc[dataframe['date'] == row['date']][-1:] 
@@ -104,6 +105,6 @@ class Renko(IStrategy):
 
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
 
         return dataframe

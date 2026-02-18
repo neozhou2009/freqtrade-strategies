@@ -19,27 +19,28 @@ class FrostAuraRandomStrategy(IStrategy):
 
     # Minimal ROI designed for the strategy.
     minimal_roi = {
-        "0": 0.347,
-        "450": 0.106,
-        "1169": 0.032,
-        "1624": 0
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
     }
 
     # Optimal stoploss designed for the strategy.
-    stoploss = -0.231
+    max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.2310 (已禁用), 改为 +0.10 (止损启用)
 
     # Trailing stoploss
-    trailing_stop = False
+    trailing_stop = True
 
     # Optimal ticker interval for the strategy.
     timeframe = '1h'
 
     # Run "populate_indicators()" only for new candle.
-    process_only_new_candles = False
+process_only_new_candles = True
 
     # These values can be overridden in the "ask_strategy" section in the config.
     use_sell_signal = True
-    sell_profit_only = True
+    sell_profit_only = False
     ignore_roi_if_buy_signal = False
 
     # Number of candles the strategy requires before producing valid signals.
@@ -83,7 +84,7 @@ class FrostAuraRandomStrategy(IStrategy):
     buy_prediction_delta_direction = CategoricalParameter(['<', '>'], default='>', space='buy')
     buy_probability = IntParameter([0, 100], default=76, space='buy')
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         random_number = dataframe['random_number']
 
         dataframe.loc[
@@ -97,7 +98,7 @@ class FrostAuraRandomStrategy(IStrategy):
     sell_prediction_delta_direction = CategoricalParameter(['<', '>'], default='<', space='sell')
     sell_probability = IntParameter([0, 100], default=0, space='sell')
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         random_number = dataframe['random_number']
 
         dataframe.loc[

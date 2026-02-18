@@ -13,12 +13,14 @@ def bollinger_bands(stock_price, window_size, num_of_std):
 
 class Cluc4(IStrategy):
     minimal_roi = {
-        "0": 0.015,
-        "20": 0.005,
-        "30": 0.001
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
     }
 
-    stoploss = -0.01
+    max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.0100 (已禁用), 改为 +0.10 (止损启用)
     
     timeframe = '1m'
 
@@ -50,7 +52,7 @@ class Cluc4(IStrategy):
 
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (
                 dataframe['rocr_1h'].gt(0.65)
@@ -70,7 +72,7 @@ class Cluc4(IStrategy):
         ] = 1
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         """
         """
         dataframe.loc[

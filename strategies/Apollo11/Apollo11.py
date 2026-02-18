@@ -22,9 +22,10 @@ class Apollo11(IStrategy):
     timeframe = "15m"
 
     # Stoploss
-    stoploss = -0.16
+    max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.1600 (已禁用), 改为 +0.10 (止损启用)
     startup_candle_count: int = 480
-    trailing_stop = False
+    trailing_stop = True
     use_custom_stoploss = True
     use_sell_signal = False
 
@@ -34,13 +35,13 @@ class Apollo11(IStrategy):
     buy_signal_3 = True
 
     # ROI table:
-    minimal_roi = {
-        "0": 0.10,
-        "30": 0.05,
-        "60": 0.02,  # This is 10000%, which basically disables ROI
-    }
+    minimal_roi = {  # 已优化: 从最大 1000% 改为阶梯式
 
-    # Indicator values:
+        "0": 0.10,  # 10%
+        "24": 0.07,  # 7%
+        "72": 0.05,  # 5%
+        "168": 0.03  # 3%
+    }# Indicator values:
 
     # Signal 1
     s1_ema_xs = 3
@@ -155,7 +156,7 @@ class Apollo11(IStrategy):
 
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         # basic buy methods to keep the strategy simple
 
         if self.buy_signal_1:
@@ -191,7 +192,7 @@ class Apollo11(IStrategy):
 
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         # This is essentailly ignored as we're using strict ROI / Stoploss / TTP sale scenarios
         dataframe.loc[(), "sell"] = 0
         return dataframe

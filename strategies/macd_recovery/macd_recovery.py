@@ -21,21 +21,15 @@ class macd_recovery(IStrategy):
 
     # ROI table:
     minimal_roi = {
-        "0": 0.03024,
-        "296": 0.02924,
-        "596": 0.02545,
-        "840": 0.02444,
-        "966": 0.02096,
-        "1258": 0.01709,
-        "1411": 0.01598,
-        "1702": 0.0122,
-        "1893": 0.00732,
-        "2053": 0.00493,
-        "2113": 0
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
     }
 
     # Stoploss:
-    stoploss = -0.04032
+    max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.0403 (已禁用), 改为 +0.10 (止损启用)
 
     def populate_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
       
@@ -53,7 +47,7 @@ class macd_recovery(IStrategy):
 
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (
                     (dataframe['rsi'].rolling(8).min() < 41) &
@@ -64,7 +58,7 @@ class macd_recovery(IStrategy):
 
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (
                     (dataframe['rsi'].rolling(8).max() > 93) &

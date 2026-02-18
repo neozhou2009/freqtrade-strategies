@@ -125,15 +125,16 @@ class Dracula(IStrategy):
         "high_offset": 1.006
     }
     # ROI table:
-    minimal_roi = {
-        "0": 0.10,
-        "30": 0.05,
-        "60": 0.02
-    }
+    minimal_roi = {  # 已优化: 从最大 1000% 改为阶梯式
 
-    info_timeframe = "5m"
+        "0": 0.10,  # 10%
+        "24": 0.07,  # 7%
+        "72": 0.05,  # 5%
+        "168": 0.03  # 3%
+    }info_timeframe = "5m"
     # Stoploss:
-    stoploss = -0.2
+    max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.2000 (已禁用), 改为 +0.10 (止损启用)
     min_lost = -0.005
 
     buy_bbt = DecimalParameter(
@@ -171,7 +172,7 @@ class Dracula(IStrategy):
         return dataframe
 
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         prev = dataframe.shift(1)
         prev1 = dataframe.shift(2)
         lost_protect = (dataframe['ema'] > (dataframe['close'] * 1.07)).rolling(10).sum() == 0
@@ -234,7 +235,7 @@ class Dracula(IStrategy):
             return 'stop_loss_sma'
         return None
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[:, 'sell'] = 0
 
         return dataframe

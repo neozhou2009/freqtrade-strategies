@@ -55,14 +55,15 @@ class SMAOffsetProtectOptV1Mod2(IStrategy):
     # Modified ROI - 20210620
     # ROI table:
     minimal_roi = {
-        "0": 0.028,
-        "10": 0.018,
-        "30": 0.010,
-        "40": 0.005
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
     }
 
     # Stoploss:
-    stoploss = -0.10
+    max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.5000 (已禁用), 改为 +0.10 (止损启用)
 
     antipump_threshold = DecimalParameter(0, 0.4, default=0.25, space='buy', optimize=True)
 
@@ -94,7 +95,7 @@ class SMAOffsetProtectOptV1Mod2(IStrategy):
 
     # Sell signal
     use_sell_signal = True
-    sell_profit_only = True
+    sell_profit_only = False
     sell_profit_offset = 0.01
     ignore_roi_if_buy_signal = False
 
@@ -154,7 +155,7 @@ class SMAOffsetProtectOptV1Mod2(IStrategy):
 
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
 
         conditions.append(
@@ -182,7 +183,7 @@ class SMAOffsetProtectOptV1Mod2(IStrategy):
 
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
 
         conditions.append(
@@ -225,7 +226,7 @@ class SMAOffsetProtectOptV1Mod2(IStrategy):
 
 class SMAOffsetProtectOptV1Mod2_antipump(SMAOffsetProtectOptV1Mod2):
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
         dont_buy_conditions = []
 

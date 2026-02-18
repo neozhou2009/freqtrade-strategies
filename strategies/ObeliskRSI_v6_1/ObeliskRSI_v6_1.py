@@ -87,10 +87,10 @@ class ObeliskRSI_v6_1(IStrategy):
 
     # ROI table:
     minimal_roi = {
-        "0": 0.15,
-        "35": 0.04,
-        "65": 0.01,
-        "115": 0
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
     }
 
     # Buy hyperspace params:
@@ -106,7 +106,8 @@ class ObeliskRSI_v6_1(IStrategy):
     }
 
     # Stoploss:
-    stoploss = -0.30
+    max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.3000 (已禁用), 改为 +0.10 (止损启用)
 
     use_custom_stoploss = True
     custom_stop_ramp_minutes = 110
@@ -136,7 +137,7 @@ class ObeliskRSI_v6_1(IStrategy):
         return dataframe
 
     # buy low
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         params = self.buy_params
 
         conditions = []
@@ -154,7 +155,7 @@ class ObeliskRSI_v6_1(IStrategy):
         return dataframe
 
     # sell high
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         params = self.sell_params
 
         conditions = []

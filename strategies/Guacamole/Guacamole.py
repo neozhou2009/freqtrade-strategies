@@ -31,16 +31,14 @@ class Guacamole(IStrategy):
 
     # ROI table:
     minimal_roi = {
-        "0": 0.13336,
-        "19": 0.07455,
-        "37": 0.04206,
-        "57": 0.02682,
-        "73": 0.01225,
-        "125": 0.0037,
-        "244": 0.0025
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
     }
 
-    stoploss = -0.10
+    max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.1000 (已禁用), 改为 +0.10 (止损启用)
 
     # Trailing stop:
     trailing_stop = True
@@ -57,11 +55,10 @@ class Guacamole(IStrategy):
     timeframe = '5m'
 
     use_sell_signal = True
-    sell_profit_only = True
+    sell_profit_only = False
     # sell_profit_offset = 0.01
     ignore_roi_if_buy_signal = True
-
-    process_only_new_candles = False
+process_only_new_candles = True
 
     startup_candle_count: int = 20
 
@@ -82,7 +79,7 @@ class Guacamole(IStrategy):
         
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         params = self.buy_params
         conditions = []
 
@@ -111,7 +108,7 @@ class Guacamole(IStrategy):
 
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         params = self.sell_params
         conditions = []
 

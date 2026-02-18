@@ -21,7 +21,7 @@ class CombinedBinHAndClucHyperV3(IStrategy):
     timeframe = '1m'
 
     use_sell_signal = True
-    sell_profit_only = True
+    sell_profit_only = False
     ignore_roi_if_buy_signal = False
 
     # ----------------------------------------------------------------
@@ -73,14 +73,14 @@ class CombinedBinHAndClucHyperV3(IStrategy):
     }
 
     # ROI table:
-    minimal_roi = {
-        "0": 0.10,
-        "30": 0.05,
-        "60": 0.02,
-    }
+    minimal_roi = {  # 已优化: 从最大 300% 改为阶梯式
 
-    # Stoploss:
-    stoploss = -0.06
+        "0": 0.10,  # 10%
+        "24": 0.07,  # 7%
+        "72": 0.05,  # 5%
+        "168": 0.03  # 3%
+    }# Stoploss:
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.0600 (已禁用), 改为 +0.10 (止损启用)
     trailing_stop = True
     trailing_only_offset_is_reached = False
     use_custom_stoploss = True
@@ -140,7 +140,7 @@ class CombinedBinHAndClucHyperV3(IStrategy):
 
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         buy_a_time_window = self.buy_a_time_window.value if isinstance(self.buy_a_time_window, ABC) else self.buy_a_time_window
         buy_a_bbdelta_rate = self.buy_a_bbdelta_rate.value if isinstance(self.buy_a_bbdelta_rate, ABC) else self.buy_a_bbdelta_rate
         buy_a_closedelta_rate = self.buy_a_closedelta_rate.value if isinstance(self.buy_a_closedelta_rate, ABC) else self.buy_a_closedelta_rate
@@ -179,7 +179,7 @@ class CombinedBinHAndClucHyperV3(IStrategy):
 
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         sell_bb_mid_slow_window = self.sell_bb_mid_slow_window.value if isinstance(self.sell_bb_mid_slow_window, ABC) else self.sell_bb_mid_slow_window
         dataframe.loc[(dataframe['close'] > dataframe[f'bb_typical_mid_{sell_bb_mid_slow_window}']), 'sell'] = 1
         return dataframe

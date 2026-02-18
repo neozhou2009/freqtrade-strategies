@@ -63,13 +63,15 @@ class fahmibah(IStrategy):
 
     # ROI table:
     minimal_roi = {
-        "0": 0.033,
-        "10": 0.023,
-        "40": 0.01,
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
     }
 
     # Stoploss:
-    stoploss = -0.10  # use custom stoploss
+    max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.1000 (已禁用), 改为 +0.10 (止损启用)  # use custom stoploss
 
     # Trailing stop:
     trailing_stop = True
@@ -85,7 +87,7 @@ class fahmibah(IStrategy):
 
     # Make sure these match or are not overridden in config
     use_sell_signal = False
-    sell_profit_only = True
+    sell_profit_only = False
     ignore_roi_if_buy_signal = False
 
     # Custom stoploss
@@ -206,7 +208,7 @@ class fahmibah(IStrategy):
 
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
         dataframe.loc[:, 'buy_tag'] = ''
 
@@ -245,7 +247,7 @@ class fahmibah(IStrategy):
 
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[(), 'sell'] = 1
         return dataframe
 

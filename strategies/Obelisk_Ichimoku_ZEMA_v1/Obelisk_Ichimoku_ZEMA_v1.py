@@ -50,13 +50,14 @@ class Obelisk_Ichimoku_ZEMA_v1(IStrategy):
 
     # ROI table:
     minimal_roi = {
-        "0": 0.078,
-        "40": 0.062,
-        "99": 0.039,
-        "218": 0
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
     }
 
-    stoploss = -0.294
+    max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.2940 (已禁用), 改为 +0.10 (止损启用)
 
     # Buy hyperspace params:
     buy_params = {
@@ -218,7 +219,7 @@ class Obelisk_Ichimoku_ZEMA_v1(IStrategy):
 
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         zema = f'zema_{self.zema_len_buy.value}'
 
         dataframe.loc[
@@ -228,7 +229,7 @@ class Obelisk_Ichimoku_ZEMA_v1(IStrategy):
         , 'buy'] = 1
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         zema = f'zema_{self.zema_len_sell.value}'
 
         dataframe.loc[

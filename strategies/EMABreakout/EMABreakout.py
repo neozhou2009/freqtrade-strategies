@@ -41,10 +41,10 @@ class EMABreakout(IStrategy):
 
     # ROI table:
     minimal_roi = {
-        "0": 0.278,
-        "39": 0.087,
-        "124": 0.038,
-        "135": 0
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
     }
 
     # Trailing stop:
@@ -54,13 +54,14 @@ class EMABreakout(IStrategy):
     trailing_only_offset_is_reached = False
 
     # Stoploss:
-    stoploss = -0.333
+    max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.3330 (已禁用), 改为 +0.10 (止损启用)
 
     # Optimal timeframe for the strategy.
     timeframe = '5m'
 
     # Run "populate_indicators()" only for new candle.
-    process_only_new_candles = False
+process_only_new_candles = True
 
     # These values can be overridden in the "ask_strategy" section in the config.
     use_sell_signal = True
@@ -337,7 +338,7 @@ class EMABreakout(IStrategy):
 
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         """
         Based on TA indicators, populates the buy signal for the given dataframe
         :param dataframe: DataFrame populated with indicators
@@ -368,7 +369,7 @@ class EMABreakout(IStrategy):
 
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         """
         Based on TA indicators, populates the sell signal for the given dataframe
         :param dataframe: DataFrame populated with indicators

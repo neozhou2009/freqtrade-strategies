@@ -18,14 +18,15 @@ class MabStra(IStrategy):
     # #################### RESULTS PASTE PLACE ####################
     # ROI table:
     minimal_roi = {
-        "0": 0.598,
-        "644": 0.166,
-        "3269": 0.115,
-        "7289": 0
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
     }
 
     # Stoploss:
-    stoploss = -0.128
+    max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.1280 (已禁用), 改为 +0.10 (止损启用)
     # Buy hypers
     timeframe = '4h'
 
@@ -64,7 +65,7 @@ class MabStra(IStrategy):
                                           timeperiod=self.sell_slow_ma_timeframe.value)
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
 
         dataframe.loc[
             (
@@ -81,7 +82,7 @@ class MabStra(IStrategy):
 
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (
                 (dataframe['sell-fastMA'].div(dataframe['sell-mojoMA'])

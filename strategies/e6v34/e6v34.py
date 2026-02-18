@@ -28,16 +28,15 @@ class e6v34(IStrategy):
 
     # ROI table:
     minimal_roi = {
-        "0": 0.555,
-        "300": 0.35,
-        "500": 0.247,
-        "1200": 0.0936,
-        "2100": 0.04,
-        "4000": 0
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
     }
 
     # Stoploss:
-    stoploss = -0.10
+    max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.5400 (已禁用), 改为 +0.10 (止损启用)
 
     # Trailing stop:
     trailing_stop = True
@@ -59,7 +58,7 @@ class e6v34(IStrategy):
         dataframe['vol_mean'] = ta.EMA(dataframe, timeperiod=pvol, price='volume')
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
 
         conditions = []
         conditions.append(dataframe[f'hma{shma}'].shift(1) - dataframe[f'hma{lhma}'].shift(1) < dataframe[f'hma{shma}'] - dataframe[f'hma{lhma}'])
@@ -79,7 +78,7 @@ class e6v34(IStrategy):
         return dataframe
 
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (
                 # ( (dataframe[f'hma{lhma_c}'] > dataframe[f'hma{shma_c}']) &

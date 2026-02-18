@@ -31,16 +31,17 @@ class BBlower(IStrategy):
     # This attribute will be overridden if the config file contains "minimal_roi"
     # ROI table:
     minimal_roi = {
-        "0": 0.32477,
-        "220": 0.13561,
-        "962": 0.10732,
-        "2115": 0
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
     }
 
 
     # Optimal stoploss designed for the strategy
     # This attribute will be overridden if the config file contains "stoploss"
-    stoploss = -0.13912
+    max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.1391 (已禁用), 改为 +0.10 (止损启用)
     
     # Optimal timeframe for the strategy
     timeframe = '5m'
@@ -56,7 +57,7 @@ class BBlower(IStrategy):
 
     # Experimental settings (configuration will overide these if set)
     use_sell_signal = True
-    sell_profit_only = True
+    sell_profit_only = False
     ignore_roi_if_buy_signal = False
 
 
@@ -112,7 +113,7 @@ class BBlower(IStrategy):
 
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         """
         Based on TA indicators, populates the buy signal for the given dataframe
         :param dataframe: DataFrame
@@ -143,7 +144,7 @@ class BBlower(IStrategy):
 
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         """
         Based on TA indicators, populates the sell signal for the given dataframe
         :param dataframe: DataFrame

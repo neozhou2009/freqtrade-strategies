@@ -15,15 +15,18 @@ from freqtrade.persistence import Trade
 
 
 class SMAOffsetV2(IStrategy):
-    minimal_roi = {
-        "0": 1,
-    }
+    minimal_roi = {  # 已优化: 从最大 100% 改为阶梯式
 
-    stoploss = -0.20
+        "0": 0.10,  # 10%
+        "24": 0.07,  # 7%
+        "72": 0.05,  # 5%
+        "168": 0.03  # 3%
+    }max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.2000 (已禁用), 改为 +0.10 (止损启用)
     timeframe = '5m'
     informative_timeframe = '1h'
     use_sell_signal = True
-    sell_profit_only = True
+    sell_profit_only = False
     process_only_new_candles = True
 
     use_custom_stoploss = True
@@ -84,7 +87,7 @@ class SMAOffsetV2(IStrategy):
 
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (
                 (dataframe['go_long'] > 0)
@@ -96,7 +99,7 @@ class SMAOffsetV2(IStrategy):
             'buy'] = 1
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (
                 (

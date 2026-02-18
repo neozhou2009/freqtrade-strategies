@@ -57,7 +57,7 @@ class PumpDetector(IStrategy):
     INTERFACE_VERSION = 2
 
 
-    stoploss = -0.10
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.9900 (已禁用), 改为 +0.10 (止损启用)
 
   
     trailing_stop = False
@@ -71,7 +71,7 @@ class PumpDetector(IStrategy):
 
     # These values can be overridden in the "ask_strategy" section in the config.
     use_sell_signal = True
-    sell_profit_only = True
+    sell_profit_only = False
     ignore_roi_if_buy_signal = False
 
     # Number of candles the strategy requires before producing valid signals
@@ -139,7 +139,7 @@ class PumpDetector(IStrategy):
 
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
      
         dataframe.loc[
             (
@@ -150,7 +150,7 @@ class PumpDetector(IStrategy):
 
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
    
         dataframe.loc[
             (

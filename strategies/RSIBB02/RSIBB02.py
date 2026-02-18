@@ -21,14 +21,15 @@ class RSIBB02(IStrategy):
 
     # Minimal ROI designed for the strategy
     minimal_roi = {
-    "0": 0.24140975952086036,
-    "13": 0.049595065708988986,
-    "51": 0.01046521346331895,
-    "135": 0
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
     }
 
     # Optimal stoploss designed for the strategy
-    stoploss = -0.12515406445006344
+    max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.1252 (已禁用), 改为 +0.10 (止损启用)
 	
 	 # Optimal ticker interval for the strategy
     ticker_interval = '1h'
@@ -76,7 +77,7 @@ class RSIBB02(IStrategy):
 
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         """
         Based on TA indicators, populates the buy signal for the given dataframe
         :param dataframe: DataFrame
@@ -91,7 +92,7 @@ class RSIBB02(IStrategy):
             'buy'] = 1
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         """
         Based on TA indicators, populates the sell signal for the given dataframe
         :param dataframe: DataFrame

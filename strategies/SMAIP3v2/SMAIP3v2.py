@@ -40,8 +40,9 @@ class SMAIP3v2(IStrategy):
     }
 
     # Stoploss:
-    stoploss = -0.23
-#    stoploss = -0.15
+    max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.2300 (已禁用), 改为 +0.10 (止损启用)
+#    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.2300 (已禁用), 改为 +0.10 (止损启用)
 
     # ROI table:
     minimal_roi = {
@@ -68,7 +69,7 @@ class SMAIP3v2(IStrategy):
     timeframe = '5m'
 
     use_sell_signal = True
-    sell_profit_only = True
+    sell_profit_only = False
     ignore_roi_if_buy_signal = False
 
     process_only_new_candles = True
@@ -117,7 +118,7 @@ class SMAIP3v2(IStrategy):
 
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         if self.config['runmode'].value == 'hyperopt':
             dataframe['ma_offset_buy'] = ma_types[self.buy_trigger.value](dataframe,
                                                                           int(self.base_nb_candles_buy.value)) * self.low_offset.value
@@ -139,7 +140,7 @@ class SMAIP3v2(IStrategy):
             'buy'] = 1
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         if self.config['runmode'].value == 'hyperopt':
             dataframe['ma_offset_sell'] = ma_types[self.sell_trigger.value](dataframe,
                                                                             int(self.base_nb_candles_sell.value)) * self.high_offset.value

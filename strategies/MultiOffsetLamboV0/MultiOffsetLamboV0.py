@@ -52,7 +52,8 @@ class MultiOffsetLamboV0(IStrategy):
     }
 
     # Stoploss:
-    stoploss = -0.10
+    max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.5000 (已禁用), 改为 +0.10 (止损启用)
 
     # Offset
     base_nb_candles_buy = IntParameter(
@@ -137,7 +138,7 @@ class MultiOffsetLamboV0(IStrategy):
     informative_timeframe = '1h'
 
     use_sell_signal = True
-    sell_profit_only = True
+    sell_profit_only = False
 
     process_only_new_candles = True
     startup_candle_count = 30
@@ -167,7 +168,7 @@ class MultiOffsetLamboV0(IStrategy):
 
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
 
         for i in self.ma_types:
@@ -188,7 +189,7 @@ class MultiOffsetLamboV0(IStrategy):
 
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
 
         for i in self.ma_types:

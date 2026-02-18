@@ -232,14 +232,14 @@ class ichiV1_Marius(IStrategy):
 
     # ROI table:
     minimal_roi = {
-        "0": 0.215,
-        "40": 0.032,
-        "87": 0.016,
-        "201": 0
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
     }
 
     # Stoploss:
-    stoploss = -0.275  # value loaded from strategy
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.2750 (已禁用), 改为 +0.10 (止损启用)  # value loaded from strategy
 
     # Trailing stop:
     trailing_stop = True
@@ -280,7 +280,7 @@ class ichiV1_Marius(IStrategy):
     ]
 
     use_sell_signal = False
-    sell_profit_only = True
+    sell_profit_only = False
     ignore_roi_if_buy_signal = True
 
     # trailing stoploss hyperopt parameters
@@ -590,7 +590,7 @@ class ichiV1_Marius(IStrategy):
 
         return True
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         
         conditions = []
         dataframe.loc[:, 'buy_tag'] = ''
@@ -628,7 +628,7 @@ class ichiV1_Marius(IStrategy):
         return dataframe
 
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
 
         conditions = []
 

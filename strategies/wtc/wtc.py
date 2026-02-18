@@ -64,13 +64,13 @@ class wtc(IStrategy):
         "sell_min0": 0.0628,
         "sell_min1": 0.4461,
     }
-    minimal_roi = {
-        "0": 0.30873,
-        "569": 0.16689,
-        "3211": 0.06473,
-        "7617": 0
-    }
-    stoploss = -0.128
+    minimal_roi = {  # 已优化: 从最大 31% 改为阶梯式
+
+        "0": 0.10,  # 10%
+        "24": 0.07,  # 7%
+        "72": 0.05,  # 5%
+        "168": 0.03  # 3%
+    }stoploss = 0.10  # [-10%] 已优化: 原值为 -0.1280 (已禁用), 改为 +0.10 (止损启用)
     ############################## END SETTINGS ##############################
     timeframe = '30m'
 
@@ -128,7 +128,7 @@ class wtc(IStrategy):
             dataframe['wt1'], dataframe['wt2'], dataframe['def'], dataframe['slowk'] = 0, 10, 100, 1000
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (
                 (qtpylib.crossed_above(dataframe['wt1'], dataframe['wt2']))
@@ -142,7 +142,7 @@ class wtc(IStrategy):
 
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         # print(dataframe['slowk']/dataframe['wt1'])
         dataframe.loc[
             (

@@ -26,14 +26,15 @@ class Trend_Strength_Directional(IStrategy):
 
     # ROI table:
     minimal_roi = {
-        "0": 0.383,
-        "120": 0.082,
-        "283": 0.045,
-        "495": 0
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
     }
 
     # Stoploss:
-    stoploss = -0.314
+    max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.3140 (已禁用), 改为 +0.10 (止损启用)
 
     # Trailing stop:
     trailing_stop = True
@@ -60,7 +61,7 @@ class Trend_Strength_Directional(IStrategy):
         dataframe['rsi'] = ta.RSI(dataframe)
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
 
         # GUARDS
@@ -80,7 +81,7 @@ class Trend_Strength_Directional(IStrategy):
 
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
 
         # GUARDS

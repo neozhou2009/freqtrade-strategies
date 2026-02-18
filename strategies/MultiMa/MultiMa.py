@@ -32,14 +32,15 @@ class MultiMa(IStrategy):
 
     # ROI table:
     minimal_roi = {
-        "0": 0.523,
-        "1553": 0.123,
-        "2332": 0.076,
-        "3169": 0
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
     }
 
     # Stoploss:
-    stoploss = -0.345
+    max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.3450 (已禁用), 改为 +0.10 (止损启用)
 
     # Trailing stop:
     trailing_stop = True  # value loaded from strategy
@@ -70,7 +71,7 @@ class MultiMa(IStrategy):
 
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
         # I used range(self.buy_ma_count.value) instade of self.buy_ma_count.range
         # Cuz it returns range(7,8) but we need range(8) for all modes hyperopt, backtest and etc
@@ -85,7 +86,7 @@ class MultiMa(IStrategy):
             dataframe.loc[reduce(lambda x, y: x & y, conditions), "buy"] = 1
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
 
         for ma_count in range(self.sell_ma_count.value):

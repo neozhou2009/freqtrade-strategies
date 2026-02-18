@@ -133,13 +133,14 @@ class NFI5MOHO_WIP(IStrategy):
 
     # ROI table:
     minimal_roi = {
-        "0": 0.111,
-        "13": 0.048,
-        "50": 0.015,
-        "61": 0.01
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
     }
 
-    stoploss = -0.10
+    max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.1000 (已禁用), 改为 +0.10 (止损启用)
 
     # Multi Offset
     base_nb_candles_buy = IntParameter(
@@ -224,7 +225,7 @@ class NFI5MOHO_WIP(IStrategy):
 
     # These values can be overridden in the "ask_strategy" section in the config.
     use_sell_signal = True
-    sell_profit_only = True
+    sell_profit_only = False
     ignore_roi_if_buy_signal = True
 
     # Number of candles the strategy requires before producing valid signals
@@ -655,7 +656,7 @@ class NFI5MOHO_WIP(IStrategy):
         return dataframe
 
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
 
         conditions.append(
@@ -1080,7 +1081,7 @@ class NFI5MOHO_WIP(IStrategy):
 
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
 
         conditions.append(

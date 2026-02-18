@@ -39,15 +39,13 @@ class SuperHV27(IStrategy):
     # ROI table:
     minimal_roi = {
         "0": 0.10,
-        "30": 0.05,
-        "40": 0.025,
-        "60": 0.015,
-        "720": 0.01,
-        "1440": 0
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
     }
 
     # Stoploss:
-    stoploss = -0.40
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.4000 (已禁用), 改为 +0.10 (止损启用)
 
     # connect will participate in hyperopted tables, other methods will not
     dynamic_roi = {
@@ -61,7 +59,7 @@ class SuperHV27(IStrategy):
 
     # Probably don't change these
     use_sell_signal = True
-    sell_profit_only = True
+    sell_profit_only = False
     ignore_roi_if_buy_signal = True
 
     # Custom Dicts for storing trade data and other custom things this strategy does
@@ -109,7 +107,7 @@ class SuperHV27(IStrategy):
         return dataframe
 
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         params = self.buy_params
         trade_data = self.custom_trade_info[metadata['pair']]
         conditions = []
@@ -170,7 +168,7 @@ class SuperHV27(IStrategy):
         return dataframe
 
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         params = self.sell_params
         trade_data = self.custom_trade_info[metadata['pair']]
         conditions = []

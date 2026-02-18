@@ -23,17 +23,14 @@ import numpy
 class Chispei(IStrategy):
     # Minimal ROI designed for the strategy.
     minimal_roi = {
-	    "5127": 0,
-	    "1836": 0.676,
-	    "2599": 0.079,
-        "120": 0.10,
-	    "60": 0.10,
-        "30": 0.05,
-        "20": 0.05,
-        "0": 0.04
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
     }
 
-    stoploss = -0.32336
+    max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.3234 (已禁用), 改为 +0.10 (止损启用)
     ticker_interval = '4h'
 
     def populate_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
@@ -43,7 +40,7 @@ class Chispei(IStrategy):
         dataframe['mom'] = ta.MOM(dataframe, timeperiod=21)
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (
                 (dataframe['mom'] < 15) &
@@ -53,7 +50,7 @@ class Chispei(IStrategy):
 
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (
                 (dataframe['mom'] < 80) &

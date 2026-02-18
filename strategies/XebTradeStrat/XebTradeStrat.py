@@ -25,7 +25,8 @@ class XebTradeStrat(IStrategy):
       "0": 0.01
     }
 
-    stoploss = -0.01
+    max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.0100 (已禁用), 改为 +0.10 (止损启用)
     timeframe = '1m'
     trailing_stop = True
     trailing_only_offset_is_reached = True
@@ -38,7 +39,7 @@ class XebTradeStrat(IStrategy):
         dataframe['ema10'] = ta.EMA(dataframe, timeperiod=10)
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (
                 (dataframe['ema5'] > dataframe['ema10']) &
@@ -48,7 +49,7 @@ class XebTradeStrat(IStrategy):
             'buy'] = 1
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         """
         no sell signal
         """

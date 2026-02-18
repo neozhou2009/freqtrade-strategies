@@ -95,17 +95,15 @@ class ClucHAnix_BB_RPB_MOD2_ROI(IStrategy):
 
     # ROI table:
     minimal_roi = {
-        "0": 0.05,
-        "15": 0.04,
-        "51": 0.03,
-        "81": 0.02,
-        "112": 0.01,
-        "154": 0.0001,
-        "240": -10
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
     }
 
     # Stoploss:
-    stoploss = -0.99   # use custom stoploss
+    max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.1000 (已禁用), 改为 +0.10 (止损启用)   # use custom stoploss
 
     # Trailing stop:
     trailing_stop = True
@@ -121,7 +119,7 @@ class ClucHAnix_BB_RPB_MOD2_ROI(IStrategy):
 
     # Make sure these match or are not overridden in config
     use_sell_signal = True
-    sell_profit_only = True
+    sell_profit_only = False
     ignore_roi_if_buy_signal = False
 
     # Custom stoploss
@@ -339,7 +337,7 @@ class ClucHAnix_BB_RPB_MOD2_ROI(IStrategy):
 
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
         dataframe.loc[:, 'buy_tag'] = ''
 
@@ -456,7 +454,7 @@ class ClucHAnix_BB_RPB_MOD2_ROI(IStrategy):
 
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         params = self.sell_params
         
         dataframe.loc[
@@ -686,7 +684,7 @@ class ClucHAnix_BB_RPB_MOD2_ROI_DYNAMIC_TB(ClucHAnix_BB_RPB_MOD2_ROI):
         
         return val
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe = super().populate_buy_trend(dataframe, metadata)
 
         if self.trailing_buy_order_enabled and self.config['runmode'].value in ('live', 'dry_run'): 

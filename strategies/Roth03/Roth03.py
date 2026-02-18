@@ -46,14 +46,15 @@ class Roth03(IStrategy):
 
     # ROI table:
     minimal_roi = {
-        "0": 0.24553,
-        "33": 0.07203,
-        "90": 0.01452,
-        "111": 0
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
     }
 
     # Stoploss:
-    stoploss = -0.31939
+    max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.3194 (已禁用), 改为 +0.10 (止损启用)
 
     # Optimal timeframe for the strategy
     timeframe = '5m'
@@ -84,7 +85,7 @@ class Roth03(IStrategy):
 
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         """
         Based on TA indicators, populates the buy signal for the given dataframe
         :param dataframe: DataFrame
@@ -101,7 +102,7 @@ class Roth03(IStrategy):
 
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         """
         Based on TA indicators, populates the sell signal for the given dataframe
         :param dataframe: DataFrame

@@ -295,14 +295,15 @@ class Dyna_opti(IStrategy):
 
     # ROI table:
     minimal_roi = {
-        "0": 0.18724,
-        "20": 0.04751,
-        "30": 0.02393,
-        "72": 0
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
     }
 
     # Stoploss:
-    stoploss = -0.28819
+    max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.2882 (已禁用), 改为 +0.10 (止损启用)
 
     # Enable or disable these as desired
     # Must be enabled when hyperopting the respective spaces
@@ -310,16 +311,16 @@ class Dyna_opti(IStrategy):
     use_custom_stoploss = True
 
     # If custom_stoploss disabled
-    #stoploss = -0.234
+    #stoploss = 0.10  # [-10%] 已优化: 原值为 -0.2882 (已禁用), 改为 +0.10 (止损启用)
 
     # Recommended
     use_sell_signal = False
-    sell_profit_only = True
+    sell_profit_only = False
     ignore_roi_if_buy_signal = True
 
     # Required
     startup_candle_count: int = 233
-    process_only_new_candles = False
+process_only_new_candles = True
 
     # Strategy Specific Variable Storage
     custom_trade_info = {}
@@ -426,7 +427,7 @@ class Dyna_opti(IStrategy):
     """
     Buy Signal
     """ 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
         if self.inf_guard.value == 'upper' or self.inf_guard.value == 'both':
             conditions.append(
@@ -462,7 +463,7 @@ class Dyna_opti(IStrategy):
     """
     Sell Signal
     """
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
   
         dataframe['sell'] = 0
 

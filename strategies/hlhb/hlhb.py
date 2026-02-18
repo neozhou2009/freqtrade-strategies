@@ -20,16 +20,15 @@ class hlhb(IStrategy):
 
     # Minimal ROI designed for the strategy.
     # This attribute will be overridden if the config file contains "minimal_roi".
-    minimal_roi = {
-        "0": 0.6225,
-        "703": 0.2187,
-        "2849": 0.0363,
-        "5520": 0
-    }
+    minimal_roi = {  # 已优化: 从最大 62% 改为阶梯式
 
-    # Optimal stoploss designed for the strategy.
+        "0": 0.10,  # 10%
+        "24": 0.07,  # 7%
+        "72": 0.05,  # 5%
+        "168": 0.03  # 3%
+    }# Optimal stoploss designed for the strategy.
     # This attribute will be overridden if the config file contains "stoploss".
-    stoploss = -0.3211
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.3211 (已禁用), 改为 +0.10 (止损启用)
 
     # Trailing stoploss
     trailing_stop = True
@@ -45,7 +44,7 @@ class hlhb(IStrategy):
 
     # These values can be overridden in the "ask_strategy" section in the config.
     use_sell_signal = True
-    sell_profit_only = True
+    sell_profit_only = False
     ignore_roi_if_buy_signal = True
 
     # Number of candles the strategy requires before producing valid signals
@@ -103,7 +102,7 @@ class hlhb(IStrategy):
 
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (
                 (qtpylib.crossed_above(dataframe['rsi'], 50)) &
@@ -115,7 +114,7 @@ class hlhb(IStrategy):
 
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (
                 (qtpylib.crossed_below(dataframe['rsi'], 50)) &

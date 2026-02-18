@@ -43,7 +43,8 @@ class BreakEven(IStrategy):
 #    }
 
     # Optimal stoploss designed for the strategy
-    stoploss = -0.05
+    max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.0500 (已禁用), 改为 +0.10 (止损启用)
 
     # Optimal timeframe for the strategy
     timeframe = '5m'
@@ -52,16 +53,16 @@ class BreakEven(IStrategy):
     def populate_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
-            (
-            ),
-            'buy'] = 0
+) & (dataframe["volume"] > 0)(
+) & (dataframe["volume"] > 0)),
+) & (dataframe["volume"] > 0)'buy'] = 0
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
-            (
-            ),
-            'sell'] = 0
+) & (dataframe["volume"] > 0)(
+) & (dataframe["volume"] > 0)),
+) & (dataframe["volume"] > 0)'sell'] = 0
         return dataframe

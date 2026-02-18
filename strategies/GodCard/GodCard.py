@@ -40,7 +40,7 @@ class GodCard(IStrategy):
         return prot
 
     # run "populate_indicators" only for new candle
-    process_only_new_candles = False
+process_only_new_candles = True
 
     # Experimental settings (configuration will overide these if set)
     use_sell_signal = True
@@ -87,14 +87,15 @@ class GodCard(IStrategy):
 
     # ROI table:
     minimal_roi = {
-        "0": 0.344,
-        "32": 0.09,
-        "120": 0.041,
-        "447": 0
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
     }
 
     # Stoploss:
-    stoploss = -0.087
+    max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.0870 (已禁用), 改为 +0.10 (止损启用)
 
     # Trailing stop:
     trailing_stop = True
@@ -132,7 +133,7 @@ class GodCard(IStrategy):
 
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
         # GUARDS AND TRENDS
         if self.buy_rsi_enabled.value:
@@ -158,7 +159,7 @@ class GodCard(IStrategy):
 
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
         # GUARDS AND TRENDS
         if self.sell_rsi_enabled.value:

@@ -43,16 +43,14 @@ class Ichi(IStrategy):
     }
 
     minimal_roi = {
-        "60": 0,
-        "45": 0.0025 / 2,
-        "30": 0.003 / 2,
-        "15": 0.005 / 2,
-        "10": 0.075 / 2,
-        "5": 0.01 / 2,
-        "0": 0.02 / 2,
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
     }
     timeframe = '15m'
-    stoploss = -0.20
+    max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.2000 (已禁用), 改为 +0.10 (止损启用)
 
     INTERFACE_VERSION = 2
 
@@ -74,7 +72,7 @@ class Ichi(IStrategy):
 
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (
                 (
@@ -100,7 +98,7 @@ class Ichi(IStrategy):
 
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         #        dataframe.loc[
         #            (
         #                (dataframe['close'].shift(-26) <= dataframe['close'].shift(26))

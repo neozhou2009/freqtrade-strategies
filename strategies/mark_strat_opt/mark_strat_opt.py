@@ -29,20 +29,21 @@ class mark_strat_opt (IStrategy):
     # Minimal ROI designed for the strategy.
     # This attribute will be overridden if the config file contains "minimal_roi".
     # minimal_roi = {
-    #     "0": 0.50503, 
-    #     "304": 0.13111, 
-    #     "669": 0.03614, 
-    #     "1039": 0
-    #     }
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
+    }
     minimal_roi = {
-        "0": 0.06965, 
-        "8": 0.01125, 
-        "19": 0.00498, 
-        "34": 0
-        }
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
+    }
     # Optimal stoploss designed for the strategy.
     # This attribute will be overridden if the config file contains "stoploss".
-    stoploss = -0.20206
+    max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.2021 (已禁用), 改为 +0.10 (止损启用)
 # {   'trailing_only_offset_is_reached': False,
 #     'trailing_stop': True,
 #     'trailing_stop_positive': 0.0916,
@@ -55,10 +56,10 @@ class mark_strat_opt (IStrategy):
     # Optimal ticker interval for the strategy.
     ticker_interval = '1m'
     # Run "populate_indicators()" only for new candle.
-    process_only_new_candles = False
+process_only_new_candles = True
     # These values can be overridden in the "ask_strategy" section in the config.
     use_sell_signal = True
-    sell_profit_only = True
+    sell_profit_only = False
     ignore_roi_if_buy_signal = False
     # Number of candles the strategy requires before producing valid signals
     startup_candle_count: int = 20
@@ -144,7 +145,7 @@ class mark_strat_opt (IStrategy):
         dataframe['macd'] = macd['macd']
         dataframe['macdsignal'] = macd['macdsignal']
         return dataframe
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         """
         Based on TA indicators, populates the buy signal for the given dataframe
         :param dataframe: DataFrame populated with indicators
@@ -161,7 +162,7 @@ class mark_strat_opt (IStrategy):
             ),
             'buy'] = 1
         return dataframe
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         """
         Based on TA indicators, populates the sell signal for the given dataframe
         :param dataframe: DataFrame populated with indicators

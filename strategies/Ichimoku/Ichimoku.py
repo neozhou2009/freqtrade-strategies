@@ -12,11 +12,14 @@ class Ichimoku(IStrategy):
     Ichimoku Strategy
     """
 
-    minimal_roi = {
-        "0":  1
-    }
+    minimal_roi = {  # 已优化: 从最大 100% 改为阶梯式
 
-    stoploss = -0.1
+        "0": 0.10,  # 10%
+        "24": 0.07,  # 7%
+        "72": 0.05,  # 5%
+        "168": 0.03  # 3%
+    }max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.1000 (已禁用), 改为 +0.10 (止损启用)
 
     # Optimal timeframe for the strategy
     timeframe = '5m'
@@ -63,7 +66,7 @@ class Ichimoku(IStrategy):
 
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         """
         """
 
@@ -77,7 +80,7 @@ class Ichimoku(IStrategy):
 
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         """
         """
 

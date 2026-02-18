@@ -13,14 +13,15 @@ class ADX_15M_USDT2(IStrategy):
 
     # ROI table:
     minimal_roi = {
-        "0": 0.10313,
-        "102": 0.07627,
-        "275": 0.04228,
-        "588": 0
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
     }
 
     # Stoploss:
-    stoploss = -0.31941
+    max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.3194 (已禁用), 改为 +0.10 (止损启用)
 
     def populate_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe['adx'] = ta.ADX(dataframe, timeperiod=14)
@@ -37,7 +38,7 @@ class ADX_15M_USDT2(IStrategy):
 
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (
                     #(dataframe['adx'] > 45) &
@@ -49,7 +50,7 @@ class ADX_15M_USDT2(IStrategy):
             'buy'] = 1
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (
                     (dataframe['adx'] > 91) &

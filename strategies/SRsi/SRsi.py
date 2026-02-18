@@ -12,7 +12,8 @@ class SRsi(IStrategy):
         "0": 0.012
     }
 
-    stoploss = -0.15
+    max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.1500 (已禁用), 改为 +0.10 (止损启用)
 
     timeframe = '1m'
     order_types = {
@@ -50,7 +51,7 @@ class SRsi(IStrategy):
 
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
 
         dataframe.loc[
         (
@@ -62,7 +63,7 @@ class SRsi(IStrategy):
 
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
 
         dataframe.loc[
             (

@@ -5,10 +5,14 @@ import freqtrade.vendor.qtpylib.indicators as qtpylib
 
 
 class Stavix2(IStrategy):
-    minimal_roi = {
-        "0": 0.15
-    }
-    stoploss = -0.10
+    minimal_roi = {  # 已优化: 从 15.0% 标准化为阶梯式
+
+        "0": 0.10,  # 10%
+        "24": 0.07,  # 7%
+        "72": 0.05,  # 5%
+        "168": 0.03  # 3%
+    }max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.1000 (已禁用), 改为 +0.10 (止损启用)
 
     ticker_interval = '1m'
 
@@ -22,7 +26,7 @@ class Stavix2(IStrategy):
 
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
                 (
                     (dataframe['close'] > dataframe['senkou_span_a']) &
@@ -32,7 +36,7 @@ class Stavix2(IStrategy):
                 'buy'] = 1
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
                 (
                     (dataframe['close'] < dataframe['senkou_span_a']) &

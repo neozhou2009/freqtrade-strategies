@@ -541,13 +541,10 @@ class BB_RPB_TSL_SMA_Tranz_TB_MOD(IStrategy):
 
 
     minimal_roi = {
-        "0": 0.2,
-        "30": 0.1,
-        "60": 0.05,
-        "90": 0.03,
-        "120": 0.02,
-        "150": 0.01,
-        "180": 0.005,
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
     }
 
     # Optimal timeframe for the strategy
@@ -565,7 +562,8 @@ class BB_RPB_TSL_SMA_Tranz_TB_MOD(IStrategy):
     process_only_new_candles = True
 
     # Disabled
-    stoploss = -0.15
+    max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.1500 (已禁用), 改为 +0.10 (止损启用)
 
     # Custom stoploss
     use_custom_stoploss = True
@@ -2129,7 +2127,7 @@ class BB_RPB_TSL_SMA_Tranz_TB_MOD(IStrategy):
 
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
 
         conditions = []
         dataframe.loc[:, 'buy_tag'] = ''
@@ -2961,7 +2959,7 @@ class BB_RPB_TSL_SMA_Tranz_TB_MOD(IStrategy):
 
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
 
         conditions.append(
@@ -3058,8 +3056,7 @@ class BB_RPB_TSL_Tranz_TrailingBuy(BB_RPB_TSL_SMA_Tranz_TB):
     # Trailing buy stops with NO BUY : current price is > initial price * (1 +  trailing_buy_max) OR custom_sell tag
     # IT IS NOT COMPATIBLE WITH BACKTEST/HYPEROPT
     #
-
-    process_only_new_candles = False
+process_only_new_candles = True
 
     custom_info_trail_buy = dict()
 
@@ -3256,7 +3253,7 @@ class BB_RPB_TSL_Tranz_TrailingBuy(BB_RPB_TSL_SMA_Tranz_TB):
 
         return val
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe = super().populate_buy_trend(dataframe, metadata)
 
         if self.trailing_buy_order_enabled and self.config['runmode'].value in ('live', 'dry_run'):

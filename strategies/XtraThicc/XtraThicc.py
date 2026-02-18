@@ -14,14 +14,15 @@ XtraThicc v69
 
 class XtraThicc(IStrategy):
 
-    minimal_roi = {
-         "0": 0.10,
-        "30": 0.05,
-        "60": 0.02
-    }
+    minimal_roi = {  # 已优化: 从最大 10000% 改为阶梯式
 
-    # Stoploss:
-    stoploss = -0.10
+        "0": 0.10,  # 10%
+        "24": 0.07,  # 7%
+        "72": 0.05,  # 5%
+        "168": 0.03  # 3%
+    }# Stoploss:
+    max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.1000 (已禁用), 改为 +0.10 (止损启用)
 
     timeframe = '5m'
     inf_timeframe = '1h'
@@ -36,7 +37,7 @@ class XtraThicc(IStrategy):
     trailing_only_offset_is_reached = True
 
     startup_candle_count: int = 72
-    process_only_new_candles = False
+process_only_new_candles = True
 
     def informative_pairs(self):
         # add all whitelisted pairs on informative timeframe
@@ -66,7 +67,7 @@ class XtraThicc(IStrategy):
 
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (
                 (dataframe['color'] == 'green') &
@@ -82,7 +83,7 @@ class XtraThicc(IStrategy):
 
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         
         dataframe['sell'] = 0
 

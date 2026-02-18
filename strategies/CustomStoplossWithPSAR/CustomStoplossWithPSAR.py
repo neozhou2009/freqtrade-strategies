@@ -24,7 +24,8 @@ class CustomStoplossWithPSAR(IStrategy):
     the populate_buy_trend() function is pretty nonsencial
     """
     timeframe = '1h'
-    stoploss = -0.2
+    max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.2000 (已禁用), 改为 +0.10 (止损启用)
     custom_info = {}
     use_custom_stoploss = True
 
@@ -64,7 +65,7 @@ class CustomStoplossWithPSAR(IStrategy):
         # dataframe['rsi'] = ta.RSI(dataframe)
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         """
         Placeholder Strategy: buys when SAR is smaller then candle before
         Based on TA indicators, populates the buy signal for the given dataframe
@@ -79,7 +80,7 @@ class CustomStoplossWithPSAR(IStrategy):
 
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         """
         Placeholder Strategy: does nothing
         Based on TA indicators, populates the sell signal for the given dataframe

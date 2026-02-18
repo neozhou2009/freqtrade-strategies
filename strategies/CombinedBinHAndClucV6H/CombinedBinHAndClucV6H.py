@@ -58,7 +58,7 @@ class CombinedBinHAndClucV6H(IStrategy):
     max_open_trades = 5
 
     # Using custom stoploss
-    stoploss = -0.10
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.1000 (已禁用), 改为 +0.10 (止损启用)
     use_custom_stoploss = True
 
     # Trailing stoploss
@@ -74,7 +74,7 @@ class CombinedBinHAndClucV6H(IStrategy):
     startup_candle_count: int = 200
 
     # Run "populate_indicators()" only for new candle.
-    process_only_new_candles = False
+process_only_new_candles = True
 
 
     use_sell_signal = True
@@ -267,7 +267,7 @@ class CombinedBinHAndClucV6H(IStrategy):
     """
     Buy Signal
     """
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
 
         conditions = []
       
@@ -367,7 +367,7 @@ class CombinedBinHAndClucV6H(IStrategy):
     """
     Sell Signal
     """
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
 
         conditions = []
 

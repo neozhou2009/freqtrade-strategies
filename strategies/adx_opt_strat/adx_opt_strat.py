@@ -18,14 +18,15 @@ class adx_opt_strat(IStrategy):
     # adjust based on market conditions. We would recommend to keep it low for quick turn arounds
     # This attribute will be overridden if the config file contains "minimal_roi"
     minimal_roi = {
-        "0": 0.0692,
-        "7": 0.02682,
-        "10": 0.00771,
-        "32": 0
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
     }
 
     # Optimal stoploss designed for the strategy
-    stoploss = -0.32766
+    max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.3277 (已禁用), 改为 +0.10 (止损启用)
 
     # Trailing stoploss
     trailing_stop = True
@@ -45,7 +46,7 @@ class adx_opt_strat(IStrategy):
 
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (
                     (dataframe['mom'] < 0) &
@@ -57,7 +58,7 @@ class adx_opt_strat(IStrategy):
         
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (
                     (dataframe['mom'] > 0) &

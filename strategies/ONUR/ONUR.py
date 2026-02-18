@@ -11,12 +11,14 @@ import freqtrade.vendor.qtpylib.indicators as qtpylib
 
 class ONUR(IStrategy):
     minimal_roi = {
-        "0": 0.131,
-        "109": 0.08,
-        "226": 0.03
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
     }
 
-    stoploss = -0.10
+    max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.1000 (已禁用), 改为 +0.10 (止损启用)
     trailing_stop = True
     trailing_stop_positive = 0.293
     trailing_stop_positive_offset = 0.362
@@ -48,7 +50,7 @@ class ONUR(IStrategy):
 
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (
                 (dataframe['rsi'] < 74)
@@ -58,7 +60,7 @@ class ONUR(IStrategy):
 
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (
                 # (dataframe['close'] > dataframe['bb_upperband'])

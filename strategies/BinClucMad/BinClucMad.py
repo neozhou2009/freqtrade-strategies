@@ -25,20 +25,21 @@ class BinClucMad(IStrategy):
     INTERFACE_VERSION = 2
 
     minimal_roi = {
-        "0": 0.038,         # I feel lucky!
-        "10": 0.028,
-        "40": 0.015,
-        "180": 0.018,        # We're going up?
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
     }
 
-    stoploss = -0.99  # effectively disabled.
+    max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.1000 (已禁用), 改为 +0.10 (止损启用)  # effectively disabled.
 
     timeframe = "5m"
     informative_timeframe = "1h"
 
     # Sell signal
     use_sell_signal = True
-    sell_profit_only = True
+    sell_profit_only = False
     sell_profit_offset = 0.001  # it doesn't meant anything, just to guarantee there is a minimal profit.
     ignore_roi_if_buy_signal = False
 
@@ -52,7 +53,7 @@ class BinClucMad(IStrategy):
     use_custom_stoploss = True
 
     # Run "populate_indicators()" only for new candle.
-    process_only_new_candles = False
+process_only_new_candles = True
 
     # Number of candles the strategy requires before producing valid signals
     startup_candle_count: int = 200
@@ -230,7 +231,7 @@ class BinClucMad(IStrategy):
 
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
         # START  VERSION9
         if self.v9_buy_condition_1_enable.value:
@@ -436,7 +437,7 @@ class BinClucMad(IStrategy):
 
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
         if self.v9_sell_condition_0_enable.value:
             conditions.append(

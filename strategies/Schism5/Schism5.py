@@ -32,13 +32,13 @@ class Schism5(IStrategy):
     }
 
     minimal_roi = {
-        "0": 0.14025,
-        "34": 0.08031,
-        "86": 0.03995,
-        "203": 0
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
     }
 
-    stoploss = -0.30
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.3000 (已禁用), 改为 +0.10 (止损启用)
     use_custom_stoploss = True
     custom_stop_ramp_minutes = 110
     custom_stop_trailing = 0.001
@@ -90,7 +90,7 @@ class Schism5(IStrategy):
     """
     Buy Trigger Signals
     """
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         params = self.get_pair_params(metadata['pair'], 'buy')
         trade_data = self.custom_trade_info[metadata['pair']]
         conditions = []
@@ -122,7 +122,7 @@ class Schism5(IStrategy):
     """
     Sell Trigger Signals
     """
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         params = self.get_pair_params(metadata['pair'], 'sell')
         conditions = []
 
@@ -277,10 +277,10 @@ class Schism5_BTC(Schism5):
     }
 
     minimal_roi = {
-        "0": 0.05,
-        "240": 0.025,
-        "1440": 0.01,
-        "4320": 0
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
     }
 
     use_sell_signal = False
@@ -301,10 +301,10 @@ class Schism5_ETH(Schism5):
     }
 
     minimal_roi = {
-        "0": 0.05,
-        "240": 0.025,
-        "1440": 0.01,
-        "4320": 0
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
     }
 
     use_sell_signal = False

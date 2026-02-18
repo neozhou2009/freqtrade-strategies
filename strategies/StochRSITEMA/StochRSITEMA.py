@@ -58,14 +58,15 @@ class StochRSITEMA(IStrategy):
 
     # ROI table:
     minimal_roi = {
-        "0": 0.19503,
-        "13": 0.09149,
-        "36": 0.02891,
-        "64": 0
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
     }
 
     # Stoploss:
-    stoploss = -0.02205
+    max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.0221 (已禁用), 改为 +0.10 (止损启用)
 
     # Trailing stop:
     trailing_stop = True
@@ -98,7 +99,7 @@ class StochRSITEMA(IStrategy):
     timeframe = '5m'
 
     # Run "populate_indicators()" only for new candle.
-    process_only_new_candles = False
+process_only_new_candles = True
 
     # Number of candles the strategy requires before producing valid signals
     # Set this to the highest period value in the indicator_params dict or highest of the ranges in the hyperopt settings (default: 72)
@@ -124,7 +125,7 @@ class StochRSITEMA(IStrategy):
 
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         params = self.buy_params
 
         conditions = []
@@ -148,7 +149,7 @@ class StochRSITEMA(IStrategy):
 
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         params = self.sell_params
 
         conditions = []

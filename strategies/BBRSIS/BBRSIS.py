@@ -13,12 +13,15 @@ class BBRSIS(IStrategy):
     """
 
     # Minimal ROI designed for the strategy
-    minimal_roi = {
-	"0": 0.30,
-    }
+    minimal_roi = {  # 已优化: 从最大 30% 改为阶梯式
 
-    # Optimal stoploss designed for the strategy
-    stoploss = -0.10
+        "0": 0.10,  # 10%
+        "24": 0.07,  # 7%
+        "72": 0.05,  # 5%
+        "168": 0.03  # 3%
+    }# Optimal stoploss designed for the strategy
+    max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.1000 (已禁用), 改为 +0.10 (止损启用)
 
     # Optimal ticker interval for the strategy
     ticker_interval = '5m'
@@ -82,7 +85,7 @@ class BBRSIS(IStrategy):
 
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         """
         Based on TA indicators, populates the buy signal for the given dataframe
         :param dataframe: DataFrame
@@ -101,7 +104,7 @@ class BBRSIS(IStrategy):
 
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         """
         Based on TA indicators, populates the sell signal for the given dataframe
         :param dataframe: DataFrame

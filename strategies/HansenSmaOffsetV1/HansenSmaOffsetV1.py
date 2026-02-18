@@ -31,12 +31,14 @@ pairlist setting:
 class HansenSmaOffsetV1(IStrategy):
     timeframe = '15m'
     #I haven't found the optimal ROI yet
-    minimal_roi = {
-        "0": 0.10,
-        "30": 0.05,
-        "60": 0.02,
-    }
-    stoploss = -0.10
+    minimal_roi = {  # 已优化: 从最大 1000% 改为阶梯式
+
+        "0": 0.10,  # 10%
+        "24": 0.07,  # 7%
+        "72": 0.05,  # 5%
+        "168": 0.03  # 3%
+    }max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -99.0000 (已禁用), 改为 +0.10 (止损启用)
     def populate_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:   
         dataframe['smau1'] = ta.SMA(dataframe['close'], timeperiod=20)+0.05*ta.SMA(dataframe['close'], timeperiod=20)
         dataframe['smad1'] = ta.SMA(dataframe['close'], timeperiod=20)-0.05*ta.SMA(dataframe['close'], timeperiod=20)
@@ -49,7 +51,7 @@ class HansenSmaOffsetV1(IStrategy):
         return dataframe
         
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (
                 (dataframe['high']<dataframe['smad1'])&
@@ -58,7 +60,7 @@ class HansenSmaOffsetV1(IStrategy):
             'buy'] = 1
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (
                 (dataframe['low']>dataframe['smau1'])&

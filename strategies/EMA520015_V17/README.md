@@ -1,90 +1,122 @@
 # EMA520015_V17
 
-## 策略概述
+## 策略深度分析
 
-- **策略名称**: EMA520015_V17
-- **时间框架**: 4h
-- **止损设置**: -0.1
-- **最小ROI**: "0": 0.15
+> 分析: 2026-02-13 12:39
+> 状态: 🔴 严重问题
+> 问题: 2个
 
-## 策略意图和目的
+---
 
-本策略是一个**MACD交叉、趋势判断**，旨在通过技术指标分析市场趋势，寻找买入和卖出机会。
+## 一、执行摘要
 
-### 核心逻辑
+核心: 策略存在 多个严重问题，会导致亏损。
 
-使用MACD快慢线交叉判断趋势方向；使用移动平均线判断市场整体趋势方向
+建议:
+- 立即修复致命问题
+- 充分回测
+- 纸质交易
 
-### 适用市场
+---
 
-本策略适用于**数字货币市场**的交易，推荐在以下时间框架使用：
-- 主要: 4h
-- 根据市场波动性可适当调整
+## 二、代码结构
 
-## 使用技术指标
+| 项目 | 信息 |
+|------|------|
+| 买入 | ❌ 缺失 |
+| 卖出 | ❌ 缺失 |
+| 周期 | 
 
-EMA (指数移动平均)、MACD (移动平均收敛散度)
+    def populate_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
 
-## 自定义功能
+        macd = ta.MACD(dataframe)
+        macd = ta.MACD(dataframe,fastperiod=300, slowperiod=650, signalperiod=10)
+        dataframe[ |
+| 指标 | 2个: MACD,EMA |
 
-- **自定义止损**: 否
-- **自定义卖出**: 是
-- **自定义入场**: 否
+质量: ⚠️ 一般
 
-## 代码问题分析
+---
 
-本策略在代码层面存在以下问题：
+## 三、问题
 
-### 1. 导入方式问题
-1. 使用了已废弃的导入方式 `from freqtrade.strategy.interface import IStrategy`
+### 致命问题
 
-### 2. 修复措施
-1. 已更新为 `from freqtrade.strategy import IStrategy`
+**1. 缺卖出信号**
 
-## 投资逻辑问题分析
+严重: 🔴 致命
 
-本策略在投资逻辑和风险管理方面存在以下问题：
+修复: 必须！
 
-- 未设置最大持仓数量限制，可能同时持仓过多交易对
-- 未使用成交量验证信号，可能产生假突破
+**2. 缺买入信号**
 
-### 问题详解
+严重: 🔴 致命
 
-- 仓位管理问题：无持仓限制会导致风险过度集中，建议设置max_open_trades参数。
-- 信号可靠性问题：没有成交量验证的信号可能产生假突破，建议增加成交量过滤条件。
+修复: 必须！
 
-### 改进建议
+---
 
-1. 合理设置止损：建议将止损设置在3%-15%之间，根据交易对的历史波动性调整
-2. 调整ROI设置：根据实际市场情况设置合理的盈利目标，建议分阶段设置（如0.03, 0.05, 0.10等）
-3. 实现自定义止损：建议根据市场波动性动态调整止损位置
-4. 添加自定义卖出逻辑：根据技术指标设置止盈条件
-5. 启用追踪止损：可以锁定部分利润，同时给趋势行情留出空间
-6. 设置仓位管理：建议设置max_open_trades参数限制同时持仓数量
-7. 增加成交量过滤：验证信号的可靠性，避免假突破
+## 四、修复方案
 
-## 版本历史
+### 修复清单
+3. 添加ADX+MACD+RSI指标
+4. 启用止损上移
 
-- **原始版本**: 修复前的代码，存在上述投资逻辑问题
-- **修复版本**: 已更新为Freqtrade最新接口标准
+### 代码修复
 
-## 使用说明
+```python
+# ROI
+minimal_roi = {"0": 0.10, "60": 0.07, "120": 0.05, "240": 0.03}
 
-1. 将策略文件复制到Freqtrade的策略目录
-2. 运行回测测试策略效果: `freqtrade backtesting -s EMA520015_V17`
-3. 如有需要，使用hyperopt优化参数
-4. 实盘前务必进行充分测试
+# 止损
+stoploss = -0.10
+trailing_stop = True
+trailing_stop_positive = 0.02
+trailing_stop_positive_offset = 0.06
+
+# 指标
+dataframe['adx'] = ta.ADX(dataframe, 14)
+dataframe['rsi'] = ta.RSI(dataframe, 14)
+macd = ta.MACD(dataframe)
+dataframe['macd'] = macd['macd']
+```
+
+---
+
+## 五、参数优化
+
+### 保守型
+```python
+stoploss = -0.08
+max_open_trades = 3
+```
+
+### 平衡型（推荐）
+```python
+stoploss = -0.10
+max_open_trades = 5
+trailing_stop = True
+```
+
+---
+
+## 六、使用
+
+```bash
+freqtrade backtesting -s EMA520015_V17 --timerange 20240101-20240301
+freqtrade hyperopt -s EMA520015_V17 --hyperopt-loss SharpeHyperOptLoss
+```
+
+---
 
 ## 风险提示
 
-- 本策略仅供学习参考，不构成投资建议
-- 使用前请进行充分回测
-- 建议先用模拟盘验证策略效果
-- 数字货币交易风险较大，请谨慎操作
+⚠️ {"必须修复: " + ",".join(crit) if crit else "相对干净"}
 
-## 依赖要求
+⚠️ 充分测试: 回测3-6个月 + 纸质交易1-2周
 
-- freqtrade
-- pandas
-- numpy
-- talib
+免责: 后果自负。
+
+---
+
+更新: {datetime.now().strftime('%Y-%m-%d')}

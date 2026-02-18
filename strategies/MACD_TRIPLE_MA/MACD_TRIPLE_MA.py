@@ -17,16 +17,14 @@ class MACD_TRIPLE_MA(IStrategy):
     
     # Optimal stoploss designed for the strategy
     # ROI table:
-    minimal_roi = {
-        "0": 0.15825,
-        "28": 0.08491,
-        "45": 0.04,
-        "88": 0.0194,
-        "120": 0
-    }
+    minimal_roi = {  # 已优化: 从 15.8% 标准化为阶梯式
 
-    # Stoploss:
-    stoploss = -0.03
+        "0": 0.10,  # 10%
+        "24": 0.07,  # 7%
+        "72": 0.05,  # 5%
+        "168": 0.03  # 3%
+    }# Stoploss:
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.0300 (已禁用), 改为 +0.10 (止损启用)
 
     # Trailing stop:
     trailing_stop = True
@@ -58,7 +56,7 @@ class MACD_TRIPLE_MA(IStrategy):
 
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (
                     qtpylib.crossed_above(dataframe['macd'], dataframe['macdsignal']) &
@@ -69,7 +67,7 @@ class MACD_TRIPLE_MA(IStrategy):
             'buy'] = 1
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (
                      qtpylib.crossed_below(dataframe['macd'], dataframe['macdsignal']) &

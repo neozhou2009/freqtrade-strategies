@@ -133,19 +133,14 @@ class NFI5MOHO_WIP_1(IStrategy):
 
     # ROI table:
     minimal_roi = {
-         "0": 0.05,
-        "10": 0.045,
-        "20": 0.04,
-         "30": 0.035,
-        "40": 0.03,
-         "50": 0.025,
-         "60": 0.02,
-         "70": 0.015,
-         "90": 0.01,
-         "120": 0.005
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
     }
 
-    stoploss = -0.10
+    max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.1000 (已禁用), 改为 +0.10 (止损启用)
 
     # Multi Offset
     base_nb_candles_buy = IntParameter(
@@ -661,7 +656,7 @@ class NFI5MOHO_WIP_1(IStrategy):
         return dataframe
 
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
 
         conditions.append(
@@ -1086,7 +1081,7 @@ class NFI5MOHO_WIP_1(IStrategy):
 
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
 
         conditions.append(

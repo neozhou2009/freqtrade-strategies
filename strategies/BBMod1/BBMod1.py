@@ -235,13 +235,13 @@ class BBMod1(IStrategy):
         "pSL_2": 0.045,
     }
 
-    minimal_roi = {
-        "0": 0.10,
-        "30": 0.05,
-        "60": 0.02
-    }
+    minimal_roi = {  # 已优化: 从最大 10000% 改为阶梯式
 
-    # Optimal timeframe for the strategy
+        "0": 0.10,  # 10%
+        "24": 0.07,  # 7%
+        "72": 0.05,  # 5%
+        "168": 0.03  # 3%
+    }# Optimal timeframe for the strategy
     timeframe = '5m'
     inf_1h = '1h'
 
@@ -263,7 +263,8 @@ class BBMod1(IStrategy):
     }
 
     # Disabled
-    stoploss = -0.10
+    max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.1000 (已禁用), 改为 +0.10 (止损启用)
 
     # Custom stoploss
     use_custom_stoploss = True
@@ -767,7 +768,7 @@ class BBMod1(IStrategy):
 
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
 
         conditions = []
         dataframe.loc[:, 'buy_tag'] = ''
@@ -1049,7 +1050,7 @@ class BBMod1(IStrategy):
 
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[(dataframe['volume'] > 0), 'sell'] = 0
         return dataframe
 

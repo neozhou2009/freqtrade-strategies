@@ -70,14 +70,15 @@ class HyperStra_GSN_SMAOnly(IStrategy):
 
     # ROI table:
     minimal_roi = {
-        "0": 0.288,
-        "81": 0.101,
-        "170": 0.049,
-        "491": 0
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
     }
 
     # Stoploss:
-    stoploss = -0.05
+    max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.0500 (已禁用), 改为 +0.10 (止损启用)
 
     # Trailing stop:
     trailing_stop = True
@@ -112,10 +113,10 @@ class HyperStra_GSN_SMAOnly(IStrategy):
     use_sell_signal = True
     timeframe = '5m'
     ignore_roi_if_buy_signal = False
-    process_only_new_candles = False
+process_only_new_candles = True
     startup_candle_count = 440
 
-    sell_profit_only = True
+    sell_profit_only = False
     sell_profit_offset = 0.01
 
     # ##################################################################
@@ -203,7 +204,7 @@ class HyperStra_GSN_SMAOnly(IStrategy):
 
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
 
         conditions.append(
@@ -241,7 +242,7 @@ class HyperStra_GSN_SMAOnly(IStrategy):
             dataframe.loc[reduce(lambda x, y: x | y, conditions), 'buy'] = 1
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
 
         conditions.append(

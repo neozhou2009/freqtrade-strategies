@@ -35,17 +35,15 @@ class Cluc5werk(IStrategy):
 
     # ROI table:
     minimal_roi = {
-        "0": 0.02134,
-        "275": 0.01745,
-        "559": 0.01618,
-        "621": 0.0131,
-        "791": 0.00843,
-        "1048": 0.00443,
-        "1074": 0
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
     }
 
     # Stoploss:
-    stoploss = -0.22405
+    max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.2240 (已禁用), 改为 +0.10 (止损启用)
 
     # Trailing stop:
     trailing_stop = True
@@ -61,7 +59,7 @@ class Cluc5werk(IStrategy):
 
     # Make sure these match or are not overridden in config
     use_sell_signal = True
-    sell_profit_only = True
+    sell_profit_only = False
     sell_profit_offset = 0.0
     ignore_roi_if_buy_signal = True
 
@@ -93,7 +91,7 @@ class Cluc5werk(IStrategy):
 
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         params = self.buy_params
 
         dataframe.loc[
@@ -126,7 +124,7 @@ class Cluc5werk(IStrategy):
 
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         params = self.sell_params
 
         dataframe.loc[
@@ -162,17 +160,14 @@ class Cluc5werk_ETH(Cluc5werk):
 
     # ROI table:
     minimal_roi = {
-        "0": 0.01648,
-        "38": 0.01484,
-        "303": 0.01317,
-        "597": 0.00952,
-        "869": 0.00724,
-        "896": 0.00253,
-        "1062": 0
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
     }
 
     # Stoploss:
-    stoploss = -0.33703
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.2240 (已禁用), 改为 +0.10 (止损启用)
 
     # Trailing stop:
     trailing_stop = True
@@ -201,17 +196,14 @@ class Cluc5werk_BTC(Cluc5werk):
 
     # ROI table:
     minimal_roi = {
-        "0": 0.0218,
-        "242": 0.02079,
-        "308": 0.01803,
-        "372": 0.01325,
-        "390": 0.00905,
-        "619": 0.00467,
-        "737": 0
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
     }
 
     # Stoploss:
-    stoploss = -0.14515
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.2240 (已禁用), 改为 +0.10 (止损启用)
 
     # Trailing stop:
     trailing_stop = True
@@ -249,17 +241,14 @@ class Cluc5werk_USD(Cluc5werk):
     # 139/250:    575 trades. 531/28/16 Wins/Draws/Losses. Avg profit   1.38%. Median profit   1.88%. Total profit  396.08871240 USD ( 790.91Σ%). Avg duration 330.9 min. Objective: -1.63637
     # ROI table:
     minimal_roi = {
-        "0": 0.01887,
-        "150": 0.016,
-        "243": 0.01193,
-        "471": 0.0103,
-        "475": 0.00687,
-        "744": 0.00271,
-        "793": 0
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
     }
 
     # Stoploss:
-    stoploss = -0.33703
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.2240 (已禁用), 改为 +0.10 (止损启用)
 
     # Trailing stop:
     trailing_stop = True

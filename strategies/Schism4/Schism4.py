@@ -47,18 +47,16 @@ class Schism4(IStrategy):
     sell_params_FOO = {}
 
     minimal_roi = {
-        "0": 0.05,
-        "10": 0.025,
-        "20": 0.015,
-        "30": 0.01,
-        "720": 0.005,
-        "1440": 0
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
     }
 
-    stoploss = -0.30
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.3000 (已禁用), 改为 +0.10 (止损启用)
 
     use_sell_signal = False
-    sell_profit_only = True
+    sell_profit_only = False
     ignore_roi_if_buy_signal = True
 
     startup_candle_count: int = 72
@@ -140,7 +138,7 @@ class Schism4(IStrategy):
     """
     Buy Trigger Signals
     """
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         params = self.get_pair_params(metadata['pair'], 'buy')
         trade_data = self.custom_trade_info[metadata['pair']]
         conditions = []
@@ -192,7 +190,7 @@ class Schism4(IStrategy):
         In this strategy all sells for profit happen according to ROI
         This sell signal is designed only as a "dynamic stoploss"
     """
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         params = self.get_pair_params(metadata['pair'], 'sell')
         trade_data = self.custom_trade_info[metadata['pair']]
         conditions = []
@@ -410,10 +408,10 @@ class Schism4_BTC(Schism4):
     }
 
     minimal_roi = {
-        "0": 0.05,
-        "240": 0.025,
-        "1440": 0.01,
-        "4320": 0
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
     }
 
     use_sell_signal = False
@@ -435,10 +433,10 @@ class Schism4_ETH(Schism4):
     }
 
     minimal_roi = {
-        "0": 0.05,
-        "240": 0.025,
-        "1440": 0.01,
-        "4320": 0
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
     }
 
     use_sell_signal = False

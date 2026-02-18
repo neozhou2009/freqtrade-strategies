@@ -31,14 +31,15 @@ class INSIDEUP(IStrategy):
 
     # ROI table:
     minimal_roi = {
-        "0": 0.237,
-        "4195": 0.17,
-        "7191": 0.053,
-        "14695": 0
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
     }
 
     # Stoploss:
-    stoploss = -0.99  # value loaded from strategy
+    max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.1000 (已禁用), 改为 +0.10 (止损启用)  # value loaded from strategy
 
     # Trailing stop:
     trailing_stop = True  # value loaded from strategy
@@ -54,7 +55,7 @@ class INSIDEUP(IStrategy):
 
     # These values can be overridden in the "ask_strategy" section in the config.
     use_sell_signal = False
-    sell_profit_only = True
+    sell_profit_only = False
     ignore_roi_if_buy_signal = False
 
 
@@ -81,7 +82,7 @@ class INSIDEUP(IStrategy):
         return dataframe
 
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dateTime = datetime.now()
 
         dataframe.loc[
@@ -103,7 +104,7 @@ class INSIDEUP(IStrategy):
 
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         """
         no sell signal
         """

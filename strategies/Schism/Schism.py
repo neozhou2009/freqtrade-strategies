@@ -30,17 +30,15 @@ class Schism(IStrategy):
 
     minimal_roi = {
         "0": 0.10,
-        "15": 0.05,
-        "30": 0.025,
-        "60": 0.01,
-        "120": 0.005,
-        "1440": 0
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
     }
 
-    stoploss = -0.40
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.4000 (已禁用), 改为 +0.10 (止损启用)
 
     use_sell_signal = True
-    sell_profit_only = True
+    sell_profit_only = False
     ignore_roi_if_buy_signal = True
 
     startup_candle_count: int = 72
@@ -77,7 +75,7 @@ class Schism(IStrategy):
 
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         params = self.buy_params
         trade_data = self.custom_trade_info[metadata['pair']]
         conditions = []
@@ -108,7 +106,7 @@ class Schism(IStrategy):
 
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         params = self.sell_params
         trade_data = self.custom_trade_info[metadata['pair']]
         conditions = []

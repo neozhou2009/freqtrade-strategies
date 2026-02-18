@@ -41,7 +41,8 @@ class CombinedBinHAndClucV5Hyperoptable(IStrategy):
         "0": 0.018
     }
 
-    stoploss = -0.99 # effectively disabled.
+    max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.1000 (已禁用), 改为 +0.10 (止损启用) # effectively disabled.
 
     timeframe = '5m'
 
@@ -61,7 +62,7 @@ class CombinedBinHAndClucV5Hyperoptable(IStrategy):
     use_custom_stoploss = True
 
     # Run "populate_indicators()" only for new candle.
-    process_only_new_candles = False
+process_only_new_candles = True
 
     # Number of candles the strategy requires before producing valid signals
     startup_candle_count: int = 50
@@ -109,7 +110,7 @@ class CombinedBinHAndClucV5Hyperoptable(IStrategy):
 
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (  # strategy BinHV45
                 (dataframe['lower'].shift() > 0 ) &
@@ -131,7 +132,7 @@ class CombinedBinHAndClucV5Hyperoptable(IStrategy):
         ] = 1
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             ( # Improves the profit slightly.
                 (dataframe['close'] > dataframe['bb_upperband']) &

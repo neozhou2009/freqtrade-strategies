@@ -39,17 +39,15 @@ class ClucHAwerk(IStrategy):
 
     # ROI table:
     minimal_roi = {
-        "0": 0.11054,
-        "2": 0.05569,
-        "10": 0.03055,
-        "16": 0.02311,
-        "82": 0.01267,
-        "238": 0.00301,
-        "480": 0
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
     }
 
     # Stoploss:
-    stoploss = -0.02139
+    max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.0214 (已禁用), 改为 +0.10 (止损启用)
 
     # Trailing stop:
     trailing_stop = True
@@ -67,7 +65,7 @@ class ClucHAwerk(IStrategy):
 
     # Make sure these match or are not overridden in config
     use_sell_signal = True
-    sell_profit_only = True
+    sell_profit_only = False
     sell_profit_offset = 0.0
     ignore_roi_if_buy_signal = True
 
@@ -112,7 +110,7 @@ class ClucHAwerk(IStrategy):
 
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         params = self.buy_params
 
         dataframe.loc[
@@ -137,7 +135,7 @@ class ClucHAwerk(IStrategy):
 
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         params = self.sell_params
 
         dataframe.loc[
@@ -181,19 +179,16 @@ class ClucHAwerk_ETH(ClucHAwerk):
     # 479/500:   1890 trades. 1209/0/681 Wins/Draws/Losses. Avg profit   0.86%. Median profit   0.74%. Total profit  0.16228997 ETH ( 1620.31Σ%). Avg duration  45.6 min. Objective: -258.91551
     # ROI table:
     minimal_roi = {
-        "0": 0.14414,
-        "13": 0.10123,
-        "20": 0.03256,
-        "47": 0.0177,
-        "132": 0.01016,
-        "177": 0.00328,
-        "277": 0
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
     }
 	
 	# hyperopt --config user_data/config-backtest-ETH.json --hyperopt ClucHAwerkHyperopt_ETH --hyperopt-loss OnlyProfitHyperOptLoss --strategy ClucHAwerk_ETH -e 500 --spaces stoploss --timeframe 1m --timerange 20210101- 
     # 292/500:   1890 trades. 1209/0/681 Wins/Draws/Losses. Avg profit   0.86%. Median profit   0.74%. Total profit  0.16251312 ETH ( 1622.53Σ%). Avg duration  45.6 min. Objective: -4.40843
     # Stoploss:
-    stoploss = -0.02
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.0214 (已禁用), 改为 +0.10 (止损启用)
 	
 	# hyperopt --config user_data/config-backtest-ETH.json --hyperopt ClucHAwerkHyperopt_ETH --hyperopt-loss OnlyProfitHyperOptLoss --strategy ClucHAwerk_ETH -e 500 --spaces trailing --timeframe 1m --timerange 20210101- 
     # 443/500:   1883 trades. 1193/0/690 Wins/Draws/Losses. Avg profit   0.86%. Median profit   0.76%. Total profit  0.16275524 ETH ( 1624.95Σ%). Avg duration  46.0 min. Objective: -4.41651
@@ -229,19 +224,16 @@ class ClucHAwerk_BTC(ClucHAwerk):
     # 304/500:    627 trades. 563/10/54 Wins/Draws/Losses. Avg profit   1.71%. Median profit   2.18%. Total profit  0.01075130 BTC ( 1073.41Σ%). Avg duration 248.0 min. Objective: -2.57804
     # ROI table:
     minimal_roi = {
-        "0": 0.18105,
-        "9": 0.10391,
-        "49": 0.0447,
-        "53": 0.02747,
-        "141": 0.01265,
-        "312": 0.00499,
-        "466": 0
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
     }
 	
 	# hyperopt --config user_data/config-backtest-BTC.json --hyperopt ClucHAwerkHyperopt_BTC --hyperopt-loss SharpeHyperOptLoss --strategy ClucHAwerk_BTC -e 250 --spaces stoploss --timeframe 1m --timerange 20210101- 
     # 192/250:    568 trades. 505/17/46 Wins/Draws/Losses. Avg profit   1.80%. Median profit   2.18%. Total profit  0.01023698 BTC ( 1022.05Σ%). Avg duration 280.1 min. Objective: -99.33155
     # Stoploss:
-    stoploss = -0.11356
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.0214 (已禁用), 改为 +0.10 (止损启用)
 	
 	# hyperopt --config user_data/config-backtest-BTC.json --hyperopt ClucHAwerkHyperopt_BTC --hyperopt-loss OnlyProfitHyperOptLoss --strategy ClucHAwerk_BTC -e 500 --spaces trailing --timeframe 1m --timerange 20210101-
     # 313/500:    637 trades. 573/10/54 Wins/Draws/Losses. Avg profit   1.69%. Median profit   2.50%. Total profit  0.01079683 BTC ( 1077.96Σ%). Avg duration 242.7 min. Objective: -2.59319
@@ -277,19 +269,16 @@ class ClucHAwerk_USD(ClucHAwerk):
     # 334/500:    715 trades. 674/22/19 Wins/Draws/Losses. Avg profit   2.90%. Median profit   2.80%. Total profit  1037.85838537 USD ( 2072.40Σ%). Avg duration 166.5 min. Objective: -5.90800
     # ROI table:
     minimal_roi = {
-        "0": 0.19315,
-        "13": 0.13189,
-        "24": 0.08358,
-        "103": 0.03894,
-        "148": 0.0148,
-        "201": 0.00506,
-        "447": 0
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
     }
 
 	# hyperopt --config user_data/config-backtest-USD.json --hyperopt ClucHAwerkHyperopt_USD --hyperopt-loss SharpeHyperOptLoss --strategy ClucHAwerk_USD -e 500 --spaces stoploss --timeframe 1m --timerange 20210101- 
     # 352/500:    729 trades. 688/22/19 Wins/Draws/Losses. Avg profit   2.91%. Median profit   2.79%. Total profit  1060.61902930 USD ( 2117.85Σ%). Avg duration 167.6 min. Objective: -198.19711
     # Stoploss:
-    stoploss = -0.17725
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.0214 (已禁用), 改为 +0.10 (止损启用)
 
 	# hyperopt --config user_data/config-backtest-USD.json --hyperopt ClucHAwerkHyperopt_USD --hyperopt-loss OnlyProfitHyperOptLoss --strategy ClucHAwerk_USD -e 500 --spaces trailing --timeframe 1m --timerange 20210101- 
     # 366/500:    730 trades. 689/22/19 Wins/Draws/Losses. Avg profit   2.91%. Median profit   2.80%. Total profit  1062.06091250 USD ( 2120.73Σ%). Avg duration 167.3 min. Objective: -6.06910

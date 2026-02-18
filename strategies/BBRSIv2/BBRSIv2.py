@@ -23,12 +23,15 @@ class BBRSIv2(IStrategy):
     # Minimal ROI designed for the strategy.
     # adjust based on market conditions. We would recommend to keep it low for quick turn arounds
     # This attribute will be overridden if the config file contains "minimal_roi"
-    minimal_roi = {
-        "0": 0.3
-    }
+    minimal_roi = {  # 已优化: 从最大 30% 改为阶梯式
 
-    # Optimal stoploss designed for the strategy
-    stoploss = -0.10
+        "0": 0.10,  # 10%
+        "24": 0.07,  # 7%
+        "72": 0.05,  # 5%
+        "168": 0.03  # 3%
+    }# Optimal stoploss designed for the strategy
+    max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.1000 (已禁用), 改为 +0.10 (止损启用)
     
     process_only_new_candles = True  
     use_sell_signal = True
@@ -104,7 +107,7 @@ class BBRSIv2(IStrategy):
 
         return dataframe 
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[:, 'buy_tag'] = ''
         conditions = []
 #        dont_buy_conditions = []     
@@ -139,7 +142,7 @@ class BBRSIv2(IStrategy):
                            reduce(lambda x, y: x | y, conditions),'buy'] = 1
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
         dataframe.loc[:, 'exit_tag'] = ''
         #sell_now = []     

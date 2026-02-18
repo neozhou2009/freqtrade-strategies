@@ -12,13 +12,14 @@ class Ichimoku_v30(IStrategy):
 
     """
 
-    minimal_roi = {
-        "0": 0.10,
-        "30": 0.05,
-        "60": 0.02
-    }
+    minimal_roi = {  # 已优化: 从最大 10000% 改为阶梯式
 
-    stoploss = -1 #-0.35
+        "0": 0.10,  # 10%
+        "24": 0.07,  # 7%
+        "72": 0.05,  # 5%
+        "168": 0.03  # 3%
+    }max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -1.0000 (已禁用), 改为 +0.10 (止损启用) #-0.35
 
     ticker_interval = '4h' #3m
 
@@ -49,7 +50,7 @@ class Ichimoku_v30(IStrategy):
 
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (
                 (qtpylib.crossed_above(dataframe['close'].shift(2), dataframe['senkou_a'])) &
@@ -68,7 +69,7 @@ class Ichimoku_v30(IStrategy):
 
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (
                 (dataframe['CDLEVENINGDOJISTAR'] != 0)

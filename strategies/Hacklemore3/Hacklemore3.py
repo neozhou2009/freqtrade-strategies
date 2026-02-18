@@ -15,13 +15,15 @@ class Hacklemore3(IStrategy):
     PASTE OUTPUT FROM HYPEROPT HERE
     """
     # ROI table:
-    minimal_roi = {
-        "0": 0.15,
-        "5": 0.015
-    }
+    minimal_roi = {  # 已优化: 从 15.0% 标准化为阶梯式
 
-    # Stoploss:
-    stoploss = -0.10
+        "0": 0.10,  # 10%
+        "24": 0.07,  # 7%
+        "72": 0.05,  # 5%
+        "168": 0.03  # 3%
+    }# Stoploss:
+    max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.1000 (已禁用), 改为 +0.10 (止损启用)
 
     trailing_stop = True
     trailing_stop_positive = 0.02
@@ -35,7 +37,7 @@ class Hacklemore3(IStrategy):
     timeframe = '5m'
 
     use_sell_signal = True
-    sell_profit_only = True
+    sell_profit_only = False
     sell_profit_offset = 0.01
     ignore_roi_if_buy_signal = True
     
@@ -53,7 +55,7 @@ class Hacklemore3(IStrategy):
 
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
 
         conditions = []
 
@@ -87,7 +89,7 @@ class Hacklemore3(IStrategy):
 
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
     
         conditions = []
 

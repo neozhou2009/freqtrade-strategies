@@ -126,14 +126,15 @@ class Persia(IStrategy):
 
     # ROI table:
     minimal_roi = {
-        "0": 0.273,
-        "26": 0.084,
-        "79": 0.033,
-        "187": 0
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
     }
 
     # Stoploss:
-    stoploss = -0.19
+    max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.1900 (已禁用), 改为 +0.10 (止损启用)
 
     timeframe = '5m'
     # #################### END OF RESULT PLACE ####################
@@ -2577,7 +2578,7 @@ class Persia(IStrategy):
         # print("\t",metadata['pair'],end="\h")
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
 
         for i in range(CONDITIONS):
@@ -2602,7 +2603,7 @@ class Persia(IStrategy):
 
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
 
         formula = []

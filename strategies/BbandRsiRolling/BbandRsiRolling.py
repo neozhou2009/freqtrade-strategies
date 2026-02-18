@@ -22,22 +22,15 @@ class BbandRsiRolling(IStrategy):
     # Minimal ROI designed for the strategy.
     # This has been determined through hyperopt in a timerange of 270 days.
     minimal_roi = {
-        "0":  0.03279,
-        "259": 0.02964,
-        "536" : 0.02467,
-        "818": 0.02326,
-        "965": 0.01951,
-        "1230": 0.01492,
-        "1279" : 0.01502,
-        "1448": 0.00945,
-        "1525" : 0.00698,
-        "1616": 0.00319,
-        "1897" : 0
-
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
     }
 
     # Optimal stoploss designed for the strategy
-    stoploss = -0.08
+    max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.0800 (已禁用), 改为 +0.10 (止损启用)
 
     # Optimal timeframe for the strategy
     timeframe = '5m'
@@ -56,7 +49,7 @@ class BbandRsiRolling(IStrategy):
 
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (
                     (dataframe['rsi'].rolling(8).min() < 37) &
@@ -66,7 +59,7 @@ class BbandRsiRolling(IStrategy):
             'buy'] = 1
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (
             ),

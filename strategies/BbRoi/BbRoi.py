@@ -9,15 +9,16 @@ import freqtrade.vendor.qtpylib.indicators as qtpylib
 
 
 class BbRoi(IStrategy):
-    minimal_roi = { 
-        "0": 0.17552,
-        "53": 0.11466,
-        "226": 0.06134,
-        "400": 0
+    minimal_roi = {
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
     }   
 
     # Stoploss:
-    stoploss = -0.23701
+    max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.2370 (已禁用), 改为 +0.10 (止损启用)
 
     # Trailing stop:
     trailing_stop = True
@@ -54,7 +55,7 @@ class BbRoi(IStrategy):
 
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (
                     (dataframe['close'] > dataframe['bb_middleband']) &
@@ -67,7 +68,7 @@ class BbRoi(IStrategy):
             'buy'] = 1
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (
                     (dataframe['rsi'] > 75) |

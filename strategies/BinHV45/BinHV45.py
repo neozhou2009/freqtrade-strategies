@@ -24,7 +24,8 @@ class BinHV45(IStrategy):
         "0": 0.0125
     }
 
-    stoploss = -0.05
+    max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.0500 (已禁用), 改为 +0.10 (止损启用)
     timeframe = '1m'
 
     buy_bbdelta = IntParameter(low=1, high=15, default=30, space='buy', optimize=True)
@@ -50,7 +51,7 @@ class BinHV45(IStrategy):
         dataframe['tail'] = (dataframe['close'] - dataframe['low']).abs()
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (
                 dataframe['lower'].shift().gt(0) &
@@ -63,7 +64,7 @@ class BinHV45(IStrategy):
             'buy'] = 1
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         """
         no sell signal
         """

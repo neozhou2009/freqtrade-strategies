@@ -191,10 +191,10 @@ class true_lambo(IStrategy):
 
     # ROI
     minimal_roi = {
-        "0": 0.092,
-        "29": 0.042,
-        "85": 0.028,
-        "128": 0.005
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
     }
 
     # Optimal timeframe for the strategy
@@ -202,7 +202,8 @@ class true_lambo(IStrategy):
     inf_1h = '1h'
 
     # Disabled
-    stoploss = -0.10
+    max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.1000 (已禁用), 改为 +0.10 (止损启用)
 
     # Run "populate_indicators()" only for new candle.
     process_only_new_candles = True
@@ -529,7 +530,7 @@ class true_lambo(IStrategy):
 
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
 
 
         conditions = []
@@ -763,7 +764,7 @@ class true_lambo(IStrategy):
 
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
 
         conditions.append(

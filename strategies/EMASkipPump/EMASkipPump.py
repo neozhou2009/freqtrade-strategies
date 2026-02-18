@@ -28,7 +28,8 @@ class EMASkipPump(IStrategy):
     # Optimal stoploss designed for the strategy
     # This attribute will be overridden if the config file contains "stoploss"
     # should be converted to a trailing stop loss
-    stoploss = -0.05
+    max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.0500 (已禁用), 改为 +0.10 (止损启用)
 
     # Optimal timeframe for the strategy
     timeframe = '5m'
@@ -59,7 +60,7 @@ class EMASkipPump(IStrategy):
 
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
 
         dataframe.loc[
             (dataframe['volume'] < (dataframe['volume'].rolling(window=30).mean().shift(1) * 20)) &
@@ -72,7 +73,7 @@ class EMASkipPump(IStrategy):
 
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
 
         dataframe.loc[
             (dataframe['close'] > dataframe['ema_{}'.format(self.EMA_SHORT_TERM)]) &

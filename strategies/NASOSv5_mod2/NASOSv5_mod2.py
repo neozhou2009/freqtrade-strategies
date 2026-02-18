@@ -60,12 +60,15 @@ class NASOSv5_mod2(IStrategy):
     }
 
     # ROI table:  # value loaded from strategy
-    minimal_roi = {
-        "0": 0.4
-    }
+    minimal_roi = {  # 已优化: 从最大 40% 改为阶梯式
 
-    # Stoploss:
-    stoploss = -0.3  # value loaded from strategy
+        "0": 0.10,  # 10%
+        "24": 0.07,  # 7%
+        "72": 0.05,  # 5%
+        "168": 0.03  # 3%
+    }# Stoploss:
+    max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.3000 (已禁用), 改为 +0.10 (止损启用)  # value loaded from strategy
 
     # Trailing stop:
     trailing_stop = True  # value loaded from strategy
@@ -114,7 +117,7 @@ class NASOSv5_mod2(IStrategy):
 
     # Sell signal
     use_sell_signal = True
-    sell_profit_only = True
+    sell_profit_only = False
     sell_profit_offset = 0.01
     ignore_roi_if_buy_signal = False
 
@@ -335,7 +338,7 @@ class NASOSv5_mod2(IStrategy):
 
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
 
         dont_buy_conditions = []
 
@@ -389,7 +392,7 @@ class NASOSv5_mod2(IStrategy):
 
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
 
         conditions.append(
@@ -440,12 +443,14 @@ class NASOSv5HO(NASOSv5_mod2):
     }
 
     # ROI table:  # value loaded from strategy
-    minimal_roi = {
-        "0": 0.1
-    }
+    minimal_roi = {  # 已优化: 从最大 40% 改为阶梯式
 
-    # Stoploss:
-    stoploss = -0.1  # value loaded from strategy
+        "0": 0.10,  # 10%
+        "24": 0.07,  # 7%
+        "72": 0.05,  # 5%
+        "168": 0.03  # 3%
+    }# Stoploss:
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.3000 (已禁用), 改为 +0.10 (止损启用)  # value loaded from strategy
 
     # Trailing stop:
     trailing_stop = True  # value loaded from strategy
@@ -454,7 +459,7 @@ class NASOSv5HO(NASOSv5_mod2):
     trailing_only_offset_is_reached = True  # value loaded from strategy
 
 class NASOSv5PD(NASOSv5_mod2):
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
 
         dont_buy_conditions = []
 
@@ -612,7 +617,7 @@ class TrailingBuyStrat(NASOSv5_mod2):
         self.custom_info[pair]['trailing_buy']['buy_tag'] = None
         return val
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         def get_local_min(x):
             win = dataframe.loc[:, 'barssince_last_buy'].iloc[x.shape[0] - 1].astype('int')
             win = max(win, 0)
@@ -653,7 +658,7 @@ class TrailingBuyStrat(NASOSv5_mod2):
             # FOR BACKTEST
             # PROBABLY STILL NOT WORKING
             dataframe.loc[
-                (dataframe['pre_buy'] == 1) &
+                (dataframe['pre_buy'] == 1) & (dataframe["volume"] > 0)) &
                 (dataframe['pre_buy'].shift() == 0)
             , 'pre_buy_switch'] = 1
             dataframe['pre_buy_switch'] = dataframe['pre_buy_switch'].fillna(0)
@@ -687,7 +692,7 @@ class TrailingBuyStrat(NASOSv5_mod2):
             , 'buy'] = 1
         else: # No but trailing
             dataframe.loc[
-                (dataframe['pre_buy'] == 1)
+                (dataframe['pre_buy'] == 1) & (dataframe["volume"] > 0))
             , 'buy'] = 1
         return dataframe
 

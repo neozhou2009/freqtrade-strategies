@@ -18,13 +18,13 @@ class Maro4hMacdSd(IStrategy):
     # Minimal ROI designed for the strategy.
     # This attribute will be overridden if the config file contains "minimal_roi"
 
-    stoploss = -0.21611
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.2161 (已禁用), 改为 +0.10 (止损启用)
 
     minimal_roi = {
-        "0": 0.24627,
-        "24": 0.06484,
-        "38": 0.02921,
-        "145": 0
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
     }
 
     # Optimal timeframe for the strategy
@@ -40,7 +40,7 @@ class Maro4hMacdSd(IStrategy):
 
     # Experimental settings (configuration will overide these if set)
     use_sell_signal = True
-    sell_profit_only = True
+    sell_profit_only = False
     ignore_roi_if_buy_signal = False
     
 
@@ -74,7 +74,7 @@ class Maro4hMacdSd(IStrategy):
 
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         """
         Based on TA indicators, populates the buy signal for the given dataframe
         :param dataframe: DataFrame
@@ -92,7 +92,7 @@ class Maro4hMacdSd(IStrategy):
 
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         """
         Based on TA indicators, populates the sell signal for the given dataframe
         :param dataframe: DataFrame

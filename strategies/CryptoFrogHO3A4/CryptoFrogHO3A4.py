@@ -32,10 +32,10 @@ class CryptoFrogHO3A4(IStrategy):
 
     # ROI table - this strat REALLY benefits from roi and trailing hyperopt:
     minimal_roi = {
-        "0": 0.219,
-        "14": 0.021,
-        "24": 0.01,
-        "49": 0
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
     }
 
     # Trailing stop:
@@ -45,7 +45,8 @@ class CryptoFrogHO3A4(IStrategy):
     trailing_only_offset_is_reached = True
 
     # Stoploss:
-    stoploss = -0.299
+    max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.2990 (已禁用), 改为 +0.10 (止损启用)
 
     use_custom_stoploss = True
     custom_stop = {
@@ -88,7 +89,7 @@ class CryptoFrogHO3A4(IStrategy):
 
     # Experimental settings (configuration will overide these if set)
     use_sell_signal = True
-    sell_profit_only = True
+    sell_profit_only = False
     ignore_roi_if_buy_signal = True
 
     use_dynamic_roi = True    
@@ -303,7 +304,7 @@ class CryptoFrogHO3A4(IStrategy):
         return dataframe
 
     ## cryptofrog signals
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (
                 (
@@ -366,7 +367,7 @@ class CryptoFrogHO3A4(IStrategy):
         return dataframe
     
     ## more going on here
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (
                 (

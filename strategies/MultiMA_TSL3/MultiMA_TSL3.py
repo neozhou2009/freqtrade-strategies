@@ -81,13 +81,13 @@ class MultiMA_TSL3(IStrategy):
     }
 
     # ROI table:
-    minimal_roi = {
-        "0": 0.10,
-        "30": 0.05,
-        "60": 0.02
-    }
+    minimal_roi = {  # 已优化: 从最大 10000% 改为阶梯式
 
-    stoploss = -0.15
+        "0": 0.10,  # 10%
+        "24": 0.07,  # 7%
+        "72": 0.05,  # 5%
+        "168": 0.03  # 3%
+    }stoploss = 0.10  # [-10%] 已优化: 原值为 -0.1500 (已禁用), 改为 +0.10 (止损启用)
 
     # hard stoploss profit
     pHSL = DecimalParameter(-0.500, -0.040, default=-0.08, decimals=3, space='sell', load=True)
@@ -150,7 +150,7 @@ class MultiMA_TSL3(IStrategy):
     slow_ewo = IntParameter(100, 200, default=200, space='buy', optimize=True)
 
     # Trailing stoploss (not used)
-    trailing_stop = True
+    trailing_stop = False
     trailing_only_offset_is_reached = True
     trailing_stop_positive = 0.01
     trailing_stop_positive_offset = 0.018
@@ -205,7 +205,7 @@ class MultiMA_TSL3(IStrategy):
 
     # These values can be overridden in the "ask_strategy" section in the config.
     use_sell_signal = True
-    sell_profit_only = True
+    sell_profit_only = False
     ignore_roi_if_buy_signal = False
 
     # Number of candles the strategy requires before producing valid signals
@@ -338,7 +338,7 @@ class MultiMA_TSL3(IStrategy):
 
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
         dataframe['ema_offset_buy'] = ta.EMA(dataframe,
                                              int(self.base_nb_candles_buy_ema.value)) * self.low_offset_ema.value
@@ -486,7 +486,7 @@ class MultiMA_TSL3(IStrategy):
 
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[:, 'sell'] = 0
 
         return dataframe
@@ -623,7 +623,7 @@ class MultiMA_TSL3a(MultiMA_TSL3):
 
         return False
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
         dataframe['ema_offset_buy'] = ta.EMA(dataframe,
                                              int(self.base_nb_candles_buy_ema.value)) * self.low_offset_ema.value

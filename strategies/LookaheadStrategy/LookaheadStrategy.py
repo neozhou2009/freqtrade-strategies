@@ -30,14 +30,16 @@ class LookaheadStrategy(IStrategy):
     # ROI table:
     # fmt: off
     minimal_roi = {
-        "0": 0.166,
-        "44": 0.012,
-        "59": 0
-        }
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
+    }
     # fmt: on
 
     # Stoploss:
-    stoploss = -0.194
+    max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.1940 (已禁用), 改为 +0.10 (止损启用)
 
     # Trailing stop:
     trailing_stop = True

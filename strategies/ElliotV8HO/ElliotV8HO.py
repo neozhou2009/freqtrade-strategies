@@ -52,13 +52,15 @@ class ElliotV8HO(IStrategy):
 
     # ROI table:
     minimal_roi = {
-        "0": 0.08,
-        "40": 0.032,
-        "87": 0.016
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
     }
 
     # Stoploss:
-    stoploss = -0.189
+    max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.1890 (已禁用), 改为 +0.10 (止损启用)
 
     # SMAOffset
     base_nb_candles_buy = IntParameter(
@@ -164,7 +166,7 @@ class ElliotV8HO(IStrategy):
 
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
 
         conditions.append(
@@ -204,7 +206,7 @@ class ElliotV8HO(IStrategy):
 
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
 
         conditions.append(

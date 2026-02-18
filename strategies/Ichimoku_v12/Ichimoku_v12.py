@@ -16,7 +16,8 @@ class Ichimoku_v12(IStrategy):
         "0": 0.05
     }
 
-    stoploss = -1 #-0.35
+    max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -1.0000 (已禁用), 改为 +0.10 (止损启用) #-0.35
 
     ticker_interval = '4h' #3m
 
@@ -43,7 +44,7 @@ class Ichimoku_v12(IStrategy):
 
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (
                 (dataframe['close'] > dataframe['senkou_a']) &
@@ -60,7 +61,7 @@ class Ichimoku_v12(IStrategy):
 
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         # dataframe.loc[
         #     (
         #         (qtpylib.crossed_below(dataframe['close'], dataframe['senkou_b'])) &

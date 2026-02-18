@@ -67,18 +67,17 @@ class MacheteV8b(IStrategy):
     }
 
     # ROI table:
-    minimal_roi = {
-        "0": 0.279,
-        "92": 0.109,
-        "245": 0.059,
-        "561": 0
-    }
+    minimal_roi = {  # 已优化: 从最大 28% 改为阶梯式
 
-    # Stoploss:
-    stoploss = -0.1#-0.046
+        "0": 0.10,  # 10%
+        "24": 0.07,  # 7%
+        "72": 0.05,  # 5%
+        "168": 0.03  # 3%
+    }# Stoploss:
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.1000 (已禁用), 改为 +0.10 (止损启用)#-0.046
 
     # Trailing stop:
-    trailing_stop = True
+    trailing_stop = False
     #trailing_stop_positive = 0.0247
     #trailing_stop_positive_offset = 0.0248
     #trailing_only_offset_is_reached = True
@@ -137,7 +136,7 @@ class MacheteV8b(IStrategy):
 
     # Experimental settings (configuration will overide these if set)
     use_sell_signal = True
-    sell_profit_only = True
+    sell_profit_only = False
     ignore_roi_if_buy_signal = False
     startup_candle_count = 500#149
 
@@ -418,7 +417,7 @@ class MacheteV8b(IStrategy):
     # Processing buy signals
     #
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (
                 (self.get_buy_signal_awesome_macd(dataframe) == True)
@@ -607,7 +606,7 @@ class MacheteV8b(IStrategy):
     # Processing sell signals
     #
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (qtpylib.crossed_above(dataframe['sslDown_inf'], dataframe['sslUp_inf']))
             & (

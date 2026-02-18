@@ -35,12 +35,10 @@ class EI3v2_tag_cofi_green(IStrategy):
     """
     # ROI table:
     minimal_roi = {
-        "0": 0.08,
-        "20": 0.04,
-        "40": 0.032,
-        "87": 0.016,
-        "201": 0,
-        "202": -1
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
     }
     """
     # Buy hyperspace params:
@@ -107,12 +105,15 @@ class EI3v2_tag_cofi_green(IStrategy):
 
     # ROI table:
     minimal_roi = {
-        "0": 0.99,
-        
+        "0": 0.10,
+        "60": 0.07,
+        "120": 0.05,
+        "240": 0.03
     }
 
     # Stoploss:
-    stoploss = -0.10
+    max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.1000 (已禁用), 改为 +0.10 (止损启用)
 
     # SMAOffset
     base_nb_candles_buy = IntParameter(8, 20, default=buy_params['base_nb_candles_buy'], space='buy', optimize=False)
@@ -303,7 +304,7 @@ class EI3v2_tag_cofi_green(IStrategy):
 
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
         dataframe.loc[:, 'buy_tag'] = ''
 
@@ -372,7 +373,7 @@ class EI3v2_tag_cofi_green(IStrategy):
 
 
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
 
         conditions.append(

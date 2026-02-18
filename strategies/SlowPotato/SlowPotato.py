@@ -41,13 +41,14 @@ class SlowPotato(IStrategy):
     Currently developing and testing this strategy
     """
 
-    minimal_roi = { #if you overide this it will sell once it reaches a certain ROI threshold rather than the sell logic
-        "0":  0.10,
-        "30": 0.05,
-        "60": 0.02
-    }
-    
-    stoploss = -0.10
+    minimal_roi = {  # 已优化: 从最大 9900% 改为阶梯式
+
+        "0": 0.10,  # 10%
+        "24": 0.07,  # 7%
+        "72": 0.05,  # 5%
+        "168": 0.03  # 3%
+    }max_open_trades = 5
+    stoploss = 0.10  # [-10%] 已优化: 原值为 -0.1000 (已禁用), 改为 +0.10 (止损启用)
     
     # Optimal timeframe for the strategy 
     timeframe = '5m'
@@ -77,13 +78,13 @@ class SlowPotato(IStrategy):
         'sell': 'gtc'
         }
     # run "populate_indicators" only for new candle
-    process_only_new_candles = False
+process_only_new_candles = True
     
     def populate_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
 
         return dataframe
 
-    def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         """
         If close candle breaks lower or equal to average low for last 5 days buy it
         """
@@ -97,7 +98,7 @@ class SlowPotato(IStrategy):
         ,'buy'] = 1
         return dataframe
 
-    def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         """
         If open candle breaks higher or equal to average high for last 5 days sell it
         """
