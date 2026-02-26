@@ -465,7 +465,7 @@ class custom(IStrategy):
         return dataframe
 
     #""
-    def custom_sell(self, pair: str, trade: Trade, current_time: datetime, current_rate: float,
+    def custom_exit(self, pair: str, trade: Trade, current_time: datetime, current_rate: float,
                     current_profit: float, **kwargs):
         dataframe, _ = self.dp.get_analyzed_dataframe(pair, self.timeframe)
         last_candle = dataframe.iloc[-1].squeeze()

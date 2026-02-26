@@ -81,9 +81,9 @@ class ClucHAnix(IStrategy):
     order_types = {
         'entry': 'market',
         'exit': 'market',
-        'emergencysell': 'market',
-        'forcebuy': "market",
-        'forcesell': 'market',
+        'emergency_exit': 'market',
+        'force_entry': "market",
+        'force_exit': 'market',
         'stoploss': 'market',
         'stoploss_on_exchange': False,
 

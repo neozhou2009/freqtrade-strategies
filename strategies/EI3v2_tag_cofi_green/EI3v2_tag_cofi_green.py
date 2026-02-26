@@ -178,7 +178,7 @@ class EI3v2_tag_cofi_green(IStrategy):
     }
 
 
-    def custom_sell(self, pair: str, trade: 'Trade', current_time: 'datetime', current_rate: float, current_profit: float, **kwargs):
+    def custom_exit(self, pair: str, trade: 'Trade', current_time: 'datetime', current_rate: float, current_profit: float, **kwargs):
         # Sell any positions at a loss if they are held for more than 7 days.
         if current_profit < -0.04 and (current_time - trade.open_date_utc).days >= 4:
             return 'unclog'

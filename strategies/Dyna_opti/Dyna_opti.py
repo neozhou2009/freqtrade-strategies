@@ -474,7 +474,7 @@ class Dyna_opti(IStrategy):
     """
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
   
-        dataframe['sell'] = 0
+        dataframe['exit'] = 0
 
         return dataframe
 

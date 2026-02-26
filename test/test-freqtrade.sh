@@ -85,20 +85,20 @@ case "$CMD" in
         ;;
     download)
         echo -e "${YELLOW}Running: freqtrade download-data $@${NC}"
-        docker run --rm --workdir /freqtrade/user_data -v "$USER_DATA_DIR:/freqtrade/user_data" "$IMAGE_NAME" download-data --userdir . "$@"
+        docker run --rm --workdir /freqtrade/user_data -v "$USER_DATA_DIR:/freqtrade/user_data" -e PYTHONPATH=/freqtrade/user_data/lib "$IMAGE_NAME" download-data --userdir . "$@"
         ;;
     list-data)
         echo -e "${YELLOW}Running: freqtrade list-data $@${NC}"
-        docker run --rm --workdir /freqtrade/user_data -v "$USER_DATA_DIR:/freqtrade/user_data" "$IMAGE_NAME" list-data --userdir . "$@"
+        docker run --rm --workdir /freqtrade/user_data -v "$USER_DATA_DIR:/freqtrade/user_data" -e PYTHONPATH=/freqtrade/user_data/lib "$IMAGE_NAME" list-data --userdir . "$@"
         ;;
     backtest)
         echo -e "${YELLOW}Running: freqtrade backtesting $@${NC}"
-        docker run --rm --workdir /freqtrade/user_data -v "$USER_DATA_DIR:/freqtrade/user_data" "$IMAGE_NAME" backtesting --userdir . "$@"
+        docker run --rm --workdir /freqtrade/user_data -v "$USER_DATA_DIR:/freqtrade/user_data" -e PYTHONPATH=/freqtrade/user_data/lib "$IMAGE_NAME" backtesting --userdir . "$@"
         ;;
     backtest-gui)
         echo -e "${YELLOW}Running: freqtrade backtesting (to generate results for UI)...${NC}"
         # 1. Run backtesting to generate the results in user_data/backtest_results/
-        docker run --rm --workdir /freqtrade/user_data -v "$USER_DATA_DIR:/freqtrade/user_data" "$IMAGE_NAME" backtesting --userdir . "$@"
+        docker run --rm --workdir /freqtrade/user_data -v "$USER_DATA_DIR:/freqtrade/user_data" -e PYTHONPATH=/freqtrade/user_data/lib "$IMAGE_NAME" backtesting --userdir . "$@"
         
         if [ $? -eq 0 ]; then
             echo "------------------------------------------------------------"

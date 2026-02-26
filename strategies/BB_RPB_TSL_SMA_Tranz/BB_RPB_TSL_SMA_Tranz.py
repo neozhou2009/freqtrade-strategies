@@ -1772,7 +1772,7 @@ class BB_RPB_TSL_SMA_Tranz(IStrategy):
         return informative_15m
 
     # From NFIX
-    def custom_sell(self, pair: str, trade: 'Trade', current_time: 'datetime', current_rate: float,
+    def custom_exit(self, pair: str, trade: 'Trade', current_time: 'datetime', current_rate: float,
                     current_profit: float, **kwargs):
         dataframe, _ = self.dp.get_analyzed_dataframe(pair, self.timeframe)
         last_candle = dataframe.iloc[-1].squeeze()
@@ -3594,7 +3594,7 @@ class UziChanTB2(BB_RPB_TSL_SMA_Tranz):
     def trailing_buy_offset(self, dataframe, pair: str, current_price: float):
         # return rebound limit before a buy in % of initial price, function of current price
         # return None to stop trailing buy (will start again at next buy signal)
-        # return 'forcebuy' to force immediate buy
+        # return 'force_entry' to force immediate buy
         # (example with 0.5%. initial price : 100 (uplimit is 100.5), 2nd price : 99 (no buy, uplimit updated to 99.5), 3price 98 (no buy uplimit updated to 98.5), 4th price 99 -> BUY
         current_trailing_profit_ratio = self.current_trailing_buy_profit_ratio(pair, current_price)
         last_candle = dataframe.iloc[-1]
@@ -3614,13 +3614,13 @@ class UziChanTB2(BB_RPB_TSL_SMA_Tranz):
         if trailing_duration.total_seconds() > self.trailing_expire_seconds:
             if ((current_trailing_profit_ratio > 0) and (last_candle['buy'] == 1)):
                 # more than 1h, price under first signal, buy signal still active -> buy
-                return 'forcebuy'
+                return 'force_entry'
             else:
                 # wait for next signal
                 return None
         elif (self.trailing_buy_uptrend_enabled and (trailing_duration.total_seconds() < self.trailing_expire_seconds_uptrend) and (current_trailing_profit_ratio < (-1 * self.min_uptrend_trailing_profit))):
             # less than 90s and price is rising, buy
-            return 'forcebuy'
+            return 'force_entry'
 
         if current_trailing_profit_ratio < 0:
             # current price is higher than initial price
@@ -3641,7 +3641,7 @@ class UziChanTB2(BB_RPB_TSL_SMA_Tranz):
     def trailing_sell_offset(self, dataframe, pair: str, current_price: float):
         # return rebound limit before a buy in % of initial price, function of current price
         # return None to stop trailing buy (will start again at next buy signal)
-        # return 'forcebuy' to force immediate buy
+        # return 'force_entry' to force immediate buy
         # (example with 0.5%. initial price : 100 (uplimit is 100.5), 2nd price : 99 (no buy, uplimit updated to 99.5), 3price 98 (no buy uplimit updated to 98.5), 4th price 99 -> BUY
         current_trailing_sell_profit_ratio = self.current_trailing_sell_profit_ratio(pair, current_price)
         last_candle = dataframe.iloc[-1]
@@ -3658,15 +3658,15 @@ class UziChanTB2(BB_RPB_TSL_SMA_Tranz):
         current_time = datetime.now(timezone.utc)
         trailing_duration =  current_time - trailing_sell['start_trailing_time']
         if trailing_duration.total_seconds() > self.trailing_expire_seconds:
-            if ((current_trailing_sell_profit_ratio > 0) and (last_candle['sell'] != 0)):
+            if ((current_trailing_sell_profit_ratio > 0) and (last_candle['exit'] != 0)):
                 # more than 1h, price over first signal, sell signal still active -> sell
-                return 'forcesell'
+                return 'force_exit'
             else:
                 # wait for next signal
                 return None
         elif (self.trailing_sell_uptrend_enabled and (trailing_duration.total_seconds() < self.trailing_expire_seconds_uptrend) and (current_trailing_sell_profit_ratio < (-1 * self.min_uptrend_trailing_profit))):
             # less than 90s and price is falling, sell 
-            return 'forcesell'
+            return 'force_exit'
 
         if current_trailing_sell_profit_ratio > 0:
             # current price is lower than initial price
@@ -3721,7 +3721,7 @@ class UziChanTB2(BB_RPB_TSL_SMA_Tranz):
                                 logger.info(f'start trailing buy for {pair} at {last_candle["close"]}')
 
                             elif trailing_buy['trailing_buy_order_started']:
-                                if trailing_buy_offset == 'forcebuy':
+                                if trailing_buy_offset == 'force_entry':
                                     # buy in custom conditions
                                     val = True
                                     ratio = "%.2f" % ((self.current_trailing_buy_profit_ratio(pair, current_price)) * 100)
@@ -3783,7 +3783,7 @@ class UziChanTB2(BB_RPB_TSL_SMA_Tranz):
                     trailing_sell_offset = self.trailing_sell_offset(dataframe, pair, current_price)
 
                     if trailing_sell['allow_sell_trailing']:
-                        if (not trailing_sell['trailing_sell_order_started'] and (last_candle['sell'] != 0)):
+                        if (not trailing_sell['trailing_sell_order_started'] and (last_candle['exit'] != 0)):
                             trailing_sell['trailing_sell_order_started'] = True
                             trailing_sell['trailing_sell_order_downlimit'] = last_candle['close']
                             trailing_sell['start_trailing_sell_price'] = last_candle['close']
@@ -3795,7 +3795,7 @@ class UziChanTB2(BB_RPB_TSL_SMA_Tranz):
                             logger.info(f'start trailing sell for {pair} at {last_candle["close"]}')
 
                         elif trailing_sell['trailing_sell_order_started']:
-                            if trailing_sell_offset == 'forcesell':
+                            if trailing_sell_offset == 'force_exit':
                                 # sell in custom conditions
                                 val = True
                                 ratio = "%.2f" % ((self.current_trailing_sell_profit_ratio(pair, current_price)) * 100)
@@ -3876,7 +3876,7 @@ class UziChanTB2(BB_RPB_TSL_SMA_Tranz):
 
         if self.trailing_buy_order_enabled and self.abort_trailing_when_sell_signal_triggered and self.config['runmode'].value in ('live', 'dry_run'):
             last_candle = dataframe.iloc[-1].squeeze()
-            if (last_candle['sell'] != 0):
+            if (last_candle['exit'] != 0):
                 trailing_buy = self.trailing_buy(metadata['pair'])
                 if trailing_buy['trailing_buy_order_started']:
                     logger.info(f"Sell signal for {metadata['pair']} is triggered!!! Abort trailing")
@@ -3885,7 +3885,7 @@ class UziChanTB2(BB_RPB_TSL_SMA_Tranz):
         if self.trailing_sell_order_enabled and self.config['runmode'].value in ('live', 'dry_run'): 
             last_candle = dataframe.iloc[-1].squeeze()
             trailing_sell = self.trailing_sell(metadata['pair'])
-            if (last_candle['sell'] != 0):
+            if (last_candle['exit'] != 0):
                 if not trailing_sell['trailing_sell_order_started']:
                     open_trades = Trade.get_trades([Trade.pair == metadata['pair'], Trade.is_open.is_(True), ]).all()
                     #if not open_trades: 

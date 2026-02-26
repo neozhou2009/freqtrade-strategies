@@ -168,5 +168,5 @@ class bb_rsi_opt_new(IStrategy):
         """
         no sell signal
         """
-        dataframe['sell'] = 0
+        dataframe['exit'] = 0
         return dataframe

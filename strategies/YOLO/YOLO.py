@@ -78,5 +78,5 @@ class YOLO(IStrategy):
         """
         no sell signal
         """
-        dataframe['sell'] = 0
+        dataframe['exit'] = 0
         return dataframe

@@ -99,7 +99,7 @@ class NowoIchimoku1hV1(IStrategy):
         },
     }
 
-    def custom_sell(self, pair: str, trade: 'Trade', current_time: 'datetime', current_rate: float,
+    def custom_exit(self, pair: str, trade: 'Trade', current_time: 'datetime', current_rate: float,
                     current_profit: float, **kwargs):
 
         dataframe, _ = self.dp.get_analyzed_dataframe(pair, self.timeframe)
@@ -210,5 +210,5 @@ class NowoIchimoku1hV1(IStrategy):
         return df
 
     def populate_exit_trend(self, df: DataFrame, metadata: dict) -> DataFrame:
-        df['sell'] = 0
+        df['exit'] = 0
         return df

@@ -403,7 +403,7 @@ class CoreStrategy(IStrategy):
 
 
 
-    def custom_sell(
+    def custom_exit(
         self,
         pair: str,
         trade: "Trade",

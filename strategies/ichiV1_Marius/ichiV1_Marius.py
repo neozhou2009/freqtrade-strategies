@@ -318,7 +318,7 @@ class ichiV1_Marius(IStrategy):
         'max_slippage': -0.02
     }
 
-    def custom_sell(self, pair: str, trade: 'Trade', current_time: 'datetime', current_rate: float, current_profit: float, **kwargs):
+    def custom_exit(self, pair: str, trade: 'Trade', current_time: 'datetime', current_rate: float, current_profit: float, **kwargs):
         if ((current_time - trade.open_date_utc).seconds / 60 > 1440):
             return 'unclog'
 

@@ -374,7 +374,7 @@ class BcmbigzDevelop(IStrategy):
 
         return True
 
-    def custom_sell(
+    def custom_exit(
         self,
         pair: str,
         trade: "Trade",

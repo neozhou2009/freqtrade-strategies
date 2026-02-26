@@ -1,1 +1,4 @@
 test/user_data/
+__pycache__/
+*.pyc
+test_install_chk/

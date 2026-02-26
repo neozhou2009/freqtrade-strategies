@@ -580,7 +580,7 @@ class TrailingBuyStrat(NASOSv5_mod3):
 
     custom_info = dict() # custom_info should be a dict
 
-    def custom_sell(self, pair: str, trade: Trade, current_time: datetime, current_rate: float,
+    def custom_exit(self, pair: str, trade: Trade, current_time: datetime, current_rate: float,
                     current_profit: float, **kwargs):
         tag = super(TrailingBuyStrat, self).custom_sell(pair, trade, current_time, current_rate, current_profit, **kwargs)
         if tag:

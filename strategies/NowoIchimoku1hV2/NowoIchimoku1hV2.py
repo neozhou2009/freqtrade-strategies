@@ -233,5 +233,5 @@ class NowoIchimoku1hV2(IStrategy):
         return df
 
     def populate_exit_trend(self, df: DataFrame, metadata: dict) -> DataFrame:
-        df['sell'] = 0
+        df['exit'] = 0
         return df

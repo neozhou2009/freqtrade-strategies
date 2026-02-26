@@ -28,9 +28,9 @@ class BBRSI2(IStrategy):
     order_types = {
         "entry": "limit",
         "exit": "limit",
-        "emergencysell": "market",
-        "forcebuy": "market",
-        "forcesell": "market",
+        "emergency_exit": "market",
+        "force_entry": "market",
+        "force_exit": "market",
         "stoploss": "market",
         "stoploss_on_exchange": True,
         "stoploss_on_exchange_interval": 60,

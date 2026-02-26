@@ -126,7 +126,7 @@ class Hacklemore2(IStrategy):
                 reduce(lambda x, y: x & y, conditions),
                 'sell'] = 1
         else:
-            dataframe['sell'] = 0
+            dataframe['exit'] = 0
       
         return dataframe
 

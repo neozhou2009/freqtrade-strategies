@@ -576,7 +576,7 @@ class BB_RPB_TSL_Tranz(IStrategy):
         return sl_new
 
     # From NFIX
-    def custom_sell(self, pair: str, trade: 'Trade', current_time: 'datetime', current_rate: float,
+    def custom_exit(self, pair: str, trade: 'Trade', current_time: 'datetime', current_rate: float,
                     current_profit: float, **kwargs):
 
         dataframe, _ = self.dp.get_analyzed_dataframe(pair, self.timeframe)
@@ -1629,7 +1629,7 @@ class BB_RPB_TSL_Tranz_TrailingBuy(BB_RPB_TSL_Tranz):
     def trailing_buy_offset(self, dataframe, pair: str, current_price: float):
         # return rebound limit before a buy in % of initial price, function of current price
         # return None to stop trailing buy (will start again at next buy signal)
-        # return 'forcebuy' to force immediate buy
+        # return 'force_entry' to force immediate buy
         # (example with 0.5%. initial price : 100 (uplimit is 100.5), 2nd price : 99 (no buy, uplimit updated to 99.5), 3price 98 (no buy uplimit updated to 98.5), 4th price 99 -> BUY
         current_trailing_profit_ratio = self.current_trailing_profit_ratio(pair, current_price)
         default_offset = 0.005
@@ -1646,13 +1646,13 @@ class BB_RPB_TSL_Tranz_TrailingBuy(BB_RPB_TSL_Tranz):
         if trailing_duration.total_seconds() > self.trailing_expire_seconds:
             if ((current_trailing_profit_ratio > 0) and (last_candle['buy'] == 1)):
                 # more than 1h, price under first signal, buy signal still active -> buy
-                return 'forcebuy'
+                return 'force_entry'
             else:
                 # wait for next signal
                 return None
         elif (self.trailing_buy_uptrend_enabled and (trailing_duration.total_seconds() < self.trailing_expire_seconds_uptrend) and (current_trailing_profit_ratio < (-1 * self.min_uptrend_trailing_profit))):
             # less than 90s and price is rising, buy
-            return 'forcebuy'
+            return 'force_entry'
 
         if current_trailing_profit_ratio < 0:
             # current price is higher than initial price
@@ -1713,7 +1713,7 @@ class BB_RPB_TSL_Tranz_TrailingBuy(BB_RPB_TSL_Tranz):
                             logger.info(f'start trailing buy for {pair} at {last_candle["close"]}')
 
                         elif trailing_buy['trailing_buy_order_started']:
-                            if trailing_buy_offset == 'forcebuy':
+                            if trailing_buy_offset == 'force_entry':
                                 # buy in custom conditions
                                 val = True
                                 ratio = "%.2f" % ((self.current_trailing_profit_ratio(pair, current_price)) * 100)

@@ -36,8 +36,8 @@ def moderi(dataframe: DataFrame, len_slow_ma: int = 32) -> Series:
 
 def EWO(dataframe, ema_length=5, ema2_length=35):
     df = dataframe.copy()
-    ema1 = ta.EMA(df, timeperiod=ema_length)
-    ema2 = ta.EMA(df, timeperiod=ema2_length)
+    ema1 = ta.EMA(df['close'], timeperiod=ema_length)
+    ema2 = ta.EMA(df['close'], timeperiod=ema2_length)
     emadif = (ema1 - ema2) / df['low'] * 100
     return emadif
 
@@ -250,9 +250,9 @@ class BBMod1(IStrategy):
     order_types = {
         'entry': 'limit',
         'exit': 'limit',
-        'emergencysell': 'limit',
-        'forcebuy': "limit",
-        'forcesell': 'limit',
+        'emergency_exit': 'limit',
+        'force_entry': "limit",
+        'force_exit': 'limit',
         'stoploss': 'limit',
         'stoploss_on_exchange': False,
 
@@ -423,10 +423,10 @@ class BBMod1(IStrategy):
         informative_1h = self.dp.get_pair_dataframe(pair=metadata['pair'], timeframe=self.inf_1h)
 
         # EMA
-        informative_1h['ema_8'] = ta.EMA(informative_1h, timeperiod=8)
-        informative_1h['ema_50'] = ta.EMA(informative_1h, timeperiod=50)
-        informative_1h['ema_100'] = ta.EMA(informative_1h, timeperiod=100)
-        informative_1h['ema_200'] = ta.EMA(informative_1h, timeperiod=200)
+        informative_1h['ema_8'] = ta.EMA(informative_1h['close'], timeperiod=8)
+        informative_1h['ema_50'] = ta.EMA(informative_1h['close'], timeperiod=50)
+        informative_1h['ema_100'] = ta.EMA(informative_1h['close'], timeperiod=100)
+        informative_1h['ema_200'] = ta.EMA(informative_1h['close'], timeperiod=200)
 
         # CTI
         informative_1h['cti'] = pta.cti(informative_1h["close"], length=20)
@@ -451,7 +451,7 @@ class BBMod1(IStrategy):
                                       informative_1h['bb_middleband2'])
 
         # ROC
-        informative_1h['roc'] = ta.ROC(dataframe, timeperiod=9)
+        informative_1h['roc'] = ta.ROC(dataframe['close'], timeperiod=9)
 
         # MOMDIV
         mom = momdiv(informative_1h)
@@ -461,7 +461,7 @@ class BBMod1(IStrategy):
         informative_1h['momdiv_col'] = mom['momdiv_col']
 
         # RSI
-        informative_1h['rsi'] = ta.RSI(informative_1h, timeperiod=14)
+        informative_1h['rsi'] = ta.RSI(informative_1h['close'], timeperiod=14)
 
         # CMF
         informative_1h['cmf'] = chaikin_money_flow(informative_1h, 20)
@@ -526,7 +526,7 @@ class BBMod1(IStrategy):
 
         return stoploss_from_open(sl_profit, current_profit)
 
-    def custom_sell(self, pair: str, trade: 'Trade', current_time: 'datetime', current_rate: float,
+    def custom_exit(self, pair: str, trade: 'Trade', current_time: 'datetime', current_rate: float,
                     current_profit: float, **kwargs):
 
         dataframe, _ = self.dp.get_analyzed_dataframe(pair, self.timeframe)
@@ -620,13 +620,13 @@ class BBMod1(IStrategy):
         dataframe['hma_50'] = qtpylib.hull_moving_average(dataframe['close'], window=50)
 
         # SMA
-        dataframe['sma_9'] = ta.SMA(dataframe, timeperiod=9)
-        dataframe['sma_15'] = ta.SMA(dataframe, timeperiod=15)
-        dataframe['sma_20'] = ta.SMA(dataframe, timeperiod=20)
-        dataframe['sma_21'] = ta.SMA(dataframe, timeperiod=21)
-        dataframe['sma_28'] = ta.SMA(dataframe, timeperiod=28)
-        dataframe['sma_30'] = ta.SMA(dataframe, timeperiod=30)
-        dataframe['sma_75'] = ta.SMA(dataframe, timeperiod=75)
+        dataframe['sma_9'] = ta.SMA(dataframe['close'], timeperiod=9)
+        dataframe['sma_15'] = ta.SMA(dataframe['close'], timeperiod=15)
+        dataframe['sma_20'] = ta.SMA(dataframe['close'], timeperiod=20)
+        dataframe['sma_21'] = ta.SMA(dataframe['close'], timeperiod=21)
+        dataframe['sma_28'] = ta.SMA(dataframe['close'], timeperiod=28)
+        dataframe['sma_30'] = ta.SMA(dataframe['close'], timeperiod=30)
+        dataframe['sma_75'] = ta.SMA(dataframe['close'], timeperiod=75)
 
         # CTI
         dataframe['cti'] = pta.cti(dataframe["close"], length=20)
@@ -641,25 +641,25 @@ class BBMod1(IStrategy):
             dataframe['close'], 100)) / 3
 
         # EMA
-        dataframe['ema_4'] = ta.EMA(dataframe, timeperiod=4)
-        dataframe['ema_8'] = ta.EMA(dataframe, timeperiod=8)
-        dataframe['ema_12'] = ta.EMA(dataframe, timeperiod=12)
-        dataframe['ema_13'] = ta.EMA(dataframe, timeperiod=13)
-        dataframe['ema_16'] = ta.EMA(dataframe, timeperiod=16)
-        dataframe['ema_20'] = ta.EMA(dataframe, timeperiod=20)
-        dataframe['ema_24'] = ta.EMA(dataframe, timeperiod=24)
-        dataframe['ema_26'] = ta.EMA(dataframe, timeperiod=26)
-        dataframe['ema_49'] = ta.EMA(dataframe, timeperiod=49)
-        dataframe['ema_50'] = ta.EMA(dataframe, timeperiod=50)
-        dataframe['ema_100'] = ta.EMA(dataframe, timeperiod=100)
-        dataframe['ema_200'] = ta.EMA(dataframe, timeperiod=200)
+        dataframe['ema_4'] = ta.EMA(dataframe['close'], timeperiod=4)
+        dataframe['ema_8'] = ta.EMA(dataframe['close'], timeperiod=8)
+        dataframe['ema_12'] = ta.EMA(dataframe['close'], timeperiod=12)
+        dataframe['ema_13'] = ta.EMA(dataframe['close'], timeperiod=13)
+        dataframe['ema_16'] = ta.EMA(dataframe['close'], timeperiod=16)
+        dataframe['ema_20'] = ta.EMA(dataframe['close'], timeperiod=20)
+        dataframe['ema_24'] = ta.EMA(dataframe['close'], timeperiod=24)
+        dataframe['ema_26'] = ta.EMA(dataframe['close'], timeperiod=26)
+        dataframe['ema_49'] = ta.EMA(dataframe['close'], timeperiod=49)
+        dataframe['ema_50'] = ta.EMA(dataframe['close'], timeperiod=50)
+        dataframe['ema_100'] = ta.EMA(dataframe['close'], timeperiod=100)
+        dataframe['ema_200'] = ta.EMA(dataframe['close'], timeperiod=200)
 
         # RSI
-        dataframe['rsi'] = ta.RSI(dataframe, timeperiod=14)
-        dataframe['rsi_fast'] = ta.RSI(dataframe, timeperiod=4)
-        dataframe['rsi_slow'] = ta.RSI(dataframe, timeperiod=20)
-        dataframe['rsi_84'] = ta.RSI(dataframe, timeperiod=84)
-        dataframe['rsi_112'] = ta.RSI(dataframe, timeperiod=112)
+        dataframe['rsi'] = ta.RSI(dataframe['close'], timeperiod=14)
+        dataframe['rsi_fast'] = ta.RSI(dataframe['close'], timeperiod=4)
+        dataframe['rsi_slow'] = ta.RSI(dataframe['close'], timeperiod=20)
+        dataframe['rsi_84'] = ta.RSI(dataframe['close'], timeperiod=84)
+        dataframe['rsi_112'] = ta.RSI(dataframe['close'], timeperiod=112)
 
         # Elliot
         dataframe['EWO'] = EWO(dataframe, 50, 200)
@@ -1139,7 +1139,7 @@ def pmax(df, period, multiplier, length, ma_type, src):
 # Mom DIV
 def momdiv(dataframe: DataFrame, mom_length: int = 10, bb_length: int = 20, bb_dev: float = 2.0,
            lookback: int = 30) -> DataFrame:
-    mom: Series = ta.MOM(dataframe, timeperiod=mom_length)
+    mom: Series = ta.MOM(dataframe['close'], timeperiod=mom_length)
     upperband, middleband, lowerband = ta.BBANDS(mom, timeperiod=bb_length, nbdevup=bb_dev, nbdevdn=bb_dev, ma_type=0)
     buy = qtpylib.crossed_below(mom, lowerband)
     sell = qtpylib.crossed_above(mom, upperband)

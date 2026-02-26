@@ -192,7 +192,7 @@ class epretrace(IStrategy):
             
         return 1
 
-    def custom_sell(self, pair: str, trade: 'Trade', current_time: datetime,
+    def custom_exit(self, pair: str, trade: 'Trade', current_time: datetime,
                         current_rate: float, current_profit: float, **kwargs) -> float:
                 
         # Obtain pair dataframe.

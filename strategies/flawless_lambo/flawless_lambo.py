@@ -1018,15 +1018,15 @@ class flawless_lambo(IStrategy):
         current_time = datetime.now(timezone.utc)
         trailing_duration =  current_time - trailing_sell['start_trailing_time']
         if trailing_duration.total_seconds() > self.trailing_expire_seconds:
-            if ((current_trailing_sell_profit_ratio > 0) and (last_candle['sell'] != 0)):
+            if ((current_trailing_sell_profit_ratio > 0) and (last_candle['exit'] != 0)):
                 # more than 1h, price over first signal, sell signal still active -> sell
-                return 'forcesell'
+                return 'force_exit'
             else:
                 # wait for next signal
                 return None
         elif (self.trailing_sell_uptrend_enabled and (trailing_duration.total_seconds() < self.trailing_expire_seconds_uptrend) and (current_trailing_sell_profit_ratio < (-1 * self.min_uptrend_trailing_profit))):
             # less than 90s and price is falling, sell 
-            return 'forcesell'
+            return 'force_exit'
 
         if current_trailing_sell_profit_ratio > 0:
             # current price is lower than initial price
@@ -1195,7 +1195,7 @@ class flawless_lambo(IStrategy):
                     trailing_sell_offset = self.trailing_sell_offset(dataframe, pair, current_price)
 
                     if trailing_sell['allow_sell_trailing']:
-                        if (not trailing_sell['trailing_sell_order_started'] and (last_candle['sell'] != 0)):
+                        if (not trailing_sell['trailing_sell_order_started'] and (last_candle['exit'] != 0)):
                             trailing_sell['trailing_sell_order_started'] = True
                             trailing_sell['trailing_sell_order_downlimit'] = last_candle['close']
                             trailing_sell['start_trailing_sell_price'] = last_candle['close']
@@ -1207,7 +1207,7 @@ class flawless_lambo(IStrategy):
                             self.logger.info(f'start trailing sell for {pair} at {last_candle["close"]}')
 
                         elif trailing_sell['trailing_sell_order_started']:
-                            if trailing_sell_offset == 'forcesell':
+                            if trailing_sell_offset == 'force_exit':
                                 # sell in custom conditions
                                 val = True
                                 ratio = "%.2f" % ((self.current_trailing_sell_profit_ratio(pair, current_price)) * 100)
@@ -1284,7 +1284,7 @@ class flawless_lambo(IStrategy):
         if self.trailing_sell_order_enabled and self.config['runmode'].value in ('live', 'dry_run'): 
             last_candle = dataframe.iloc[-1].squeeze()
             trailing_sell = self.trailing_sell(metadata['pair'])
-            if (last_candle['sell'] != 0):
+            if (last_candle['exit'] != 0):
                 if not trailing_sell['trailing_sell_order_started']:
                     open_trades = Trade.get_trades([Trade.pair == metadata['pair'], Trade.is_open.is_(True), ]).all()
                     if open_trades:

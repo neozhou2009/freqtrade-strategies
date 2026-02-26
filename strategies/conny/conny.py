@@ -63,7 +63,7 @@ class conny(IStrategy):
         c.evaluate_momentum()
         c.evaluate_adx()
         dataframe['consensus_buy'] = c.score()['buy']
-        dataframe['consensus_sell'] = c.score()['sell']
+        dataframe['consensus_sell'] = c.score()['exit']
 
 
         print(dataframe)

@@ -263,7 +263,7 @@ class BinClucMadDevelop(IStrategy):
 
 
 
-    def custom_sell(
+    def custom_exit(
         self, pair: str, trade: "Trade", current_time: "datetime", current_rate: float, current_profit: float, **kwargs
     ):
         # return False

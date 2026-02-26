@@ -122,7 +122,7 @@ class Strategy001_custom_sell(IStrategy):
             'sell'] = 1
         return dataframe
 
-    def custom_sell(self, pair: str, trade: 'Trade', current_time: 'datetime', current_rate: float, current_profit: float, **kwargs):
+    def custom_exit(self, pair: str, trade: 'Trade', current_time: 'datetime', current_rate: float, current_profit: float, **kwargs):
         """
         Sell only when matching some criteria other than those used to generate the sell signal
         :return: str sell_reason, if any, otherwise None
