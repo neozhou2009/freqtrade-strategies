@@ -198,8 +198,12 @@ auto_download_data() {
         done
         
         local timerange_args=""
+        local timeframe_args="--timeframes $timeframe"
+        
         if [ -n "$timerange" ]; then
             timerange_args="--timerange $timerange"
+            timeframe_args="--timeframes 1m 5m 15m 1h 4h 1d"
+            download_args="$download_args --erase"
         fi
         
         docker run --rm --workdir /freqtrade/user_data \
@@ -207,7 +211,7 @@ auto_download_data() {
             "$IMAGE_NAME" download-data \
             --userdir . \
             --exchange binance \
-            --timeframes "$timeframe" \
+            $timeframe_args \
             $pair_args \
             $timerange_args \
             $download_args
@@ -277,6 +281,29 @@ fi
 
 TIMERANGE=$(extract_timerange "$@")
 
+# Extract --timeframes from command line arguments
+TIMEFRAMES=""
+for arg in "$@"; do
+    if [[ "$arg" == --timeframes=* ]]; then
+        TIMEFRAMES="${arg#--timeframes=}"
+        break
+    elif [[ "$arg" == "--timeframes" ]]; then
+        for next_arg in "$@"; do
+            if [[ "$next_arg" != "--timeframes" ]]; then
+                TIMEFRAMES="$next_arg"
+                break
+            fi
+        done
+        break
+    fi
+done
+
+# Convert --timeframes to --timeframe for freqtrade compatibility
+if [ -n "$TIMEFRAMES" ]; then
+    set -- "${@//--timeframes=/--timeframe=}"
+    set -- "${@//--timeframes /--timeframe }"
+fi
+
 # Try to get timeframe from strategy (if specified in args)
 for arg in "$@"; do
     if [[ "$arg" == *"--strategy"* ]]; then
@@ -301,6 +328,11 @@ for arg in "$@"; do
         break
     fi
 done
+
+# Override TIMEFRAME if --timeframes was provided
+if [ -n "$TIMEFRAMES" ]; then
+    TIMEFRAME="$TIMEFRAMES"
+fi
 
 # Auto-download data for backtest commands
 if [ "$CMD" == "backtest" ] || [ "$CMD" == "backtest-gui" ]; then
