@@ -3,6 +3,7 @@
 # script: test-freqtrade.sh
 # description: Wrapper script to run freqtrade commands via Docker
 # usage: ./test-freqtrade.sh {download|backtest|backtest-gui} [args]
+#        Use --timerange=YYYYMMDD-YYYYMMDD to specify backtest date range
 
 # Check if docker is installed
 if ! command -v docker &> /dev/null; then
@@ -25,38 +26,144 @@ CONFIG_FILE="$BASE_DIR/config.json"
 #     echo "Warning: config.json not found in $USER_DATA_DIR. Make sure you are in the correct directory."
 # fi
 
+# Function: Parse timerange from arguments
+# Usage: TIMERANGE=$(parse_timerange "$@")
+parse_timerange() {
+    for arg in "$@"; do
+        if [[ "$arg" == --timerange=* ]]; then
+            echo "${arg#--timerange=}"
+            return 0
+        elif [[ "$arg" == "--timerange" ]]; then
+            # Handle --timerange value (next argument)
+            return 0
+        fi
+    done
+    echo ""
+}
+
+# Function: Extract timerange value from arguments (handles both --timerange=VALUE and --timerange VALUE)
+extract_timerange() {
+    local found_timerange=false
+    for arg in "$@"; do
+        if [ "$found_timerange" = true ]; then
+            echo "$arg"
+            return 0
+        fi
+        if [[ "$arg" == "--timerange" ]]; then
+            found_timerange=true
+        elif [[ "$arg" == --timerange=* ]]; then
+            echo "${arg#--timerange=}"
+            return 0
+        fi
+    done
+    echo ""
+}
+
+# Function: Convert timerange to start/end timestamps
+# Input: 20210101-20210410 or 1624940400-1630447200
+# Output: START_TIMESTAMP END_TIMESTAMP
+parse_timerange_to_timestamps() {
+    local timerange="$1"
+    
+    if [ -z "$timerange" ]; then
+        echo ""
+        return
+    fi
+    
+    # Split by '-' (handle both formats: YYYYMMDD-YYYYMMDD or timestamp-timestamp)
+    local start_date="${timerange%-*}"
+    local end_date="${timerange#*-}"
+    
+    # If using YYYYMMDD format, convert to timestamp
+    if [[ "$start_date" =~ ^[0-9]{8}$ ]]; then
+        start_date=$(date -d "${start_date:0:4}-${start_date:4:2}-${start_date:6:2}" +%s 2>/dev/null || echo "")
+    fi
+    
+    if [[ "$end_date" =~ ^[0-9]{8}$ ]]; then
+        # For end date, use end of day
+        end_date=$(date -d "${end_date:0:4}-${end_date:4:2}-${end_date:6:2} 23:59:59" +%s 2>/dev/null || echo "")
+    fi
+    
+    if [ -n "$start_date" ] && [ -n "$end_date" ]; then
+        echo "${start_date} ${end_date}"
+    fi
+}
+
 # Function: Check if data exists for given pairs and timeframe
-# Usage: check_data_exists "BTC/USDT:USDT,ETH/USDT:USDT" "5m"
+# Usage: check_data_exists "BTC/USDT:USDT,ETH/USDT:USDT" "5m" "timerange"
 check_data_exists() {
     local pairs="$1"
     local timeframe="$2"
+    local timerange="$3"
     local exchange="binance"
     local missing_pairs=()
+    local incomplete_pairs=()
+    
+    # Convert timerange to timestamps if provided
+    local timerange_ts=""
+    if [ -n "$timerange" ]; then
+        timerange_ts=$(parse_timerange_to_timestamps "$timerange")
+    fi
     
     # Convert pairs to the format used in data directory (replace / with _ and : with _)
     # e.g., BTC/USDT:USDT -> BTC_USDT_USDT
     IFS=',' read -ra PAIR_ARRAY <<< "$pairs"
     
     for pair in "${PAIR_ARRAY[@]}"; do
-        # Trim whitespace
         pair=$(echo "$pair" | xargs)
-        
-        # Convert pair format for filename: BTC/USDT:USDT -> BTC_USDT_USDT
         pair_filename=$(echo "$pair" | tr '/' '_' | tr ':' '_')
-        
-        # Check if parquet file exists for this pair
-        local data_file="$DATA_DIR/${exchange}/${pair_filename}-${timeframe}.parquet"
+        data_file="$DATA_DIR/${exchange}/${pair_filename}-${timeframe}.parquet"
         
         if [ ! -f "$data_file" ]; then
             missing_pairs+=("$pair")
+        elif [ -n "$timerange_ts" ]; then
+            start_ts="${timerange_ts% *}"
+            end_ts="${timerange_ts#* }"
+            timerange_ok=0
+            
+            python3 -c "
+import pandas as pd
+import sys
+try:
+    df = pd.read_parquet('$data_file')
+    if 'date' not in df.columns:
+        if 'datetime' in df.columns:
+            df['date'] = df['datetime']
+        else:
+            sys.exit(1)
+    df['date'] = pd.to_datetime(df['date'])
+    file_start = int(df['date'].min().timestamp())
+    file_end = int(df['date'].max().timestamp())
+    start_ts = $start_ts
+    end_ts = $end_ts
+    tolerance = 86400
+    if file_start <= (start_ts + tolerance) and file_end >= (end_ts - tolerance):
+        sys.exit(0)
+    else:
+        sys.exit(1)
+except Exception:
+    sys.exit(1)
+" 2>&1
+            if [ $? -eq 0 ]; then
+                timerange_ok=1
+            fi
+            
+            if [ $timerange_ok -eq 0 ]; then
+                incomplete_pairs+=("$pair")
+            fi
         fi
     done
     
-    if [ ${#missing_pairs[@]} -eq 0 ]; then
-        return 0  # All data exists
+    if [ ${#missing_pairs[@]} -eq 0 ] && [ ${#incomplete_pairs[@]} -eq 0 ]; then
+        return 0  # All data exists and is complete
     else
-        echo "Missing data for pairs: ${missing_pairs[*]}"
-        return 1  # Missing data
+        if [ ${#missing_pairs[@]} -gt 0 ]; then
+            echo "Missing data for pairs: ${missing_pairs[*]}"
+        fi
+        if [ ${#incomplete_pairs[@]} -gt 0 ]; then
+            echo "Incomplete timerange data for pairs: ${incomplete_pairs[*]}"
+        fi
+        return 1  # Missing or incomplete data
     fi
 }
 
@@ -64,24 +171,25 @@ check_data_exists() {
 auto_download_data() {
     local pairs="$1"
     local timeframe="$2"
-    local download_args="${3:-}"  # Optional additional args
+    local timerange="$3"
+    local download_args="${4:-}"  
     
     echo "=========================================="
     echo "Checking if data exists for backtesting..."
     echo "  Pairs: $pairs"
     echo "  Timeframe: $timeframe"
+    if [ -n "$timerange" ]; then
+        echo "  Timerange: $timerange"
+    fi
     echo "=========================================="
     
-    if check_data_exists "$pairs" "$timeframe"; then
+    if check_data_exists "$pairs" "$timeframe" "$timerange"; then
         echo "✓ Data already exists for all pairs. Proceeding with backtest."
         return 0
     else
         echo "⚠ Data not found or incomplete!"
         echo "Starting data download..."
         
-        # Parse pairs for download-data command (convert BTC/USDT:USDT to BTC/USDT:USDT)
-        # download-data expects pairs without the :USDT suffix for futures in some cases
-        # But let's try with the full pair first
         local pair_args=""
         IFS=',' read -ra PAIR_ARRAY <<< "$pairs"
         for pair in "${PAIR_ARRAY[@]}"; do
@@ -89,7 +197,11 @@ auto_download_data() {
             pair_args="$pair_args -p $pair"
         done
         
-        # Run download
+        local timerange_args=""
+        if [ -n "$timerange" ]; then
+            timerange_args="--timerange $timerange"
+        fi
+        
         docker run --rm --workdir /freqtrade/user_data \
             -v "$USER_DATA_DIR:/freqtrade/user_data" \
             "$IMAGE_NAME" download-data \
@@ -97,6 +209,7 @@ auto_download_data() {
             --exchange binance \
             --timeframes "$timeframe" \
             $pair_args \
+            $timerange_args \
             $download_args
         
         if [ $? -eq 0 ]; then
@@ -154,12 +267,15 @@ shift
 
 # Parse common arguments to find config and strategy
 PAIRS=""
-TIMEFRAME="5m"  # default
+TIMEFRAME="5m"  
+TIMERANGE=""
 
 # Try to get pairs from config file
 if [ -f "$CONFIG_FILE" ]; then
     PAIRS=$(get_pairs_from_config "$CONFIG_FILE")
 fi
+
+TIMERANGE=$(extract_timerange "$@")
 
 # Try to get timeframe from strategy (if specified in args)
 for arg in "$@"; do
@@ -189,7 +305,11 @@ done
 # Auto-download data for backtest commands
 if [ "$CMD" == "backtest" ] || [ "$CMD" == "backtest-gui" ]; then
     if [ -n "$PAIRS" ]; then
-        auto_download_data "$PAIRS" "$TIMEFRAME" "--days 30"
+        if [ -n "$TIMERANGE" ]; then
+            auto_download_data "$PAIRS" "$TIMEFRAME" "$TIMERANGE" ""
+        else
+            auto_download_data "$PAIRS" "$TIMEFRAME" "$TIMERANGE" "--days 30"
+        fi
     else
         echo "Warning: Could not determine pairs from config. Skipping data check."
     fi
@@ -257,6 +377,7 @@ case "$CMD" in
         echo "  $0 download -c config.json --days 30 -t 5m"
         echo "  $0 list-data -c config.json"
         echo "  $0 backtest -c config.json --strategy MyStrategy"
+        echo "  $0 backtest -c config.json --strategy MyStrategy --timerange=20210101-20210410"
         echo "  $0 backtest-gui -c config.json --strategy MyStrategy"
         exit 1
         ;;
