@@ -188,14 +188,16 @@ auto_download_data() {
         return 0
     else
         echo "⚠ Data not found or incomplete!"
+        
+        local pair_count=$(echo "$pairs" | tr ',' '\n' | wc -l)
+        if [ -n "$timerange" ]; then
+            echo "⚠ Timerange specified: will download $pair_count pairs with all timeframes (1m 5m 15m 1h 4h 1d)"
+            echo "⚠ This may take several minutes..."
+        fi
+        
         echo "Starting data download..."
         
-        local pair_args=""
-        IFS=',' read -ra PAIR_ARRAY <<< "$pairs"
-        for pair in "${PAIR_ARRAY[@]}"; do
-            pair=$(echo "$pair" | xargs)
-            pair_args="$pair_args -p $pair"
-        done
+        local pairs_spaced=$(echo "$pairs" | tr ',' ' ')
         
         local timerange_args=""
         local timeframe_args="--timeframes $timeframe"
@@ -212,7 +214,7 @@ auto_download_data() {
             --userdir . \
             --exchange binance \
             $timeframe_args \
-            $pair_args \
+            -p $pairs_spaced \
             $timerange_args \
             $download_args
         
@@ -273,10 +275,36 @@ shift
 PAIRS=""
 TIMEFRAME="5m"  
 TIMERANGE=""
+USER_PAIRS=""
 
 # Try to get pairs from config file
 if [ -f "$CONFIG_FILE" ]; then
     PAIRS=$(get_pairs_from_config "$CONFIG_FILE")
+fi
+
+# Extract -p/--pairs from command line to override config pairs
+USER_PAIRS=""
+prev_arg=""
+for arg in "$@"; do
+    if [[ "$prev_arg" == "-p" ]]; then
+        USER_PAIRS="$arg"
+        break
+    elif [[ "$arg" == -p\ * ]]; then
+        USER_PAIRS="${arg#-p }"
+        break
+    elif [[ "$prev_arg" == "--pairs" ]]; then
+        USER_PAIRS="$arg"
+        break
+    elif [[ "$arg" == --pairs\ * ]]; then
+        USER_PAIRS="${arg#--pairs }"
+        break
+    fi
+    prev_arg="$arg"
+done
+
+# Use user-specified pairs if provided, otherwise use config pairs
+if [ -n "$USER_PAIRS" ]; then
+    PAIRS="$USER_PAIRS"
 fi
 
 TIMERANGE=$(extract_timerange "$@")
