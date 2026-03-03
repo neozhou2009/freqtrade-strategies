@@ -1,3 +1,7 @@
 test/
 test/user_data/
 user_data/*
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
