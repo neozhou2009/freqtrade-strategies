@@ -112,7 +112,7 @@ check_data_exists() {
     for pair in "${PAIR_ARRAY[@]}"; do
         pair=$(echo "$pair" | xargs)
         pair_filename=$(echo "$pair" | tr '/' '_' | tr ':' '_')
-        data_file="$DATA_DIR/${exchange}/${pair_filename}-${timeframe}.parquet"
+        data_file="$DATA_DIR/${exchange}/futures/${pair_filename}-${timeframe}-futures.feather"
         
         if [ ! -f "$data_file" ]; then
             missing_pairs+=("$pair")
