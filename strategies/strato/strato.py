@@ -3,33 +3,31 @@
 import talib.abstract as ta
 from pandas import DataFrame
 
-import freqtrade.vendor.qtpylib.indicators as qtpylib
-from freqtrade.strategy.interface import IStrategy
+from technical import qtpylib
+from freqtrade.strategy import IStrategy
+
 
 class strato(IStrategy):
+    INTERFACE_VERSION = 3
 
-    INTERFACE_VERSION = 2
-
-    minimal_roi = {
-        "0": 0.012
-    }
+    minimal_roi = {"0": 0.012}
 
     stoploss = -0.1
 
-    timeframe = '1m'
+    timeframe = "1m"
 
     order_types = {
-        'buy': 'market',
-        'sell': 'market',
-        'stoploss': 'market',
-        'stoploss_on_exchange': False
+        "entry": "market",
+        "exit": "market",
+        "stoploss": "market",
+        "stoploss_on_exchange": False,
     }
 
     startup_candle_count: int = 20
 
     order_time_in_force = {
-        'buy': 'gtc',
-        'sell': 'gtc',
+        "entry": "gtc",
+        "exit": "gtc",
     }
 
     def informative_pairs(self):
@@ -45,36 +43,26 @@ class strato(IStrategy):
         d = 3
         k = 3
 
-        dataframe['rsi'] = ta.RSI(dataframe, timeperiod=14)
-        srsi  = (dataframe['rsi'] - dataframe['rsi'].rolling(p).min()) / (dataframe['rsi'].rolling(p).max() - dataframe['rsi'].rolling(p).min())
-        dataframe['k'] = srsi.rolling(k).mean() * 100
-        dataframe['d'] = dataframe['k'].rolling(d).mean()
-
+        dataframe["rsi"] = ta.RSI(dataframe, timeperiod=14)
+        srsi = (dataframe["rsi"] - dataframe["rsi"].rolling(p).min()) / (
+            dataframe["rsi"].rolling(p).max() - dataframe["rsi"].rolling(p).min()
+        )
+        dataframe["k"] = srsi.rolling(k).mean() * 100
+        dataframe["d"] = dataframe["k"].rolling(d).mean()
 
         return dataframe
 
     def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
 
         dataframe.loc[
-        (
-                (dataframe['k'] < 18) &
-                (dataframe['k'] >= dataframe['d'])
-                
-	    ),
-            'buy'] = 1
+            ((dataframe["k"] < 18) & (dataframe["k"] >= dataframe["d"])), "buy"
+        ] = 1
 
         return dataframe
 
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
 
         dataframe.loc[
-            (
-                (dataframe['k'] > 80) &
-                (dataframe['d'] >= dataframe['k'])
-            ),
-            'sell'] = 1
+            ((dataframe["k"] > 80) & (dataframe["d"] >= dataframe["k"])), "sell"
+        ] = 1
         return dataframe
-
-
-
-
