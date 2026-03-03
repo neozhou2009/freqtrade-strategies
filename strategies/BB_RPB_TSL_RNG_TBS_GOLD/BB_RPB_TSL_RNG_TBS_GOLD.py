@@ -112,7 +112,7 @@ class BB_RPB_TSL_RNG_TBS_GOLD(IStrategy):
 
     # Custom stoploss
     use_custom_stoploss = True
-    use_sell_signal = True
+    use_exit_signal = True
     process_only_new_candles = True
     ############################################################################
 
