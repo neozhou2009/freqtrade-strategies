@@ -125,7 +125,7 @@ check_data_exists() {
 import pandas as pd
 import sys
 try:
-    df = pd.read_parquet('$data_file')
+    df = pd.read_feather('$data_file')
     if 'date' not in df.columns:
         if 'datetime' in df.columns:
             df['date'] = df['datetime']
@@ -136,7 +136,8 @@ try:
     file_end = int(df['date'].max().timestamp())
     start_ts = $start_ts
     end_ts = $end_ts
-    tolerance = 86400
+    # Check if file covers the timerange with 3-day tolerance (allow for minor gaps at edges)
+    tolerance = 259200
     if file_start <= (start_ts + tolerance) and file_end >= (end_ts - tolerance):
         sys.exit(0)
     else:
