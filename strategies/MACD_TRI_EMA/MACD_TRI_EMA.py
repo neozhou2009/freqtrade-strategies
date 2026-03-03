@@ -6,14 +6,11 @@ from pandas import DataFrame
 # --------------------------------
 
 import talib.abstract as ta
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 
 
 class MACD_TRI_EMA(IStrategy):
-    """
-
-    
-    """
+    """ """
 
     # Minimal ROI designed for the strategy.
     # This attribute will be overridden if the config file contains "minimal_roi"
@@ -29,30 +26,28 @@ class MACD_TRI_EMA(IStrategy):
     stoploss = -0.03
 
     # Optimal timeframe for the strategy
-    timeframe = '5m'
+    timeframe = "5m"
 
     def populate_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         macd = ta.MACD(dataframe)
-        dataframe['macd'] = macd['macd']
-        dataframe['macdsignal'] = macd['macdsignal']
-        
-        dataframe['tema'] = ta.TEMA(dataframe, timeperiod=13)
+        dataframe["macd"] = macd["macd"]
+        dataframe["macdsignal"] = macd["macdsignal"]
+
+        dataframe["tema"] = ta.TEMA(dataframe, timeperiod=13)
         return dataframe
 
     def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (
-                    qtpylib.crossed_above(dataframe['macd'], dataframe['macdsignal']) &
-                    (dataframe['close'].shift(1) > dataframe['tema'].shift(1)) 
-
+                qtpylib.crossed_above(dataframe["macd"], dataframe["macdsignal"])
+                & (dataframe["close"].shift(1) > dataframe["tema"].shift(1))
             ),
-            'buy'] = 1
+            "buy",
+        ] = 1
         return dataframe
 
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
-            (
-                   qtpylib.crossed_above(dataframe['macdsignal'], dataframe['macd'])
-            ),
-            'sell'] = 1
+            (qtpylib.crossed_above(dataframe["macdsignal"], dataframe["macd"])), "sell"
+        ] = 1
         return dataframe
