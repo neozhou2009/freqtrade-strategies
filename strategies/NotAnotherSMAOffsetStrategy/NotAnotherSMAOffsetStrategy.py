@@ -8,7 +8,7 @@ from pandas import DataFrame
 # --------------------------------
 import talib.abstract as ta
 import numpy as np
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 import datetime
 from technical.util import resample_to_interval, resampled_merge
 from datetime import datetime, timedelta
@@ -48,7 +48,7 @@ def EWO(dataframe, ema_length=5, ema2_length=35):
 
 
 class NotAnotherSMAOffsetStrategy(IStrategy):
-    INTERFACE_VERSION = 2
+    INTERFACE_VERSION = 3
 
     # ROI table:
     minimal_roi = {"0": 0.215, "40": 0.032, "87": 0.016, "201": 0}

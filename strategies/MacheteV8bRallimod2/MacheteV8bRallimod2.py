@@ -15,7 +15,7 @@ from technical.indicators import cmf
 
 ## FT stuffs
 from freqtrade.strategy import IStrategy, merge_informative_pair, stoploss_from_open, IntParameter, DecimalParameter, CategoricalParameter
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 from freqtrade.exchange import timeframe_to_minutes
 from freqtrade.persistence import Trade
 from skopt.space import Dimension
@@ -121,9 +121,9 @@ class MacheteV8bRallimod2(IStrategy):
     process_only_new_candles = False
 
     # Experimental settings (configuration will overide these if set)
-    use_sell_signal = True
-    sell_profit_only = True
-    ignore_roi_if_buy_signal = False
+    use_exit_signal = True
+    exit_profit_only = True
+    ignore_roi_if_entry_signal = False
     startup_candle_count = 200#149
 
     use_dynamic_roi = True
@@ -133,8 +133,8 @@ class MacheteV8bRallimod2(IStrategy):
 
     # Optional order type mapping
     order_types = {
-        'buy': 'limit',
-        'sell': 'limit',
+        'entry': 'limit',
+        'exit': 'limit',
         'stoploss': 'market',
         'stoploss_on_exchange': False
     }
@@ -526,7 +526,7 @@ def SSLChannels_ATR(dataframe, length=7):
     df['ATR'] = ta.ATR(df, timeperiod=14)
     df['smaHigh'] = df['high'].rolling(length).mean() + df['ATR']
     df['smaLow'] = df['low'].rolling(length).mean() - df['ATR']
-    df['hlv'] = np.where(df['close'] > df['smaHigh'], 1, np.where(df['close'] < df['smaLow'], -1, np.NAN))
+    df['hlv'] = np.where(df['close'] > df['smaHigh'], 1, np.where(df['close'] < df['smaLow'], -1, np.nan))
     df['hlv'] = df['hlv'].ffill()
     df['sslDown'] = np.where(df['hlv'] < 0, df['smaHigh'], df['smaLow'])
     df['sslUp'] = np.where(df['hlv'] < 0, df['smaLow'], df['smaHigh'])

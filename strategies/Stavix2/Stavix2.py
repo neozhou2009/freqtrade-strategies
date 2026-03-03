@@ -1,7 +1,7 @@
 from freqtrade.strategy.interface import IStrategy
 from pandas import DataFrame
 from technical.indicators import ichimoku
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 
 
 class Stavix2(IStrategy):

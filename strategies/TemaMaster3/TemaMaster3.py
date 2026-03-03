@@ -14,7 +14,7 @@ from pandas import DataFrame
 # --------------------------------
 
 import talib.abstract as ta
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 
 
 class TemaMaster3(IStrategy):
@@ -53,9 +53,9 @@ class TemaMaster3(IStrategy):
     ta_on_candle = False
 
     # Experimental settings (configuration will overide these if set)
-    use_sell_signal = True
-    sell_profit_only = True
-    ignore_roi_if_buy_signal = False
+    use_exit_signal = True
+    exit_profit_only = True
+    ignore_roi_if_entry_signal = False
 
 
     def informative_pairs(self):

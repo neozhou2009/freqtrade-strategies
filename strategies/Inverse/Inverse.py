@@ -13,14 +13,14 @@ from freqtrade.strategy import CategoricalParameter, DecimalParameter, IntParame
 # --------------------------------
 # Add your lib to import here
 import talib.abstract as ta
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 import numpy  # noqa
 from freqtrade.persistence import Trade
 from datetime import datetime, timedelta
 
 
 class Inverse(IStrategy):
-    INTERFACE_VERSION = 2
+    INTERFACE_VERSION = 3
 
     # Buy hyperspace params:
     buy_params = {

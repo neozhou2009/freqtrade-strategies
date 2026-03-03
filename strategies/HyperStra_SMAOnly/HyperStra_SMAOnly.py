@@ -6,7 +6,7 @@ from pandas import DataFrame
 
 import talib.abstract as ta
 import numpy as np
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 import datetime
 from technical.util import resample_to_interval, resampled_merge
 from datetime import datetime, timedelta
@@ -28,7 +28,7 @@ MA_Indicator = abstract.SMA
 
 
 class HyperStra_SMAOnly(IStrategy):
-    INTERFACE_VERSION = 2
+    INTERFACE_VERSION = 3
 
     # ##################################################################
     # Hyperopt Params Paste Here
@@ -110,14 +110,14 @@ class HyperStra_SMAOnly(IStrategy):
 
     # Sell signal
     use_custom_stoploss = False
-    use_sell_signal = True
+    use_exit_signal = True
     timeframe = '5m'
-    ignore_roi_if_buy_signal = False
+    ignore_roi_if_entry_signal = False
     process_only_new_candles = False
     startup_candle_count = 440
 
-    sell_profit_only = True
-    sell_profit_offset = 0.01
+    exit_profit_only = True
+    exit_profit_offset = 0.01
 
     # ##################################################################
     # ##################################################################

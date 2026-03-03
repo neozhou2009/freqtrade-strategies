@@ -1,4 +1,4 @@
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 from typing import Dict, List
 import numpy as np
 import talib.abstract as ta
@@ -33,7 +33,7 @@ from technical.indicators import zema, VIDYA
 # Any profits and losses are all your responsibility
 
 class MultiMA_TSL3(IStrategy):
-    INTERFACE_VERSION = 2
+    INTERFACE_VERSION = 3
 
     DATESTAMP = 0
     SELLMA = 1
@@ -204,14 +204,14 @@ class MultiMA_TSL3(IStrategy):
     process_only_new_candles = True
 
     # These values can be overridden in the "ask_strategy" section in the config.
-    use_sell_signal = True
-    sell_profit_only = True
-    ignore_roi_if_buy_signal = False
+    use_exit_signal = True
+    exit_profit_only = True
+    ignore_roi_if_entry_signal = False
 
     # Number of candles the strategy requires before producing valid signals
     startup_candle_count: int = 400
 
-    def custom_sell(self, pair: str, trade: 'Trade', current_time: 'datetime', current_rate: float,
+    def custom_exit(self, pair: str, trade: 'Trade', current_time: 'datetime', current_rate: float,
                     current_profit: float, **kwargs):
 
         dataframe, _ = self.dp.get_analyzed_dataframe(pair, self.timeframe)
@@ -556,7 +556,7 @@ class MultiMA_TSL3a(MultiMA_TSL3):
 
         return dataframe
 
-    def custom_sell(self, pair: str, trade: 'Trade', current_time: 'datetime', current_rate: float,
+    def custom_exit(self, pair: str, trade: 'Trade', current_time: 'datetime', current_rate: float,
                     current_profit: float, **kwargs):
 
         dataframe, _ = self.dp.get_analyzed_dataframe(pair, self.timeframe)

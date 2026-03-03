@@ -1,5 +1,5 @@
 # --- Do not remove these libs ---
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 import numpy as np
 # --------------------------------
 import talib.abstract as ta

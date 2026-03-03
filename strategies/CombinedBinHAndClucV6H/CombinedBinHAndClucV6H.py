@@ -1,5 +1,5 @@
 # --- Do not remove these libs --------------------------------------------------------------------
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 import talib.abstract as ta
 import logging
 import pandas as pd
@@ -31,7 +31,7 @@ from functools import reduce
 ##   Prefer stable coin (USDT, BUSDT etc) pairs, instead of BTC or ETH pairs.                            ##
 ##   Highly recommended to blacklist leveraged tokens (*BULL, *BEAR, *UP, *DOWN etc).                    ##
 ##   Ensure that you don't override any variables in you config.json. Especially                         ##
-##   the timeframe (must be 5m) & sell_profit_only (must be true).                                       ##
+##   the timeframe (must be 5m) & exit_profit_only (must be true).                                       ##
 ##                                                                                                       ##
 ###########################################################################################################
 ##               DONATIONS                                                                               ##
@@ -77,10 +77,10 @@ class CombinedBinHAndClucV6H(IStrategy):
     process_only_new_candles = False
 
 
-    use_sell_signal = True
-    sell_profit_only = True
-    sell_profit_offset = 0.001
-    ignore_roi_if_buy_signal = True
+    use_exit_signal = True
+    exit_profit_only = True
+    exit_profit_offset = 0.001
+    ignore_roi_if_entry_signal = True
 
     # hyperspace default buy params 
     buy_params = {
@@ -439,7 +439,7 @@ def SSLChannels_ATR(dataframe, length=7):
     df['ATR'] = ta.ATR(df, timeperiod=14)
     df['smaHigh'] = df['high'].rolling(length).mean() + df['ATR']
     df['smaLow'] = df['low'].rolling(length).mean() - df['ATR']
-    df['hlv'] = np.where(df['close'] > df['smaHigh'], 1, np.where(df['close'] < df['smaLow'], -1, np.NAN))
+    df['hlv'] = np.where(df['close'] > df['smaHigh'], 1, np.where(df['close'] < df['smaLow'], -1, np.nan))
     df['hlv'] = df['hlv'].ffill()
     df['sslDown'] = np.where(df['hlv'] < 0, df['smaHigh'], df['smaLow'])
     df['sslUp'] = np.where(df['hlv'] < 0, df['smaLow'], df['smaHigh'])

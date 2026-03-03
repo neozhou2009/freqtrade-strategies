@@ -1,6 +1,6 @@
 import numpy as np
 import talib.abstract as ta
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 import arrow
 from freqtrade.strategy.interface import IStrategy
 from freqtrade.strategy import merge_informative_pair
@@ -375,9 +375,9 @@ class Schism2(IStrategy):
             if custom_params['minimal_roi']:
                 custom_stop = custom_params['minimal_roi']
             
-        if params == 'buy':
+        if params == 'entry':
             return buy_params
-        if params == 'sell':
+        if params == 'exit':
             return sell_params
         if params == 'minimal_roi':
             return minimal_roi

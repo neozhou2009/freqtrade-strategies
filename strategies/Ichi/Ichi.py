@@ -12,7 +12,7 @@ from technical.indicators import ichimoku
 # --------------------------------
 # Add your lib to import here
 import talib.abstract as ta
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 from datetime import datetime
 from freqtrade.persistence import Trade
 from datetime import datetime, timedelta
@@ -36,8 +36,8 @@ logging.info("test")
 
 class Ichi(IStrategy):
     order_types = {
-        'buy': 'limit',
-        'sell': 'limit',
+        'entry': 'limit',
+        'exit': 'limit',
         'stoploss': 'limit',
         'stoploss_on_exchange': True
     }
@@ -54,7 +54,7 @@ class Ichi(IStrategy):
     timeframe = '15m'
     stoploss = -0.20
 
-    INTERFACE_VERSION = 2
+    INTERFACE_VERSION = 3
 
     def populate_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         ichi = ichimoku(dataframe)

@@ -8,7 +8,7 @@ import sys
 from functools import reduce
 from pathlib import Path
 
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 import talib.abstract as ta
 from freqtrade.constants import ListPairsWithTimeframes
 from freqtrade.strategy import (
@@ -41,9 +41,9 @@ class Gumbo1(IStrategy):
     use_custom_stoploss = False
     inf_timeframe = '1h'
     # Recommended
-    use_sell_signal = True
-    sell_profit_only = True
-    ignore_roi_if_buy_signal = True
+    use_exit_signal = True
+    exit_profit_only = True
+    ignore_roi_if_entry_signal = True
     startup_candle_count = 200
 
     def informative_pairs(self) -> ListPairsWithTimeframes:

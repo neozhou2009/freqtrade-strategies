@@ -2,7 +2,7 @@
 import logging
 import pathlib
 import rapidjson
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 import numpy as np
 import talib.abstract as ta
 from freqtrade.misc import json_load
@@ -36,9 +36,9 @@ log = logging.getLogger(__name__)
 ##   Highly recommended to blacklist leveraged tokens (*BULL, *BEAR, *UP, *DOWN etc).                    ##
 ##   Ensure that you don't override any variables in you config.json. Especially                         ##
 ##   the timeframe (must be 5m).                                                                         ##
-##     use_sell_signal must set to true (or not set at all).                                             ##
-##     sell_profit_only must set to false (or not set at all).                                           ##
-##     ignore_roi_if_buy_signal must set to true (or not set at all).                                    ##
+##     use_exit_signal must set to true (or not set at all).                                             ##
+##     exit_profit_only must set to false (or not set at all).                                           ##
+##     ignore_roi_if_entry_signal must set to true (or not set at all).                                    ##
 ##                                                                                                       ##
 ###########################################################################################################
 ##               HOLD SUPPORT                                                                            ##
@@ -72,7 +72,7 @@ log = logging.getLogger(__name__)
 
 
 class NostalgiaForInfinityNext_ChangeToTower_V6(IStrategy):
-    INTERFACE_VERSION = 2
+    INTERFACE_VERSION = 3
 
     plot_config = {
         "main_plot": {},
@@ -6428,7 +6428,7 @@ def SSLChannels(dataframe, length=7):
         np.where(
             dataframe["close"] > smaHigh,
             1,
-            np.where(dataframe["close"] < smaLow, -1, np.NAN),
+            np.where(dataframe["close"] < smaLow, -1, np.nan),
         )
     )
     hlv = hlv.ffill()

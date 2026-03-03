@@ -2,7 +2,7 @@ import copy
 import logging
 import pathlib
 import rapidjson
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 import numpy as np
 import talib.abstract as ta
 import pandas as pd
@@ -27,7 +27,7 @@ import json
 
 
 class INSIDEUP(IStrategy):
-    INTERFACE_VERSION = 2
+    INTERFACE_VERSION = 3
 
     # ROI table:
     minimal_roi = {
@@ -53,9 +53,9 @@ class INSIDEUP(IStrategy):
     process_only_new_candles = True
 
     # These values can be overridden in the "ask_strategy" section in the config.
-    use_sell_signal = False
-    sell_profit_only = True
-    ignore_roi_if_buy_signal = False
+    use_exit_signal = False
+    exit_profit_only = True
+    ignore_roi_if_entry_signal = False
 
 
     def populate_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:

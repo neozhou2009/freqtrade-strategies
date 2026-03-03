@@ -1,7 +1,7 @@
 import numpy as np
 import talib.abstract as ta
 import technical.indicators as ti
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 import arrow
 from freqtrade.strategy.interface import IStrategy
 from freqtrade.strategy import merge_informative_pair
@@ -50,9 +50,9 @@ class Stinkfist(IStrategy):
     stoploss = -0.40
 
     # Probably don't change these
-    use_sell_signal = True
-    sell_profit_only = True
-    ignore_roi_if_buy_signal = True
+    use_exit_signal = True
+    exit_profit_only = True
+    ignore_roi_if_entry_signal = True
 
     startup_candle_count: int = 72
 
@@ -353,7 +353,7 @@ class Stinkfist(IStrategy):
     Price protection on trade entry and timeouts, built-in Freqtrade functionality
     https://www.freqtrade.io/en/latest/strategy-advanced/
     """
-    def check_buy_timeout(self, pair: str, trade: Trade, order: dict, **kwargs) -> bool:
+    def check_entry_timeout(self, pair: str, trade: Trade, order: dict, **kwargs) -> bool:
         bid_strategy = self.config.get('bid_strategy', {})
         ob = self.dp.orderbook(pair, 1)
         current_price = ob[f"{bid_strategy['price_side']}s"][0][0]
@@ -361,7 +361,7 @@ class Stinkfist(IStrategy):
             return True
         return False
 
-    def check_sell_timeout(self, pair: str, trade: Trade, order: dict, **kwargs) -> bool:
+    def check_exit_timeout(self, pair: str, trade: Trade, order: dict, **kwargs) -> bool:
         ask_strategy = self.config.get('ask_strategy', {})
         ob = self.dp.orderbook(pair, 1)
         current_price = ob[f"{ask_strategy['price_side']}s"][0][0]
@@ -393,7 +393,7 @@ class Stinkfist_BTC(Stinkfist):
         'mp': 66,
     }
 
-    use_sell_signal = False
+    use_exit_signal = False
 
 # Sub-strategy with parameters specific to ETH stake
 class Stinkfist_ETH(Stinkfist):
@@ -411,4 +411,4 @@ class Stinkfist_ETH(Stinkfist):
     trailing_stop_positive_offset = 0.022
     trailing_only_offset_is_reached = False
 
-    use_sell_signal = False
+    use_exit_signal = False

@@ -15,7 +15,7 @@ from pandas import DataFrame
 # Add your lib to import here
 # TODO: talib is fast but have not more indicators
 import talib.abstract as ta
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 from functools import reduce
 import numpy as np
 from random import shuffle

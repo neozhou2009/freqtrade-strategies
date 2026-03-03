@@ -1,4 +1,4 @@
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 import numpy as np
 import talib.abstract as ta
 from freqtrade.persistence import Trade
@@ -14,7 +14,7 @@ def SSLChannels(dataframe, length=7):
     df["ATR"] = ta.ATR(df, timeperiod=14)
     df["smaHigh"] = df["high"].rolling(length).mean() + df["ATR"]
     df["smaLow"] = df["low"].rolling(length).mean() - df["ATR"]
-    df["hlv"] = np.where(df["close"] > df["smaHigh"], 1, np.where(df["close"] < df["smaLow"], -1, np.NAN))
+    df["hlv"] = np.where(df["close"] > df["smaHigh"], 1, np.where(df["close"] < df["smaLow"], -1, np.nan))
     df["hlv"] = df["hlv"].ffill()
     df["sslDown"] = np.where(df["hlv"] < 0, df["smaHigh"], df["smaLow"])
     df["sslUp"] = np.where(df["hlv"] < 0, df["smaLow"], df["smaHigh"])
@@ -22,7 +22,7 @@ def SSLChannels(dataframe, length=7):
 
 
 class BinClucMad(IStrategy):
-    INTERFACE_VERSION = 2
+    INTERFACE_VERSION = 3
 
     minimal_roi = {
         "0": 0.038,         # I feel lucky!
@@ -37,10 +37,10 @@ class BinClucMad(IStrategy):
     informative_timeframe = "1h"
 
     # Sell signal
-    use_sell_signal = True
-    sell_profit_only = True
-    sell_profit_offset = 0.001  # it doesn't meant anything, just to guarantee there is a minimal profit.
-    ignore_roi_if_buy_signal = False
+    use_exit_signal = True
+    exit_profit_only = True
+    exit_profit_offset = 0.001  # it doesn't meant anything, just to guarantee there is a minimal profit.
+    ignore_roi_if_entry_signal = False
 
     # Trailing stoploss
     trailing_stop = True

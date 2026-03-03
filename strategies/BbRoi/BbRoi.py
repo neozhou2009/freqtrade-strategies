@@ -2,7 +2,7 @@
 from freqtrade.strategy.interface import IStrategy
 from pandas import DataFrame
 import talib.abstract as ta
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 
 
 # --------------------------------
@@ -25,15 +25,15 @@ class BbRoi(IStrategy):
     trailing_stop_positive_offset = 0.01821
     trailing_only_offset_is_reached = True
 
-    ticker_interval = '15m'
+    timeframe = '15m'
 
     # Experimental settings (configuration will overide these if set)
-    use_sell_signal = True
-    ignore_roi_if_buy_signal = False
+    use_exit_signal = True
+    ignore_roi_if_entry_signal = False
 
     order_types = {
-        'buy': 'market',
-        'sell': 'market',
+        'entry': 'market',
+        'exit': 'market',
         'stoploss': 'limit',
         'stoploss_on_exchange': True
     }

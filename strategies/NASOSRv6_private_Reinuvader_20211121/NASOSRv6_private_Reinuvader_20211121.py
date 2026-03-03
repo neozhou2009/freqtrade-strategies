@@ -13,7 +13,7 @@ from functools import reduce
 from pandas import DataFrame, Series
 import talib.abstract as ta
 import numpy as np
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 import datetime
 from technical.util import resample_to_interval, resampled_merge
 from datetime import datetime, timedelta
@@ -64,7 +64,7 @@ sell_params = {
 
 
 class NASOSRv6_private_Reinuvader_20211121(IStrategy):
-    INTERFACE_VERSION = 2
+    INTERFACE_VERSION = 3
 
     # ROI table:
     minimal_roi = {
@@ -127,15 +127,15 @@ class NASOSRv6_private_Reinuvader_20211121(IStrategy):
     #trailing_only_offset_is_reached = True
 
     # Sell signal
-    use_sell_signal = True
-    #sell_profit_only = True
-    #sell_profit_offset = -0.0001
-    #ignore_roi_if_buy_signal = False
+    use_exit_signal = True
+    #exit_profit_only = True
+    #exit_profit_offset = -0.0001
+    #ignore_roi_if_entry_signal = False
 
     # Optional order time in force.
     order_time_in_force = {
-        'buy': 'gtc',
-        'sell': 'gtc'
+        'entry': 'gtc',
+        'exit': 'gtc'
     }
 
     # Optimal timeframe for the strategy
@@ -168,7 +168,7 @@ class NASOSRv6_private_Reinuvader_20211121(IStrategy):
         'max_slippage': -0.02
     }
 
-    def custom_sell(self, pair: str, trade: 'Trade', current_time: 'datetime', current_rate: float, current_profit: float, **kwargs):
+    def custom_exit(self, pair: str, trade: 'Trade', current_time: 'datetime', current_rate: float, current_profit: float, **kwargs):
         if ((current_time - trade.open_date_utc).seconds / 60 > 1440):
             return 'unclog'
 

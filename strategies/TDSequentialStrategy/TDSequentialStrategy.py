@@ -1,7 +1,7 @@
 import talib.abstract as ta
 from pandas import DataFrame
 import scipy.signal
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 from freqtrade.strategy.interface import IStrategy
 
 
@@ -21,7 +21,7 @@ class TDSequentialStrategy(IStrategy):
 
     Created by @bmoulkaf
     """
-    INTERFACE_VERSION = 2
+    INTERFACE_VERSION = 3
 
     # Minimal ROI designed for the strategy
     minimal_roi = {'0': 5}
@@ -39,14 +39,14 @@ class TDSequentialStrategy(IStrategy):
     timeframe = '1h'
 
     # These values can be overridden in the "ask_strategy" section in the config.
-    use_sell_signal = True
-    sell_profit_only = True
-    ignore_roi_if_buy_signal = False
+    use_exit_signal = True
+    exit_profit_only = True
+    ignore_roi_if_entry_signal = False
 
     # Optional order type mapping
     order_types = {
-        'buy': 'limit',
-        'sell': 'limit',
+        'entry': 'limit',
+        'exit': 'limit',
         'stoploss': 'limit',
         'stoploss_on_exchange': False
     }
@@ -56,8 +56,8 @@ class TDSequentialStrategy(IStrategy):
 
     # Optional time in force for orders
     order_time_in_force = {
-        'buy': 'gtc',
-        'sell': 'gtc',
+        'entry': 'gtc',
+        'exit': 'gtc',
     }
 
     def informative_pairs(self):

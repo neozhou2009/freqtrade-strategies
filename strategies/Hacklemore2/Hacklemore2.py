@@ -1,4 +1,4 @@
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 import numpy as np
 import talib.abstract as ta
 from freqtrade.strategy.interface import IStrategy
@@ -39,10 +39,10 @@ class Hacklemore2(IStrategy):
     
     timeframe = '15m'
 
-    use_sell_signal = True
-    sell_profit_only = True
-    #sell_profit_offset = 0.01
-    ignore_roi_if_buy_signal = True
+    use_exit_signal = True
+    exit_profit_only = True
+    #exit_profit_offset = 0.01
+    ignore_roi_if_entry_signal = True
     
     def populate_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe['volume_mean_slow'] = dataframe['volume'].rolling(window=24).mean()
@@ -128,7 +128,7 @@ class Hacklemore2(IStrategy):
       
         return dataframe
 
-    def check_buy_timeout(self, pair: str, trade: Trade, order: dict, **kwargs) -> bool:
+    def check_entry_timeout(self, pair: str, trade: Trade, order: dict, **kwargs) -> bool:
         ob = self.dp.orderbook(pair, 1)
         current_price = ob['bids'][0][0]
         # Cancel buy order if price is more than 1% above the order.
@@ -136,7 +136,7 @@ class Hacklemore2(IStrategy):
             return True
         return False
 
-    def check_sell_timeout(self, pair: str, trade: Trade, order: dict, **kwargs) -> bool:
+    def check_exit_timeout(self, pair: str, trade: Trade, order: dict, **kwargs) -> bool:
         ob = self.dp.orderbook(pair, 1)
         current_price = ob['asks'][0][0]
         # Cancel sell order if price is more than 1% below the order.

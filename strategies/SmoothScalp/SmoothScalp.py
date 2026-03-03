@@ -5,13 +5,13 @@ from functools import reduce
 from pandas import DataFrame
 # --------------------------------
 import talib.abstract as ta
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 from typing import Dict, List
 from functools import reduce
 from pandas import DataFrame, DatetimeIndex, merge
 # --------------------------------
 import talib.abstract as ta
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 import numpy  # noqa
 
 

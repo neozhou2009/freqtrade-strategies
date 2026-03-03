@@ -1,4 +1,4 @@
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 import numpy as np
 import talib.abstract as ta
 from freqtrade.strategy import merge_informative_pair
@@ -26,7 +26,7 @@ from functools import reduce
 ##   Prefer stable coin (USDT, BUSDT etc) pairs, instead of BTC or ETH pairs.                            ##
 ##   Highly recommended to blacklist leveraged tokens (*BULL, *BEAR, *UP, *DOWN etc).                    ##
 ##   Ensure that you don't override any variables in you config.json. Especially                         ##
-##   the timeframe (must be 5m) & sell_profit_only (must be true).                                       ##
+##   the timeframe (must be 5m) & exit_profit_only (must be true).                                       ##
 ##                                                                                                       ##
 ###########################################################################################################
 ##               DONATIONS                                                                               ##
@@ -45,7 +45,7 @@ def SSLChannels(dataframe, length=7):
     df['smaHigh'] = df['high'].rolling(length).mean() + df['ATR']
     df['smaLow'] = df['low'].rolling(length).mean() - df['ATR']
     df['hlv'] = np.where(df['close'] > df['smaHigh'], 1,
-                         np.where(df['close'] < df['smaLow'], -1, np.NAN))
+                         np.where(df['close'] < df['smaLow'], -1, np.nan))
     df['hlv'] = df['hlv'].ffill()
     df['sslDown'] = np.where(df['hlv'] < 0, df['smaHigh'], df['smaLow'])
     df['sslUp'] = np.where(df['hlv'] < 0, df['smaLow'], df['smaHigh'])
@@ -53,7 +53,7 @@ def SSLChannels(dataframe, length=7):
 
 
 class CombinedBinHAndClucV8XH(IStrategy):
-    INTERFACE_VERSION = 2
+    INTERFACE_VERSION = 3
 
 
     # Buy hyperspace params:
@@ -111,11 +111,11 @@ class CombinedBinHAndClucV8XH(IStrategy):
     inf_1h = '1h'  # informative tf
 
     # Sell signal
-    use_sell_signal = True
-    sell_profit_only = True
+    use_exit_signal = True
+    exit_profit_only = True
     # it doesn't meant anything, just to guarantee there is a minimal profit.
-    sell_profit_offset = 0.001
-    ignore_roi_if_buy_signal = True
+    exit_profit_offset = 0.001
+    ignore_roi_if_entry_signal = True
 
     # Trailing stoploss
     trailing_stop = True
@@ -134,8 +134,8 @@ class CombinedBinHAndClucV8XH(IStrategy):
 
     # Optional order type mapping.
     order_types = {
-        'buy': 'limit',
-        'sell': 'limit',
+        'entry': 'limit',
+        'exit': 'limit',
         'stoploss': 'market',
         'stoploss_on_exchange': False
     }
@@ -249,7 +249,7 @@ class CombinedBinHAndClucV8XH(IStrategy):
                     return 0.01
         return 0.99
 
-    def custom_sell(self, pair: str, trade: 'Trade', current_time: 'datetime', current_rate: float,
+    def custom_exit(self, pair: str, trade: 'Trade', current_time: 'datetime', current_rate: float,
                     current_profit: float, **kwargs):
         dataframe, _ = self.dp.get_analyzed_dataframe(pair, self.timeframe)
         last_candle = dataframe.iloc[-1].squeeze()

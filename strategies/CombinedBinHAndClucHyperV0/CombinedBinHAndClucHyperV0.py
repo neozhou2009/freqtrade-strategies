@@ -1,5 +1,5 @@
 # --- Do not remove these libs ---
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 import numpy as np
 # --------------------------------
 import talib.abstract as ta
@@ -15,9 +15,9 @@ import math
 class CombinedBinHAndClucHyperV0(IStrategy):
     timeframe = '1m'
 
-    use_sell_signal = True
-    sell_profit_only = True
-    ignore_roi_if_buy_signal = False
+    use_exit_signal = True
+    exit_profit_only = True
+    ignore_roi_if_entry_signal = False
 
     # ----------------------------------------------------------------
     # Hyper Params

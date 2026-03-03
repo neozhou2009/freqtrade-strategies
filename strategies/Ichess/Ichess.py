@@ -20,7 +20,7 @@ import numpy as np
 # Add your lib to import here
 # import talib.abstract as ta
 import talib as ta
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 from functools import reduce
 
 class Ichess(IStrategy):

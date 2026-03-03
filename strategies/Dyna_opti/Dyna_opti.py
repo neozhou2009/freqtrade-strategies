@@ -1,6 +1,6 @@
 import numpy as np
 import talib.abstract as ta
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 import arrow
 
 from freqtrade.strategy.interface import IStrategy
@@ -22,7 +22,7 @@ sys.path.append(str(Path(__file__).parent))
 
 import numpy as np
 import talib.abstract as ta
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 
 from pandas import DataFrame, Series
 
@@ -150,7 +150,7 @@ def SSLChannels(dataframe, length=10, mode='sma'):
         df['smaLow'] = df['low'].rolling(length).mean()
 
     df['hlv'] = np.where(df['close'] > df['smaHigh'], 1,
-                         np.where(df['close'] < df['smaLow'], -1, np.NAN))
+                         np.where(df['close'] < df['smaLow'], -1, np.nan))
     df['hlv'] = df['hlv'].ffill()
 
     df['sslDown'] = np.where(df['hlv'] < 0, df['smaHigh'], df['smaLow'])
@@ -168,7 +168,7 @@ def SSLChannels_ATR(dataframe, length=7):
     df['ATR'] = ta.ATR(df, timeperiod=14)
     df['smaHigh'] = df['high'].rolling(length).mean() + df['ATR']
     df['smaLow'] = df['low'].rolling(length).mean() - df['ATR']
-    df['hlv'] = np.where(df['close'] > df['smaHigh'], 1, np.where(df['close'] < df['smaLow'], -1, np.NAN))
+    df['hlv'] = np.where(df['close'] > df['smaHigh'], 1, np.where(df['close'] < df['smaLow'], -1, np.nan))
     df['hlv'] = df['hlv'].ffill()
     df['sslDown'] = np.where(df['hlv'] < 0, df['smaHigh'], df['smaLow'])
     df['sslUp'] = np.where(df['hlv'] < 0, df['smaLow'], df['smaHigh'])
@@ -313,9 +313,9 @@ class Dyna_opti(IStrategy):
     #stoploss = -0.234
 
     # Recommended
-    use_sell_signal = False
-    sell_profit_only = True
-    ignore_roi_if_buy_signal = True
+    use_exit_signal = False
+    exit_profit_only = True
+    ignore_roi_if_entry_signal = True
 
     # Required
     startup_candle_count: int = 233
@@ -563,7 +563,7 @@ class Dyna_opti(IStrategy):
     """
     Trade Timeout Overloads
     """
-    def check_buy_timeout(self, pair: str, trade: Trade, order: dict, **kwargs) -> bool:
+    def check_entry_timeout(self, pair: str, trade: Trade, order: dict, **kwargs) -> bool:
         bid_strategy = self.config.get('bid_strategy', {})
         ob = self.dp.orderbook(pair, 1)
         current_price = ob[f"{bid_strategy['price_side']}s"][0][0]
@@ -571,7 +571,7 @@ class Dyna_opti(IStrategy):
             return True
         return False
 
-    def check_sell_timeout(self, pair: str, trade: Trade, order: dict, **kwargs) -> bool:
+    def check_exit_timeout(self, pair: str, trade: Trade, order: dict, **kwargs) -> bool:
         ask_strategy = self.config.get('ask_strategy', {})
         ob = self.dp.orderbook(pair, 1)
         current_price = ob[f"{ask_strategy['price_side']}s"][0][0]
@@ -606,9 +606,9 @@ class Dyna_opti(IStrategy):
                         dynamic_roi = custom_params['dynamic_roi']
                     break
             
-        if params == 'buy':
+        if params == 'entry':
             return buy_params
-        if params == 'sell':
+        if params == 'exit':
             return sell_params
         if params == 'minimal_roi':
             return minimal_roi

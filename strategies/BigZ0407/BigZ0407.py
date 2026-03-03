@@ -1,4 +1,4 @@
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 import numpy as np
 import talib.abstract as ta
 from freqtrade.persistence import Trade
@@ -37,7 +37,7 @@ from technical.indicators import zema
 ##   Ensure that you don't override any variables in your config.json. Especially                        ##
 ##   the timeframe (must be 5m).                                                                         ##
 ##                                                                                                       ##
-##   sell_profit_only:                                                                                   ##
+##   exit_profit_only:                                                                                   ##
 ##       True - risk more (gives you higher profit and higher Drawdown)                                  ##
 ##       False (default) - risk less (gives you less ~10-15% profit and much lower Drawdown)             ##
 ##                                                                                                       ##
@@ -53,7 +53,7 @@ from technical.indicators import zema
 
 
 class BigZ0407(IStrategy):
-    INTERFACE_VERSION = 2
+    INTERFACE_VERSION = 3
 
     minimal_roi = {
         "0": 0.1,         # I feel lucky!
@@ -69,10 +69,10 @@ class BigZ0407(IStrategy):
     inf_1h = '1h'
 
     # Sell signal
-    use_sell_signal = True
-    sell_profit_only = True
-    sell_profit_offset = 0.001 # it doesn't meant anything, just to guarantee there is a minimal profit.
-    ignore_roi_if_buy_signal = False
+    use_exit_signal = True
+    exit_profit_only = True
+    exit_profit_offset = 0.001 # it doesn't meant anything, just to guarantee there is a minimal profit.
+    ignore_roi_if_entry_signal = False
 
     # Trailing stoploss
     trailing_stop = True
@@ -91,8 +91,8 @@ class BigZ0407(IStrategy):
 
     # Optional order type mapping.
     order_types = {
-        'buy': 'market',
-        'sell': 'market',
+        'entry': 'market',
+        'exit': 'market',
         'stoploss': 'market',
         'stoploss_on_exchange': False
     }
@@ -424,7 +424,7 @@ class BigZ0407(IStrategy):
 
         return True
 
-    def custom_sell(self, pair: str, trade: 'Trade', current_time: 'datetime', current_rate: float,
+    def custom_exit(self, pair: str, trade: 'Trade', current_time: 'datetime', current_rate: float,
                     current_profit: float, **kwargs):
         dataframe, _ = self.dp.get_analyzed_dataframe(pair, self.timeframe)
         last_candle = dataframe.iloc[-1].squeeze()

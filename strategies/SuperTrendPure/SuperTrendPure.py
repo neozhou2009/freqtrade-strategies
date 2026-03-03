@@ -5,7 +5,7 @@ from freqtrade.strategy.hyper import IntParameter
 from pandas import DataFrame
 import talib.abstract as ta
 import numpy as np
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 
 
 class SuperTrendPure(IStrategy):

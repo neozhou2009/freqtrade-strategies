@@ -13,14 +13,14 @@ from freqtrade.strategy import CategoricalParameter, DecimalParameter, IntParame
 # --------------------------------
 # Add your lib to import here
 import talib.abstract as ta
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 import numpy # noqa
 from freqtrade.persistence import Trade
 from datetime import datetime, timedelta
 
 class InverseV2(IStrategy):
     
-    INTERFACE_VERSION = 2
+    INTERFACE_VERSION = 3
     
     # Buy hyperspace params:
     buy_params = {
@@ -59,25 +59,25 @@ class InverseV2(IStrategy):
     process_only_new_candles = False
 
     # These values can be overridden in the "ask_strategy" section in the config.
-    use_sell_signal = True
-    sell_profit_only = True
-    ignore_roi_if_buy_signal = False
+    use_exit_signal = True
+    exit_profit_only = True
+    ignore_roi_if_entry_signal = False
 
     # Number of candles the strategy requires before producing valid signals
     startup_candle_count: int = 200
 
     # Optional order type mapping.
     order_types = {
-        'buy': 'limit',
-        'sell': 'limit',
+        'entry': 'limit',
+        'exit': 'limit',
         'stoploss': 'market',
         'stoploss_on_exchange': False
     }
 
     # Optional order time in force.
     order_time_in_force = {
-        'buy': 'gtc',
-        'sell': 'gtc'
+        'entry': 'gtc',
+        'exit': 'gtc'
     }
     
     plot_config = {
@@ -276,7 +276,7 @@ class InverseV2(IStrategy):
         df['ATR'] = ta.ATR(df, timeperiod=14)
         df['smaHigh'] = df['high'].rolling(length).mean() + df['ATR']
         df['smaLow'] = df['low'].rolling(length).mean() - df['ATR']
-        df['hlv'] = np.where(df['close'] > df['smaHigh'], 1, np.where(df['close'] < df['smaLow'], -1, np.NAN))
+        df['hlv'] = np.where(df['close'] > df['smaHigh'], 1, np.where(df['close'] < df['smaLow'], -1, np.nan))
         df['hlv'] = df['hlv'].ffill()
         df['sslDown'] = np.where(df['hlv'] < 0, df['smaHigh'], df['smaLow'])
         df['sslUp'] = np.where(df['hlv'] < 0, df['smaLow'], df['smaHigh'])

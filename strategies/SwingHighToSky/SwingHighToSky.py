@@ -15,7 +15,7 @@ from functools import reduce
 from pandas import DataFrame
 
 import talib.abstract as ta
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 import numpy
 
 
@@ -34,7 +34,7 @@ rsiSellVal = 88
 
 
 class SwingHighToSky(IStrategy):
-    INTERFACE_VERSION = 2
+    INTERFACE_VERSION = 3
 
     timeframe = '15m'
 

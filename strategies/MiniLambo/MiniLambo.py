@@ -13,7 +13,7 @@ import technical.indicators as ftt
 from pandas import DataFrame, Series
 from skopt.space import Dimension, Integer
 
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 from freqtrade.persistence import Trade
 from freqtrade.strategy import (BooleanParameter, DecimalParameter,
                                 IntParameter, merge_informative_pair)
@@ -139,9 +139,9 @@ class MiniLambo(IStrategy):
 
     timeframe = '1m'
 
-    use_sell_signal = False
-    sell_profit_only = True
-    ignore_roi_if_buy_signal = False
+    use_exit_signal = False
+    exit_profit_only = True
+    ignore_roi_if_entry_signal = False
     use_custom_stoploss = True
     process_only_new_candles = True
     startup_candle_count = 200

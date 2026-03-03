@@ -4,13 +4,13 @@ from typing import Dict, List
 from functools import reduce
 from pandas import DataFrame
 # --------------------------------
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 import talib.abstract as ta
 
 
 class MACDRSI200(IStrategy):
 
-    ticker_interval = '5m'
+    timeframe = '5m'
 
     # ROI table:
     minimal_roi = {

@@ -7,7 +7,7 @@ from pandas import DataFrame
 # --------------------------------
 
 import talib.abstract as ta
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 
 class BB_RSI(IStrategy):
     """
@@ -33,7 +33,7 @@ class BB_RSI(IStrategy):
     # This attribute will be overridden if the config file contains "stoploss"
     stoploss = -0.06491
     # Optimal ticker interval for the strategy
-    ticker_interval = '1h'
+    timeframe = '1h'
 
     # trailing stoploss
     trailing_only_offset_is_reached = False
@@ -45,14 +45,14 @@ class BB_RSI(IStrategy):
     process_only_new_candles = False
 
     # Experimental settings (configuration will overide these if set)
-    use_sell_signal = True
-    sell_profit_only = True
-    ignore_roi_if_buy_signal = False
+     use_exit_signal = True
+    exit_profit_only = True
+    ignore_roi_if_entry_signal = False
 
     # Optional order type mapping
     order_types = {
-        'buy': 'limit',
-        'sell': 'limit',
+        'entry': 'limit',
+        'exit': 'limit',
         'stoploss': 'market',
         'stoploss_on_exchange': False
     }

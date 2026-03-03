@@ -1,6 +1,6 @@
 import numpy as np
 import talib.abstract as ta
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 import arrow
 from freqtrade.strategy.interface import IStrategy
 from freqtrade.strategy import merge_informative_pair
@@ -43,9 +43,9 @@ class Schism5(IStrategy):
     custom_stop_ramp_minutes = 110
     custom_stop_trailing = 0.001
 
-    use_sell_signal = True
-    sell_profit_only = True
-    ignore_roi_if_buy_signal = True
+    use_exit_signal = True
+    exit_profit_only = True
+    ignore_roi_if_entry_signal = True
 
     startup_candle_count: int = 72
 
@@ -149,7 +149,7 @@ class Schism5(IStrategy):
 
         return min(0, sl_ramp) - self.custom_stop_trailing
 
-    def check_buy_timeout(self, pair: str, trade: Trade, order: dict, **kwargs) -> bool:
+    def check_entry_timeout(self, pair: str, trade: Trade, order: dict, **kwargs) -> bool:
         bid_strategy = self.config.get('bid_strategy', {})
         ob = self.dp.orderbook(pair, 1)
         current_price = ob[f"{bid_strategy['price_side']}s"][0][0]
@@ -157,7 +157,7 @@ class Schism5(IStrategy):
             return True
         return False
 
-    def check_sell_timeout(self, pair: str, trade: Trade, order: dict, **kwargs) -> bool:
+    def check_exit_timeout(self, pair: str, trade: Trade, order: dict, **kwargs) -> bool:
         ask_strategy = self.config.get('ask_strategy', {})
         ob = self.dp.orderbook(pair, 1)
         current_price = ob[f"{ask_strategy['price_side']}s"][0][0]
@@ -255,7 +255,7 @@ class Schism5(IStrategy):
             buy_params = self.buy_params_QRD
             sell_params = self.sell_params_QRD
 
-        if side == 'sell':
+        if side == 'exit':
             return sell_params
 
         return buy_params
@@ -283,7 +283,7 @@ class Schism5_BTC(Schism5):
         "4320": 0
     }
 
-    use_sell_signal = False
+    use_exit_signal = False
 
 class Schism5_ETH(Schism5):
 
@@ -307,4 +307,4 @@ class Schism5_ETH(Schism5):
         "4320": 0
     }
 
-    use_sell_signal = False
+    use_exit_signal = False

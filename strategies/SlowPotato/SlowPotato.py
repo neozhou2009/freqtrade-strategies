@@ -27,7 +27,7 @@ from freqtrade.strategy.interface import IStrategy
 # --------------------------------
 # Add your lib to import here
 import talib.abstract as ta
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 from datetime import datetime
 from freqtrade.persistence import Trade
 from technical.util import resample_to_interval, resampled_merge
@@ -58,14 +58,14 @@ class SlowPotato(IStrategy):
     trailing_stop_positive_offset = 0.03
     
     # Experimental settings (configuration will overide these if set)
-    use_sell_signal = True
-    sell_profit_only = True
-    ignore_roi_if_buy_signal = True
+    use_exit_signal = True
+    exit_profit_only = True
+    ignore_roi_if_entry_signal = True
     
     # Optional order type mapping
     order_types = {
-        'buy': 'market',
-        'sell': 'market',
+        'entry': 'market',
+        'exit': 'market',
         'stoploss': 'market',
         'stoploss_on_exchange': False
     }
@@ -73,8 +73,8 @@ class SlowPotato(IStrategy):
         
     # Optional order time in force.
     order_time_in_force = {
-        'buy': 'gtc',
-        'sell': 'gtc'
+        'entry': 'gtc',
+        'exit': 'gtc'
         }
     # run "populate_indicators" only for new candle
     process_only_new_candles = False

@@ -17,7 +17,7 @@
 # --- Do not remove these libs ---
 import numpy as np
 from functools import reduce
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 import talib.abstract as ta
 import random
 from freqtrade.strategy.hyper import CategoricalParameter, DecimalParameter, IntParameter

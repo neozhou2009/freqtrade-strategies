@@ -16,7 +16,7 @@ from pandas import DataFrame
 
 # Add your lib to import here
 import talib.abstract as ta
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 import numpy
 
 
@@ -34,7 +34,7 @@ class Chispei(IStrategy):
     }
 
     stoploss = -0.32336
-    ticker_interval = '4h'
+    timeframe = '4h'
 
     def populate_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         # SMA - Simple Moving Average

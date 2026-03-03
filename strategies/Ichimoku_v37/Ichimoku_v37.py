@@ -7,7 +7,7 @@ from freqtrade.strategy.interface import IStrategy
 # --------------------------------
 # Add your lib to import here
 import talib.abstract as ta
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 from technical.util import resample_to_interval, resampled_merge
 from freqtrade.strategy import IStrategy, merge_informative_pair
 from technical.indicators import ichimoku
@@ -32,17 +32,17 @@ class Ichimoku_v37(IStrategy):
   process_only_new_candles = True
 
   # These values can be overridden in the "ask_strategy" section in the config.
-  use_sell_signal = True
-  sell_profit_only = True
-  ignore_roi_if_buy_signal = True
+  use_exit_signal = True
+  exit_profit_only = True
+  ignore_roi_if_entry_signal = True
 
   # Number of candles the strategy requires before producing valid signals
   startup_candle_count = 150
 
   # Optional order type mapping.
   order_types = {
-    'buy': 'market',
-    'sell': 'market',
+    'entry': 'market',
+    'exit': 'market',
     'stoploss': 'market',
     'stoploss_on_exchange': False
   }

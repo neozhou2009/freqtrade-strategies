@@ -1,7 +1,7 @@
 # --- Do not remove these libs ---
 from freqtrade.strategy import IStrategy, merge_informative_pair
 from pandas import DataFrame
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 # --------------------------------
 
 """
@@ -59,9 +59,9 @@ class Slowbro(IStrategy):
     timeframe = '1h'
     inf_timeframe = '1d'
 
-    use_sell_signal = True
-    sell_profit_only = True
-    ignore_roi_if_buy_signal = False
+    use_exit_signal = True
+    exit_profit_only = True
+    ignore_roi_if_entry_signal = False
 
     startup_candle_count: int = 30
     process_only_new_candles = False

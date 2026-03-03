@@ -1,6 +1,6 @@
 import numpy as np
 import talib.abstract as ta
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 import arrow
 from freqtrade.strategy.interface import IStrategy
 from freqtrade.strategy import merge_informative_pair
@@ -57,9 +57,9 @@ class Schism4(IStrategy):
 
     stoploss = -0.30
 
-    use_sell_signal = False
-    sell_profit_only = True
-    ignore_roi_if_buy_signal = True
+    use_exit_signal = False
+    exit_profit_only = True
+    ignore_roi_if_entry_signal = True
 
     startup_candle_count: int = 72
 
@@ -145,7 +145,7 @@ class Schism4(IStrategy):
         trade_data = self.custom_trade_info[metadata['pair']]
         conditions = []
 
-        # Persist a buy signal for existing trades to make use of ignore_roi_if_buy_signal = True
+        # Persist a buy signal for existing trades to make use of ignore_roi_if_entry_signal = True
         # when this buy signal is not present a sell can happen according to the defined ROI table
         if trade_data['active_trade']:
             # peak_profit factor f(x)=1-x/400, rmi 30 -> 0.925, rmi 80 -> 0.80
@@ -353,7 +353,7 @@ class Schism4(IStrategy):
             buy_params = self.buy_params_QRD
             sell_params = self.sell_params_QRD
 
-        if side == 'sell':
+        if side == 'exit':
             return sell_params
 
         return buy_params
@@ -362,7 +362,7 @@ class Schism4(IStrategy):
     Price protection on trade entry and timeouts, built-in Freqtrade functionality
     https://www.freqtrade.io/en/latest/strategy-advanced/
     """
-    def check_buy_timeout(self, pair: str, trade: Trade, order: dict, **kwargs) -> bool:
+    def check_entry_timeout(self, pair: str, trade: Trade, order: dict, **kwargs) -> bool:
         bid_strategy = self.config.get('bid_strategy', {})
         ob = self.dp.orderbook(pair, 1)
         current_price = ob[f"{bid_strategy['price_side']}s"][0][0]
@@ -371,7 +371,7 @@ class Schism4(IStrategy):
             return True
         return False
 
-    def check_sell_timeout(self, pair: str, trade: Trade, order: dict, **kwargs) -> bool:
+    def check_exit_timeout(self, pair: str, trade: Trade, order: dict, **kwargs) -> bool:
         ask_strategy = self.config.get('ask_strategy', {})
         ob = self.dp.orderbook(pair, 1)
         current_price = ob[f"{ask_strategy['price_side']}s"][0][0]
@@ -416,7 +416,7 @@ class Schism4_BTC(Schism4):
         "4320": 0
     }
 
-    use_sell_signal = False
+    use_exit_signal = False
 
 # Sub-strategy with parameters specific to ETH stake
 class Schism4_ETH(Schism4):
@@ -441,4 +441,4 @@ class Schism4_ETH(Schism4):
         "4320": 0
     }
 
-    use_sell_signal = False
+    use_exit_signal = False

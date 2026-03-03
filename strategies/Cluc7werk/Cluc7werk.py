@@ -1,4 +1,4 @@
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 import numpy as np
 import talib.abstract as ta
 from freqtrade.strategy.interface import IStrategy
@@ -55,10 +55,10 @@ class Cluc7werk(IStrategy):
     startup_candle_count: int = 72
 
     # Make sure these match or are not overridden in config
-    use_sell_signal = True
-    sell_profit_only = True
-    sell_profit_offset = 0.01
-    ignore_roi_if_buy_signal = True
+    use_exit_signal = True
+    exit_profit_only = True
+    exit_profit_offset = 0.01
+    ignore_roi_if_entry_signal = True
 
     def populate_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
 

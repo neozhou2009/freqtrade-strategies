@@ -6,7 +6,7 @@ from pandas import DataFrame
 # --------------------------------
 import talib.abstract as ta
 import numpy as np
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 import datetime
 from technical.util import resample_to_interval, resampled_merge
 from datetime import datetime, timedelta
@@ -31,7 +31,7 @@ def EWO(dataframe, ema_length=5, ema2_length=3):
 
 
 class EI3v2_tag_cofi_green(IStrategy):
-    INTERFACE_VERSION = 2
+    INTERFACE_VERSION = 3
     """
     # ROI table:
     minimal_roi = {
@@ -150,15 +150,15 @@ class EI3v2_tag_cofi_green(IStrategy):
     
 
     # Sell signal
-    use_sell_signal = True
-    sell_profit_only = True
-    sell_profit_offset = 0.01
-    ignore_roi_if_buy_signal = False
+    use_exit_signal = True
+    exit_profit_only = True
+    exit_profit_offset = 0.01
+    ignore_roi_if_entry_signal = False
 
     ## Optional order time in force.
     order_time_in_force = {
-        'buy': 'gtc',
-        'sell': 'gtc'
+        'entry': 'gtc',
+        'exit': 'gtc'
     }
 
     # Optimal timeframe for the strategy
@@ -176,7 +176,7 @@ class EI3v2_tag_cofi_green(IStrategy):
     }
 
 
-    def custom_sell(self, pair: str, trade: 'Trade', current_time: 'datetime', current_rate: float, current_profit: float, **kwargs):
+    def custom_exit(self, pair: str, trade: 'Trade', current_time: 'datetime', current_rate: float, current_profit: float, **kwargs):
         # Sell any positions at a loss if they are held for more than 7 days.
         if current_profit < -0.04 and (current_time - trade.open_date_utc).days >= 4:
             return 'unclog'
@@ -451,7 +451,7 @@ class EI3v2_tag_cofi_dca_green(EI3v2_tag_cofi_green):
 
         count_of_buys = 0
         for order in trade.orders:
-            if order.ft_is_open or order.ft_order_side != 'buy':
+            if order.ft_is_open or order.ft_order_side != 'entry':
                 continue
             if order.status == "closed":
                 count_of_buys += 1

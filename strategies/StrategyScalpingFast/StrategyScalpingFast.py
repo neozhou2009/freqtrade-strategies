@@ -3,11 +3,11 @@ from freqtrade.strategy.interface import IStrategy
 from pandas import DataFrame
 # --------------------------------
 import talib.abstract as ta
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 from pandas import DataFrame
 # --------------------------------
 import talib.abstract as ta
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 
 
 class StrategyScalpingFast(IStrategy):
@@ -21,9 +21,9 @@ class StrategyScalpingFast(IStrategy):
     timeframe_support = '5m'
     timeframe_main = '5m'
 
-    use_sell_signal = False
-    sell_profit_only = True
-    ignore_roi_if_buy_signal = False
+    use_exit_signal = False
+    exit_profit_only = True
+    ignore_roi_if_entry_signal = False
     ignore_buying_expired_candle_after = 0
     trailing_stop = False
 

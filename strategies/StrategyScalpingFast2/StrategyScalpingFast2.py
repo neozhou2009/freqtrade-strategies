@@ -7,7 +7,7 @@ from functools import reduce
 import numpy  # noqa
 # --------------------------------
 import talib.abstract as ta
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 
 
 class StrategyScalpingFast2(IStrategy):
@@ -51,7 +51,7 @@ class StrategyScalpingFast2(IStrategy):
         "51": 0.012,
         "123": 0
     }
-    use_sell_signal = False
+    use_exit_signal = False
     # Stoploss:
     stoploss = -0.326
     # Minimal ROI designed for the strategy.

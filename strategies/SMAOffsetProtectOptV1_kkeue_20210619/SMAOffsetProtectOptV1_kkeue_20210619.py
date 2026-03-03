@@ -7,7 +7,7 @@ from pandas import DataFrame
 
 import talib.abstract as ta
 import numpy as np
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 import datetime
 from technical.util import resample_to_interval, resampled_merge
 from datetime import datetime, timedelta
@@ -51,7 +51,7 @@ class SMAOffsetProtectOptV1_kkeue_20210619(IStrategy):
         "base_nb_candles_sell": 20,
         "high_offset": 1.010,
     }
-    INTERFACE_VERSION = 2
+    INTERFACE_VERSION = 3
 
     # Modified ROI - 20210620
     # ROI table:
@@ -92,10 +92,10 @@ class SMAOffsetProtectOptV1_kkeue_20210619(IStrategy):
     trailing_only_offset_is_reached = True
 
     # Sell signal
-    use_sell_signal = True
-    sell_profit_only = True
-    sell_profit_offset = 0.01
-    ignore_roi_if_buy_signal = False
+    use_exit_signal = True
+    exit_profit_only = True
+    exit_profit_offset = 0.01
+    ignore_roi_if_entry_signal = False
 
     # Optimal timeframe for the strategy
     timeframe = '5m'

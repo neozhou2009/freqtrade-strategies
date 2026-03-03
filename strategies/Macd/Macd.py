@@ -2,7 +2,7 @@
 from freqtrade.strategy import IStrategy, merge_informative_pair
 from pandas import DataFrame
 import talib.abstract as ta
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 from datetime import timedelta, datetime, timezone
 
 # --------------------------------

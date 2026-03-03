@@ -26,7 +26,7 @@ from pandas import DataFrame
 import pandas as pd
 import ta
 from ta.utils import dropna
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 from functools import reduce
 import numpy as np
 

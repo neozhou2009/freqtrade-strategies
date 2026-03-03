@@ -14,7 +14,7 @@ from pandas import DataFrame
 # Add your lib to import here
 # No need to These imports. just for who want to add more conditions:
 # import talib.abstract as ta
-# import freqtrade.vendor.qtpylib.indicators as qtpylib
+# from technical import qtpylib
 
 
 class HourBasedStrategy(IStrategy):

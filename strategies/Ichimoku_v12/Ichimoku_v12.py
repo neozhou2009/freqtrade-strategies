@@ -3,7 +3,7 @@ from pandas import DataFrame
 #from technical.indicators import accumulation_distribution
 from technical.util import resample_to_interval, resampled_merge
 import talib.abstract as ta
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 import numpy
 from technical.indicators import ichimoku
 
@@ -18,7 +18,7 @@ class Ichimoku_v12(IStrategy):
 
     stoploss = -1 #-0.35
 
-    ticker_interval = '4h' #3m
+    timeframe = '4h' #3m
 
     # startup_candle_count: int = 2
 

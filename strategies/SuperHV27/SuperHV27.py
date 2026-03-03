@@ -1,6 +1,6 @@
 import numpy as np
 import talib.abstract as ta
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 import arrow
 from typing import Dict, List, NamedTuple, Optional, Tuple
 from freqtrade.strategy.interface import IStrategy
@@ -60,9 +60,9 @@ class SuperHV27(IStrategy):
     }
 
     # Probably don't change these
-    use_sell_signal = True
-    sell_profit_only = True
-    ignore_roi_if_buy_signal = True
+    use_exit_signal = True
+    exit_profit_only = True
+    ignore_roi_if_entry_signal = True
 
     # Custom Dicts for storing trade data and other custom things this strategy does
     custom_trade_info = {}
@@ -360,7 +360,7 @@ class SuperHV27(IStrategy):
     Price protection on trade entry and timeouts, built-in Freqtrade functionality
     https://www.freqtrade.io/en/latest/strategy-advanced/
     """
-    def check_buy_timeout(self, pair: str, trade: Trade, order: dict, **kwargs) -> bool:
+    def check_entry_timeout(self, pair: str, trade: Trade, order: dict, **kwargs) -> bool:
         bid_strategy = self.config.get('bid_strategy', {})
         ob = self.dp.orderbook(pair, 1)
         current_price = ob[f"{bid_strategy['price_side']}s"][0][0]
@@ -368,7 +368,7 @@ class SuperHV27(IStrategy):
             return True
         return False
 
-    def check_sell_timeout(self, pair: str, trade: Trade, order: dict, **kwargs) -> bool:
+    def check_exit_timeout(self, pair: str, trade: Trade, order: dict, **kwargs) -> bool:
         ask_strategy = self.config.get('ask_strategy', {})
         ob = self.dp.orderbook(pair, 1)
         current_price = ob[f"{ask_strategy['price_side']}s"][0][0]
@@ -396,7 +396,7 @@ class SuperHV27_BTC(SuperHV27):
 
 
 
-    use_sell_signal = False
+    use_exit_signal = False
 
 # Sub-strategy with parameters specific to ETH stake
 class SuperHV27_ETH(SuperHV27):
@@ -405,4 +405,4 @@ class SuperHV27_ETH(SuperHV27):
 
 
 
-    use_sell_signal = False
+    use_exit_signal = False

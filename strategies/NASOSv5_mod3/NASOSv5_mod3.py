@@ -8,7 +8,7 @@ from pandas import DataFrame
 # --------------------------------
 import talib.abstract as ta
 import numpy as np
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 import datetime
 from technical.util import resample_to_interval, resampled_merge
 from datetime import datetime, timedelta
@@ -36,7 +36,7 @@ def EWO(dataframe, ema_length=5, ema2_length=50):
 
 
 class NASOSv5_mod3(IStrategy):
-    INTERFACE_VERSION = 2
+    INTERFACE_VERSION = 3
 
     # Buy hyperspace params:
     buy_params = {
@@ -113,15 +113,15 @@ class NASOSv5_mod3(IStrategy):
 
 
     # Sell signal
-    use_sell_signal = True
-    sell_profit_only = True
-    sell_profit_offset = 0.01
-    ignore_roi_if_buy_signal = False
+    use_exit_signal = True
+    exit_profit_only = True
+    exit_profit_offset = 0.01
+    ignore_roi_if_entry_signal = False
 
     # Optional order time in force.
     order_time_in_force = {
-        'buy': 'gtc',
-        'sell': 'ioc'
+        'entry': 'gtc',
+        'exit': 'ioc'
     }
 
     # Optimal timeframe for the strategy
@@ -578,7 +578,7 @@ class TrailingBuyStrat(NASOSv5_mod3):
 
     custom_info = dict() # custom_info should be a dict
 
-    def custom_sell(self, pair: str, trade: Trade, current_time: datetime, current_rate: float,
+    def custom_exit(self, pair: str, trade: Trade, current_time: datetime, current_rate: float,
                     current_profit: float, **kwargs):
         tag = super(TrailingBuyStrat, self).custom_sell(pair, trade, current_time, current_rate, current_profit, **kwargs)
         if tag:

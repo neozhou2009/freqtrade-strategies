@@ -1,4 +1,4 @@
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 import numpy as np
 import talib.abstract as ta
 from freqtrade.persistence import Trade
@@ -21,7 +21,7 @@ logger = logging.getLogger(__name__)
 
 
 class CoreStrategy(IStrategy):
-    INTERFACE_VERSION = 2
+    INTERFACE_VERSION = 3
 
     # minimal_roi = {"0": 0.038, "20": 0.028, "40": 0.02, "60": 0.015, "180": 0.018, }
     # minimal_roi = {"0": 0.038, "20": 0.028, "40": 0.02, "60": 0.015, "180": 0.018, }
@@ -32,10 +32,10 @@ class CoreStrategy(IStrategy):
     informative_timeframe = "1h"
 
     # Sell signal
-    use_sell_signal = True
-    sell_profit_only = True
-    sell_profit_offset = 0.001
-    ignore_roi_if_buy_signal = True
+    use_exit_signal = True
+    exit_profit_only = True
+    exit_profit_offset = 0.001
+    ignore_roi_if_entry_signal = True
 
     # Trailing stoploss
     trailing_stop = True
@@ -401,7 +401,7 @@ class CoreStrategy(IStrategy):
 
 
 
-    def custom_sell(
+    def custom_exit(
         self,
         pair: str,
         trade: "Trade",
@@ -1179,7 +1179,7 @@ def SSLChannels_ATR(dataframe, length=7):
     df["smaHigh"] = df["high"].rolling(length).mean() + df["ATR"]
     df["smaLow"] = df["low"].rolling(length).mean() - df["ATR"]
     df["hlv"] = np.where(
-        df["close"] > df["smaHigh"], 1, np.where(df["close"] < df["smaLow"], -1, np.NAN)
+        df["close"] > df["smaHigh"], 1, np.where(df["close"] < df["smaLow"], -1, np.nan)
     )
     df["hlv"] = df["hlv"].ffill()
     df["sslDown"] = np.where(df["hlv"] < 0, df["smaHigh"], df["smaLow"])
@@ -1195,7 +1195,7 @@ def SSLChannels(dataframe, length=7):
     df["smaHigh"] = df["high"].rolling(length).mean() + df["ATR"]
     df["smaLow"] = df["low"].rolling(length).mean() - df["ATR"]
     df["hlv"] = np.where(
-        df["close"] > df["smaHigh"], 1, np.where(df["close"] < df["smaLow"], -1, np.NAN)
+        df["close"] > df["smaHigh"], 1, np.where(df["close"] < df["smaLow"], -1, np.nan)
     )
     df["hlv"] = df["hlv"].ffill()
     df["sslDown"] = np.where(df["hlv"] < 0, df["smaHigh"], df["smaLow"])
@@ -1212,7 +1212,7 @@ def EWO(dataframe, ema_length=5, ema2_length=35):
 
 
 class BinClucMadv1(CoreStrategy):
-    INTERFACE_VERSION = 2
+    INTERFACE_VERSION = 3
 
     stoploss = -0.10
 
@@ -1252,7 +1252,7 @@ class BinClucMadv1(CoreStrategy):
 
 
 class BinClucMadv2(CoreStrategy):
-    INTERFACE_VERSION = 2
+    INTERFACE_VERSION = 3
 
     stoploss = -0.10
 
@@ -1294,7 +1294,7 @@ class BinClucMadv2(CoreStrategy):
 
 class BinClucMadSMAv1(CoreStrategy):
 
-    INTERFACE_VERSION = 2
+    INTERFACE_VERSION = 3
 
 
     stoploss = -0.228  # effectively disabled.
@@ -1338,7 +1338,7 @@ class BinClucMadSMAv1(CoreStrategy):
 
 class BinClucMadSMAv2(CoreStrategy):
 
-    INTERFACE_VERSION = 2
+    INTERFACE_VERSION = 3
 
     stoploss = -0.228  # effectively disabled.
     # Custom stoploss

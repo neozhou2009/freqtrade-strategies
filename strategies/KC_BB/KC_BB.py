@@ -10,7 +10,7 @@ import talib.abstract as ta
 import numpy as np
 import pandas_ta as pta
 from freqtrade.strategy import merge_informative_pair, CategoricalParameter, DecimalParameter, IntParameter, stoploss_from_open
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 
 class KC_BB(IStrategy):
     """

@@ -158,15 +158,34 @@ trailing_stop_positive_offset = 0.02
 
 ---
 
+### ✅ 第5批 (10个) - 2026-03-03 10/10 全部通过
+
+| 序号 | 策略名称 | 状态 | 修复内容 |
+|------|----------|------|----------|
+| 41 | BB_RPB_TSL_c7c477d_20211030 | ✅ | qtpylib + use_sell_signal→use_exit_signal |
+| 42 | BB_RPB_TSLmeneguzzo | ✅ | qtpylib + use_sell_signal→use_exit_signal + custom_sell→custom_exit |
+| 43 | BB_RSI | ✅ | qtpylib + 3废弃参数 + ticker_interval→timeframe + order_types |
+| 44 | BB_Strategy04 | ✅ | qtpylib + INTERFACE_VERSION + 3废弃参数 + ticker_interval→timeframe + order_types + order_time_in_force |
+| 45 | BBands | ✅ | qtpylib + INTERFACE_VERSION + 3废弃参数 + order_types + order_time_in_force |
+| 46 | BBandsRSI | ✅ | qtpylib + INTERFACE_VERSION + 3废弃参数 + order_types + order_time_in_force |
+| 47 | BBlower | ✅ | qtpylib + 3废弃参数 |
+| 48 | Babico_SMA5xBBmid | ✅ | qtpylib + 2废弃参数 + order_types |
+| 49 | Bandtastic | ✅ | qtpylib + INTERFACE_VERSION |
+| 50 | BbRoi | ✅ | qtpylib + 2废弃参数 + ticker_interval→timeframe + order_types |
+
+**通过率**: 10/10 (100%)
+
+---
+
 ## 总体统计
 
 | 指标 | 数值 |
 |------|------|
-| 已处理批次 | 4 |
-| 已修复策略 | 40 |
-| 接口修复通过 | 34 (85%) |
+| 已处理批次 | 5 |
+| 已修复策略 | 50 |
+| 接口修复通过 | 44 (88%) |
 | 遇到的额外问题类型 | 5 |
-| 剩余待修复文件 | ~380+ |
+| 剩余待修复文件 | ~370+ |
 | 最近批次通过率 | 10/10 (100%) |
 
 ---
@@ -214,7 +233,7 @@ cd test
 ---
 
 ## 下一步计划
-1. 继续第4批修复 (10个策略)
+1. 继续第6批修复 (10个策略)
 2. 对已修复但未通过的策略进行进一步调试
 3. 批量修复剩余的 qtpylib 和 INTERFACE_VERSION 问题
 4. 完成后进行全部策略的回归测试

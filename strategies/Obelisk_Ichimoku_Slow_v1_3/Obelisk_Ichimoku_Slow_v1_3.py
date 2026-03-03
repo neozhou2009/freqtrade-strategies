@@ -2,7 +2,7 @@
 from freqtrade.strategy import IStrategy, merge_informative_pair
 from pandas import DataFrame
 import talib.abstract as ta
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 
 # --------------------------------
 import pandas as pd
@@ -61,7 +61,7 @@ def ssl_atr(dataframe, length = 7):
     df = dataframe.copy()
     df['smaHigh'] = df['high'].rolling(length).mean() + df['atr']
     df['smaLow'] = df['low'].rolling(length).mean() - df['atr']
-    df['hlv'] = np.where(df['close'] > df['smaHigh'], 1, np.where(df['close'] < df['smaLow'], -1, np.NAN))
+    df['hlv'] = np.where(df['close'] > df['smaHigh'], 1, np.where(df['close'] < df['smaLow'], -1, np.nan))
     df['hlv'] = df['hlv'].ffill()
     df['sslDown'] = np.where(df['hlv'] < 0, df['smaHigh'], df['smaLow'])
     df['sslUp'] = np.where(df['hlv'] < 0, df['smaLow'], df['smaHigh'])

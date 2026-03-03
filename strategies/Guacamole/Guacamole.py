@@ -49,7 +49,7 @@ class Guacamole(IStrategy):
 
     use_exit_signal = True
     exit_profit_only = True
-    # sell_profit_offset = 0.01
+    # exit_profit_offset = 0.01
     ignore_roi_if_entry_signal = True
 
     process_only_new_candles = False

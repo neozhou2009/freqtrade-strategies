@@ -1,6 +1,6 @@
 from functools import reduce
 
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 import talib.abstract as ta
 from freqtrade.strategy import merge_informative_pair
 from freqtrade.strategy.interface import IStrategy

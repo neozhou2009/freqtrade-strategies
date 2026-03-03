@@ -20,7 +20,7 @@ ma_types = {
 
 
 class SMAIP3(IStrategy):
-    INTERFACE_VERSION = 2
+    INTERFACE_VERSION = 3
 
     # hyperopt and paste results here
     # Buy hyperspace params:
@@ -78,9 +78,9 @@ class SMAIP3(IStrategy):
     # Optimal timeframe for the strategy
     timeframe = '5m'
 
-    use_sell_signal = True
-    sell_profit_only = True
-    ignore_roi_if_buy_signal = False
+    use_exit_signal = True
+    exit_profit_only = True
+    ignore_roi_if_entry_signal = False
 
     process_only_new_candles = True
     startup_candle_count = 30

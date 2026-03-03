@@ -3,7 +3,7 @@
 import talib.abstract as ta
 from pandas import DataFrame
 
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 from freqtrade.strategy.interface import IStrategy
 
 
@@ -24,20 +24,20 @@ class EMABBRSI(IStrategy):
     # Optimal stoploss designed for the strategy
     stoploss = -0.20
     # Optimal ticker interval for the strategy
-    ticker_interval = '1h'
+    timeframe = '1h'
 
     # Optional order type mapping
     order_types = {
-        'buy': 'limit',
-        'sell': 'limit',
+        'entry': 'limit',
+        'exit': 'limit',
         'stoploss': 'limit',
         'stoploss_on_exchange': False
     }
 
     # Optional time in force for orders
     order_time_in_force = {
-        'buy': 'gtc',
-        'sell': 'gtc',
+        'entry': 'gtc',
+        'exit': 'gtc',
     }
 
     def populate_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:

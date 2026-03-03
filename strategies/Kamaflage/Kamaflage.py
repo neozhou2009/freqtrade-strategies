@@ -1,5 +1,5 @@
 # pragma pylint: disable=missing-docstring, invalid-name, pointless-string-statement
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 import numpy as np
 import talib.abstract as ta
 from freqtrade.strategy.interface import IStrategy
@@ -52,7 +52,7 @@ class Kamaflage(IStrategy):
 
     use_exit_signal = True
     exit_profit_only = True
-    # sell_profit_offset = 0.01
+    # exit_profit_offset = 0.01
     ignore_roi_if_entry_signal = True
 
     process_only_new_candles = False

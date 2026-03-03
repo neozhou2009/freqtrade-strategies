@@ -6,7 +6,7 @@ from pandas import DataFrame
 # --------------------------------
 
 import talib.abstract as ta
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 from datetime import datetime, timedelta
 from freqtrade.persistence import Trade
 import pandas as pd
@@ -63,8 +63,8 @@ class MADisplaceV3(IStrategy):
 
     timeframe = '5m'
 
-    use_sell_signal = True
-    sell_profit_only = True
+    use_exit_signal = True
+    exit_profit_only = True
 
     process_only_new_candles = True
 

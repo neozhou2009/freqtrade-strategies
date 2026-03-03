@@ -18,7 +18,7 @@ from freqtrade.strategy import IStrategy
 # --------------------------------
 # Add your lib to import here
 import talib.abstract as ta
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 from freqtrade.strategy import IntParameter
 from pandas import Series
 from numpy.typing import ArrayLike
@@ -126,7 +126,7 @@ class NowoIchimoku5mV2(IStrategy):
 
     startup_candle_count = int(100 * time_factor)
 
-    use_sell_signal = False
+    use_exit_signal = False
 
     use_custom_stoploss = True
 

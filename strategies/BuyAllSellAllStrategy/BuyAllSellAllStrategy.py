@@ -9,9 +9,9 @@ class BuyAllSellAllStrategy(IStrategy):
     stoploss = -0.25
     timeframe = '5m'
 
-    use_sell_signal = True
-    sell_profit_only = True
-    ignore_roi_if_buy_signal = False
+    use_exit_signal = True
+    exit_profit_only = True
+    ignore_roi_if_entry_signal = False
 
     def populate_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         return dataframe
@@ -24,7 +24,7 @@ class BuyAllSellAllStrategy(IStrategy):
         dataframe["sell"] = 0
         return dataframe
 
-    def custom_sell(
+    def custom_exit(
         self, pair: str, trade: 'Trade', current_time: 'datetime', current_rate: float, current_profit: float, **kwargs
     ) -> float:
         dataframe, _ = self.dp.get_analyzed_dataframe(pair, self.timeframe)

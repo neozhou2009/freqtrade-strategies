@@ -6,7 +6,7 @@ from pandas import DataFrame
 # --------------------------------
 
 import talib.abstract as ta
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 import numpy # noqa
 
 __author__      = "Kevin OssenbrÃ¼ck"
@@ -38,7 +38,7 @@ class MACDCCI(IStrategy):
     trailing_stop_positive_offset = 0.10
     trailing_only_offset_is_reached = False
 
-    ticker_interval = '30m'
+    timeframe = '30m'
 
     def informative_pairs(self):
         return []

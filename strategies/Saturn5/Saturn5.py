@@ -1,7 +1,7 @@
 from datetime import timedelta
 from functools import reduce
 
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 import talib.abstract as ta
 from freqtrade.strategy import IStrategy
 from pandas import DataFrame
@@ -24,7 +24,7 @@ class Saturn5(IStrategy):
     startup_candle_count: int = 480
     trailing_stop = False
     use_custom_stoploss = False
-    use_sell_signal = False
+    use_exit_signal = False
 
     # signal controls
     buy_signal_1 = True

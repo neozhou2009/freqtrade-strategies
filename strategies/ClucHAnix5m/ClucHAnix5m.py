@@ -10,7 +10,7 @@ import pandas as pd
 import numpy as np
 from freqtrade.persistence import Trade
 import time
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 import pandas_ta as pta
 import talib.abstract as ta
 import technical.indicators as ftt
@@ -119,9 +119,9 @@ class ClucHAnix5m(IStrategy):
     timeframe = '5m'
 
     # Make sure these match or are not overridden in config
-    use_sell_signal = True
-    sell_profit_only = True
-    ignore_roi_if_buy_signal = False
+    use_exit_signal = True
+    exit_profit_only = True
+    ignore_roi_if_entry_signal = False
 
     # Custom stoploss
     use_custom_stoploss = True
@@ -130,8 +130,8 @@ class ClucHAnix5m(IStrategy):
     startup_candle_count = 200
 
     order_types = {
-        'buy': 'market',
-        'sell': 'market',
+        'entry': 'market',
+        'exit': 'market',
         'emergencysell': 'market',
         'forcebuy': "market",
         'forcesell': 'market',

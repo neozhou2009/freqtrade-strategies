@@ -2,7 +2,7 @@
 from freqtrade.strategy.interface import IStrategy
 from pandas import DataFrame
 import talib.abstract as ta
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 # --------------------------------
 
 class Babico_SMA5xBBmid(IStrategy):
@@ -21,14 +21,14 @@ class Babico_SMA5xBBmid(IStrategy):
     trailing_stop_positive = 0.01
     trailing_stop_positive_offset = 0.03
 
-    use_sell_signal = True
-    sell_profit_only = True
+    use_exit_signal = True
+    exit_profit_only = True
     process_only_new_candles = True
 
     # Optional order type mapping.
     order_types = {
-        'buy': 'limit',
-        'sell': 'limit',
+        'entry': 'limit',
+        'exit': 'limit',
         'trailing_stop_loss': 'limit',
         'stoploss': 'limit',
         'stoploss_on_exchange': False

@@ -8,7 +8,7 @@ import numpy as np
 # --------------------------------
 
 import talib.abstract as ta
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 
 
 def bollinger_bands(stock_price, window_size, num_of_std):

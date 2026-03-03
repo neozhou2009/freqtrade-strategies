@@ -1,5 +1,5 @@
 # --- Do not remove these libs ---
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 import numpy as np
 # --------------------------------
 import talib.abstract as ta
@@ -20,9 +20,9 @@ class CombinedBinHAndClucHyperV3(IStrategy):
     #   "max_open_trades" = 2 and minimal_roi = 0.01
     timeframe = '1m'
 
-    use_sell_signal = True
-    sell_profit_only = True
-    ignore_roi_if_buy_signal = False
+    use_exit_signal = True
+    exit_profit_only = True
+    ignore_roi_if_entry_signal = False
 
     # ----------------------------------------------------------------
     # Hyper Params

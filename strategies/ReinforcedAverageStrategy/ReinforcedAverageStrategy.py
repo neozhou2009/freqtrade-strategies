@@ -6,7 +6,7 @@ from pandas import DataFrame, merge, DatetimeIndex
 # --------------------------------
 
 import talib.abstract as ta
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 from technical.util import resample_to_interval, resampled_merge
 from freqtrade.exchange import timeframe_to_minutes
 
@@ -43,9 +43,9 @@ class ReinforcedAverageStrategy(IStrategy):
     process_only_new_candles = False
 
     # Experimental settings (configuration will overide these if set)
-    use_sell_signal = True
-    sell_profit_only = True
-    ignore_roi_if_buy_signal = False
+    use_exit_signal = True
+    exit_profit_only = True
+    ignore_roi_if_entry_signal = False
 
     def populate_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
 

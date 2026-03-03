@@ -4,7 +4,7 @@ from functools import reduce
 from pandas import DataFrame
 # --------------------------------
 import talib.abstract as ta
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 import datetime
 from datetime import datetime
 from freqtrade.persistence import Trade
@@ -29,8 +29,8 @@ sell_params = {
     }
 
 order_types = {
-    'buy': 'limit',
-    'sell': 'market',
+    'entry': 'limit',
+    'exit': 'market',
     'stoploss': 'market',
     'stoploss_on_exchange': False
     }    
@@ -45,7 +45,7 @@ def EWO(dataframe, ema_length=5, ema2_length=35):
 
 
 class NotAnotherSMAOffsetStrategy_uzi(IStrategy):
-    INTERFACE_VERSION = 2
+    INTERFACE_VERSION = 3
 
     # ROI table:
     minimal_roi = {
@@ -79,10 +79,10 @@ class NotAnotherSMAOffsetStrategy_uzi(IStrategy):
     trailing_only_offset_is_reached = True
 
     # Sell signal
-    use_sell_signal = True
-    sell_profit_only = True
-    sell_profit_offset = 0.005
-    ignore_roi_if_buy_signal = False
+    use_exit_signal = True
+    exit_profit_only = True
+    exit_profit_offset = 0.005
+    ignore_roi_if_entry_signal = False
 
     # Optimal timeframe for the strategy
     timeframe = '5m'

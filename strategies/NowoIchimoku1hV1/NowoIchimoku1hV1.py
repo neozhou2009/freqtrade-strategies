@@ -16,7 +16,7 @@ from freqtrade.strategy import IStrategy
 # --------------------------------
 # Add your lib to import here
 import talib.abstract as ta
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 from freqtrade.strategy import IntParameter
 from pandas import Series
 from numpy.typing import ArrayLike
@@ -66,7 +66,7 @@ class NowoIchimoku1hV1(IStrategy):
 
     startup_candle_count = 100
 
-    use_sell_signal = False
+    use_exit_signal = False
 
     use_custom_stoploss = True
 
@@ -94,7 +94,7 @@ class NowoIchimoku1hV1(IStrategy):
         },
     }
 
-    def custom_sell(self, pair: str, trade: 'Trade', current_time: 'datetime', current_rate: float,
+    def custom_exit(self, pair: str, trade: 'Trade', current_time: 'datetime', current_rate: float,
                     current_profit: float, **kwargs):
 
         dataframe, _ = self.dp.get_analyzed_dataframe(pair, self.timeframe)

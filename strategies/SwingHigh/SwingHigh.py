@@ -10,7 +10,7 @@ from freqtrade.strategy.interface import IStrategy
 # --------------------------------
 # Add your lib to import here
 import talib.abstract as ta
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 
 
 class SwingHigh(IStrategy):
@@ -27,7 +27,7 @@ class SwingHigh(IStrategy):
     trailing_stop_positive_offset = 0.10
     trailing_only_offset_is_reached = True
 
-    ticker_interval = "30m"
+    timeframe = "30m"
 
     def informative_pairs(self):
         return []

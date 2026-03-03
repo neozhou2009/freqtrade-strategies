@@ -7,7 +7,7 @@ from pandas import DataFrame
 
 import talib.abstract as ta
 import numpy as np
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 import datetime
 from technical.util import resample_to_interval, resampled_merge
 from datetime import datetime, timedelta
@@ -22,7 +22,7 @@ ma_types = {
 }
 
 class SMAOffset(IStrategy):
-	INTERFACE_VERSION = 2
+	INTERFACE_VERSION = 3
 
 	# hyperopt and paste results here
 	# Buy hyperspace params:
@@ -63,8 +63,8 @@ class SMAOffset(IStrategy):
 	# Optimal timeframe for the strategy
 	timeframe = '5m'
 
-	use_sell_signal = True
-	sell_profit_only = True
+	use_exit_signal = True
+	exit_profit_only = True
 
 	process_only_new_candles = True
 	startup_candle_count = 30

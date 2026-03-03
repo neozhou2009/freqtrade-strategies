@@ -5,7 +5,7 @@ from pandas import DataFrame
 # --------------------------------
 import talib.abstract as ta
 import numpy as np
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 from datetime import datetime, timedelta
 from freqtrade.persistence import Trade
 from freqtrade.strategy import stoploss_from_open, DecimalParameter, IntParameter, CategoricalParameter
@@ -22,7 +22,7 @@ def ewo(dataframe, ema_length=5, ema2_length=35):
 
 
 class NotAnotherSMAOffsetStrategyLite(IStrategy):
-    INTERFACE_VERSION = 2
+    INTERFACE_VERSION = 3
 
     # Buy hyperspace params:
     buy_params = {
@@ -50,11 +50,11 @@ class NotAnotherSMAOffsetStrategyLite(IStrategy):
     fast_ewo = 50
     slow_ewo = 200
 
-    use_sell_signal = True
-    sell_profit_only = True
-    sell_profit_offset = 0.01
-    ignore_roi_if_buy_signal = False
-    order_time_in_force = {'buy': 'gtc', 'sell': 'ioc'}
+    use_exit_signal = True
+    exit_profit_only = True
+    exit_profit_offset = 0.01
+    ignore_roi_if_entry_signal = False
+    order_time_in_force = {'entry': 'gtc', 'exit': 'ioc'}
     timeframe = '5m'
     process_only_new_candles = True
     startup_candle_count = 200
