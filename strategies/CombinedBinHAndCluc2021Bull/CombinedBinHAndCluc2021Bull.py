@@ -33,9 +33,9 @@ class CombinedBinHAndCluc2021Bull(IStrategy):
 
     process_only_new_candles = False
 
-    use_sell_signal = True
-    sell_profit_only = True
-    ignore_roi_if_buy_signal = False
+    use_exit_signal = True
+    exit_profit_only = True
+    ignore_roi_if_entry_signal = False
 
     def populate_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         # strategy BinHV45

@@ -50,10 +50,10 @@ class Kamaflage(IStrategy):
 
     timeframe = '5m'
 
-    use_sell_signal = True
-    sell_profit_only = True
+    use_exit_signal = True
+    exit_profit_only = True
     # sell_profit_offset = 0.01
-    ignore_roi_if_buy_signal = True
+    ignore_roi_if_entry_signal = True
 
     process_only_new_candles = False
 
@@ -134,7 +134,7 @@ class Kamaflage(IStrategy):
       
         return dataframe
     
-    def check_buy_timeout(self, pair: str, trade: Trade, order: dict, **kwargs) -> bool:
+    def check_entry_timeout(self, pair: str, trade: Trade, order: dict, **kwargs) -> bool:
         ob = self.dp.orderbook(pair, 1)
         current_price = ob['bids'][0][0]
         # Cancel buy order if price is more than 1% above the order.
@@ -142,7 +142,7 @@ class Kamaflage(IStrategy):
             return True
         return False
 
-    def check_sell_timeout(self, pair: str, trade: Trade, order: dict, **kwargs) -> bool:
+    def check_exit_timeout(self, pair: str, trade: Trade, order: dict, **kwargs) -> bool:
         ob = self.dp.orderbook(pair, 1)
         current_price = ob['asks'][0][0]
         # Cancel sell order if price is more than 1% below the order.

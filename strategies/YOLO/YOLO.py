@@ -42,9 +42,9 @@ class YOLO(IStrategy):
     
     timeframe = '1m'
 
-    use_sell_signal = False
-    sell_profit_only = True
-    ignore_roi_if_buy_signal = True
+    use_exit_signal = False
+    exit_profit_only = True
+    ignore_roi_if_entry_signal = True
 
 
     def populate_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
