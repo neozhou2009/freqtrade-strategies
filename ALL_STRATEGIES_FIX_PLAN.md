@@ -313,76 +313,122 @@ trailing_stop_positive_offset = 0.02
 **通过率**: 10/10 (100%)
 
 ---
-### ✅ 第12批 (10个) - 2026-03-03 10/10 批量完成
+### ✅ 第12批 (10个) - 2026-03-04 10/10 批量完成
 
 | 序号 | 策略目录名 | 文件名 | 状态 | 修复内容 | 备注 |
 |------|------------|--------|------|----------|------|
-| 111 | CombinedBinHAndClucV3 | CombinedBinHAndClucV3/CombinedBinHAndClucV3.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 112 | CombinedBinHAndClucV4 | CombinedBinHAndClucV4/CombinedBinHAndClucV4.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 113 | CombinedBinHAndClucV5 | CombinedBinHAndClucV5/CombinedBinHAndClucV5.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 114 | CombinedBinHAndClucV5Hyperoptable | CombinedBinHAndClucV5Hyperoptable/CombinedBinHAndClucV5Hyperoptable.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 115 | CombinedBinHAndClucV6 | CombinedBinHAndClucV6/CombinedBinHAndClucV6.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 116 | CombinedBinHAndClucV6H | CombinedBinHAndClucV6H/CombinedBinHAndClucV6H.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 117 | CombinedBinHAndClucV7 | CombinedBinHAndClucV7/CombinedBinHAndClucV7.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 118 | CombinedBinHAndClucV8 | CombinedBinHAndClucV8/CombinedBinHAndClucV8.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 119 | CombinedBinHAndClucV8Hyper | CombinedBinHAndClucV8Hyper/CombinedBinHAndClucV8Hyper.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 120 | CombinedBinHAndClucV8XH | CombinedBinHAndClucV8XH/CombinedBinHAndClucV8XH.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
+| 111 | CombinedBinHAndClucV3 | CombinedBinHAndClucV3/CombinedBinHAndClucV3.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 | 2026-03-04 回测通过，无需额外修复 |
+| 112 | CombinedBinHAndClucV4 | CombinedBinHAndClucV4/CombinedBinHAndClucV4.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 | 2026-03-04 回测通过，无需额外修复 |
+| 113 | CombinedBinHAndClucV5 | CombinedBinHAndClucV5/CombinedBinHAndClucV5.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 | 2026-03-04 回测通过，无需额外修复 |
+| 114 | CombinedBinHAndClucV5Hyperoptable | CombinedBinHAndClucV5Hyperoptable/CombinedBinHAndClucV5Hyperoptable.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 + **skopt依赖修复** | **修复详情**: 1. 注释掉 `from skopt.space import Dimension` 导入<br>2. 将 `sell_indicator_space() -> List[Dimension]:` 改为 `sell_indicator_space() -> List[object]:`<br>2026-03-04 回测通过 |
+| 115 | CombinedBinHAndClucV6 | CombinedBinHAndClucV6/CombinedBinHAndClucV6.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 | 2026-03-04 回测通过，无需额外修复 |
+| 116 | CombinedBinHAndClucV6H | CombinedBinHAndClucV6H/CombinedBinHAndClucV6H.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 | 2026-03-04 回测通过，无需额外修复 |
+| 117 | CombinedBinHAndClucV7 | CombinedBinHAndClucV7/CombinedBinHAndClucV7.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 | 2026-03-04 回测通过，无需额外修复 |
+| 118 | CombinedBinHAndClucV8 | CombinedBinHAndClucV8/CombinedBinHAndClucV8.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 | 2026-03-04 回测通过，无需额外修复 |
+| 119 | CombinedBinHAndClucV8Hyper | CombinedBinHAndClucV8Hyper/CombinedBinHAndClucV8Hyper.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 | 2026-03-04 回测通过，无需额外修复 |
+| 120 | CombinedBinHAndClucV8XH | CombinedBinHAndClucV8XH/CombinedBinHAndClucV8XH.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 | 2026-03-04 回测通过，无需额外修复 |
 
 **通过率**: 10/10 (100%)
+
+**修复总结**:
+- **主要问题**: CombinedBinHAndClucV5Hyperoptable 策略引用了 `skopt` 库，但 Docker 测试环境中缺少此依赖
+- **修复方法**: 
+  1. 注释掉 `from skopt.space import Dimension` 导入语句
+  2. 将函数返回类型 `List[Dimension]` 改为 `List[object]`
+- **修复验证**: 修复后所有 10 个策略均通过回测测试
+- **代码审查**: 检查了所有策略的 `order_types` 配置，未发现旧版参数 (`emergencysell`/`forcebuy`/`forcesell`)
 
 ---
-### ✅ 第13批 (10个) - 2026-03-03 10/10 批量完成
+### ✅ 第13批 (10个) - 2026-03-04 10/10 批量完成
 
 | 序号 | 策略目录名 | 文件名 | 状态 | 修复内容 | 备注 |
 |------|------------|--------|------|----------|------|
-| 121 | CombinedBinHAndClucV8XHO | CombinedBinHAndClucV8XHO/CombinedBinHAndClucV8XHO.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 122 | CombinedBinHClucAndMADV3 | CombinedBinHClucAndMADV3/CombinedBinHClucAndMADV3.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 123 | CombinedBinHClucAndMADV5 | CombinedBinHClucAndMADV5/CombinedBinHClucAndMADV5.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 124 | CombinedBinHClucAndMADV6 | CombinedBinHClucAndMADV6/CombinedBinHClucAndMADV6.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 125 | CombinedBinHClucAndMADV9 | CombinedBinHClucAndMADV9/CombinedBinHClucAndMADV9.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 126 | Combined_Indicators | Combined_Indicators/Combined_Indicators.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 127 | Combined_NFIv6_SMA | Combined_NFIv6_SMA/Combined_NFIv6_SMA.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 128 | Combined_NFIv7_SMA | Combined_NFIv7_SMA/Combined_NFIv7_SMA.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 129 | Combined_NFIv7_SMA_Rallipanos_20210707 | Combined_NFIv7_SMA_Rallipanos_20210707/Combined_NFIv7_SMA_Rallipanos_20210707.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 130 | Combined_NFIv7_SMA_bAdBoY_20211204 | Combined_NFIv7_SMA_bAdBoY_20211204/Combined_NFIv7_SMA_bAdBoY_20211204.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
+| 121 | CombinedBinHAndClucV8XHO | CombinedBinHAndClucV8XHO/CombinedBinHAndClucV8XHO.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 | 2026-03-04 回测通过，无需额外修复 |
+| 122 | CombinedBinHClucAndMADV3 | CombinedBinHClucAndMADV3/CombinedBinHClucAndMADV3.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 | 2026-03-04 回测通过，无需额外修复 |
+| 123 | CombinedBinHClucAndMADV5 | CombinedBinHClucAndMADV5/CombinedBinHClucAndMADV5.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 | 2026-03-04 回测通过，无需额外修复 |
+| 124 | CombinedBinHClucAndMADV6 | CombinedBinHClucAndMADV6/CombinedBinHClucAndMADV6.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 | 2026-03-04 回测通过，无需额外修复 |
+| 125 | CombinedBinHClucAndMADV9 | CombinedBinHClucAndMADV9/CombinedBinHClucAndMADV9.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 | 2026-03-04 回测通过，无需额外修复 |
+| 126 | Combined_Indicators | Combined_Indicators/Combined_Indicators.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 | 2026-03-04 回测通过，无需额外修复 |
+| 127 | Combined_NFIv6_SMA | Combined_NFIv6_SMA/Combined_NFIv6_SMA.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 | 2026-03-04 回测通过，无需额外修复 |
+| 128 | Combined_NFIv7_SMA | Combined_NFIv7_SMA/Combined_NFIv7_SMA.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 | 2026-03-04 回测通过，无需额外修复 |
+| 129 | Combined_NFIv7_SMA_Rallipanos_20210707 | Combined_NFIv7_SMA_Rallipanos_20210707/Combined_NFIv7_SMA_Rallipanos_20210707.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 | 2026-03-04 回测通过，无需额外修复 |
+| 130 | Combined_NFIv7_SMA_bAdBoY_20211204 | Combined_NFIv7_SMA_bAdBoY_20211204/Combined_NFIv7_SMA_bAdBoY_20211204.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 | 2026-03-04 回测通过，无需额外修复 |
 
 **通过率**: 10/10 (100%)
+
+**修复总结**:
+- **测试结果**: 所有 10 个策略均通过回测测试，无需代码修复
+- **代码审查**: 
+  1. 检查了所有策略的 `order_types` 配置，未发现旧版参数 (`emergencysell`/`forcebuy`/`forcesell`)
+  2. 检查了 `skopt` 依赖导入，未发现相关引用
+  3. 所有策略均已应用基础修复 (qtpylib + INTERFACE_VERSION + 参数重命名)
+- **批量测试**: 使用 Docker 容器并行测试，所有策略在测试环境下运行正常
+- **性能表现**: 策略平均测试时间 20-28 秒，性能良好
 
 ---
-### ✅ 第14批 (10个) - 2026-03-03 10/10 批量完成
+### ✅ 第14批 (10个) - 2026-03-04 10/10 批量完成
 
 | 序号 | 策略目录名 | 文件名 | 状态 | 修复内容 | 备注 |
 |------|------------|--------|------|----------|------|
-| 131 | CoreStrategy | CoreStrategy/CoreStrategy.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 132 | CrossEMAStrategy | CrossEMAStrategy/CrossEMAStrategy.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 133 | CryptoFrog | CryptoFrog/CryptoFrog.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 134 | CryptoFrogHO | CryptoFrogHO/CryptoFrogHO.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 135 | CryptoFrogHO2 | CryptoFrogHO2/CryptoFrogHO2.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 136 | CryptoFrogHO2A | CryptoFrogHO2A/CryptoFrogHO2A.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 137 | CryptoFrogHO3A1 | CryptoFrogHO3A1/CryptoFrogHO3A1.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 138 | CryptoFrogHO3A2 | CryptoFrogHO3A2/CryptoFrogHO3A2.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 139 | CryptoFrogHO3A3 | CryptoFrogHO3A3/CryptoFrogHO3A3.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 140 | CryptoFrogHO3A4 | CryptoFrogHO3A4/CryptoFrogHO3A4.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
+| 131 | CoreStrategy | CoreStrategy/CoreStrategy.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 | 2026-03-04 回测通过，8笔交易，3.54%盈利，100%胜率 |
+| 132 | CrossEMAStrategy | CrossEMAStrategy/CrossEMAStrategy.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 + **ta库依赖修复** | **修复详情**: 1. 创建`freqtrade-full:latest`镜像包含`ta`库<br>2. 使用新镜像测试成功<br>**测试通过**: 19笔交易，-20.42%盈利，84.2%胜率 |
+| 133 | CryptoFrog | CryptoFrog/CryptoFrog.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 + **finta库依赖修复** | **修复详情**: 1. 创建`freqtrade-full:latest`镜像包含`finta`库<br>2. 使用新镜像测试成功<br>**依赖修复后测试通过** |
+| 134 | CryptoFrogHO | CryptoFrogHO/CryptoFrogHO.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 + **finta库依赖修复** | **修复详情**: 需要`finta`库依赖<br>**依赖修复后测试通过** |
+| 135 | CryptoFrogHO2 | CryptoFrogHO2/CryptoFrogHO2.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 + **finta库依赖修复** | **修复详情**: 需要`finta`库依赖<br>**依赖修复后测试通过** |
+| 136 | CryptoFrogHO2A | CryptoFrogHO2A/CryptoFrogHO2A.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 + **finta库依赖修复** | **修复详情**: 需要`finta`库依赖<br>**依赖修复后测试通过** |
+| 137 | CryptoFrogHO3A1 | CryptoFrogHO3A1/CryptoFrogHO3A1.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 + **finta库依赖修复** | **修复详情**: 需要`finta`库依赖<br>**依赖修复后测试通过** |
+| 138 | CryptoFrogHO3A2 | CryptoFrogHO3A2/CryptoFrogHO3A2.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 + **finta库依赖修复** | **修复详情**: 需要`finta`库依赖<br>**依赖修复后测试通过** |
+| 139 | CryptoFrogHO3A3 | CryptoFrogHO3A3/CryptoFrogHO3A3.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 + **finta库依赖修复** | **修复详情**: 需要`finta`库依赖<br>**依赖修复后测试通过** |
+| 140 | CryptoFrogHO3A4 | CryptoFrogHO3A4/CryptoFrogHO3A4.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 + **finta库依赖修复** | **修复详情**: 需要`finta`库依赖<br>**依赖修复后测试通过** |
 
-**通过率**: 10/10 (100%)
+**通过率**: 1/10 (10%) 
+**依赖修复后通过率**: 10/10 (100%) - 创建`freqtrade-full:latest`镜像后
+
+**修复总结**:
+- **主要问题**: 9个策略依赖外部库 (`finta`和`ta`) 但测试环境中缺少这些依赖
+- **解决方案**: 
+  1. **创建完整依赖Docker镜像**: `Dockerfile.freqtrade-full`包含所有必要依赖
+  ```dockerfile
+  FROM freqtradeorg/freqtrade:stable
+  RUN pip install TA-Lib finta ta scikit-optimize
+  ```
+  2. **构建镜像**: `docker build -f Dockerfile.freqtrade-full -t freqtrade-full:latest .`
+  3. **使用新镜像测试**: 所有策略在完整依赖环境下均通过测试
+- **核心策略表现**: CoreStrategy表现优异，8笔交易100%胜率，3.54%盈利
+- **修复验证**: 创建完整依赖镜像后，所有10个策略均通过回测测试
+- **批量测试**: 使用新`freqtrade-full:latest`镜像并行测试，平均测试时间12-16秒
 
 ---
-### ✅ 第15批 (10个) - 2026-03-03 10/10 批量完成
+### ⚠️ 第15批 (10个) - 2026-03-04 2/10 测试完成，8个策略不存在
 
 | 序号 | 策略目录名 | 文件名 | 状态 | 修复内容 | 备注 |
 |------|------------|--------|------|----------|------|
-| 141 | CryptoFrogNFI | CryptoFrogNFI/CryptoFrogNFI.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 142 | CryptoFrogNFIHO1A | CryptoFrogNFIHO1A/CryptoFrogNFIHO1A.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 143 | CryptoFrogOffset | CryptoFrogOffset/CryptoFrogOffset.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 144 | CustomStoplossWithPSAR | CustomStoplossWithPSAR/CustomStoplossWithPSAR.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 145 | DCBBBounce | DCBBBounce/DCBBBounce.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 146 | DD | DD/DD.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 147 | DIV_v1 | DIV_v1/DIV_v1.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 148 | DevilStra | DevilStra/DevilStra.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 149 | Diamond | Diamond/Diamond.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 150 | Divergences | Divergences/Divergences.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
+| 141 | CryptoFrogNFI | CryptoFrogNFI/CryptoFrogNFI.py | ❌ | qtpylib + INTERFACE_VERSION + 参数重命名 + **方法签名修复** | **修复详情**: `min_roi_reached_entry()`方法缺少2个必需参数 (`trade_dur`和`current_time`)<br>**测试失败**: 方法签名不匹配，需要修复 |
+| 142 | CryptoFrogNFIHO1A | CryptoFrogNFIHO1A/CryptoFrogNFIHO1A.py | ⏳ | qtpylib + INTERFACE_VERSION + 参数重命名 | **文件存在但未测试** - 实际测试策略列表不包含此策略 |
+| 143 | CryptoFrogOffset | CryptoFrogOffset/CryptoFrogOffset.py | ⏳ | qtpylib + INTERFACE_VERSION + 参数重命名 | **文件存在但未测试** - 实际测试策略列表不包含此策略 |
+| 144 | CustomStoplossWithPSAR | CustomStoplossWithPSAR/CustomStoplossWithPSAR.py | ⏳ | qtpylib + INTERFACE_VERSION + 参数重命名 | **文件存在但未测试** - 实际测试策略列表不包含此策略 |
+| 145 | DCBBBounce | DCBBBounce/DCBBBounce.py | ⏳ | qtpylib + INTERFACE_VERSION + 参数重命名 | **文件存在但未测试** - 实际测试策略列表不包含此策略 |
+| 146 | DD | DD/DD.py | ⏳ | qtpylib + INTERFACE_VERSION + 参数重命名 | **文件存在但未测试** - 实际测试策略列表不包含此策略 |
+| 147 | DIV_v1 | DIV_v1/DIV_v1.py | ⏳ | qtpylib + INTERFACE_VERSION + 参数重命名 | **文件存在但未测试** - 实际测试策略列表不包含此策略 |
+| 148 | DevilStra | DevilStra/DevilStra.py | ⏳ | qtpylib + INTERFACE_VERSION + 参数重命名 | **文件存在但未测试** - 实际测试策略列表不包含此策略 |
+| 149 | Diamond | Diamond/Diamond.py | ⏳ | qtpylib + INTERFACE_VERSION + 参数重命名 | **文件存在但未测试** - 实际测试策略列表不包含此策略 |
+| 150 | Divergences | Divergences/Divergences.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 | 2026-03-04 回测通过，89笔交易，3.15%盈利，84.3%胜率 |
 
-**通过率**: 10/10 (100%)
+**实际测试通过率**: 1/2 (50%) - 仅测试了CryptoFrogNFI和Divergences
+**策略列表问题**: 批次15的原始测试列表包含8个不存在的策略 (Current, Currentv2, Currentv2X, Currentv3, Currentv4, Currentv5, Currentv6, Currentv7)
+
+**修复总结**:
+- **策略列表问题**: 原始策略列表包含不存在的策略 (Current, Currentv2, Currentv2X, Currentv3, Currentv4, Currentv5, Currentv6, Currentv7)
+- **实际测试策略**: 仅测试了CryptoFrogNFI和Divergences
+- **Divergences表现优异**: 89笔交易，84.3%胜率，3.15%盈利，表现稳定
+- **CryptoFrogNFI方法签名问题**: `min_roi_reached_entry()`方法参数不匹配，需要添加`trade_dur`和`current_time`参数
+- **测试方法**: 使用`freqtrade-full:latest`镜像进行测试，包含所有依赖
+- **性能表现**: Divergences测试时间15秒，CryptoFrogNFI测试时间21秒
+
+**后续建议**:
+1. **更新策略列表**: 修正批次15的策略列表，移除不存在的Current系列策略
+2. **修复方法签名**: 修复CryptoFrogNFI的`min_roi_reached_entry()`方法参数
+3. **测试剩余策略**: 测试CryptoFrogNFIHO1A等实际存在的策略
 
 ---
 ### ✅ 第16批 (10个) - 2026-03-03 10/10 批量完成
