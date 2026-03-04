@@ -3,7 +3,6 @@
 import numpy as np  # noqa
 import pandas as pd  # noqa
 from pandas import DataFrame
-from freqtrade.strategy.interface import IStrategy
 
 # --------------------------------
 # Add your lib to import here
@@ -15,6 +14,9 @@ from technical.indicators import ichimoku
 
 
 class Ichimoku_v31(IStrategy):
+    # Strategy interface version
+    INTERFACE_VERSION = 3
+
     # ROI table:
     minimal_roi = {"0": 0.10, "30": 0.05, "60": 0.02}
 
@@ -112,7 +114,7 @@ class Ichimoku_v31(IStrategy):
                     & (dataframe["cloud_red_4h"] == True)
                 )
             ),
-            "buy",
+            "enter_long",
         ] = 1
 
         return dataframe
@@ -123,6 +125,6 @@ class Ichimoku_v31(IStrategy):
                 (dataframe["ha_close_4h"] < dataframe["senkou_a_4h"])
                 | (dataframe["ha_close_4h"] < dataframe["senkou_b_4h"])
             ),
-            "sell",
+            "exit_long",
         ] = 1
         return dataframe

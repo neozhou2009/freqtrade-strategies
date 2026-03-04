@@ -55,7 +55,7 @@ class strato(IStrategy):
     def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
 
         dataframe.loc[
-            ((dataframe["k"] < 18) & (dataframe["k"] >= dataframe["d"])), "buy"
+            ((dataframe["k"] < 18) & (dataframe["k"] >= dataframe["d"])), "enter_long"
         ] = 1
 
         return dataframe
@@ -63,6 +63,6 @@ class strato(IStrategy):
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
 
         dataframe.loc[
-            ((dataframe["k"] > 80) & (dataframe["d"] >= dataframe["k"])), "sell"
+            ((dataframe["k"] > 80) & (dataframe["d"] >= dataframe["k"])), "exit_long"
         ] = 1
         return dataframe
