@@ -206,16 +206,16 @@ trailing_stop_positive_offset = 0.02
 
 | 序号 | 策略目录名 | 文件名 | 状态 | 修复内容 | 备注 |
 |------|------------|--------|------|----------|------|
-| 51 | BbandRsi | BbandRsi/BbandRsi.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 52 | BbandRsiRolling | BbandRsiRolling/BbandRsiRolling.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 53 | BcmbigzDevelop | BcmbigzDevelop/BcmbigzDevelop.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 54 | BcmbigzV1 | BcmbigzV1/BcmbigzV1.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 55 | BigPete | BigPete/BigPete.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 56 | BigZ03 | BigZ03/BigZ03.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 57 | BigZ0307HO | BigZ0307HO/BigZ0307HO.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 58 | BigZ03HO | BigZ03HO/BigZ03HO.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 59 | BigZ04 | BigZ04/BigZ04.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 60 | BigZ04_TSL3 | BigZ04_TSL3/BigZ04_TSL3.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
+| 51 | BbandRsi | BbandRsi/BbandRsi.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 | 2026-03-04 回测通过 |
+| 52 | BbandRsiRolling | BbandRsiRolling/BbandRsiRolling.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 | 2026-03-04 回测通过 |
+| 53 | BcmbigzDevelop | BcmbigzDevelop/BcmbigzDevelop.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 | 2026-03-04 回测通过 |
+| 54 | BcmbigzV1 | BcmbigzV1/BcmbigzV1.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 | 2026-03-04 回测通过 |
+| 55 | BigPete | BigPete/BigPete.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 | 2026-03-04 回测通过 |
+| 56 | BigZ03 | BigZ03/BigZ03.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 | 2026-03-04 回测通过 |
+| 57 | BigZ0307HO | BigZ0307HO/BigZ0307HO.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 | 2026-03-04 回测通过 |
+| 58 | BigZ03HO | BigZ03HO/BigZ03HO.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 | 2026-03-04 回测通过 |
+| 59 | BigZ04 | BigZ04/BigZ04.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 | 2026-03-04 回测通过 |
+| 60 | BigZ04_TSL3 | BigZ04_TSL3/BigZ04_TSL3.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 | 2026-03-04 回测通过 |
 
 **通过率**: 10/10 (100%)
 
@@ -244,16 +244,16 @@ trailing_stop_positive_offset = 0.02
 
 | 序号 | 策略目录名 | 文件名 | 状态 | 修复内容 | 备注 |
 |------|------------|--------|------|----------|------|
-| 71 | BinClucMadDevelop | BinClucMadDevelop/BinClucMadDevelop.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 72 | BinClucMadSMADevelop | BinClucMadSMADevelop/BinClucMadSMADevelop.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 73 | BinClucMadV1 | BinClucMadV1/BinClucMadV1.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 74 | BinHV27 | BinHV27/BinHV27.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 75 | BinHV45 | BinHV45/BinHV45.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 76 | BinHV45HO | BinHV45HO/BinHV45HO.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 77 | BreakEven | BreakEven/BreakEven.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 78 | BuyAllSellAllStrategy | BuyAllSellAllStrategy/BuyAllSellAllStrategy.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 79 | BuyOnly | BuyOnly/BuyOnly.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 80 | CBPete9 | CBPete9/CBPete9.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
+| 71 | BinClucMadDevelop | BinClucMadDevelop/BinClucMadDevelop.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 | 2026-03-04 回测通过 |
+| 72 | BinClucMadSMADevelop | BinClucMadSMADevelop/BinClucMadSMADevelop.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 | 2026-03-04 回测通过 |
+| 73 | BinClucMadV1 | BinClucMadV1/BinClucMadV1.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 | 2026-03-04 回测通过 |
+| 74 | BinHV27 | BinHV27/BinHV27.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 | 2026-03-04 回测通过 |
+| 75 | BinHV45 | BinHV45/BinHV45.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 | 2026-03-04 回测通过 |
+| 76 | BinHV45HO | BinHV45HO/BinHV45HO.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 | 2026-03-04 回测通过 |
+| 77 | BreakEven | BreakEven/BreakEven.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 | 2026-03-04 回测通过 |
+| 78 | BuyAllSellAllStrategy | BuyAllSellAllStrategy/BuyAllSellAllStrategy.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 | 2026-03-04 回测通过 |
+| 79 | BuyOnly | BuyOnly/BuyOnly.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 | 2026-03-04 回测通过 |
+| 80 | CBPete9 | CBPete9/CBPete9.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 | 2026-03-04 回测通过 |
 
 **通过率**: 10/10 (100%)
 
@@ -263,16 +263,16 @@ trailing_stop_positive_offset = 0.02
 
 | 序号 | 策略目录名 | 文件名 | 状态 | 修复内容 | 备注 |
 |------|------------|--------|------|----------|------|
-| 81 | CCIStrategy | CCIStrategy/CCIStrategy.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 82 | CMCWinner | CMCWinner/CMCWinner.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 83 | Cci | Cci/Cci.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 84 | Chandem | Chandem/Chandem.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 85 | Chandemtwo | Chandemtwo/Chandemtwo.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 86 | Chispei | Chispei/Chispei.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 87 | Cluc4 | Cluc4/Cluc4.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 88 | Cluc4werk | Cluc4werk/Cluc4werk.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 89 | Cluc5werk | Cluc5werk/Cluc5werk.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 90 | Cluc7werk | Cluc7werk/Cluc7werk.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
+| 81 | CCIStrategy | CCIStrategy/CCIStrategy.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 | 2026-03-04 回测通过 |
+| 82 | CMCWinner | CMCWinner/CMCWinner.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 | 2026-03-04 回测通过 |
+| 83 | Cci | Cci/Cci.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 | 2026-03-04 回测通过 |
+| 84 | Chandem | Chandem/Chandem.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 | 2026-03-04 回测通过 |
+| 85 | Chandemtwo | Chandemtwo/Chandemtwo.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 | 2026-03-04 回测通过 |
+| 86 | Chispei | Chispei/Chispei.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 | 2026-03-04 回测通过 |
+| 87 | Cluc4 | Cluc4/Cluc4.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 | 2026-03-04 回测通过 |
+| 88 | Cluc4werk | Cluc4werk/Cluc4werk.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 | 2026-03-04 回测通过 |
+| 89 | Cluc5werk | Cluc5werk/Cluc5werk.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 | 2026-03-04 回测通过 |
+| 90 | Cluc7werk | Cluc7werk/Cluc7werk.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 | 2026-03-04 回测通过 |
 
 **通过率**: 10/10 (100%)
 
@@ -282,33 +282,33 @@ trailing_stop_positive_offset = 0.02
 
 | 序号 | 策略目录名 | 文件名 | 状态 | 修复内容 | 备注 |
 |------|------------|--------|------|----------|------|
-| 91 | ClucFiatROI | ClucFiatROI/ClucFiatROI.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 92 | ClucFiatSlow | ClucFiatSlow/ClucFiatSlow.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 93 | ClucHAnix | ClucHAnix/ClucHAnix.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 94 | ClucHAnix5m | ClucHAnix5m/ClucHAnix5m.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 95 | ClucHAnix_5m | ClucHAnix_5m/ClucHAnix_5m.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 96 | ClucHAnix_5m1 | ClucHAnix_5m1/ClucHAnix_5m1.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 97 | ClucHAnix_BB_RPB_MOD | ClucHAnix_BB_RPB_MOD/ClucHAnix_BB_RPB_MOD.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 98 | ClucHAnix_BB_RPB_MOD2_ROI | ClucHAnix_BB_RPB_MOD2_ROI/ClucHAnix_BB_RPB_MOD2_ROI.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 99 | ClucHAnix_BB_RPB_MOD_CTT | ClucHAnix_BB_RPB_MOD_CTT/ClucHAnix_BB_RPB_MOD_CTT.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 100 | ClucHAnix_BB_RPB_MOD_E0V1E_ROI | ClucHAnix_BB_RPB_MOD_E0V1E_ROI/ClucHAnix_BB_RPB_MOD_E0V1E_ROI.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
+| 91 | ClucFiatROI | ClucFiatROI/ClucFiatROI.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 | 2026-03-04 回测通过 |
+| 92 | ClucFiatSlow | ClucFiatSlow/ClucFiatSlow.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 | 2026-03-04 回测通过 |
+| 93 | ClucHAnix | ClucHAnix/ClucHAnix.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 + order_types更新(emergencysell/forcebuy/forcesell) | 2026-03-04 回测通过 |
+| 94 | ClucHAnix5m | ClucHAnix5m/ClucHAnix5m.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 + skopt注释 | 2026-03-04 回测通过 |
+| 95 | ClucHAnix_5m | ClucHAnix_5m/ClucHAnix_5m.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 + order_types更新 | 2026-03-04 回测通过 |
+| 96 | ClucHAnix_5m1 | ClucHAnix_5m1/ClucHAnix_5m1.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 + order_types更新 | 2026-03-04 回测通过 |
+| 97 | ClucHAnix_BB_RPB_MOD | ClucHAnix_BB_RPB_MOD/ClucHAnix_BB_RPB_MOD.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 + order_types更新 | 2026-03-04 回测通过 |
+| 98 | ClucHAnix_BB_RPB_MOD2_ROI | ClucHAnix_BB_RPB_MOD2_ROI/ClucHAnix_BB_RPB_MOD2_ROI.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 + order_types更新 | 2026-03-04 回测通过 |
+| 99 | ClucHAnix_BB_RPB_MOD_CTT | ClucHAnix_BB_RPB_MOD_CTT/ClucHAnix_BB_RPB_MOD_CTT.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 + order_types更新 + skopt修复 | 2026-03-04 回测通过 |
+| 100 | ClucHAnix_BB_RPB_MOD_E0V1E_ROI | ClucHAnix_BB_RPB_MOD_E0V1E_ROI/ClucHAnix_BB_RPB_MOD_E0V1E_ROI.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 + order_types更新 + skopt修复 | 2026-03-04 回测通过 |
 
 **通过率**: 10/10 (100%)
 
-### ✅ 第11批 (10个) - 2026-03-03 10/10 批量完成
+### ✅ 第11批 (10个) - 2026-03-04 10/10 批量完成
 
 | 序号 | 策略目录名 | 文件名 | 状态 | 修复内容 | 备注 |
 |------|------------|--------|------|----------|------|
-| 101 | ClucHAnix_hhll | ClucHAnix_hhll/ClucHAnix_hhll.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 102 | ClucHAwerk | ClucHAwerk/ClucHAwerk.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 103 | ClucMay72018 | ClucMay72018/ClucMay72018.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 104 | CofiBitStrategy | CofiBitStrategy/CofiBitStrategy.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 105 | CombinedBinHAndCluc | CombinedBinHAndCluc/CombinedBinHAndCluc.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 106 | CombinedBinHAndCluc2021 | CombinedBinHAndCluc2021/CombinedBinHAndCluc2021.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 107 | CombinedBinHAndCluc2021Bull | CombinedBinHAndCluc2021Bull/CombinedBinHAndCluc2021Bull.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 108 | CombinedBinHAndClucHyperV0 | CombinedBinHAndClucHyperV0/CombinedBinHAndClucHyperV0.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 109 | CombinedBinHAndClucHyperV3 | CombinedBinHAndClucHyperV3/CombinedBinHAndClucHyperV3.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 110 | CombinedBinHAndClucV2 | CombinedBinHAndClucV2/CombinedBinHAndClucV2.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
+| 101 | ClucHAnix_hhll | ClucHAnix_hhll/ClucHAnix_hhll.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 + order_types更新(emergencysell/forcebuy/forcesell) | 2026-03-04 回测通过 |
+| 102 | ClucHAwerk | ClucHAwerk/ClucHAwerk.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 | 2026-03-04 回测通过 |
+| 103 | ClucMay72018 | ClucMay72018/ClucMay72018.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 | 2026-03-04 回测通过 |
+| 104 | CofiBitStrategy | CofiBitStrategy/CofiBitStrategy.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 | 2026-03-04 回测通过 |
+| 105 | CombinedBinHAndCluc | CombinedBinHAndCluc/CombinedBinHAndCluc.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 | 2026-03-04 回测通过 |
+| 106 | CombinedBinHAndCluc2021 | CombinedBinHAndCluc2021/CombinedBinHAndCluc2021.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 | 2026-03-04 回测通过 |
+| 107 | CombinedBinHAndCluc2021Bull | CombinedBinHAndCluc2021Bull/CombinedBinHAndCluc2021Bull.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 | 2026-03-04 回测通过 |
+| 108 | CombinedBinHAndClucHyperV0 | CombinedBinHAndClucHyperV0/CombinedBinHAndClucHyperV0.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 | 2026-03-04 回测通过 |
+| 109 | CombinedBinHAndClucHyperV3 | CombinedBinHAndClucHyperV3/CombinedBinHAndClucHyperV3.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 | 2026-03-04 回测通过 |
+| 110 | CombinedBinHAndClucV2 | CombinedBinHAndClucV2/CombinedBinHAndClucV2.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 | 2026-03-04 回测通过 |
 
 **通过率**: 10/10 (100%)
 

@@ -13,7 +13,7 @@ from freqtrade.strategy import (BooleanParameter, DecimalParameter,
                                 IntParameter, stoploss_from_open, merge_informative_pair)
 from freqtrade.strategy.interface import IStrategy
 from pandas import DataFrame, Series
-from skopt.space import Dimension, Integer
+# from skopt.space import object, Integer
 
 def bollinger_bands(stock_price, window_size, num_of_std):
     rolling_mean = stock_price.rolling(window=window_size).mean()
@@ -120,9 +120,9 @@ class ClucHAnix_BB_RPB_MOD(IStrategy):
     order_types = {
         'entry': 'market',
         'exit': 'market',
-        'emergencysell': 'market',
-        'forcebuy': "market",
-        'forcesell': 'market',
+        'emergency_exit': 'market',
+        'force_entry': "market",
+        'force_exit': 'market',
         'stoploss': 'market',
         'stoploss_on_exchange': False,
 

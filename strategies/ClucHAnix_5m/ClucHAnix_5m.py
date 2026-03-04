@@ -81,9 +81,9 @@ class ClucHAnix_5m(IStrategy):
     order_types = {
         'entry': 'limit',
         'exit': 'limit',
-        'emergencysell': 'limit',
-        'forcebuy': "limit",
-        'forcesell': 'limit',
+        'emergency_exit': 'limit',
+        'force_entry': "limit",
+        'force_exit': 'limit',
         'stoploss': 'limit',
         'stoploss_on_exchange': False,
 
