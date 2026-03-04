@@ -5,8 +5,14 @@ from freqtrade.persistence import Trade
 from freqtrade.strategy.interface import IStrategy
 from pandas import DataFrame
 from datetime import datetime, timedelta
-from freqtrade.strategy import merge_informative_pair, CategoricalParameter, DecimalParameter, IntParameter
+from freqtrade.strategy import (
+    merge_informative_pair,
+    CategoricalParameter,
+    DecimalParameter,
+    IntParameter,
+)
 from functools import reduce
+
 
 # SSL Channels
 def SSLChannels(dataframe, length=7):
@@ -14,7 +20,9 @@ def SSLChannels(dataframe, length=7):
     df["ATR"] = ta.ATR(df, timeperiod=14)
     df["smaHigh"] = df["high"].rolling(length).mean() + df["ATR"]
     df["smaLow"] = df["low"].rolling(length).mean() - df["ATR"]
-    df["hlv"] = np.where(df["close"] > df["smaHigh"], 1, np.where(df["close"] < df["smaLow"], -1, np.nan))
+    df["hlv"] = np.where(
+        df["close"] > df["smaHigh"], 1, np.where(df["close"] < df["smaLow"], -1, np.nan)
+    )
     df["hlv"] = df["hlv"].ffill()
     df["sslDown"] = np.where(df["hlv"] < 0, df["smaHigh"], df["smaLow"])
     df["sslUp"] = np.where(df["hlv"] < 0, df["smaLow"], df["smaHigh"])
@@ -25,10 +33,10 @@ class BinClucMad(IStrategy):
     INTERFACE_VERSION = 3
 
     minimal_roi = {
-        "0": 0.038,         # I feel lucky!
+        "0": 0.038,  # I feel lucky!
         "10": 0.028,
         "40": 0.015,
-        "180": 0.018,        # We're going up?
+        "180": 0.018,  # We're going up?
     }
 
     stoploss = -0.99  # effectively disabled.
@@ -39,7 +47,9 @@ class BinClucMad(IStrategy):
     # Sell signal
     use_exit_signal = True
     exit_profit_only = True
-    exit_profit_offset = 0.001  # it doesn't meant anything, just to guarantee there is a minimal profit.
+    exit_profit_offset = (
+        0.001  # it doesn't meant anything, just to guarantee there is a minimal profit.
+    )
     ignore_roi_if_entry_signal = False
 
     # Trailing stoploss
@@ -59,8 +69,8 @@ class BinClucMad(IStrategy):
 
     # Optional order type mapping.
     order_types = {
-        "buy": "market",
-        "sell": "market",
+        "entry": "market",
+        "exit": "market",
         "stoploss": "market",
         "stoploss_on_exchange": False,
     }
@@ -95,49 +105,121 @@ class BinClucMad(IStrategy):
     ############################################################################
 
     # Buy  CombinedBinHClucAndMADV9
-    v9_buy_condition_0_enable = CategoricalParameter([True, False], default=True, space="buy", optimize=False, load=True)
-    v9_buy_condition_1_enable = CategoricalParameter([True, False], default=True, space="buy", optimize=False, load=True)
-    v9_buy_condition_2_enable = CategoricalParameter([True, False], default=True, space="buy", optimize=False, load=True)
-    v9_buy_condition_3_enable = CategoricalParameter([True, False], default=True, space="buy", optimize=False, load=True)
-    v9_buy_condition_4_enable = CategoricalParameter([True, False], default=True, space="buy", optimize=False, load=True)
-    v9_buy_condition_5_enable = CategoricalParameter([True, False], default=True, space="buy", optimize=False, load=True)
-    v9_buy_condition_6_enable = CategoricalParameter([True, False], default=True, space="buy", optimize=False, load=True)
-    v9_buy_condition_7_enable = CategoricalParameter([True, False], default=True, space="buy", optimize=False, load=True)
-    v9_buy_condition_8_enable = CategoricalParameter([True, False], default=True, space="buy", optimize=False, load=True)
-    v9_buy_condition_9_enable = CategoricalParameter([True, False], default=True, space="buy", optimize=False, load=True)
-    v9_buy_condition_10_enable = CategoricalParameter([True, False], default=True, space="buy", optimize=False, load=True)
-    v6_buy_condition_0_enable = CategoricalParameter([True, False], default=True, space="buy", optimize=False, load=True)
-    v6_buy_condition_1_enable = CategoricalParameter([True, False], default=True, space="buy", optimize=False, load=True)
-    v6_buy_condition_2_enable = CategoricalParameter([True, False], default=True, space="buy", optimize=False, load=True)
-    v6_buy_condition_3_enable = CategoricalParameter([True, False], default=True, space="buy", optimize=False, load=True)
-    v6_buy_condition_4_enable = CategoricalParameter([True, False], default=True, space="buy", optimize=False, load=True)
+    v9_buy_condition_0_enable = CategoricalParameter(
+        [True, False], default=True, space="buy", optimize=False, load=True
+    )
+    v9_buy_condition_1_enable = CategoricalParameter(
+        [True, False], default=True, space="buy", optimize=False, load=True
+    )
+    v9_buy_condition_2_enable = CategoricalParameter(
+        [True, False], default=True, space="buy", optimize=False, load=True
+    )
+    v9_buy_condition_3_enable = CategoricalParameter(
+        [True, False], default=True, space="buy", optimize=False, load=True
+    )
+    v9_buy_condition_4_enable = CategoricalParameter(
+        [True, False], default=True, space="buy", optimize=False, load=True
+    )
+    v9_buy_condition_5_enable = CategoricalParameter(
+        [True, False], default=True, space="buy", optimize=False, load=True
+    )
+    v9_buy_condition_6_enable = CategoricalParameter(
+        [True, False], default=True, space="buy", optimize=False, load=True
+    )
+    v9_buy_condition_7_enable = CategoricalParameter(
+        [True, False], default=True, space="buy", optimize=False, load=True
+    )
+    v9_buy_condition_8_enable = CategoricalParameter(
+        [True, False], default=True, space="buy", optimize=False, load=True
+    )
+    v9_buy_condition_9_enable = CategoricalParameter(
+        [True, False], default=True, space="buy", optimize=False, load=True
+    )
+    v9_buy_condition_10_enable = CategoricalParameter(
+        [True, False], default=True, space="buy", optimize=False, load=True
+    )
+    v6_buy_condition_0_enable = CategoricalParameter(
+        [True, False], default=True, space="buy", optimize=False, load=True
+    )
+    v6_buy_condition_1_enable = CategoricalParameter(
+        [True, False], default=True, space="buy", optimize=False, load=True
+    )
+    v6_buy_condition_2_enable = CategoricalParameter(
+        [True, False], default=True, space="buy", optimize=False, load=True
+    )
+    v6_buy_condition_3_enable = CategoricalParameter(
+        [True, False], default=True, space="buy", optimize=False, load=True
+    )
+    v6_buy_condition_4_enable = CategoricalParameter(
+        [True, False], default=True, space="buy", optimize=False, load=True
+    )
     # Sell
-    v9_sell_condition_0_enable = CategoricalParameter([True, False], default=True, space="sell", optimize=False, load=True)
-    v8_sell_condition_0_enable = CategoricalParameter([True, False], default=True, space="sell", optimize=False, load=True)
-    v8_sell_condition_1_enable = CategoricalParameter([True, False], default=True, space="sell", optimize=False, load=True)
+    v9_sell_condition_0_enable = CategoricalParameter(
+        [True, False], default=True, space="sell", optimize=False, load=True
+    )
+    v8_sell_condition_0_enable = CategoricalParameter(
+        [True, False], default=True, space="sell", optimize=False, load=True
+    )
+    v8_sell_condition_1_enable = CategoricalParameter(
+        [True, False], default=True, space="sell", optimize=False, load=True
+    )
 
-    buy_bb20_close_bblowerband_safe_1 = DecimalParameter(0.7, 1.1, default=0.99, space="buy", optimize=True, load=True)
-    buy_bb20_close_bblowerband_safe_2 = DecimalParameter(0.7, 1.1, default=0.982, space="buy", optimize=True, load=True)
+    buy_bb20_close_bblowerband_safe_1 = DecimalParameter(
+        0.7, 1.1, default=0.99, space="buy", optimize=True, load=True
+    )
+    buy_bb20_close_bblowerband_safe_2 = DecimalParameter(
+        0.7, 1.1, default=0.982, space="buy", optimize=True, load=True
+    )
 
-    buy_volume_pump_1 = DecimalParameter(0.1, 0.9, default=0.4, space="buy", decimals=1, optimize=True, load=True)
-    buy_volume_drop_1 = DecimalParameter(1, 10, default=4, space="buy", decimals=1, optimize=True, load=True)
+    buy_volume_pump_1 = DecimalParameter(
+        0.1, 0.9, default=0.4, space="buy", decimals=1, optimize=True, load=True
+    )
+    buy_volume_drop_1 = DecimalParameter(
+        1, 10, default=4, space="buy", decimals=1, optimize=True, load=True
+    )
 
-    buy_rsi_1h_1 = DecimalParameter(10.0, 40.0, default=16.5, space="buy", decimals=1, optimize=True, load=True)
-    buy_rsi_1h_2 = DecimalParameter(10.0, 40.0, default=15.0, space="buy", decimals=1, optimize=True, load=True)
-    buy_rsi_1h_3 = DecimalParameter(10.0, 40.0, default=20.0, space="buy", decimals=1, optimize=True, load=True)
-    buy_rsi_1h_4 = DecimalParameter(10.0, 40.0, default=35.0, space="buy", decimals=1, optimize=True, load=True)
+    buy_rsi_1h_1 = DecimalParameter(
+        10.0, 40.0, default=16.5, space="buy", decimals=1, optimize=True, load=True
+    )
+    buy_rsi_1h_2 = DecimalParameter(
+        10.0, 40.0, default=15.0, space="buy", decimals=1, optimize=True, load=True
+    )
+    buy_rsi_1h_3 = DecimalParameter(
+        10.0, 40.0, default=20.0, space="buy", decimals=1, optimize=True, load=True
+    )
+    buy_rsi_1h_4 = DecimalParameter(
+        10.0, 40.0, default=35.0, space="buy", decimals=1, optimize=True, load=True
+    )
 
-    buy_rsi_1 = DecimalParameter(10.0, 40.0, default=28.0, space="buy", decimals=1, optimize=True, load=True)
-    buy_rsi_2 = DecimalParameter(7.0, 40.0, default=10.0, space="buy", decimals=1, optimize=True, load=True)
-    buy_rsi_3 = DecimalParameter(7.0, 40.0, default=14.2, space="buy", decimals=1, optimize=True, load=True)
+    buy_rsi_1 = DecimalParameter(
+        10.0, 40.0, default=28.0, space="buy", decimals=1, optimize=True, load=True
+    )
+    buy_rsi_2 = DecimalParameter(
+        7.0, 40.0, default=10.0, space="buy", decimals=1, optimize=True, load=True
+    )
+    buy_rsi_3 = DecimalParameter(
+        7.0, 40.0, default=14.2, space="buy", decimals=1, optimize=True, load=True
+    )
 
-    buy_macd_1 = DecimalParameter(0.01, 0.09, default=0.02, space="buy", decimals=2, optimize=True, load=True)
-    buy_macd_2 = DecimalParameter(0.01, 0.09, default=0.03, space="buy", decimals=2, optimize=True, load=True)
+    buy_macd_1 = DecimalParameter(
+        0.01, 0.09, default=0.02, space="buy", decimals=2, optimize=True, load=True
+    )
+    buy_macd_2 = DecimalParameter(
+        0.01, 0.09, default=0.03, space="buy", decimals=2, optimize=True, load=True
+    )
 
-    v8_sell_rsi_main = DecimalParameter(72.0, 90.0, default=80, space="sell", decimals=2, optimize=True, load=True)
+    v8_sell_rsi_main = DecimalParameter(
+        72.0, 90.0, default=80, space="sell", decimals=2, optimize=True, load=True
+    )
 
     def custom_stoploss(
-        self, pair: str, trade: "Trade", current_time: datetime, current_rate: float, current_profit: float, **kwargs
+        self,
+        pair: str,
+        trade: "Trade",
+        current_time: datetime,
+        current_rate: float,
+        current_profit: float,
+        **kwargs,
     ) -> float:
         # Manage losing trades and open room for better ones.
 
@@ -150,9 +232,10 @@ class BinClucMad(IStrategy):
             # Let's try to minimize the loss
 
             if current_time > trade_time_50:
-
                 try:
-                    number_of_candle_shift = int((current_time - trade_time_50).total_seconds() / 300)
+                    number_of_candle_shift = int(
+                        (current_time - trade_time_50).total_seconds() / 300
+                    )
                     dataframe, _ = self.dp.get_analyzed_dataframe(pair, self.timeframe)
                     candle = dataframe.iloc[-number_of_candle_shift].squeeze()
 
@@ -169,7 +252,6 @@ class BinClucMad(IStrategy):
                         return 0.01
 
                 except IndexError as error:
-
                     # Whoops, set stoploss at 10%
                     return 0.1
 
@@ -180,10 +262,14 @@ class BinClucMad(IStrategy):
         informative_pairs = [(pair, self.informative_timeframe) for pair in pairs]
         return informative_pairs
 
-    def informative_1h_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def informative_1h_indicators(
+        self, dataframe: DataFrame, metadata: dict
+    ) -> DataFrame:
         assert self.dp, "DataProvider is required for multiple timeframes."
         # Get the informative pair
-        informative_1h = self.dp.get_pair_dataframe(pair=metadata["pair"], timeframe=self.informative_timeframe)
+        informative_1h = self.dp.get_pair_dataframe(
+            pair=metadata["pair"], timeframe=self.informative_timeframe
+        )
         # EMA
         informative_1h["ema_50"] = ta.EMA(informative_1h, timeperiod=50)
         informative_1h["ema_200"] = ta.EMA(informative_1h, timeperiod=200)
@@ -199,7 +285,9 @@ class BinClucMad(IStrategy):
 
     def normal_tf_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
 
-        bollinger = qtpylib.bollinger_bands(qtpylib.typical_price(dataframe), window=20, stds=2)
+        bollinger = qtpylib.bollinger_bands(
+            qtpylib.typical_price(dataframe), window=20, stds=2
+        )
         dataframe["bb_lowerband"] = bollinger["lower"]
         dataframe["bb_middleband"] = bollinger["mid"]
         dataframe["bb_upperband"] = bollinger["upper"]
@@ -223,7 +311,13 @@ class BinClucMad(IStrategy):
     def populate_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         # The indicators for the 1h informative timeframe
         informative = self.informative_1h_indicators(dataframe, metadata)
-        dataframe = merge_informative_pair(dataframe, informative, self.timeframe, self.informative_timeframe, ffill=True)
+        dataframe = merge_informative_pair(
+            dataframe,
+            informative,
+            self.timeframe,
+            self.informative_timeframe,
+            ffill=True,
+        )
 
         # The indicators for the normal (5m) timeframe
         dataframe = self.normal_tf_indicators(dataframe, metadata)
@@ -238,15 +332,24 @@ class BinClucMad(IStrategy):
                 (
                     (dataframe["close"] > dataframe["ema_200"])
                     & (dataframe["close"] > dataframe["ema_200_1h"])
-                    & (dataframe["close"] < dataframe["bb_lowerband"] * self.buy_bb20_close_bblowerband_safe_1.value)
+                    & (
+                        dataframe["close"]
+                        < dataframe["bb_lowerband"]
+                        * self.buy_bb20_close_bblowerband_safe_1.value
+                    )
                     & (
                         dataframe["volume_mean_slow"]
-                        > dataframe["volume_mean_slow"].shift(30) * self.buy_volume_pump_1.value
+                        > dataframe["volume_mean_slow"].shift(30)
+                        * self.buy_volume_pump_1.value
                     )
-                    & (dataframe["volume"] < (dataframe["volume"].shift() * self.buy_volume_drop_1.value))
+                    & (
+                        dataframe["volume"]
+                        < (dataframe["volume"].shift() * self.buy_volume_drop_1.value)
+                    )
                     & (
                         dataframe["open"] - dataframe["close"]
-                        < dataframe["bb_upperband"].shift(2) - dataframe["bb_lowerband"].shift(2)
+                        < dataframe["bb_upperband"].shift(2)
+                        - dataframe["bb_lowerband"].shift(2)
                     )
                     & (dataframe["volume"] > 0)
                 )
@@ -255,15 +358,24 @@ class BinClucMad(IStrategy):
             conditions.append(
                 (
                     (dataframe["close"] > dataframe["ema_200"])
-                    & (dataframe["close"] < dataframe["bb_lowerband"] * self.buy_bb20_close_bblowerband_safe_2.value)
+                    & (
+                        dataframe["close"]
+                        < dataframe["bb_lowerband"]
+                        * self.buy_bb20_close_bblowerband_safe_2.value
+                    )
                     & (
                         dataframe["volume_mean_slow"]
-                        > dataframe["volume_mean_slow"].shift(30) * self.buy_volume_pump_1.value
+                        > dataframe["volume_mean_slow"].shift(30)
+                        * self.buy_volume_pump_1.value
                     )
-                    & (dataframe["volume"] < (dataframe["volume"].shift() * self.buy_volume_drop_1.value))
+                    & (
+                        dataframe["volume"]
+                        < (dataframe["volume"].shift() * self.buy_volume_drop_1.value)
+                    )
                     & (
                         dataframe["open"] - dataframe["close"]
-                        < dataframe["bb_upperband"].shift(2) - dataframe["bb_lowerband"].shift(2)
+                        < dataframe["bb_upperband"].shift(2)
+                        - dataframe["bb_lowerband"].shift(2)
                     )
                     & (dataframe["volume"] > 0)
                 )
@@ -274,7 +386,10 @@ class BinClucMad(IStrategy):
                     (dataframe["close"] > dataframe["ema_200_1h"])
                     & (dataframe["close"] < dataframe["bb_lowerband"])
                     & (dataframe["rsi"] < self.buy_rsi_3.value)
-                    & (dataframe["volume"] < (dataframe["volume"].shift() * self.buy_volume_drop_1.value))
+                    & (
+                        dataframe["volume"]
+                        < (dataframe["volume"].shift() * self.buy_volume_drop_1.value)
+                    )
                     & (dataframe["volume"] > 0)
                 )
             )
@@ -283,7 +398,10 @@ class BinClucMad(IStrategy):
                 (
                     (dataframe["rsi_1h"] < self.buy_rsi_1h_1.value)
                     & (dataframe["close"] < dataframe["bb_lowerband"])
-                    & (dataframe["volume"] < (dataframe["volume"].shift() * self.buy_volume_drop_1.value))
+                    & (
+                        dataframe["volume"]
+                        < (dataframe["volume"].shift() * self.buy_volume_drop_1.value)
+                    )
                     & (dataframe["volume"] > 0)
                 )
             )
@@ -293,13 +411,23 @@ class BinClucMad(IStrategy):
                     (dataframe["close"] > dataframe["ema_200"])
                     & (dataframe["close"] > dataframe["ema_200_1h"])
                     & (dataframe["ema_26"] > dataframe["ema_12"])
-                    & ((dataframe["ema_26"] - dataframe["ema_12"]) > (dataframe["open"] * self.buy_macd_1.value))
-                    & ((dataframe["ema_26"].shift() - dataframe["ema_12"].shift()) > (dataframe["open"] / 100))
+                    & (
+                        (dataframe["ema_26"] - dataframe["ema_12"])
+                        > (dataframe["open"] * self.buy_macd_1.value)
+                    )
+                    & (
+                        (dataframe["ema_26"].shift() - dataframe["ema_12"].shift())
+                        > (dataframe["open"] / 100)
+                    )
                     & (dataframe["close"] < (dataframe["bb_lowerband"]))
-                    & (dataframe["volume"] < (dataframe["volume"].shift() * self.buy_volume_drop_1.value))
+                    & (
+                        dataframe["volume"]
+                        < (dataframe["volume"].shift() * self.buy_volume_drop_1.value)
+                    )
                     & (
                         dataframe["volume_mean_slow"]
-                        > dataframe["volume_mean_slow"].shift(30) * self.buy_volume_pump_1.value
+                        > dataframe["volume_mean_slow"].shift(30)
+                        * self.buy_volume_pump_1.value
                     )
                     & (dataframe["volume"] > 0)  # Make sure Volume is not 0
                 )
@@ -308,10 +436,19 @@ class BinClucMad(IStrategy):
             conditions.append(
                 (
                     (dataframe["ema_26"] > dataframe["ema_12"])
-                    & ((dataframe["ema_26"] - dataframe["ema_12"]) > (dataframe["open"] * self.buy_macd_2.value))
-                    & ((dataframe["ema_26"].shift() - dataframe["ema_12"].shift()) > (dataframe["open"] / 100))
+                    & (
+                        (dataframe["ema_26"] - dataframe["ema_12"])
+                        > (dataframe["open"] * self.buy_macd_2.value)
+                    )
+                    & (
+                        (dataframe["ema_26"].shift() - dataframe["ema_12"].shift())
+                        > (dataframe["open"] / 100)
+                    )
                     & (dataframe["close"] < (dataframe["bb_lowerband"]))
-                    & (dataframe["volume"] < (dataframe["volume"].shift() * self.buy_volume_drop_1.value))
+                    & (
+                        dataframe["volume"]
+                        < (dataframe["volume"].shift() * self.buy_volume_drop_1.value)
+                    )
                     & (dataframe["volume"] > 0)
                 )
             )
@@ -320,12 +457,22 @@ class BinClucMad(IStrategy):
                 (
                     (dataframe["rsi_1h"] < self.buy_rsi_1h_2.value)
                     & (dataframe["ema_26"] > dataframe["ema_12"])
-                    & ((dataframe["ema_26"] - dataframe["ema_12"]) > (dataframe["open"] * self.buy_macd_1.value))
-                    & ((dataframe["ema_26"].shift() - dataframe["ema_12"].shift()) > (dataframe["open"] / 100))
-                    & (dataframe["volume"] < (dataframe["volume"].shift() * self.buy_volume_drop_1.value))
+                    & (
+                        (dataframe["ema_26"] - dataframe["ema_12"])
+                        > (dataframe["open"] * self.buy_macd_1.value)
+                    )
+                    & (
+                        (dataframe["ema_26"].shift() - dataframe["ema_12"].shift())
+                        > (dataframe["open"] / 100)
+                    )
+                    & (
+                        dataframe["volume"]
+                        < (dataframe["volume"].shift() * self.buy_volume_drop_1.value)
+                    )
                     & (
                         dataframe["volume_mean_slow"]
-                        > dataframe["volume_mean_slow"].shift(30) * self.buy_volume_pump_1.value
+                        > dataframe["volume_mean_slow"].shift(30)
+                        * self.buy_volume_pump_1.value
                     )
                     & (dataframe["volume"] > 0)
                 )
@@ -335,10 +482,14 @@ class BinClucMad(IStrategy):
                 (
                     (dataframe["rsi_1h"] < self.buy_rsi_1h_3.value)
                     & (dataframe["rsi"] < self.buy_rsi_1.value)
-                    & (dataframe["volume"] < (dataframe["volume"].shift() * self.buy_volume_drop_1.value))
+                    & (
+                        dataframe["volume"]
+                        < (dataframe["volume"].shift() * self.buy_volume_drop_1.value)
+                    )
                     & (
                         dataframe["volume_mean_slow"]
-                        > dataframe["volume_mean_slow"].shift(30) * self.buy_volume_pump_1.value
+                        > dataframe["volume_mean_slow"].shift(30)
+                        * self.buy_volume_pump_1.value
                     )
                     & (dataframe["volume"] > 0)
                 )
@@ -348,10 +499,14 @@ class BinClucMad(IStrategy):
                 (
                     (dataframe["rsi_1h"] < self.buy_rsi_1h_4.value)
                     & (dataframe["rsi"] < self.buy_rsi_2.value)
-                    & (dataframe["volume"] < (dataframe["volume"].shift() * self.buy_volume_drop_1.value))
+                    & (
+                        dataframe["volume"]
+                        < (dataframe["volume"].shift() * self.buy_volume_drop_1.value)
+                    )
                     & (
                         dataframe["volume_mean_slow"]
-                        > dataframe["volume_mean_slow"].shift(30) * self.buy_volume_pump_1.value
+                        > dataframe["volume_mean_slow"].shift(30)
+                        * self.buy_volume_pump_1.value
                     )
                     & (dataframe["volume"] > 0)
                 )
@@ -376,8 +531,14 @@ class BinClucMad(IStrategy):
                     & (dataframe["close"] < dataframe["ema_50"])
                     & (dataframe["close"] < 0.99 * dataframe["bb_lowerband"])
                     & (
-                        (dataframe["volume"] < (dataframe["volume_mean_slow"].shift(1) * 21))
-                        | (dataframe["volume_mean_slow"] > (dataframe["volume_mean_slow"].shift(30) * 0.4))
+                        (
+                            dataframe["volume"]
+                            < (dataframe["volume_mean_slow"].shift(1) * 21)
+                        )
+                        | (
+                            dataframe["volume_mean_slow"]
+                            > (dataframe["volume_mean_slow"].shift(30) * 0.4)
+                        )
                     )
                     & (dataframe["volume"] > 0)
                 )
@@ -388,12 +549,22 @@ class BinClucMad(IStrategy):
                     (dataframe["close"] < dataframe["ema_50"])
                     & (dataframe["close"] < 0.975 * dataframe["bb_lowerband"])
                     & (
-                        (dataframe["volume"] < (dataframe["volume_mean_slow"].shift(1) * 20))
-                        | (dataframe["volume_mean_slow"] > dataframe["volume_mean_slow"].shift(30) * 0.4)
+                        (
+                            dataframe["volume"]
+                            < (dataframe["volume_mean_slow"].shift(1) * 20)
+                        )
+                        | (
+                            dataframe["volume_mean_slow"]
+                            > dataframe["volume_mean_slow"].shift(30) * 0.4
+                        )
                     )
-                    & (dataframe["rsi_1h"] < 15)  # Don't buy if someone drop the market.
+                    & (
+                        dataframe["rsi_1h"] < 15
+                    )  # Don't buy if someone drop the market.
                     & (dataframe["volume"] < (dataframe["volume"].shift() * 4))
-                    & (dataframe["volume"] > 0)  # Try to exclude pumping  # Make sure Volume is not 0
+                    & (
+                        dataframe["volume"] > 0
+                    )  # Try to exclude pumping  # Make sure Volume is not 0
                 )
             )
         if self.v6_buy_condition_2_enable.value:
@@ -402,11 +573,20 @@ class BinClucMad(IStrategy):
                     (dataframe["close"] > dataframe["ema_200"])
                     & (dataframe["close"] > dataframe["ema_200_1h"])
                     & (dataframe["ema_26"] > dataframe["ema_12"])
-                    & ((dataframe["ema_26"] - dataframe["ema_12"]) > (dataframe["open"] * 0.02))
-                    & ((dataframe["ema_26"].shift() - dataframe["ema_12"].shift()) > (dataframe["open"] / 100))
+                    & (
+                        (dataframe["ema_26"] - dataframe["ema_12"])
+                        > (dataframe["open"] * 0.02)
+                    )
+                    & (
+                        (dataframe["ema_26"].shift() - dataframe["ema_12"].shift())
+                        > (dataframe["open"] / 100)
+                    )
                     & (
                         (dataframe["volume"] < (dataframe["volume"].shift() * 4))
-                        | (dataframe["volume_mean_slow"] > dataframe["volume_mean_slow"].shift(30) * 0.4)
+                        | (
+                            dataframe["volume_mean_slow"]
+                            > dataframe["volume_mean_slow"].shift(30) * 0.4
+                        )
                     )
                     & (dataframe["close"] < (dataframe["bb_lowerband"]))
                     &
@@ -419,15 +599,21 @@ class BinClucMad(IStrategy):
             conditions.append(
                 (  # strategy MACD Low buy
                     (dataframe["ema_26"] > dataframe["ema_12"])
-                    & ((dataframe["ema_26"] - dataframe["ema_12"]) > (dataframe["open"] * 0.03))
-                    & ((dataframe["ema_26"].shift() - dataframe["ema_12"].shift()) > (dataframe["open"] / 100))
+                    & (
+                        (dataframe["ema_26"] - dataframe["ema_12"])
+                        > (dataframe["open"] * 0.03)
+                    )
+                    & (
+                        (dataframe["ema_26"].shift() - dataframe["ema_12"].shift())
+                        > (dataframe["open"] / 100)
+                    )
                     & (dataframe["volume"] < (dataframe["volume"].shift() * 4))
-                    & (dataframe["close"] < (dataframe["bb_lowerband"]))  # Don't buy if someone drop the market.
+                    & (
+                        dataframe["close"] < (dataframe["bb_lowerband"])
+                    )  # Don't buy if someone drop the market.
                     & (dataframe["volume"] > 0)  # Make sure Volume is not 0
                 )
             )
-
-
 
         # END  V6
 
@@ -442,7 +628,9 @@ class BinClucMad(IStrategy):
             conditions.append(
                 (
                     (dataframe["close"] > dataframe["bb_middleband"] * 1.01)
-                    & (dataframe["volume"] > 0)  # Don't be gready, sell fast  # Make sure Volume is not 0
+                    & (
+                        dataframe["volume"] > 0
+                    )  # Don't be gready, sell fast  # Make sure Volume is not 0
                 )
             )
 
@@ -457,7 +645,12 @@ class BinClucMad(IStrategy):
                 )
             )
         if self.v8_sell_condition_1_enable.value:
-            conditions.append(((dataframe["rsi"] > self.v8_sell_rsi_main.value) & (dataframe["volume"] > 0)))
+            conditions.append(
+                (
+                    (dataframe["rsi"] > self.v8_sell_rsi_main.value)
+                    & (dataframe["volume"] > 0)
+                )
+            )
 
         if conditions:
             dataframe.loc[reduce(lambda x, y: x | y, conditions), "sell"] = 1

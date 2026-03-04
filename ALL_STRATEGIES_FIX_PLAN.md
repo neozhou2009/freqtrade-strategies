@@ -225,16 +225,16 @@ trailing_stop_positive_offset = 0.02
 
 | 序号 | 策略目录名 | 文件名 | 状态 | 修复内容 | 备注 |
 |------|------------|--------|------|----------|------|
-| 61 | BigZ0407 | BigZ0407/BigZ0407.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 62 | BigZ0407HO | BigZ0407HO/BigZ0407HO.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 63 | BigZ04HO | BigZ04HO/BigZ04HO.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 64 | BigZ04HO2 | BigZ04HO2/BigZ04HO2.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 65 | BigZ04_TSL4 | BigZ04_TSL4/BigZ04_TSL4.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 66 | BigZ06 | BigZ06/BigZ06.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 67 | BigZ07 | BigZ07/BigZ07.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 68 | BigZ07Next | BigZ07Next/BigZ07Next.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 69 | BigZ07Next2 | BigZ07Next2/BigZ07Next2.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
-| 70 | BinClucMad | BinClucMad/BinClucMad.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 |  |
+| 61 | BigZ0407 | BigZ0407/BigZ0407.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 | 2026-03-04 回测通过 |
+| 62 | BigZ0407HO | BigZ0407HO/BigZ0407HO.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 | 2026-03-04 回测通过 |
+| 63 | BigZ04HO | BigZ04HO/BigZ04HO.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 | 2026-03-04 回测通过 |
+| 64 | BigZ04HO2 | BigZ04HO2/BigZ04HO2.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 | 2026-03-04 回测通过 |
+| 65 | BigZ04_TSL4 | BigZ04_TSL4/BigZ04_TSL4.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 | 2026-03-04 回测通过 |
+| 66 | BigZ06 | BigZ06/BigZ06.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 | 2026-03-04 回测通过 |
+| 67 | BigZ07 | BigZ07/BigZ07.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 | 2026-03-04 回测通过 |
+| 68 | BigZ07Next | BigZ07Next/BigZ07Next.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 | 2026-03-04 回测通过 |
+| 69 | BigZ07Next2 | BigZ07Next2/BigZ07Next2.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 | 2026-03-04 回测通过 |
+| 70 | BinClucMad | BinClucMad/BinClucMad.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 + order_types更新 | 2026-03-04 回测通过 |
 
 **通过率**: 10/10 (100%)
 
