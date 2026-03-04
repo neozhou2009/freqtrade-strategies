@@ -57,8 +57,8 @@ class BcmbigzDevelop(IStrategy):
 
     # Optional order type mapping.
     order_types = {
-        "buy": "market",
-        "sell": "market",
+        "entry": "limit",
+        "exit": "limit",
         "stoploss": "market",
         "stoploss_on_exchange": False,
     }
@@ -456,7 +456,6 @@ class BcmbigzDevelop(IStrategy):
             # Let's try to minimize the loss
 
             if current_time > trade_time_50:
-
                 try:
                     number_of_candle_shift = int(
                         (current_time - trade_time_50).total_seconds() / 300
@@ -476,7 +475,6 @@ class BcmbigzDevelop(IStrategy):
                         return 0.01
 
                 except IndexError as error:
-
                     # Whoops, set stoploss at 10%
                     return 0.1
 
@@ -515,9 +513,7 @@ class BcmbigzDevelop(IStrategy):
         )  # for BinClucMad
         informative_1h["sma_200_dec"] = informative_1h["sma_200"] < informative_1h[
             "sma_200"
-        ].shift(
-            20
-        )  # for BinClucMad
+        ].shift(20)  # for BinClucMad
         ssl_down_1h, ssl_up_1h = SSLChannels(informative_1h, 20)
         informative_1h["ssl_down"] = ssl_down_1h
         informative_1h["ssl_up"] = ssl_up_1h
@@ -889,175 +885,276 @@ class BcmbigzDevelop(IStrategy):
         # Strategy: BigZ07 BUY conditions
         dataframe.loc[
             (
-                self.bzv7_buy_condition_0_enable.value &
-
-                (dataframe['close'] > dataframe['ema_200']) &
-
-                (dataframe['rsi'] < 30) &
-                (dataframe['close'] * 1.024 < dataframe['open'].shift(3)) &
-                (dataframe['rsi_1h'] < 71) &
-
-                (dataframe['volume_mean_slow'] > dataframe['volume_mean_slow'].shift(48) * self.bzv7_buy_volume_pump_1.value) &
-                (dataframe['volume_mean_slow'] * self.bzv7_buy_volume_pump_1.value < dataframe['volume_mean_slow'].shift(48)) &
-                (dataframe['volume'] > 0)
+                self.bzv7_buy_condition_0_enable.value
+                & (dataframe["close"] > dataframe["ema_200"])
+                & (dataframe["rsi"] < 30)
+                & (dataframe["close"] * 1.024 < dataframe["open"].shift(3))
+                & (dataframe["rsi_1h"] < 71)
+                & (
+                    dataframe["volume_mean_slow"]
+                    > dataframe["volume_mean_slow"].shift(48)
+                    * self.bzv7_buy_volume_pump_1.value
+                )
+                & (
+                    dataframe["volume_mean_slow"] * self.bzv7_buy_volume_pump_1.value
+                    < dataframe["volume_mean_slow"].shift(48)
+                )
+                & (dataframe["volume"] > 0)
             ),
             "bzv7_buy_condition_0_enable",
         ] = 1
         dataframe.loc[
             (
-                self.bzv7_buy_condition_1_enable.value &
-
-                (dataframe['close'] > dataframe['ema_200']) &
-                (dataframe['close'] > dataframe['ema_200_1h']) &
-
-                (dataframe['close'] <  dataframe['bb_lowerband'] * self.bzv7_buy_bb20_close_bblowerband_safe_1.value) &
-                (dataframe['rsi_1h'] < 69) &
-                (dataframe['open'] > dataframe['close']) &
-
-                (dataframe['volume_mean_slow'] > dataframe['volume_mean_slow'].shift(48) * self.bzv7_buy_volume_pump_1.value) &
-                (dataframe['volume_mean_slow'] * self.bzv7_buy_volume_pump_1.value < dataframe['volume_mean_slow'].shift(48)) &
-                (dataframe['volume'] < (dataframe['volume'].shift() * self.bzv7_buy_volume_drop_1.value)) &
-                ((dataframe['open'] - dataframe['close']) < dataframe['bb_upperband'].shift(2) - dataframe['bb_lowerband'].shift(2)) &
-
-                (dataframe['volume'] > 0)
+                self.bzv7_buy_condition_1_enable.value
+                & (dataframe["close"] > dataframe["ema_200"])
+                & (dataframe["close"] > dataframe["ema_200_1h"])
+                & (
+                    dataframe["close"]
+                    < dataframe["bb_lowerband"]
+                    * self.bzv7_buy_bb20_close_bblowerband_safe_1.value
+                )
+                & (dataframe["rsi_1h"] < 69)
+                & (dataframe["open"] > dataframe["close"])
+                & (
+                    dataframe["volume_mean_slow"]
+                    > dataframe["volume_mean_slow"].shift(48)
+                    * self.bzv7_buy_volume_pump_1.value
+                )
+                & (
+                    dataframe["volume_mean_slow"] * self.bzv7_buy_volume_pump_1.value
+                    < dataframe["volume_mean_slow"].shift(48)
+                )
+                & (
+                    dataframe["volume"]
+                    < (dataframe["volume"].shift() * self.bzv7_buy_volume_drop_1.value)
+                )
+                & (
+                    (dataframe["open"] - dataframe["close"])
+                    < dataframe["bb_upperband"].shift(2)
+                    - dataframe["bb_lowerband"].shift(2)
+                )
+                & (dataframe["volume"] > 0)
             ),
             "bzv7_buy_condition_1_enable",
         ] = 1
 
         dataframe.loc[
             (
-                self.bzv7_buy_condition_2_enable.value &
-
-                (dataframe['close'] > dataframe['ema_200']) &
-
-                (dataframe['close'] < dataframe['bb_lowerband'] *  self.bzv7_buy_bb20_close_bblowerband_safe_2.value) &
-
-                (dataframe['volume_mean_slow'] > dataframe['volume_mean_slow'].shift(48) * self.bzv7_buy_volume_pump_1.value) &
-                (dataframe['volume_mean_slow'] * self.bzv7_buy_volume_pump_1.value < dataframe['volume_mean_slow'].shift(48)) &
-                (dataframe['volume'] < (dataframe['volume'].shift() * self.bzv7_buy_volume_drop_1.value)) &
-                (dataframe['open'] - dataframe['close'] < dataframe['bb_upperband'].shift(2) - dataframe['bb_lowerband'].shift(2)) &
-                (dataframe['volume'] > 0)
+                self.bzv7_buy_condition_2_enable.value
+                & (dataframe["close"] > dataframe["ema_200"])
+                & (
+                    dataframe["close"]
+                    < dataframe["bb_lowerband"]
+                    * self.bzv7_buy_bb20_close_bblowerband_safe_2.value
+                )
+                & (
+                    dataframe["volume_mean_slow"]
+                    > dataframe["volume_mean_slow"].shift(48)
+                    * self.bzv7_buy_volume_pump_1.value
+                )
+                & (
+                    dataframe["volume_mean_slow"] * self.bzv7_buy_volume_pump_1.value
+                    < dataframe["volume_mean_slow"].shift(48)
+                )
+                & (
+                    dataframe["volume"]
+                    < (dataframe["volume"].shift() * self.bzv7_buy_volume_drop_1.value)
+                )
+                & (
+                    dataframe["open"] - dataframe["close"]
+                    < dataframe["bb_upperband"].shift(2)
+                    - dataframe["bb_lowerband"].shift(2)
+                )
+                & (dataframe["volume"] > 0)
             ),
             "bzv7_buy_condition_2_enable",
         ] = 1
 
         dataframe.loc[
             (
-                self.bzv7_buy_condition_3_enable.value &
-
-                (dataframe['close'] > dataframe['ema_200_1h']) &
-
-                (dataframe['close'] < dataframe['bb_lowerband']) &
-                (dataframe['rsi'] < self.bzv7_buy_rsi_3.value) &
-
-                (dataframe['volume_mean_slow'] > dataframe['volume_mean_slow'].shift(48) * self.bzv7_buy_volume_pump_1.value) &
-                (dataframe['volume_mean_slow'] * self.bzv7_buy_volume_pump_1.value < dataframe['volume_mean_slow'].shift(48)) &
-                (dataframe['volume'] < (dataframe['volume'].shift() * self.bzv7_buy_volume_drop_3.value)) &
-
-                (dataframe['volume'] > 0)
+                self.bzv7_buy_condition_3_enable.value
+                & (dataframe["close"] > dataframe["ema_200_1h"])
+                & (dataframe["close"] < dataframe["bb_lowerband"])
+                & (dataframe["rsi"] < self.bzv7_buy_rsi_3.value)
+                & (
+                    dataframe["volume_mean_slow"]
+                    > dataframe["volume_mean_slow"].shift(48)
+                    * self.bzv7_buy_volume_pump_1.value
+                )
+                & (
+                    dataframe["volume_mean_slow"] * self.bzv7_buy_volume_pump_1.value
+                    < dataframe["volume_mean_slow"].shift(48)
+                )
+                & (
+                    dataframe["volume"]
+                    < (dataframe["volume"].shift() * self.bzv7_buy_volume_drop_3.value)
+                )
+                & (dataframe["volume"] > 0)
             ),
             "bzv7_buy_condition_3_enable",
         ] = 1
 
         dataframe.loc[
             (
-                self.bzv7_buy_condition_4_enable.value &
-
-                (dataframe['rsi_1h'] < self.bzv7_buy_rsi_1h_1.value) &
-
-                (dataframe['close'] < dataframe['bb_lowerband']) &
-
-                (dataframe['volume_mean_slow'] > dataframe['volume_mean_slow'].shift(48) * self.bzv7_buy_volume_pump_1.value) &
-                (dataframe['volume_mean_slow'] * self.bzv7_buy_volume_pump_1.value < dataframe['volume_mean_slow'].shift(48)) &
-                (dataframe['volume'] < (dataframe['volume'].shift() * self.bzv7_buy_volume_drop_1.value)) &
-                (dataframe['volume'] > 0)
+                self.bzv7_buy_condition_4_enable.value
+                & (dataframe["rsi_1h"] < self.bzv7_buy_rsi_1h_1.value)
+                & (dataframe["close"] < dataframe["bb_lowerband"])
+                & (
+                    dataframe["volume_mean_slow"]
+                    > dataframe["volume_mean_slow"].shift(48)
+                    * self.bzv7_buy_volume_pump_1.value
+                )
+                & (
+                    dataframe["volume_mean_slow"] * self.bzv7_buy_volume_pump_1.value
+                    < dataframe["volume_mean_slow"].shift(48)
+                )
+                & (
+                    dataframe["volume"]
+                    < (dataframe["volume"].shift() * self.bzv7_buy_volume_drop_1.value)
+                )
+                & (dataframe["volume"] > 0)
             ),
             "bzv7_buy_condition_4_enable",
         ] = 1
 
         dataframe.loc[
             (
-                self.bzv7_buy_condition_5_enable.value &
-
-                (dataframe['close'] > dataframe['ema_200']) &
-                (dataframe['close'] > dataframe['ema_200_1h']) &
-
-                (dataframe['ema_26'] > dataframe['ema_12']) &
-                ((dataframe['ema_26'] - dataframe['ema_12']) > (dataframe['open'] * self.bzv7_buy_macd_1.value)) &
-                ((dataframe['ema_26'].shift() - dataframe['ema_12'].shift()) > (dataframe['open']/100)) &
-                (dataframe['close'] < (dataframe['bb_lowerband'])) &
-
-                (dataframe['volume'] < (dataframe['volume'].shift() * self.bzv7_buy_volume_drop_1.value)) &
-                (dataframe['volume_mean_slow'] > dataframe['volume_mean_slow'].shift(48) * self.bzv7_buy_volume_pump_1.value) &
-                (dataframe['volume_mean_slow'] * self.bzv7_buy_volume_pump_1.value < dataframe['volume_mean_slow'].shift(48)) &
-                (dataframe['volume'] > 0) # Make sure Volume is not 0
+                self.bzv7_buy_condition_5_enable.value
+                & (dataframe["close"] > dataframe["ema_200"])
+                & (dataframe["close"] > dataframe["ema_200_1h"])
+                & (dataframe["ema_26"] > dataframe["ema_12"])
+                & (
+                    (dataframe["ema_26"] - dataframe["ema_12"])
+                    > (dataframe["open"] * self.bzv7_buy_macd_1.value)
+                )
+                & (
+                    (dataframe["ema_26"].shift() - dataframe["ema_12"].shift())
+                    > (dataframe["open"] / 100)
+                )
+                & (dataframe["close"] < (dataframe["bb_lowerband"]))
+                & (
+                    dataframe["volume"]
+                    < (dataframe["volume"].shift() * self.bzv7_buy_volume_drop_1.value)
+                )
+                & (
+                    dataframe["volume_mean_slow"]
+                    > dataframe["volume_mean_slow"].shift(48)
+                    * self.bzv7_buy_volume_pump_1.value
+                )
+                & (
+                    dataframe["volume_mean_slow"] * self.bzv7_buy_volume_pump_1.value
+                    < dataframe["volume_mean_slow"].shift(48)
+                )
+                & (dataframe["volume"] > 0)  # Make sure Volume is not 0
             ),
             "bzv7_buy_condition_5_enable",
         ] = 1
 
         dataframe.loc[
             (
-                self.bzv7_buy_condition_6_enable.value &
-
-                (dataframe['rsi_1h'] < self.bzv7_buy_rsi_1h_5.value) &
-
-                (dataframe['ema_26'] > dataframe['ema_12']) &
-                ((dataframe['ema_26'] - dataframe['ema_12']) > (dataframe['open'] * self.bzv7_buy_macd_2.value)) &
-                ((dataframe['ema_26'].shift() - dataframe['ema_12'].shift()) > (dataframe['open']/100)) &
-                (dataframe['close'] < (dataframe['bb_lowerband'])) &
-
-                (dataframe['volume_mean_slow'] > dataframe['volume_mean_slow'].shift(48) * self.bzv7_buy_volume_pump_1.value) &
-                (dataframe['volume_mean_slow'] * self.bzv7_buy_volume_pump_1.value < dataframe['volume_mean_slow'].shift(48)) &
-                (dataframe['volume'] < (dataframe['volume'].shift() * self.bzv7_buy_volume_drop_1.value)) &
-                (dataframe['volume'] > 0)
+                self.bzv7_buy_condition_6_enable.value
+                & (dataframe["rsi_1h"] < self.bzv7_buy_rsi_1h_5.value)
+                & (dataframe["ema_26"] > dataframe["ema_12"])
+                & (
+                    (dataframe["ema_26"] - dataframe["ema_12"])
+                    > (dataframe["open"] * self.bzv7_buy_macd_2.value)
+                )
+                & (
+                    (dataframe["ema_26"].shift() - dataframe["ema_12"].shift())
+                    > (dataframe["open"] / 100)
+                )
+                & (dataframe["close"] < (dataframe["bb_lowerband"]))
+                & (
+                    dataframe["volume_mean_slow"]
+                    > dataframe["volume_mean_slow"].shift(48)
+                    * self.bzv7_buy_volume_pump_1.value
+                )
+                & (
+                    dataframe["volume_mean_slow"] * self.bzv7_buy_volume_pump_1.value
+                    < dataframe["volume_mean_slow"].shift(48)
+                )
+                & (
+                    dataframe["volume"]
+                    < (dataframe["volume"].shift() * self.bzv7_buy_volume_drop_1.value)
+                )
+                & (dataframe["volume"] > 0)
             ),
             "bzv7_buy_condition_6_enable",
         ] = 1
 
         dataframe.loc[
             (
-                self.bzv7_buy_condition_7_enable.value &
-
-                (dataframe['rsi_1h'] < self.bzv7_buy_rsi_1h_2.value) &
-
-                (dataframe['ema_26'] > dataframe['ema_12']) &
-                ((dataframe['ema_26'] - dataframe['ema_12']) > (dataframe['open'] * self.bzv7_buy_macd_1.value)) &
-                ((dataframe['ema_26'].shift() - dataframe['ema_12'].shift()) > (dataframe['open']/100)) &
-
-                (dataframe['volume'] < (dataframe['volume'].shift() * self.bzv7_buy_volume_drop_1.value)) &
-                (dataframe['volume_mean_slow'] > dataframe['volume_mean_slow'].shift(48) * self.bzv7_buy_volume_pump_1.value) &
-                (dataframe['volume_mean_slow'] * self.bzv7_buy_volume_pump_1.value < dataframe['volume_mean_slow'].shift(48)) &
-                (dataframe['volume'] > 0)
+                self.bzv7_buy_condition_7_enable.value
+                & (dataframe["rsi_1h"] < self.bzv7_buy_rsi_1h_2.value)
+                & (dataframe["ema_26"] > dataframe["ema_12"])
+                & (
+                    (dataframe["ema_26"] - dataframe["ema_12"])
+                    > (dataframe["open"] * self.bzv7_buy_macd_1.value)
+                )
+                & (
+                    (dataframe["ema_26"].shift() - dataframe["ema_12"].shift())
+                    > (dataframe["open"] / 100)
+                )
+                & (
+                    dataframe["volume"]
+                    < (dataframe["volume"].shift() * self.bzv7_buy_volume_drop_1.value)
+                )
+                & (
+                    dataframe["volume_mean_slow"]
+                    > dataframe["volume_mean_slow"].shift(48)
+                    * self.bzv7_buy_volume_pump_1.value
+                )
+                & (
+                    dataframe["volume_mean_slow"] * self.bzv7_buy_volume_pump_1.value
+                    < dataframe["volume_mean_slow"].shift(48)
+                )
+                & (dataframe["volume"] > 0)
             ),
             "bzv7_buy_condition_7_enable",
         ] = 1
 
         dataframe.loc[
             (
-                self.bzv7_buy_condition_8_enable.value &
-
-                (dataframe['rsi_1h'] < self.bzv7_buy_rsi_1h_3.value) &
-                (dataframe['rsi'] < self.bzv7_buy_rsi_1.value) &
-
-                (dataframe['volume'] < (dataframe['volume'].shift() * self.bzv7_buy_volume_drop_1.value)) &
-                (dataframe['volume_mean_slow'] > dataframe['volume_mean_slow'].shift(48) * self.bzv7_buy_volume_pump_1.value) &
-                (dataframe['volume_mean_slow'] * self.bzv7_buy_volume_pump_1.value < dataframe['volume_mean_slow'].shift(48)) &
-                (dataframe['volume'] > 0)
+                self.bzv7_buy_condition_8_enable.value
+                & (dataframe["rsi_1h"] < self.bzv7_buy_rsi_1h_3.value)
+                & (dataframe["rsi"] < self.bzv7_buy_rsi_1.value)
+                & (
+                    dataframe["volume"]
+                    < (dataframe["volume"].shift() * self.bzv7_buy_volume_drop_1.value)
+                )
+                & (
+                    dataframe["volume_mean_slow"]
+                    > dataframe["volume_mean_slow"].shift(48)
+                    * self.bzv7_buy_volume_pump_1.value
+                )
+                & (
+                    dataframe["volume_mean_slow"] * self.bzv7_buy_volume_pump_1.value
+                    < dataframe["volume_mean_slow"].shift(48)
+                )
+                & (dataframe["volume"] > 0)
             ),
             "bzv7_buy_condition_8_enable",
         ] = 1
 
         dataframe.loc[
             (
-                self.bzv7_buy_condition_9_enable.value &
-
-                (dataframe['rsi_1h'] < self.bzv7_buy_rsi_1h_4.value) &
-                (dataframe['rsi'] < self.bzv7_buy_rsi_2.value) &
-
-                (dataframe['volume'] < (dataframe['volume'].shift() * self.bzv7_buy_volume_drop_1.value)) &
-                (dataframe['volume_mean_slow'] > dataframe['volume_mean_slow'].shift(48) * self.bzv7_buy_volume_pump_1.value) &
-                (dataframe['volume_mean_slow'] * self.bzv7_buy_volume_pump_1.value < dataframe['volume_mean_slow'].shift(48)) &
-                (dataframe['volume'] > 0)
+                self.bzv7_buy_condition_9_enable.value
+                & (dataframe["rsi_1h"] < self.bzv7_buy_rsi_1h_4.value)
+                & (dataframe["rsi"] < self.bzv7_buy_rsi_2.value)
+                & (
+                    dataframe["volume"]
+                    < (dataframe["volume"].shift() * self.bzv7_buy_volume_drop_1.value)
+                )
+                & (
+                    dataframe["volume_mean_slow"]
+                    > dataframe["volume_mean_slow"].shift(48)
+                    * self.bzv7_buy_volume_pump_1.value
+                )
+                & (
+                    dataframe["volume_mean_slow"] * self.bzv7_buy_volume_pump_1.value
+                    < dataframe["volume_mean_slow"].shift(48)
+                )
+                & (dataframe["volume"] > 0)
             ),
             "bzv7_buy_condition_9_enable",
         ] = 1
@@ -1079,46 +1176,84 @@ class BcmbigzDevelop(IStrategy):
 
         dataframe.loc[
             (
-                self.bzv7_buy_condition_11_enable.value &
-
-                ((dataframe['high'] - dataframe['low']) < dataframe['open']/100) &
-                (dataframe['open'] < dataframe['close']) &
-                ((dataframe['high'].shift() - dataframe['low'].shift()) < dataframe['open'].shift()/100) &
-                ((dataframe['high'].shift(2) - dataframe['low'].shift(2)) < dataframe['open'].shift(2)/100) &
-                ((dataframe['high'].shift(3) - dataframe['low'].shift(3)) < dataframe['open'].shift(3)/100) &
-                ((dataframe['high'].shift(4) - dataframe['low'].shift(4)) < dataframe['open'].shift(4)/100) &
-                ((dataframe['high'].shift(5) - dataframe['low'].shift(5)) < dataframe['open'].shift(5)/100) &
-                ((dataframe['high'].shift(6) - dataframe['low'].shift(6)) < dataframe['open'].shift(6)/100) &
-                ((dataframe['high'].shift(7) - dataframe['low'].shift(7)) < dataframe['open'].shift(7)/100) &
-                ((dataframe['high'].shift(8) - dataframe['low'].shift(8)) < dataframe['open'].shift(8)/100) &
-                ((dataframe['high'].shift(9) - dataframe['low'].shift(9)) < dataframe['open'].shift(9)/100) &
-                (dataframe['bb_middleband'] > dataframe['bb_middleband'].shift(9) * 1.005) &
-                (dataframe['rsi'] < 68) &
-
-                (dataframe['volume'] > 0) # Make sure Volume is not 0
+                self.bzv7_buy_condition_11_enable.value
+                & ((dataframe["high"] - dataframe["low"]) < dataframe["open"] / 100)
+                & (dataframe["open"] < dataframe["close"])
+                & (
+                    (dataframe["high"].shift() - dataframe["low"].shift())
+                    < dataframe["open"].shift() / 100
+                )
+                & (
+                    (dataframe["high"].shift(2) - dataframe["low"].shift(2))
+                    < dataframe["open"].shift(2) / 100
+                )
+                & (
+                    (dataframe["high"].shift(3) - dataframe["low"].shift(3))
+                    < dataframe["open"].shift(3) / 100
+                )
+                & (
+                    (dataframe["high"].shift(4) - dataframe["low"].shift(4))
+                    < dataframe["open"].shift(4) / 100
+                )
+                & (
+                    (dataframe["high"].shift(5) - dataframe["low"].shift(5))
+                    < dataframe["open"].shift(5) / 100
+                )
+                & (
+                    (dataframe["high"].shift(6) - dataframe["low"].shift(6))
+                    < dataframe["open"].shift(6) / 100
+                )
+                & (
+                    (dataframe["high"].shift(7) - dataframe["low"].shift(7))
+                    < dataframe["open"].shift(7) / 100
+                )
+                & (
+                    (dataframe["high"].shift(8) - dataframe["low"].shift(8))
+                    < dataframe["open"].shift(8) / 100
+                )
+                & (
+                    (dataframe["high"].shift(9) - dataframe["low"].shift(9))
+                    < dataframe["open"].shift(9) / 100
+                )
+                & (
+                    dataframe["bb_middleband"]
+                    > dataframe["bb_middleband"].shift(9) * 1.005
+                )
+                & (dataframe["rsi"] < 68)
+                & (dataframe["volume"] > 0)  # Make sure Volume is not 0
             ),
             "bzv7_buy_condition_11_enable",
         ] = 1
 
         dataframe.loc[
             (
-                self.bzv7_buy_condition_12_enable.value &
-
-                (dataframe['close'] > dataframe['ema_200']) &
-                (dataframe['close'] > dataframe['ema_200_1h']) &
-
-                (dataframe['close'] < dataframe['bb_lowerband'] * 0.993) &
-                (dataframe['low'] < dataframe['bb_lowerband'] * 0.985) &
-                (dataframe['close'].shift() > dataframe['bb_lowerband']) &
-                (dataframe['rsi_1h'] < 72.8) &
-                (dataframe['open'] > dataframe['close']) &
-
-                (dataframe['volume_mean_slow'] > dataframe['volume_mean_slow'].shift(48) * self.bzv7_buy_volume_pump_1.value) &
-                (dataframe['volume_mean_slow'] * self.bzv7_buy_volume_pump_1.value < dataframe['volume_mean_slow'].shift(48)) &
-                (dataframe['volume'] < (dataframe['volume'].shift() * self.bzv7_buy_volume_drop_1.value)) &
-                ((dataframe['open'] - dataframe['close']) < dataframe['bb_upperband'].shift(2) - dataframe['bb_lowerband'].shift(2)) &
-
-                (dataframe['volume'] > 0)
+                self.bzv7_buy_condition_12_enable.value
+                & (dataframe["close"] > dataframe["ema_200"])
+                & (dataframe["close"] > dataframe["ema_200_1h"])
+                & (dataframe["close"] < dataframe["bb_lowerband"] * 0.993)
+                & (dataframe["low"] < dataframe["bb_lowerband"] * 0.985)
+                & (dataframe["close"].shift() > dataframe["bb_lowerband"])
+                & (dataframe["rsi_1h"] < 72.8)
+                & (dataframe["open"] > dataframe["close"])
+                & (
+                    dataframe["volume_mean_slow"]
+                    > dataframe["volume_mean_slow"].shift(48)
+                    * self.bzv7_buy_volume_pump_1.value
+                )
+                & (
+                    dataframe["volume_mean_slow"] * self.bzv7_buy_volume_pump_1.value
+                    < dataframe["volume_mean_slow"].shift(48)
+                )
+                & (
+                    dataframe["volume"]
+                    < (dataframe["volume"].shift() * self.bzv7_buy_volume_drop_1.value)
+                )
+                & (
+                    (dataframe["open"] - dataframe["close"])
+                    < dataframe["bb_upperband"].shift(2)
+                    - dataframe["bb_lowerband"].shift(2)
+                )
+                & (dataframe["volume"] > 0)
             ),
             "bzv7_buy_condition_12_enable",
         ] = 1
