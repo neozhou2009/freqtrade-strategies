@@ -1,14 +1,15 @@
 # --- Do not remove these libs ---
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from pandas import DataFrame
 import talib.abstract as ta
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 
 
 # --------------------------------
 
 
 class AdxSmas(IStrategy):
+    INTERFACE_VERSION = 3
     """
 
     author@: Gert Wohlgemuth
@@ -46,7 +47,7 @@ class AdxSmas(IStrategy):
                     (qtpylib.crossed_above(dataframe['short'], dataframe['long']))
 
             ),
-            'buy'] = 1
+            'entry'] = 1
         return dataframe
 
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
@@ -56,5 +57,5 @@ class AdxSmas(IStrategy):
                     (qtpylib.crossed_above(dataframe['long'], dataframe['short']))
 
             ),
-            'sell'] = 1
+            'exit'] = 1
         return dataframe

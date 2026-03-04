@@ -1,15 +1,16 @@
 # --- Do not remove these libs ---
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from typing import Dict, List
 from functools import reduce
 from pandas import DataFrame
 # --------------------------------
 
 import talib.abstract as ta
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 
 
 class BBRSI2(IStrategy):
+    INTERFACE_VERSION = 3
     minimal_roi = {
         "0": 0.30,
         "120": 0.20,
@@ -24,8 +25,8 @@ class BBRSI2(IStrategy):
     trailing_stop = True
 
     order_types = {
-        "buy": "limit",
-        "sell": "limit",
+        "entry": "limit",
+        "exit": "limit",
         "emergencysell": "market",
         "forcebuy": "market",
         "forcesell": "market",
@@ -54,7 +55,7 @@ class BBRSI2(IStrategy):
                 (dataframe['rsi'] > 35)
                 & (dataframe['close'] < dataframe['bb_lowerband'])
             ),
-            'buy'] = 1
+            'entry'] = 1
 
         return dataframe
 
@@ -64,6 +65,6 @@ class BBRSI2(IStrategy):
                 (dataframe['rsi'] > 75)
                 & (dataframe['close'] > dataframe['bb_middleband'])
             ),
-            'sell'] = 1
+            'exit'] = 1
 
         return dataframe

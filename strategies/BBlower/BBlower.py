@@ -7,7 +7,7 @@ Created on Wed Dec  2 13:50:49 2020
 """
 
 # --- Do not remove these libs ---
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from typing import Dict, List
 from functools import reduce
 from pandas import DataFrame
@@ -18,6 +18,7 @@ from technical import qtpylib
 
 
 class BBlower(IStrategy):
+    INTERFACE_VERSION = 3
     """
     Sample strategy implementing Informative Pairs - compares stake_currency with USDT.
     Not performing very well - but should serve as an example how to use a referential pair against USDT.
@@ -139,7 +140,7 @@ class BBlower(IStrategy):
                   
                 
             ),
-            'buy'] = 1
+            'entry'] = 1
 
         return dataframe
 
@@ -162,6 +163,6 @@ class BBlower(IStrategy):
                 
                 
             ),
-            'sell'] = 1        
+            'exit'] = 1        
         
         return dataframe

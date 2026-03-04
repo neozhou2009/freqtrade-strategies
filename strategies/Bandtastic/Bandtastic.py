@@ -4,7 +4,7 @@ import pandas as pd
 from functools import reduce
 from pandas import DataFrame
 from technical import qtpylib
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from freqtrade.strategy import CategoricalParameter, DecimalParameter, IntParameter, RealParameter
 
 __author__ = "Robert Roman"
@@ -42,26 +42,26 @@ class Bandtastic(IStrategy):
     trailing_only_offset_is_reached = False
 
     # Hyperopt Buy Parameters
-    buy_fastema = IntParameter(low=1, high=236, default=211, space='buy', optimize=True, load=True)
-    buy_slowema = IntParameter(low=1, high=126, default=364, space='buy', optimize=True, load=True)
-    buy_rsi = IntParameter(low=15, high=70, default=52, space='buy', optimize=True, load=True)
-    buy_mfi = IntParameter(low=15, high=70, default=30, space='buy', optimize=True, load=True)
+    buy_fastema = IntParameter(low=1, high=236, default=211, space='entry', optimize=True, load=True)
+    buy_slowema = IntParameter(low=1, high=126, default=364, space='entry', optimize=True, load=True)
+    buy_rsi = IntParameter(low=15, high=70, default=52, space='entry', optimize=True, load=True)
+    buy_mfi = IntParameter(low=15, high=70, default=30, space='entry', optimize=True, load=True)
 
-    buy_rsi_enabled = CategoricalParameter([True, False], space='buy', optimize=True, default=False)
-    buy_mfi_enabled = CategoricalParameter([True, False], space='buy', optimize=True, default=False)
-    buy_ema_enabled = CategoricalParameter([True, False], space='buy', optimize=True, default=False)
-    buy_trigger = CategoricalParameter(["bb_lower1", "bb_lower2", "bb_lower3", "bb_lower4"], default="bb_lower1", space="buy")
+    buy_rsi_enabled = CategoricalParameter([True, False], space='entry', optimize=True, default=False)
+    buy_mfi_enabled = CategoricalParameter([True, False], space='entry', optimize=True, default=False)
+    buy_ema_enabled = CategoricalParameter([True, False], space='entry', optimize=True, default=False)
+    buy_trigger = CategoricalParameter(["bb_lower1", "bb_lower2", "bb_lower3", "bb_lower4"], default="bb_lower1", space="entry")
 
     # Hyperopt Sell Parameters
-    sell_fastema = IntParameter(low=1, high=365, default=7, space='sell', optimize=True, load=True)
-    sell_slowema = IntParameter(low=1, high=365, default=6, space='sell', optimize=True, load=True)
-    sell_rsi = IntParameter(low=30, high=100, default=57, space='sell', optimize=True, load=True)
-    sell_mfi = IntParameter(low=30, high=100, default=46, space='sell', optimize=True, load=True)
+    sell_fastema = IntParameter(low=1, high=365, default=7, space='exit', optimize=True, load=True)
+    sell_slowema = IntParameter(low=1, high=365, default=6, space='exit', optimize=True, load=True)
+    sell_rsi = IntParameter(low=30, high=100, default=57, space='exit', optimize=True, load=True)
+    sell_mfi = IntParameter(low=30, high=100, default=46, space='exit', optimize=True, load=True)
 
-    sell_rsi_enabled = CategoricalParameter([True, False], space='sell', optimize=True, default=False)
-    sell_mfi_enabled = CategoricalParameter([True, False], space='sell', optimize=True, default=True)
-    sell_ema_enabled = CategoricalParameter([True, False], space='sell', optimize=True, default=False)
-    sell_trigger = CategoricalParameter(["sell-bb_upper1", "sell-bb_upper2", "sell-bb_upper3", "sell-bb_upper4"], default="sell-bb_upper2", space="sell")
+    sell_rsi_enabled = CategoricalParameter([True, False], space='exit', optimize=True, default=False)
+    sell_mfi_enabled = CategoricalParameter([True, False], space='exit', optimize=True, default=True)
+    sell_ema_enabled = CategoricalParameter([True, False], space='exit', optimize=True, default=False)
+    sell_trigger = CategoricalParameter(["sell-bb_upper1", "sell-bb_upper2", "sell-bb_upper3", "sell-bb_upper4"], default="sell-bb_upper2", space="exit")
 
     def populate_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         # RSI
@@ -120,7 +120,7 @@ class Bandtastic(IStrategy):
         if conditions:
             dataframe.loc[
                 reduce(lambda x, y: x & y, conditions),
-                'buy'] = 1
+                'entry'] = 1
 
         return dataframe
 
@@ -154,6 +154,6 @@ class Bandtastic(IStrategy):
         if conditions:
             dataframe.loc[
                 reduce(lambda x, y: x & y, conditions),
-                'sell'] = 1
+                'exit'] = 1
 
         return dataframe

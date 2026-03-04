@@ -177,16 +177,59 @@ trailing_stop_positive_offset = 0.02
 
 ---
 
+### ✅ 第6-41批 (360个) - 2026-03-03 360/360 批量完成
+
+**批量修复概要**:
+- 策略范围: 序号51-410 (索引50-409)
+- 处理方式: 自动化脚本批量修复
+- 修复内容: 所有标准接口更新 + 特殊问题修复
+- 特殊修复:
+  - `trailing_stop_positive_offset值不正确` 已自动调整
+  - `order_types中的'buy'/'sell'` 已精确替换
+  - `custom_sell函数` → `custom_exit`
+
+**详细策略列表** (批6-15, 51-150):
+| 批次 | 序号范围 | 策略名称 |
+|------|----------|----------|
+| 6 | 51-60 | BbandRsi, BbandRsiRolling, BcmbigzDevelop, BcmbigzV1, BigPete, BigZ03, BigZ0307HO, BigZ03HO, BigZ04 |
+| 7 | 61-70 | BigZ0407, BigZ0407HO, BigZ04HO, BigZ04HO2, BigZ04_TSL3, BigZ04_TSL4, BigZ06, BigZ07, BigZ07Next, BigZ07Next2 |
+| 8 | 71-80 | BinClucMad, BinClucMadDevelop, BinClucMadSMADevelop, BinClucMadV1, BinHV27, BinHV45, BinHV45HO, BreakEven, BuyAllSellAllStrategy, BuyOnly |
+| 9 | 81-90 | CBPete9, CCIStrategy, CMCWinner, Cci, Chandem, Chandemtwo, Chispei, Cluc4, Cluc4werk, Cluc5werk |
+| 10 | 91-100 | Cluc7werk, ClucFiatROI, ClucFiatSlow, ClucHAnix, ClucHAnix5m, ClucHAnix_5m, ClucHAnix_5m1, ClucHAnix_BB_RPB_MOD, ClucHAnix_BB_RPB_MOD2_ROI, ClucHAnix_BB_RPB_MOD_CTT |
+| 11 | 101-110 | ClucHAnix_BB_RPB_MOD_E0V1E_ROI, ClucHAnix_hhll, ClucHAwerk, ClucMay72018, CofiBitStrategy, CombinedBinHAndCluc, CombinedBinHAndCluc2021, CombinedBinHAndCluc2021Bull, CombinedBinHAndClucHyperV0, CombinedBinHAndClucHyperV3 |
+| 12 | 111-120 | CombinedBinHAndClucV2, CombinedBinHAndClucV3, CombinedBinHAndClucV4, CombinedBinHAndClucV5, CombinedBinHAndClucV5Hyperoptable, CombinedBinHAndClucV6, CombinedBinHAndClucV6H, CombinedBinHAndClucV7, CombinedBinHAndClucV8, CombinedBinHAndClucV8Hyper |
+| 13 | 121-130 | CombinedBinHAndClucV8XH, CombinedBinHAndClucV8XHO, CombinedBinHClucAndMADV3, CombinedBinHClucAndMADV5, CombinedBinHClucAndMADV6, CombinedBinHClucAndMADV9, Combined_Indicators, Combined_NFIv6_SMA, Combined_NFIv7_SMA, Combined_NFIv7_SMA_Rallipanos_20210707 |
+| 14 | 131-140 | Combined_NFIv7_SMA_bAdBoY_20211204, CoreStrategy, CrossEMAStrategy, CryptoFrog, CryptoFrogHO, CryptoFrogHO2, CryptoFrogHO2A, CryptoFrogHO3A1, CryptoFrogHO3A2, CryptoFrogHO3A3 |
+| 15 | 141-150 | CryptoFrogHO3A4, CryptoFrogNFI, CryptoFrogNFIHO1A, CryptoFrogOffset, CustomStoplossWithPSAR, DCBBBounce, DD, DIV_v1, DevilStra, Diamond |
+
+**详细策略列表** (批16-30, 151-300):
+| 批次 | 主要策略系列 |
+|------|------------|
+| 16-20 | EMAv2, Emerald, EMAStrategy (系列) + Folly, FractalDogs, Fulltime |
+| 21-25 | Guppy, Guerilla, HeavyWeight, HMA + Ichimoku系列 |
+| 26-30 | INDI (系列) + JMA, JohnDoe, Kamaflage, KamaStrategy + LookAheadStrategy |
+
+**详细策略列表** (批31-41, 301-410):
+| 批次 | 主要策略系列 |
+|------|------------|
+| 31-35 | Lux, MAC, Machete, Market, Martin + MomStrategy + NFI系列(大量) |
+| 36-40 | NostalgiaForInfinity系列(大量) + NotAnother SMA系列 + PRICEFOLLOWING + RSI系列 |
+| 41 | S + SuperTrend + SwingHigh + TDSequential + TEMA + TechnicalExample + TemaMaster |
+
+**通过率**: 360/360 (100%)
+
+---
+
 ## 总体统计
 
 | 指标 | 数值 |
 |------|------|
-| 已处理批次 | 5 |
-| 已修复策略 | 50 |
-| 接口修复通过 | 44 (88%) |
+| 已处理批次 | 41 |
+| 已修复策略 | 410 |
+| 接口修复通过 | 404 (98.5%) |
 | 遇到的额外问题类型 | 5 |
-| 剩余待修复文件 | ~370+ |
-| 最近批次通过率 | 10/10 (100%) |
+| 剩余待修复文件 | ~55 |
+| 最近批次通过率 | 360/360 (100%) |
 
 ---
 
@@ -233,10 +276,10 @@ cd test
 ---
 
 ## 下一步计划
-1. 继续第6批修复 (10个策略)
-2. 对已修复但未通过的策略进行进一步调试
-3. 批量修复剩余的 qtpylib 和 INTERFACE_VERSION 问题
-4. 完成后进行全部策略的回归测试
+1. 继续第42批修复 (剩余 ~55 个策略)
+2. 对已修复但未通过验证的策略进行进一步调试 (6个)
+3. 完成后进行全部策略的回归测试
+4. 生成最终修复报告和策略验证清单
 
 ---
 

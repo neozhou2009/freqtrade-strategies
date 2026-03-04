@@ -68,8 +68,8 @@ class BBandsRSI(IStrategy):
     startup_candle_count: int = 30
 
     # Strategy parameters
-    buy_rsi = IntParameter(10, 40, default=30, space="buy")
-    sell_rsi = IntParameter(60, 90, default=70, space="sell")
+    buy_rsi = IntParameter(10, 40, default=30, space="entry")
+    sell_rsi = IntParameter(60, 90, default=70, space="exit")
 
     # Optional order type mapping.
     order_types = {
@@ -155,7 +155,7 @@ class BBandsRSI(IStrategy):
                 (dataframe['close'] < dataframe['bb_lowerband']) &
                 (dataframe['volume'] > 0)  # Make sure Volume is not 0
             ),
-            'buy'] = 1
+            'entry'] = 1
 
         return dataframe
 
@@ -171,6 +171,6 @@ class BBandsRSI(IStrategy):
                 (dataframe['rsi'] > 70) &
                 (dataframe['volume'] > 0)  # Make sure Volume is not 0
             ),
-            'sell'] = 1
+            'exit'] = 1
         return dataframe
     

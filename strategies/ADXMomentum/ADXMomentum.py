@@ -1,5 +1,5 @@
 # --- Do not remove these libs ---
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from pandas import DataFrame
 import talib.abstract as ta
 
@@ -8,6 +8,7 @@ import talib.abstract as ta
 
 
 class ADXMomentum(IStrategy):
+    INTERFACE_VERSION = 3
     """
 
     author@: Gert Wohlgemuth
@@ -52,7 +53,7 @@ class ADXMomentum(IStrategy):
                     (dataframe['plus_di'] > dataframe['minus_di'])
 
             ),
-            'buy'] = 1
+            'entry'] = 1
         return dataframe
 
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
@@ -64,5 +65,5 @@ class ADXMomentum(IStrategy):
                     (dataframe['plus_di'] < dataframe['minus_di'])
 
             ),
-            'sell'] = 1
+            'exit'] = 1
         return dataframe

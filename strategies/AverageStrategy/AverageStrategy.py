@@ -1,13 +1,14 @@
 # --- Do not remove these libs ---
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from pandas import DataFrame
 # --------------------------------
 
 import talib.abstract as ta
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 
 
 class AverageStrategy(IStrategy):
+    INTERFACE_VERSION = 3
     """
 
     author@: Gert Wohlgemuth
@@ -46,7 +47,7 @@ class AverageStrategy(IStrategy):
             (
                 qtpylib.crossed_above(dataframe['maShort'], dataframe['maMedium'])
             ),
-            'buy'] = 1
+            'entry'] = 1
 
         return dataframe
 
@@ -60,5 +61,5 @@ class AverageStrategy(IStrategy):
             (
                 qtpylib.crossed_above(dataframe['maMedium'], dataframe['maShort'])
             ),
-            'sell'] = 1
+            'exit'] = 1
         return dataframe

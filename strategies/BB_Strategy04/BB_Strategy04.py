@@ -5,7 +5,7 @@ import numpy as np  # noqa
 import pandas as pd  # noqa
 from pandas import DataFrame
 
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 
 # --------------------------------
 # Add your lib to import here
@@ -142,7 +142,7 @@ class BB_Strategy04(IStrategy):
 
                 # (dataframe['volume'] > self.config['stake_amount'])
             ),
-            'buy'] = 1
+            'entry'] = 1
 
         return dataframe
 
@@ -160,6 +160,6 @@ class BB_Strategy04(IStrategy):
                 # (dataframe['close'] < dataframe['bb_lowerband1.5'])
                 # (dataframe['volume'] > self.config['stake_amount'])
             ),
-            'sell'] = 1
+            'exit'] = 1
 
         return dataframe

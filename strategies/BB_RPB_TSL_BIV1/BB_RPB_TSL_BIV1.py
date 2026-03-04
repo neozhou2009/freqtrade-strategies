@@ -1,11 +1,11 @@
 # --- Do not remove these libs ---
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 import numpy as np
 import talib.abstract as ta
 import pandas_ta as pta
 
 from freqtrade.persistence import Trade
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from pandas import DataFrame, Series, DatetimeIndex, merge
 from datetime import datetime, timedelta
 from freqtrade.strategy import merge_informative_pair, CategoricalParameter, DecimalParameter, IntParameter, stoploss_from_open
@@ -90,6 +90,7 @@ def chaikin_money_flow(dataframe, n=20, fillna=False) -> Series:
     return Series(cmf, name='cmf')
 
 class BB_RPB_TSL_BIV1(IStrategy):
+    INTERFACE_VERSION = 3
     '''
         BB_RPB_TSL
         @author jilv220
@@ -199,7 +200,7 @@ class BB_RPB_TSL_BIV1(IStrategy):
 
     # Custom stoploss
     use_custom_stoploss = True
-    use_sell_signal = True
+    use_exit_signal = True
 
     ############################################################################
 
@@ -397,7 +398,7 @@ class BB_RPB_TSL_BIV1(IStrategy):
         return sl_new
 
     # From NFIX
-    def custom_sell(self, pair: str, trade: 'Trade', current_time: 'datetime', current_rate: float,
+    def custom_exit(self, pair: str, trade: 'Trade', current_time: 'datetime', current_rate: float,
                     current_profit: float, **kwargs):
 
         dataframe, _ = self.dp.get_analyzed_dataframe(pair, self.timeframe)
@@ -871,13 +872,13 @@ class BB_RPB_TSL_BIV1(IStrategy):
                             &
                             reduce(lambda x, y: x | y, conditions)
 
-                        , 'buy' ] = 1
+                        , 'entry' ] = 1
 
         return dataframe
 
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
 
-        dataframe.loc[ (dataframe['volume'] > 0), 'sell' ] = 0
+        dataframe.loc[ (dataframe['volume'] > 0), 'exit' ] = 0
 
         return dataframe
 

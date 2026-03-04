@@ -7,6 +7,7 @@ from freqtrade.strategy import IStrategy, merge_informative_pair
 
 
 class BBRSIS(IStrategy):
+    INTERFACE_VERSION = 3
     """
     Default Strategy provided by freqtrade bot.
     You can override it with your own strategy
@@ -113,7 +114,7 @@ class BBRSIS(IStrategy):
                 )
                 & (dataframe["volume"] > 0)
             ),
-            "buy",
+            "entry",
         ] = 1
 
         return dataframe
@@ -149,6 +150,6 @@ class BBRSIS(IStrategy):
                 )
                 & (dataframe["volume"] > 0)
             ),
-            "sell",
+            "exit",
         ] = 1
         return dataframe

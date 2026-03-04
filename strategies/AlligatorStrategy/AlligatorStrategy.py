@@ -69,7 +69,7 @@ class AlligatorStrategy(IStrategy):
     """
     # Strategy interface version - allow new iterations of the strategy interface.
     # Check the documentation or the Sample strategy to get the latest version.
-    INTERFACE_VERSION = 2
+    INTERFACE_VERSION = 3
 
     # Minimal ROI designed for the strategy.
     # This attribute will be overridden if the config file contains "minimal_roi".
@@ -90,8 +90,8 @@ class AlligatorStrategy(IStrategy):
     # trailing_stop_positive_offset = 0.0  # Disabled / not configured
 
     # Hyperoptable parameters
-    buy_stoch_rsi = DecimalParameter(0.5, 1, decimals=3, default=0.82, space="buy")
-    sell_stoch_rsi = DecimalParameter(0, 0.5, decimals=3, default=0.2, space="sell")
+    buy_stoch_rsi = DecimalParameter(0.5, 1, decimals=3, default=0.82, space="entry")
+    sell_stoch_rsi = DecimalParameter(0, 0.5, decimals=3, default=0.2, space="exit")
 
     # Optimal timeframe for the strategy.
     timeframe = '1h'
@@ -100,25 +100,25 @@ class AlligatorStrategy(IStrategy):
     process_only_new_candles = False
 
     # These values can be overridden in the "ask_strategy" section in the config.
-    use_sell_signal = True
-    sell_profit_only = True
-    ignore_roi_if_buy_signal = False
+    use_exit_signal = True
+    exit_profit_only = True
+    ignore_roi_if_entry_signal = False
 
     # Number of candles the strategy requires before producing valid signals
     startup_candle_count = 200 # EMA200
 
     # Optional order type mapping.
     order_types = {
-        'buy': 'limit',
-        'sell': 'limit',
+        'entry': 'limit',
+        'exit': 'limit',
         'stoploss': 'market',
         'stoploss_on_exchange': False
     }
 
     # Optional order time in force.
     order_time_in_force = {
-        'buy': 'gtc',
-        'sell': 'gtc'
+        'entry': 'gtc',
+        'exit': 'gtc'
     }
 
     plot_config = {
@@ -198,7 +198,7 @@ class AlligatorStrategy(IStrategy):
                 (dataframe['stoch_rsi'] < self.buy_stoch_rsi.value) &
                 (dataframe['volume'] > 0)
             ),
-            'buy'] = 1
+            'entry'] = 1
 
         return dataframe
 
@@ -215,5 +215,5 @@ class AlligatorStrategy(IStrategy):
                 (dataframe['stoch_rsi'] > self.sell_stoch_rsi.value) &
                 (dataframe['volume'] > 0)
             ),
-            'sell'] = 1
+            'exit'] = 1
         return dataframe

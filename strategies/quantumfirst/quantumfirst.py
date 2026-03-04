@@ -6,18 +6,19 @@ Created on Sat Aug 29 15:18:55 2020
 @author: alex
 """
 # --- Do not remove these libs ---
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from typing import Dict, List
 from functools import reduce
 from pandas import DataFrame
 # --------------------------------
 
 import talib.abstract as ta
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 import numpy # noqa
 
 
 class quantumfirst(IStrategy):
+    INTERFACE_VERSION = 3
     """
     Strategy 005
     author@: Gerald Lonlas
@@ -42,7 +43,7 @@ class quantumfirst(IStrategy):
     stoploss = -0.10
 
     # Optimal ticker interval for the strategy
-    ticker_interval = '5m'
+    timeframe = '5m'
 
     # trailing stoploss
     trailing_stop = True
@@ -53,14 +54,14 @@ class quantumfirst(IStrategy):
     process_only_new_candles = False
 
     # Experimental settings (configuration will overide these if set)
-    use_sell_signal = True
-    sell_profit_only = True
-    ignore_roi_if_buy_signal = False
+    use_exit_signal = True
+    exit_profit_only = True
+    ignore_roi_if_entry_signal = False
 
     # Optional order type mapping
     order_types = {
-        'buy': 'limit',
-        'sell': 'limit',
+        'entry': 'limit',
+        'exit': 'limit',
         'stoploss': 'market',
         'stoploss_on_exchange': False
     }
@@ -138,7 +139,7 @@ class quantumfirst(IStrategy):
                 # (dataframe['fisher_rsi'] < -0.94)
                 (dataframe['fisher_rsi_norma'] < 38.900000000000006)
             ),
-            'buy'] = 1
+            'entry'] = 1
 
         return dataframe
 
@@ -160,5 +161,5 @@ class quantumfirst(IStrategy):
                 (dataframe['fisher_rsi'] > 0.3)
             ),
 
-            'sell'] = 1
+            'exit'] = 1
         return dataframe

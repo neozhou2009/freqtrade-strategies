@@ -12,14 +12,14 @@ from freqtrade.strategy import CategoricalParameter, DecimalParameter, IntParame
 # --------------------------------
 # Add your lib to import here
 import talib.abstract as ta
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 import datetime
 
 
 class ActionZone(IStrategy):
     # Strategy interface version - allow new iterations of the strategy interface.
     # Check the documentation or the Sample strategy to get the latest version.
-    INTERFACE_VERSION = 2
+    INTERFACE_VERSION = 3
 
     # Minimal ROI designed for the strategy.
     # This attribute will be overridden if the config file contains "minimal_roi".
@@ -178,7 +178,7 @@ class ActionZone(IStrategy):
                 & (dataframe["close"] > dataframe["fastMA"])  # Price Cross Up
                 & (dataframe["volume"] > 0)  # Make sure Volume is not 0
             ),
-            "buy",
+            "entry",
         ] = 1
 
         return dataframe
@@ -196,7 +196,7 @@ class ActionZone(IStrategy):
                 & (dataframe["close"] < dataframe["fastMA"])  # Price Cross Down
                 & (dataframe["volume"] > 0)  # Make sure Volume is not 0
             ),
-            "sell",
+            "exit",
         ] = 1
         return dataframe
 

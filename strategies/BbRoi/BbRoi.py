@@ -1,5 +1,5 @@
 # --- Do not remove these libs ---
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from pandas import DataFrame
 import talib.abstract as ta
 from technical import qtpylib
@@ -9,6 +9,7 @@ from technical import qtpylib
 
 
 class BbRoi(IStrategy):
+    INTERFACE_VERSION = 3
     minimal_roi = { 
         "0": 0.17552,
         "53": 0.11466,
@@ -64,7 +65,7 @@ class BbRoi(IStrategy):
                     (dataframe['ema20'] > dataframe['ema200'])
 
             ),
-            'buy'] = 1
+            'entry'] = 1
         return dataframe
 
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
@@ -75,6 +76,6 @@ class BbRoi(IStrategy):
                     (dataframe['open'] > dataframe['close'])  # red bar
 
             ),
-            'sell'] = 1
+            'exit'] = 1
         return dataframe
 

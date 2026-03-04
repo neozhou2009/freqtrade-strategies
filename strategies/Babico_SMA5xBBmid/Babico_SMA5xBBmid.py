@@ -1,11 +1,12 @@
 # --- Do not remove these libs ---
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from pandas import DataFrame
 import talib.abstract as ta
 from technical import qtpylib
 # --------------------------------
 
 class Babico_SMA5xBBmid(IStrategy):
+    INTERFACE_VERSION = 3
 
     minimal_roi = {
         "0": 0.10,
@@ -53,7 +54,7 @@ class Babico_SMA5xBBmid(IStrategy):
             (
                 qtpylib.crossed_above(dataframe['ema5'], dataframe['bb_mid']) 
             ),
-            'buy'] = 1
+            'entry'] = 1
         return dataframe
 
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
@@ -61,5 +62,5 @@ class Babico_SMA5xBBmid(IStrategy):
             (
                 qtpylib.crossed_above(dataframe['bb_mid'], dataframe['ema5']) 
             ),
-            'sell'] = 1
+            'exit'] = 1
         return dataframe

@@ -12,7 +12,7 @@ from freqtrade.strategy import (BooleanParameter, CategoricalParameter, DecimalP
 # --------------------------------
 # Add your lib to import here
 import talib.abstract as ta
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 
 
 # This class is a sample. Feel free to customize it.
@@ -55,11 +55,11 @@ class BBRSI4cust(IStrategy):
     ignore_roi_if_entry_signal = False
 
     # Hyperoptable parameters
-    # buy_rsi = IntParameter(low=25, high=35, default=35, space='buy', optimize=True, load=True)
-    buy_bb = IntParameter(low=1, high=4, default=1, space='buy', optimize=True, load=True)
-    buy_di = IntParameter(low=10, high=20, default=20, space='buy', optimize=True, load=True)
+    # buy_rsi = IntParameter(low=25, high=35, default=35, space='entry', optimize=True, load=True)
+    buy_bb = IntParameter(low=1, high=4, default=1, space='entry', optimize=True, load=True)
+    buy_di = IntParameter(low=10, high=20, default=20, space='entry', optimize=True, load=True)
 
-    sell_bb = IntParameter(low=1, high=4, default=1, space='sell', optimize=True, load=True)
+    sell_bb = IntParameter(low=1, high=4, default=1, space='exit', optimize=True, load=True)
 
     # Number of candles the strategy requires before producing valid signals
     startup_candle_count: int = 30

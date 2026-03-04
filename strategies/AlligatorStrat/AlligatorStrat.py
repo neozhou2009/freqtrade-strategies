@@ -1,13 +1,14 @@
 # --- Do not remove these libs ---
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from pandas import DataFrame
 # --------------------------------
 
 import talib.abstract as ta
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 
 
 class AlligatorStrat(IStrategy):
+    INTERFACE_VERSION = 3
     """
 
     author@: Gert Wohlgemuth
@@ -31,7 +32,7 @@ class AlligatorStrat(IStrategy):
     stoploss = -0.2
 
     # Optimal ticker interval for the strategy
-    ticker_interval = '4h'
+    timeframe = '4h'
 
     def populate_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
 
@@ -88,7 +89,7 @@ class AlligatorStrat(IStrategy):
                 # qtpylib.crossed_above(dataframe['macd'], dataframe['macdsignal'])
                 # )
             ),
-            'buy'] = 1
+            'entry'] = 1
 
         return dataframe
 
@@ -108,5 +109,5 @@ class AlligatorStrat(IStrategy):
                 qtpylib.crossed_below(dataframe['macd'], dataframe['macdsignal'])
                 # (dataframe['cci'] >= 100.0)
             ),
-            'sell'] = 1
+            'exit'] = 1
         return dataframe

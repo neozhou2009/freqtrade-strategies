@@ -5,7 +5,7 @@ import talib.abstract as ta
 import pandas_ta as pta
 
 from freqtrade.persistence import Trade
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from pandas import DataFrame, Series, DatetimeIndex, merge
 from datetime import datetime, timedelta
 from freqtrade.strategy import (
@@ -132,6 +132,7 @@ def chaikin_money_flow(dataframe, n=20, fillna=False) -> Series:
 
 
 class BB_RPB_TSLmeneguzzo(IStrategy):
+    INTERFACE_VERSION = 3
     """
     BB_RPB_TSL
     @author jilv220
@@ -387,7 +388,7 @@ class BB_RPB_TSLmeneguzzo(IStrategy):
         default=0.33,
         decimals=3,
         optimize=is_optimize_slip,
-        space="buy",
+        space="entry",
         load=True,
     )
 
@@ -1233,13 +1234,13 @@ class BB_RPB_TSLmeneguzzo(IStrategy):
         dataframe.loc[is_nfi7_37, "buy_tag"] += "nfi7_37 "
 
         if conditions:
-            dataframe.loc[reduce(lambda x, y: x | y, conditions), "buy"] = 1
+            dataframe.loc[reduce(lambda x, y: x | y, conditions), "entry"] = 1
 
         return dataframe
 
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
 
-        dataframe.loc[(dataframe["volume"] > 0), "sell"] = 0
+        dataframe.loc[(dataframe["volume"] > 0), "exit"] = 0
 
         return dataframe
 

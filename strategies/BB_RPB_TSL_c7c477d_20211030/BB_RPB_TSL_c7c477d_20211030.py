@@ -5,7 +5,7 @@ import talib.abstract as ta
 import pandas_ta as pta
 
 from freqtrade.persistence import Trade
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from pandas import DataFrame, Series, DatetimeIndex, merge
 from datetime import datetime, timedelta
 from freqtrade.strategy import (
@@ -76,6 +76,7 @@ def chaikin_money_flow(dataframe, n=20, fillna=False) -> Series:
 
 
 class BB_RPB_TSL_c7c477d_20211030(IStrategy):
+    INTERFACE_VERSION = 3
     """
     BB_RPB_TSL
     @author jilv220
@@ -234,7 +235,7 @@ class BB_RPB_TSL_c7c477d_20211030(IStrategy):
         -0.040,
         default=-0.08,
         decimals=3,
-        space="sell",
+        space="exit",
         optimize=is_optimize_trailing,
         load=True,
     )
@@ -244,7 +245,7 @@ class BB_RPB_TSL_c7c477d_20211030(IStrategy):
         0.020,
         default=0.016,
         decimals=3,
-        space="sell",
+        space="exit",
         optimize=is_optimize_trailing,
         load=True,
     )
@@ -253,7 +254,7 @@ class BB_RPB_TSL_c7c477d_20211030(IStrategy):
         0.020,
         default=0.011,
         decimals=3,
-        space="sell",
+        space="exit",
         optimize=is_optimize_trailing,
         load=True,
     )
@@ -264,7 +265,7 @@ class BB_RPB_TSL_c7c477d_20211030(IStrategy):
         0.100,
         default=0.080,
         decimals=3,
-        space="sell",
+        space="exit",
         optimize=is_optimize_trailing,
         load=True,
     )
@@ -273,7 +274,7 @@ class BB_RPB_TSL_c7c477d_20211030(IStrategy):
         0.070,
         default=0.040,
         decimals=3,
-        space="sell",
+        space="exit",
         optimize=is_optimize_trailing,
         load=True,
     )
@@ -652,7 +653,7 @@ class BB_RPB_TSL_c7c477d_20211030(IStrategy):
 
         if conditions:
             dataframe.loc[
-                is_btc_safe & reduce(lambda x, y: x | y, conditions), "buy"
+                is_btc_safe & reduce(lambda x, y: x | y, conditions), "entry"
             ] = 1
 
         return dataframe
@@ -681,6 +682,6 @@ class BB_RPB_TSL_c7c477d_20211030(IStrategy):
                 )
                 & (dataframe["volume"] > 0)  # Make sure Volume is not 0
             ),
-            "sell",
+            "exit",
         ] = 1
         return dataframe

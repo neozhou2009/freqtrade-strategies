@@ -1,11 +1,11 @@
 # --- Do not remove these libs ---
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 import numpy as np
 import talib.abstract as ta
 import pandas_ta as pta
 
 from freqtrade.persistence import Trade
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from pandas import DataFrame, Series, DatetimeIndex, merge
 from datetime import datetime, timedelta
 from freqtrade.strategy import merge_informative_pair, CategoricalParameter, DecimalParameter, IntParameter, stoploss_from_open
@@ -40,6 +40,7 @@ def williams_r(dataframe: DataFrame, period: int = 14) -> Series:
     return WR * -100
 
 class BB_RPB_TSL_RNG_2(IStrategy):
+    INTERFACE_VERSION = 3
     '''
         BB_RPB_TSL
         @author jilv220
@@ -111,7 +112,7 @@ class BB_RPB_TSL_RNG_2(IStrategy):
 
     # Custom stoploss
     use_custom_stoploss = True
-    use_sell_signal = True
+    use_exit_signal = True
 
     ############################################################################
 
@@ -157,26 +158,26 @@ class BB_RPB_TSL_RNG_2(IStrategy):
     buy_threshold = DecimalParameter(0.003, 0.012, default=0.008, optimize = is_optimize_btc_safe)
 
     # Buy params toggle
-    buy_is_dip_enabled = CategoricalParameter([True, False], default=True, space='buy', optimize=False, load=True)
-    buy_is_break_enabled = CategoricalParameter([True, False], default=True, space='buy', optimize=False, load=True)
+    buy_is_dip_enabled = CategoricalParameter([True, False], default=True, space='entry', optimize=False, load=True)
+    buy_is_break_enabled = CategoricalParameter([True, False], default=True, space='entry', optimize=False, load=True)
 
     ## Sell params
     sell_btc_safe = IntParameter(-400, -300, default=-365, optimize = True)
-    base_nb_candles_sell = IntParameter(5, 80, default=sell_params['base_nb_candles_sell'], space='sell', optimize=True)
-    high_offset          = DecimalParameter(0.95, 1.1, default=sell_params['high_offset'], space='sell', optimize=True)
-    high_offset_2        = DecimalParameter(0.99, 1.5, default=sell_params['high_offset_2'], space='sell', optimize=True)      
+    base_nb_candles_sell = IntParameter(5, 80, default=sell_params['base_nb_candles_sell'], space='exit', optimize=True)
+    high_offset          = DecimalParameter(0.95, 1.1, default=sell_params['high_offset'], space='exit', optimize=True)
+    high_offset_2        = DecimalParameter(0.99, 1.5, default=sell_params['high_offset_2'], space='exit', optimize=True)      
 
     ## Trailing params
 
     # hard stoploss profit
-    pHSL = DecimalParameter(-0.200, -0.040, default=-0.08, decimals=3, space='sell', load=True)
+    pHSL = DecimalParameter(-0.200, -0.040, default=-0.08, decimals=3, space='exit', load=True)
     # profit threshold 1, trigger point, SL_1 is used
-    pPF_1 = DecimalParameter(0.008, 0.020, default=0.016, decimals=3, space='sell', load=True)
-    pSL_1 = DecimalParameter(0.008, 0.020, default=0.011, decimals=3, space='sell', load=True)
+    pPF_1 = DecimalParameter(0.008, 0.020, default=0.016, decimals=3, space='exit', load=True)
+    pSL_1 = DecimalParameter(0.008, 0.020, default=0.011, decimals=3, space='exit', load=True)
 
     # profit threshold 2, SL_2 is used
-    pPF_2 = DecimalParameter(0.040, 0.100, default=0.080, decimals=3, space='sell', load=True)
-    pSL_2 = DecimalParameter(0.020, 0.070, default=0.040, decimals=3, space='sell', load=True)
+    pPF_2 = DecimalParameter(0.040, 0.100, default=0.080, decimals=3, space='exit', load=True)
+    pSL_2 = DecimalParameter(0.020, 0.070, default=0.040, decimals=3, space='exit', load=True)
 
     ############################################################################
 
@@ -445,7 +446,7 @@ class BB_RPB_TSL_RNG_2(IStrategy):
         dataframe.loc[is_nfi_33, 'buy_tag'] += 'nfi 33 '
 
         if conditions:
-            dataframe.loc[reduce(lambda x, y: x | y, conditions), 'buy' ] = 1
+            dataframe.loc[reduce(lambda x, y: x | y, conditions), 'entry' ] = 1
 
         return dataframe
 
@@ -475,7 +476,7 @@ class BB_RPB_TSL_RNG_2(IStrategy):
         if conditions:
             dataframe.loc[
                 reduce(lambda x, y: x | y, conditions),
-                'sell'
+                'exit'
             ]=1
 
         return dataframe

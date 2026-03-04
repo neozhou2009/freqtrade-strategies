@@ -1,14 +1,15 @@
 # --- Do not remove these libs ---
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from pandas import DataFrame
 import talib.abstract as ta
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 
 
 # --------------------------------
 
 
 class AwesomeMacd(IStrategy):
+    INTERFACE_VERSION = 3
     """
 
     author@: Gert Wohlgemuth
@@ -51,7 +52,7 @@ class AwesomeMacd(IStrategy):
                     (dataframe['ao'].shift() < 0)
 
             ),
-            'buy'] = 1
+            'entry'] = 1
         return dataframe
 
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
@@ -62,5 +63,5 @@ class AwesomeMacd(IStrategy):
                     (dataframe['ao'].shift() > 0)
 
             ),
-            'sell'] = 1
+            'exit'] = 1
         return dataframe

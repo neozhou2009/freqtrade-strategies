@@ -70,8 +70,8 @@ class BBands(IStrategy):
     startup_candle_count: int = 30
 
     # Strategy parameters
-    buy_rsi = IntParameter(10, 40, default=30, space="buy")
-    sell_rsi = IntParameter(60, 90, default=70, space="sell")
+    buy_rsi = IntParameter(10, 40, default=30, space="entry")
+    sell_rsi = IntParameter(60, 90, default=70, space="exit")
 
     # Optional order type mapping.
     order_types = {
@@ -353,7 +353,7 @@ class BBands(IStrategy):
                 (dataframe['tema'] > dataframe['tema'].shift(1)) &  # Guard: tema is rising
                 (dataframe['volume'] > 0)  # Make sure Volume is not 0
             ),
-            'buy'] = 1
+            'entry'] = 1
 
         return dataframe
 
@@ -370,7 +370,7 @@ class BBands(IStrategy):
                 (dataframe['tema'] < dataframe['tema'].shift(1)) &  # Guard: tema is falling
                 (dataframe['volume'] > 0)  # Make sure Volume is not 0
             ),
-            'sell'] = 1
+            'exit'] = 1
             
         return dataframe
     

@@ -1,15 +1,16 @@
 # --- Do not remove these libs ---
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from pandas import DataFrame
 import talib.abstract as ta
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 
 
 # --------------------------------
 
 
 class ADX_15M_USDT2(IStrategy):
-    ticker_interval = '15m'
+    INTERFACE_VERSION = 3
+    timeframe = '15m'
 
     # ROI table:
     minimal_roi = {
@@ -46,7 +47,7 @@ class ADX_15M_USDT2(IStrategy):
                     (qtpylib.crossed_above(dataframe['minus_di'], dataframe['plus_di']))
 
             ),
-            'buy'] = 1
+            'entry'] = 1
         return dataframe
 
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
@@ -59,6 +60,6 @@ class ADX_15M_USDT2(IStrategy):
                     (qtpylib.crossed_above(dataframe['sell-plus_di'], dataframe['sell-minus_di']))
 
             ),
-            'sell'] = 1
+            'exit'] = 1
         return dataframe
 

@@ -1,8 +1,8 @@
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from typing import Dict, List
 from functools import reduce
 from pandas import DataFrame
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 import talib.abstract as ta
 
 __author__       = "Robert Roman"
@@ -16,8 +16,9 @@ __BTC_donation__ = "3FgFaG15yntZYSUzfEpxr5mDt1RArvcQrK"
 # Optimized With Sortino Ratio and 2 years data
 
 class macd_recovery(IStrategy):
+    INTERFACE_VERSION = 3
 
-    ticker_interval = '5m'
+    timeframe = '5m'
 
     # ROI table:
     minimal_roi = {
@@ -60,7 +61,7 @@ class macd_recovery(IStrategy):
                     (dataframe['close'] > dataframe['ema200']) &
                     (qtpylib.crossed_above(dataframe['macd'], dataframe['macdsignal']))
             ),
-            'buy'] = 1
+            'entry'] = 1
 
         return dataframe
 
@@ -71,6 +72,6 @@ class macd_recovery(IStrategy):
                     (dataframe['macd'] > 0) &
                     (qtpylib.crossed_below(dataframe['macd'], dataframe['macdsignal']))
             ),
-            'sell'] = 1
+            'exit'] = 1
 
         return dataframe

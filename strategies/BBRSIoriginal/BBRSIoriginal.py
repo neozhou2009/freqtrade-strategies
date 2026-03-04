@@ -4,11 +4,12 @@ import talib.abstract as ta
 import pandas
 from pandas import DataFrame
 
-import freqtrade.vendor.qtpylib.indicators as qtpylib
-from freqtrade.strategy.interface import IStrategy
+from technical import qtpylib
+from freqtrade.strategy import IStrategy
 pandas.set_option("display.precision",8)
 
 class BBRSIoriginal(IStrategy):
+    INTERFACE_VERSION = 3
     """
     Default Strategy provided by freqtrade bot.
     You can override it with your own strategy
@@ -26,20 +27,20 @@ class BBRSIoriginal(IStrategy):
     stoploss = -0.36828
 
     # Optimal ticker interval for the strategy
-    ticker_interval = '1h'
+    timeframe = '1h'
 
     # Optional order type mapping
     order_types = {
-        'buy': 'limit',
-        'sell': 'limit',
+        'entry': 'limit',
+        'exit': 'limit',
         'stoploss': 'limit',
         'stoploss_on_exchange': False
     }
 
     # Optional time in force for orders
     order_time_in_force = {
-        'buy': 'gtc',
-        'sell': 'gtc',
+        'entry': 'gtc',
+        'exit': 'gtc',
     }
 
     def populate_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
@@ -89,7 +90,7 @@ class BBRSIoriginal(IStrategy):
                 #(dataframe['rsi'] > 12) &
                 (dataframe["close"] < dataframe['bb_lowerband3'] )
             ),
-            'buy'] = 1
+            'entry'] = 1
         return dataframe
 
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
@@ -105,6 +106,6 @@ class BBRSIoriginal(IStrategy):
                 (dataframe['rsi'] > 75) &
                 (dataframe["close"] > dataframe['bb_middleband'] )
             ),
-            'sell'] = 1
+            'exit'] = 1
 
         return dataframe

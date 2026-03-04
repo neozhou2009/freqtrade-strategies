@@ -1,8 +1,8 @@
 # --- Do not remove these libs ---
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from pandas import DataFrame
 import talib.abstract as ta
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 
 
 # --------------------------------
@@ -13,6 +13,7 @@ from functools import reduce
 
 
 class BBRSIv2(IStrategy):
+    INTERFACE_VERSION = 3
     """
     author@: Gert Wohlgemuth
     converted from:
@@ -31,10 +32,10 @@ class BBRSIv2(IStrategy):
     stoploss = -0.10
     
     process_only_new_candles = True  
-    use_sell_signal = True
-    sell_profit_only = True
+    use_exit_signal = True
+    exit_profit_only = True
     sell_profit_offset= 0.01
-    ignore_roi_if_buy_signal = False    
+    ignore_roi_if_entry_signal = False    
     use_custom_stoploss = True
   
 
@@ -136,7 +137,7 @@ class BBRSIv2(IStrategy):
                            #is_additional_check & 
                            #can_buy &
                            #is_live_data & 
-                           reduce(lambda x, y: x | y, conditions),'buy'] = 1
+                           reduce(lambda x, y: x | y, conditions),'entry'] = 1
         return dataframe
 
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
@@ -158,7 +159,7 @@ class BBRSIv2(IStrategy):
                           
                            #can_sell &
                            #is_live_data & 
-                           reduce(lambda x, y: x | y, conditions),'sell'] = 1
+                           reduce(lambda x, y: x | y, conditions),'exit'] = 1
 
         
 

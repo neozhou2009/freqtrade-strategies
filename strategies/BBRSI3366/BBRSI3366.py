@@ -1,14 +1,15 @@
 # --- Do not remove these libs ---
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from pandas import DataFrame
 import talib.abstract as ta
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 
 
 # --------------------------------
 
 
 class BBRSI3366(IStrategy):
+    INTERFACE_VERSION = 3
     """
 
     author@: Gert Wohlgemuth
@@ -74,7 +75,7 @@ class BBRSI3366(IStrategy):
               #  (dataframe['adx'] > 25) &
                 (dataframe['rsi'] < 33)
             ),
-            'buy'] = 1
+            'entry'] = 1
 
         return dataframe
 
@@ -103,5 +104,5 @@ class BBRSI3366(IStrategy):
           #      )) &
           #      (dataframe['fastd'] > 54)
             ),
-            'sell'] = 1
+            'exit'] = 1
         return dataframe

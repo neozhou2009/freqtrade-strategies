@@ -1,8 +1,8 @@
 # --- Do not remove these libs ---
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from pandas import DataFrame, Series
 import talib.abstract as ta
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 import numpy as np
 from freqtrade.strategy import DecimalParameter, IntParameter, stoploss_from_open
 from datetime import datetime, timedelta
@@ -30,7 +30,7 @@ def moderi(dataframe: DataFrame, len_slow_ma: int = 32) -> Series:
     return slow_ma >= slow_ma.shift(1)  # we just need true & false for ERI trend
 
 class BBRSITV(IStrategy):
-    INTERFACE_VERSION = 2
+    INTERFACE_VERSION = 3
 
     # Buy hyperspace params:
     buy_params = {
@@ -61,10 +61,10 @@ class BBRSITV(IStrategy):
     trailing_only_offset_is_reached = True  # value loaded from strategy
 
     # Sell signal
-    use_sell_signal = True
-    sell_profit_only = True
+    use_exit_signal = True
+    exit_profit_only = True
     sell_profit_offset = 0.01
-    ignore_roi_if_buy_signal = False
+    ignore_roi_if_entry_signal = False
     process_only_new_candles = True
     startup_candle_count = 30
 
@@ -99,12 +99,12 @@ class BBRSITV(IStrategy):
         },
     ]
 
-    ewo_high = DecimalParameter(0, 7.0, default=buy_params['ewo_high'], space='buy', optimize=True)
-    for_sigma = DecimalParameter(0, 10.0, default=buy_params['for_sigma'], space='buy', optimize=True)
-    for_sigma_sell = DecimalParameter(0, 10.0, default=sell_params['for_sigma_sell'], space='sell', optimize=True)
-    rsi_high = IntParameter(60, 100, default=sell_params['rsi_high'], space='sell', optimize=True)
-    for_ma_length = IntParameter(5, 80, default=buy_params['for_ma_length'], space='buy', optimize=True)
-    for_ma_length_sell = IntParameter(5, 80, default=sell_params['for_ma_length_sell'], space='sell', optimize=True)
+    ewo_high = DecimalParameter(0, 7.0, default=buy_params['ewo_high'], space='entry', optimize=True)
+    for_sigma = DecimalParameter(0, 10.0, default=buy_params['for_sigma'], space='entry', optimize=True)
+    for_sigma_sell = DecimalParameter(0, 10.0, default=sell_params['for_sigma_sell'], space='exit', optimize=True)
+    rsi_high = IntParameter(60, 100, default=sell_params['rsi_high'], space='exit', optimize=True)
+    for_ma_length = IntParameter(5, 80, default=buy_params['for_ma_length'], space='entry', optimize=True)
+    for_ma_length_sell = IntParameter(5, 80, default=sell_params['for_ma_length_sell'], space='exit', optimize=True)
 
     # Optimal timeframe for the strategy
     timeframe = '5m'
@@ -201,7 +201,7 @@ class BBRSITV(IStrategy):
                 (dataframe['volume'] > 0)
 
             ),
-            'buy'] = 1
+            'entry'] = 1
         return dataframe
 
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
@@ -218,14 +218,14 @@ class BBRSITV(IStrategy):
                 (dataframe['volume'] > 0)
 
             ),
-            'sell'] = 1
+            'exit'] = 1
         return dataframe
 
 class BBRSITV4(BBRSITV):
     minimal_roi = {
         "0": 0.07
     }
-    ignore_roi_if_buy_signal = True
+    ignore_roi_if_entry_signal = True
     startup_candle_count = 400
 
     stoploss = -0.3  # value loaded from strategy
@@ -255,7 +255,7 @@ class BBRSITV4(BBRSITV):
                 # &
                 # (dataframe["roc_bbwidth_max"] < 70)
             ),
-            'buy'] = 1
+            'entry'] = 1
 
         return dataframe
 
@@ -270,7 +270,7 @@ class BBRSITV1(BBRSITV):
 |               BBRSITV |    309 |           1.10 |         340.17 |          3869.800 |         128.99 |        2:53:00 |   223     0    86  72.2 |  261.984 USDT  25.84% |
 ============================================================================================================================================================================
     """
-    INTERFACE_VERSION = 2
+    INTERFACE_VERSION = 3
 
     # Buy hyperspace params:
     buy_params = {
@@ -351,7 +351,7 @@ class BBRSITV3(BBRSITV):
     | SMAOffsetProtectOptV1 |    417 |           1.33 |         555.91 |          8423.809 |         280.79 |        1:44:00 |   300     0   117  71.9 | 1056.072 USDT   61.08% |
     |               BBRSITV |    627 |           1.14 |         715.85 |         12998.605 |         433.29 |        5:35:00 |   374     0   253  59.6 | 2294.408 USDT  100.60% |
     ============================================================================================================================================================================="""
-    INTERFACE_VERSION = 2
+    INTERFACE_VERSION = 3
 
     # Buy hyperspace params:
     buy_params = {
@@ -385,7 +385,7 @@ class BBRSITV5(BBRSITV):
     minimal_roi = {
         "0": 0.04
     }
-    ignore_roi_if_buy_signal = True
+    ignore_roi_if_entry_signal = True
     startup_candle_count = 400
     use_custom_stoploss = True
 
@@ -400,14 +400,14 @@ class BBRSITV5(BBRSITV):
     }
     
     is_optimize_trailing = True
-    pHSL = DecimalParameter(-0.200, -0.040, default=-0.08, decimals=3, space='sell', optimize=is_optimize_trailing , load=True)
+    pHSL = DecimalParameter(-0.200, -0.040, default=-0.08, decimals=3, space='exit', optimize=is_optimize_trailing , load=True)
     # profit threshold 1, trigger point, SL_1 is used
-    pPF_1 = DecimalParameter(0.008, 0.020, default=0.016, decimals=3, space='sell', optimize=is_optimize_trailing , load=True)
-    pSL_1 = DecimalParameter(0.008, 0.020, default=0.011, decimals=3, space='sell', optimize=is_optimize_trailing , load=True)
+    pPF_1 = DecimalParameter(0.008, 0.020, default=0.016, decimals=3, space='exit', optimize=is_optimize_trailing , load=True)
+    pSL_1 = DecimalParameter(0.008, 0.020, default=0.011, decimals=3, space='exit', optimize=is_optimize_trailing , load=True)
 
     # profit threshold 2, SL_2 is used
-    pPF_2 = DecimalParameter(0.040, 0.100, default=0.080, decimals=3, space='sell', optimize=is_optimize_trailing , load=True)
-    pSL_2 = DecimalParameter(0.020, 0.070, default=0.040, decimals=3, space='sell', optimize=is_optimize_trailing , load=True)
+    pPF_2 = DecimalParameter(0.040, 0.100, default=0.080, decimals=3, space='exit', optimize=is_optimize_trailing , load=True)
+    pSL_2 = DecimalParameter(0.020, 0.070, default=0.040, decimals=3, space='exit', optimize=is_optimize_trailing , load=True)
 
     def custom_stoploss(self, pair: str, trade: 'Trade', current_time: datetime,
                         current_rate: float, current_profit: float, **kwargs) -> float:
@@ -461,6 +461,6 @@ class BBRSITV5(BBRSITV):
                 # &
                 # (dataframe["roc_bbwidth_max"] < 70)
             ),
-            'buy'] = 1
+            'entry'] = 1
 
         return dataframe
