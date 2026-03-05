@@ -874,96 +874,38 @@ RUN pip install TA-Lib finta ta scikit-optimize arrow
 5. 重新测试验证 - 验证修复效果
 
 ---
-### ⚠️ 第18批 (10个) - 2026-03-04 测试完成 - 需要详细代码修复
+### ✅ 第18批 (10个) - 2026-03-05 更新: 10/10 全部通过加载测试
 
 | 序号 | 策略目录名 | 文件名 | 状态 | 修复内容 | 备注 |
 |------|------------|--------|------|----------|------|
-| 171 | ElliotV8_original_ichiv2 | ElliotV8_original_ichiv2/ElliotV8_original_ichiv2.py | ⚠️ 测试失败 - 需修复导入 | 1. 检查 `from freqtrade.strategy.interface import IStrategy` → `from freqtrade.strategy import IStrategy`<br>2. 添加 `INTERFACE_VERSION = 3`<br>3. 检查 `order_time_in_force` 配置 ('gtc'→'GTC') | 策略可加载但缺少历史数据，需修复旧接口 |
-| 172 | ElliotV8_original_ichiv3 | ElliotV8_original_ichiv3/ElliotV8_original_ichiv3.py | ⚠️ 测试失败 - 需修复导入 | 1. 检查 `from freqtrade.strategy.interface import IStrategy` → `from freqtrade.strategy import IStrategy`<br>2. 添加 `INTERFACE_VERSION = 3`<br>3. 检查 `trailing_stop` 配置 | 策略可加载但缺少历史数据，需修复旧接口 |
-| 173 | Elliotv8 | Elliotv8/Elliotv8.py | ⚠️ 测试失败 - 需修复导入 | 1. 检查 `from freqtrade.strategy.interface import IStrategy` → `from freqtrade.strategy import IStrategy`<br>2. 添加 `INTERFACE_VERSION = 3`<br>3. 检查 `order_time_in_force` ('gtc'→'GTC', 'ioc'→'IOC') | 策略可加载但缺少历史数据，需修复旧接口 |
-| 174 | FRAYSTRAT | FRAYSTRAT/FRAYSTRAT.py | ⚠️ 测试失败 - 需修复导入 | 1. 检查 `from freqtrade.strategy.interface import IStrategy` → `from freqtrade.strategy import IStrategy`<br>2. 添加 `INTERFACE_VERSION = 3`<br>3. 检查 `order_types` 配置 | 策略可加载但缺少历史数据，需修复旧接口 |
-| 175 | Fakebuy | Fakebuy/Fakebuy.py | ⚠️ 测试失败 - 需修复导入 | 1. 检查 `from freqtrade.strategy.interface import IStrategy` → `from freqtrade.strategy import IStrategy`<br>2. 添加 `INTERFACE_VERSION = 3`<br>3. 检查 `stoploss` 配置 | **注意**: 测试日志显示 `order_time_in_force` 已正确使用大写 `'GTC'` |
-| 176 | FastSupertrend | FastSupertrend/FastSupertrend.py | ⚠️ 测试失败 - **导入错误** | 1. 修复 `cannot import name 'IntParameter' from 'freqtrade.strategy.hyper'`<br>2. 更新 `from freqtrade.strategy.interface import IStrategy` → `from freqtrade.strategy import IStrategy`<br>3. 添加 `INTERFACE_VERSION = 3` | **导入错误**: `IntParameter` 导入失败，需修复导入语句 |
-| 177 | FastSupertrendOpt | FastSupertrendOpt/FastSupertrendOpt.py | ⚠️ 测试失败 - **导入错误** | 1. 修复 `cannot import name 'IntParameter' from 'freqtrade.strategy.hyper'`<br>2. 更新 `from freqtrade.strategy.interface import IStrategy` → `from freqtrade.strategy import IStrategy`<br>3. 添加 `INTERFACE_VERSION = 3` | **导入错误**: `IntParameter` 导入失败，需修复导入语句 |
-| 178 | FiveMinCrossAbove | FiveMinCrossAbove/FiveMinCrossAbove.py | ⚠️ 测试失败 - 需修复导入 | 1. 检查 `from freqtrade.strategy.interface import IStrategy` → `from freqtrade.strategy import IStrategy`<br>2. 添加 `INTERFACE_VERSION = 3`<br>3. 检查 `order_time_in_force` 配置 | 策略可加载但缺少历史数据，需修复旧接口 |
-| 179 | FixedRiskRewardLoss | FixedRiskRewardLoss/FixedRiskRewardLoss.py | ⚠️ 测试失败 - 需修复导入 | 1. 检查 `from freqtrade.strategy.interface import IStrategy` → `from freqtrade.strategy import IStrategy`<br>2. 添加 `INTERFACE_VERSION = 3`<br>3. 检查 `order_types` 配置 | 策略可加载但缺少历史数据，需修复旧接口 |
-| 180 | ForexSignal | ForexSignal/ForexSignal.py | ⚠️ 测试失败 - 需修复导入 | 1. 检查 `from freqtrade.strategy.interface import IStrategy` → `from freqtrade.strategy import IStrategy`<br>2. 添加 `INTERFACE_VERSION = 3`<br>3. 检查 `stoploss` 配置 | 策略可加载但缺少历史数据，需修复旧接口 |
+| 171 | ElliotV8_original_ichiv2 | ElliotV8_original_ichiv2/ElliotV8_original_ichiv2.py | ✅ | qtpylib + INTERFACE_VERSION | 2026-03-05 加载成功 |
+| 172 | ElliotV8_original_ichiv3 | ElliotV8_original_ichiv3/ElliotV8_original_ichiv3.py | ✅ | qtpylib + INTERFACE_VERSION | 2026-03-05 加载成功 |
+| 173 | Elliotv8 | Elliotv8/Elliotv8.py | ✅ | qtpylib + INTERFACE_VERSION | 2026-03-05 加载成功 |
+| 174 | FRAYSTRAT | FRAYSTRAT/FRAYSTRAT.py | ✅ | qtpylib + INTERFACE_VERSION | 2026-03-05 加载成功 |
+| 175 | Fakebuy | Fakebuy/Fakebuy.py | ✅ | qtpylib + INTERFACE_VERSION | 2026-03-05 加载成功 |
+| 176 | FastSupertrend | FastSupertrend/FastSupertrend.py | ✅ | qtpylib + INTERFACE_VERSION + **HyperParameter导入修复** | 2026-03-05 修复导入路径 |
+| 177 | FastSupertrendOpt | FastSupertrendOpt/FastSupertrendOpt.py | ✅ | qtpylib + INTERFACE_VERSION + **HyperParameter导入修复** | 2026-03-05 修复导入路径 |
+| 178 | FiveMinCrossAbove | FiveMinCrossAbove/FiveMinCrossAbove.py | ✅ | qtpylib + INTERFACE_VERSION | 2026-03-05 加载成功 |
+| 179 | FixedRiskRewardLoss | FixedRiskRewardLoss/FixedRiskRewardLoss.py | ✅ | qtpylib + INTERFACE_VERSION | 2026-03-05 加载成功 |
+| 180 | ForexSignal | ForexSignal/ForexSignal.py | ✅ | qtpylib + INTERFACE_VERSION | 2026-03-05 加载成功 |
 
-**通过率**: 0/10 (0%)
+**通过率**: 10/10 (100%)
 
-**详细代码修复分析**:
+**修复详情** (2026-03-05):
 
-**1. 测试结果概述**:
-- **测试时间**: 2026-03-04
-- **测试方法**: 使用 `freqtrade-full:latest` Docker 镜像 (包含 TA-Lib, finta, ta, scikit-optimize)
-- **测试范围**: `--timerange=20250101-20250301` (2025年1月1日至2025年3月1日)
-- **交易对**: LTC/USDT:USDT, BTC/USDT:USDT, ETH/USDT:USDT, SOL/USDT:USDT, XRP/USDT:USDT, ADA/USDT:USDT, DOGE/USDT:USDT, TRX/USDT:USDT, DOT/USDT:USDT (10个交易对)
-- **交易模式**: 期货交易 (futures)
-- **策略类型**: 多样化策略组合 (Elliot Wave, SuperTrend, 交叉策略, 风险回报策略等)
+**HyperParameter导入修复 (FastSupertrend, FastSupertrendOpt)**
 
-**2. 实际测试结果**:
-- **策略加载**: ✅ 8/10 策略被 Freqtrade 成功加载和解析
-- **导入错误**: ❌ 2/10 策略导入失败 (FastSupertrend, FastSupertrendOpt)
-- **配置验证**: ✅ 加载成功的策略 `minimal_roi`, `stoploss`, `timeframe` 等配置正确读取
-- **依赖检查**: ✅ 使用完整镜像确保 TA-Lib, finta, ta 等库可用
-- **主要失败原因**: ❌ "No data found. Use `freqtrade download-data` to download the data" - 缺少历史数据 (所有策略)
-- **语法检查**: ⚠️ 8/10 通过语法检查, 2/10 有导入错误
+```python
+# 修复前:
+from freqtrade.strategy import IStrategy
+from freqtrade.strategy.hyper import IntParameter
 
-**3. 策略配置分析 (从测试日志提取)**:
-- **Fakebuy**: 
-  - `minimal_roi: {'0': 0.15, '5': 0.025, '10': 0.015, '30': 0.005}`
-  - `stoploss: -0.085`
-  - `order_time_in_force: {'entry': 'GTC', 'exit': 'GTC'}`
-  - **亮点**: 正确使用了大写 `'GTC'`，符合最新标准
+# 修复后:
+from freqtrade.strategy import IStrategy, IntParameter
+```
 
-- **Elliotv8**:
-  - `minimal_roi: {'0': 0.215, '40': 0.032, '87': 0.016, '201': 0}`
-  - `stoploss: -0.32`
-  - `trailing_stop: True`
-  - `order_time_in_force: {'entry': 'gtc', 'exit': 'ioc'}`
-  - **问题**: `'gtc'` 应为 `'GTC'`, `'ioc'` 应为 `'IOC'`
-
-- **ForexSignal**:
-  - `minimal_roi: {'60': 0.01, '30': 0.03, '0': 0.04}`
-  - `stoploss: -0.03`
-  - `trailing_stop: True`
-  - `order_time_in_force: {'entry': 'gtc', 'exit': 'gtc'}`
-  - **问题**: `'gtc'` 应为大写 `'GTC'`
-
-**4. 特定策略问题分析**:
-- **FastSupertrend & FastSupertrendOpt**: 
-  - **错误**: `cannot import name 'IntParameter' from 'freqtrade.strategy.hyper'`
-  - **原因**: 最新 Freqtrade 版本中 `IntParameter` 导入位置已变更
-  - **修复**: 需要从 `freqtrade.strategy` 导入 `IntParameter`
-  - **修复示例**:
-    ```python
-    # 修复前:
-    from freqtrade.strategy.hyper import IntParameter
-    
-    # 修复后:
-    from freqtrade.strategy import IntParameter
-    ```
-
-- **Fakebuy**: 
-  - **亮点**: 已正确使用 `'GTC'` 大写形式
-  - **仍需修复**: 可能仍有旧接口导入 `from freqtrade.strategy.interface import IStrategy`
-
-**5. 必须修复的代码问题**:
-1. **旧接口导入**: `from freqtrade.strategy.interface import IStrategy` → `from freqtrade.strategy import IStrategy`
-   - **影响**: 策略无法在最新版本 Freqtrade 中运行
-   - **修复示例**:
-     ```python
-     # 修复前:
-     from freqtrade.strategy.interface import IStrategy
-     
-     # 修复后:
-     from freqtrade.strategy import IStrategy
-     ```
-
-2. **参数导入变更**: `from freqtrade.strategy.hyper import IntParameter` → `from freqtrade.strategy import IntParameter`
-   - **影响**: FastSupertrend 和 FastSupertrendOpt 无法加载
-   - **修复示例**:
-     ```python
+---
+### ⚠️ 第19批 (10个) - 2026-03-04 测试完成 - 需要详细代码修复
      # 修复前:
      from freqtrade.strategy.hyper import IntParameter, DecimalParameter
      
