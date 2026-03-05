@@ -233,9 +233,10 @@ class MultiMA_TSL(IStrategy):
             * self.low_offset_trima.value
         )
 
-        dataframe.loc[:, "buy_tag"] = ""
-        dataframe.loc[:, "buy_copy"] = 0
-        dataframe.loc[:, "buy"] = 0
+        # 初始化列 - 使用直接赋值避免 pandas SettingWithCopyWarning
+        dataframe["buy_tag"] = ""
+        dataframe["buy_copy"] = 0
+        dataframe["buy"] = 0
 
         buy_offset_trima = (
             self.buy_condition_trima_enable.value
@@ -248,7 +249,10 @@ class MultiMA_TSL(IStrategy):
                 )
             )
         )
-        dataframe.loc[buy_offset_trima, "buy_tag"] += "trima "
+        # 使用 assign 方法避免 inplace 操作问题
+        dataframe.loc[buy_offset_trima, "buy_tag"] = dataframe.loc[
+            buy_offset_trima, "buy_tag"
+        ].apply(lambda x: x + "trima ")
         conditions.append(buy_offset_trima)
 
         buy_offset_zema = (
@@ -262,7 +266,9 @@ class MultiMA_TSL(IStrategy):
                 )
             )
         )
-        dataframe.loc[buy_offset_zema, "buy_tag"] += "zema "
+        dataframe.loc[buy_offset_zema, "buy_tag"] = dataframe.loc[
+            buy_offset_zema, "buy_tag"
+        ].apply(lambda x: x + "zema ")
         conditions.append(buy_offset_zema)
 
         add_check = (
@@ -272,15 +278,15 @@ class MultiMA_TSL(IStrategy):
         )
 
         if conditions:
-            dataframe.loc[
-                (add_check & reduce(lambda x, y: x | y, conditions)),
-                ["buy_copy", "buy"],
-            ] = (1, 1)
+            condition_mask = add_check & reduce(lambda x, y: x | y, conditions)
+            dataframe.loc[condition_mask, "buy_copy"] = 1
+            dataframe.loc[condition_mask, "buy"] = 1
 
         return dataframe
 
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
-        dataframe.loc[:, "sell_copy"] = 0
+        # 初始化列 - 使用直接赋值避免 pandas SettingWithCopyWarning
+        dataframe["sell_copy"] = 0
 
         dataframe["ema_offset_sell"] = (
             ta.EMA(dataframe, int(self.base_nb_candles_sell.value))
@@ -308,12 +314,12 @@ class MultiMA_TSL(IStrategy):
         )
 
         if conditions:
-            dataframe.loc[
-                reduce(lambda x, y: x | y, conditions), ["sell_copy", "sell"]
-            ] = (1, 1)
+            condition_mask = reduce(lambda x, y: x | y, conditions)
+            dataframe.loc[condition_mask, "sell_copy"] = 1
+            dataframe.loc[condition_mask, "sell"] = 1
 
         if not self.config["runmode"].value in ("backtest", "hyperopt"):
-            dataframe.loc[:, "sell"] = 0
+            dataframe["sell"] = 0
 
         return dataframe
 

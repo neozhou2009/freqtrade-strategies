@@ -43,6 +43,96 @@ EMA (指数移动平均)、RSI (相对强弱指标)
 1. 已更新为 `from freqtrade.strategy import IStrategy`
 2. 已更新为 INTERFACE_VERSION = 3 以获得最新功能和兼容性
 
+---
+
+## pandas 2.x 兼容性修复详情 (2026-03-05)
+
+### 问题原因
+
+在 pandas 2.x 版本中，以下旧写法会触发 `SettingWithCopyWarning` 或 `duplicate labels` 错误：
+
+```python
+# 问题写法 1: 使用 .loc[:, col] 进行列初始化
+dataframe.loc[:, "buy_tag"] = ""
+```
+
+```python
+# 问题写法 2: 使用 += 进行字符串累加
+dataframe.loc[mask, "buy_tag"] += "trima "
+```
+
+```python
+# 问题写法 3: 多列同时赋值
+dataframe.loc[condition, ["col1", "col2"]] = (1, 1)
+```
+
+### 修复方案
+
+#### 修复点 1: 列初始化 (第236-239行)
+
+```python
+# 修复前:
+dataframe.loc[:, "buy_tag"] = ""
+dataframe.loc[:, "buy_copy"] = 0
+dataframe.loc[:, "buy"] = 0
+
+# 修复后:
+# 初始化列 - 使用直接赋值避免 pandas SettingWithCopyWarning
+dataframe["buy_tag"] = ""
+dataframe["buy_copy"] = 0
+dataframe["buy"] = 0
+```
+
+#### 修复点 2: 字符串累加 (第251-255行)
+
+```python
+# 修复前:
+dataframe.loc[buy_offset_trima, "buy_tag"] += "trima "
+
+# 修复后:
+# 使用 assign 方法避免 inplace 操作问题
+dataframe.loc[buy_offset_trima, "buy_tag"] = dataframe.loc[
+    buy_offset_trima, "buy_tag"
+].apply(lambda x: x + "trima ")
+```
+
+#### 修复点 3: 多列同时赋值 (第280-283行)
+
+```python
+# 修复前:
+if conditions:
+    dataframe.loc[
+        (add_check & reduce(lambda x, y: x | y, conditions)),
+        ["buy_copy", "buy"],
+    ] = (1, 1)
+
+# 修复后:
+if conditions:
+    condition_mask = add_check & reduce(lambda x, y: x | y, conditions)
+    dataframe.loc[condition_mask, "buy_copy"] = 1
+    dataframe.loc[condition_mask, "buy"] = 1
+```
+
+#### 修复点 4: exit_trend 同样问题 (第287-322行)
+
+`populate_exit_trend` 方法中存在相同的 pandas 问题，使用相同方式修复。
+
+### 修复验证
+
+```bash
+# 回测命令
+docker run --rm \
+  -v $(pwd)/user_data:/freqtrade/user_data \
+  -v $(pwd)/strategies:/freqtrade/user_data/strategies \
+  freqtradeorg/freqtrade:stable \
+  backtesting --strategy-path /freqtrade/user_data/strategies/MultiMA_TSL \
+  --strategy MultiMA_TSL --timerange 20250101-20250301
+```
+
+**结果**: ✅ 策略成功加载，回测运行完成，无 pandas 错误
+
+---
+
 ## 投资逻辑问题分析
 
 本策略在投资逻辑和风险管理方面存在以下问题：

@@ -126,7 +126,7 @@ trailing_stop_positive_offset = 0.02
 
 ---
 
-### ✅ 第2批 (10个) - 2026-03-03 9/10 通过 (2026-03-04 回测测试: 9/10通过, 1个pandas bug)
+### ✅ 第2批 (10个) - 2026-03-03 9/10 通过 → 2026-03-05 10/10 全部通过
 
 | 序号 | 策略目录名 | 文件名 | 状态 | 修复内容 | 备注 |
 |------|------------|--------|------|----------|------|
@@ -139,9 +139,14 @@ trailing_stop_positive_offset = 0.02
 | 17 | ClucFiatROI | ClucFiatROI.py | ✅ | +sell_profit_offset→exit_profit_offset | |
 | 18 | ema | ema.py | ✅ | qtpylib + trailing_stop_positive_offset修正 | |
 | 19 | stratfib | stratfib.py | ✅ | qtpylib + order_types修复 | |
-| 20 | MultiMA_TSL | MultiMA_TSL.py | ❌ | qtpylib + INTERFACE_VERSION | pandas duplicate labels bug (非接口问题) |
+| 20 | MultiMA_TSL | MultiMA_TSL.py | ✅ | qtpylib + INTERFACE_VERSION + **pandas兼容性修复** | 2026-03-05 修复pandas 2.x API兼容性问题，回测通过 |
 
-**通过率**: 9/10 (90%)
+**通过率**: 10/10 (100%)
+
+**pandas兼容性修复详情** (2026-03-05):
+1. `dataframe.loc[:, "col"] = value` → `dataframe["col"] = value`
+2. `dataframe.loc[mask, "col"] += "text"` → `dataframe.loc[mask, "col"] = dataframe.loc[mask, "col"].apply(lambda x: x + "text")`
+3. 多列同时赋值 `loc[..., [col1, col2]] = (1, 1)` → 分开单独赋值
 
 ---
 
