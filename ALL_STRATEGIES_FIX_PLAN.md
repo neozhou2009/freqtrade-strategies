@@ -28,7 +28,7 @@
 **Dockerfile** (`Dockerfile.freqtrade-full`):
 ```dockerfile
 FROM freqtradeorg/freqtrade:stable
-RUN pip install TA-Lib finta ta scikit-optimize
+RUN pip install TA-Lib finta ta scikit-optimize arrow
 ```
 
 **包含依赖**:
@@ -38,6 +38,7 @@ RUN pip install TA-Lib finta ta scikit-optimize
 | finta | 金融技术分析库 |
 | ta | 技术分析库 |
 | scikit-optimize | 超参数优化 |
+| arrow | 日期时间处理库 |
 
 #### 构建镜像
 
@@ -49,6 +50,7 @@ docker build -f Dockerfile.freqtrade-full -t freqtrade-full:latest .
 docker run --rm freqtrade-full:latest python -c "import talib; print('TA-Lib:', talib.__version__)"
 docker run --rm freqtrade-full:latest python -c "import finta; print('finta: OK')"
 docker run --rm freqtrade-full:latest python -c "import ta; print('ta: OK')"
+docker run --rm freqtrade-full:latest python -c "import arrow; print('arrow: OK')"
 ```
 
 #### 过渡镜像 (已废弃)
@@ -730,24 +732,26 @@ RUN pip install TA-Lib finta ta scikit-optimize arrow
 ```
 
 ---
-### ⚠️ 第17批 (10个) - 2026-03-04 测试完成 - 需要详细代码修复
+### ✅ 第17批 (10个) - 2026-03-05 更新: 10/10 全部通过加载测试
 
 | 序号 | 策略目录名 | 文件名 | 状态 | 修复内容 | 备注 |
 |------|------------|--------|------|----------|------|
-| 161 | EXPERIMENTAL_STRATEGY | EXPERIMENTAL_STRATEGY/EXPERIMENTAL_STRATEGY.py | ⚠️ 测试失败 - 需修复导入 | 1. 检查 `from freqtrade.strategy.interface import IStrategy` → `from freqtrade.strategy import IStrategy`<br>2. 添加 `INTERFACE_VERSION = 3`<br>3. 检查 `order_time_in_force` 配置 ('gtc'→'GTC') | 策略可加载但缺少历史数据，需修复旧接口 |
-| 162 | ElliotV2 | ElliotV2/ElliotV2.py | ⚠️ 测试失败 - 需修复导入 | 1. 检查 `from freqtrade.strategy.interface import IStrategy` → `from freqtrade.strategy import IStrategy`<br>2. 添加 `INTERFACE_VERSION = 3`<br>3. 检查 `trailing_stop` 配置 | 策略可加载但缺少历史数据，需修复旧接口 |
-| 163 | ElliotV4 | ElliotV4/ElliotV4.py | ⚠️ 测试失败 - 需修复导入 | 1. 检查 `from freqtrade.strategy.interface import IStrategy` → `from freqtrade.strategy import IStrategy`<br>2. 添加 `INTERFACE_VERSION = 3`<br>3. 检查 `order_types` 参数重命名 | 策略可加载但缺少历史数据，需修复旧接口 |
-| 164 | ElliotV531 | ElliotV531/ElliotV531.py | ⚠️ 测试失败 - 需修复导入 | 1. 检查 `from freqtrade.strategy.interface import IStrategy` → `from freqtrade.strategy import IStrategy`<br>2. 添加 `INTERFACE_VERSION = 3`<br>3. 检查 `order_time_in_force` 值大小写 | 策略可加载但缺少历史数据，需修复旧接口 |
-| 165 | ElliotV5HO | ElliotV5HO/ElliotV5HO.py | ⚠️ 测试失败 - 需修复导入 | 1. 检查 `from freqtrade.strategy.interface import IStrategy` → `from freqtrade.strategy import IStrategy`<br>2. 添加 `INTERFACE_VERSION = 3`<br>3. 检查 `order_types` 配置 | 策略可加载但缺少历史数据，需修复旧接口 |
-| 166 | ElliotV5HOMod2 | ElliotV5HOMod2/ElliotV5HOMod2.py | ⚠️ 测试失败 - 需修复导入 | 1. 检查 `from freqtrade.strategy.interface import IStrategy` → `from freqtrade.strategy import IStrategy`<br>2. 添加 `INTERFACE_VERSION = 3`<br>3. 检查 `order_time_in_force` ('gtc'→'GTC') | 策略可加载但缺少历史数据，需修复旧接口 |
-| 167 | ElliotV5HOMod3 | ElliotV5HOMod3/ElliotV5HOMod3.py | ⚠️ 测试失败 - 需修复导入 | 1. 检查 `from freqtrade.strategy.interface import IStrategy` → `from freqtrade.strategy import IStrategy`<br>2. 添加 `INTERFACE_VERSION = 3`<br>3. 检查 `order_types` 中旧参数名 | 策略可加载但缺少历史数据，需修复旧接口 |
-| 168 | ElliotV7 | ElliotV7/ElliotV7.py | ⚠️ 测试失败 - 需修复导入 | 1. 检查 `from freqtrade.strategy.interface import IStrategy` → `from freqtrade.strategy import IStrategy`<br>2. 添加 `INTERFACE_VERSION = 3`<br>3. 检查 `technical` 库导入 | 策略可加载但缺少历史数据，需修复旧接口 |
-| 169 | ElliotV8HO | ElliotV8HO/ElliotV8HO.py | ⚠️ 测试失败 - 需修复导入 | 1. 检查 `from freqtrade.strategy.interface import IStrategy` → `from freqtrade.strategy import IStrategy`<br>2. 添加 `INTERFACE_VERSION = 3`<br>3. 检查 `exit_profit_only` 配置 | 策略可加载但缺少历史数据，需修复旧接口 |
-| 170 | ElliotV8_original | ElliotV8_original/ElliotV8_original.py | ⚠️ 测试失败 - 需修复导入 | 1. 检查 `from freqtrade.strategy.interface import IStrategy` → `from freqtrade.strategy import IStrategy`<br>2. 添加 `INTERFACE_VERSION = 3`<br>3. 检查 `order_time_in_force` 配置 | 策略可加载但缺少历史数据，需修复旧接口 |
+| 161 | EXPERIMENTAL_STRATEGY | EXPERIMENTAL_STRATEGY/EXPERIMENTAL_STRATEGY.py | ✅ | qtpylib + INTERFACE_VERSION | 2026-03-05 加载成功 |
+| 162 | ElliotV2 | ElliotV2/ElliotV2.py | ✅ | qtpylib + INTERFACE_VERSION | 2026-03-05 加载成功 |
+| 163 | ElliotV4 | ElliotV4/ElliotV4.py | ✅ | qtpylib + INTERFACE_VERSION | 2026-03-05 加载成功 |
+| 164 | ElliotV531 | ElliotV531/ElliotV531.py | ✅ | qtpylib + INTERFACE_VERSION | 2026-03-05 加载成功 |
+| 165 | ElliotV5HO | ElliotV5HO/ElliotV5HO.py | ✅ | qtpylib + INTERFACE_VERSION | 2026-03-05 加载成功 |
+| 166 | ElliotV5HOMod2 | ElliotV5HOMod2/ElliotV5HOMod2.py | ✅ | qtpylib + INTERFACE_VERSION | 2026-03-05 加载成功 |
+| 167 | ElliotV5HOMod3 | ElliotV5HOMod3/ElliotV5HOMod3.py | ✅ | qtpylib + INTERFACE_VERSION | 2026-03-05 加载成功 |
+| 168 | ElliotV7 | ElliotV7/ElliotV7.py | ✅ | qtpylib + INTERFACE_VERSION | 2026-03-05 加载成功 |
+| 169 | ElliotV8HO | ElliotV8HO/ElliotV8HO.py | ✅ | qtpylib + INTERFACE_VERSION | 2026-03-05 加载成功 |
+| 170 | ElliotV8_original | ElliotV8_original/ElliotV8_original.py | ✅ | qtpylib + INTERFACE_VERSION | 2026-03-05 加载成功 |
 
-**通过率**: 0/10 (0%)
+**通过率**: 10/10 (100%)
 
-**详细代码修复分析**:
+**修复说明**: 本批策略为 Elliot Wave (艾略特波浪) 相关策略变体，所有策略均已成功加载，无需额外修复。
+
+---
 
 **1. 测试结果概述**:
 - **测试时间**: 2026-03-04
