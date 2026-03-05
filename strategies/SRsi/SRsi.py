@@ -2,7 +2,7 @@ import talib.abstract as ta
 from pandas import DataFrame
 
 from technical import qtpylib
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 
 class SRsi(IStrategy):
 
@@ -25,8 +25,8 @@ class SRsi(IStrategy):
     startup_candle_count: int = 120
 
     order_time_in_force = {
-        'entry': 'gtc',
-        'exit': 'gtc',
+        'entry': 'GTC',
+        'exit': 'GTC',
     }
 
     def informative_pairs(self):

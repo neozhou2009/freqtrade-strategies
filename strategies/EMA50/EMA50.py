@@ -2,7 +2,7 @@
 # flake8: noqa: F401
 
 # --- Do not remove these libs ---
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from typing import Dict, List
 from functools import reduce
 from pandas import DataFrame
@@ -17,6 +17,7 @@ import numpy # noqa
 # Add your lib to import here
 
 
+INTERFACE_VERSION = 3
 class EMA50(IStrategy):
     """
     Simple strategy that trades based on Prices breaking above/below the EMA
@@ -95,8 +96,8 @@ class EMA50(IStrategy):
 
     # Optional order time in force.
     order_time_in_force = {
-        'entry': 'gtc',
-        'exit': 'gtc'
+        'entry': 'GTC',
+        'exit': 'GTC'
     }
     
     plot_config = {

@@ -1,5 +1,5 @@
 # --- Do not remove these libs ---
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from typing import Dict, List
 from functools import reduce
 from pandas import DataFrame
@@ -7,7 +7,7 @@ from pandas import DataFrame
 
 import talib.abstract as ta
 import numpy as np
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 import datetime
 from technical.util import resample_to_interval, resampled_merge
 from datetime import datetime, timedelta
@@ -106,7 +106,7 @@ class bestV2(IStrategy):
 
     ## Optional order time in force.
     order_time_in_force = {
-        'buy': 'gtc',
+        'buy': 'GTC',
         'sell': 'ioc'
     }
 

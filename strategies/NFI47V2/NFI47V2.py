@@ -1,7 +1,7 @@
 from technical import qtpylib
 import numpy as np
 import talib.abstract as ta
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from freqtrade.strategy import (merge_informative_pair,
                                 DecimalParameter, IntParameter, CategoricalParameter)
 from pandas import DataFrame, Series
@@ -81,7 +81,6 @@ class NFI47V2(IStrategy):
     order_types = {
         'entry': 'market',
         'exit': 'market',
-        'trailing_stop_loss': 'market',
         'stoploss': 'market',
         'stoploss_on_exchange': False
     }

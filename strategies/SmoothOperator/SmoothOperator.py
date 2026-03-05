@@ -1,5 +1,5 @@
 # --- Do not remove these libs ---
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from typing import Dict, List
 from functools import reduce
 from pandas import DataFrame
@@ -12,6 +12,7 @@ import numpy  # noqa
 # DO NOT USE, just playing with smooting and graphs!
 
 
+INTERFACE_VERSION = 3
 class SmoothOperator(IStrategy):
     """
 

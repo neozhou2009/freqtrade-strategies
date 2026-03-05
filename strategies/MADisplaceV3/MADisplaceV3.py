@@ -34,6 +34,7 @@ sell_params = {
 }
 
 
+INTERFACE_VERSION = 3
 class MADisplaceV3(IStrategy):
 
     ma_lower_length = IntParameter(15, 25, default=buy_params['ma_lower_length'], space='buy')

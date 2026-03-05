@@ -3,7 +3,7 @@ from functools import reduce
 from typing import List
 
 # --- Do not remove these libs ---
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from typing import Dict, List
 from pandas import DataFrame, Series
 import logging
@@ -40,6 +40,7 @@ def ha_typical_price(bars):
     return Series(index=bars.index, data=res)
 
 
+INTERFACE_VERSION = 3
 class ClucHAnix5m(IStrategy):
     # Buy hyperspace params:
     buy_params = {

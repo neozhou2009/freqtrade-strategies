@@ -18,6 +18,7 @@ from freqtrade.exchange import timeframe_to_minutes
 from freqtrade.persistence import Trade
 from skopt.space import Dimension
 
+INTERFACE_VERSION = 3
 class CryptoFrogNFIHO1A(IStrategy):
     # Buy hyperspace params:
     buy_params = {

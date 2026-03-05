@@ -5,12 +5,12 @@ import numpy as np  # noqa
 import pandas as pd  # noqa
 from pandas import DataFrame
 
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 
 # --------------------------------
 # Add your lib to import here
 import talib.abstract as ta
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 
 
 # This class is a sample. Feel free to customize it.
@@ -77,8 +77,8 @@ class bb_rsi_opt_new(IStrategy):
 
     # Optional order time in force.
     order_time_in_force = {
-        'buy': 'gtc',
-        'sell': 'gtc'
+        'buy': 'GTC',
+        'sell': 'GTC'
     }
 
     plot_config = {

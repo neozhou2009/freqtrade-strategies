@@ -1,20 +1,21 @@
 # --- Do not remove these libs --- freqtrade backtesting --strategy SmoothScalp --timerange 20210110-20210410
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from typing import Dict, List
 from functools import reduce
 from pandas import DataFrame
 # --------------------------------
 import talib.abstract as ta
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 from typing import Dict, List
 from functools import reduce
 from pandas import DataFrame, DatetimeIndex, merge
 # --------------------------------
 import talib.abstract as ta
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 import numpy  # noqa
 
 
+INTERFACE_VERSION = 3
 class hansencandlepatternV1(IStrategy):
     """
         This strategy is only an experiment using candlestick pattern to be used as buy or sell indicator. Do not use this strategy live.

@@ -1,5 +1,5 @@
 # --- Do not remove these libs ---
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from typing import Dict, List
 from functools import reduce
 from pandas import DataFrame
@@ -11,6 +11,7 @@ from scipy.signal import argrelextrema
 import numpy as np
 
 
+INTERFACE_VERSION = 3
 class Minmax(IStrategy):
 
     minimal_roi = {

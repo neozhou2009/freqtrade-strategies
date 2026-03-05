@@ -5,7 +5,7 @@
 
 # --- Do not remove these libs ---
 from freqtrade.strategy import IntParameter, DecimalParameter
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from pandas import DataFrame
 # --------------------------------
 
@@ -13,6 +13,7 @@ from pandas import DataFrame
 import talib.abstract as ta
 
 
+INTERFACE_VERSION = 3
 class MabStra(IStrategy):
 
     # #################### RESULTS PASTE PLACE ####################

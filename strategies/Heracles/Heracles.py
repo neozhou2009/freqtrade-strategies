@@ -17,7 +17,7 @@
 import logging
 
 from numpy.lib import math
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from pandas import DataFrame
 # --------------------------------
 
@@ -31,6 +31,7 @@ from functools import reduce
 import numpy as np
 
 
+INTERFACE_VERSION = 3
 class Heracles(IStrategy):
     # 65/600:   2275 trades. 1438/7/830 W/D/L.
     # Avg profit   3.10%. Median profit   3.06%.

@@ -1,7 +1,7 @@
 from technical import qtpylib
 import numpy as np
 import talib.abstract as ta
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from freqtrade.strategy import merge_informative_pair
 from pandas import DataFrame, Series
 from functools import reduce
@@ -9,6 +9,7 @@ from datetime import datetime
 from freqtrade.persistence import Trade
 from technical.indicators import RMI
 
+INTERFACE_VERSION = 3
 class Hacklemore3(IStrategy):
 
     """

@@ -26,8 +26,8 @@ class strato(IStrategy):
     startup_candle_count: int = 20
 
     order_time_in_force = {
-        "entry": "gtc",
-        "exit": "gtc",
+        "entry": "GTC",
+        "exit": "GTC",
     }
 
     def informative_pairs(self):

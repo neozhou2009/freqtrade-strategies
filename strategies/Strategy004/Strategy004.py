@@ -9,6 +9,7 @@ from pandas import DataFrame
 import talib.abstract as ta
 
 
+INTERFACE_VERSION = 3
 class Strategy004(IStrategy):
 
     """

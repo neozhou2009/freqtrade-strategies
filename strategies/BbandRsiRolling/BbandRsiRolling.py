@@ -1,5 +1,5 @@
 # --- Do not remove these libs ---
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from pandas import DataFrame
 import talib.abstract as ta
 from technical import qtpylib
@@ -9,6 +9,7 @@ from functools import reduce
 # --------------------------------
 
 
+INTERFACE_VERSION = 3
 class BbandRsiRolling(IStrategy):
     """
 

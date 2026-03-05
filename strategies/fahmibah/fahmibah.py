@@ -2,14 +2,14 @@ from typing import Optional
 from functools import reduce
 from typing import List
 
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 import numpy as np
 import pandas as pd
 import pandas_ta as pta
 import talib.abstract as ta
 
 from freqtrade.persistence import Trade
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from freqtrade.strategy import merge_informative_pair, DecimalParameter, stoploss_from_open, RealParameter, IntParameter, BooleanParameter
 from pandas import DataFrame, Series
 from datetime import datetime, timedelta, timezone
@@ -27,6 +27,7 @@ def ha_typical_price(bars):
     return Series(index=bars.index, data=res)
 
 
+INTERFACE_VERSION = 3
 class fahmibah(IStrategy):
     """
     PASTE OUTPUT FROM HYPEROPT HERE
@@ -97,9 +98,9 @@ class fahmibah(IStrategy):
     order_types = {
         'buy': 'limit',
         'sell': 'limit',
-        'emergencysell': 'limit',
-        'forcebuy': "limit",
-        'forcesell': 'limit',
+        'emergency_exit': 'limit',
+        'force_entry': "limit",
+        'force_exit': 'limit',
         'stoploss': 'limit',
         'stoploss_on_exchange': False,
 

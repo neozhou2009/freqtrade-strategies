@@ -117,6 +117,7 @@ def bollinger_bands(series: Series, moving_average='sma', length=20, mult=2.0) -
     })
 
 
+INTERFACE_VERSION = 3
 class NowoIchimoku5mV2(IStrategy):
     # Optimal timeframe for the strategy
     timeframe = '5m'

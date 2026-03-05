@@ -12,7 +12,7 @@ from freqtrade.strategy import CategoricalParameter, DecimalParameter, IntParame
 # --------------------------------
 # Add your lib to import here
 import talib.abstract as ta
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 
 """
     https://fr.tradingview.com/script/dV5HEGpP-Ultimate-Momentum-Indicator-CC/
@@ -70,8 +70,8 @@ class UltimateMomentumIndicator(IStrategy):
 
     # Optional order time in force.
     order_time_in_force = {
-        'buy': 'gtc',
-        'sell': 'gtc'
+        'buy': 'GTC',
+        'sell': 'GTC'
     }
     
     plot_config = {

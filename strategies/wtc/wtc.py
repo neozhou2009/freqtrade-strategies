@@ -13,7 +13,7 @@
 # github: https://github.com/mablue/
 # freqtrade hyperopt --hyperopt-loss SharpeHyperOptLoss --spaces buy sell --strategy wtc
 
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 import talib.abstract as ta
 from freqtrade.strategy import DecimalParameter
 from freqtrade.strategy import IStrategy
@@ -28,6 +28,7 @@ from sklearn import preprocessing
 # Add your lib to import here
 
 
+INTERFACE_VERSION = 3
 class wtc(IStrategy):
     ################################ SETTINGS ################################
     # 61 trades. 16/0/45 Wins/Draws/Losses.

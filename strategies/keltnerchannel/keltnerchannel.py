@@ -1,10 +1,10 @@
 # --- Do not remove these libs ---
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from pandas import DataFrame
 
 # Add your lib to import here
 import talib.abstract as ta
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 import pandas_ta as pta
 import numpy as np  # noqa
 import pandas as pd  # noqa
@@ -13,6 +13,7 @@ import pandas as pd  # noqa
 from functools import reduce
 from freqtrade.strategy import (BooleanParameter, CategoricalParameter, DecimalParameter,IStrategy, IntParameter)
 
+INTERFACE_VERSION = 3
 class keltnerchannel(IStrategy):
     timeframe = "6h"
     # Both stoploss and roi are set to 100 to prevent them to give a sell signal.

@@ -1,5 +1,5 @@
 # --- Do not remove these libs ---
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from typing import Dict, List
 from functools import reduce
 from pandas import DataFrame
@@ -19,6 +19,7 @@ def bollinger_bands(stock_price, window_size, num_of_std):
     return rolling_mean, lower_band
 
 
+INTERFACE_VERSION = 3
 class BinHV45HO(IStrategy):
     buy_params = {
         "df_close_bbdelta": 0.057,

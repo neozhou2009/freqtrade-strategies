@@ -11,7 +11,7 @@ from freqtrade.strategy import IStrategy, merge_informative_pair
 # --------------------------------
 # Add your lib to import here
 import talib.abstract as ta
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 # from freqtrade.strategy.strategy_helper import merge_informative_pair
 
 class TenderEnter(IStrategy):
@@ -100,8 +100,8 @@ class TenderEnter(IStrategy):
 
     # Optional order time in force.
     order_time_in_force = {
-        'buy': 'gtc',
-        'sell': 'gtc'
+        'buy': 'GTC',
+        'sell': 'GTC'
     }
     
 

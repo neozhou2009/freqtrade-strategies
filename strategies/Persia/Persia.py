@@ -10,7 +10,7 @@ from numpy.lib.function_base import append
 from pandas.core.series import Series
 
 from freqtrade.strategy.hyper import CategoricalParameter, IntParameter, DecimalParameter
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from pandas import DataFrame
 # --------------------------------
 
@@ -81,6 +81,7 @@ reals = REALSRANGE
 formulas = FORMULAS
 
 
+INTERFACE_VERSION = 3
 class Persia(IStrategy):
     ###################### RESULT PLACE ######################
     buy_params = {

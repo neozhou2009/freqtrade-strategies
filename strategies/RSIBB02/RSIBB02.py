@@ -5,7 +5,7 @@ import numpy as np # noqa
 import pandas as pd # noqa
 from pandas import DataFrame
 
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 
 # --------------------------
 # Add your lib to import here
@@ -13,6 +13,7 @@ import talib.abstract as ta
 from technical import qtpylib
 #from freqtrade.indicator_helpers import fishers_inverse
 
+INTERFACE_VERSION = 3
 class RSIBB02(IStrategy):
     """
     Default Strategy provided by freqtrade bot.
@@ -43,8 +44,8 @@ class RSIBB02(IStrategy):
 
     # Optional time in force for orders
     order_time_in_force = {
-        'entry': 'gtc',
-        'exit': 'gtc',
+        'entry': 'GTC',
+        'exit': 'GTC',
     }
 
     def populate_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:

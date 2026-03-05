@@ -3,7 +3,7 @@ import talib.abstract as ta
 from technical import qtpylib
 import arrow
 from typing import Dict, List, NamedTuple, Optional, Tuple
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from freqtrade.strategy import merge_informative_pair
 from pandas import DataFrame, Series
 from functools import reduce
@@ -15,6 +15,7 @@ from cachetools import TTLCache
 
 
 
+INTERFACE_VERSION = 3
 class SuperHV27(IStrategy):
 
     timeframe = '5m'

@@ -13,6 +13,7 @@ import json
 
 
 
+INTERFACE_VERSION = 3
 class RSIv2(IStrategy):
 
 

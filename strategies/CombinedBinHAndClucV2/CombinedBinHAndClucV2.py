@@ -30,6 +30,7 @@ def SSLChannels(dataframe, length = 7):
     return df['sslDown'], df['sslUp']
 
 
+INTERFACE_VERSION = 3
 class CombinedBinHAndClucV2(IStrategy):
     minimal_roi = {
         '120': 0.01,

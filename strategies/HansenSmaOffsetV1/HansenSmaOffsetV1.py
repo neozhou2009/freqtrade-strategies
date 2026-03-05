@@ -1,5 +1,5 @@
 # --- Do not remove these libs --- freqtrade backtesting --strategy SmoothScalp --timerange 20210110-20210410
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from typing import Dict, List
 from functools import reduce
 from pandas import DataFrame
@@ -28,6 +28,7 @@ pairlist setting:
 
 """
 
+INTERFACE_VERSION = 3
 class HansenSmaOffsetV1(IStrategy):
     timeframe = '15m'
     #I haven't found the optimal ROI yet

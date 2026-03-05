@@ -4,7 +4,7 @@
 
 # --- Do not remove these libs ---
 from freqtrade.strategy.hyper import IntParameter
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from pandas import DataFrame
 
 # --------------------------------
@@ -15,6 +15,7 @@ from technical import qtpylib
 from functools import reduce
 
 
+INTERFACE_VERSION = 3
 class MultiMa(IStrategy):
     # 111/2000:     18 trades. 12/4/2 Wins/Draws/Losses. Avg profit   9.72%. Median profit   3.01%. Total profit  733.01234143 USDT (  73.30%). Avg duration 2 days, 18:40:00 min. Objective: 1.67048
 

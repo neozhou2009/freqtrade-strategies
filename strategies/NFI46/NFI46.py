@@ -1,7 +1,7 @@
 from technical import qtpylib
 import numpy as np
 import talib.abstract as ta
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from freqtrade.strategy import (
     merge_informative_pair,
     DecimalParameter,
@@ -44,9 +44,10 @@ from datetime import datetime
 ###########################################################################################################
 
 
-class NFI46(IStrategy):
-    INTERFACE_VERSION = 3
+INTERFACE_VERSION = 3
 
+
+class NFI46(IStrategy):
     # ROI table:
     minimal_roi = {"0": 0.10, "30": 0.05, "60": 0.02}
 

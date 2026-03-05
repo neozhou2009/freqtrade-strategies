@@ -1,9 +1,10 @@
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from pandas import DataFrame
 from technical.indicators import ichimoku
 from technical import qtpylib
 
 
+INTERFACE_VERSION = 3
 class Stavix2(IStrategy):
     minimal_roi = {
         "0": 0.15

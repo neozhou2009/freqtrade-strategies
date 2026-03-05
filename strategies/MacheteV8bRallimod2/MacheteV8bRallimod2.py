@@ -25,6 +25,7 @@ from skopt.space import Dimension
 NOTE:
 docker-compose run --rm freqtrade hyperopt -c user_data/config-backtesting.json --strategy IchimokuHaulingV8a --hyperopt-loss SortinoHyperOptLossDaily --spaces roi buy sell --timerange=1624940400-1630447200 -j 4 -e 1000
 """
+INTERFACE_VERSION = 3
 class MacheteV8bRallimod2(IStrategy):
 
     # Buy hyperspace params:

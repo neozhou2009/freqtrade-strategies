@@ -1,5 +1,5 @@
 # --- Do not remove these libs ---
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from typing import Dict, List
 from functools import reduce
 from pandas import DataFrame, Series, DatetimeIndex, merge
@@ -9,6 +9,7 @@ import talib.abstract as ta
 from technical import qtpylib
 
 
+INTERFACE_VERSION = 3
 class CCIStrategy(IStrategy):
     # Minimal ROI designed for the strategy.
     # This attribute will be overridden if the config file contains "minimal_roi"

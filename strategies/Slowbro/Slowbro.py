@@ -44,6 +44,7 @@ SLOWBRO v100
 """
 
 
+INTERFACE_VERSION = 3
 class Slowbro(IStrategy):
 
     minimal_roi = {

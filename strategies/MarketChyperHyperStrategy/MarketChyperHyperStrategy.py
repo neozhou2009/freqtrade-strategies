@@ -4,7 +4,7 @@ import pandas as pd  # noqa
 import talib.abstract as ta
 from pandas import DataFrame
 from technical import qtpylib
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from freqtrade.strategy.hyper import (CategoricalParameter, DecimalParameter, IntParameter,
                                       RealParameter)
 
@@ -15,6 +15,7 @@ from freqtrade.strategy.hyper import (CategoricalParameter, DecimalParameter, In
 # podriamos ver la tendencia y calcular cada valor por tendencia como hace manigomoney
 
 
+INTERFACE_VERSION = 3
 class MarketChyperHyperStrategy(IStrategy):
 
     # If enabled all Weighted Signal results will be added to the dataframe for easy debugging with BreakPoints
@@ -110,8 +111,8 @@ class MarketChyperHyperStrategy(IStrategy):
 
     # Optional order time in force.
     order_time_in_force = {
-        'entry': 'gtc',
-        'exit': 'gtc'
+        'entry': 'GTC',
+        'exit': 'GTC'
     }
 
 

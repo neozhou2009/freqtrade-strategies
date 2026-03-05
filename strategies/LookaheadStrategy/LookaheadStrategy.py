@@ -3,7 +3,7 @@ from functools import reduce
 from technical import qtpylib
 import talib.abstract as ta
 from freqtrade.strategy import merge_informative_pair
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from pandas import DataFrame
 
 

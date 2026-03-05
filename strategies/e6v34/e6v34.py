@@ -1,7 +1,7 @@
 # --- Do not remove these libs ---
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 import talib.abstract as ta
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from freqtrade.strategy import RealParameter, IntParameter
 from functools import reduce
 from pandas import DataFrame
@@ -18,6 +18,7 @@ pwill = 12 #period williams r
 pvol = 100 #period pvt
 # pmv = 50 #period ema williams r
 
+INTERFACE_VERSION = 3
 class e6v34(IStrategy):
 
     bwill = RealParameter(-25, -15, default=-20, space='buy')

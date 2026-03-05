@@ -17,7 +17,7 @@ from freqtrade.strategy import (
 # --------------------------------
 # Add your lib to import here
 import talib.abstract as ta
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 
 
 # This class is a sample. Feel free to customize it.
@@ -88,7 +88,7 @@ class stratfib(IStrategy):
     }
 
     # Optional order time in force.
-    order_time_in_force = {"entry": "gtc", "exit": "gtc"}
+    order_time_in_force = {"entry": "GTC", "exit": "GTC"}
 
     plot_config = {
         "main_plot": {

@@ -1,4 +1,4 @@
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from pandas import DataFrame
 #from technical.indicators import accumulation_distribution
 from technical.util import resample_to_interval, resampled_merge
@@ -7,6 +7,7 @@ from technical import qtpylib
 import numpy
 from technical.indicators import ichimoku
 
+INTERFACE_VERSION = 3
 class Ichimoku_v30(IStrategy):
     """
 

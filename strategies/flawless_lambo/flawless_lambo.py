@@ -6,7 +6,7 @@ from sqlalchemy.orm.base import RELATED_OBJECT_OK
 from sqlalchemy.sql.elements import or_
 import talib.abstract as ta
 import pandas_ta as pta
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 from freqtrade.exchange import timeframe_to_minutes
 from freqtrade.persistence import Trade
 from technical import indicators
@@ -852,8 +852,8 @@ class flawless_lambo(IStrategy):
 
     # Optional order time in force.
     order_time_in_force = {
-        'buy': 'gtc',
-        'sell': 'gtc'
+        'buy': 'GTC',
+        'sell': 'GTC'
     }
     
     @property
@@ -1018,13 +1018,13 @@ class flawless_lambo(IStrategy):
         if trailing_duration.total_seconds() > self.trailing_expire_seconds:
             if ((current_trailing_sell_profit_ratio > 0) and (last_candle['sell'] != 0)):
                 # more than 1h, price over first signal, sell signal still active -> sell
-                return 'forcesell'
+                return 'force_exit'
             else:
                 # wait for next signal
                 return None
         elif (self.trailing_sell_uptrend_enabled and (trailing_duration.total_seconds() < self.trailing_expire_seconds_uptrend) and (current_trailing_sell_profit_ratio < (-1 * self.min_uptrend_trailing_profit))):
             # less than 90s and price is falling, sell 
-            return 'forcesell'
+            return 'force_exit'
 
         if current_trailing_sell_profit_ratio > 0:
             # current price is lower than initial price
@@ -1205,7 +1205,7 @@ class flawless_lambo(IStrategy):
                             self.logger.info(f'start trailing sell for {pair} at {last_candle["close"]}')
 
                         elif trailing_sell['trailing_sell_order_started']:
-                            if trailing_sell_offset == 'forcesell':
+                            if trailing_sell_offset == 'force_exit':
                                 # sell in custom conditions
                                 val = True
                                 ratio = "%.2f" % ((self.current_trailing_sell_profit_ratio(pair, current_price)) * 100)

@@ -4,9 +4,10 @@ import talib.abstract as ta
 from pandas import DataFrame
 
 from technical import qtpylib
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 
 
+INTERFACE_VERSION = 3
 class EMABBRSI(IStrategy):
     """
     Default Strategy provided by freqtrade bot.
@@ -36,8 +37,8 @@ class EMABBRSI(IStrategy):
 
     # Optional time in force for orders
     order_time_in_force = {
-        'entry': 'gtc',
-        'exit': 'gtc',
+        'entry': 'GTC',
+        'exit': 'GTC',
     }
 
     def populate_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:

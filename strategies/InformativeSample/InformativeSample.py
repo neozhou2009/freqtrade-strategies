@@ -10,6 +10,7 @@ import talib.abstract as ta
 from technical import qtpylib
 
 
+INTERFACE_VERSION = 3
 class InformativeSample(IStrategy):
     """
     Sample strategy implementing Informative Pairs - compares stake_currency with USDT.

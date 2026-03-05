@@ -2,7 +2,7 @@ import talib.abstract as ta
 from pandas import DataFrame
 import scipy.signal
 from technical import qtpylib
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 
 
 class TDSequentialStrategy(IStrategy):
@@ -56,8 +56,8 @@ class TDSequentialStrategy(IStrategy):
 
     # Optional time in force for orders
     order_time_in_force = {
-        'entry': 'gtc',
-        'exit': 'gtc',
+        'entry': 'GTC',
+        'exit': 'GTC',
     }
 
     def informative_pairs(self):

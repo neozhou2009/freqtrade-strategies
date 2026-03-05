@@ -1,7 +1,7 @@
 # --- Do not remove these libs ---
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from pandas import DataFrame
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 import pandas_ta as pta
 import talib.abstract as ta
 # --------------------------------
@@ -27,6 +27,7 @@ def top_percent_change(dataframe: DataFrame, length: int) -> float:
         else:
             return (dataframe['open'].rolling(length).max() - dataframe['close']) / dataframe['close']
 
+INTERFACE_VERSION = 3
 class VWAP(IStrategy):
     """
 

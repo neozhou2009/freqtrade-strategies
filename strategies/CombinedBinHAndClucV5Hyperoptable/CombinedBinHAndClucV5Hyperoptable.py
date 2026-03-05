@@ -44,6 +44,7 @@ from typing import Dict, List
 ###########################################################################################################
 
 
+INTERFACE_VERSION = 3
 class CombinedBinHAndClucV5Hyperoptable(IStrategy):
     minimal_roi = {"0": 0.018}
 

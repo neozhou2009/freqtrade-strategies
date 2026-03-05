@@ -1,5 +1,5 @@
 # --- Do not remove these libs ---
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from pandas import DataFrame
 import talib.abstract as ta
 from technical import qtpylib
@@ -25,6 +25,7 @@ from datetime import datetime, timedelta
 #
 # Does not attempt to emulate the risk/reward take-profit/stop-loss, so the sell criteria are mine.
 
+INTERFACE_VERSION = 3
 class Obelisk_TradePro_Ichi_v1_1(IStrategy):
 
     # Optimal timeframe for the strategy

@@ -1,6 +1,6 @@
 
 # --- Do not remove these libs ---
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from pandas import DataFrame
 # --------------------------------
 
@@ -11,6 +11,7 @@ import numpy # noqa
 
 
 # This class is a sample. Feel free to customize it.
+INTERFACE_VERSION = 3
 class CMCWinner(IStrategy):
     """
     This is a test strategy to inspire you.

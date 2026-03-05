@@ -2,7 +2,7 @@ import numpy as np
 import talib.abstract as ta
 from technical import qtpylib
 import arrow
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from freqtrade.strategy import merge_informative_pair
 from typing import Dict, List, Optional, Tuple
 from pandas import DataFrame, Series
@@ -14,6 +14,7 @@ from statistics import mean
 from cachetools import TTLCache
 
 
+INTERFACE_VERSION = 3
 class Schism5(IStrategy):
     """
     Strategy Configuration Items

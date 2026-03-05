@@ -5,7 +5,7 @@ import pandas as pd  # noqa
 from pandas import DataFrame
 from freqtrade.strategy import IStrategy
 import talib.abstract as ta
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 
 
 class hlhb(IStrategy):
@@ -61,8 +61,8 @@ class hlhb(IStrategy):
 
     # Optional order time in force.
     order_time_in_force = {
-        'buy': 'gtc',
-        'sell': 'gtc'
+        'buy': 'GTC',
+        'sell': 'GTC'
     }
     
     plot_config = {

@@ -7,6 +7,7 @@ from technical import qtpylib
 from freqtrade.strategy import IStrategy
 
 
+INTERFACE_VERSION = 3
 class bbema(IStrategy):
     """
     Default Strategy provided by freqtrade bot.
@@ -32,8 +33,8 @@ class bbema(IStrategy):
 
     # Optional time in force for orders
     order_time_in_force = {
-        "entry": "gtc",
-        "exit": "gtc",
+        "entry": "GTC",
+        "exit": "GTC",
     }
 
     def informative_pairs(self):

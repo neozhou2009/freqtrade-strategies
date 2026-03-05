@@ -1,5 +1,5 @@
 # --- Do not remove these libs ---
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from pandas import DataFrame
 import talib.abstract as ta
 from technical import qtpylib
@@ -61,6 +61,7 @@ def SSLChannels(dataframe, length = 7):
     df['sslUp'] = np.where(df['hlv'] < 0, df['smaLow'], df['smaHigh'])
     return df['sslDown'], df['sslUp']
 
+INTERFACE_VERSION = 3
 class Obelisk_TradePro_Ichi_v2_1(IStrategy):
 
     # Optimal timeframe for the strategy

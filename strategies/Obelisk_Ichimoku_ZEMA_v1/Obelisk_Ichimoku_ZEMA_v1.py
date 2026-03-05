@@ -32,6 +32,7 @@ def ssl_atr(dataframe, length = 7):
     df['sslUp'] = np.where(df['hlv'] < 0, df['smaLow'], df['smaHigh'])
     return df['sslDown'], df['sslUp']
 
+INTERFACE_VERSION = 3
 class Obelisk_Ichimoku_ZEMA_v1(IStrategy):
 
     # Optimal timeframe for the strategy

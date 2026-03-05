@@ -83,8 +83,8 @@ class RaposaDivergenceV1(IStrategy):
 
     # Optional order time in force.
     order_time_in_force = {
-        'entry': 'gtc',
-        'exit': 'gtc'
+        'entry': 'GTC',
+        'exit': 'GTC'
     }
 
     rsi_buy = IntParameter(20, 80, default=buy_params['rsi_buy'], space='buy', optimize=True)

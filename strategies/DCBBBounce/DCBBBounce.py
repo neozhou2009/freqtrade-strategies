@@ -1,6 +1,6 @@
 
 # --- Do not remove these libs ---
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from typing import Dict, List
 from functools import reduce
 from pandas import DataFrame
@@ -13,6 +13,7 @@ from freqtrade.strategy.hyper import CategoricalParameter, DecimalParameter, Int
 
 
 
+INTERFACE_VERSION = 3
 class DCBBBounce(IStrategy):
     """
     Simple strategy based on Contrarian Donchian Channels crossing Bollinger Bands

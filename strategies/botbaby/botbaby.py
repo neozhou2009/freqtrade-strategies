@@ -12,7 +12,7 @@ from freqtrade.strategy import (BooleanParameter, CategoricalParameter, DecimalP
 # --------------------------------
 # Add your lib to import here
 import talib.abstract as ta
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 
 
 # This class is a sample. Feel free to customize it.
@@ -58,8 +58,8 @@ class botbaby(IStrategy):
 
     # Optional order time in force.
     order_time_in_force = {
-        'buy': 'gtc',
-        'sell': 'gtc'
+        'buy': 'GTC',
+        'sell': 'GTC'
     }
 
 

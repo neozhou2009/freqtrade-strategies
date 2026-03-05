@@ -2,7 +2,7 @@
 # --- Do not remove these libs ---
 from freqtrade.strategy import IStrategy, merge_informative_pair
 from pandas import DataFrame
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 import talib.abstract as ta
 import numpy as np
 # --------------------------------
@@ -12,6 +12,7 @@ import numpy as np
 XtraThicc v69
 """
 
+INTERFACE_VERSION = 3
 class XtraThicc(IStrategy):
 
     minimal_roi = {

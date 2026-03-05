@@ -1,5 +1,5 @@
 # --- Do not remove these libs ---
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from pandas import DataFrame
 import talib.abstract as ta
 from technical import qtpylib
@@ -30,6 +30,7 @@ from datetime import datetime, timedelta
 # - reduce buying small peaks during sideways ranges
 # - additional entry trigger(s) for strong up trends / breakouts if tk cross happened in/below cloud
 
+INTERFACE_VERSION = 3
 class ObeliskIM_v1_1(IStrategy):
 
     # Optimal timeframe for the strategy

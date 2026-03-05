@@ -1,10 +1,11 @@
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from pandas import DataFrame
 from freqtrade.persistence import Trade
 from datetime import datetime
 import numpy as np
 
 
+INTERFACE_VERSION = 3
 class BuyAllSellAllStrategy(IStrategy):
     stoploss = -0.25
     timeframe = '5m'

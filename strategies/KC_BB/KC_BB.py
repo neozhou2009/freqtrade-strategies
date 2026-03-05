@@ -1,5 +1,5 @@
 # --- Do not remove these libs ---
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from typing import Dict, List
 from functools import reduce
 from pandas import DataFrame, Series, DatetimeIndex, merge
@@ -12,6 +12,7 @@ import pandas_ta as pta
 from freqtrade.strategy import merge_informative_pair, CategoricalParameter, DecimalParameter, IntParameter, stoploss_from_open
 from technical import qtpylib
 
+INTERFACE_VERSION = 3
 class KC_BB(IStrategy):
     """
 

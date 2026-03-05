@@ -1,8 +1,8 @@
 # --- Do not remove these libs ---
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from pandas import DataFrame
 import talib.abstract as ta
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 from freqtrade.persistence import Trade
 from datetime import timedelta, datetime, timezone
 #from freqtrade.strategy.strategy_helper import  merge_informative_pair
@@ -11,6 +11,7 @@ import numpy as np
 # --------------------------------
 # 11-Aug-20  - seems to be good making a few trades  5 days 33 wins 7 losses AVE 0.41% tot ROI 17.14%
 
+INTERFACE_VERSION = 3
 class cryptohassle(IStrategy):
     """
 
@@ -117,7 +118,7 @@ class cryptohassle(IStrategy):
             if mode == 'sma':
                 df['smaHigh'] = df['ha_high'].rolling(length).mean()
                 df['smaLow'] = df['ha_low'].rolling(length).mean()
-            df['hlv'] = np.where(df['ha_close'] > df['smaHigh'], 1, np.where(df['ha_close'] < df['smaLow'], -1, np.NAN))
+            df['hlv'] = np.where(df['ha_close'] > df['smaHigh'], 1, np.where(df['ha_close'] < df['smaLow'], -1, np.nan))
             df['hlv'] = df['hlv'].ffill()
             df['ha_sslDown'] = np.where(df['hlv'] < 0, df['smaHigh'], df['smaLow'])
             df['ha_sslUp'] = np.where(df['hlv'] < 0, df['smaLow'], df['smaHigh'])

@@ -7,7 +7,7 @@ from freqtrade import data
 from freqtrade.strategy.hyper import CategoricalParameter, DecimalParameter
 
 from numpy.lib import math
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from pandas import DataFrame
 
 # --------------------------------
@@ -448,6 +448,7 @@ def condition_generator(dataframe, operator, indicator, crossed_indicator, real_
     return condition, dataframe
 
 
+INTERFACE_VERSION = 3
 class GodStraNew(IStrategy):
     # #################### RESULTS PASTE PLACE ####################
 

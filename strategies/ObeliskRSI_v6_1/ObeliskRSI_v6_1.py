@@ -1,5 +1,5 @@
 # --- Do not remove these libs ---
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from pandas import DataFrame
 import talib.abstract as ta
 from technical import qtpylib
@@ -77,6 +77,7 @@ def clamp01(num):
     return clamp(num, 0, 1)
 
 
+INTERFACE_VERSION = 3
 class ObeliskRSI_v6_1(IStrategy):
 
     # Optimal timeframe for the strategy

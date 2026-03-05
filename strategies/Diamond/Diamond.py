@@ -41,7 +41,7 @@
 
 # --- Do not remove these libs ---
 from freqtrade.strategy.hyper import CategoricalParameter, DecimalParameter, IntParameter
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from pandas import DataFrame
 # --------------------------------
 
@@ -51,6 +51,7 @@ from functools import reduce
 from technical import qtpylib
 
 
+INTERFACE_VERSION = 3
 class Diamond(IStrategy):
     # ###################### RESULT PLACE ######################
     #    Config: 5 x UNLIMITED STOCK costume pair list,

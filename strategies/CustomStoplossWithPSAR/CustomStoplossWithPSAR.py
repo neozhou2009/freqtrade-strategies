@@ -5,7 +5,7 @@ import numpy as np  # noqa
 import pandas as pd  # noqa
 from pandas import DataFrame
 
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 
 # --------------------------------
 # Add your lib to import here
@@ -15,6 +15,7 @@ from datetime import datetime
 from freqtrade.persistence import Trade
 
 
+INTERFACE_VERSION = 3
 class CustomStoplossWithPSAR(IStrategy):
     """
     this is an example class, implementing a PSAR based trailing stop loss

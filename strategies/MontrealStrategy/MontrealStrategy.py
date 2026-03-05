@@ -4,7 +4,7 @@ import numpy as np  # noqa
 import pandas as pd  # noqa
 from pandas import DataFrame
 
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 
 import talib.abstract as ta
 from technical import qtpylib
@@ -56,7 +56,7 @@ class MontrealStrategy(IStrategy):
     }
 
     # Optional order time in force.
-    order_time_in_force = {"buy": "gtc", "sell": "gtc"}
+    order_time_in_force = {"buy": "GTC", "sell": "GTC"}
 
     plot_config = {
         "main_plot": {},

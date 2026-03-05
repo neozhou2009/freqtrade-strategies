@@ -2,13 +2,14 @@ from technical import qtpylib
 import numpy as np
 from functools import reduce
 import talib.abstract as ta
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from freqtrade.strategy import merge_informative_pair
 from datetime import datetime
 from freqtrade.persistence import Trade
 from pandas import DataFrame, Series
 
 
+INTERFACE_VERSION = 3
 class ClucFiatROI(IStrategy):
     # Buy hyperspace params:
     buy_params = {

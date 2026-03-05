@@ -1,7 +1,7 @@
 # --- Do not remove these libs ---
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from pandas import DataFrame, Series, DatetimeIndex, merge
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 import pandas_ta as pta
 import talib.abstract as ta
 from freqtrade.strategy import merge_informative_pair, CategoricalParameter, DecimalParameter, IntParameter, stoploss_from_open
@@ -27,6 +27,7 @@ def williams_r(dataframe: DataFrame, period: int = 14) -> Series:
 
     return WR * -100
 
+INTERFACE_VERSION = 3
 class adaptive(IStrategy):
     """
 

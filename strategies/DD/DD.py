@@ -1,5 +1,5 @@
 # --- Do not remove these libs ---
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from pandas import DataFrame
 import talib.abstract as ta
 from technical import qtpylib
@@ -8,6 +8,7 @@ from technical import qtpylib
 # --------------------------------
 
 
+INTERFACE_VERSION = 3
 class DD(IStrategy):
     """
 

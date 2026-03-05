@@ -22,7 +22,7 @@ import numpy as np  # noqa
 import pandas as pd  # noqa
 from pandas import DataFrame
 
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 
 # --------------------------------
 # Add your lib to import here
@@ -35,6 +35,7 @@ from technical.util import resample_to_interval, resampled_merge
 import logging
 logger = logging.getLogger(__name__)
 
+INTERFACE_VERSION = 3
 class SlowPotato(IStrategy):
     """
     This strategy uses the averages for the last 5 days high/low and sets up buy and sell orders acordingly
@@ -73,8 +74,8 @@ class SlowPotato(IStrategy):
         
     # Optional order time in force.
     order_time_in_force = {
-        'entry': 'gtc',
-        'exit': 'gtc'
+        'entry': 'GTC',
+        'exit': 'GTC'
         }
     # run "populate_indicators" only for new candle
     process_only_new_candles = False

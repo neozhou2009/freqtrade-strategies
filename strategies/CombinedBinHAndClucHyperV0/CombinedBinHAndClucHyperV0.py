@@ -3,7 +3,7 @@ from technical import qtpylib
 import numpy as np
 # --------------------------------
 import talib.abstract as ta
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from freqtrade.strategy import CategoricalParameter, DecimalParameter, IntParameter
 from abc import ABC, abstractmethod
 from pandas import DataFrame
@@ -12,6 +12,7 @@ from freqtrade.exchange import timeframe_to_prev_date, timeframe_to_seconds
 from datetime import datetime, timedelta
 import math
 
+INTERFACE_VERSION = 3
 class CombinedBinHAndClucHyperV0(IStrategy):
     timeframe = '1m'
 

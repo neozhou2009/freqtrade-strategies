@@ -1,8 +1,8 @@
 # --- Do not remove these libs ---
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from pandas import DataFrame
 import talib.abstract as ta
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 import pandas as pd  # noqa
 pd.options.mode.chained_assignment = None  # default='warn'
 import technical.indicators as ftt
@@ -13,6 +13,7 @@ import numpy as np
 from freqtrade.strategy import stoploss_from_open
 
 
+INTERFACE_VERSION = 3
 class ichiV1(IStrategy):
 
     # NOTE: settings as of the 25th july 21

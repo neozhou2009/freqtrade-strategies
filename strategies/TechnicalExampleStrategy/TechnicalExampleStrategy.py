@@ -1,9 +1,10 @@
 from pandas import DataFrame
 from technical.indicators import cmf
 
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 
 
+INTERFACE_VERSION = 3
 class TechnicalExampleStrategy(IStrategy):
     minimal_roi = {
         "0": 0.01

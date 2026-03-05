@@ -5,7 +5,7 @@ import numpy as np  # noqa
 import pandas as pd  # noqa
 from pandas import DataFrame
 
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 
 # --------------------------------
 # Add your lib to import here
@@ -47,8 +47,8 @@ class EXPERIMENTAL_STRATEGY(IStrategy):
 
     # Optional time in force for orders
     order_time_in_force = {
-        'entry': 'gtc',
-        'exit': 'gtc',
+        'entry': 'GTC',
+        'exit': 'GTC',
     }
 
     def informative_pairs(self):

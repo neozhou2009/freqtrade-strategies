@@ -2,7 +2,7 @@ import numpy as np
 import talib.abstract as ta
 from technical import qtpylib
 from datetime import datetime, timezone
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from freqtrade.strategy import merge_informative_pair
 from typing import Dict, List, Optional, Tuple
 from pandas import DataFrame, Series
@@ -42,6 +42,7 @@ TODO:
 """
 
 
+INTERFACE_VERSION = 3
 class Schism2(IStrategy):
     """
     Strategy Configuration Items

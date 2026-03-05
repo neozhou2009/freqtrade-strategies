@@ -37,6 +37,7 @@ logger = logging.getLogger(__name__)
 # live / dryrun: use 1h
 # backtest / hyperopt: use 5m or 1m
 
+INTERFACE_VERSION = 3
 class Obelisk_3EMA_StochRSI_ATR(IStrategy):
 
     # Backtest or hyperopt at this timeframe

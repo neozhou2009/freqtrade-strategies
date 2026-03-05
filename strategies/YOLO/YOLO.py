@@ -1,10 +1,11 @@
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 import numpy as np
 import talib.abstract as ta
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from pandas import DataFrame, DatetimeIndex, merge, Series
 
 
+INTERFACE_VERSION = 3
 class YOLO(IStrategy):
 
     # Buy hyperspace params:

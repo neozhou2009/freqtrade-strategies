@@ -1,4 +1,4 @@
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from typing import Dict, List
 from functools import reduce
 from pandas import DataFrame
@@ -9,6 +9,7 @@ from technical import qtpylib
 import numpy  # noqa
 
 
+INTERFACE_VERSION = 3
 class EMASkipPump(IStrategy):
 
     """

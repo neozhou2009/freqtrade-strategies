@@ -23,7 +23,7 @@ import random
 from freqtrade.strategy.hyper import CategoricalParameter, DecimalParameter, IntParameter
 
 from numpy.lib import math
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from pandas import DataFrame
 
 # ########################## SETTINGS ##############################
@@ -533,6 +533,7 @@ def condition_generator(dataframe, operator, indicator, crossed_indicator, real_
     return condition, dataframe
 
 
+INTERFACE_VERSION = 3
 class DevilStra(IStrategy):
     # #################### RESULT PASTE PLACE ####################
     # 16/16:    108 trades. 75/18/15 Wins/Draws/Losses. Avg profit   7.77%. Median profit   8.89%. Total profit  0.08404983 BTC (  84.05Σ%). Avg duration 3 days, 6:49:00 min. Objective: -11.22849

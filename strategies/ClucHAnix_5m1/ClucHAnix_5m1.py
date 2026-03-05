@@ -1,7 +1,7 @@
 from technical import qtpylib
 import numpy as np
 import talib.abstract as ta
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from freqtrade.strategy import merge_informative_pair, DecimalParameter, stoploss_from_open, RealParameter
 from pandas import DataFrame, Series
 from datetime import datetime
@@ -26,6 +26,7 @@ def ha_typical_price(bars):
     return Series(index=bars.index, data=res)
 
 
+INTERFACE_VERSION = 3
 class ClucHAnix_5m1(IStrategy):
     """
     PASTE OUTPUT FROM HYPEROPT HERE

@@ -1,6 +1,6 @@
 # --- Do not remove these libs ---
 # --- Do not remove these libs ---
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from typing import Dict, List
 from functools import reduce
 from pandas import DataFrame
@@ -107,7 +107,7 @@ class NotAnotherSMAOffsetStrategy(IStrategy):
     ignore_roi_if_entry_signal = False
 
     ## Optional order time in force.
-    order_time_in_force = {"entry": "gtc", "exit": "ioc"}
+    order_time_in_force = {"entry": "GTC", "exit": "ioc"}
 
     # Optimal timeframe for the strategy
     timeframe = "5m"

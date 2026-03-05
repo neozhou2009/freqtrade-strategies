@@ -30,7 +30,6 @@ class Babico_SMA5xBBmid(IStrategy):
     order_types = {
         'entry': 'limit',
         'exit': 'limit',
-        'trailing_stop_loss': 'limit',
         'stoploss': 'limit',
         'stoploss_on_exchange': False
     }

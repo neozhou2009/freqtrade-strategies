@@ -17,6 +17,7 @@ from pandas import DataFrame
 # from technical import qtpylib
 
 
+INTERFACE_VERSION = 3
 class HourBasedStrategy(IStrategy):
     # SHIB/USDT, 1000$x1:100days
     # 158/1000:     51 trades. 29/19/3 Wins/Draws/Losses. Avg profit   4.02%. Median profit   2.48%. Total profit  4867.53438466 USDT ( 486.75%). Avg duration 1 day, 19:38:00 min. Objective: -4.17276

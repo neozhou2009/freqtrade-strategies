@@ -3,7 +3,7 @@ from technical import qtpylib
 import numpy as np
 # --------------------------------
 import talib.abstract as ta
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from pandas import DataFrame
 
 
@@ -14,6 +14,7 @@ def bollinger_bands(stock_price, window_size, num_of_std):
     return np.nan_to_num(rolling_mean), np.nan_to_num(lower_band)
 
 
+INTERFACE_VERSION = 3
 class CombinedBinHAndCluc(IStrategy):
     # Based on a backtesting:
     # - the best perfomance is reached with "max_open_trades" = 2 (in average for any market),

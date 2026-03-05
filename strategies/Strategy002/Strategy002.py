@@ -11,6 +11,7 @@ from technical import qtpylib
 import numpy # noqa
 
 
+INTERFACE_VERSION = 3
 class Strategy002(IStrategy):
     """
     Strategy 002

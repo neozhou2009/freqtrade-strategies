@@ -7,7 +7,7 @@ from pandas import DataFrame
 import numpy
 import tabulate
 
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 
 # --------------------------------
 # Add your lib to import here
@@ -77,8 +77,8 @@ class MomStrategy(IStrategy):
 
     # Optional order time in force.
     order_time_in_force = {
-        'entry': 'gtc',
-        'exit': 'gtc'
+        'entry': 'GTC',
+        'exit': 'GTC'
     }
     
     plot_config = {

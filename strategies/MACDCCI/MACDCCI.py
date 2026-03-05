@@ -1,5 +1,5 @@
 # --- Do not remove these libs ---
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from typing import Dict, List
 from functools import reduce
 from pandas import DataFrame
@@ -19,6 +19,7 @@ __email__       = "kevin.ossenbrueck@pm.de"
 __status__      = "Live"
 
 class_name = 'MACDCCI'
+INTERFACE_VERSION = 3
 class MACDCCI(IStrategy):
 
     # Disable ROI

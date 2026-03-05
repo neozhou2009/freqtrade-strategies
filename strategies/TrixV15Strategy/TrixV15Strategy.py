@@ -18,7 +18,7 @@ from freqtrade.strategy import (merge_informative_pair,
 # import talib.abstract as ta
 import ta
 from functools import reduce
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 
 
 # This class is a sample. Feel free to customize it.
@@ -118,8 +118,8 @@ class TrixV15Strategy(IStrategy):
 
     # Optional order time in force.
     order_time_in_force = {
-        'buy': 'gtc',
-        'sell': 'gtc'
+        'buy': 'GTC',
+        'sell': 'GTC'
     }
 
     plot_config = {

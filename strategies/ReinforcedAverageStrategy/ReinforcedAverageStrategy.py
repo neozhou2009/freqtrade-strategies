@@ -1,5 +1,5 @@
 # --- Do not remove these libs ---
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from typing import Dict, List
 from functools import reduce
 from pandas import DataFrame, merge, DatetimeIndex
@@ -11,6 +11,7 @@ from technical.util import resample_to_interval, resampled_merge
 from freqtrade.exchange import timeframe_to_minutes
 
 
+INTERFACE_VERSION = 3
 class ReinforcedAverageStrategy(IStrategy):
     """
 

@@ -1,11 +1,11 @@
 # --- Do not remove these libs ---
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 import numpy as np
 import talib.abstract as ta
 import pandas_ta as pta
 
 from freqtrade.persistence import Trade
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from pandas import DataFrame, Series, DatetimeIndex, merge
 from datetime import datetime, timedelta
 from freqtrade.strategy import merge_informative_pair, CategoricalParameter, DecimalParameter, IntParameter, stoploss_from_open
@@ -63,6 +63,7 @@ def williams_r(dataframe: DataFrame, period: int = 14) -> Series:
 
     return WR * -100
 
+INTERFACE_VERSION = 3
 class true_lambo(IStrategy):
 
     '''

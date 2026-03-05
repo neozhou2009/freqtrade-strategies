@@ -2,7 +2,7 @@ from datetime import datetime, timedelta, timezone
 from functools import reduce
 from typing import List
 # --- Do not remove these libs ---
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from typing import Dict, List
 from pandas import DataFrame, Series
 # --------------------------------
@@ -32,6 +32,7 @@ def ha_typical_price(bars):
     res = (bars['ha_high'] + bars['ha_low'] + bars['ha_close']) / 3.
     return Series(index=bars.index, data=res)
 
+INTERFACE_VERSION = 3
 class ClucHAnix_BB_RPB_MOD_E0V1E_ROI(IStrategy):
 
     """

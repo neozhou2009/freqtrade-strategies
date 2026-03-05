@@ -1,5 +1,5 @@
 # --- Do not remove these libs ---
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from typing import Dict, List
 from functools import reduce
 from pandas import DataFrame
@@ -8,6 +8,7 @@ from technical import qtpylib
 import talib.abstract as ta
 
 
+INTERFACE_VERSION = 3
 class MACDRSI200(IStrategy):
 
     timeframe = '5m'

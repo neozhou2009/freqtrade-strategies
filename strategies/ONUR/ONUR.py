@@ -1,5 +1,5 @@
 # --- Do not remove these libs ---
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from typing import Dict, List
 from functools import reduce
 from pandas import DataFrame
@@ -9,6 +9,7 @@ import talib.abstract as ta
 from technical import qtpylib
 
 
+INTERFACE_VERSION = 3
 class ONUR(IStrategy):
     minimal_roi = {"0": 0.131, "109": 0.08, "226": 0.03}
 

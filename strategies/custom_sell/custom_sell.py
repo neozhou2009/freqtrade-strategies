@@ -1,5 +1,5 @@
 # --- Do not remove these libs ---
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 from datetime import datetime, timedelta, timezone
 
 from functools import reduce
@@ -10,7 +10,7 @@ import numpy as np
 import sys
 # --------------------------------
 import talib.abstract as ta
-#from freqtrade.strategy.interface import IStrategy
+#from freqtrade.strategy import IStrategy
 from freqtrade.strategy import IStrategy, merge_informative_pair, informative
 from pandas import DataFrame, Series, DatetimeIndex, merge, to_numeric
 from freqtrade.persistence import Trade
@@ -24,6 +24,7 @@ import arrow
 from freqtrade.exchange import timeframe_to_minutes
 import time
 
+INTERFACE_VERSION = 3
 class custom_sell(IStrategy):
     custom_info = {}
 

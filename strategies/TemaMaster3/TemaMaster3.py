@@ -7,7 +7,7 @@ Created on Wed Dec  2 13:50:49 2020
 """
 
 # --- Do not remove these libs ---
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from typing import Dict, List
 from functools import reduce
 from pandas import DataFrame
@@ -17,6 +17,7 @@ import talib.abstract as ta
 from technical import qtpylib
 
 
+INTERFACE_VERSION = 3
 class TemaMaster3(IStrategy):
     """
     Sample strategy implementing Informative Pairs - compares stake_currency with USDT.

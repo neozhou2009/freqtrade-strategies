@@ -7,6 +7,7 @@ import numpy as np
 from technical import qtpylib
 
 
+INTERFACE_VERSION = 3
 class SuperTrendPure(IStrategy):
     # ROI table:
     minimal_roi = {"0": 0.087, "372": 0.058, "861": 0.029, "2221": 0}

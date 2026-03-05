@@ -61,8 +61,8 @@ class BBRSIOptim2020Strategy(IStrategy):
 
     # Optional order time in force.
     order_time_in_force = {
-        'entry': 'gtc',
-        'exit': 'gtc'
+        'entry': 'GTC',
+        'exit': 'GTC'
     }
 
     plot_config = {

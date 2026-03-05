@@ -17,6 +17,7 @@ from freqtrade.exchange import timeframe_to_minutes
 from freqtrade.persistence import Trade
 from skopt.space import Dimension
 
+INTERFACE_VERSION = 3
 class CryptoFrog(IStrategy):
 
     # ROI table - this strat REALLY benefits from roi and trailing hyperopt:

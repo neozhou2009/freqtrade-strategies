@@ -3,7 +3,7 @@ import talib.abstract as ta
 import technical.indicators as ti
 from technical import qtpylib
 import arrow
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from freqtrade.strategy import merge_informative_pair
 from typing import Dict, List, Optional, Tuple
 from pandas import DataFrame, Series
@@ -24,6 +24,7 @@ TODO:
 
 """
 
+INTERFACE_VERSION = 3
 class Stinkfist(IStrategy):
     """
     Strategy Configuration Items

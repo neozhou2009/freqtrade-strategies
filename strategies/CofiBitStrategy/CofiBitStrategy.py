@@ -1,7 +1,7 @@
 # --- Do not remove these libs ---
 from technical import qtpylib
 import talib.abstract as ta
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from freqtrade.strategy import IntParameter
 from pandas import DataFrame
 
@@ -9,6 +9,7 @@ from pandas import DataFrame
 # --------------------------------
 
 
+INTERFACE_VERSION = 3
 class CofiBitStrategy(IStrategy):
     """
         taken from slack by user CofiBit

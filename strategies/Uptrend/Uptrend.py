@@ -12,7 +12,7 @@ from freqtrade.strategy import (BooleanParameter, CategoricalParameter, DecimalP
 # --------------------------------
 # Add your lib to import here
 import talib.abstract as ta
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 from datetime import datetime
 
 

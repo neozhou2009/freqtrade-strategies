@@ -7,7 +7,7 @@ from freqtrade import data
 from freqtrade.strategy.hyper import CategoricalParameter, DecimalParameter
 
 from numpy.lib import math
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from pandas import DataFrame
 
 # --------------------------------
@@ -480,6 +480,7 @@ sell_params = {
     "sell_real_num2": 0.7,
 }
 
+INTERFACE_VERSION = 3
 class GodStraNew40(IStrategy):
     # #################### RESULTS PASTE PLACE ####################
 

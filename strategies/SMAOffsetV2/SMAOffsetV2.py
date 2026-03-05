@@ -14,6 +14,7 @@ from freqtrade.persistence import Trade
 # added trend detection and stoploss
 
 
+INTERFACE_VERSION = 3
 class SMAOffsetV2(IStrategy):
     minimal_roi = {
         "0": 1,

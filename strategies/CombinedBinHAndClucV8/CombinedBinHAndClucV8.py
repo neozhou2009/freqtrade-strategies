@@ -3,7 +3,7 @@ import numpy as np
 import talib.abstract as ta
 from freqtrade.strategy import merge_informative_pair
 from freqtrade.strategy import DecimalParameter, IntParameter
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from freqtrade.persistence import Trade
 from pandas import DataFrame
 from datetime import datetime, timedelta

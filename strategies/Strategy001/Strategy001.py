@@ -10,6 +10,7 @@ import talib.abstract as ta
 from technical import qtpylib
 
 
+INTERFACE_VERSION = 3
 class Strategy001(IStrategy):
     """
     Strategy 001

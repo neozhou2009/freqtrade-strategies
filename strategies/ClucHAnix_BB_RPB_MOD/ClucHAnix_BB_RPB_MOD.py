@@ -11,7 +11,7 @@ import technical.indicators as ftt
 from freqtrade.persistence import Trade, PairLocks
 from freqtrade.strategy import (BooleanParameter, DecimalParameter,
                                 IntParameter, stoploss_from_open, merge_informative_pair)
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from pandas import DataFrame, Series
 # from skopt.space import object, Integer
 
@@ -25,6 +25,7 @@ def ha_typical_price(bars):
     res = (bars['ha_high'] + bars['ha_low'] + bars['ha_close']) / 3.
     return Series(index=bars.index, data=res)
 
+INTERFACE_VERSION = 3
 class ClucHAnix_BB_RPB_MOD(IStrategy):
 
     # Buy hyperspace params:

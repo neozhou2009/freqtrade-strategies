@@ -1,5 +1,5 @@
 # --- Do not remove these libs ---
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from pandas import DataFrame
 # --------------------------------
 import numpy as np
@@ -53,6 +53,7 @@ def MOST(dataframe, length=8, percent=2, MAtype=1):
     return data
 
 
+INTERFACE_VERSION = 3
 class MostOfAll(IStrategy):
     """
         My second humble strategy using a MOST alike indicator

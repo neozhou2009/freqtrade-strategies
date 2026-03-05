@@ -16,7 +16,7 @@ from freqtrade.strategy import (
     DecimalParameter,
     merge_informative_pair,
 )
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from pandas import DataFrame
 
 sys.path.append(str(Path(__file__).parent))
@@ -24,6 +24,7 @@ sys.path.append(str(Path(__file__).parent))
 logger = logging.getLogger(__name__)
 
 
+INTERFACE_VERSION = 3
 class Gumbo1(IStrategy):
     # region Parameters
     ewo_low = DecimalParameter(-20.0, 1, default=0, space="buy", optimize=True)

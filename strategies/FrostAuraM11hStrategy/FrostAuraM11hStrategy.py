@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 from pandas import DataFrame
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 import talib.abstract as ta
 from technical import qtpylib
 
@@ -58,8 +58,8 @@ class FrostAuraM11hStrategy(IStrategy):
 
     # Optional order time in force.
     order_time_in_force = {
-        'entry': 'gtc',
-        'exit': 'gtc'
+        'entry': 'GTC',
+        'exit': 'GTC'
     }
 
     plot_config = {

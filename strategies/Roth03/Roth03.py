@@ -1,6 +1,6 @@
 
 # --- Do not remove these libs ---
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from typing import Dict, List
 from functools import reduce
 from pandas import DataFrame
@@ -10,6 +10,7 @@ import talib.abstract as ta
 from technical import qtpylib
 
 
+INTERFACE_VERSION = 3
 class Roth03(IStrategy):
 
     #  7205/10000:    499 trades. 251/240/8 Wins/Draws/Losses. Avg profit   0.51%. Median profit   0.01%. Total profit  0.00137449 BTC ( 254.47Î£%). Avg duration 746.7 min. Objective: 0.15177

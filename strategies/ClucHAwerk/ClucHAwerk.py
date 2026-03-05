@@ -1,7 +1,7 @@
 from technical import qtpylib
 import numpy as np
 import talib.abstract as ta
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from freqtrade.strategy import merge_informative_pair
 from pandas import DataFrame, Series
 
@@ -15,6 +15,7 @@ def ha_typical_price(bars):
     res = (bars['ha_high'] + bars['ha_low'] + bars['ha_close']) / 3.
     return Series(index=bars.index, data=res)
 
+INTERFACE_VERSION = 3
 class ClucHAwerk(IStrategy):
 
     """

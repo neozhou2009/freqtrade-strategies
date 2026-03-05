@@ -1,7 +1,7 @@
 from technical import qtpylib
 import numpy as np
 import talib.abstract as ta
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from freqtrade.strategy import (merge_informative_pair,
                                 DecimalParameter, IntParameter, CategoricalParameter)
 from pandas import DataFrame, Series
@@ -152,7 +152,6 @@ class NFI7MOHO(IStrategy):
     order_types = {
         'entry': 'limit',
         'exit': 'limit',
-        'trailing_stop_loss': 'limit',
         'stoploss': 'limit',
         'stoploss_on_exchange': False
     }

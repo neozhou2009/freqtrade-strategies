@@ -7,6 +7,7 @@ from freqtrade.strategy import (IStrategy)
 # DIV v1.0 - 2021-09-07
 # by Sanka 
 
+INTERFACE_VERSION = 3
 class DIV_v1(IStrategy):
 
     minimal_roi = {

@@ -8,7 +8,7 @@ import technical.indicators as ftt
 from datetime import datetime, timedelta
 from freqtrade.persistence import Trade
 from freqtrade.strategy import stoploss_from_open, merge_informative_pair, DecimalParameter, IntParameter, CategoricalParameter
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from functools import reduce
 from logging import FATAL
 from pandas import DataFrame
@@ -111,7 +111,7 @@ class NASOSv5_mod1_DanMod(IStrategy):
     ignore_roi_if_entry_signal = False
 
     order_time_in_force = {
-        'entry': 'gtc',
+        'entry': 'GTC',
         'exit': 'ioc'
     }
 

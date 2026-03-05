@@ -34,8 +34,8 @@ class BBRSIS(IStrategy):
 
     # Optional time in force for orders
     order_time_in_force = {
-        "entry": "gtc",
-        "exit": "gtc",
+        "entry": "GTC",
+        "exit": "GTC",
     }
 
     def get_ticker_indicator(self):

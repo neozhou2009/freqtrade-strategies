@@ -1,10 +1,11 @@
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from pandas import DataFrame
 import talib.abstract as ta
 from technical import qtpylib
 import numpy
 from technical.indicators import ichimoku
 
+INTERFACE_VERSION = 3
 class Ichimoku_SenkouSpanCross(IStrategy):
     """
     """
@@ -28,8 +29,8 @@ class Ichimoku_SenkouSpanCross(IStrategy):
         'stoploss_on_exchange': False
     }
     order_time_in_force = {
-        'entry': 'gtc',
-        'exit': 'gtc'
+        'entry': 'GTC',
+        'exit': 'GTC'
     }
     def informative_pairs(self):
         return [

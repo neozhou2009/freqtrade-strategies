@@ -1,5 +1,5 @@
 # --- Do not remove these libs ---
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from freqtrade.strategy.hyper import CategoricalParameter, DecimalParameter, IntParameter
 from typing import Dict, List
 from functools import reduce
@@ -11,9 +11,10 @@ from freqtrade.exchange import timeframe_to_prev_date
 # --------------------------------
 
 import talib.abstract as ta
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 
 
+INTERFACE_VERSION = 3
 class epretrace(IStrategy):
     """
 

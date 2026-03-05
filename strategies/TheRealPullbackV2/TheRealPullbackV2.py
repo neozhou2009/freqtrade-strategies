@@ -1,7 +1,7 @@
 from freqtrade.strategy import IStrategy, merge_informative_pair
 from pandas import DataFrame, Series
 import talib.abstract as ta
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 from technical.indicators import RMI
 
 
@@ -20,6 +20,7 @@ def chaikin_mf(df, periods=20):
     return Series(cmf, name='cmf')
 
 
+INTERFACE_VERSION = 3
 class TheRealPullbackV2(IStrategy):
 
     minimal_roi = {

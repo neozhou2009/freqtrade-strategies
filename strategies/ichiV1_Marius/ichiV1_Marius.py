@@ -1,13 +1,13 @@
 # --- Do not remove these libs ---
 from sqlalchemy import true
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from pandas import DataFrame, Series
 import copy
 import logging
 import pathlib
 import rapidjson
 import talib.abstract as ta
-import freqtrade.vendor.qtpylib.indicators as qtpylib
+from technical import qtpylib
 import pandas as pd  # noqa
 pd.options.mode.chained_assignment = None  # default='warn'
 import technical.indicators as ftt
@@ -85,6 +85,7 @@ def to_minutes(**timdelta_kwargs):
 #######################  ichiV1_Mod #####################
 #########################################################
       #############################################
+INTERFACE_VERSION = 3
 class ichiV1_Marius(IStrategy):
 
     class HyperOpt:
@@ -253,8 +254,8 @@ class ichiV1_Marius(IStrategy):
 
     # Optional order time in force.
     order_time_in_force = {
-        'buy': 'gtc',
-        'sell': 'gtc'
+        'buy': 'GTC',
+        'sell': 'GTC'
     }
 
     use_custom_stoploss = True

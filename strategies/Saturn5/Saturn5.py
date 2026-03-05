@@ -11,6 +11,7 @@ def to_minutes(**timdelta_kwargs):
     return int(timedelta(**timdelta_kwargs).total_seconds() / 60)
 
 
+INTERFACE_VERSION = 3
 class Saturn5(IStrategy):
     # Strategy created by Shane Jones https://twitter.com/shanejones
     #

@@ -8,6 +8,7 @@ from datetime import timedelta, datetime, timezone
 # --------------------------------
 
 
+INTERFACE_VERSION = 3
 class Macd(IStrategy):
     """
 

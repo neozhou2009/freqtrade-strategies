@@ -1,7 +1,7 @@
 # --- Do not remove these libs ---
 # --- Do not remove these libs ---
 from logging import FATAL
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from typing import Dict, List
 from functools import reduce
 from pandas import DataFrame
@@ -114,7 +114,7 @@ class NASOSv5(IStrategy):
 
     # Optional order time in force.
     order_time_in_force = {
-        'entry': 'gtc',
+        'entry': 'GTC',
         'exit': 'ioc'
     }
 

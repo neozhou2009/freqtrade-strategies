@@ -2,7 +2,7 @@ from technical import qtpylib
 from typing import Dict, List
 import numpy as np
 import talib.abstract as ta
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from freqtrade.strategy import (merge_informative_pair,
                                 DecimalParameter, IntParameter, BooleanParameter, timeframe_to_minutes, stoploss_from_open)
 from pandas import DataFrame, Series

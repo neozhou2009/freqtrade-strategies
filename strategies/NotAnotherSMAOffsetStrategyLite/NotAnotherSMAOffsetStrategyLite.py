@@ -1,5 +1,5 @@
 # --- Do not remove these libs ---
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from pandas import DataFrame
 
 # --------------------------------
@@ -54,7 +54,7 @@ class NotAnotherSMAOffsetStrategyLite(IStrategy):
     exit_profit_only = True
     exit_profit_offset = 0.01
     ignore_roi_if_entry_signal = False
-    order_time_in_force = {'entry': 'gtc', 'exit': 'ioc'}
+    order_time_in_force = {'entry': 'GTC', 'exit': 'ioc'}
     timeframe = '5m'
     process_only_new_candles = True
     startup_candle_count = 200

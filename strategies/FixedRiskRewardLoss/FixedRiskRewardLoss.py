@@ -5,7 +5,7 @@ import numpy as np  # noqa
 import pandas as pd  # noqa
 from pandas import DataFrame
 
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 
 # --------------------------------
 # Add your lib to import here
@@ -19,6 +19,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 
+INTERFACE_VERSION = 3
 class FixedRiskRewardLoss(IStrategy):
     """
     This strategy uses custom_stoploss() to enforce a fixed risk/reward ratio

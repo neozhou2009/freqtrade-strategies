@@ -5,7 +5,7 @@ import rapidjson
 from technical import qtpylib
 import numpy as np
 import talib.abstract as ta
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from freqtrade.strategy import merge_informative_pair, timeframe_to_minutes
 from freqtrade.exchange import timeframe_to_prev_date
 from pandas import DataFrame, Series, concat
@@ -170,7 +170,6 @@ class NostalgiaForInfinityNextGen_TSL(IStrategy):
     order_types = {
         'entry': 'limit',
         'exit': 'limit',
-        'trailing_stop_loss': 'limit',
         'stoploss': 'limit',
         'stoploss_on_exchange': False,
         'stoploss_on_exchange_interval': 60,

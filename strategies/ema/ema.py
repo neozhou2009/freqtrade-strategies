@@ -11,6 +11,7 @@ from technical import qtpylib
 import numpy as np  # noqa
 
 
+INTERFACE_VERSION = 3
 class ema(IStrategy):
     max_open_trades = 3
     stake_amount = 50

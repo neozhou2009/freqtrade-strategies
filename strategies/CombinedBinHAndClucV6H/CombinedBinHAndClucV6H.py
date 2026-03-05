@@ -49,6 +49,7 @@ from functools import reduce
 logger = logging.getLogger(__name__)
 # -------------------------------------------------------------------------------------------------
 
+INTERFACE_VERSION = 3
 class CombinedBinHAndClucV6H(IStrategy):
 
     minimal_roi = {

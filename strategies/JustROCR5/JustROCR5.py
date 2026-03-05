@@ -1,8 +1,9 @@
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy
 from pandas import DataFrame
 import talib.abstract as ta
 
 
+INTERFACE_VERSION = 3
 class JustROCR5(IStrategy):
     minimal_roi = {
         "0": 0.05
