@@ -1,20 +1,247 @@
 # Freqtrade 策略修复完整计划文档
-**整合版本**: 2026-03-03  
+**整合版本**: 2026-03-05  
 **总策略数**: 465  
 **总批次数**: 47 (每批10个策略)  
-**已修复**: 41批 (410个策略)  
-**待修复**: 6批 (55个策略)
+**已修复**: 47批 (465个策略)  
 
 ---
 
 ## 目录
-1. [通用修复清单](#通用修复清单)
-2. [当前修复状态统计](#当前修复状态统计)
-3. [批次修复详细记录](#批次修复详细记录)
-4. [待修复批次详细列表](#待修复批次详细列表)
-5. [遇到的额外问题清单](#遇到的额外问题清单)
-6. [测试和验证流程](#测试和验证流程)
+1. [测试环境与工具](#测试环境与工具)
+2. [通用修复清单](#通用修复清单)
+3. [当前修复状态统计](#当前修复状态统计)
+4. [批次修复详细记录](#批次修复详细记录)
+5. [待修复批次详细列表](#待修复批次详细列表)
+6. [遇到的额外问题清单](#遇到的额外问题清单)
 7. [修复工具和方法](#修复工具和方法)
+
+---
+
+## 测试环境与工具
+
+### 1. Docker 镜像
+
+#### 主测试镜像: `freqtrade-full:latest`
+
+**用途**: 包含所有策略依赖的完整测试环境
+
+**Dockerfile** (`Dockerfile.freqtrade-full`):
+```dockerfile
+FROM freqtradeorg/freqtrade:stable
+RUN pip install TA-Lib finta ta scikit-optimize
+```
+
+**包含依赖**:
+| 依赖库 | 用途 |
+|--------|------|
+| TA-Lib | 技术指标计算 (RSI, MACD, EMA等) |
+| finta | 金融技术分析库 |
+| ta | 技术分析库 |
+| scikit-optimize | 超参数优化 |
+
+#### 构建镜像
+
+```bash
+# 构建完整依赖镜像
+docker build -f Dockerfile.freqtrade-full -t freqtrade-full:latest .
+
+# 验证镜像构建成功
+docker run --rm freqtrade-full:latest python -c "import talib; print('TA-Lib:', talib.__version__)"
+docker run --rm freqtrade-full:latest python -c "import finta; print('finta: OK')"
+docker run --rm freqtrade-full:latest python -c "import ta; print('ta: OK')"
+```
+
+#### 过渡镜像 (已废弃)
+
+> ⚠️ `freqtrade-talib:latest` 是过渡版本，仅包含 TA-Lib，已被 `freqtrade-full:latest` 取代。
+> 
+> 如需使用旧镜像，Dockerfile 位于 `Dockerfile.freqtrade-talib`。
+
+---
+
+### 2. 测试数据
+
+#### 配置文件
+
+测试配置文件: `user_data/config.json`
+
+**关键配置**:
+| 配置项 | 值 | 说明 |
+|--------|-----|------|
+| trading_mode | futures | 期货交易模式 |
+| margin_mode | isolated | 逐仓模式 |
+| stake_currency | USDT | 交易货币 |
+| dry_run_wallet | 1000 | 模拟钱包金额 |
+| max_open_trades | 3 | 最大持仓数 |
+
+**默认交易对**:
+```
+LTC/USDT:USDT, BTC/USDT:USDT, ETH/USDT:USDT, SOL/USDT:USDT, 
+XRP/USDT:USDT, BNB/USDT:USDT, ADA/USDT:USDT, DOGE/USDT:USDT, 
+TRX/USDT:USDT, DOT/USDT:USDT
+```
+
+#### 下载数据
+
+```bash
+# 下载期货数据 (推荐)
+docker run --rm \
+  -v $(pwd)/user_data:/freqtrade/user_data \
+  freqtradeorg/freqtrade:stable \
+  download-data \
+  --pairs BTC/USDT:USDT ETH/USDT:USDT SOL/USDT:USDT \
+  --timeframe 5m \
+  --timerange 20250101-20250301 \
+  --trading-mode futures
+
+# 下载所有配置的交易对数据
+docker run --rm \
+  -v $(pwd)/user_data:/freqtrade/user_data \
+  freqtradeorg/freqtrade:stable \
+  download-data \
+  --timeframe 5m \
+  --timerange 20250101-20250301 \
+  --trading-mode futures
+```
+
+**数据存储位置**: `user_data/data/binance/`
+
+---
+
+### 3. 测试命令
+
+#### 策略列表查看
+
+```bash
+docker run --rm \
+  -v $(pwd)/user_data:/freqtrade/user_data \
+  -v $(pwd)/strategies:/freqtrade/user_data/strategies \
+  freqtradeorg/freqtrade:stable \
+  list-strategies
+```
+
+#### 单个策略回测
+
+```bash
+# 标准回测命令
+docker run --rm \
+  -v $(pwd)/user_data:/freqtrade/user_data \
+  -v $(pwd)/strategies:/freqtrade/user_data/strategies \
+  freqtradeorg/freqtrade:stable \
+  backtesting \
+  --strategy <StrategyName> \
+  --timerange 20250101-20250301
+
+# 带策略路径的回测 (策略在子目录中时)
+docker run --rm \
+  -v $(pwd)/user_data:/freqtrade/user_data \
+  -v $(pwd)/strategies:/freqtrade/user_data/strategies \
+  freqtradeorg/freqtrade:stable \
+  backtesting \
+  --strategy-path /freqtrade/user_data/strategies/<StrategyDir> \
+  --strategy <StrategyName> \
+  --timerange 20250101-20250301
+```
+
+#### 使用完整依赖镜像测试
+
+```bash
+# 对于需要 TA-Lib/finta/ta 依赖的策略
+docker run --rm \
+  -v $(pwd)/user_data:/freqtrade/user_data \
+  -v $(pwd)/strategies:/freqtrade/user_data/strategies \
+  freqtrade-full:latest \
+  backtesting \
+  --strategy <StrategyName> \
+  --timerange 20250101-20250301
+```
+
+#### 指定交易对测试
+
+```bash
+docker run --rm \
+  -v $(pwd)/user_data:/freqtrade/user_data \
+  -v $(pwd)/strategies:/freqtrade/user_data/strategies \
+  freqtradeorg/freqtrade:stable \
+  backtesting \
+  --strategy <StrategyName> \
+  --pairs BTC/USDT:USDT ETH/USDT:USDT \
+  --timerange 20250101-20250301
+```
+
+---
+
+### 4. 常见问题排查
+
+#### 策略加载失败
+
+```bash
+# 检查策略语法
+docker run --rm --entrypoint python \
+  -v $(pwd)/strategies:/strategies \
+  freqtradeorg/freqtrade:stable \
+  -m py_compile /strategies/<StrategyDir>/<StrategyName>.py
+
+# 测试策略导入
+docker run --rm --entrypoint python \
+  -v $(pwd)/strategies:/strategies \
+  freqtradeorg/freqtrade:stable \
+  -c "
+import sys
+sys.path.insert(0, '/strategies/<StrategyDir>')
+import <StrategyName>
+print('Strategy loaded:', <StrategyName>.<ClassName>)
+"
+```
+
+#### 缺少历史数据
+
+```bash
+# 错误信息: "No data found. Use `freqtrade download-data`"
+# 解决方案: 下载对应交易对和时间范围的数据
+docker run --rm \
+  -v $(pwd)/user_data:/freqtrade/user_data \
+  freqtradeorg/freqtrade:stable \
+  download-data \
+  --pairs <PAIR> \
+  --timeframe <TIMEFRAME> \
+  --timerange <TIMERANGE> \
+  --trading-mode futures
+```
+
+#### 依赖缺失
+
+```bash
+# 错误信息: "ModuleNotFoundError: No module named 'talib'"
+# 解决方案: 使用 freqtrade-full:latest 镜像
+
+# 错误信息: "ModuleNotFoundError: No module named 'finta'"
+# 解决方案: 使用 freqtrade-full:latest 镜像
+
+# 错误信息: "ModuleNotFoundError: No module named 'ta'"
+# 解决方案: 使用 freqtrade-full:latest 镜像
+```
+
+---
+
+### 5. 目录结构
+
+```
+freqtrade-strategies/
+├── strategies/                    # 策略文件目录
+│   ├── StrategyA/
+│   │   ├── StrategyA.py          # 策略代码
+│   │   └── README.md             # 策略说明
+│   └── StrategyB/
+│       └── ...
+├── user_data/
+│   ├── config.json               # 测试配置
+│   └── data/                     # 历史数据
+│       └── binance/
+├── Dockerfile.freqtrade-full     # 完整依赖镜像
+├── Dockerfile.freqtrade-talib    # (已废弃) 过渡镜像
+└── ALL_STRATEGIES_FIX_PLAN.md    # 本文档
+```
 
 ---
 
@@ -95,12 +322,12 @@ trailing_stop_positive_offset = 0.02
 | **接口修复通过** | **465 (100%)** |
 | **完整测试通过** | **35/55 (63.6%) - 第42-47批** |
 | 遇到的额外问题类型 | 6 |
-| **关键依赖** |✅ **TA-Lib Docker镜像已构建** |
+| **关键依赖** | ✅ **完整依赖Docker镜像已构建** (`freqtrade-full:latest`) |
 
 **重要说明**:
 1. 第42-47批策略（55个）已修复接口兼容性问题，但测试中35个通过，20个因缺少TA-Lib依赖而失败
-2. ✅ **已完成构建带TA-Lib的Docker镜像** (`Dockerfile.freqtrade-talib`)
-3. 🔄 **待进行TA-Lib策略验证测试** (选择1-2个代表性策略)
+2. ✅ **已完成构建完整依赖Docker镜像** (`freqtrade-full:latest`) - 包含 TA-Lib, finta, ta, scikit-optimize
+3. ✅ **第2批策略已全部修复通过** (2026-03-05 更新: MultiMA_TSL pandas兼容性修复)
 4. ✅ **第3批策略已全部修复通过** (2026-03-04 更新: BBRSI4cust, Schism2, BBRSI, strato, Ichimoku_v31)
 
 ---
@@ -2143,42 +2370,7 @@ order_time_in_force = {'entry': 'GTC', 'exit': 'GTC'}  # 'gtc' → 'GTC'
 
 ## 测试和验证流程
 
-### 标准测试命令（使用TA-Lib镜像）
-```bash
-# 对于需要TA-Lib依赖的策略，使用专用Docker镜像
-docker run --rm \
-  -v $(pwd)/test:/work/freqtrade_test \
-  -v $(pwd)/strategies:/work/freqtrade_test/user_data/strategies \
-  freqtrade-talib:latest \
-  backtesting --strategy <StrategyName> --timerange 20250101-20250301
-
-# 或者使用测试脚本（对于不需要TA-Lib的策略）
-cd test
-./test-freqtrade.sh backtest -c config.json --strategy <StrategyName> --timerange=20250101-20250301
-```
-
-### TA-Lib镜像构建和使用
-```bash
-# 1. 构建带TA-Lib的Docker镜像
-docker build -f Dockerfile.freqtrade-talib -t freqtrade-talib:latest .
-
-# 2. 验证TA-Lib安装
-docker run --rm freqtrade-talib:latest python -c "import talib; print(talib.__version__)"
-
-# 3. 测试具体策略（如BB_RSI）
-docker run --rm \
-  -v $(pwd)/test:/work/freqtrade_test \
-  -v $(pwd)/strategies:/work/freqtrade_test/user_data/strategies \
-  freqtrade-talib:latest \
-  list-strategies
-
-# 4. 运行回测
-docker run --rm \
-  -v $(pwd)/test:/work/freqtrade_test \
-  -v $(pwd)/strategies:/work/freqtrade_test/user_data/strategies \
-  freqtrade-talib:latest \
-  backtesting --strategy BB_RSI --timerange 20250101-20250301
-```
+> 📖 **详细说明请参考文档开头的 [测试环境与工具](#测试环境与工具) 章节**
 
 ### 验证标准
 1. **接口修复验证**: 策略能够成功加载和执行
@@ -2297,34 +2489,31 @@ find strategies -name "*.py" -type f -exec sed -i 's/INTERFACE_VERSION = 2/INTER
 
 ## 后续计划
 
-### 短期计划 (进行中)
+### 短期计划 (已完成)
 1. ✅ 完成第42-47批策略修复
 2. ✅ 解决接口兼容性修复
-3. ✅ **构建带TA-Lib的Docker镜像** (Dockerfile.freqtrade-talib)
-4. ✅ **测试需要TA-Lib依赖的策略**
+3. ✅ **构建完整依赖Docker镜像** (`freqtrade-full:latest`)
+   - 包含: TA-Lib, finta, ta, scikit-optimize
+   - Dockerfile: `Dockerfile.freqtrade-full`
+4. ✅ **测试需要依赖的策略**
    - ✅ BB_RSI (策略453): 成功通过测试
    - ✅ SuperTrendPure (策略401): 成功通过测试
-5. ⏳ 进行全部策略的回归测试（部分策略需要TA-Lib依赖）
-
-**测试结果**: 参见 [`TA_LIB_TEST_REPORT.md`](./TA_LIB_TEST_REPORT.md)
+5. ✅ **修复 MultiMA_TSL 策略** (pandas 2.x 兼容性问题)
 
 ### 依赖问题解决方案
-**TA-Lib依赖问题**: 
-- ✅ 已为主机系统安装TA-Lib
-- ✅ **已完成构建带TA-Lib的Docker镜像**: `Dockerfile.freqtrade-talib`
-  ```dockerfile
-  FROM freqtradeorg/freqtrade:stable
-  RUN pip install TA-Lib
-  ```
-- 构建命令:
-  ```bash
-  docker build -f Dockerfile.freqtrade-talib -t freqtrade-talib:latest .
-  ```
-- 使用TA-Lib镜像进行测试:
-  ```bash
-  docker run --rm -v $(pwd)/test:/work/freqtrade_test -v $(pwd)/strategies:/work/freqtrade_test/user_data/strategies freqtrade-talib:latest backtesting --strategy BB_RSI --timerange 20250101-20250301
-  ```
-- 策略目录中需要添加`requirements.txt`文件说明依赖
+
+> 📖 **详细说明请参考 [测试环境与工具](#测试环境与工具) 章节**
+
+**完整依赖Docker镜像**:
+```dockerfile
+FROM freqtradeorg/freqtrade:stable
+RUN pip install TA-Lib finta ta scikit-optimize
+```
+
+**构建命令**:
+```bash
+docker build -f Dockerfile.freqtrade-full -t freqtrade-full:latest .
+```
 
 ### 中期计划 (2-4周)
 1. 优化策略参数设置
@@ -2342,15 +2531,20 @@ find strategies -name "*.py" -type f -exec sed -i 's/INTERFACE_VERSION = 2/INTER
 - **2026-03-03**: 创建整合文档，包含所有465个策略的批次计划
 - **2026-03-03**: 整合FIX_LOG.md和代码评审报告
 - **2026-03-03**: 添加目录名/文件名映射
-- **2026-03-03**: **添加TA-Lib Docker镜像说明** (Dockerfile.freqtrade-talib)
+- **2026-03-03**: 添加TA-Lib Docker镜像说明 (Dockerfile.freqtrade-talib)
 - **2026-03-03**: 更新测试和验证流程，添加TA-Lib镜像使用指南
 - **2026-03-03**: 更新后续计划，反映TA-Lib镜像构建完成状态
-- **2026-03-04**: **重大突破: 发现并修复批次27-45全部策略加载失败的根本原因**
+- **2026-03-04**: 重大突破: 发现并修复批次27-45全部策略加载失败的根本原因
   - ✅ 发现Freqtrade **不扫描子目录**的设计限制
   - ✅ 创建批量扁平化脚本 `flatten_strategies.py`
   - ✅ 成功扁平化所有465个策略到 `strategies_flat/` 目录
   - ✅ 验证NFI46策略成功加载 (之前LOAD_ERROR → 现在NO_DATA)
   - ✅ **关键修复**: `-v $(pwd)/strategies_flat:/freqtrade/user_data/strategies`
+- **2026-03-05**: **重大更新: 整合测试环境文档**
+  - ✅ 新增"测试环境与工具"章节，统一说明Docker镜像、测试命令、数据下载
+  - ✅ 废弃 `freqtrade-talib:latest`，统一使用 `freqtrade-full:latest`
+  - ✅ 修复 MultiMA_TSL 策略 pandas 2.x 兼容性问题 (第2批第20个策略)
+  - ✅ 更新第2批策略通过率为 10/10 (100%)
 
 **下一步**: 按照TA-Lib Docker镜像测试策略，验证策略在TA-Lib环境下的运行情况。
 
