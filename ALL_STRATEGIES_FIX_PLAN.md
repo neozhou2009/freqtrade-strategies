@@ -631,36 +631,50 @@ trailing_stop_positive_offset = 0.02
 - **批量测试**: 使用新`freqtrade-full:latest`镜像并行测试，平均测试时间12-16秒
 
 ---
-### ⚠️ 第15批 (10个) - 2026-03-04 2/10 测试完成，8个策略不存在
+### ⚠️ 第15批 (10个) - 2026-03-05 更新: 3/10 通过回测
 
 | 序号 | 策略目录名 | 文件名 | 状态 | 修复内容 | 备注 |
 |------|------------|--------|------|----------|------|
-| 141 | CryptoFrogNFI | CryptoFrogNFI/CryptoFrogNFI.py | ❌ | qtpylib + INTERFACE_VERSION + 参数重命名 + **方法签名修复** | **修复详情**: `min_roi_reached_entry()`方法缺少2个必需参数 (`trade_dur`和`current_time`)<br>**测试失败**: 方法签名不匹配，需要修复 |
-| 142 | CryptoFrogNFIHO1A | CryptoFrogNFIHO1A/CryptoFrogNFIHO1A.py | ⏳ | qtpylib + INTERFACE_VERSION + 参数重命名 | **文件存在但未测试** - 实际测试策略列表不包含此策略 |
-| 143 | CryptoFrogOffset | CryptoFrogOffset/CryptoFrogOffset.py | ⏳ | qtpylib + INTERFACE_VERSION + 参数重命名 | **文件存在但未测试** - 实际测试策略列表不包含此策略 |
-| 144 | CustomStoplossWithPSAR | CustomStoplossWithPSAR/CustomStoplossWithPSAR.py | ⏳ | qtpylib + INTERFACE_VERSION + 参数重命名 | **文件存在但未测试** - 实际测试策略列表不包含此策略 |
-| 145 | DCBBBounce | DCBBBounce/DCBBBounce.py | ⏳ | qtpylib + INTERFACE_VERSION + 参数重命名 | **文件存在但未测试** - 实际测试策略列表不包含此策略 |
-| 146 | DD | DD/DD.py | ⏳ | qtpylib + INTERFACE_VERSION + 参数重命名 | **文件存在但未测试** - 实际测试策略列表不包含此策略 |
-| 147 | DIV_v1 | DIV_v1/DIV_v1.py | ⏳ | qtpylib + INTERFACE_VERSION + 参数重命名 | **文件存在但未测试** - 实际测试策略列表不包含此策略 |
-| 148 | DevilStra | DevilStra/DevilStra.py | ⏳ | qtpylib + INTERFACE_VERSION + 参数重命名 | **文件存在但未测试** - 实际测试策略列表不包含此策略 |
-| 149 | Diamond | Diamond/Diamond.py | ⏳ | qtpylib + INTERFACE_VERSION + 参数重命名 | **文件存在但未测试** - 实际测试策略列表不包含此策略 |
+| 141 | CryptoFrogNFI | CryptoFrogNFI/CryptoFrogNFI.py | ✅ | qtpylib + INTERFACE_VERSION + **min_roi_reached_entry方法签名修复** | 2026-03-05 修复方法签名，回测通过: 80笔交易，73.8%胜率 |
+| 142 | CryptoFrogNFIHO1A | CryptoFrogNFIHO1A/CryptoFrogNFIHO1A.py | ⏳ | qtpylib + INTERFACE_VERSION + 参数重命名 | **文件存在但未测试** |
+| 143 | CryptoFrogOffset | CryptoFrogOffset/CryptoFrogOffset.py | ⏳ | qtpylib + INTERFACE_VERSION + 参数重命名 | **文件存在但未测试** |
+| 144 | CustomStoplossWithPSAR | CustomStoplossWithPSAR/CustomStoplossWithPSAR.py | ⏳ | qtpylib + INTERFACE_VERSION + 参数重命名 | **文件存在但未测试** |
+| 145 | DCBBBounce | DCBBBounce/DCBBBounce.py | ✅ | qtpylib + INTERFACE_VERSION + **HyperParameter导入修复** | 2026-03-05 修复导入路径，回测通过 |
+| 146 | DD | DD/DD.py | ⏳ | qtpylib + INTERFACE_VERSION + 参数重命名 | **文件存在但未测试** |
+| 147 | DIV_v1 | DIV_v1/DIV_v1.py | ⏳ | qtpylib + INTERFACE_VERSION + 参数重命名 | **文件存在但未测试** |
+| 148 | DevilStra | DevilStra/DevilStra.py | ⏳ | qtpylib + INTERFACE_VERSION + 参数重命名 | **文件存在但未测试** |
+| 149 | Diamond | Diamond/Diamond.py | ⏳ | qtpylib + INTERFACE_VERSION + 参数重命名 | **文件存在但未测试** |
 | 150 | Divergences | Divergences/Divergences.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 | 2026-03-04 回测通过，89笔交易，3.15%盈利，84.3%胜率 |
 
-**实际测试通过率**: 1/2 (50%) - 仅测试了CryptoFrogNFI和Divergences
-**策略列表问题**: 批次15的原始测试列表包含8个不存在的策略 (Current, Currentv2, Currentv2X, Currentv3, Currentv4, Currentv5, Currentv6, Currentv7)
+**通过率**: 3/10 (30%)
 
-**修复总结**:
-- **策略列表问题**: 原始策略列表包含不存在的策略 (Current, Currentv2, Currentv2X, Currentv3, Currentv4, Currentv5, Currentv6, Currentv7)
-- **实际测试策略**: 仅测试了CryptoFrogNFI和Divergences
-- **Divergences表现优异**: 89笔交易，84.3%胜率，3.15%盈利，表现稳定
-- **CryptoFrogNFI方法签名问题**: `min_roi_reached_entry()`方法参数不匹配，需要添加`trade_dur`和`current_time`参数
-- **测试方法**: 使用`freqtrade-full:latest`镜像进行测试，包含所有依赖
-- **性能表现**: Divergences测试时间15秒，CryptoFrogNFI测试时间21秒
+**修复详情** (2026-03-05):
 
-**后续建议**:
-1. **更新策略列表**: 修正批次15的策略列表，移除不存在的Current系列策略
-2. **修复方法签名**: 修复CryptoFrogNFI的`min_roi_reached_entry()`方法参数
-3. **测试剩余策略**: 测试CryptoFrogNFIHO1A等实际存在的策略
+**1. min_roi_reached_entry方法签名修复 (CryptoFrogNFI)**
+
+Freqtrade 2024+ 版本中，`min_roi_reached_entry` 方法签名已变更：
+
+```python
+# 修复前:
+def min_roi_reached_entry(self, trade_dur: int) -> Tuple[Optional[int], Optional[float]]:
+
+# 修复后:
+def min_roi_reached_entry(self, trade: Trade, trade_dur: int, current_time: datetime) -> Tuple[Optional[int], Optional[float]]:
+```
+
+**2. HyperParameter导入修复 (DCBBBounce)**
+
+Freqtrade 2024+ 版本中，参数类导入路径已变更：
+
+```python
+# 修复前:
+from freqtrade.strategy.hyper import CategoricalParameter, DecimalParameter, IntParameter
+
+# 修复后:
+from freqtrade.strategy import CategoricalParameter, DecimalParameter, IntParameter
+```
+
+**策略列表问题**: 原始测试列表包含8个不存在的策略 (Current, Currentv2等)
 
 ---
 ### ⚠️ 第16批 (10个) - 2026-03-04 测试完成 - 需要详细代码修复

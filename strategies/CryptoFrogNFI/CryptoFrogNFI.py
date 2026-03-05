@@ -27,6 +27,8 @@ from freqtrade.persistence import Trade
 
 
 INTERFACE_VERSION = 3
+
+
 class CryptoFrogNFI(IStrategy):
     # Sell hyperspace params:
     sell_params = {
@@ -5967,7 +5969,7 @@ class CryptoFrogNFI(IStrategy):
         return 1
 
     def min_roi_reached_entry(
-        self, trade_dur: int
+        self, trade: Trade, trade_dur: int, current_time: datetime
     ) -> Tuple[Optional[int], Optional[float]]:
         """
         Default implementation for ROI table lookup
@@ -5992,7 +5994,7 @@ class CryptoFrogNFI(IStrategy):
     ) -> Tuple[Optional[int], Optional[float]]:
 
         minimal_roi = self.minimal_roi
-        _, table_roi = self.min_roi_reached_entry(trade_dur)
+        _, table_roi = self.min_roi_reached_entry(trade, trade_dur, current_time)
 
         # see if we have the data we need to do this, otherwise fall back to the standard table
         if self.custom_trade_info and trade and trade.pair in self.custom_trade_info:
@@ -6069,7 +6071,7 @@ class CryptoFrogNFI(IStrategy):
                 trade, current_profit, current_time, trade_dur
             )
         else:
-            _, roi = self.min_roi_reached_entry(trade_dur)
+            _, roi = self.min_roi_reached_entry(trade, trade_dur, current_time)
         if roi is None:
             return False
         else:

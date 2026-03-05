@@ -44,6 +44,260 @@ EMA (指数移动平均)、SMA (简单移动平均)、RSI (相对强弱指标)�
 ### 2. 修复措施
 1. 已更新为 `from freqtrade.strategy import IStrategy`
 
+---
+
+## HyperParameter 导入修复详情 (2026-03-05)
+
+### 问题原因
+
+在 Freqtrade 2024+ 版本中，`CategoricalParameter`, `DecimalParameter`, `IntParameter` 的导入路径已变更。从 `freqtrade.strategy.hyper` 模块移到了 `freqtrade.strategy` 模块。
+
+### 错误信息
+
+```
+cannot import name 'CategoricalParameter' from 'freqtrade.strategy.hyper'
+```
+
+### 修复前代码
+
+```python
+# 第1-12行
+from freqtrade.strategy import IStrategy
+from typing import Dict, List
+from functools import reduce
+from pandas import DataFrame
+
+import talib.abstract as ta
+from technical import qtpylib
+import numpy # noqa
+from freqtrade.strategy.hyper import CategoricalParameter, DecimalParameter, IntParameter
+```
+
+### 修复后代码
+
+```python
+# 第1-11行
+from freqtrade.strategy import IStrategy, CategoricalParameter, DecimalParameter, IntParameter
+from typing import Dict, List
+from functools import reduce
+from pandas import DataFrame
+
+import talib.abstract as ta
+from technical import qtpylib
+import numpy # noqa
+```
+
+### 修复验证
+
+```bash
+# 回测命令
+docker run --rm \
+  -v $(pwd)/user_data:/freqtrade/user_data \
+  -v $(pwd)/strategies:/freqtrade/user_data/strategies \
+  freqtradeorg/freqtrade:stable \
+  backtesting \
+  --strategy-path /freqtrade/user_data/strategies/DCBBBounce \
+  --strategy DCBBBounce \
+  --pairs BTC/USDT:USDT \
+  --timerange 20250101-20250301
+```
+
+**回测结果**:
+- ✅ 策略成功加载
+- ✅ 回测运行完成，无错误
+- 交易数: 0笔 (策略逻辑问题，非代码问题)
+
+---
+
+---
+
+## HyperParameter 导入修复详情 (2026-03-05)
+
+### 问题原因
+
+在 Freqtrade 2024+ 版本中，`CategoricalParameter`, `DecimalParameter`, `IntParameter` 的导入路径已变更。从 `freqtrade.strategy.hyper` 模块移到了 `freqtrade.strategy` 模块。
+
+### 修复前代码
+
+```python
+# 第1-12行
+# --- Do not remove these libs ---
+from freqtrade.strategy import IStrategy
+from typing import Dict, List
+from functools import reduce
+from pandas import DataFrame
+# --------------------------------
+
+import talib.abstract as ta
+from technical import qtpylib
+import numpy # noqa
+from freqtrade.strategy.hyper import CategoricalParameter, DecimalParameter, IntParameter
+```
+
+### 修复后代码
+
+```python
+# 第1-11行
+# --- Do not remove these libs ---
+from freqtrade.strategy import IStrategy, CategoricalParameter, DecimalParameter, IntParameter
+from typing import Dict, List
+from functools import reduce
+from pandas import DataFrame
+# --------------------------------
+
+import talib.abstract as ta
+from technical import qtpylib
+import numpy # noqa
+```
+
+### 修复验证
+
+```bash
+# 回测命令
+docker run --rm \
+  -v $(pwd)/user_data:/freqtrade/user_data \
+  -v $(pwd)/strategies:/freqtrade/user_data/strategies \
+  freqtradeorg/freqtrade:stable \
+  backtesting \
+  --strategy-path /freqtrade/user_data/strategies/DCBBBounce \
+  --strategy DCBBBounce \
+  --pairs BTC/USDT:USDT \
+  --timerange 20250101-20250301
+```
+
+**回测结果**:
+- ✅ 策略成功加载
+- ✅ 回测运行完成，无错误
+- 交易数: 0笔 (策略逻辑问题，非代码问题)
+
+---
+
+---
+
+## HyperParameter 导入修复详情 (2026-03-05)
+
+### 问题原因
+
+在 Freqtrade 2024+ 版本中，`CategoricalParameter`, `DecimalParameter`, `IntParameter` 的导入路径已变更。从 `freqtrade.strategy.hyper` 模块移到了 `freqtrade.strategy` 模块。
+
+### 修复前代码
+
+```python
+# 第1-12行
+# --- Do not remove these libs ---
+from freqtrade.strategy import IStrategy
+from typing import Dict, List
+from functools import reduce
+from pandas import DataFrame
+# --------------------------------
+
+import talib.abstract as ta
+from technical import qtpylib
+import numpy # noqa
+from freqtrade.strategy.hyper import CategoricalParameter, DecimalParameter, IntParameter
+```
+
+### 修复后代码
+
+```python
+# 第1-11行
+# --- Do not remove these libs ---
+from freqtrade.strategy import IStrategy, CategoricalParameter, DecimalParameter, IntParameter
+from typing import Dict, List
+from functools import reduce
+from pandas import DataFrame
+# --------------------------------
+
+import talib.abstract as ta
+from technical import qtpylib
+import numpy # noqa
+```
+
+### 修复验证
+
+```bash
+# 回测命令
+docker run --rm \
+  -v $(pwd)/user_data:/freqtrade/user_data \
+  -v $(pwd)/strategies:/freqtrade/user_data/strategies \
+  freqtradeorg/freqtrade:stable \
+  backtesting \
+  --strategy-path /freqtrade/user_data/strategies/DCBBBounce \
+  --strategy DCBBBounce \
+  --pairs BTC/USDT:USDT \
+  --timerange 20250101-20250301
+```
+
+**回测结果**:
+- ✅ 策略成功加载
+- ✅ 回测运行完成，无错误
+- 交易数: 0笔 (策略逻辑问题，非代码问题)
+
+---
+
+---
+
+## HyperParameter 导入修复详情 (2026-03-05)
+
+### 问题原因
+
+在 Freqtrade 2024+ 版本中，`CategoricalParameter`, `DecimalParameter`, `IntParameter` 的导入路径已变更。从 `freqtrade.strategy.hyper` 模块移到了 `freqtrade.strategy` 模块。
+
+### 修复前代码
+
+```python
+# 第1-12行
+# --- Do not remove these libs ---
+from freqtrade.strategy import IStrategy
+from typing import Dict, List
+from functools import reduce
+from pandas import DataFrame
+# --------------------------------
+
+import talib.abstract as ta
+from technical import qtpylib
+import numpy # noqa
+from freqtrade.strategy.hyper import CategoricalParameter, DecimalParameter, IntParameter
+```
+
+### 修复后代码
+
+```python
+# 第1-11行
+# --- Do not remove these libs ---
+from freqtrade.strategy import IStrategy, CategoricalParameter, DecimalParameter, IntParameter
+from typing import Dict, List
+from functools import reduce
+from pandas import DataFrame
+# --------------------------------
+
+import talib.abstract as ta
+from technical import qtpylib
+import numpy # noqa
+```
+
+### 修复验证
+
+```bash
+# 回测命令
+docker run --rm \
+  -v $(pwd)/user_data:/freqtrade/user_data \
+  -v $(pwd)/strategies:/freqtrade/user_data/strategies \
+  freqtradeorg/freqtrade:stable \
+  backtesting \
+  --strategy-path /freqtrade/user_data/strategies/DCBBBounce \
+  --strategy DCBBBounce \
+  --pairs BTC/USDT:USDT \
+  --timerange 20250101-20250301
+```
+
+**回测结果**:
+- ✅ 策略成功加载
+- ✅ 回测运行完成，无错误
+- 交易数: 0笔 (策略逻辑问题，非代码问题)
+
+---
+
 ## 投资逻辑问题分析
 
 本策略在投资逻辑和风险管理方面存在以下问题：

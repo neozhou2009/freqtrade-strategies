@@ -44,6 +44,108 @@ EMA (指数移动平均)、SMA (简单移动平均)、RSI (相对强弱指标)�
 ### 2. 修复措施
 无
 
+---
+
+## min_roi_reached_entry 方法签名修复详情 (2026-03-05)
+
+### 问题原因
+
+在 Freqtrade 2024+ 版本中，`min_roi_reached_entry()` 方法的签名已变更。旧的签名不再被框架正确调用，导致回测时报错：
+
+```
+TypeError: CryptoFrogNFI.min_roi_reached_entry() takes 3 positional arguments but 4 were given
+```
+
+### 修复前代码
+
+```python
+# 第5969-5980行
+def min_roi_reached_entry(
+    self, trade_dur: int
+) -> Tuple[Optional[int], Optional[float]]:
+    """
+    Default implementation for ROI table lookup
+    """
+    # Get highest entry in ROI dict where key <= trade-duration
+    roi_list = list(filter(lambda x: x <= trade_dur, self.minimal_roi.keys()))
+    if not roi_list:
+        return None, None
+    roi_entry = max(roi_list)
+    return roi_entry, self.minimal_roi[roi_entry]
+```
+
+### 修复后代码
+
+```python
+# 第5969-5981行
+def min_roi_reached_entry(
+    self, trade: Trade, trade_dur: int, current_time: datetime
+) -> Tuple[Optional[int], Optional[float]]:
+    """
+    Default implementation for ROI table lookup
+    """
+    # Get highest entry in ROI dict where key <= trade-duration
+    roi_list = list(filter(lambda x: x <= trade_dur, self.minimal_roi.keys()))
+    if not roi_list:
+        return None, None
+    roi_entry = max(roi_list)
+    return roi_entry, self.minimal_roi[roi_entry]
+```
+
+### 同时修复的调用点
+
+**调用点 1: min_roi_reached_dynamic 方法中 (第5997行)**
+
+```python
+# 修复前:
+_, table_roi = self.min_roi_reached_entry(trade_dur)
+
+# 修复后:
+_, table_roi = self.min_roi_reached_entry(trade, trade_dur, current_time)
+```
+
+**调用点 2: min_roi_reached 方法中 (第6074行)**
+
+```python
+# 修复前:
+_, roi = self.min_roi_reached_entry(trade_dur)
+
+# 修复后:
+_, roi = self.min_roi_reached_entry(trade, trade_dur, current_time)
+```
+
+### 修复验证
+
+```bash
+# 回测命令
+docker run --rm \
+  -v $(pwd)/user_data:/freqtrade/user_data \
+  -v $(pwd)/strategies:/freqtrade/user_data/strategies \
+  freqtrade-full:latest \
+  backtesting \
+  --strategy-path /freqtrade/user_data/strategies/CryptoFrogNFI \
+  --strategy CryptoFrogNFI \
+  --pairs BTC/USDT:USDT \
+  --timerange 20250101-20250301
+```
+
+**回测结果**:
+- ✅ 策略成功加载
+- ✅ 回测运行完成，无错误
+- 交易数: 80笔
+- 胜率: 73.8% (59胜/18负/3平)
+- 总盈亏: -2.46%
+- 平均持仓时间: 1小时32分钟
+
+### 注意事项
+
+此策略依赖以下库，需要使用 `freqtrade-full:latest` 镜像进行测试：
+- `finta` - 金融技术分析库
+- `talib` - 技术指标计算
+- `ta` - 技术分析库
+
+---
+
 ## 投资逻辑问题分析
 
 本策略在投资逻辑和风险管理方面存在以下问题：
