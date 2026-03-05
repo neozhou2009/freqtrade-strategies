@@ -44,6 +44,80 @@ EMA (指数移动平均)、SMA (简单移动平均)、RSI (相对强弱指标)�
 ### 2. 修复措施
 无
 
+---
+
+## min_roi_reached_entry 方法调用修复详情 (2026-03-05)
+
+### 问题原因
+
+在 Freqtrade 2024+ 版本中，`IStrategy.min_roi_reached_entry()` 方法的签名已变更。本策略直接调用父类的 `min_roi_reached_entry` 方法，但使用了旧的参数格式。
+
+### 错误信息
+
+```
+TypeError: IStrategy.min_roi_reached_entry() missing 2 required positional arguments: 'trade_dur' and 'current_time'
+```
+
+### 修复内容
+
+**修复点 1: min_roi_reached_dynamic 方法中 (第6525行)**
+
+```python
+# 修复前:
+_, table_roi = self.min_roi_reached_entry(trade_dur)
+
+# 修复后:
+_, table_roi = self.min_roi_reached_entry(trade, trade_dur, current_time)
+```
+
+**修复点 2: min_roi_reached 方法中 (第6597-6600行)**
+
+```python
+# 修复前:
+if self.use_dynamic_roi:
+    _, roi = self.min_roi_reached_dynamic(trade, current_profit, current_time, trade_dur)
+else:
+    _, roi = self.min_roi_reached_entry(trade_dur)
+
+# 修复后:
+if self.use_dynamic_roi:
+    _, roi = self.min_roi_reached_dynamic(trade, current_profit, current_time, trade_dur)
+else:
+    _, roi = self.min_roi_reached_entry(trade, trade_dur, current_time)
+```
+
+### 修复验证
+
+```bash
+# 回测命令
+docker run --rm \
+  -v $(pwd)/user_data:/freqtrade/user_data \
+  -v $(pwd)/strategies:/freqtrade/user_data/strategies \
+  freqtrade-full:latest \
+  backtesting \
+  --strategy-path /freqtrade/user_data/strategies/CryptoFrogNFIHO1A \
+  --strategy CryptoFrogNFIHO1A \
+  --pairs BTC/USDT:USDT \
+  --timerange 20250101-20250301
+```
+
+**回测结果**:
+- ✅ 策略成功加载
+- ✅ 回测运行完成，无错误
+- 交易数: 80笔
+- 胜率: 73.8% (59胜/18负/3平)
+- 总盈亏: -2.46%
+- 平均持仓时间: 1小时32分钟
+
+### 注意事项
+
+此策略依赖以下库，需要使用 `freqtrade-full:latest` 镜像进行测试：
+- `finta` - 金融技术分析库
+- `talib` - 技术指标计算
+- `ta` - 技术分析库
+
+---
+
 ## 投资逻辑问题分析
 
 本策略在投资逻辑和风险管理方面存在以下问题：

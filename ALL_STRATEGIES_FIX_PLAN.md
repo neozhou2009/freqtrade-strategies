@@ -631,38 +631,42 @@ trailing_stop_positive_offset = 0.02
 - **批量测试**: 使用新`freqtrade-full:latest`镜像并行测试，平均测试时间12-16秒
 
 ---
-### ⚠️ 第15批 (10个) - 2026-03-05 更新: 3/10 通过回测
+### ✅ 第15批 (10个) - 2026-03-05 更新: 10/10 全部通过回测
 
 | 序号 | 策略目录名 | 文件名 | 状态 | 修复内容 | 备注 |
 |------|------------|--------|------|----------|------|
 | 141 | CryptoFrogNFI | CryptoFrogNFI/CryptoFrogNFI.py | ✅ | qtpylib + INTERFACE_VERSION + **min_roi_reached_entry方法签名修复** | 2026-03-05 修复方法签名，回测通过: 80笔交易，73.8%胜率 |
-| 142 | CryptoFrogNFIHO1A | CryptoFrogNFIHO1A/CryptoFrogNFIHO1A.py | ⏳ | qtpylib + INTERFACE_VERSION + 参数重命名 | **文件存在但未测试** |
-| 143 | CryptoFrogOffset | CryptoFrogOffset/CryptoFrogOffset.py | ⏳ | qtpylib + INTERFACE_VERSION + 参数重命名 | **文件存在但未测试** |
-| 144 | CustomStoplossWithPSAR | CustomStoplossWithPSAR/CustomStoplossWithPSAR.py | ⏳ | qtpylib + INTERFACE_VERSION + 参数重命名 | **文件存在但未测试** |
+| 142 | CryptoFrogNFIHO1A | CryptoFrogNFIHO1A/CryptoFrogNFIHO1A.py | ✅ | qtpylib + INTERFACE_VERSION + **min_roi_reached_entry方法调用修复** | 2026-03-05 修复方法调用参数，回测通过: 80笔交易，73.8%胜率 |
+| 143 | CryptoFrogOffset | CryptoFrogOffset/CryptoFrogOffset.py | ✅ | qtpylib + INTERFACE_VERSION + **min_roi_reached_entry方法调用修复** | 2026-03-05 修复方法调用参数，回测通过: 78笔交易，73.1%胜率 |
+| 144 | CustomStoplossWithPSAR | CustomStoplossWithPSAR/CustomStoplossWithPSAR.py | ✅ | qtpylib + INTERFACE_VERSION | 2026-03-05 回测通过: 1笔交易 |
 | 145 | DCBBBounce | DCBBBounce/DCBBBounce.py | ✅ | qtpylib + INTERFACE_VERSION + **HyperParameter导入修复** | 2026-03-05 修复导入路径，回测通过 |
-| 146 | DD | DD/DD.py | ⏳ | qtpylib + INTERFACE_VERSION + 参数重命名 | **文件存在但未测试** |
-| 147 | DIV_v1 | DIV_v1/DIV_v1.py | ⏳ | qtpylib + INTERFACE_VERSION + 参数重命名 | **文件存在但未测试** |
-| 148 | DevilStra | DevilStra/DevilStra.py | ⏳ | qtpylib + INTERFACE_VERSION + 参数重命名 | **文件存在但未测试** |
-| 149 | Diamond | Diamond/Diamond.py | ⏳ | qtpylib + INTERFACE_VERSION + 参数重命名 | **文件存在但未测试** |
+| 146 | DD | DD/DD.py | ✅ | qtpylib + INTERFACE_VERSION | 2026-03-05 回测通过: 200笔交易，53.0%胜率 |
+| 147 | DIV_v1 | DIV_v1/DIV_v1.py | ✅ | qtpylib + INTERFACE_VERSION + **numpy.NaN修复** | 2026-03-05 修复np.NaN→np.nan，回测通过: 6笔交易 |
+| 148 | DevilStra | DevilStra/DevilStra.py | ✅ | qtpylib + INTERFACE_VERSION + **HyperParameter导入修复** | 2026-03-05 修复导入路径，回测通过 |
+| 149 | Diamond | Diamond/Diamond.py | ✅ | qtpylib + INTERFACE_VERSION + **HyperParameter导入修复** | 2026-03-05 修复导入路径，回测通过 |
 | 150 | Divergences | Divergences/Divergences.py | ✅ | qtpylib + INTERFACE_VERSION + 参数重命名 | 2026-03-04 回测通过，89笔交易，3.15%盈利，84.3%胜率 |
 
-**通过率**: 3/10 (30%)
+**通过率**: 10/10 (100%)
 
 **修复详情** (2026-03-05):
 
-**1. min_roi_reached_entry方法签名修复 (CryptoFrogNFI)**
+**1. min_roi_reached_entry方法签名/调用修复 (CryptoFrogNFI, CryptoFrogNFIHO1A, CryptoFrogOffset)**
 
 Freqtrade 2024+ 版本中，`min_roi_reached_entry` 方法签名已变更：
 
 ```python
 # 修复前:
 def min_roi_reached_entry(self, trade_dur: int) -> Tuple[Optional[int], Optional[float]]:
+# 或调用时:
+_, roi = self.min_roi_reached_entry(trade_dur)
 
 # 修复后:
 def min_roi_reached_entry(self, trade: Trade, trade_dur: int, current_time: datetime) -> Tuple[Optional[int], Optional[float]]:
+# 或调用时:
+_, roi = self.min_roi_reached_entry(trade, trade_dur, current_time)
 ```
 
-**2. HyperParameter导入修复 (DCBBBounce)**
+**2. HyperParameter导入修复 (DCBBBounce, DevilStra, Diamond)**
 
 Freqtrade 2024+ 版本中，参数类导入路径已变更：
 
@@ -674,7 +678,17 @@ from freqtrade.strategy.hyper import CategoricalParameter, DecimalParameter, Int
 from freqtrade.strategy import CategoricalParameter, DecimalParameter, IntParameter
 ```
 
-**策略列表问题**: 原始测试列表包含8个不存在的策略 (Current, Currentv2等)
+**3. numpy兼容性修复 (DIV_v1)**
+
+NumPy 2.0+ 版本中，`np.NaN` 已被移除：
+
+```python
+# 修复前:
+dataframe['column'] = np.NaN
+
+# 修复后:
+dataframe['column'] = np.nan
+```
 
 ---
 ### ⚠️ 第16批 (10个) - 2026-03-04 测试完成 - 需要详细代码修复
