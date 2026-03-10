@@ -12,7 +12,7 @@ if ! command -v docker &> /dev/null; then
 fi
 
 # Configuration
-IMAGE_NAME="freqtradeorg/freqtrade:stable"
+IMAGE_NAME="neozhou2009/freqtrade-full:latest"
 # Mount the user_data directory inside the container
 BASE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 USER_DATA_DIR="$BASE_DIR/user_data"
