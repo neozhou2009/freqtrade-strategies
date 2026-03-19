@@ -1,4 +1,4 @@
-# Strategy Leaderboard: last_3_months
+# Strategy Leaderboard: 2025_year
 
 Total strategies: 109
 

@@ -34,11 +34,24 @@ def main():
         default="neozhou2009/freqtrade-full:latest",
         help="Docker image to use (passed through to run_batch_backtests.py)"
     )
+    parser.add_argument(
+        "--skip-errors",
+        action="store_true",
+        default=True,
+        help="Run each strategy individually and skip those with errors (default: True)"
+    )
+    parser.add_argument(
+        "--no-skip-errors",
+        dest="skip_errors",
+        action="store_false",
+        help="Run all strategies in a single batch call (faster, but one error aborts the whole batch)"
+    )
     args = parser.parse_args()
     period = args.period
 
     print(f"=== Running all {TOTAL_BATCHES} batches ===")
     print(f"Period: {period}")
+    print(f"Skip errors: {args.skip_errors} (each strategy runs individually when True)")
     print()
 
     success_batches = []
@@ -61,6 +74,8 @@ def main():
         ]
         if args.docker:
             cmd += ["--docker", "--docker-image", args.docker_image]
+        if args.skip_errors:
+            cmd += ["--skip-errors"]
 
         result = subprocess.run(cmd)
 

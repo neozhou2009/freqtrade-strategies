@@ -33,9 +33,17 @@ jobs:
           # pip install freqtrade
           echo "Assuming freqtrade is available in the environment"
 
+      - name: Pull Docker Image
+        run: docker pull neozhou2009/freqtrade-full:latest
+
       - name: Run Script to Backtest Batch
         run: |
-          python scripts/run_batch_backtests.py --batch ${{ matrix.batch_id }} --total-batches 10 --period ${{ github.event.inputs.period || 'last_1_month' }}
+          python scripts/run_batch_backtests.py \
+            --batch ${{ matrix.batch_id }} \
+            --total-batches 10 \
+            --period ${{ github.event.inputs.period || 'last_1_month' }} \
+            --docker \
+            --skip-errors
         continue-on-error: true
 
       - name: Upload Batch Results
