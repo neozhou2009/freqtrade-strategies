@@ -23,6 +23,17 @@ def main():
         ],
         help="Timeframe period for the backtests"
     )
+    parser.add_argument(
+        "--docker",
+        action="store_true",
+        default=False,
+        help="Use Docker mode (passed through to run_batch_backtests.py)"
+    )
+    parser.add_argument(
+        "--docker-image",
+        default="neozhou2009/freqtrade-full:latest",
+        help="Docker image to use (passed through to run_batch_backtests.py)"
+    )
     args = parser.parse_args()
     period = args.period
 
@@ -47,8 +58,9 @@ def main():
             str(batch),
             "--total-batches",
             str(TOTAL_BATCHES),
-            "--docker",
         ]
+        if args.docker:
+            cmd += ["--docker", "--docker-image", args.docker_image]
 
         result = subprocess.run(cmd)
 
