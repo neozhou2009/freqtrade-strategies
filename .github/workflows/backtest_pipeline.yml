@@ -1,0 +1,74 @@
+name: Freqtrade CI/CD Backtesting Pipeline
+
+on:
+  workflow_dispatch:
+    inputs:
+      period:
+        description: 'Timerange period for backtesting'
+        required: true
+        default: '2025_year'
+        type: choice
+        options:
+          - 2025_year
+          - last_3_months
+          - last_1_month
+  schedule:
+    - cron: '0 0 * * 1' # Run weekly on Monday
+
+jobs:
+  backtest:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pandas numpy
+
+      # [CRITICAL] Cache Data to avoid re-downloading yearly data
+      - name: Cache Freqtrade Data
+        uses: actions/cache@v3
+        with:
+          path: user_data/data
+          key: ${{ runner.os }}-freqtrade-data-v1-${{ hashFiles('user_data/config.json', 'scripts/download_data.py') }}
+          restore-keys: |
+            ${{ runner.os }}-freqtrade-data-v1-
+
+      - name: Step 1 - Strategy Registry Classification
+        run: python scripts/classify_strategies.py
+
+      - name: Step 2 - Sync/Complete Market Data
+        # Using the script with docker logic (via freqtradeorg/freqtrade:latest which is usually preferred on CI)
+        # We manually use the image for speed if the runner has it, or pull it
+        run: |
+          docker pull neozhou2009/freqtrade-full:latest
+          python scripts/download_data.py --period ${{ github.event.inputs.period || '2025_year' }} --docker
+
+      - name: Step 3 - Prepare Environment (Flatten)
+        run: python scripts/prepare_test_env.py
+
+      - name: Step 4 - Run Full Batch Backtesting
+        run: python scripts/run_all_batches.py --period ${{ github.event.inputs.period || '2025_year' }} --docker
+
+      - name: Step 5 - Generate Rankings
+        run: python scripts/generate_leaderboard.py --period "CI Auto Report - ${{ github.event.inputs.period || '2025_year' }}"
+
+      - name: Step 6 - Commit and Push Results
+        # Don't fail if no changes were made to LEADERBOARD.md
+        continue-on-error: true
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add LEADERBOARD.md leaderboard.json strategy_registry.json
+          git commit -m "chore: Update Leaderboard [skip ci]"
+          git push

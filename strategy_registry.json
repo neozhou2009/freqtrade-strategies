@@ -1,0 +1,10605 @@
+{
+  "ADXMomentum": {
+    "complexity": 2,
+    "family": "ADXMomentum",
+    "features": [],
+    "indicators": [
+      "ADX",
+      "Momentum",
+      "PSAR"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Scalping",
+      "Trend"
+    ],
+    "timeframe": "1h"
+  },
+  "ADX_15M_USDT": {
+    "complexity": 2,
+    "family": "ADX",
+    "features": [],
+    "indicators": [
+      "ADX",
+      "Momentum",
+      "PSAR"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Momentum"
+    ],
+    "timeframe": "15m"
+  },
+  "ADX_15M_USDT2": {
+    "complexity": 2,
+    "family": "ADX",
+    "features": [],
+    "indicators": [
+      "ADX",
+      "Momentum",
+      "PSAR"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Momentum"
+    ],
+    "timeframe": "15m"
+  },
+  "ASDTSRockwellTrading": {
+    "complexity": 1,
+    "family": "ASDTSRockwellTrading",
+    "features": [],
+    "indicators": [
+      "MACD"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Breakout"
+    ],
+    "timeframe": "5m"
+  },
+  "ActionZone": {
+    "complexity": 8,
+    "family": "ActionZone",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "custom-exit",
+      "hyperopt",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "EMA",
+      "TEMA"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend"
+    ],
+    "timeframe": "1d"
+  },
+  "AdxSmas": {
+    "complexity": 2,
+    "family": "AdxSmas",
+    "features": [],
+    "indicators": [
+      "SMA",
+      "ADX"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Scalping"
+    ],
+    "timeframe": "1h"
+  },
+  "AlligatorStrat": {
+    "complexity": 3,
+    "family": "AlligatorStrat",
+    "features": [],
+    "indicators": [
+      "SMA",
+      "MACD",
+      "CCI",
+      "Alligator"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend"
+    ],
+    "timeframe": "4h"
+  },
+  "AlligatorStrategy": {
+    "complexity": 7,
+    "family": "AlligatorStrategy",
+    "features": [
+      "trailing-stop",
+      "hyperopt",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "RSI",
+      "Stoch",
+      "Momentum",
+      "Alligator"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Momentum"
+    ],
+    "timeframe": "1h"
+  },
+  "AlwaysBuy": {
+    "features": [
+      "test-strategy"
+    ],
+    "indicators": [],
+    "market": "Any",
+    "style": [
+      "Special"
+    ],
+    "timeframe": "5m"
+  },
+  "Apollo11": {
+    "complexity": 4,
+    "family": "Apollo",
+    "features": [
+      "custom-stoploss"
+    ],
+    "indicators": [
+      "EMA",
+      "SMA",
+      "BB",
+      "ATR",
+      "Fibonacci"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Scalping",
+      "Trend"
+    ],
+    "timeframe": "15m"
+  },
+  "AverageStrategy": {
+    "complexity": 1,
+    "family": "AverageStrategy",
+    "features": [],
+    "indicators": [
+      "EMA"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend"
+    ],
+    "timeframe": "4h"
+  },
+  "AwesomeMacd": {
+    "complexity": 2,
+    "family": "AwesomeMacd",
+    "features": [],
+    "indicators": [
+      "MACD",
+      "ADX",
+      "Awesome"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Scalping",
+      "Trend"
+    ],
+    "timeframe": "1h"
+  },
+  "BBMod1": {
+    "complexity": 10,
+    "family": "BB",
+    "features": [
+      "custom-stoploss",
+      "custom-exit",
+      "hyperopt",
+      "multi-timeframe",
+      "heikin-ashi",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "CCI",
+      "ADX",
+      "ATR",
+      "Stoch",
+      "MFI",
+      "VWAP",
+      "Williams",
+      "Momentum",
+      "ROC",
+      "RMI",
+      "TEMA",
+      "Keltner",
+      "Fibonacci",
+      "Heikin",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Momentum",
+      "Mean Reversion"
+    ],
+    "timeframe": "5m"
+  },
+  "BBRSI": {
+    "complexity": 5,
+    "family": "BBRSI",
+    "features": [
+      "trailing-stop",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "RSI",
+      "BB",
+      "TEMA"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion"
+    ],
+    "timeframe": "4h"
+  },
+  "BBRSI2": {
+    "complexity": 2,
+    "family": "BBRSI",
+    "features": [
+      "trailing-stop"
+    ],
+    "indicators": [
+      "RSI",
+      "BB"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion"
+    ],
+    "timeframe": "1m"
+  },
+  "BBRSI21": {
+    "complexity": 3,
+    "family": "BBRSI",
+    "features": [
+      "trailing-stop"
+    ],
+    "indicators": [
+      "RSI",
+      "BB",
+      "Stoch"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Scalping"
+    ],
+    "timeframe": "5m"
+  },
+  "BBRSI3366": {
+    "complexity": 3,
+    "family": "BBRSI",
+    "features": [
+      "trailing-stop"
+    ],
+    "indicators": [
+      "RSI",
+      "BB",
+      "Stoch",
+      "PSAR"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Scalping"
+    ],
+    "timeframe": "5m"
+  },
+  "BBRSI4cust": {
+    "complexity": 5,
+    "family": "BBRSI",
+    "features": [
+      "trailing-stop",
+      "custom-exit",
+      "hyperopt"
+    ],
+    "indicators": [
+      "RSI",
+      "BB",
+      "ADX"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Breakout"
+    ],
+    "timeframe": "15m"
+  },
+  "BBRSINaiveStrategy": {
+    "complexity": 4,
+    "family": "BBRSI",
+    "features": [
+      "trailing-stop",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "RSI",
+      "BB"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion"
+    ],
+    "timeframe": "15m"
+  },
+  "BBRSIOptim2020Strategy": {
+    "complexity": 5,
+    "family": "BBRSI",
+    "features": [
+      "trailing-stop",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "RSI",
+      "BB",
+      "TEMA"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion"
+    ],
+    "timeframe": "5m"
+  },
+  "BBRSIOptimStrategy": {
+    "complexity": 5,
+    "family": "BBRSI",
+    "features": [
+      "trailing-stop",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "RSI",
+      "BB",
+      "TEMA"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion"
+    ],
+    "timeframe": "5m"
+  },
+  "BBRSIOptimizedStrategy": {
+    "complexity": 4,
+    "family": "BBRSI",
+    "features": [
+      "trailing-stop",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "RSI",
+      "BB"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion"
+    ],
+    "timeframe": "5m"
+  },
+  "BBRSIS": {
+    "complexity": 2,
+    "family": "BBRSI",
+    "features": [],
+    "indicators": [
+      "RSI",
+      "SMA",
+      "BB"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Mean Reversion"
+    ],
+    "timeframe": "5m"
+  },
+  "BBRSIStrategy": {
+    "complexity": 5,
+    "family": "BBRSI",
+    "features": [
+      "trailing-stop",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "RSI",
+      "BB",
+      "TEMA"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion"
+    ],
+    "timeframe": "15m"
+  },
+  "BBRSITV": {
+    "complexity": 6,
+    "family": "BBRSI",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "hyperopt"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "EWO"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Scalping"
+    ],
+    "timeframe": "5m"
+  },
+  "BBRSIoriginal": {
+    "complexity": 2,
+    "family": "BBRSI",
+    "features": [],
+    "indicators": [
+      "RSI",
+      "BB"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion"
+    ],
+    "timeframe": "1h"
+  },
+  "BBRSIv2": {
+    "complexity": 4,
+    "family": "BBRSI",
+    "features": [
+      "custom-stoploss"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "BB",
+      "TEMA"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Scalping"
+    ],
+    "timeframe": "15m"
+  },
+  "BB_RPB_TSL": {
+    "complexity": 10,
+    "family": "BB_RPB_TSL",
+    "features": [
+      "custom-stoploss",
+      "custom-exit",
+      "confirm-entry",
+      "hyperopt",
+      "multi-timeframe",
+      "heikin-ashi",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "CCI",
+      "ADX",
+      "Ichimoku",
+      "ATR",
+      "Stoch",
+      "MFI",
+      "Williams",
+      "Momentum",
+      "ROC",
+      "RMI",
+      "TEMA",
+      "Keltner",
+      "Fibonacci",
+      "Heikin",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Momentum",
+      "Mean Reversion"
+    ],
+    "timeframe": "5m"
+  },
+  "BB_RPB_TSL_2": {
+    "complexity": 10,
+    "family": "BB_RPB_TSL",
+    "features": [
+      "custom-stoploss",
+      "custom-exit",
+      "confirm-entry",
+      "hyperopt",
+      "multi-timeframe",
+      "heikin-ashi",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "CCI",
+      "ADX",
+      "Ichimoku",
+      "ATR",
+      "Stoch",
+      "MFI",
+      "Williams",
+      "Momentum",
+      "ROC",
+      "RMI",
+      "TEMA",
+      "Heikin",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Momentum",
+      "Mean Reversion"
+    ],
+    "timeframe": "3m"
+  },
+  "BB_RPB_TSL_BI": {
+    "complexity": 10,
+    "family": "BB_RPB_TSL",
+    "features": [
+      "custom-stoploss",
+      "custom-exit",
+      "confirm-entry",
+      "hyperopt",
+      "multi-timeframe",
+      "heikin-ashi",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "CCI",
+      "ADX",
+      "Ichimoku",
+      "ATR",
+      "Stoch",
+      "MFI",
+      "Williams",
+      "Momentum",
+      "ROC",
+      "RMI",
+      "TEMA",
+      "Heikin",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Momentum",
+      "Mean Reversion"
+    ],
+    "timeframe": "5m"
+  },
+  "BB_RPB_TSL_BIV1": {
+    "complexity": 10,
+    "family": "BB_RPB_TSL",
+    "features": [
+      "custom-stoploss",
+      "custom-exit",
+      "confirm-entry",
+      "hyperopt",
+      "multi-timeframe",
+      "heikin-ashi",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "CCI",
+      "ADX",
+      "Ichimoku",
+      "ATR",
+      "Stoch",
+      "MFI",
+      "Williams",
+      "Momentum",
+      "ROC",
+      "RMI",
+      "TEMA",
+      "Heikin",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Momentum",
+      "Mean Reversion"
+    ],
+    "timeframe": "5m"
+  },
+  "BB_RPB_TSL_RNG": {
+    "complexity": 10,
+    "family": "BB_RPB_TSL",
+    "features": [
+      "custom-stoploss",
+      "hyperopt",
+      "multi-timeframe",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "CCI",
+      "ADX",
+      "Stoch",
+      "Williams",
+      "RMI",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "BB_RPB_TSL_RNG_2": {
+    "complexity": 10,
+    "family": "BB_RPB_TSL",
+    "features": [
+      "custom-stoploss",
+      "hyperopt",
+      "multi-timeframe",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "CCI",
+      "ADX",
+      "Stoch",
+      "Williams",
+      "RMI",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "BB_RPB_TSL_RNG_TBS": {
+    "complexity": 10,
+    "family": "BB_RPB_TSL",
+    "features": [
+      "custom-stoploss",
+      "confirm-entry",
+      "hyperopt",
+      "multi-timeframe",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "CCI",
+      "ADX",
+      "Stoch",
+      "Williams",
+      "RMI",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "BB_RPB_TSL_RNG_TBS_GOLD": {
+    "complexity": 10,
+    "family": "BB_RPB_TSL",
+    "features": [
+      "custom-stoploss",
+      "confirm-entry",
+      "hyperopt",
+      "multi-timeframe",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "CCI",
+      "ADX",
+      "Stoch",
+      "Williams",
+      "RMI",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "BB_RPB_TSL_RNG_VWAP": {
+    "complexity": 10,
+    "family": "BB_RPB_TSL",
+    "features": [
+      "custom-stoploss",
+      "hyperopt",
+      "multi-timeframe",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "CCI",
+      "ADX",
+      "Stoch",
+      "VWAP",
+      "Williams",
+      "RMI",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "BB_RPB_TSL_SMA_Tranz": {
+    "complexity": 10,
+    "family": "BB_RPB_TSL",
+    "features": [
+      "custom-stoploss",
+      "custom-exit",
+      "confirm-entry",
+      "hyperopt",
+      "multi-timeframe",
+      "heikin-ashi",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "CCI",
+      "ADX",
+      "Ichimoku",
+      "ATR",
+      "Stoch",
+      "MFI",
+      "VWAP",
+      "Williams",
+      "Momentum",
+      "ROC",
+      "RMI",
+      "TEMA",
+      "Keltner",
+      "Fibonacci",
+      "Heikin",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Momentum",
+      "Mean Reversion"
+    ],
+    "timeframe": "5m"
+  },
+  "BB_RPB_TSL_SMA_Tranz_TB_1_1_1": {
+    "complexity": 10,
+    "family": "BB_RPB_TSL",
+    "features": [
+      "custom-stoploss",
+      "custom-exit",
+      "confirm-entry",
+      "hyperopt",
+      "multi-timeframe",
+      "heikin-ashi",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "CCI",
+      "ADX",
+      "Ichimoku",
+      "ATR",
+      "Stoch",
+      "MFI",
+      "Williams",
+      "Momentum",
+      "ROC",
+      "RMI",
+      "TEMA",
+      "Keltner",
+      "Fibonacci",
+      "Heikin",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Momentum",
+      "Mean Reversion"
+    ],
+    "timeframe": "5m"
+  },
+  "BB_RPB_TSL_SMA_Tranz_TB_MOD": {
+    "complexity": 10,
+    "family": "BB_RPB_TSL",
+    "features": [
+      "custom-stoploss",
+      "custom-exit",
+      "confirm-entry",
+      "hyperopt",
+      "multi-timeframe",
+      "heikin-ashi",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "CCI",
+      "ADX",
+      "Ichimoku",
+      "ATR",
+      "Stoch",
+      "MFI",
+      "Williams",
+      "Momentum",
+      "ROC",
+      "RMI",
+      "TEMA",
+      "Keltner",
+      "Fibonacci",
+      "Heikin",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Momentum",
+      "Mean Reversion"
+    ],
+    "timeframe": "5m"
+  },
+  "BB_RPB_TSL_Tranz": {
+    "complexity": 10,
+    "family": "BB_RPB_TSL",
+    "features": [
+      "custom-stoploss",
+      "custom-exit",
+      "confirm-entry",
+      "hyperopt",
+      "multi-timeframe",
+      "heikin-ashi",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "CCI",
+      "ADX",
+      "Ichimoku",
+      "ATR",
+      "Stoch",
+      "MFI",
+      "Williams",
+      "Momentum",
+      "ROC",
+      "RMI",
+      "TEMA",
+      "Keltner",
+      "Fibonacci",
+      "Heikin",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Momentum",
+      "Mean Reversion"
+    ],
+    "timeframe": "5m"
+  },
+  "BB_RPB_TSL_c7c477d_20211030": {
+    "complexity": 10,
+    "family": "BB_RPB_TSL",
+    "features": [
+      "custom-stoploss",
+      "hyperopt",
+      "multi-timeframe",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "CCI",
+      "ADX",
+      "Ichimoku",
+      "Stoch",
+      "Williams",
+      "RMI",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "BB_RPB_TSLmeneguzzo": {
+    "complexity": 10,
+    "family": "BB_RPB_TSL",
+    "features": [
+      "custom-stoploss",
+      "custom-exit",
+      "confirm-entry",
+      "hyperopt",
+      "multi-timeframe",
+      "heikin-ashi",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "CCI",
+      "ADX",
+      "Ichimoku",
+      "ATR",
+      "Stoch",
+      "MFI",
+      "Williams",
+      "Momentum",
+      "ROC",
+      "RMI",
+      "TEMA",
+      "Keltner",
+      "Heikin",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Momentum",
+      "Mean Reversion"
+    ],
+    "timeframe": "5m"
+  },
+  "BB_RSI": {
+    "complexity": 4,
+    "family": "BB",
+    "features": [
+      "trailing-stop",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "RSI",
+      "BB"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion"
+    ],
+    "timeframe": "1h"
+  },
+  "BB_Strategy04": {
+    "complexity": 4,
+    "family": "BB",
+    "features": [
+      "trailing-stop",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "RSI",
+      "BB"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion"
+    ],
+    "timeframe": "1h"
+  },
+  "BBands": {
+    "complexity": 10,
+    "family": "BBands",
+    "features": [
+      "trailing-stop",
+      "hyperopt",
+      "multi-timeframe",
+      "heikin-ashi"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "MACD",
+      "BB",
+      "CCI",
+      "ADX",
+      "Stoch",
+      "MFI",
+      "ROC",
+      "PSAR",
+      "TEMA",
+      "Awesome",
+      "Keltner",
+      "Heikin"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Momentum"
+    ],
+    "timeframe": "1m"
+  },
+  "BBandsRSI": {
+    "complexity": 4,
+    "family": "BBandsRSI",
+    "features": [
+      "trailing-stop",
+      "hyperopt"
+    ],
+    "indicators": [
+      "RSI",
+      "BB"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion"
+    ],
+    "timeframe": "5m"
+  },
+  "BBlower": {
+    "complexity": 5,
+    "family": "BBlower",
+    "features": [
+      "trailing-stop",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "BB",
+      "TEMA"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Mean Reversion"
+    ],
+    "timeframe": "5m"
+  },
+  "Babico_SMA5xBBmid": {
+    "complexity": 2,
+    "family": "Babico",
+    "features": [
+      "trailing-stop"
+    ],
+    "indicators": [
+      "EMA",
+      "BB"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend"
+    ],
+    "timeframe": "1d"
+  },
+  "Bandtastic": {
+    "complexity": 6,
+    "family": "Bandtastic",
+    "features": [
+      "trailing-stop",
+      "hyperopt",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "BB",
+      "MFI",
+      "TEMA"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Momentum"
+    ],
+    "timeframe": "15m"
+  },
+  "BbRoi": {
+    "complexity": 3,
+    "family": "BbRoi",
+    "features": [
+      "trailing-stop"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "BB"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Mean Reversion"
+    ],
+    "timeframe": "15m"
+  },
+  "BbandRsi": {
+    "complexity": 2,
+    "family": "BbandRsi",
+    "features": [],
+    "indicators": [
+      "RSI",
+      "BB"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Scalping"
+    ],
+    "timeframe": "1h"
+  },
+  "BbandRsiRolling": {
+    "complexity": 2,
+    "family": "BbandRsiRolling",
+    "features": [],
+    "indicators": [
+      "RSI",
+      "BB"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion"
+    ],
+    "timeframe": "5m"
+  },
+  "BcmbigzDevelop": {
+    "complexity": 10,
+    "family": "BcmbigzDevelop",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "custom-exit",
+      "hyperopt",
+      "multi-timeframe",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "MACD",
+      "BB",
+      "ATR",
+      "MFI"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "BcmbigzV1": {
+    "complexity": 10,
+    "family": "Bcmbigz",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "custom-exit",
+      "hyperopt",
+      "multi-timeframe",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "MACD",
+      "BB"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Mean Reversion"
+    ],
+    "timeframe": "5m"
+  },
+  "BigPete": {
+    "complexity": 10,
+    "family": "BigPete",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "custom-exit",
+      "hyperopt",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "MACD",
+      "BB",
+      "ATR",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "BigZ03": {
+    "complexity": 8,
+    "family": "BigZ",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "hyperopt",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "MACD",
+      "BB"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Scalping"
+    ],
+    "timeframe": "5m"
+  },
+  "BigZ0307HO": {
+    "complexity": 10,
+    "family": "BigZ0307HO",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "custom-exit",
+      "hyperopt",
+      "multi-timeframe",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "MACD",
+      "BB",
+      "MFI",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "BigZ03HO": {
+    "complexity": 8,
+    "family": "BigZ03HO",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "hyperopt",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "MACD",
+      "BB"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Scalping"
+    ],
+    "timeframe": "5m"
+  },
+  "BigZ04": {
+    "complexity": 10,
+    "family": "BigZ",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "custom-exit",
+      "hyperopt",
+      "multi-timeframe",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "MACD",
+      "BB"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Scalping"
+    ],
+    "timeframe": "5m"
+  },
+  "BigZ0407": {
+    "complexity": 10,
+    "family": "BigZ",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "custom-exit",
+      "hyperopt",
+      "multi-timeframe",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "MACD",
+      "BB",
+      "MFI",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "BigZ0407HO": {
+    "complexity": 10,
+    "family": "BigZ0407HO",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "custom-exit",
+      "hyperopt",
+      "multi-timeframe",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "MACD",
+      "BB",
+      "MFI",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "BigZ04HO": {
+    "complexity": 10,
+    "family": "BigZ04HO",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "custom-exit",
+      "hyperopt",
+      "multi-timeframe",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "MACD",
+      "BB"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Scalping"
+    ],
+    "timeframe": "5m"
+  },
+  "BigZ04HO2": {
+    "complexity": 10,
+    "family": "BigZ04HO",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "custom-exit",
+      "hyperopt",
+      "multi-timeframe",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "MACD",
+      "BB"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Scalping"
+    ],
+    "timeframe": "5m"
+  },
+  "BigZ04_TSL3": {
+    "complexity": 10,
+    "family": "BigZ04",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "custom-exit",
+      "hyperopt",
+      "multi-timeframe",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "MACD",
+      "BB",
+      "ATR"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "BigZ04_TSL4": {
+    "complexity": 10,
+    "family": "BigZ04",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "custom-exit",
+      "hyperopt",
+      "multi-timeframe",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "MACD",
+      "BB",
+      "ATR",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "BigZ06": {
+    "complexity": 10,
+    "family": "BigZ",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "custom-exit",
+      "hyperopt",
+      "multi-timeframe",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "MACD",
+      "BB"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Scalping"
+    ],
+    "timeframe": "5m"
+  },
+  "BigZ07": {
+    "complexity": 10,
+    "family": "BigZ",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "custom-exit",
+      "hyperopt",
+      "multi-timeframe",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "MACD",
+      "BB"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Scalping"
+    ],
+    "timeframe": "5m"
+  },
+  "BigZ07Next": {
+    "complexity": 10,
+    "family": "BigZ07Next",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "custom-exit",
+      "hyperopt",
+      "multi-timeframe",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "MACD",
+      "BB",
+      "MFI",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "BigZ07Next2": {
+    "complexity": 10,
+    "family": "BigZ07Next",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "custom-exit",
+      "hyperopt",
+      "multi-timeframe",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "MACD",
+      "BB",
+      "MFI",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "BinClucMad": {
+    "complexity": 10,
+    "family": "BinClucMad",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "hyperopt",
+      "multi-timeframe",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "BB",
+      "ATR"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "BinClucMadDevelop": {
+    "complexity": 10,
+    "family": "BinClucMadDevelop",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "custom-exit",
+      "hyperopt",
+      "multi-timeframe",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "ATR",
+      "MFI"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "BinClucMadSMADevelop": {
+    "complexity": 10,
+    "family": "BinClucMadSMADevelop",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "custom-exit",
+      "hyperopt",
+      "multi-timeframe",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "ATR",
+      "MFI",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Scalping"
+    ],
+    "timeframe": "5m"
+  },
+  "BinClucMadV1": {
+    "complexity": 10,
+    "family": "BinClucMad",
+    "features": [
+      "custom-stoploss",
+      "custom-exit",
+      "hyperopt",
+      "multi-timeframe",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "ATR",
+      "MFI"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "BinHV27": {
+    "complexity": 3,
+    "family": "BinH",
+    "features": [],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "ADX"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "BinHV45": {
+    "complexity": 3,
+    "family": "BinH",
+    "features": [
+      "hyperopt"
+    ],
+    "indicators": [
+      "BB"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend"
+    ],
+    "timeframe": "1m"
+  },
+  "BinHV45HO": {
+    "complexity": 3,
+    "family": "BinHV45HO",
+    "features": [
+      "hyperopt"
+    ],
+    "indicators": [
+      "BB"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend"
+    ],
+    "timeframe": "1m"
+  },
+  "BreakEven": {
+    "complexity": 1,
+    "family": "BreakEven",
+    "features": [],
+    "indicators": [],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "BuyAllSellAllStrategy": {
+    "complexity": 2,
+    "family": "BuyAllSellAllStrategy",
+    "features": [
+      "custom-exit"
+    ],
+    "indicators": [],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "BuyOnly": {
+    "features": [
+      "test-strategy"
+    ],
+    "indicators": [],
+    "market": "Any",
+    "style": [
+      "Special"
+    ],
+    "timeframe": "15m"
+  },
+  "CBPete9": {
+    "complexity": 8,
+    "family": "CBPete",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "hyperopt",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "BB",
+      "ATR"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Scalping"
+    ],
+    "timeframe": "5m"
+  },
+  "CCIStrategy": {
+    "complexity": 3,
+    "family": "CCIStrategy",
+    "features": [],
+    "indicators": [
+      "RSI",
+      "SMA",
+      "BB",
+      "CCI",
+      "MFI"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Trend"
+    ],
+    "timeframe": "1m"
+  },
+  "CMCWinner": {
+    "complexity": 2,
+    "family": "CMCWinner",
+    "features": [],
+    "indicators": [
+      "CCI",
+      "MFI"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Momentum"
+    ],
+    "timeframe": "15m"
+  },
+  "Cci": {
+    "complexity": 2,
+    "family": "Cci",
+    "features": [],
+    "indicators": [
+      "SMA",
+      "CCI"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend"
+    ],
+    "timeframe": "1m"
+  },
+  "Chandem": {
+    "complexity": 4,
+    "family": "Chandem",
+    "features": [
+      "trailing-stop",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "BB"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "Chandemtwo": {
+    "complexity": 4,
+    "family": "Chandemtwo",
+    "features": [
+      "trailing-stop",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "BB"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "Chispei": {
+    "complexity": 2,
+    "family": "Chispei",
+    "features": [],
+    "indicators": [
+      "SMA",
+      "Momentum"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Momentum"
+    ],
+    "timeframe": "4h"
+  },
+  "Cluc4": {
+    "complexity": 4,
+    "family": "Cluc",
+    "features": [
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "EMA",
+      "BB",
+      "ROC"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Momentum"
+    ],
+    "timeframe": "1m"
+  },
+  "Cluc4werk": {
+    "complexity": 5,
+    "family": "Cluc4werk",
+    "features": [
+      "trailing-stop",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "BB",
+      "ROC"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Momentum"
+    ],
+    "timeframe": "1m"
+  },
+  "Cluc5werk": {
+    "complexity": 5,
+    "family": "Cluc5werk",
+    "features": [
+      "trailing-stop",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "EMA",
+      "BB",
+      "ROC"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Momentum"
+    ],
+    "timeframe": "1m"
+  },
+  "Cluc7werk": {
+    "complexity": 3,
+    "family": "Cluc7werk",
+    "features": [
+      "trailing-stop"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "BB"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Mean Reversion"
+    ],
+    "timeframe": "1m"
+  },
+  "ClucFiatROI": {
+    "complexity": 3,
+    "family": "ClucFiatROI",
+    "features": [
+      "trailing-stop"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "BB",
+      "PSAR"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Mean Reversion"
+    ],
+    "timeframe": "5m"
+  },
+  "ClucFiatSlow": {
+    "complexity": 3,
+    "family": "ClucFiatSlow",
+    "features": [
+      "trailing-stop"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "BB"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Mean Reversion"
+    ],
+    "timeframe": "5m"
+  },
+  "ClucHAnix": {
+    "complexity": 10,
+    "family": "ClucHAnix",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "hyperopt",
+      "multi-timeframe",
+      "heikin-ashi"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "BB",
+      "ROC",
+      "Heikin"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Momentum"
+    ],
+    "timeframe": "1m"
+  },
+  "ClucHAnix5m": {
+    "complexity": 10,
+    "family": "ClucHAnix",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "confirm-entry",
+      "hyperopt",
+      "multi-timeframe",
+      "heikin-ashi",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "ADX",
+      "Stoch",
+      "ROC",
+      "Heikin",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "ClucHAnix_5m": {
+    "complexity": 10,
+    "family": "ClucHAnix",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "hyperopt",
+      "multi-timeframe",
+      "heikin-ashi"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "BB",
+      "ROC",
+      "Heikin"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Momentum"
+    ],
+    "timeframe": "5m"
+  },
+  "ClucHAnix_5m1": {
+    "complexity": 10,
+    "family": "ClucHAnix",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "confirm-entry",
+      "hyperopt",
+      "multi-timeframe",
+      "heikin-ashi"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "BB",
+      "ROC",
+      "Heikin"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "ClucHAnix_BB_RPB_MOD": {
+    "complexity": 10,
+    "family": "ClucHAnix",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "hyperopt",
+      "multi-timeframe",
+      "heikin-ashi",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "ADX",
+      "Stoch",
+      "ROC",
+      "Heikin",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Trend"
+    ],
+    "timeframe": "1m"
+  },
+  "ClucHAnix_BB_RPB_MOD2_ROI": {
+    "complexity": 10,
+    "family": "ClucHAnix",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "confirm-entry",
+      "hyperopt",
+      "multi-timeframe",
+      "heikin-ashi",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "ADX",
+      "Stoch",
+      "ROC",
+      "Heikin",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "ClucHAnix_BB_RPB_MOD_CTT": {
+    "complexity": 10,
+    "family": "ClucHAnix",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "confirm-entry",
+      "hyperopt",
+      "multi-timeframe",
+      "heikin-ashi",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "ADX",
+      "Stoch",
+      "ROC",
+      "Heikin",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "ClucHAnix_BB_RPB_MOD_E0V1E_ROI": {
+    "complexity": 10,
+    "family": "ClucHAnix",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "confirm-entry",
+      "hyperopt",
+      "multi-timeframe",
+      "heikin-ashi",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "ADX",
+      "Stoch",
+      "ROC",
+      "Heikin",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "ClucHAnix_hhll": {
+    "complexity": 10,
+    "family": "ClucHAnix",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "custom-exit",
+      "confirm-entry",
+      "hyperopt",
+      "multi-timeframe",
+      "heikin-ashi",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "ROC",
+      "Heikin"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "ClucHAwerk": {
+    "complexity": 6,
+    "family": "ClucHAwerk",
+    "features": [
+      "trailing-stop",
+      "multi-timeframe",
+      "heikin-ashi"
+    ],
+    "indicators": [
+      "EMA",
+      "BB",
+      "ROC",
+      "Heikin"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Momentum"
+    ],
+    "timeframe": "1m"
+  },
+  "ClucMay72018": {
+    "complexity": 3,
+    "family": "ClucMay",
+    "features": [],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "MACD",
+      "BB",
+      "ADX"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Mean Reversion"
+    ],
+    "timeframe": "5m"
+  },
+  "CofiBitStrategy": {
+    "complexity": 4,
+    "family": "CofiBitStrategy",
+    "features": [
+      "hyperopt"
+    ],
+    "indicators": [
+      "EMA",
+      "ADX",
+      "Stoch",
+      "Fibonacci"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Momentum"
+    ],
+    "timeframe": "5m"
+  },
+  "CombinedBinHAndCluc": {
+    "complexity": 2,
+    "family": "CombinedBinHAndCluc",
+    "features": [],
+    "indicators": [
+      "EMA",
+      "BB"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Mean Reversion"
+    ],
+    "timeframe": "5m"
+  },
+  "CombinedBinHAndCluc2021": {
+    "complexity": 2,
+    "family": "CombinedBinHAndCluc",
+    "features": [],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "BB"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Mean Reversion"
+    ],
+    "timeframe": "5m"
+  },
+  "CombinedBinHAndCluc2021Bull": {
+    "complexity": 2,
+    "family": "CombinedBinHAndCluc2021Bull",
+    "features": [],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "BB"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Mean Reversion"
+    ],
+    "timeframe": "5m"
+  },
+  "CombinedBinHAndClucHyperV0": {
+    "complexity": 5,
+    "family": "CombinedBinHAndClucHyper",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "hyperopt"
+    ],
+    "indicators": [
+      "EMA",
+      "BB"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Mean Reversion"
+    ],
+    "timeframe": "1m"
+  },
+  "CombinedBinHAndClucHyperV3": {
+    "complexity": 6,
+    "family": "CombinedBinHAndClucHyper",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "hyperopt"
+    ],
+    "indicators": [
+      "EMA",
+      "BB",
+      "ATR"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Trend"
+    ],
+    "timeframe": "1m"
+  },
+  "CombinedBinHAndClucV2": {
+    "complexity": 5,
+    "family": "CombinedBinHAndCluc",
+    "features": [
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "BB",
+      "ATR",
+      "Stoch",
+      "MFI"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Trend"
+    ],
+    "timeframe": "1h"
+  },
+  "CombinedBinHAndClucV3": {
+    "complexity": 4,
+    "family": "CombinedBinHAndCluc",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop"
+    ],
+    "indicators": [
+      "EMA",
+      "BB"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Breakout"
+    ],
+    "timeframe": "5m"
+  },
+  "CombinedBinHAndClucV4": {
+    "complexity": 4,
+    "family": "CombinedBinHAndCluc",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop"
+    ],
+    "indicators": [
+      "EMA",
+      "BB"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Mean Reversion"
+    ],
+    "timeframe": "5m"
+  },
+  "CombinedBinHAndClucV5": {
+    "complexity": 4,
+    "family": "CombinedBinHAndCluc",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop"
+    ],
+    "indicators": [
+      "EMA",
+      "BB"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Mean Reversion"
+    ],
+    "timeframe": "5m"
+  },
+  "CombinedBinHAndClucV5Hyperoptable": {
+    "complexity": 5,
+    "family": "CombinedBinHAndClucV5Hyperoptable",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "hyperopt"
+    ],
+    "indicators": [
+      "EMA",
+      "BB"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Mean Reversion"
+    ],
+    "timeframe": "5m"
+  },
+  "CombinedBinHAndClucV6": {
+    "complexity": 7,
+    "family": "CombinedBinHAndCluc",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "BB",
+      "ATR"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "CombinedBinHAndClucV6H": {
+    "complexity": 8,
+    "family": "CombinedBinHAndClucV6H",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "hyperopt",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "BB",
+      "ATR"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "CombinedBinHAndClucV7": {
+    "complexity": 10,
+    "family": "CombinedBinHAndCluc",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "hyperopt",
+      "multi-timeframe",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "ATR",
+      "MFI"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "CombinedBinHAndClucV8": {
+    "complexity": 10,
+    "family": "CombinedBinHAndCluc",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "custom-exit",
+      "hyperopt",
+      "multi-timeframe",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "ATR",
+      "MFI"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "CombinedBinHAndClucV8Hyper": {
+    "complexity": 10,
+    "family": "CombinedBinHAndClucV8Hyper",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "custom-exit",
+      "hyperopt",
+      "multi-timeframe",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "ATR",
+      "MFI"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "CombinedBinHAndClucV8XH": {
+    "complexity": 10,
+    "family": "CombinedBinHAndClucV8XH",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "custom-exit",
+      "hyperopt",
+      "multi-timeframe",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "ATR",
+      "MFI"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "CombinedBinHAndClucV8XHO": {
+    "complexity": 10,
+    "family": "CombinedBinHAndClucV8XHO",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "custom-exit",
+      "hyperopt",
+      "multi-timeframe",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "ATR",
+      "MFI"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "CombinedBinHClucAndMADV3": {
+    "complexity": 6,
+    "family": "CombinedBinHClucAndMAD",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "BB"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Mean Reversion"
+    ],
+    "timeframe": "5m"
+  },
+  "CombinedBinHClucAndMADV5": {
+    "complexity": 7,
+    "family": "CombinedBinHClucAndMAD",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "BB",
+      "ATR"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Scalping"
+    ],
+    "timeframe": "5m"
+  },
+  "CombinedBinHClucAndMADV6": {
+    "complexity": 7,
+    "family": "CombinedBinHClucAndMAD",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "BB",
+      "ATR"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Scalping"
+    ],
+    "timeframe": "5m"
+  },
+  "CombinedBinHClucAndMADV9": {
+    "complexity": 8,
+    "family": "CombinedBinHClucAndMAD",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "hyperopt",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "BB",
+      "ATR"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Scalping"
+    ],
+    "timeframe": "5m"
+  },
+  "Combined_Indicators": {
+    "complexity": 2,
+    "family": "Combined",
+    "features": [
+      "trailing-stop"
+    ],
+    "indicators": [
+      "EMA",
+      "BB"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Mean Reversion"
+    ],
+    "timeframe": "1m"
+  },
+  "Combined_NFIv6_SMA": {
+    "complexity": 10,
+    "family": "Combined",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "custom-exit",
+      "hyperopt",
+      "multi-timeframe",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "MFI",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "Combined_NFIv7_SMA": {
+    "complexity": 10,
+    "family": "Combined",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "custom-exit",
+      "hyperopt",
+      "multi-timeframe",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "MFI",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "Combined_NFIv7_SMA_Rallipanos_20210707": {
+    "complexity": 10,
+    "family": "Combined",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "custom-exit",
+      "hyperopt",
+      "multi-timeframe",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "MFI",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "Combined_NFIv7_SMA_bAdBoY_20211204": {
+    "complexity": 10,
+    "family": "Combined",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "custom-exit",
+      "hyperopt",
+      "multi-timeframe",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "MFI",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "CoreStrategy": {
+    "complexity": 10,
+    "family": "CoreStrategy",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "custom-exit",
+      "hyperopt",
+      "multi-timeframe",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "ATR",
+      "MFI",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Scalping"
+    ],
+    "timeframe": "5m"
+  },
+  "CrossEMAStrategy": {
+    "complexity": 6,
+    "family": "CrossEMAStrategy",
+    "features": [
+      "trailing-stop",
+      "hyperopt",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "RSI",
+      "Stoch",
+      "Momentum"
+    ],
+    "market": "Any",
+    "side": "Long",
+    "style": [
+      "Momentum"
+    ],
+    "timeframe": "1h"
+  },
+  "CryptoFrog": {
+    "complexity": 10,
+    "family": "CryptoFrog",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "hyperopt",
+      "multi-timeframe",
+      "heikin-ashi"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "ADX",
+      "ATR",
+      "Stoch",
+      "MFI",
+      "ROC",
+      "RMI",
+      "PSAR",
+      "Heikin"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Momentum",
+      "Mean Reversion"
+    ],
+    "timeframe": "5m"
+  },
+  "CryptoFrogHO": {
+    "complexity": 10,
+    "family": "CryptoFrogHO",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "hyperopt",
+      "multi-timeframe",
+      "heikin-ashi"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "ADX",
+      "ATR",
+      "Stoch",
+      "MFI",
+      "ROC",
+      "RMI",
+      "PSAR",
+      "Heikin"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Momentum",
+      "Mean Reversion"
+    ],
+    "timeframe": "5m"
+  },
+  "CryptoFrogHO2": {
+    "complexity": 10,
+    "family": "CryptoFrogHO",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "hyperopt",
+      "multi-timeframe",
+      "heikin-ashi"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "ADX",
+      "ATR",
+      "Stoch",
+      "MFI",
+      "ROC",
+      "RMI",
+      "PSAR",
+      "Heikin"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Momentum",
+      "Mean Reversion"
+    ],
+    "timeframe": "5m"
+  },
+  "CryptoFrogHO2A": {
+    "complexity": 10,
+    "family": "CryptoFrogHO2A",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "hyperopt",
+      "multi-timeframe",
+      "heikin-ashi"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "ADX",
+      "ATR",
+      "Stoch",
+      "MFI",
+      "ROC",
+      "RMI",
+      "PSAR",
+      "Heikin"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Momentum",
+      "Mean Reversion"
+    ],
+    "timeframe": "5m"
+  },
+  "CryptoFrogHO3A1": {
+    "complexity": 10,
+    "family": "CryptoFrogHO3A",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "hyperopt",
+      "multi-timeframe",
+      "heikin-ashi"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "ADX",
+      "ATR",
+      "Stoch",
+      "MFI",
+      "ROC",
+      "RMI",
+      "PSAR",
+      "Heikin"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Momentum",
+      "Mean Reversion"
+    ],
+    "timeframe": "5m"
+  },
+  "CryptoFrogHO3A2": {
+    "complexity": 10,
+    "family": "CryptoFrogHO3A",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "hyperopt",
+      "multi-timeframe",
+      "heikin-ashi"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "ADX",
+      "ATR",
+      "Stoch",
+      "MFI",
+      "ROC",
+      "RMI",
+      "PSAR",
+      "Heikin"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Momentum",
+      "Mean Reversion"
+    ],
+    "timeframe": "5m"
+  },
+  "CryptoFrogHO3A3": {
+    "complexity": 10,
+    "family": "CryptoFrogHO3A",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "hyperopt",
+      "multi-timeframe",
+      "heikin-ashi"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "ADX",
+      "ATR",
+      "Stoch",
+      "MFI",
+      "ROC",
+      "RMI",
+      "PSAR",
+      "Heikin"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Momentum",
+      "Mean Reversion"
+    ],
+    "timeframe": "5m"
+  },
+  "CryptoFrogHO3A4": {
+    "complexity": 10,
+    "family": "CryptoFrogHO3A",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "hyperopt",
+      "multi-timeframe",
+      "heikin-ashi"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "ADX",
+      "ATR",
+      "Stoch",
+      "MFI",
+      "ROC",
+      "RMI",
+      "PSAR",
+      "Heikin"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Momentum",
+      "Mean Reversion"
+    ],
+    "timeframe": "5m"
+  },
+  "CryptoFrogNFI": {
+    "complexity": 10,
+    "family": "CryptoFrogNFI",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "custom-exit",
+      "hyperopt",
+      "multi-timeframe",
+      "heikin-ashi",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "ADX",
+      "ATR",
+      "Stoch",
+      "MFI",
+      "ROC",
+      "RMI",
+      "PSAR",
+      "Heikin",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Momentum",
+      "Mean Reversion"
+    ],
+    "timeframe": "5m"
+  },
+  "CryptoFrogNFIHO1A": {
+    "complexity": 10,
+    "family": "CryptoFrogNFIHO1A",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "custom-exit",
+      "hyperopt",
+      "multi-timeframe",
+      "heikin-ashi",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "ADX",
+      "ATR",
+      "Stoch",
+      "MFI",
+      "ROC",
+      "RMI",
+      "PSAR",
+      "Heikin",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Momentum",
+      "Mean Reversion"
+    ],
+    "timeframe": "5m"
+  },
+  "CryptoFrogOffset": {
+    "complexity": 10,
+    "family": "CryptoFrogOffset",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "custom-exit",
+      "hyperopt",
+      "multi-timeframe",
+      "heikin-ashi",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "ADX",
+      "ATR",
+      "Stoch",
+      "MFI",
+      "ROC",
+      "RMI",
+      "PSAR",
+      "Heikin",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Momentum",
+      "Mean Reversion"
+    ],
+    "timeframe": "5m"
+  },
+  "CustomStoplossWithPSAR": {
+    "complexity": 3,
+    "family": "CustomStoplossWithPSAR",
+    "features": [
+      "custom-stoploss"
+    ],
+    "indicators": [
+      "RSI",
+      "PSAR"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend"
+    ],
+    "timeframe": "1h"
+  },
+  "DCBBBounce": {
+    "complexity": 10,
+    "family": "DCBBBounce",
+    "features": [
+      "trailing-stop",
+      "hyperopt",
+      "multi-timeframe",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "MACD",
+      "BB",
+      "ADX",
+      "Stoch",
+      "MFI",
+      "PSAR",
+      "Donchian"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Mean Reversion"
+    ],
+    "timeframe": "5m"
+  },
+  "DD": {
+    "complexity": 3,
+    "family": "DD",
+    "features": [
+      "trailing-stop"
+    ],
+    "indicators": [
+      "RSI",
+      "BB",
+      "Stoch"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Scalping"
+    ],
+    "timeframe": "5m"
+  },
+  "DIV_v1": {
+    "complexity": 2,
+    "family": "DIV",
+    "features": [
+      "trailing-stop"
+    ],
+    "indicators": [
+      "RSI"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "DevilStra": {
+    "complexity": 6,
+    "family": "DevilStra",
+    "features": [
+      "hyperopt",
+      "multi-condition"
+    ],
+    "indicators": [
+      "SMA",
+      "ADX",
+      "Stoch",
+      "Williams"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Momentum"
+    ],
+    "timeframe": "4h"
+  },
+  "Diamond": {
+    "complexity": 3,
+    "family": "Diamond",
+    "features": [
+      "trailing-stop",
+      "hyperopt"
+    ],
+    "indicators": [
+      "SMA"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Scalping"
+    ],
+    "timeframe": "5m"
+  },
+  "Divergences": {
+    "complexity": 10,
+    "family": "Divergences",
+    "features": [
+      "trailing-stop",
+      "multi-timeframe",
+      "heikin-ashi"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "MACD",
+      "BB",
+      "CCI",
+      "ADX",
+      "Stoch",
+      "MFI",
+      "ROC",
+      "PSAR",
+      "TEMA",
+      "Awesome",
+      "Keltner",
+      "Heikin"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Momentum"
+    ],
+    "timeframe": "1h"
+  },
+  "Dracula": {
+    "complexity": 6,
+    "family": "Dracula",
+    "features": [
+      "trailing-stop",
+      "custom-exit",
+      "hyperopt"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "BB",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Scalping"
+    ],
+    "timeframe": "5m"
+  },
+  "Dyna_opti": {
+    "complexity": 9,
+    "family": "Dyna",
+    "features": [
+      "custom-stoploss",
+      "hyperopt",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "ATR",
+      "ROC",
+      "RMI"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Momentum"
+    ],
+    "timeframe": "5m"
+  },
+  "EI3v2_tag_cofi_green": {
+    "complexity": 10,
+    "family": "EI3v2",
+    "features": [
+      "trailing-stop",
+      "custom-exit",
+      "hyperopt",
+      "multi-timeframe",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "ADX",
+      "Stoch",
+      "EWO"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Scalping"
+    ],
+    "timeframe": "5m"
+  },
+  "EMA50": {
+    "complexity": 10,
+    "family": "EMA",
+    "features": [
+      "trailing-stop",
+      "hyperopt",
+      "multi-timeframe",
+      "heikin-ashi"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "MACD",
+      "BB",
+      "CCI",
+      "ADX",
+      "Stoch",
+      "MFI",
+      "ROC",
+      "PSAR",
+      "TEMA",
+      "Awesome",
+      "Donchian",
+      "Keltner",
+      "Heikin"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Momentum"
+    ],
+    "timeframe": "5m"
+  },
+  "EMA520015_V17": {
+    "complexity": 3,
+    "family": "EMA520015",
+    "features": [
+      "trailing-stop",
+      "custom-exit"
+    ],
+    "indicators": [
+      "EMA",
+      "MACD"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend"
+    ],
+    "timeframe": "4h"
+  },
+  "EMABBRSI": {
+    "complexity": 2,
+    "family": "EMABBRSI",
+    "features": [],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "BB"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Mean Reversion"
+    ],
+    "timeframe": "1h"
+  },
+  "EMABreakout": {
+    "complexity": 10,
+    "family": "EMABreakout",
+    "features": [
+      "trailing-stop",
+      "hyperopt",
+      "multi-timeframe",
+      "heikin-ashi"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "MACD",
+      "BB",
+      "CCI",
+      "ADX",
+      "Stoch",
+      "MFI",
+      "ROC",
+      "PSAR",
+      "TEMA",
+      "Awesome",
+      "Keltner",
+      "Heikin"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Momentum"
+    ],
+    "timeframe": "5m"
+  },
+  "EMASkipPump": {
+    "complexity": 2,
+    "family": "EMASkipPump",
+    "features": [],
+    "indicators": [
+      "EMA",
+      "BB"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "EMAVolume": {
+    "complexity": 1,
+    "family": "EMAVolume",
+    "features": [],
+    "indicators": [
+      "EMA"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend"
+    ],
+    "timeframe": "15m"
+  },
+  "EMA_CROSSOVER_STRATEGY": {
+    "complexity": 4,
+    "family": "EMA",
+    "features": [
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "EMA",
+      "BB",
+      "TEMA"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "EXPERIMENTAL_STRATEGY": {
+    "features": [
+      "test-strategy"
+    ],
+    "indicators": [],
+    "market": "Any",
+    "style": [
+      "Special"
+    ],
+    "timeframe": "5m"
+  },
+  "ElliotV2": {
+    "complexity": 10,
+    "family": "Elliot",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "hyperopt",
+      "multi-timeframe",
+      "heikin-ashi"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "MACD",
+      "BB",
+      "CCI",
+      "ADX",
+      "Stoch",
+      "MFI",
+      "ROC",
+      "PSAR",
+      "TEMA",
+      "Awesome",
+      "Keltner",
+      "Heikin",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Momentum"
+    ],
+    "timeframe": "5m"
+  },
+  "ElliotV4": {
+    "complexity": 10,
+    "family": "Elliot",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "hyperopt",
+      "multi-timeframe",
+      "heikin-ashi"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "MACD",
+      "BB",
+      "CCI",
+      "ADX",
+      "Stoch",
+      "MFI",
+      "ROC",
+      "PSAR",
+      "TEMA",
+      "Awesome",
+      "Keltner",
+      "Heikin",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Momentum"
+    ],
+    "timeframe": "5m"
+  },
+  "ElliotV531": {
+    "complexity": 10,
+    "family": "Elliot",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "hyperopt",
+      "multi-timeframe",
+      "heikin-ashi",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "MACD",
+      "BB",
+      "CCI",
+      "ADX",
+      "Stoch",
+      "MFI",
+      "ROC",
+      "PSAR",
+      "TEMA",
+      "Awesome",
+      "Keltner",
+      "Heikin",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Momentum"
+    ],
+    "timeframe": "5m"
+  },
+  "ElliotV5HO": {
+    "complexity": 10,
+    "family": "ElliotV5HO",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "hyperopt",
+      "multi-timeframe",
+      "heikin-ashi",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "MACD",
+      "BB",
+      "CCI",
+      "ADX",
+      "Stoch",
+      "MFI",
+      "ROC",
+      "PSAR",
+      "TEMA",
+      "Awesome",
+      "Keltner",
+      "Heikin",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Momentum"
+    ],
+    "timeframe": "5m"
+  },
+  "ElliotV5HOMod2": {
+    "complexity": 8,
+    "family": "ElliotV5HO",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "hyperopt",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "EWO"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Scalping"
+    ],
+    "timeframe": "5m"
+  },
+  "ElliotV5HOMod3": {
+    "complexity": 8,
+    "family": "ElliotV5HO",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "hyperopt",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "EWO"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Scalping"
+    ],
+    "timeframe": "5m"
+  },
+  "ElliotV7": {
+    "complexity": 9,
+    "family": "Elliot",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "hyperopt",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "MACD",
+      "BB",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "ElliotV8HO": {
+    "complexity": 8,
+    "family": "ElliotV8HO",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "hyperopt",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "EWO"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Scalping"
+    ],
+    "timeframe": "5m"
+  },
+  "ElliotV8_original": {
+    "complexity": 5,
+    "family": "ElliotV8",
+    "features": [
+      "trailing-stop",
+      "hyperopt"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "EWO"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Scalping"
+    ],
+    "timeframe": "5m"
+  },
+  "ElliotV8_original_ichiv2": {
+    "complexity": 5,
+    "family": "ElliotV8",
+    "features": [
+      "trailing-stop",
+      "hyperopt"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "EWO"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Scalping"
+    ],
+    "timeframe": "5m"
+  },
+  "ElliotV8_original_ichiv3": {
+    "complexity": 5,
+    "family": "ElliotV8",
+    "features": [
+      "trailing-stop",
+      "hyperopt"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "EWO"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Scalping"
+    ],
+    "timeframe": "5m"
+  },
+  "Elliotv8": {
+    "complexity": 6,
+    "family": "Elliot",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "hyperopt"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "EWO"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Scalping"
+    ],
+    "timeframe": "5m"
+  },
+  "FRAYSTRAT": {
+    "complexity": 10,
+    "family": "FRAYSTRAT",
+    "features": [
+      "trailing-stop",
+      "hyperopt",
+      "multi-timeframe",
+      "heikin-ashi"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "MACD",
+      "BB",
+      "CCI",
+      "ADX",
+      "Stoch",
+      "MFI",
+      "ROC",
+      "PSAR",
+      "TEMA",
+      "Awesome",
+      "Keltner",
+      "Heikin"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Momentum"
+    ],
+    "timeframe": "15m"
+  },
+  "Fakebuy": {
+    "features": [
+      "test-strategy"
+    ],
+    "indicators": [],
+    "market": "Any",
+    "style": [
+      "Special"
+    ],
+    "timeframe": "5m"
+  },
+  "FastSupertrend": {
+    "complexity": 4,
+    "family": "FastSupertrend",
+    "features": [
+      "trailing-stop",
+      "hyperopt"
+    ],
+    "indicators": [
+      "SMA",
+      "Supertrend"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend"
+    ],
+    "timeframe": "1h"
+  },
+  "FastSupertrendOpt": {
+    "complexity": 4,
+    "family": "FastSupertrend",
+    "features": [
+      "trailing-stop",
+      "hyperopt"
+    ],
+    "indicators": [
+      "SMA",
+      "Supertrend"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend"
+    ],
+    "timeframe": "1h"
+  },
+  "FiveMinCrossAbove": {
+    "complexity": 4,
+    "family": "FiveMinCrossAbove",
+    "features": [
+      "trailing-stop",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "RSI",
+      "BB"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion"
+    ],
+    "timeframe": "5m"
+  },
+  "FixedRiskRewardLoss": {
+    "complexity": 3,
+    "family": "FixedRiskRewardLoss",
+    "features": [
+      "custom-stoploss"
+    ],
+    "indicators": [
+      "RSI",
+      "ATR"
+    ],
+    "market": "Volatile",
+    "side": "Long",
+    "style": [
+      "Breakout"
+    ],
+    "timeframe": "5m"
+  },
+  "ForexSignal": {
+    "complexity": 4,
+    "family": "ForexSignal",
+    "features": [
+      "trailing-stop",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "EMA",
+      "TEMA"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "FrostAuraM115mStrategy": {
+    "complexity": 4,
+    "family": "FrostAuraM115mStrategy",
+    "features": [
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "RSI",
+      "BB",
+      "TEMA"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion"
+    ],
+    "timeframe": "15m"
+  },
+  "FrostAuraM11hStrategy": {
+    "complexity": 4,
+    "family": "FrostAuraM11hStrategy",
+    "features": [
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "RSI",
+      "BB",
+      "TEMA"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion"
+    ],
+    "timeframe": "1h"
+  },
+  "FrostAuraM21hStrategy": {
+    "complexity": 4,
+    "family": "FrostAuraM21hStrategy",
+    "features": [
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "RSI",
+      "Stoch",
+      "TEMA"
+    ],
+    "market": "Any",
+    "side": "Long",
+    "style": [
+      "Momentum"
+    ],
+    "timeframe": "15m"
+  },
+  "FrostAuraM315mStrategy": {
+    "complexity": 5,
+    "family": "FrostAuraM315mStrategy",
+    "features": [
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "RSI",
+      "BB",
+      "Stoch",
+      "TEMA"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Momentum"
+    ],
+    "timeframe": "15m"
+  },
+  "FrostAuraM31hStrategy": {
+    "complexity": 5,
+    "family": "FrostAuraM31hStrategy",
+    "features": [
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "RSI",
+      "BB",
+      "Stoch",
+      "TEMA"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Momentum"
+    ],
+    "timeframe": "1h"
+  },
+  "FrostAuraRandomStrategy": {
+    "complexity": 3,
+    "family": "FrostAuraRandomStrategy",
+    "features": [
+      "hyperopt"
+    ],
+    "indicators": [
+      "TEMA"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend"
+    ],
+    "timeframe": "1h"
+  },
+  "GodCard": {
+    "complexity": 8,
+    "family": "GodCard",
+    "features": [
+      "trailing-stop",
+      "hyperopt",
+      "multi-timeframe",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "BB",
+      "PSAR"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Mean Reversion"
+    ],
+    "timeframe": "5m"
+  },
+  "GodStraNew": {
+    "complexity": 7,
+    "family": "GodStraNew",
+    "features": [
+      "hyperopt",
+      "multi-condition"
+    ],
+    "indicators": [
+      "SMA",
+      "BB",
+      "ADX",
+      "Stoch",
+      "Williams",
+      "PSAR",
+      "Trix",
+      "TEMA"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Momentum"
+    ],
+    "timeframe": "4h"
+  },
+  "GodStraNew40": {
+    "complexity": 7,
+    "family": "GodStraNew",
+    "features": [
+      "hyperopt",
+      "multi-condition"
+    ],
+    "indicators": [
+      "SMA",
+      "BB",
+      "ADX",
+      "Stoch",
+      "Williams",
+      "PSAR",
+      "Trix",
+      "TEMA"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Momentum"
+    ],
+    "timeframe": "4h"
+  },
+  "GodStraNew_SMAonly": {
+    "complexity": 8,
+    "family": "GodStraNew",
+    "features": [
+      "trailing-stop",
+      "hyperopt",
+      "multi-condition"
+    ],
+    "indicators": [
+      "SMA",
+      "BB",
+      "ADX",
+      "Stoch",
+      "Williams",
+      "PSAR",
+      "Trix",
+      "TEMA"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Momentum"
+    ],
+    "timeframe": "5m"
+  },
+  "Guacamole": {
+    "complexity": 5,
+    "family": "Guacamole",
+    "features": [
+      "trailing-stop",
+      "confirm-entry",
+      "multi-condition"
+    ],
+    "indicators": [
+      "MACD",
+      "RMI",
+      "PSAR"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Momentum"
+    ],
+    "timeframe": "5m"
+  },
+  "Gumbo1": {
+    "complexity": 8,
+    "family": "Gumbo",
+    "features": [
+      "custom-stoploss",
+      "hyperopt",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "EMA",
+      "SMA",
+      "BB",
+      "Stoch",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Mean Reversion"
+    ],
+    "timeframe": "5m"
+  },
+  "Hacklemore2": {
+    "complexity": 3,
+    "family": "Hacklemore",
+    "features": [
+      "trailing-stop",
+      "confirm-entry"
+    ],
+    "indicators": [
+      "RMI",
+      "PSAR"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Momentum"
+    ],
+    "timeframe": "15m"
+  },
+  "Hacklemore3": {
+    "complexity": 5,
+    "family": "Hacklemore",
+    "features": [
+      "trailing-stop",
+      "confirm-entry",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RMI",
+      "PSAR"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Momentum"
+    ],
+    "timeframe": "5m"
+  },
+  "HansenSmaOffsetV1": {
+    "complexity": 1,
+    "family": "HansenSmaOffset",
+    "features": [],
+    "indicators": [
+      "SMA"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Scalping"
+    ],
+    "timeframe": "15m"
+  },
+  "HarmonicDivergence": {
+    "complexity": 10,
+    "family": "HarmonicDivergence",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "custom-exit",
+      "hyperopt",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "MACD",
+      "BB",
+      "CCI",
+      "ADX",
+      "ATR",
+      "Stoch",
+      "MFI",
+      "OBV",
+      "ROC",
+      "Awesome",
+      "Keltner"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Momentum"
+    ],
+    "timeframe": "15m"
+  },
+  "Heracles": {
+    "complexity": 2,
+    "family": "Heracles",
+    "features": [
+      "trailing-stop"
+    ],
+    "indicators": [
+      "Donchian",
+      "Keltner"
+    ],
+    "market": "Volatile",
+    "side": "Long",
+    "style": [
+      "Breakout"
+    ],
+    "timeframe": "12h"
+  },
+  "HourBasedStrategy": {
+    "complexity": 2,
+    "family": "HourBasedStrategy",
+    "features": [
+      "hyperopt"
+    ],
+    "indicators": [],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend"
+    ],
+    "timeframe": "1h"
+  },
+  "HyperStra_GSN_SMAOnly": {
+    "complexity": 4,
+    "family": "HyperStra",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "hyperopt"
+    ],
+    "indicators": [],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "HyperStra_SMAOnly": {
+    "complexity": 4,
+    "family": "HyperStra",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "hyperopt"
+    ],
+    "indicators": [],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "INSIDEUP": {
+    "complexity": 3,
+    "family": "INSIDEUP",
+    "features": [
+      "trailing-stop"
+    ],
+    "indicators": [
+      "RSI",
+      "ADX",
+      "Ichimoku"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend"
+    ],
+    "timeframe": "1d"
+  },
+  "Ichess": {
+    "complexity": 5,
+    "family": "Ichess",
+    "features": [
+      "hyperopt",
+      "heikin-ashi"
+    ],
+    "indicators": [
+      "SMA",
+      "Ichimoku",
+      "Heikin"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Scalping",
+      "Trend"
+    ],
+    "timeframe": "1d"
+  },
+  "Ichi": {
+    "complexity": 3,
+    "family": "Ichi",
+    "features": [
+      "hyperopt"
+    ],
+    "indicators": [
+      "EMA",
+      "Ichimoku"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend"
+    ],
+    "timeframe": "15m"
+  },
+  "Ichimoku": {
+    "complexity": 4,
+    "family": "Ichimoku",
+    "features": [
+      "trailing-stop",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "Ichimoku"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "Ichimoku_SenkouSpanCross": {
+    "complexity": 4,
+    "family": "Ichimoku",
+    "features": [
+      "trailing-stop",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "RSI",
+      "Ichimoku"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend"
+    ],
+    "timeframe": "4h"
+  },
+  "Ichimoku_v12": {
+    "complexity": 4,
+    "family": "Ichimoku",
+    "features": [
+      "trailing-stop",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "Ichimoku"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend"
+    ],
+    "timeframe": "4h"
+  },
+  "Ichimoku_v30": {
+    "complexity": 4,
+    "family": "Ichimoku",
+    "features": [
+      "trailing-stop",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "Ichimoku"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend"
+    ],
+    "timeframe": "4h"
+  },
+  "Ichimoku_v31": {
+    "complexity": 5,
+    "family": "Ichimoku",
+    "features": [
+      "multi-timeframe",
+      "heikin-ashi"
+    ],
+    "indicators": [
+      "Ichimoku",
+      "Heikin"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend"
+    ],
+    "timeframe": "1h"
+  },
+  "Ichimoku_v32": {
+    "complexity": 5,
+    "family": "Ichimoku",
+    "features": [
+      "trailing-stop",
+      "multi-timeframe",
+      "heikin-ashi"
+    ],
+    "indicators": [
+      "Ichimoku",
+      "Heikin"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend"
+    ],
+    "timeframe": "4h"
+  },
+  "Ichimoku_v33": {
+    "complexity": 4,
+    "family": "Ichimoku",
+    "features": [
+      "trailing-stop",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "Ichimoku",
+      "PSAR"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend"
+    ],
+    "timeframe": "4h"
+  },
+  "Ichimoku_v37": {
+    "complexity": 5,
+    "family": "Ichimoku",
+    "features": [
+      "multi-timeframe",
+      "heikin-ashi"
+    ],
+    "indicators": [
+      "Ichimoku",
+      "Heikin"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend"
+    ],
+    "timeframe": "4h"
+  },
+  "InformativeSample": {
+    "features": [
+      "test-strategy"
+    ],
+    "indicators": [],
+    "market": "Any",
+    "style": [
+      "Special"
+    ],
+    "timeframe": "5m"
+  },
+  "Inverse": {
+    "complexity": 8,
+    "family": "Inverse",
+    "features": [
+      "trailing-stop",
+      "hyperopt",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "CCI",
+      "ADX",
+      "ATR",
+      "Stoch",
+      "MFI"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Momentum",
+      "Mean Reversion"
+    ],
+    "timeframe": "1h"
+  },
+  "InverseV2": {
+    "complexity": 8,
+    "family": "Inverse",
+    "features": [
+      "trailing-stop",
+      "hyperopt",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "CCI",
+      "ADX",
+      "ATR",
+      "Stoch",
+      "MFI"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Momentum",
+      "Mean Reversion"
+    ],
+    "timeframe": "1h"
+  },
+  "JustROCR": {
+    "complexity": 2,
+    "family": "JustROCR",
+    "features": [
+      "trailing-stop"
+    ],
+    "indicators": [
+      "ROC"
+    ],
+    "market": "Any",
+    "side": "Long",
+    "style": [
+      "Momentum"
+    ],
+    "timeframe": "1h"
+  },
+  "JustROCR3": {
+    "complexity": 2,
+    "family": "JustROCR",
+    "features": [
+      "trailing-stop"
+    ],
+    "indicators": [
+      "ROC"
+    ],
+    "market": "Any",
+    "side": "Long",
+    "style": [
+      "Momentum"
+    ],
+    "timeframe": "5m"
+  },
+  "JustROCR5": {
+    "complexity": 1,
+    "family": "JustROCR",
+    "features": [],
+    "indicators": [
+      "ROC"
+    ],
+    "market": "Any",
+    "side": "Long",
+    "style": [
+      "Momentum"
+    ],
+    "timeframe": "1m"
+  },
+  "JustROCR6": {
+    "complexity": 2,
+    "family": "JustROCR",
+    "features": [
+      "trailing-stop"
+    ],
+    "indicators": [
+      "ROC"
+    ],
+    "market": "Any",
+    "side": "Long",
+    "style": [
+      "Momentum"
+    ],
+    "timeframe": "1m"
+  },
+  "KAMACCIRSI": {
+    "complexity": 6,
+    "family": "KAMACCIRSI",
+    "features": [
+      "trailing-stop",
+      "multi-timeframe",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "CCI"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion"
+    ],
+    "timeframe": "5m"
+  },
+  "KC_BB": {
+    "complexity": 8,
+    "family": "KC",
+    "features": [
+      "custom-stoploss",
+      "hyperopt",
+      "heikin-ashi"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "Williams",
+      "Keltner",
+      "Heikin"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Scalping"
+    ],
+    "timeframe": "5m"
+  },
+  "Kamaflage": {
+    "complexity": 5,
+    "family": "Kamaflage",
+    "features": [
+      "trailing-stop",
+      "confirm-entry",
+      "multi-condition"
+    ],
+    "indicators": [
+      "MACD",
+      "RMI",
+      "PSAR"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Momentum"
+    ],
+    "timeframe": "5m"
+  },
+  "Leveraged": {
+    "complexity": 4,
+    "family": "Leveraged",
+    "features": [],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "MACD",
+      "BB",
+      "CCI",
+      "MFI"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "LookaheadStrategy": {
+    "complexity": 2,
+    "family": "LookaheadStrategy",
+    "features": [
+      "trailing-stop"
+    ],
+    "indicators": [
+      "EMA",
+      "SMA"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "Low_BB": {
+    "complexity": 3,
+    "family": "Low",
+    "features": [],
+    "indicators": [
+      "RSI",
+      "MACD",
+      "BB",
+      "CCI",
+      "MFI"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Momentum"
+    ],
+    "timeframe": "1m"
+  },
+  "LuxOSC": {
+    "complexity": 4,
+    "family": "LuxOSC",
+    "features": [
+      "hyperopt"
+    ],
+    "indicators": [
+      "EMA",
+      "Supertrend",
+      "ATR"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Breakout"
+    ],
+    "timeframe": "5m"
+  },
+  "MAC": {
+    "complexity": 7,
+    "family": "MAC",
+    "features": [
+      "trailing-stop",
+      "hyperopt",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "MACD"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend"
+    ],
+    "timeframe": "1d"
+  },
+  "MACDCCI": {
+    "complexity": 4,
+    "family": "MACDCCI",
+    "features": [
+      "trailing-stop",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "MACD",
+      "CCI"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend"
+    ],
+    "timeframe": "30m"
+  },
+  "MACDRSI200": {
+    "complexity": 2,
+    "family": "MACDRSI",
+    "features": [],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "MACD"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "MACDStrategy": {
+    "complexity": 3,
+    "family": "MACDStrategy",
+    "features": [
+      "hyperopt"
+    ],
+    "indicators": [
+      "MACD",
+      "CCI"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "MACDStrategy_crossed": {
+    "complexity": 2,
+    "family": "MACDStrategy",
+    "features": [],
+    "indicators": [
+      "MACD",
+      "CCI"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "MACD_EMA": {
+    "complexity": 2,
+    "family": "MACD",
+    "features": [],
+    "indicators": [
+      "EMA",
+      "MACD"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Scalping"
+    ],
+    "timeframe": "5m"
+  },
+  "MACD_TRIPLE_MA": {
+    "complexity": 2,
+    "family": "MACD",
+    "features": [
+      "trailing-stop"
+    ],
+    "indicators": [
+      "SMA",
+      "MACD"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Scalping"
+    ],
+    "timeframe": "5m"
+  },
+  "MACD_TRI_EMA": {
+    "complexity": 2,
+    "family": "MACD",
+    "features": [],
+    "indicators": [
+      "EMA",
+      "MACD",
+      "TEMA"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "MADisplaceV3": {
+    "complexity": 8,
+    "family": "MADisplace",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "hyperopt",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Scalping"
+    ],
+    "timeframe": "5m"
+  },
+  "MFI": {
+    "complexity": 2,
+    "family": "MFI",
+    "features": [
+      "trailing-stop"
+    ],
+    "indicators": [
+      "MFI"
+    ],
+    "market": "Any",
+    "side": "Long",
+    "style": [
+      "Momentum",
+      "Scalping"
+    ],
+    "timeframe": "5m"
+  },
+  "Macd": {
+    "complexity": 5,
+    "family": "Macd",
+    "features": [
+      "custom-stoploss",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "MACD",
+      "Awesome"
+    ],
+    "market": "Any",
+    "side": "Long",
+    "style": [
+      "Scalping",
+      "Momentum"
+    ],
+    "timeframe": "1h"
+  },
+  "MacheteV8b": {
+    "complexity": 10,
+    "family": "MacheteV8b",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "hyperopt",
+      "multi-timeframe",
+      "heikin-ashi"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "MACD",
+      "BB",
+      "CCI",
+      "ADX",
+      "Ichimoku",
+      "ATR",
+      "Stoch",
+      "Momentum",
+      "ROC",
+      "RMI",
+      "PSAR",
+      "TEMA",
+      "Awesome",
+      "Heikin"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Momentum"
+    ],
+    "timeframe": "15m"
+  },
+  "MacheteV8bRallimod2": {
+    "complexity": 10,
+    "family": "MacheteV8bRalli",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "hyperopt",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "Ichimoku",
+      "ATR",
+      "ROC",
+      "RMI",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "MarketChyperHyperStrategy": {
+    "complexity": 7,
+    "family": "MarketChyperHyperStrategy",
+    "features": [
+      "trailing-stop",
+      "hyperopt",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "MACD",
+      "ADX",
+      "VWAP"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Breakout"
+    ],
+    "timeframe": "1h"
+  },
+  "Maro4hMacdSd": {
+    "complexity": 2,
+    "family": "Maro4hMacdSd",
+    "features": [
+      "trailing-stop"
+    ],
+    "indicators": [
+      "MACD"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "Martin": {
+    "complexity": 10,
+    "family": "Martin",
+    "features": [
+      "trailing-stop",
+      "multi-timeframe",
+      "heikin-ashi"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "MACD",
+      "BB",
+      "CCI",
+      "ADX",
+      "Stoch",
+      "MFI",
+      "ROC",
+      "PSAR",
+      "TEMA",
+      "Awesome",
+      "Keltner",
+      "Heikin"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Momentum"
+    ],
+    "timeframe": "5m"
+  },
+  "MiniLambo": {
+    "complexity": 10,
+    "family": "MiniLambo",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "confirm-entry",
+      "hyperopt",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "BB",
+      "Heikin",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Mean Reversion"
+    ],
+    "timeframe": "1m"
+  },
+  "Minmax": {
+    "complexity": 1,
+    "family": "Minmax",
+    "features": [],
+    "indicators": [
+      "EMA"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend"
+    ],
+    "timeframe": "1h"
+  },
+  "MomStrategy": {
+    "complexity": 10,
+    "family": "MomStrategy",
+    "features": [
+      "trailing-stop",
+      "multi-timeframe",
+      "heikin-ashi"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "MACD",
+      "BB",
+      "CCI",
+      "ADX",
+      "Stoch",
+      "MFI",
+      "Momentum",
+      "ROC",
+      "PSAR",
+      "TEMA",
+      "Awesome",
+      "Keltner",
+      "Heikin"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Momentum",
+      "Mean Reversion"
+    ],
+    "timeframe": "1h"
+  },
+  "Momentumv2": {
+    "complexity": 6,
+    "family": "Momentum",
+    "features": [
+      "custom-stoploss",
+      "hyperopt"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "MACD",
+      "ATR"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Breakout"
+    ],
+    "timeframe": "4h"
+  },
+  "MontrealStrategy": {
+    "complexity": 4,
+    "family": "MontrealStrategy",
+    "features": [
+      "trailing-stop",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "RSI",
+      "BB"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion"
+    ],
+    "timeframe": "15m"
+  },
+  "MostOfAll": {
+    "complexity": 5,
+    "family": "MostOfAll",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "hyperopt"
+    ],
+    "indicators": [
+      "EMA"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "MultiMA_TSL": {
+    "complexity": 6,
+    "family": "MultiMA",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "hyperopt"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "EWO"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Scalping"
+    ],
+    "timeframe": "5m"
+  },
+  "MultiMA_TSL3": {
+    "complexity": 10,
+    "family": "MultiMA",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "custom-exit",
+      "confirm-entry",
+      "hyperopt",
+      "multi-timeframe",
+      "heikin-ashi",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "ATR",
+      "TEMA",
+      "Heikin",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Scalping"
+    ],
+    "timeframe": "5m"
+  },
+  "MultiMA_TSL3_Mod": {
+    "complexity": 10,
+    "family": "MultiMA",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "custom-exit",
+      "confirm-entry",
+      "hyperopt",
+      "heikin-ashi"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "ATR",
+      "PSAR",
+      "TEMA",
+      "Heikin",
+      "EWO"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Scalping"
+    ],
+    "timeframe": "5m"
+  },
+  "MultiMa": {
+    "complexity": 4,
+    "family": "MultiMa",
+    "features": [
+      "trailing-stop",
+      "hyperopt"
+    ],
+    "indicators": [
+      "EMA",
+      "TEMA"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend"
+    ],
+    "timeframe": "4h"
+  },
+  "MultiOffsetLamboV0": {
+    "complexity": 6,
+    "family": "MultiOffsetLambo",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "hyperopt"
+    ],
+    "indicators": [
+      "EMA",
+      "SMA",
+      "EWO"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Scalping"
+    ],
+    "timeframe": "5m"
+  },
+  "MultiRSI": {
+    "complexity": 2,
+    "family": "MultiRSI",
+    "features": [],
+    "indicators": [
+      "RSI",
+      "SMA"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "NASOSRv6_private_Reinuvader_20211121": {
+    "complexity": 10,
+    "family": "NASOSRv6",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "custom-exit",
+      "hyperopt",
+      "multi-timeframe",
+      "heikin-ashi"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "MACD",
+      "BB",
+      "ATR",
+      "Williams",
+      "ROC",
+      "TEMA",
+      "Heikin",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "NASOSv4": {
+    "complexity": 8,
+    "family": "NASOS",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "hyperopt",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Scalping"
+    ],
+    "timeframe": "5m"
+  },
+  "NASOSv5": {
+    "complexity": 8,
+    "family": "NASOS",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "hyperopt",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Scalping"
+    ],
+    "timeframe": "5m"
+  },
+  "NASOSv5_mod1": {
+    "complexity": 10,
+    "family": "NASOSv5",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "custom-exit",
+      "hyperopt",
+      "multi-timeframe",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Scalping"
+    ],
+    "timeframe": "5m"
+  },
+  "NASOSv5_mod1_DanMod": {
+    "complexity": 8,
+    "family": "NASOSv5",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "hyperopt",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "VWAP",
+      "EWO"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Scalping"
+    ],
+    "timeframe": "5m"
+  },
+  "NASOSv5_mod2": {
+    "complexity": 10,
+    "family": "NASOSv5",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "custom-exit",
+      "hyperopt",
+      "multi-timeframe",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Scalping"
+    ],
+    "timeframe": "5m"
+  },
+  "NASOSv5_mod3": {
+    "complexity": 10,
+    "family": "NASOSv5",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "custom-exit",
+      "hyperopt",
+      "multi-timeframe",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Scalping"
+    ],
+    "timeframe": "5m"
+  },
+  "NFI46": {
+    "complexity": 10,
+    "family": "NFI",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "custom-exit",
+      "hyperopt",
+      "multi-timeframe",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "MFI",
+      "Alligator",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "NFI46Frog": {
+    "complexity": 10,
+    "family": "NFI46Frog",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "custom-exit",
+      "hyperopt",
+      "multi-timeframe",
+      "heikin-ashi",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "ADX",
+      "ATR",
+      "Stoch",
+      "MFI",
+      "ROC",
+      "RMI",
+      "PSAR",
+      "Alligator",
+      "Heikin",
+      "EWO"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Momentum",
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "NFI46FrogZ": {
+    "complexity": 10,
+    "family": "NFI46FrogZ",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "custom-exit",
+      "hyperopt",
+      "multi-timeframe",
+      "heikin-ashi",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "ADX",
+      "ATR",
+      "Stoch",
+      "MFI",
+      "ROC",
+      "RMI",
+      "PSAR",
+      "Alligator",
+      "Heikin",
+      "EWO"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Momentum",
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "NFI46Offset": {
+    "complexity": 10,
+    "family": "NFI46Offset",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "custom-exit",
+      "hyperopt",
+      "multi-timeframe",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "MFI",
+      "Alligator",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "NFI46OffsetHOA1": {
+    "complexity": 10,
+    "family": "NFI46OffsetHOA",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "custom-exit",
+      "hyperopt",
+      "multi-timeframe",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "MFI",
+      "Alligator",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "NFI46Z": {
+    "complexity": 10,
+    "family": "NFI46Z",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "custom-exit",
+      "hyperopt",
+      "multi-timeframe",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "MACD",
+      "BB",
+      "MFI",
+      "Alligator",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "NFI47V2": {
+    "complexity": 10,
+    "family": "NFI47",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "custom-exit",
+      "hyperopt",
+      "multi-timeframe",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "MFI",
+      "Alligator",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "NFI4Frog": {
+    "complexity": 10,
+    "family": "NFI4Frog",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "custom-exit",
+      "hyperopt",
+      "multi-timeframe",
+      "heikin-ashi",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "ADX",
+      "ATR",
+      "Stoch",
+      "MFI",
+      "ROC",
+      "RMI",
+      "PSAR",
+      "Alligator",
+      "Heikin",
+      "EWO"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Momentum",
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "NFI5MOHO": {
+    "complexity": 10,
+    "family": "NFI5MOHO",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "custom-exit",
+      "hyperopt",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "MFI",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Scalping"
+    ],
+    "timeframe": "5m"
+  },
+  "NFI5MOHO2": {
+    "complexity": 10,
+    "family": "NFI5MOHO",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "custom-exit",
+      "hyperopt",
+      "multi-timeframe",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "MFI",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Scalping"
+    ],
+    "timeframe": "5m"
+  },
+  "NFI5MOHO_WIP": {
+    "complexity": 10,
+    "family": "NFI5MOHO",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "custom-exit",
+      "hyperopt",
+      "multi-timeframe",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "MFI",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Scalping"
+    ],
+    "timeframe": "5m"
+  },
+  "NFI5MOHO_WIP_1": {
+    "complexity": 10,
+    "family": "NFI5MOHO",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "custom-exit",
+      "hyperopt",
+      "multi-timeframe",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "MFI",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Scalping"
+    ],
+    "timeframe": "5m"
+  },
+  "NFI5MOHO_WIP_2": {
+    "complexity": 10,
+    "family": "NFI5MOHO",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "custom-exit",
+      "hyperopt",
+      "multi-timeframe",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "MFI",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Scalping"
+    ],
+    "timeframe": "5m"
+  },
+  "NFI731_BUSD": {
+    "complexity": 10,
+    "family": "NFI731",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "custom-exit",
+      "hyperopt",
+      "multi-timeframe",
+      "heikin-ashi",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "ATR",
+      "Stoch",
+      "MFI",
+      "Williams",
+      "ROC",
+      "TEMA",
+      "Heikin",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Momentum"
+    ],
+    "timeframe": "5m"
+  },
+  "NFI7MOHO": {
+    "complexity": 10,
+    "family": "NFI7MOHO",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "custom-exit",
+      "hyperopt",
+      "multi-timeframe",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "MFI",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Scalping"
+    ],
+    "timeframe": "5m"
+  },
+  "NFINextMOHO": {
+    "complexity": 10,
+    "family": "NFINextMOHO",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "custom-exit",
+      "hyperopt",
+      "multi-timeframe",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "MFI",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Scalping"
+    ],
+    "timeframe": "5m"
+  },
+  "NFINextMOHO2": {
+    "complexity": 10,
+    "family": "NFINextMOHO",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "custom-exit",
+      "hyperopt",
+      "multi-timeframe",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "MFI",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Scalping"
+    ],
+    "timeframe": "5m"
+  },
+  "NFINextMultiOffsetAndHO": {
+    "complexity": 10,
+    "family": "NFINextMultiOffsetAndHO",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "custom-exit",
+      "hyperopt",
+      "multi-timeframe",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "Stoch",
+      "MFI",
+      "Williams",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Momentum"
+    ],
+    "timeframe": "5m"
+  },
+  "NFINextMultiOffsetAndHO2": {
+    "complexity": 10,
+    "family": "NFINextMultiOffsetAndHO",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "custom-exit",
+      "hyperopt",
+      "multi-timeframe",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "Stoch",
+      "MFI",
+      "Williams",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Momentum"
+    ],
+    "timeframe": "5m"
+  },
+  "NFIX_BB_RPB": {
+    "complexity": 10,
+    "family": "NFIX",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "custom-exit",
+      "confirm-entry",
+      "multi-timeframe",
+      "heikin-ashi",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "CCI",
+      "ADX",
+      "Ichimoku",
+      "ATR",
+      "Stoch",
+      "MFI",
+      "Williams",
+      "Momentum",
+      "ROC",
+      "RMI",
+      "TEMA",
+      "Fibonacci",
+      "Heikin",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Momentum",
+      "Mean Reversion"
+    ],
+    "timeframe": "5m"
+  },
+  "NFIX_BB_RPB_c7c477d_20211030": {
+    "complexity": 10,
+    "family": "NFIX",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "custom-exit",
+      "multi-timeframe",
+      "heikin-ashi",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "CCI",
+      "Ichimoku",
+      "ATR",
+      "Stoch",
+      "MFI",
+      "Williams",
+      "Momentum",
+      "ROC",
+      "RMI",
+      "TEMA",
+      "Fibonacci",
+      "Heikin",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Momentum",
+      "Mean Reversion"
+    ],
+    "timeframe": "5m"
+  },
+  "NfiNextModded": {
+    "complexity": 10,
+    "family": "NfiNextModded",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "custom-exit",
+      "multi-timeframe",
+      "heikin-ashi"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "CCI",
+      "Ichimoku",
+      "ATR",
+      "Stoch",
+      "MFI",
+      "Williams",
+      "Momentum",
+      "ROC",
+      "TEMA",
+      "Fibonacci",
+      "Heikin",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Momentum"
+    ],
+    "timeframe": "5m"
+  },
+  "NormalizerStrategy": {
+    "complexity": 3,
+    "family": "NormalizerStrategy",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop"
+    ],
+    "indicators": [],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend"
+    ],
+    "timeframe": "1h"
+  },
+  "NormalizerStrategyHO2": {
+    "complexity": 3,
+    "family": "NormalizerStrategyHO",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop"
+    ],
+    "indicators": [],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend"
+    ],
+    "timeframe": "1h"
+  },
+  "Nostalgia": {
+    "complexity": 10,
+    "family": "Nostalgia",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "custom-exit",
+      "hyperopt",
+      "multi-timeframe",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "Stoch",
+      "MFI",
+      "Williams",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Momentum"
+    ],
+    "timeframe": "5m"
+  },
+  "NostalgiaForInfinityNext": {
+    "complexity": 10,
+    "family": "NostalgiaForInfinity",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "custom-exit",
+      "hyperopt",
+      "multi-timeframe",
+      "heikin-ashi",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "ATR",
+      "Stoch",
+      "MFI",
+      "Williams",
+      "ROC",
+      "TEMA",
+      "Heikin",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Momentum"
+    ],
+    "timeframe": "5m"
+  },
+  "NostalgiaForInfinityNextGen": {
+    "complexity": 10,
+    "family": "NostalgiaForInfinity",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "custom-exit",
+      "multi-timeframe",
+      "heikin-ashi"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "CCI",
+      "Ichimoku",
+      "MFI",
+      "Williams",
+      "Momentum",
+      "ROC",
+      "Fibonacci",
+      "Heikin",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Momentum"
+    ],
+    "timeframe": "15m"
+  },
+  "NostalgiaForInfinityNextGen_TSL": {
+    "complexity": 10,
+    "family": "NostalgiaForInfinity",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "custom-exit",
+      "multi-timeframe",
+      "heikin-ashi"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "CCI",
+      "Ichimoku",
+      "MFI",
+      "Williams",
+      "ROC",
+      "Fibonacci",
+      "Heikin",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Trend"
+    ],
+    "timeframe": "15m"
+  },
+  "NostalgiaForInfinityNextV7155": {
+    "complexity": 10,
+    "family": "NostalgiaForInfinity",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "custom-exit",
+      "multi-timeframe",
+      "heikin-ashi"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "CCI",
+      "Ichimoku",
+      "ATR",
+      "Stoch",
+      "MFI",
+      "Williams",
+      "Momentum",
+      "ROC",
+      "TEMA",
+      "Fibonacci",
+      "Heikin",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Momentum"
+    ],
+    "timeframe": "5m"
+  },
+  "NostalgiaForInfinityNext_ChangeToTower_V5_2": {
+    "complexity": 10,
+    "family": "NostalgiaForInfinity",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "custom-exit",
+      "hyperopt",
+      "multi-timeframe",
+      "heikin-ashi"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "CCI",
+      "Ichimoku",
+      "ATR",
+      "Stoch",
+      "MFI",
+      "Williams",
+      "TEMA",
+      "Heikin",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "NostalgiaForInfinityNext_ChangeToTower_V5_3": {
+    "complexity": 10,
+    "family": "NostalgiaForInfinity",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "custom-exit",
+      "hyperopt",
+      "multi-timeframe",
+      "heikin-ashi"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "CCI",
+      "Ichimoku",
+      "ATR",
+      "Stoch",
+      "MFI",
+      "Williams",
+      "TEMA",
+      "Heikin",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "NostalgiaForInfinityNext_ChangeToTower_V6": {
+    "complexity": 10,
+    "family": "NostalgiaForInfinity",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "custom-exit",
+      "hyperopt",
+      "multi-timeframe",
+      "heikin-ashi"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "CCI",
+      "Ichimoku",
+      "ATR",
+      "Stoch",
+      "MFI",
+      "Williams",
+      "TEMA",
+      "Heikin",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "NostalgiaForInfinityNext_maximizer": {
+    "complexity": 10,
+    "family": "NostalgiaForInfinity",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "custom-exit",
+      "hyperopt",
+      "multi-timeframe",
+      "heikin-ashi"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "CCI",
+      "Ichimoku",
+      "ATR",
+      "Stoch",
+      "MFI",
+      "Williams",
+      "TEMA",
+      "Heikin",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "NostalgiaForInfinityV1": {
+    "complexity": 7,
+    "family": "NostalgiaForInfinity",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "BB",
+      "ATR"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "NostalgiaForInfinityV2": {
+    "complexity": 8,
+    "family": "NostalgiaForInfinity",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "hyperopt",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "ATR"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "NostalgiaForInfinityV3": {
+    "complexity": 10,
+    "family": "NostalgiaForInfinity",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "custom-exit",
+      "hyperopt",
+      "multi-timeframe",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "MFI",
+      "Alligator"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "NostalgiaForInfinityV4": {
+    "complexity": 10,
+    "family": "NostalgiaForInfinity",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "custom-exit",
+      "hyperopt",
+      "multi-timeframe",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "MFI",
+      "Alligator",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "NostalgiaForInfinityV4HO": {
+    "complexity": 10,
+    "family": "NostalgiaForInfinity",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "custom-exit",
+      "hyperopt",
+      "multi-timeframe",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "MFI",
+      "Alligator",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "NostalgiaForInfinityV5": {
+    "complexity": 10,
+    "family": "NostalgiaForInfinity",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "custom-exit",
+      "hyperopt",
+      "multi-timeframe",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "MFI",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "NostalgiaForInfinityV5MultiOffsetAndHO": {
+    "complexity": 10,
+    "family": "NostalgiaForInfinity",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "custom-exit",
+      "hyperopt",
+      "multi-timeframe",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "MFI",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Scalping"
+    ],
+    "timeframe": "5m"
+  },
+  "NostalgiaForInfinityV5MultiOffsetAndHO2": {
+    "complexity": 10,
+    "family": "NostalgiaForInfinity",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "custom-exit",
+      "hyperopt",
+      "multi-timeframe",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "MFI",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Scalping"
+    ],
+    "timeframe": "5m"
+  },
+  "NostalgiaForInfinityV6": {
+    "complexity": 10,
+    "family": "NostalgiaForInfinity",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "custom-exit",
+      "hyperopt",
+      "multi-timeframe",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "MFI",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Scalping"
+    ],
+    "timeframe": "5m"
+  },
+  "NostalgiaForInfinityV6HO": {
+    "complexity": 10,
+    "family": "NostalgiaForInfinity",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "custom-exit",
+      "hyperopt",
+      "multi-timeframe",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "MFI",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Scalping"
+    ],
+    "timeframe": "5m"
+  },
+  "NostalgiaForInfinityV7": {
+    "complexity": 10,
+    "family": "NostalgiaForInfinity",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "custom-exit",
+      "hyperopt",
+      "multi-timeframe",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "MFI",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Scalping"
+    ],
+    "timeframe": "5m"
+  },
+  "NostalgiaForInfinityV7_7_2": {
+    "complexity": 10,
+    "family": "NostalgiaForInfinity",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "custom-exit",
+      "multi-timeframe",
+      "heikin-ashi"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "CCI",
+      "Ichimoku",
+      "ATR",
+      "Stoch",
+      "MFI",
+      "Williams",
+      "TEMA",
+      "Heikin",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "NostalgiaForInfinityV7_SMA": {
+    "complexity": 10,
+    "family": "NostalgiaForInfinity",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "custom-exit",
+      "hyperopt",
+      "multi-timeframe",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "MFI",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "NostalgiaForInfinityV7_SMAv2": {
+    "complexity": 10,
+    "family": "NostalgiaForInfinity",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "custom-exit",
+      "hyperopt",
+      "multi-timeframe",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "MFI",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "NostalgiaForInfinityV7_SMAv2_1": {
+    "complexity": 10,
+    "family": "NostalgiaForInfinity",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "custom-exit",
+      "hyperopt",
+      "multi-timeframe",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "MFI",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "NostalgiaForInfinityX": {
+    "complexity": 10,
+    "family": "NostalgiaForInfinity",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "custom-exit",
+      "hyperopt",
+      "multi-timeframe",
+      "heikin-ashi",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "CCI",
+      "ADX",
+      "Ichimoku",
+      "ATR",
+      "Stoch",
+      "MFI",
+      "Williams",
+      "Momentum",
+      "ROC",
+      "RMI",
+      "TEMA",
+      "Fibonacci",
+      "Heikin",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Momentum",
+      "Mean Reversion"
+    ],
+    "timeframe": "5m"
+  },
+  "NostalgiaForInfinityX2": {
+    "complexity": 10,
+    "family": "NostalgiaForInfinity",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "custom-exit",
+      "confirm-entry",
+      "multi-timeframe",
+      "heikin-ashi",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "Williams",
+      "Fibonacci",
+      "Heikin",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "NostalgiaForInfinityXw": {
+    "complexity": 10,
+    "family": "NostalgiaForInfinity",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "custom-exit",
+      "confirm-entry",
+      "hyperopt",
+      "multi-timeframe",
+      "heikin-ashi",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "CCI",
+      "ADX",
+      "Ichimoku",
+      "ATR",
+      "Stoch",
+      "MFI",
+      "Williams",
+      "ROC",
+      "RMI",
+      "TEMA",
+      "Keltner",
+      "Fibonacci",
+      "Heikin",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Momentum",
+      "Mean Reversion"
+    ],
+    "timeframe": "5m"
+  },
+  "NotAnotherSMAOffSetStrategy_V2": {
+    "complexity": 5,
+    "family": "NotAnotherSMAOffSetStrategy",
+    "features": [
+      "trailing-stop",
+      "hyperopt"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "EWO"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Scalping"
+    ],
+    "timeframe": "5m"
+  },
+  "NotAnotherSMAOffsetStrategy": {
+    "complexity": 5,
+    "family": "NotAnotherSMAOffsetStrategy",
+    "features": [
+      "trailing-stop",
+      "hyperopt"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "EWO"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Scalping"
+    ],
+    "timeframe": "5m"
+  },
+  "NotAnotherSMAOffsetStrategyHO": {
+    "complexity": 5,
+    "family": "NotAnotherSMAOffsetStrategyHO",
+    "features": [
+      "trailing-stop",
+      "hyperopt"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "EWO"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Scalping"
+    ],
+    "timeframe": "5m"
+  },
+  "NotAnotherSMAOffsetStrategyHOv3": {
+    "complexity": 6,
+    "family": "NotAnotherSMAOffsetStrategyHO",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "hyperopt"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "EWO"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Scalping"
+    ],
+    "timeframe": "5m"
+  },
+  "NotAnotherSMAOffsetStrategyLite": {
+    "complexity": 5,
+    "family": "NotAnotherSMAOffsetStrategyLite",
+    "features": [
+      "custom-stoploss",
+      "hyperopt"
+    ],
+    "indicators": [
+      "EMA",
+      "EWO"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Scalping"
+    ],
+    "timeframe": "5m"
+  },
+  "NotAnotherSMAOffsetStrategyModHO": {
+    "complexity": 6,
+    "family": "NotAnotherSMAOffsetStrategyModHO",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "hyperopt"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "ADX",
+      "EWO"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Scalping"
+    ],
+    "timeframe": "5m"
+  },
+  "NotAnotherSMAOffsetStrategyModHO_LamineDz_20210901": {
+    "complexity": 6,
+    "family": "NotAnotherSMAOffsetStrategyModHO",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "hyperopt"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "ADX",
+      "EWO"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Scalping"
+    ],
+    "timeframe": "5m"
+  },
+  "NotAnotherSMAOffsetStrategyX1": {
+    "complexity": 6,
+    "family": "NotAnotherSMAOffsetStrategyX",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "hyperopt"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "EWO"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Scalping"
+    ],
+    "timeframe": "5m"
+  },
+  "NotAnotherSMAOffsetStrategy_uzi": {
+    "complexity": 5,
+    "family": "NotAnotherSMAOffsetStrategy",
+    "features": [
+      "trailing-stop",
+      "hyperopt"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "EWO"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Scalping"
+    ],
+    "timeframe": "5m"
+  },
+  "NotAnotherSMAOffsetStrategy_uzi3": {
+    "complexity": 5,
+    "family": "NotAnotherSMAOffsetStrategy",
+    "features": [
+      "trailing-stop",
+      "hyperopt"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Scalping"
+    ],
+    "timeframe": "5m"
+  },
+  "NowoIchimoku1hV1": {
+    "complexity": 9,
+    "family": "NowoIchimoku1h",
+    "features": [
+      "custom-stoploss",
+      "custom-exit",
+      "hyperopt",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "RSI",
+      "SMA",
+      "BB",
+      "Ichimoku",
+      "Stoch"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Trend"
+    ],
+    "timeframe": "1h"
+  },
+  "NowoIchimoku1hV2": {
+    "complexity": 6,
+    "family": "NowoIchimoku1h",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "hyperopt"
+    ],
+    "indicators": [
+      "RSI",
+      "SMA",
+      "BB",
+      "Ichimoku",
+      "Stoch"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Trend"
+    ],
+    "timeframe": "1h"
+  },
+  "NowoIchimoku5mV2": {
+    "complexity": 8,
+    "family": "NowoIchimoku5m",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "hyperopt",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "RSI",
+      "SMA",
+      "BB",
+      "Ichimoku",
+      "Stoch"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "ONUR": {
+    "complexity": 2,
+    "family": "ONUR",
+    "features": [
+      "trailing-stop"
+    ],
+    "indicators": [
+      "RSI",
+      "BB"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion"
+    ],
+    "timeframe": "15m"
+  },
+  "ObeliskIM_v1_1": {
+    "complexity": 4,
+    "family": "ObeliskIM",
+    "features": [
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "Ichimoku"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Breakout"
+    ],
+    "timeframe": "5m"
+  },
+  "ObeliskRSI_v6_1": {
+    "complexity": 3,
+    "family": "ObeliskRSI",
+    "features": [
+      "custom-stoploss"
+    ],
+    "indicators": [
+      "RSI"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "Obelisk_3EMA_StochRSI_ATR": {
+    "complexity": 6,
+    "family": "Obelisk",
+    "features": [
+      "custom-stoploss",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "ATR",
+      "Stoch"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Momentum",
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "Obelisk_Ichimoku_Slow_v1_3": {
+    "complexity": 5,
+    "family": "Obelisk",
+    "features": [
+      "trailing-stop",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "EMA",
+      "Ichimoku",
+      "ATR"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Scalping",
+      "Trend"
+    ],
+    "timeframe": "1h"
+  },
+  "Obelisk_Ichimoku_ZEMA_v1": {
+    "complexity": 6,
+    "family": "Obelisk",
+    "features": [
+      "hyperopt",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "EMA",
+      "Ichimoku",
+      "ATR"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Scalping"
+    ],
+    "timeframe": "5m"
+  },
+  "Obelisk_TradePro_Ichi_v1_1": {
+    "complexity": 1,
+    "family": "Obelisk",
+    "features": [],
+    "indicators": [
+      "Ichimoku"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend"
+    ],
+    "timeframe": "1h"
+  },
+  "Obelisk_TradePro_Ichi_v2_1": {
+    "complexity": 3,
+    "family": "Obelisk",
+    "features": [
+      "trailing-stop"
+    ],
+    "indicators": [
+      "Ichimoku",
+      "ATR",
+      "ROC",
+      "RMI"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Momentum",
+      "Trend"
+    ],
+    "timeframe": "1h"
+  },
+  "PRICEFOLLOWING": {
+    "complexity": 10,
+    "family": "PRICEFOLLOWING",
+    "features": [
+      "trailing-stop",
+      "hyperopt",
+      "multi-timeframe",
+      "heikin-ashi",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "MACD",
+      "ADX",
+      "Stoch",
+      "PSAR",
+      "TEMA",
+      "Heikin"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Momentum"
+    ],
+    "timeframe": "5m"
+  },
+  "PRICEFOLLOWING2": {
+    "complexity": 10,
+    "family": "PRICEFOLLOWING",
+    "features": [
+      "trailing-stop",
+      "hyperopt",
+      "multi-timeframe",
+      "heikin-ashi",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "MACD",
+      "ADX",
+      "Stoch",
+      "PSAR",
+      "TEMA",
+      "Heikin"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Momentum"
+    ],
+    "timeframe": "15m"
+  },
+  "PRICEFOLLOWINGX": {
+    "complexity": 10,
+    "family": "PRICEFOLLOWINGX",
+    "features": [
+      "trailing-stop",
+      "hyperopt",
+      "multi-timeframe",
+      "heikin-ashi",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "MACD",
+      "BB",
+      "ADX",
+      "Stoch",
+      "PSAR",
+      "TEMA",
+      "Heikin"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Mean Reversion"
+    ],
+    "timeframe": "15m"
+  },
+  "Persia": {
+    "complexity": 3,
+    "family": "Persia",
+    "features": [
+      "hyperopt"
+    ],
+    "indicators": [
+      "TEMA"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "PrawnstarOBV": {
+    "complexity": 6,
+    "family": "PrawnstarOBV",
+    "features": [
+      "trailing-stop",
+      "hyperopt",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "RSI",
+      "SMA",
+      "OBV"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend"
+    ],
+    "timeframe": "1h"
+  },
+  "PumpDetector": {
+    "complexity": 3,
+    "family": "PumpDetector",
+    "features": [
+      "hyperopt"
+    ],
+    "indicators": [
+      "EMA"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "Quickie": {
+    "complexity": 3,
+    "family": "Quickie",
+    "features": [],
+    "indicators": [
+      "EMA",
+      "SMA",
+      "MACD",
+      "BB",
+      "ADX",
+      "TEMA"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Scalping"
+    ],
+    "timeframe": "5m"
+  },
+  "RSI": {
+    "complexity": 4,
+    "family": "RSI",
+    "features": [
+      "trailing-stop",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "RSI",
+      "Williams"
+    ],
+    "market": "Any",
+    "side": "Long",
+    "style": [
+      "Momentum"
+    ],
+    "timeframe": "15m"
+  },
+  "RSIBB02": {
+    "complexity": 2,
+    "family": "RSIBB",
+    "features": [],
+    "indicators": [
+      "RSI",
+      "BB"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion"
+    ],
+    "timeframe": "1h"
+  },
+  "RSIv2": {
+    "complexity": 4,
+    "family": "RSI",
+    "features": [
+      "trailing-stop",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "RSI",
+      "Williams"
+    ],
+    "market": "Any",
+    "side": "Long",
+    "style": [
+      "Momentum"
+    ],
+    "timeframe": "15m"
+  },
+  "RalliV1": {
+    "complexity": 8,
+    "family": "Ralli",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "hyperopt",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "EWO"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Scalping"
+    ],
+    "timeframe": "5m"
+  },
+  "RalliV1_disable56": {
+    "complexity": 8,
+    "family": "RalliV1",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "hyperopt",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "EWO"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Scalping"
+    ],
+    "timeframe": "5m"
+  },
+  "RaposaDivergenceV1": {
+    "complexity": 4,
+    "family": "RaposaDivergence",
+    "features": [
+      "trailing-stop",
+      "hyperopt"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "ReinforcedAverageStrategy": {
+    "complexity": 3,
+    "family": "ReinforcedAverageStrategy",
+    "features": [
+      "trailing-stop"
+    ],
+    "indicators": [
+      "EMA",
+      "SMA",
+      "BB"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Mean Reversion"
+    ],
+    "timeframe": "4h"
+  },
+  "ReinforcedQuickie": {
+    "complexity": 4,
+    "family": "ReinforcedQuickie",
+    "features": [],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "MACD",
+      "BB",
+      "CCI",
+      "MFI"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "ReinforcedSmoothScalp": {
+    "complexity": 4,
+    "family": "ReinforcedSmoothScalp",
+    "features": [],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "CCI",
+      "ADX",
+      "Stoch",
+      "MFI"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Momentum"
+    ],
+    "timeframe": "1m"
+  },
+  "Renko": {
+    "complexity": 1,
+    "family": "Renko",
+    "features": [],
+    "indicators": [
+      "ATR"
+    ],
+    "market": "Volatile",
+    "side": "Long",
+    "style": [
+      "Breakout"
+    ],
+    "timeframe": "15m"
+  },
+  "RobotradingBody": {
+    "complexity": 5,
+    "family": "RobotradingBody",
+    "features": [
+      "hyperopt",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "SMA"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend"
+    ],
+    "timeframe": "4h"
+  },
+  "Roth01": {
+    "complexity": 4,
+    "family": "Roth",
+    "features": [],
+    "indicators": [
+      "RSI",
+      "MACD",
+      "BB",
+      "CCI",
+      "ADX",
+      "Stoch",
+      "MFI",
+      "PSAR"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Momentum"
+    ],
+    "timeframe": "5m"
+  },
+  "Roth03": {
+    "complexity": 4,
+    "family": "Roth",
+    "features": [],
+    "indicators": [
+      "RSI",
+      "MACD",
+      "BB",
+      "CCI",
+      "ADX",
+      "Stoch",
+      "MFI",
+      "PSAR"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Momentum"
+    ],
+    "timeframe": "5m"
+  },
+  "SAR": {
+    "complexity": 10,
+    "family": "SAR",
+    "features": [
+      "trailing-stop",
+      "multi-timeframe",
+      "heikin-ashi"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "MACD",
+      "BB",
+      "CCI",
+      "ADX",
+      "Stoch",
+      "MFI",
+      "ROC",
+      "PSAR",
+      "TEMA",
+      "Awesome",
+      "Keltner",
+      "Heikin"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Momentum"
+    ],
+    "timeframe": "5m"
+  },
+  "SMAIP3": {
+    "complexity": 5,
+    "family": "SMAIP",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "hyperopt"
+    ],
+    "indicators": [
+      "EMA",
+      "SMA"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "SMAIP3v2": {
+    "complexity": 4,
+    "family": "SMAIP3",
+    "features": [
+      "trailing-stop",
+      "hyperopt"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "SMAOG": {
+    "complexity": 4,
+    "family": "SMAOG",
+    "features": [
+      "trailing-stop",
+      "hyperopt"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "SMAOPv1_TTF": {
+    "complexity": 8,
+    "family": "SMAOPv1",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "hyperopt",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "EWO"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Scalping"
+    ],
+    "timeframe": "5m"
+  },
+  "SMAOffset": {
+    "complexity": 5,
+    "family": "SMAOffset",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "hyperopt"
+    ],
+    "indicators": [
+      "EMA",
+      "SMA"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "SMAOffsetProtectOpt": {
+    "complexity": 8,
+    "family": "SMAOffset",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "hyperopt",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "EWO"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Scalping"
+    ],
+    "timeframe": "5m"
+  },
+  "SMAOffsetProtectOptV0": {
+    "complexity": 10,
+    "family": "SMAOffset",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "hyperopt",
+      "multi-timeframe",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "EWO"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Scalping"
+    ],
+    "timeframe": "5m"
+  },
+  "SMAOffsetProtectOptV1": {
+    "complexity": 8,
+    "family": "SMAOffset",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "hyperopt",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "EWO"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Scalping"
+    ],
+    "timeframe": "5m"
+  },
+  "SMAOffsetProtectOptV1HO1": {
+    "complexity": 8,
+    "family": "SMAOffset",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "hyperopt",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "EWO"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Scalping"
+    ],
+    "timeframe": "5m"
+  },
+  "SMAOffsetProtectOptV1Mod": {
+    "complexity": 8,
+    "family": "SMAOffset",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "hyperopt",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "EWO"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Scalping"
+    ],
+    "timeframe": "5m"
+  },
+  "SMAOffsetProtectOptV1Mod2": {
+    "complexity": 9,
+    "family": "SMAOffset",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "hyperopt",
+      "multi-timeframe",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "EWO"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Scalping"
+    ],
+    "timeframe": "5m"
+  },
+  "SMAOffsetProtectOptV1_kkeue_20210619": {
+    "complexity": 8,
+    "family": "SMAOffset",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "hyperopt",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "EWO"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Scalping"
+    ],
+    "timeframe": "5m"
+  },
+  "SMAOffsetV2": {
+    "complexity": 5,
+    "family": "SMAOffset",
+    "features": [
+      "custom-stoploss",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "EMA",
+      "SMA"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "SMA_BBRSI": {
+    "complexity": 10,
+    "family": "SMA",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "hyperopt",
+      "multi-timeframe",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "CCI",
+      "ATR",
+      "EWO"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Scalping",
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "SRsi": {
+    "complexity": 3,
+    "family": "SRsi",
+    "features": [
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "RSI"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend"
+    ],
+    "timeframe": "1m"
+  },
+  "STRATEGY_RSI_BB_BOUNDS_CROSS": {
+    "complexity": 5,
+    "family": "STRATEGY",
+    "features": [
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "BB",
+      "TEMA"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Breakout"
+    ],
+    "timeframe": "5m"
+  },
+  "STRATEGY_RSI_BB_CROSS": {
+    "complexity": 4,
+    "family": "STRATEGY",
+    "features": [
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "RSI",
+      "BB",
+      "TEMA"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Breakout"
+    ],
+    "timeframe": "5m"
+  },
+  "SampleStrategy": {
+    "features": [
+      "test-strategy"
+    ],
+    "indicators": [],
+    "market": "Any",
+    "style": [
+      "Special"
+    ],
+    "timeframe": "5m"
+  },
+  "SampleStrategyV2": {
+    "features": [
+      "test-strategy"
+    ],
+    "indicators": [],
+    "market": "Any",
+    "style": [
+      "Special"
+    ],
+    "timeframe": "5m"
+  },
+  "Saturn5": {
+    "complexity": 4,
+    "family": "Saturn",
+    "features": [
+      "custom-stoploss"
+    ],
+    "indicators": [
+      "EMA",
+      "SMA",
+      "BB",
+      "ATR",
+      "Fibonacci"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Scalping",
+      "Trend"
+    ],
+    "timeframe": "15m"
+  },
+  "Scalp": {
+    "complexity": 3,
+    "family": "Scalp",
+    "features": [],
+    "indicators": [
+      "EMA",
+      "BB",
+      "ADX",
+      "Stoch"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Scalping",
+      "Trend"
+    ],
+    "timeframe": "1m"
+  },
+  "Schism": {
+    "complexity": 7,
+    "family": "Schism",
+    "features": [
+      "confirm-entry",
+      "multi-timeframe",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "ROC",
+      "RMI"
+    ],
+    "market": "Volatile",
+    "side": "Long",
+    "style": [
+      "Momentum",
+      "Breakout"
+    ],
+    "timeframe": "5m"
+  },
+  "Schism2": {
+    "complexity": 7,
+    "family": "Schism",
+    "features": [
+      "confirm-entry",
+      "multi-timeframe",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "ROC",
+      "RMI",
+      "EWO"
+    ],
+    "market": "Volatile",
+    "side": "Long",
+    "style": [
+      "Momentum",
+      "Breakout"
+    ],
+    "timeframe": "5m"
+  },
+  "Schism2MM": {
+    "complexity": 7,
+    "family": "Schism2MM",
+    "features": [
+      "confirm-entry",
+      "multi-timeframe",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "ROC",
+      "RMI"
+    ],
+    "market": "Volatile",
+    "side": "Long",
+    "style": [
+      "Momentum",
+      "Breakout"
+    ],
+    "timeframe": "5m"
+  },
+  "Schism3": {
+    "complexity": 7,
+    "family": "Schism",
+    "features": [
+      "confirm-entry",
+      "multi-timeframe",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "ROC",
+      "RMI"
+    ],
+    "market": "Volatile",
+    "side": "Long",
+    "style": [
+      "Momentum",
+      "Breakout"
+    ],
+    "timeframe": "5m"
+  },
+  "Schism4": {
+    "complexity": 7,
+    "family": "Schism",
+    "features": [
+      "confirm-entry",
+      "multi-timeframe",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "ROC",
+      "RMI"
+    ],
+    "market": "Volatile",
+    "side": "Long",
+    "style": [
+      "Momentum",
+      "Breakout"
+    ],
+    "timeframe": "5m"
+  },
+  "Schism5": {
+    "complexity": 8,
+    "family": "Schism",
+    "features": [
+      "custom-stoploss",
+      "confirm-entry",
+      "multi-timeframe",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "RMI"
+    ],
+    "market": "Any",
+    "side": "Long",
+    "style": [
+      "Momentum"
+    ],
+    "timeframe": "5m"
+  },
+  "Schism6": {
+    "complexity": 7,
+    "family": "Schism",
+    "features": [
+      "confirm-entry",
+      "multi-timeframe",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "ROC",
+      "RMI"
+    ],
+    "market": "Volatile",
+    "side": "Long",
+    "style": [
+      "Momentum",
+      "Breakout"
+    ],
+    "timeframe": "5m"
+  },
+  "Seb": {
+    "complexity": 10,
+    "family": "Seb",
+    "features": [
+      "trailing-stop",
+      "hyperopt",
+      "multi-timeframe",
+      "heikin-ashi"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "MACD",
+      "BB",
+      "CCI",
+      "ADX",
+      "Stoch",
+      "PSAR",
+      "Heikin"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "Simple": {
+    "complexity": 2,
+    "family": "Simple",
+    "features": [],
+    "indicators": [
+      "RSI",
+      "MACD",
+      "BB"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Scalping"
+    ],
+    "timeframe": "5m"
+  },
+  "SlowPotato": {
+    "complexity": 2,
+    "family": "SlowPotato",
+    "features": [
+      "trailing-stop"
+    ],
+    "indicators": [],
+    "market": "Volatile",
+    "side": "Long",
+    "style": [
+      "Breakout"
+    ],
+    "timeframe": "5m"
+  },
+  "Slowbro": {
+    "complexity": 3,
+    "family": "Slowbro",
+    "features": [
+      "multi-timeframe"
+    ],
+    "indicators": [],
+    "market": "Volatile",
+    "side": "Long",
+    "style": [
+      "Breakout"
+    ],
+    "timeframe": "1h"
+  },
+  "SmoothOperator": {
+    "complexity": 5,
+    "family": "SmoothOperator",
+    "features": [],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "MACD",
+      "BB",
+      "CCI",
+      "ADX",
+      "MFI",
+      "TEMA"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "SmoothScalp": {
+    "complexity": 4,
+    "family": "SmoothScalp",
+    "features": [],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "MACD",
+      "BB",
+      "CCI",
+      "ADX",
+      "Stoch",
+      "MFI"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Momentum"
+    ],
+    "timeframe": "1m"
+  },
+  "Stavix2": {
+    "complexity": 1,
+    "family": "Stavix",
+    "features": [],
+    "indicators": [
+      "Ichimoku"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend"
+    ],
+    "timeframe": "1m"
+  },
+  "Stinkfist": {
+    "complexity": 8,
+    "family": "Stinkfist",
+    "features": [
+      "trailing-stop",
+      "confirm-entry",
+      "multi-timeframe",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "ROC",
+      "RMI"
+    ],
+    "market": "Volatile",
+    "side": "Long",
+    "style": [
+      "Momentum",
+      "Breakout"
+    ],
+    "timeframe": "5m"
+  },
+  "StochRSITEMA": {
+    "complexity": 5,
+    "family": "StochRSITEMA",
+    "features": [
+      "trailing-stop",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "Stoch",
+      "TEMA"
+    ],
+    "market": "Volatile",
+    "side": "Long",
+    "style": [
+      "Breakout",
+      "Momentum"
+    ],
+    "timeframe": "5m"
+  },
+  "Strategy001": {
+    "complexity": 5,
+    "family": "Strategy",
+    "features": [
+      "trailing-stop",
+      "multi-timeframe",
+      "heikin-ashi"
+    ],
+    "indicators": [
+      "EMA",
+      "Heikin"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "Strategy001_custom_sell": {
+    "complexity": 7,
+    "family": "Strategy001",
+    "features": [
+      "trailing-stop",
+      "custom-exit",
+      "multi-timeframe",
+      "heikin-ashi"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "Heikin"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "Strategy002": {
+    "complexity": 5,
+    "family": "Strategy",
+    "features": [
+      "trailing-stop",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "RSI",
+      "BB",
+      "Stoch",
+      "PSAR"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Momentum"
+    ],
+    "timeframe": "5m"
+  },
+  "Strategy003": {
+    "complexity": 6,
+    "family": "Strategy",
+    "features": [
+      "trailing-stop",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "Stoch",
+      "MFI",
+      "PSAR"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "Strategy004": {
+    "complexity": 5,
+    "family": "Strategy",
+    "features": [
+      "trailing-stop",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "EMA",
+      "CCI",
+      "ADX",
+      "Stoch"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Momentum"
+    ],
+    "timeframe": "5m"
+  },
+  "Strategy005": {
+    "complexity": 7,
+    "family": "Strategy",
+    "features": [
+      "trailing-stop",
+      "hyperopt",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "RSI",
+      "SMA",
+      "MACD",
+      "ADX",
+      "Stoch",
+      "PSAR"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Momentum"
+    ],
+    "timeframe": "5m"
+  },
+  "StrategyScalpingFast": {
+    "complexity": 4,
+    "family": "StrategyScalpingFast",
+    "features": [],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "MACD",
+      "BB",
+      "CCI",
+      "ADX",
+      "Stoch",
+      "MFI"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Momentum"
+    ],
+    "timeframe": "1m"
+  },
+  "StrategyScalpingFast2": {
+    "complexity": 6,
+    "family": "StrategyScalpingFast",
+    "features": [
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "CCI",
+      "ADX",
+      "Stoch",
+      "MFI"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Momentum"
+    ],
+    "timeframe": "1m"
+  },
+  "SuperHV27": {
+    "complexity": 6,
+    "family": "SuperH",
+    "features": [
+      "confirm-entry",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "ADX",
+      "RMI"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Momentum"
+    ],
+    "timeframe": "5m"
+  },
+  "SuperTrend": {
+    "complexity": 4,
+    "family": "SuperTrend",
+    "features": [
+      "trailing-stop",
+      "hyperopt"
+    ],
+    "indicators": [
+      "SMA",
+      "Supertrend"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend"
+    ],
+    "timeframe": "1h"
+  },
+  "SuperTrendPure": {
+    "complexity": 2,
+    "family": "SuperTrendPure",
+    "features": [
+      "trailing-stop"
+    ],
+    "indicators": [
+      "SMA",
+      "Supertrend"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend"
+    ],
+    "timeframe": "1h"
+  },
+  "SupertrendStrategy": {
+    "complexity": 7,
+    "family": "SupertrendStrategy",
+    "features": [
+      "trailing-stop",
+      "hyperopt",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "RSI",
+      "Supertrend",
+      "Stoch",
+      "Momentum"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Momentum"
+    ],
+    "timeframe": "1h"
+  },
+  "SwingHigh": {
+    "complexity": 4,
+    "family": "SwingHigh",
+    "features": [
+      "trailing-stop",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "MACD",
+      "CCI"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend"
+    ],
+    "timeframe": "30m"
+  },
+  "SwingHighToSky": {
+    "complexity": 5,
+    "family": "SwingHighToSky",
+    "features": [
+      "hyperopt",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "RSI",
+      "CCI"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend"
+    ],
+    "timeframe": "15m"
+  },
+  "TDSequentialStrategy": {
+    "complexity": 4,
+    "family": "TDSequentialStrategy",
+    "features": [
+      "trailing-stop",
+      "multi-timeframe"
+    ],
+    "indicators": [],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend"
+    ],
+    "timeframe": "1h"
+  },
+  "TEMA": {
+    "complexity": 10,
+    "family": "TEMA",
+    "features": [
+      "trailing-stop",
+      "hyperopt",
+      "multi-timeframe",
+      "heikin-ashi"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "MACD",
+      "BB",
+      "CCI",
+      "ADX",
+      "Stoch",
+      "MFI",
+      "ROC",
+      "PSAR",
+      "TEMA",
+      "Awesome",
+      "Keltner",
+      "Heikin"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Momentum"
+    ],
+    "timeframe": "1m"
+  },
+  "TechnicalExampleStrategy": {
+    "complexity": 1,
+    "family": "TechnicalExampleStrategy",
+    "features": [],
+    "indicators": [],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "TemaMaster": {
+    "complexity": 5,
+    "family": "TemaMaster",
+    "features": [
+      "trailing-stop",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "EMA",
+      "BB",
+      "TEMA"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "TemaMaster3": {
+    "complexity": 5,
+    "family": "TemaMaster",
+    "features": [
+      "trailing-stop",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "EMA",
+      "BB",
+      "TEMA"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend"
+    ],
+    "timeframe": "1m"
+  },
+  "TemaPure": {
+    "complexity": 5,
+    "family": "TemaPure",
+    "features": [
+      "trailing-stop",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "EMA",
+      "BB",
+      "TEMA"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Breakout"
+    ],
+    "timeframe": "5m"
+  },
+  "TemaPureNeat": {
+    "complexity": 5,
+    "family": "TemaPureNeat",
+    "features": [
+      "trailing-stop",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "EMA",
+      "BB",
+      "TEMA"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "TemaPureTwo": {
+    "complexity": 5,
+    "family": "TemaPureTwo",
+    "features": [
+      "trailing-stop",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "EMA",
+      "BB",
+      "TEMA"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Breakout"
+    ],
+    "timeframe": "5m"
+  },
+  "TenderEnter": {
+    "complexity": 10,
+    "family": "TenderEnter",
+    "features": [
+      "trailing-stop",
+      "confirm-entry",
+      "multi-timeframe",
+      "heikin-ashi"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "MACD",
+      "BB",
+      "CCI",
+      "ADX",
+      "Stoch",
+      "MFI",
+      "ROC",
+      "PSAR",
+      "TEMA",
+      "Awesome",
+      "Keltner",
+      "Heikin"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Momentum"
+    ],
+    "timeframe": "15m"
+  },
+  "TheForce": {
+    "complexity": 6,
+    "family": "TheForce",
+    "features": [
+      "trailing-stop",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "MACD",
+      "Stoch",
+      "TEMA"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Momentum"
+    ],
+    "timeframe": "15m"
+  },
+  "TheRealPullbackV2": {
+    "complexity": 5,
+    "family": "TheRealPullback",
+    "features": [],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "BB",
+      "CCI",
+      "ADX",
+      "Stoch",
+      "MFI",
+      "RMI",
+      "TEMA"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Momentum"
+    ],
+    "timeframe": "5m"
+  },
+  "TrailingBuyStrat2": {
+    "features": [
+      "utility-strategy"
+    ],
+    "indicators": [],
+    "market": "Any",
+    "style": [
+      "Special"
+    ],
+    "timeframe": "unknown"
+  },
+  "Trend_Strength_Directional": {
+    "complexity": 4,
+    "family": "Trend",
+    "features": [
+      "trailing-stop",
+      "hyperopt"
+    ],
+    "indicators": [
+      "RSI",
+      "ADX"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend"
+    ],
+    "timeframe": "15m"
+  },
+  "TrixStrategy": {
+    "complexity": 7,
+    "family": "TrixStrategy",
+    "features": [
+      "trailing-stop",
+      "hyperopt",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "RSI",
+      "Stoch",
+      "Momentum",
+      "Trix"
+    ],
+    "market": "Any",
+    "side": "Long",
+    "style": [
+      "Momentum"
+    ],
+    "timeframe": "1h"
+  },
+  "TrixV15Strategy": {
+    "complexity": 8,
+    "family": "TrixV15Strategy",
+    "features": [
+      "trailing-stop",
+      "hyperopt",
+      "multi-timeframe",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "SMA",
+      "Stoch",
+      "Momentum",
+      "Trix"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Momentum"
+    ],
+    "timeframe": "1h"
+  },
+  "TrixV21Strategy": {
+    "complexity": 8,
+    "family": "TrixV21Strategy",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "hyperopt",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "ATR",
+      "Stoch",
+      "Trix"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Momentum"
+    ],
+    "timeframe": "1h"
+  },
+  "TrixV23Strategy": {
+    "complexity": 8,
+    "family": "TrixV23Strategy",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "hyperopt",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "ATR",
+      "Trix"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Breakout"
+    ],
+    "timeframe": "1h"
+  },
+  "UltimateMomentumIndicator": {
+    "complexity": 4,
+    "family": "UltimateMomentumIndicator",
+    "features": [
+      "hyperopt"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "MFI"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Momentum"
+    ],
+    "timeframe": "5m"
+  },
+  "Uptrend": {
+    "complexity": 6,
+    "family": "Uptrend",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "hyperopt"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "BB",
+      "Williams",
+      "Trix"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "UziChan": {
+    "complexity": 2,
+    "family": "UziChan",
+    "features": [
+      "confirm-entry"
+    ],
+    "indicators": [
+      "EMA"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "UziChan2": {
+    "complexity": 2,
+    "family": "UziChan",
+    "features": [
+      "confirm-entry"
+    ],
+    "indicators": [
+      "EMA"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend"
+    ],
+    "timeframe": "1m"
+  },
+  "VWAP": {
+    "complexity": 2,
+    "family": "VWAP",
+    "features": [],
+    "indicators": [
+      "RSI",
+      "VWAP"
+    ],
+    "market": "Any",
+    "side": "Long",
+    "style": [
+      "Scalping"
+    ],
+    "timeframe": "5m"
+  },
+  "WaveTrendStra": {
+    "complexity": 2,
+    "family": "WaveTrendStra",
+    "features": [],
+    "indicators": [
+      "EMA",
+      "SMA"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Scalping"
+    ],
+    "timeframe": "4h"
+  },
+  "XebTradeStrat": {
+    "complexity": 2,
+    "family": "XebTradeStrat",
+    "features": [
+      "trailing-stop"
+    ],
+    "indicators": [
+      "EMA",
+      "BB"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Mean Reversion"
+    ],
+    "timeframe": "1m"
+  },
+  "XtraThicc": {
+    "complexity": 4,
+    "family": "XtraThicc",
+    "features": [
+      "trailing-stop",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "ROC"
+    ],
+    "market": "Any",
+    "side": "Long",
+    "style": [
+      "Momentum"
+    ],
+    "timeframe": "5m"
+  },
+  "YOLO": {
+    "features": [
+      "test-strategy"
+    ],
+    "indicators": [],
+    "market": "Any",
+    "style": [
+      "Special"
+    ],
+    "timeframe": "1m"
+  },
+  "adaptive": {
+    "complexity": 3,
+    "family": "adaptive",
+    "features": [
+      "hyperopt"
+    ],
+    "indicators": [
+      "RSI",
+      "Williams"
+    ],
+    "market": "Any",
+    "side": "Long",
+    "style": [
+      "Momentum",
+      "Scalping"
+    ],
+    "timeframe": "5m"
+  },
+  "adx_opt_strat": {
+    "complexity": 3,
+    "family": "adx",
+    "features": [
+      "trailing-stop"
+    ],
+    "indicators": [
+      "ADX",
+      "Momentum",
+      "PSAR"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Scalping",
+      "Trend"
+    ],
+    "timeframe": "unknown"
+  },
+  "adxbbrsi2": {
+    "complexity": 4,
+    "family": "adxbbrsi",
+    "features": [
+      "trailing-stop"
+    ],
+    "indicators": [
+      "RSI",
+      "BB",
+      "ADX",
+      "Stoch",
+      "MFI",
+      "Momentum",
+      "PSAR"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Momentum"
+    ],
+    "timeframe": "1h"
+  },
+  "bb_rsi_opt_new": {
+    "complexity": 5,
+    "family": "bb",
+    "features": [
+      "trailing-stop",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "RSI",
+      "BB",
+      "TEMA"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion"
+    ],
+    "timeframe": "unknown"
+  },
+  "bbema": {
+    "complexity": 4,
+    "family": "bbema",
+    "features": [
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "EMA",
+      "BB"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend"
+    ],
+    "timeframe": "1h"
+  },
+  "bbrsi1_strategy": {
+    "complexity": 6,
+    "family": "bbrsi1",
+    "features": [
+      "trailing-stop",
+      "hyperopt",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "RSI",
+      "BB",
+      "TEMA"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion"
+    ],
+    "timeframe": "5m"
+  },
+  "bbrsi4Freq": {
+    "complexity": 5,
+    "family": "bbrsi4Freq",
+    "features": [
+      "trailing-stop",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "RSI",
+      "BB",
+      "TEMA"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion"
+    ],
+    "timeframe": "1h"
+  },
+  "bestV2": {
+    "complexity": 8,
+    "family": "best",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "hyperopt",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "EWO"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Scalping"
+    ],
+    "timeframe": "5m"
+  },
+  "botbaby": {
+    "complexity": 5,
+    "family": "botbaby",
+    "features": [
+      "hyperopt",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "EMA"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend"
+    ],
+    "timeframe": "30m"
+  },
+  "conny": {
+    "complexity": 7,
+    "family": "conny",
+    "features": [
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "MACD",
+      "CCI",
+      "ADX",
+      "Ichimoku",
+      "Stoch",
+      "Williams",
+      "Momentum",
+      "TEMA"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Momentum"
+    ],
+    "timeframe": "15m"
+  },
+  "cryptohassle": {
+    "complexity": 4,
+    "family": "cryptohassle",
+    "features": [
+      "trailing-stop",
+      "heikin-ashi"
+    ],
+    "indicators": [
+      "EMA",
+      "MACD",
+      "ADX",
+      "Momentum",
+      "Heikin"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Momentum"
+    ],
+    "timeframe": "unknown"
+  },
+  "custom": {
+    "complexity": 10,
+    "family": "custom",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "hyperopt",
+      "multi-timeframe",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "ROC",
+      "RMI",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Momentum"
+    ],
+    "timeframe": "5m"
+  },
+  "custom_sell": {
+    "complexity": 5,
+    "family": "custom",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "hyperopt"
+    ],
+    "indicators": [
+      "Keltner"
+    ],
+    "market": "Volatile",
+    "side": "Long",
+    "style": [
+      "Breakout"
+    ],
+    "timeframe": "5m"
+  },
+  "e6v34": {
+    "complexity": 5,
+    "family": "e6",
+    "features": [
+      "trailing-stop",
+      "hyperopt",
+      "multi-condition"
+    ],
+    "indicators": [
+      "EMA",
+      "Williams"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Momentum"
+    ],
+    "timeframe": "15m"
+  },
+  "ema": {
+    "complexity": 2,
+    "family": "ema",
+    "features": [
+      "trailing-stop"
+    ],
+    "indicators": [
+      "EMA",
+      "SMA"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "epretrace": {
+    "complexity": 7,
+    "family": "epretrace",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "hyperopt"
+    ],
+    "indicators": [
+      "EMA",
+      "MACD",
+      "CCI",
+      "Ichimoku",
+      "ATR",
+      "Fibonacci"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Scalping"
+    ],
+    "timeframe": "5m"
+  },
+  "fahmibah": {
+    "complexity": 10,
+    "family": "fahmibah",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "hyperopt",
+      "multi-timeframe",
+      "heikin-ashi"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "BB",
+      "ROC",
+      "Heikin"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Momentum"
+    ],
+    "timeframe": "5m"
+  },
+  "flawless_lambo": {
+    "complexity": 10,
+    "family": "flawless",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "hyperopt",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "MACD",
+      "BB",
+      "ADX",
+      "Stoch",
+      "VWAP",
+      "OBV",
+      "Williams",
+      "Momentum"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Trend"
+    ],
+    "timeframe": "15m"
+  },
+  "hansencandlepatternV1": {
+    "complexity": 1,
+    "family": "hansencandlepattern",
+    "features": [],
+    "indicators": [
+      "SMA"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Scalping"
+    ],
+    "timeframe": "1h"
+  },
+  "heikin": {
+    "complexity": 3,
+    "family": "heikin",
+    "features": [
+      "heikin-ashi"
+    ],
+    "indicators": [
+      "SMA",
+      "Heikin"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Scalping"
+    ],
+    "timeframe": "1h"
+  },
+  "hlhb": {
+    "complexity": 5,
+    "family": "hlhb",
+    "features": [
+      "trailing-stop",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "ADX"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend"
+    ],
+    "timeframe": "4h"
+  },
+  "ichiV1": {
+    "complexity": 6,
+    "family": "ichi",
+    "features": [
+      "trailing-stop",
+      "heikin-ashi",
+      "multi-condition"
+    ],
+    "indicators": [
+      "EMA",
+      "Ichimoku",
+      "ATR",
+      "Heikin"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Breakout"
+    ],
+    "timeframe": "5m"
+  },
+  "ichiV1_Marius": {
+    "complexity": 10,
+    "family": "ichiV1",
+    "features": [
+      "custom-stoploss",
+      "trailing-stop",
+      "confirm-entry",
+      "hyperopt",
+      "multi-timeframe",
+      "heikin-ashi"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "Ichimoku",
+      "ATR",
+      "MFI",
+      "Heikin"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Momentum"
+    ],
+    "timeframe": "5m"
+  },
+  "keltnerchannel": {
+    "complexity": 3,
+    "family": "keltnerchannel",
+    "features": [
+      "hyperopt"
+    ],
+    "indicators": [
+      "RSI",
+      "Keltner"
+    ],
+    "market": "Volatile",
+    "side": "Long",
+    "style": [
+      "Breakout"
+    ],
+    "timeframe": "6h"
+  },
+  "mabStra": {
+    "complexity": 3,
+    "family": "mabStra",
+    "features": [
+      "hyperopt"
+    ],
+    "indicators": [
+      "SMA"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Scalping"
+    ],
+    "timeframe": "4h"
+  },
+  "macd_recovery": {
+    "complexity": 2,
+    "family": "macd",
+    "features": [],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "MACD"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend"
+    ],
+    "timeframe": "5m"
+  },
+  "mark_strat": {
+    "complexity": 6,
+    "family": "mark",
+    "features": [
+      "trailing-stop",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "RSI",
+      "MACD",
+      "BB",
+      "Stoch",
+      "ROC",
+      "PSAR",
+      "TEMA"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Momentum"
+    ],
+    "timeframe": "1m"
+  },
+  "mark_strat_opt": {
+    "complexity": 7,
+    "family": "mark",
+    "features": [
+      "trailing-stop",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "RSI",
+      "MACD",
+      "BB",
+      "ADX",
+      "Stoch",
+      "MFI",
+      "PSAR",
+      "TEMA"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Momentum"
+    ],
+    "timeframe": "1m"
+  },
+  "quantumfirst": {
+    "complexity": 6,
+    "family": "quantumfirst",
+    "features": [
+      "trailing-stop",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "RSI",
+      "SMA",
+      "MACD",
+      "ADX",
+      "Stoch",
+      "PSAR"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Momentum"
+    ],
+    "timeframe": "5m"
+  },
+  "redditMA": {
+    "complexity": 4,
+    "family": "redditMA",
+    "features": [
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "EMA",
+      "VWAP"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Breakout"
+    ],
+    "timeframe": "15m"
+  },
+  "stoploss": {
+    "complexity": 10,
+    "family": "stoploss",
+    "features": [
+      "trailing-stop",
+      "multi-timeframe",
+      "heikin-ashi"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "MACD",
+      "BB",
+      "CCI",
+      "ADX",
+      "Stoch",
+      "MFI",
+      "ROC",
+      "PSAR",
+      "TEMA",
+      "Awesome",
+      "Keltner",
+      "Heikin"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Momentum"
+    ],
+    "timeframe": "5m"
+  },
+  "stratfib": {
+    "complexity": 7,
+    "family": "stratfib",
+    "features": [
+      "trailing-stop",
+      "hyperopt",
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "TEMA",
+      "Fibonacci"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend"
+    ],
+    "timeframe": "1h"
+  },
+  "strato": {
+    "complexity": 3,
+    "family": "strato",
+    "features": [
+      "multi-timeframe"
+    ],
+    "indicators": [
+      "RSI"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend"
+    ],
+    "timeframe": "1m"
+  },
+  "true_lambo": {
+    "complexity": 10,
+    "family": "true",
+    "features": [
+      "custom-stoploss",
+      "hyperopt",
+      "multi-timeframe",
+      "heikin-ashi",
+      "multi-condition"
+    ],
+    "indicators": [
+      "RSI",
+      "EMA",
+      "SMA",
+      "BB",
+      "CCI",
+      "ADX",
+      "Stoch",
+      "MFI",
+      "VWAP",
+      "Williams",
+      "ROC",
+      "Heikin",
+      "EWO"
+    ],
+    "market": "Ranging",
+    "side": "Long",
+    "style": [
+      "Mean Reversion",
+      "Momentum"
+    ],
+    "timeframe": "5m"
+  },
+  "wtc": {
+    "complexity": 4,
+    "family": "wtc",
+    "features": [
+      "hyperopt"
+    ],
+    "indicators": [
+      "EMA",
+      "SMA",
+      "Stoch"
+    ],
+    "market": "Trending",
+    "side": "Long",
+    "style": [
+      "Trend",
+      "Momentum"
+    ],
+    "timeframe": "30m"
+  }
+}

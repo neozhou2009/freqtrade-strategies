@@ -1,0 +1,82 @@
+name: Strategy Leaderboard Backtesting
+
+on:
+  workflow_dispatch:
+    inputs:
+      period:
+        description: 'Timeframe period (e.g. 2025_year, last_1_week, last_1_month, last_3_months, last_6_months)'
+        required: true
+        default: 'last_1_month'
+  schedule:
+    - cron: '0 0 * * 0' # Run weekly on Sunday
+
+jobs:
+  backtest-batch:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        batch_id: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install Freqtrade (Optional/Example)
+        # Note: You may need to replace this step with pulling a Freqtrade Docker image
+        # if your build dependencies (like TA-lib) require it.
+        run: |
+          # pip install freqtrade
+          echo "Assuming freqtrade is available in the environment"
+
+      - name: Run Script to Backtest Batch
+        run: |
+          python scripts/run_batch_backtests.py --batch ${{ matrix.batch_id }} --total-batches 10 --period ${{ github.event.inputs.period || 'last_1_month' }}
+        continue-on-error: true
+
+      - name: Upload Batch Results
+        uses: actions/upload-artifact@v3
+        with:
+          name: backtest-results-${{ matrix.batch_id }}
+          path: user_data/backtest_results/*.json
+
+  generate-leaderboard:
+    needs: backtest-batch
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Download all batch results
+        uses: actions/download-artifact@v3
+        with:
+          path: all_results/
+
+      - name: Structure downloaded files
+        run: |
+          mkdir -p consolidated_results
+          find all_results -name "*.json" -exec cp {} consolidated_results/ \;
+
+      - name: Generate Leaderboard
+        run: |
+          python scripts/generate_leaderboard.py --input-dir consolidated_results/ --period ${{ github.event.inputs.period || 'Scheduled_Run' }}
+
+      - name: Upload Leaderboard Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: Leaderboard
+          path: |
+            LEADERBOARD.md
+            leaderboard.json
+
+      - name: Commit Leaderboard to Repo (Optional)
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add LEADERBOARD.md leaderboard.json
+          git commit -m "chore: update Strategy Leaderboard CI results" || echo "No changes to commit"
+          git push
