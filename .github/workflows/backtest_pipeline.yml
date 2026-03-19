@@ -12,6 +12,9 @@ on:
           - 2025_year
           - last_3_months
           - last_1_month
+  push:
+    branches:
+      - backtesting
   schedule:
     - cron: '0 0 * * 1' # Run weekly on Monday
 
