@@ -77,3 +77,37 @@ python scripts/generate_leaderboard.py --period "2025年全年回测报告"
 - **新增策略**：请重新执行 **Step 1** 和 **Step 3**。
 - **时间更新**：请重新执行 **Step 2** 补全最新月份的数据。
 - **重新跑榜**：请清理 `test/user_data/backtest_results/` 目录后重复 **Step 4** 和 **Step 5**。
+
+---
+
+## 常见问题 (FAQ)
+
+**Q: 我想单独运行最近 3 个月的排行榜，要如何执行脚本命令？**
+
+**A:** 您可以选择在本地运行或通过云端 CI/CD 自动运行：
+
+**方法一：在本地通过终端运行**
+1. **策略分类（如未修改策略结构可跳过）**: 
+   ```bash
+   python scripts/classify_strategies.py
+   ```
+2. **下载最近 3 个月数据**: 
+   ```bash
+   python scripts/download_data.py --period last_3_months --docker
+   ```
+3. **准备测试环境**: 
+   ```bash
+   python scripts/prepare_test_env.py
+   ```
+4. **运行全量回测并自动生成榜单**: 
+   ```bash
+   python scripts/run_all_batches.py --period last_3_months
+   ```
+   *(执行结束后，当前目录下将自动生成最新版 `LEADERBOARD.md` 的三个月榜单)*
+
+**方法二：通过 GitHub Actions 自动化云端运行**
+1. 打开您的 GitHub 仓库页面，点击顶部的 **Actions** 标签。
+2. 左侧菜单选择 **Strategy Leaderboard Backtesting** 自动化工作流。
+3. 点击右侧的 **Run workflow**。
+4. 在弹出的 `Timeframe period` 输入框中，填写 `last_3_months`。
+5. 点击执行。机器人会在云端调度服务器为您跑完所有回测，并自动将生成好的最新排行榜提交(Commit)到仓库中。

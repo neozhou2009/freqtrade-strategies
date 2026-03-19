@@ -4,15 +4,30 @@ Run all batches for complete backtesting
 """
 
 import subprocess
-import sys
+import argparse
 
 TOTAL_BATCHES = 10
-PERIOD = "2025_year"
-
 
 def main():
+    parser = argparse.ArgumentParser(description="Run all batches for complete backtesting")
+    parser.add_argument(
+        "--period",
+        required=False,
+        default="2025_year",
+        choices=[
+            "2025_year",
+            "last_1_week",
+            "last_1_month",
+            "last_3_months",
+            "last_6_months",
+        ],
+        help="Timeframe period for the backtests"
+    )
+    args = parser.parse_args()
+    period = args.period
+
     print(f"=== Running all {TOTAL_BATCHES} batches ===")
-    print(f"Period: {PERIOD}")
+    print(f"Period: {period}")
     print()
 
     success_batches = []
@@ -27,7 +42,7 @@ def main():
             "python",
             "scripts/run_batch_backtests.py",
             "--period",
-            PERIOD,
+            period,
             "--batch",
             str(batch),
             "--total-batches",
@@ -53,11 +68,10 @@ def main():
     if failed_batches:
         print(f"Failed batch numbers: {failed_batches}")
 
-    print(f"\nRunning: python scripts/generate_leaderboard.py --period {PERIOD}")
-    subprocess.run(["python", "scripts/generate_leaderboard.py", "--period", PERIOD])
+    print(f"\nRunning: python scripts/generate_leaderboard.py --period {period}")
+    subprocess.run(["python", "scripts/generate_leaderboard.py", "--period", period])
 
     print("\nDone! Check LEADERBOARD.md for results.")
-
 
 if __name__ == "__main__":
     main()

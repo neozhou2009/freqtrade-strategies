@@ -469,3 +469,24 @@ Trix, TEMA, Alligator, Awesome, Donchian, Keltner, Fibonacci, Heikin, EWO
 > **"基于RSI的均值回归策略，适用于15分钟时间框架的震荡市"**
 
 这种多维度的分类方法能帮助你最快地理解策略的核心逻辑和适用场景。
+
+---
+
+## 6. 常见问题 (FAQ)
+
+**Q: 我想单独运行最近 3 个月的排行榜，要如何执行脚本命令？**
+
+**A:** 我们的脚本均支持通过 `--period` 参数进行动态调节。您可以选择本地运行或完全依赖 GitHub Actions。
+
+**【方式一】 本地终端运行**
+连续执行以下指令即可全自动在本地完成 3个月数据的下载和 10 个批次的回测，并最终输出榜单：
+1. `python scripts/classify_strategies.py` （更新分类注册表，可选）
+2. `python scripts/download_data.py --period last_3_months --docker` （同步近 3 个月 K 线数据）
+3. `python scripts/prepare_test_env.py` （载入全部 465 个策略到运行目录）
+4. `python scripts/run_all_batches.py --period last_3_months` （后台自动执行全部批次回合并汇总）
+
+**【方式二】 GitHub Actions 云端运行**
+1. 访问 GitHub 仓库的 **Actions** 面板。
+2. 选择 **Strategy Leaderboard Backtesting** 手动触发工作流。
+3. 点击 **Run workflow**，在 `Timeframe period` 变量框内填写 `last_3_months`。
+4. 确认执行。GitHub runner 群会自动并发执行，最终替您生成一份新榜单 Commit 合并到主分支。

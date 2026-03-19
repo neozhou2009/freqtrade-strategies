@@ -1008,6 +1008,766 @@
       "winrate": 0.0
     },
     {
+      "category": "Scalping",
+      "complexity": 2,
+      "family": "ADXMomentum",
+      "indicators": [
+        "ADX",
+        "Momentum",
+        "PSAR"
+      ],
+      "max_drawdown_abs": 0.0,
+      "profit_factor": 0.0,
+      "profit_total_abs": 0,
+      "profit_total_pct": 0.0,
+      "sharpe": 0,
+      "side": "Long",
+      "strategy": "ADXMomentum",
+      "styles": [
+        "Scalping",
+        "Trend"
+      ],
+      "timeframe": "1h",
+      "trades": 0,
+      "winrate": 0.0
+    },
+    {
+      "category": "Trend",
+      "complexity": 2,
+      "family": "ADX",
+      "indicators": [
+        "ADX",
+        "Momentum",
+        "PSAR"
+      ],
+      "max_drawdown_abs": 0.0,
+      "profit_factor": 0.0,
+      "profit_total_abs": 0,
+      "profit_total_pct": 0.0,
+      "sharpe": 0,
+      "side": "Long",
+      "strategy": "ADX_15M_USDT",
+      "styles": [
+        "Trend",
+        "Momentum"
+      ],
+      "timeframe": "15m",
+      "trades": 0,
+      "winrate": 0.0
+    },
+    {
+      "category": "Trend",
+      "complexity": 2,
+      "family": "ADX",
+      "indicators": [
+        "ADX",
+        "Momentum",
+        "PSAR"
+      ],
+      "max_drawdown_abs": 0.0,
+      "profit_factor": 0.0,
+      "profit_total_abs": 0,
+      "profit_total_pct": 0.0,
+      "sharpe": 0,
+      "side": "Long",
+      "strategy": "ADX_15M_USDT2",
+      "styles": [
+        "Trend",
+        "Momentum"
+      ],
+      "timeframe": "15m",
+      "trades": 0,
+      "winrate": 0.0
+    },
+    {
+      "category": "Trend",
+      "complexity": 1,
+      "family": "ASDTSRockwellTrading",
+      "indicators": [
+        "MACD"
+      ],
+      "max_drawdown_abs": 0.0,
+      "profit_factor": 0.0,
+      "profit_total_abs": 0,
+      "profit_total_pct": 0.0,
+      "sharpe": 0,
+      "side": "Long",
+      "strategy": "ASDTSRockwellTrading",
+      "styles": [
+        "Trend",
+        "Breakout"
+      ],
+      "timeframe": "5m",
+      "trades": 0,
+      "winrate": 0.0
+    },
+    {
+      "category": "Trend",
+      "complexity": 8,
+      "family": "ActionZone",
+      "indicators": [
+        "EMA",
+        "TEMA"
+      ],
+      "max_drawdown_abs": 0.0,
+      "profit_factor": 0.0,
+      "profit_total_abs": 0,
+      "profit_total_pct": 0.0,
+      "sharpe": 0,
+      "side": "Long",
+      "strategy": "ActionZone",
+      "styles": [
+        "Trend"
+      ],
+      "timeframe": "1d",
+      "trades": 0,
+      "winrate": 0.0
+    },
+    {
+      "category": "Trend",
+      "complexity": 2,
+      "family": "AdxSmas",
+      "indicators": [
+        "SMA",
+        "ADX"
+      ],
+      "max_drawdown_abs": 0.0,
+      "profit_factor": 0.0,
+      "profit_total_abs": 0,
+      "profit_total_pct": 0.0,
+      "sharpe": 0,
+      "side": "Long",
+      "strategy": "AdxSmas",
+      "styles": [
+        "Trend",
+        "Scalping"
+      ],
+      "timeframe": "1h",
+      "trades": 0,
+      "winrate": 0.0
+    },
+    {
+      "category": "Trend",
+      "complexity": 3,
+      "family": "AlligatorStrat",
+      "indicators": [
+        "SMA",
+        "MACD",
+        "CCI",
+        "Alligator"
+      ],
+      "max_drawdown_abs": 0.0,
+      "profit_factor": 0.0,
+      "profit_total_abs": 0,
+      "profit_total_pct": 0.0,
+      "sharpe": 0,
+      "side": "Long",
+      "strategy": "AlligatorStrat",
+      "styles": [
+        "Trend"
+      ],
+      "timeframe": "4h",
+      "trades": 0,
+      "winrate": 0.0
+    },
+    {
+      "category": "Trend",
+      "complexity": 7,
+      "family": "AlligatorStrategy",
+      "indicators": [
+        "RSI",
+        "Stoch",
+        "Momentum",
+        "Alligator"
+      ],
+      "max_drawdown_abs": 0.0,
+      "profit_factor": 0.0,
+      "profit_total_abs": 0,
+      "profit_total_pct": 0.0,
+      "sharpe": 0,
+      "side": "Long",
+      "strategy": "AlligatorStrategy",
+      "styles": [
+        "Trend",
+        "Momentum"
+      ],
+      "timeframe": "1h",
+      "trades": 0,
+      "winrate": 0.0
+    },
+    {
+      "category": "Scalping",
+      "complexity": 4,
+      "family": "Apollo",
+      "indicators": [
+        "EMA",
+        "SMA",
+        "BB",
+        "ATR",
+        "Fibonacci"
+      ],
+      "max_drawdown_abs": 0.0,
+      "profit_factor": 0.0,
+      "profit_total_abs": 0,
+      "profit_total_pct": 0.0,
+      "sharpe": 0,
+      "side": "Long",
+      "strategy": "Apollo11",
+      "styles": [
+        "Scalping",
+        "Trend"
+      ],
+      "timeframe": "15m",
+      "trades": 0,
+      "winrate": 0.0
+    },
+    {
+      "category": "Trend",
+      "complexity": 1,
+      "family": "AverageStrategy",
+      "indicators": [
+        "EMA"
+      ],
+      "max_drawdown_abs": 0.0,
+      "profit_factor": 0.0,
+      "profit_total_abs": 0,
+      "profit_total_pct": 0.0,
+      "sharpe": 0,
+      "side": "Long",
+      "strategy": "AverageStrategy",
+      "styles": [
+        "Trend"
+      ],
+      "timeframe": "4h",
+      "trades": 0,
+      "winrate": 0.0
+    },
+    {
+      "category": "Scalping",
+      "complexity": 2,
+      "family": "AwesomeMacd",
+      "indicators": [
+        "MACD",
+        "ADX",
+        "Awesome"
+      ],
+      "max_drawdown_abs": 0.0,
+      "profit_factor": 0.0,
+      "profit_total_abs": 0,
+      "profit_total_pct": 0.0,
+      "sharpe": 0,
+      "side": "Long",
+      "strategy": "AwesomeMacd",
+      "styles": [
+        "Scalping",
+        "Trend"
+      ],
+      "timeframe": "1h",
+      "trades": 0,
+      "winrate": 0.0
+    },
+    {
+      "category": "Mean Reversion",
+      "complexity": 2,
+      "family": "BBRSI",
+      "indicators": [
+        "RSI",
+        "BB"
+      ],
+      "max_drawdown_abs": 0.0,
+      "profit_factor": 0.0,
+      "profit_total_abs": 0,
+      "profit_total_pct": 0.0,
+      "sharpe": 0,
+      "side": "Long",
+      "strategy": "BBRSI2",
+      "styles": [
+        "Mean Reversion"
+      ],
+      "timeframe": "1m",
+      "trades": 0,
+      "winrate": 0.0
+    },
+    {
+      "category": "Mean Reversion",
+      "complexity": 3,
+      "family": "BBRSI",
+      "indicators": [
+        "RSI",
+        "BB",
+        "Stoch"
+      ],
+      "max_drawdown_abs": 0.0,
+      "profit_factor": 0.0,
+      "profit_total_abs": 0,
+      "profit_total_pct": 0.0,
+      "sharpe": 0,
+      "side": "Long",
+      "strategy": "BBRSI21",
+      "styles": [
+        "Mean Reversion",
+        "Scalping"
+      ],
+      "timeframe": "5m",
+      "trades": 0,
+      "winrate": 0.0
+    },
+    {
+      "category": "Mean Reversion",
+      "complexity": 3,
+      "family": "BBRSI",
+      "indicators": [
+        "RSI",
+        "BB",
+        "Stoch",
+        "PSAR"
+      ],
+      "max_drawdown_abs": 0.0,
+      "profit_factor": 0.0,
+      "profit_total_abs": 0,
+      "profit_total_pct": 0.0,
+      "sharpe": 0,
+      "side": "Long",
+      "strategy": "BBRSI3366",
+      "styles": [
+        "Mean Reversion",
+        "Scalping"
+      ],
+      "timeframe": "5m",
+      "trades": 0,
+      "winrate": 0.0
+    },
+    {
+      "category": "Mean Reversion",
+      "complexity": 4,
+      "family": "BBRSI",
+      "indicators": [
+        "RSI",
+        "BB"
+      ],
+      "max_drawdown_abs": 0.0,
+      "profit_factor": 0.0,
+      "profit_total_abs": 0,
+      "profit_total_pct": 0.0,
+      "sharpe": 0,
+      "side": "Long",
+      "strategy": "BBRSINaiveStrategy",
+      "styles": [
+        "Mean Reversion"
+      ],
+      "timeframe": "15m",
+      "trades": 0,
+      "winrate": 0.0
+    },
+    {
+      "category": "Mean Reversion",
+      "complexity": 5,
+      "family": "BBRSI",
+      "indicators": [
+        "RSI",
+        "BB",
+        "TEMA"
+      ],
+      "max_drawdown_abs": 0.0,
+      "profit_factor": 0.0,
+      "profit_total_abs": 0,
+      "profit_total_pct": 0.0,
+      "sharpe": 0,
+      "side": "Long",
+      "strategy": "BBRSIOptim2020Strategy",
+      "styles": [
+        "Mean Reversion"
+      ],
+      "timeframe": "5m",
+      "trades": 0,
+      "winrate": 0.0
+    },
+    {
+      "category": "Mean Reversion",
+      "complexity": 5,
+      "family": "BBRSI",
+      "indicators": [
+        "RSI",
+        "BB",
+        "TEMA"
+      ],
+      "max_drawdown_abs": 0.0,
+      "profit_factor": 0.0,
+      "profit_total_abs": 0,
+      "profit_total_pct": 0.0,
+      "sharpe": 0,
+      "side": "Long",
+      "strategy": "BBRSIOptimStrategy",
+      "styles": [
+        "Mean Reversion"
+      ],
+      "timeframe": "5m",
+      "trades": 0,
+      "winrate": 0.0
+    },
+    {
+      "category": "Mean Reversion",
+      "complexity": 4,
+      "family": "BBRSI",
+      "indicators": [
+        "RSI",
+        "BB"
+      ],
+      "max_drawdown_abs": 0.0,
+      "profit_factor": 0.0,
+      "profit_total_abs": 0,
+      "profit_total_pct": 0.0,
+      "sharpe": 0,
+      "side": "Long",
+      "strategy": "BBRSIOptimizedStrategy",
+      "styles": [
+        "Mean Reversion"
+      ],
+      "timeframe": "5m",
+      "trades": 0,
+      "winrate": 0.0
+    },
+    {
+      "category": "Trend",
+      "complexity": 2,
+      "family": "BBRSI",
+      "indicators": [
+        "RSI",
+        "SMA",
+        "BB"
+      ],
+      "max_drawdown_abs": 0.0,
+      "profit_factor": 0.0,
+      "profit_total_abs": 0,
+      "profit_total_pct": 0.0,
+      "sharpe": 0,
+      "side": "Long",
+      "strategy": "BBRSIS",
+      "styles": [
+        "Trend",
+        "Mean Reversion"
+      ],
+      "timeframe": "5m",
+      "trades": 0,
+      "winrate": 0.0
+    },
+    {
+      "category": "Mean Reversion",
+      "complexity": 5,
+      "family": "BBRSI",
+      "indicators": [
+        "RSI",
+        "BB",
+        "TEMA"
+      ],
+      "max_drawdown_abs": 0.0,
+      "profit_factor": 0.0,
+      "profit_total_abs": 0,
+      "profit_total_pct": 0.0,
+      "sharpe": 0,
+      "side": "Long",
+      "strategy": "BBRSIStrategy",
+      "styles": [
+        "Mean Reversion"
+      ],
+      "timeframe": "15m",
+      "trades": 0,
+      "winrate": 0.0
+    },
+    {
+      "category": "Mean Reversion",
+      "complexity": 2,
+      "family": "BBRSI",
+      "indicators": [
+        "RSI",
+        "BB"
+      ],
+      "max_drawdown_abs": 0.0,
+      "profit_factor": 0.0,
+      "profit_total_abs": 0,
+      "profit_total_pct": 0.0,
+      "sharpe": 0,
+      "side": "Long",
+      "strategy": "BBRSIoriginal",
+      "styles": [
+        "Mean Reversion"
+      ],
+      "timeframe": "1h",
+      "trades": 0,
+      "winrate": 0.0
+    },
+    {
+      "category": "Mean Reversion",
+      "complexity": 10,
+      "family": "BB_RPB_TSL",
+      "indicators": [
+        "RSI",
+        "EMA",
+        "SMA",
+        "BB",
+        "CCI",
+        "ADX",
+        "Stoch",
+        "Williams",
+        "RMI",
+        "EWO"
+      ],
+      "max_drawdown_abs": 0.0,
+      "profit_factor": 0.0,
+      "profit_total_abs": 0,
+      "profit_total_pct": 0.0,
+      "sharpe": 0,
+      "side": "Long",
+      "strategy": "BB_RPB_TSL_RNG",
+      "styles": [
+        "Mean Reversion",
+        "Trend"
+      ],
+      "timeframe": "5m",
+      "trades": 0,
+      "winrate": 0.0
+    },
+    {
+      "category": "Mean Reversion",
+      "complexity": 10,
+      "family": "BB_RPB_TSL",
+      "indicators": [
+        "RSI",
+        "EMA",
+        "SMA",
+        "BB",
+        "CCI",
+        "ADX",
+        "Stoch",
+        "Williams",
+        "RMI",
+        "EWO"
+      ],
+      "max_drawdown_abs": 0.0,
+      "profit_factor": 0.0,
+      "profit_total_abs": 0,
+      "profit_total_pct": 0.0,
+      "sharpe": 0,
+      "side": "Long",
+      "strategy": "BB_RPB_TSL_RNG_2",
+      "styles": [
+        "Mean Reversion",
+        "Trend"
+      ],
+      "timeframe": "5m",
+      "trades": 0,
+      "winrate": 0.0
+    },
+    {
+      "category": "Mean Reversion",
+      "complexity": 10,
+      "family": "BB_RPB_TSL",
+      "indicators": [
+        "RSI",
+        "EMA",
+        "SMA",
+        "BB",
+        "CCI",
+        "ADX",
+        "Stoch",
+        "Williams",
+        "RMI",
+        "EWO"
+      ],
+      "max_drawdown_abs": 0.0,
+      "profit_factor": 0.0,
+      "profit_total_abs": 0,
+      "profit_total_pct": 0.0,
+      "sharpe": 0,
+      "side": "Long",
+      "strategy": "BB_RPB_TSL_RNG_TBS",
+      "styles": [
+        "Mean Reversion",
+        "Trend"
+      ],
+      "timeframe": "5m",
+      "trades": 0,
+      "winrate": 0.0
+    },
+    {
+      "category": "Mean Reversion",
+      "complexity": 10,
+      "family": "BB_RPB_TSL",
+      "indicators": [
+        "RSI",
+        "EMA",
+        "SMA",
+        "BB",
+        "CCI",
+        "ADX",
+        "Stoch",
+        "Williams",
+        "RMI",
+        "EWO"
+      ],
+      "max_drawdown_abs": 0.0,
+      "profit_factor": 0.0,
+      "profit_total_abs": 0,
+      "profit_total_pct": 0.0,
+      "sharpe": 0,
+      "side": "Long",
+      "strategy": "BB_RPB_TSL_RNG_TBS_GOLD",
+      "styles": [
+        "Mean Reversion",
+        "Trend"
+      ],
+      "timeframe": "5m",
+      "trades": 0,
+      "winrate": 0.0
+    },
+    {
+      "category": "Mean Reversion",
+      "complexity": 10,
+      "family": "BB_RPB_TSL",
+      "indicators": [
+        "RSI",
+        "EMA",
+        "SMA",
+        "BB",
+        "CCI",
+        "ADX",
+        "Stoch",
+        "VWAP",
+        "Williams",
+        "RMI",
+        "EWO"
+      ],
+      "max_drawdown_abs": 0.0,
+      "profit_factor": 0.0,
+      "profit_total_abs": 0,
+      "profit_total_pct": 0.0,
+      "sharpe": 0,
+      "side": "Long",
+      "strategy": "BB_RPB_TSL_RNG_VWAP",
+      "styles": [
+        "Mean Reversion",
+        "Trend"
+      ],
+      "timeframe": "5m",
+      "trades": 0,
+      "winrate": 0.0
+    },
+    {
+      "category": "Mean Reversion",
+      "complexity": 10,
+      "family": "BB_RPB_TSL",
+      "indicators": [
+        "RSI",
+        "EMA",
+        "SMA",
+        "BB",
+        "CCI",
+        "ADX",
+        "Ichimoku",
+        "Stoch",
+        "Williams",
+        "RMI",
+        "EWO"
+      ],
+      "max_drawdown_abs": 0.0,
+      "profit_factor": 0.0,
+      "profit_total_abs": 0,
+      "profit_total_pct": 0.0,
+      "sharpe": 0,
+      "side": "Long",
+      "strategy": "BB_RPB_TSL_c7c477d_20211030",
+      "styles": [
+        "Mean Reversion",
+        "Trend"
+      ],
+      "timeframe": "5m",
+      "trades": 0,
+      "winrate": 0.0
+    },
+    {
+      "category": "Momentum",
+      "complexity": 10,
+      "family": "BB_RPB_TSL",
+      "indicators": [
+        "RSI",
+        "EMA",
+        "SMA",
+        "BB",
+        "CCI",
+        "ADX",
+        "Ichimoku",
+        "ATR",
+        "Stoch",
+        "MFI",
+        "Williams",
+        "Momentum",
+        "ROC",
+        "RMI",
+        "TEMA",
+        "Keltner",
+        "Heikin",
+        "EWO"
+      ],
+      "max_drawdown_abs": 0.0,
+      "profit_factor": 0.0,
+      "profit_total_abs": 0,
+      "profit_total_pct": 0.0,
+      "sharpe": 0,
+      "side": "Long",
+      "strategy": "BB_RPB_TSLmeneguzzo",
+      "styles": [
+        "Momentum",
+        "Mean Reversion"
+      ],
+      "timeframe": "5m",
+      "trades": 0,
+      "winrate": 0.0
+    },
+    {
+      "category": "Mean Reversion",
+      "complexity": 4,
+      "family": "BB",
+      "indicators": [
+        "RSI",
+        "BB"
+      ],
+      "max_drawdown_abs": 0.0,
+      "profit_factor": 0.0,
+      "profit_total_abs": 0,
+      "profit_total_pct": 0.0,
+      "sharpe": 0,
+      "side": "Long",
+      "strategy": "BB_RSI",
+      "styles": [
+        "Mean Reversion"
+      ],
+      "timeframe": "1h",
+      "trades": 0,
+      "winrate": 0.0
+    },
+    {
+      "category": "Mean Reversion",
+      "complexity": 4,
+      "family": "BB",
+      "indicators": [
+        "RSI",
+        "BB"
+      ],
+      "max_drawdown_abs": 0.0,
+      "profit_factor": 0.0,
+      "profit_total_abs": 0,
+      "profit_total_pct": 0.0,
+      "sharpe": 0,
+      "side": "Long",
+      "strategy": "BB_Strategy04",
+      "styles": [
+        "Mean Reversion"
+      ],
+      "timeframe": "1h",
+      "trades": 0,
+      "winrate": 0.0
+    },
+    {
       "category": "Mean Reversion",
       "complexity": 10,
       "family": "BigZ07Next",
@@ -1603,6 +2363,29 @@
     },
     {
       "category": "Mean Reversion",
+      "complexity": 5,
+      "family": "BBRSI",
+      "indicators": [
+        "RSI",
+        "BB",
+        "TEMA"
+      ],
+      "max_drawdown_abs": 210.62655566000004,
+      "profit_factor": 0.3578511382096078,
+      "profit_total_abs": -173.65082094000002,
+      "profit_total_pct": -1.74,
+      "sharpe": -1.6841890946898028,
+      "side": "Long",
+      "strategy": "BBRSI",
+      "styles": [
+        "Mean Reversion"
+      ],
+      "timeframe": "4h",
+      "trades": 309,
+      "winrate": 0.2815533980582524
+    },
+    {
+      "category": "Mean Reversion",
       "complexity": 10,
       "family": "BigPete",
       "indicators": [
@@ -1725,6 +2508,49 @@
       "winrate": 0.5047581284694687
     },
     {
+      "category": "Special",
+      "complexity": 5,
+      "family": "AlwaysBuy",
+      "indicators": [],
+      "max_drawdown_abs": 446.48876076999983,
+      "profit_factor": 0.8814823913475934,
+      "profit_total_abs": -410.24502738,
+      "profit_total_pct": -4.1,
+      "sharpe": -12.100844951546957,
+      "side": "Long",
+      "strategy": "AlwaysBuy",
+      "styles": [
+        "Special"
+      ],
+      "timeframe": "5m",
+      "trades": 5498,
+      "winrate": 0.4783557657329938
+    },
+    {
+      "category": "Mean Reversion",
+      "complexity": 5,
+      "family": "BBRSI",
+      "indicators": [
+        "RSI",
+        "BB",
+        "ADX"
+      ],
+      "max_drawdown_abs": 428.0579653700007,
+      "profit_factor": 0.5995979952173255,
+      "profit_total_abs": -422.1516201,
+      "profit_total_pct": -4.22,
+      "sharpe": -28.386696690580916,
+      "side": "Long",
+      "strategy": "BBRSI4cust",
+      "styles": [
+        "Mean Reversion",
+        "Breakout"
+      ],
+      "timeframe": "15m",
+      "trades": 4684,
+      "winrate": 0.5813407344150299
+    },
+    {
       "category": "Trend",
       "complexity": 2,
       "family": "Chispei",
@@ -1834,6 +2660,6 @@
       "winrate": 0.0
     }
   ],
-  "period": "2025_year",
-  "strat_count": 76
+  "period": "last_3_months",
+  "strat_count": 109
 }
