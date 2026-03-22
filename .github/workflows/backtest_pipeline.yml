@@ -6,12 +6,12 @@ on:
       period:
         description: 'Timerange period for backtesting'
         required: true
-        default: '2025_year'
+        default: 'last_1_month'
         type: choice
         options:
-          - 2025_year
-          - last_3_months
           - last_1_month
+          - last_3_months
+          - 2025_year
   push:
     branches:
       - backtesting
@@ -55,17 +55,17 @@ jobs:
         # We manually use the image for speed if the runner has it, or pull it
         run: |
           docker pull neozhou2009/freqtrade-full:latest
-          python scripts/download_data.py --period ${{ github.event.inputs.period || '2025_year' }} --docker
+          python scripts/download_data.py --period ${{ github.event.inputs.period || 'last_1_month' }} --docker
 
       - name: Step 3 - Prepare Environment (Flatten)
         run: python scripts/prepare_test_env.py
 
       - name: Step 4 - Run Full Batch Backtesting
         continue-on-error: true
-        run: python scripts/run_all_batches.py --period ${{ github.event.inputs.period || '2025_year' }} --docker --skip-errors
+        run: python scripts/run_all_batches.py --period ${{ github.event.inputs.period || 'last_1_month' }} --docker --skip-errors
 
       - name: Step 5 - Generate Rankings
-        run: python scripts/generate_leaderboard.py --period "CI Auto Report - ${{ github.event.inputs.period || '2025_year' }}"
+        run: python scripts/generate_leaderboard.py --period "CI Auto Report - ${{ github.event.inputs.period || 'last_1_month' }}"
 
       - name: Step 6 - Commit and Push Results
         # Don't fail if no changes were made to LEADERBOARD.md
