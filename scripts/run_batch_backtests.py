@@ -36,9 +36,9 @@ def main():
             "last_6_months",
         ],
     )
-    parser.add_argument("--batch", type=int, required=True, help="Batch ID (1-indexed)")
+    parser.add_argument("--batch", type=int, required=False, help="Batch ID (1-indexed)")
     parser.add_argument(
-        "--total-batches", type=int, required=True, help="Total number of batches"
+        "--total-batches", type=int, required=False, help="Total number of batches"
     )
     parser.add_argument("--docker", action="store_true", help="Use Docker mode")
     parser.add_argument(
@@ -56,6 +56,11 @@ def main():
 
     timerange = get_timerange(args.period)
     print(f"[*] Timerange for {args.period}: {timerange}")
+
+    if args.strategy is None and (args.batch is None or args.total_batches is None):
+        raise ValueError(
+            "--batch and --total-batches are required unless --strategy is specified"
+        )
 
     registry_file = "strategy_registry.json"
     if not os.path.exists(registry_file):
