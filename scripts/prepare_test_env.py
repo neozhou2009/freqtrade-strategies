@@ -134,6 +134,10 @@ def main():
 
     print()
 
+    # Ensure backtest configuration stays synced with user_data/config.json
+    # (Fixes the issue where an outdated test/config.json causes failures like Binance US restrictions)
+    shutil.copy2("user_data/config.json", "test/config.json")
+    
     # Pre-create backtest results directory and grant generous permissions
     # This prevents PermissionError when the docker container (ftuser) tries to write 
     # to the directory created by the github actions runner
