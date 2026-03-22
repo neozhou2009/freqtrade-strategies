@@ -101,8 +101,8 @@ def flatten_strategies():
 
 def copy_data():
     """Copy data from user_data/data/ to test/user_data/data/"""
-    src_dir = "user_data/data/binance"
-    dst_dir = "test/user_data/data/binance"
+    src_dir = "user_data/data/okx"
+    dst_dir = "test/user_data/data/okx"
 
     if not os.path.exists(src_dir):
         print(f"[!] Source data directory not found: {src_dir}")

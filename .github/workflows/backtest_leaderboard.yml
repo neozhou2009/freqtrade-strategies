@@ -46,7 +46,7 @@ jobs:
             ${{ runner.os }}-freqtrade-data-v1-
 
       - name: Download/Update Market Data
-        run: python scripts/download_data.py --period ${{ github.event.inputs.period || 'last_1_month' }} --docker
+        run: python scripts/download_data.py --period ${{ github.event.inputs.period || 'last_1_month' }} --exchange okx --docker
 
       - name: Prepare Test Environment
         run: python scripts/prepare_test_env.py

@@ -55,7 +55,7 @@ jobs:
         # We manually use the image for speed if the runner has it, or pull it
         run: |
           docker pull neozhou2009/freqtrade-full:latest
-          python scripts/download_data.py --period ${{ github.event.inputs.period || 'last_1_month' }} --docker
+          python scripts/download_data.py --period ${{ github.event.inputs.period || 'last_1_month' }} --exchange okx --docker
 
       - name: Step 3 - Prepare Environment (Flatten)
         run: python scripts/prepare_test_env.py
