@@ -1,6 +1,7 @@
 test/
 test/user_data/
 user_data/*
+!user_data/config.json
 __pycache__/
 *.pyc
 *.pyo
