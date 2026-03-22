@@ -12,6 +12,11 @@ on:
           - last_1_month
           - last_3_months
           - 2025_year
+      strategy:
+        description: 'Optional: run only one strategy name from strategy_registry'
+        required: false
+        default: ''
+        type: string
   push:
     branches:
       - backtesting
@@ -23,6 +28,9 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    env:
+      # 这里设置自动触发（push/schedule）默认执行的单策略，留空表示跑全量
+      DEFAULT_STRATEGY: 'ADXMomentum'
 
     steps:
       - name: Checkout Code
@@ -60,9 +68,23 @@ jobs:
       - name: Step 3 - Prepare Environment (Flatten)
         run: python scripts/prepare_test_env.py
 
-      - name: Step 4 - Run Full Batch Backtesting
+      - name: Step 4 - Run Backtesting
         continue-on-error: true
-        run: python scripts/run_all_batches.py --period ${{ github.event.inputs.period || 'last_1_month' }} --docker --skip-errors
+        run: |
+          # 手动触发输入 strategy 优先
+          if [ -n "${{ github.event.inputs.strategy }}" ]; then
+            STRATEGY="${{ github.event.inputs.strategy }}"
+          else
+            STRATEGY="${{ env.DEFAULT_STRATEGY }}"
+          fi
+
+          if [ -n "$STRATEGY" ]; then
+            echo "Running single strategy: $STRATEGY"
+            python scripts/run_batch_backtests.py --period ${{ github.event.inputs.period || 'last_1_month' }} --strategy "$STRATEGY" --docker --skip-errors
+          else
+            echo "Running full batch backtesting"
+            python scripts/run_all_batches.py --period ${{ github.event.inputs.period || 'last_1_month' }} --docker --skip-errors
+          fi
 
       - name: Step 5 - Generate Rankings
         run: python scripts/generate_leaderboard.py --period "CI Auto Report - ${{ github.event.inputs.period || 'last_1_month' }}"

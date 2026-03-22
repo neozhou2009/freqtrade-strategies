@@ -47,6 +47,11 @@ def main():
     parser.add_argument(
         "--skip-errors", action="store_true", help="Skip strategies with errors"
     )
+    parser.add_argument(
+        "--strategy",
+        help="Run a single specific strategy (overrides batch selectors)",
+        default=None,
+    )
     args = parser.parse_args()
 
     timerange = get_timerange(args.period)
@@ -62,13 +67,17 @@ def main():
     with open(registry_file, "r") as f:
         registry = json.load(f)
 
-    strategies = sorted(list(registry.keys()))
-    total_strats = len(strategies)
-    batch_size = (total_strats + args.total_batches - 1) // args.total_batches
-    start_idx = (args.batch - 1) * batch_size
-    end_idx = min(start_idx + batch_size, total_strats)
+    if args.strategy:
+        batch_strats = [args.strategy]
+    else:
+        strategies = sorted(list(registry.keys()))
+        total_strats = len(strategies)
+        batch_size = (total_strats + args.total_batches - 1) // args.total_batches
+        start_idx = (args.batch - 1) * batch_size
+        end_idx = min(start_idx + batch_size, total_strats)
 
-    batch_strats = strategies[start_idx:end_idx]
+        batch_strats = strategies[start_idx:end_idx]
+
     if not batch_strats:
         print("[*] No strategies in this batch. Exiting.")
         return
