@@ -36,6 +36,21 @@ jobs:
       - name: Pull Docker Image
         run: docker pull neozhou2009/freqtrade-full:latest
 
+      # [CRITICAL] Cache Data to avoid re-downloading market data (shared with pipeline)
+      - name: Cache Freqtrade Data
+        uses: actions/cache@v3
+        with:
+          path: user_data/data
+          key: ${{ runner.os }}-freqtrade-data-v1-${{ hashFiles('user_data/config.json', 'scripts/download_data.py') }}
+          restore-keys: |
+            ${{ runner.os }}-freqtrade-data-v1-
+
+      - name: Download/Update Market Data
+        run: python scripts/download_data.py --period ${{ github.event.inputs.period || 'last_1_month' }} --docker
+
+      - name: Prepare Test Environment
+        run: python scripts/prepare_test_env.py
+
       - name: Run Script to Backtest Batch
         run: |
           python scripts/run_batch_backtests.py \
