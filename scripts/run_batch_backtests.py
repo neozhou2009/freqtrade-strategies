@@ -62,7 +62,11 @@ def main():
             "--batch and --total-batches are required unless --strategy is specified"
         )
 
-    registry_file = "strategy_registry.json"
+    # Allow running from any current working directory by resolving repo root
+    script_dir = os.path.dirname(os.path.realpath(__file__))
+    repo_root = os.path.abspath(os.path.join(script_dir, os.pardir))
+
+    registry_file = os.path.join(repo_root, "strategy_registry.json")
     if not os.path.exists(registry_file):
         print(
             "[!] strategy_registry.json not found! Run: python scripts/classify_strategies.py"
@@ -91,7 +95,7 @@ def main():
         f"[*] Batch {args.batch}/{args.total_batches}: Running {len(batch_strats)} strategies..."
     )
 
-    project_root = os.getcwd()
+    project_root = repo_root
     test_dir = os.path.join(project_root, "test")
 
     if not os.path.exists(test_dir):
