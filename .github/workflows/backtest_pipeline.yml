@@ -90,11 +90,15 @@ jobs:
         run: python scripts/generate_leaderboard.py --period "CI Auto Report - ${{ github.event.inputs.period || 'last_1_month' }}"
 
       - name: Step 6 - Commit and Push Results
-        # Don't fail if no changes were made to LEADERBOARD.md
+        # Fail only on real git push failure; skip if no changes to commit
         continue-on-error: true
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git add LEADERBOARD.md leaderboard.json strategy_registry.json
-          git commit -m "chore: Update Leaderboard [skip ci]"
-          git push
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "chore: Update Leaderboard [skip ci]"
+            git push
+          fi

@@ -133,6 +133,19 @@ def main():
     data = copy_data()
 
     print()
+
+    # Pre-create backtest results directory and grant generous permissions
+    # This prevents PermissionError when the docker container (ftuser) tries to write 
+    # to the directory created by the github actions runner
+    backtest_dir = "test/user_data/backtest_results"
+    os.makedirs(backtest_dir, exist_ok=True)
+    for root, dirs, files in os.walk("test/user_data"):
+        for d in dirs:
+            os.chmod(os.path.join(root, d), 0o777)
+        for f in files:
+            os.chmod(os.path.join(root, f), 0o666)
+    os.chmod("test/user_data", 0o777)
+
     print("=== Summary ===")
     print(f"Strategies: {strategies}")
     print(f"Data files: {data}")

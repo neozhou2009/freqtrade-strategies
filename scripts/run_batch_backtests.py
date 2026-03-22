@@ -162,6 +162,8 @@ def run_strategies_batch(args, batch_strats, test_dir, timerange):
 
     if result.returncode != 0:
         print(f"[!] Freqtrade returned non-zero exit code: {result.returncode}")
+        print(result.stdout)
+        print(result.stderr)
     else:
         print(f"[*] Backtest completed for batch {args.batch}")
 
@@ -217,6 +219,8 @@ def run_strategies_individually(args, batch_strats, test_dir, timerange):
 
         if result.returncode != 0:
             print(f"  [✗] Failed: {strategy}")
+            print(result.stdout)
+            print(result.stderr)
             fail_count += 1
             failed_strategies.append(strategy)
         else:
