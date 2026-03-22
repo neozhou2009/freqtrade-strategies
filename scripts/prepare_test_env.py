@@ -92,6 +92,7 @@ def flatten_strategies():
         dst_path = os.path.join(dst_dir, basename)
         shutil.copy2(filepath, dst_path)
         count += 1
+        break  # Only copy the first file found in each subdirectory
 
     print(f"[✓] Flattened {count} strategy files to {dst_dir}")
     fix_class_names(dst_dir)
