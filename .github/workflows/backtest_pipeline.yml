@@ -29,8 +29,16 @@ jobs:
     permissions:
       contents: write
     env:
-      # 这里设置自动触发（push/schedule）默认执行的单策略，留空表示跑全量
-      # 调试某个策略时，可将其名称填入，如 'ADXMomentum'，或者在 GitHub Action 取消勾选手动输入
+      # ====================================================================================================
+      # 【日常跑全量】
+      # 留空 DEFAULT_STRATEGY 表示自动触发（push/schedule）时跑全量 465 个策略： DEFAULT_STRATEGY: ''
+      #
+      # 【排查某个出错策略的 2 种方法】
+      # 方法 1 (推荐): 在 GitHub 网页点击 Actions -> 此流水线 -> 选 "Run workflow"，在弹出的 strategy
+      #               输入框直接填入出错的策略名 (如 ADXMomentum)。该方法无需改代码，测完依然全量。
+      # 方法 2 (修改代码): 若需要一段时间内每次 Git Push 都只跑某个问题策略，
+      #               直接将下面的空字符串临时修改为策略名即可：DEFAULT_STRATEGY: 'ADXMomentum'
+      # ====================================================================================================
       DEFAULT_STRATEGY: ''
 
     steps:
