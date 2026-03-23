@@ -13,7 +13,7 @@ Usage:
 import os
 import shutil
 import glob
-
+import re
 
 def fix_class_names(directory):
     """Fix class names that don't match filename."""
@@ -61,6 +61,17 @@ def fix_numpy_compatibility(directory):
         for old, new in replacements:
             if old in content:
                 content = content.replace(old, new)
+                modified = True
+                
+        # Fix DTypePromotionError when mixing string and np.nan in np.where
+        if re.search(r",\s*(?:np|numpy)\.nan\)", content):
+            new_content = re.sub(
+                r"(\bnp\.where\([^,]+,\s*'down',\s*'up'\)),\s*(?:np|numpy)\.nan\)",
+                r"\1, 'NaN')",
+                content
+            )
+            if new_content != content:
+                content = new_content
                 modified = True
 
         if modified:

@@ -17,11 +17,6 @@ on:
         required: false
         default: ''
         type: string
-  push:
-    branches:
-      - backtesting
-  schedule:
-    - cron: '0 0 * * 1' # Run weekly on Monday
 
 jobs:
   backtest:
