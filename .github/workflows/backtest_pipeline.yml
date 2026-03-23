@@ -30,7 +30,8 @@ jobs:
       contents: write
     env:
       # 这里设置自动触发（push/schedule）默认执行的单策略，留空表示跑全量
-      DEFAULT_STRATEGY: 'ADXMomentum'
+      # 调试某个策略时，可将其名称填入，如 'ADXMomentum'，或者在 GitHub Action 取消勾选手动输入
+      DEFAULT_STRATEGY: ''
 
     steps:
       - name: Checkout Code
