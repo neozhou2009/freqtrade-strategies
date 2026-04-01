@@ -15,6 +15,7 @@ import shutil
 import glob
 import re
 
+
 def fix_class_names(directory):
     """Fix class names that don't match filename."""
     fixes = [
@@ -62,13 +63,13 @@ def fix_numpy_compatibility(directory):
             if old in content:
                 content = content.replace(old, new)
                 modified = True
-                
+
         # Fix DTypePromotionError when mixing string and np.nan in np.where
         if re.search(r",\s*(?:np|numpy)\.nan\)", content):
             new_content = re.sub(
                 r"(\bnp\.where\([^,]+,\s*'down',\s*'up'\)),\s*(?:np|numpy)\.nan\)",
                 r"\1, 'NaN')",
-                content
+                content,
             )
             if new_content != content:
                 content = new_content
@@ -148,9 +149,9 @@ def main():
     # Ensure backtest configuration stays synced with user_data/config.json
     # (Fixes the issue where an outdated test/config.json causes failures like Binance US restrictions)
     shutil.copy2("user_data/config.json", "test/config.json")
-    
+
     # Pre-create backtest results directory and grant generous permissions
-    # This prevents PermissionError when the docker container (ftuser) tries to write 
+    # This prevents PermissionError when the docker container (ftuser) tries to write
     # to the directory created by the github actions runner
     backtest_dir = "test/user_data/backtest_results"
     os.makedirs(backtest_dir, exist_ok=True)

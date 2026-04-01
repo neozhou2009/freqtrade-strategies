@@ -113,7 +113,7 @@ def chaikin_money_flow(dataframe, n=20, fillna=False) -> Series:
     return Series(cmf, name="cmf")
 
 
-class BB_RPB_TSL_BIV1(IStrategy):
+class BB_RPB_TSL_2(IStrategy):
     INTERFACE_VERSION = 3
     """
         BB_RPB_TSL
@@ -134,8 +134,8 @@ class BB_RPB_TSL_BIV1(IStrategy):
     buy_params = {
         "max_slip": 0.668,
         ##
-        "buy_bb_width_1h": 1.074,
-        "buy_roc_1h": 4,
+        "buy_bb_width_1h": 0.954,
+        "buy_roc_1h": 86,
         ##
         "buy_threshold": 0.003,
         "buy_bb_factor": 0.999,
@@ -149,8 +149,8 @@ class BB_RPB_TSL_BIV1(IStrategy):
         "buy_rmi_length": 17,
         "buy_srsi_fk": 32,
         ##
-        "buy_closedelta": 13.494,
-        "buy_ema_diff": 0.024,
+        "buy_closedelta": 17.922,
+        "buy_ema_diff": 0.026,
         ##
         "buy_ema_high": 0.968,
         "buy_ema_low": 0.935,
@@ -158,29 +158,29 @@ class BB_RPB_TSL_BIV1(IStrategy):
         "buy_rsi": 23,
         "buy_rsi_fast": 44,
         ##
-        "buy_ema_high_2": 1.092,
-        "buy_ema_low_2": 1.164,
-        "buy_ewo_high_2": 4.072,
-        "buy_rsi_ewo_2": 42,
-        "buy_rsi_fast_ewo_2": 48,
+        "buy_ema_high_2": 1.087,
+        "buy_ema_low_2": 0.970,
+        "buy_ewo_high_2": 4.179,
+        "buy_rsi_ewo_2": 35,
+        "buy_rsi_fast_ewo_2": 45,
         ##
-        "buy_closedelta_local_dip": 13.717,
+        "buy_closedelta_local_dip": 12.044,
         "buy_ema_diff_local_dip": 0.024,
-        "buy_ema_high_local_dip": 1.084,
-        "buy_rsi_local_dip": 20,
+        "buy_ema_high_local_dip": 1.014,
+        "buy_rsi_local_dip": 21,
         ##
-        "buy_r_deadfish_bb_factor": 0.911,
-        "buy_r_deadfish_bb_width": 0.091,
-        "buy_r_deadfish_ema": 0.972,
-        "buy_r_deadfish_volume_factor": 1.008,
+        "buy_r_deadfish_bb_factor": 1.014,
+        "buy_r_deadfish_bb_width": 0.299,
+        "buy_r_deadfish_ema": 1.054,
+        "buy_r_deadfish_volume_factor": 1.59,
         "buy_r_deadfish_cti": -0.115,
         "buy_r_deadfish_r14": -44.34,
         ##
-        "buy_clucha_bbdelta_close": 0.04,
-        "buy_clucha_bbdelta_tail": 0.913,
-        "buy_clucha_close_bblower": 0.04,
-        "buy_clucha_closedelta_close": 0.05,
-        "buy_clucha_rocr_1h": 0.416,
+        "buy_clucha_bbdelta_close": 0.049,
+        "buy_clucha_bbdelta_tail": 1.146,
+        "buy_clucha_close_bblower": 0.018,
+        "buy_clucha_closedelta_close": 0.017,
+        "buy_clucha_rocr_1h": 0.526,
         ##
         "buy_adx": 13,
         "buy_cofi_39_r14": -85.016,
@@ -207,20 +207,20 @@ class BB_RPB_TSL_BIV1(IStrategy):
         "sell_deadfish_volume_factor": 2.37,
     }
 
-    # ROI table:
     minimal_roi = {
         "0": 0.205,
     }
 
     # Optimal timeframe for the strategy
     timeframe = "5m"
+    inf_5m = "15m"
     inf_1h = "1h"
 
     # Run "populate_indicators()" only for new candle.
     process_only_new_candles = True
 
     # Disabled
-    stoploss = -0.10
+    stoploss = -0.15
 
     # Custom stoploss
     use_custom_stoploss = True
@@ -397,15 +397,12 @@ class BB_RPB_TSL_BIV1(IStrategy):
     sell_ema = DecimalParameter(
         0.97, 0.99, default=0.987, optimize=is_optimize_sell_stoploss
     )
-    sell_rsi_delta = IntParameter(4, 15, default=10, optimize=is_optimize_sell_stoploss)
 
     is_optimize_deadfish = False
     sell_deadfish_bb_width = DecimalParameter(
         0.03, 0.75, default=0.05, optimize=is_optimize_deadfish
     )
-    sell_deadfish_profit = DecimalParameter(
-        -0.15, -0.05, default=-0.05, optimize=is_optimize_deadfish
-    )
+    sell_deadfish_profit = DecimalParameter(-0.15, -0.05, default=-0.05, optimize=True)
     sell_deadfish_bb_factor = DecimalParameter(
         0.90, 1.20, default=1.0, optimize=is_optimize_deadfish
     )
@@ -416,85 +413,13 @@ class BB_RPB_TSL_BIV1(IStrategy):
     ############################################################################
 
     def informative_pairs(self):
+        informative_pairs = []
 
         pairs = self.dp.current_whitelist()
-        informative_pairs = [(pair, "1h") for pair in pairs]
+        informative_pairs += [(pair, self.inf_5m) for pair in pairs]
+        informative_pairs += [(pair, self.inf_1h) for pair in pairs]
 
         return informative_pairs
-
-    def informative_1h_indicators(
-        self, dataframe: DataFrame, metadata: dict
-    ) -> DataFrame:
-
-        assert self.dp, "DataProvider is required for multiple timeframes."
-        # Get the informative pair
-        informative_1h = self.dp.get_pair_dataframe(
-            pair=metadata["pair"], timeframe=self.inf_1h
-        )
-
-        # EMA
-        informative_1h["ema_8"] = ta.EMA(informative_1h, timeperiod=8)
-        informative_1h["ema_50"] = ta.EMA(informative_1h, timeperiod=50)
-        informative_1h["ema_100"] = ta.EMA(informative_1h, timeperiod=100)
-        informative_1h["ema_200"] = ta.EMA(informative_1h, timeperiod=200)
-
-        # CTI
-        informative_1h["cti"] = pta.cti(informative_1h["close"], length=20)
-
-        # CRSI (3, 2, 100)
-        crsi_closechange = informative_1h["close"] / informative_1h["close"].shift(1)
-        crsi_updown = np.where(
-            crsi_closechange.gt(1), 1.0, np.where(crsi_closechange.lt(1), -1.0, 0.0)
-        )
-        informative_1h["crsi"] = (
-            ta.RSI(informative_1h["close"], timeperiod=3)
-            + ta.RSI(crsi_updown, timeperiod=2)
-            + ta.ROC(informative_1h["close"], 100)
-        ) / 3
-
-        # Williams %R
-        informative_1h["r_480"] = williams_r(informative_1h, period=480)
-
-        # Bollinger bands
-        bollinger2 = qtpylib.bollinger_bands(
-            qtpylib.typical_price(informative_1h), window=20, stds=2
-        )
-        informative_1h["bb_lowerband2"] = bollinger2["lower"]
-        informative_1h["bb_middleband2"] = bollinger2["mid"]
-        informative_1h["bb_upperband2"] = bollinger2["upper"]
-        informative_1h["bb_width"] = (
-            informative_1h["bb_upperband2"] - informative_1h["bb_lowerband2"]
-        ) / informative_1h["bb_middleband2"]
-
-        # ROC
-        informative_1h["roc"] = ta.ROC(dataframe, timeperiod=9)
-
-        # MOMDIV
-        mom = momdiv(informative_1h)
-        informative_1h["momdiv_buy"] = mom["momdiv_buy"]
-        informative_1h["momdiv_sell"] = mom["momdiv_sell"]
-        informative_1h["momdiv_coh"] = mom["momdiv_coh"]
-        informative_1h["momdiv_col"] = mom["momdiv_col"]
-
-        # RSI
-        informative_1h["rsi"] = ta.RSI(informative_1h, timeperiod=14)
-
-        # CMF
-        informative_1h["cmf"] = chaikin_money_flow(informative_1h, 20)
-
-        # Heikin Ashi
-        inf_heikinashi = qtpylib.heikinashi(informative_1h)
-        informative_1h["ha_close"] = inf_heikinashi["close"]
-        informative_1h["rocr"] = ta.ROCR(informative_1h["ha_close"], timeperiod=168)
-
-        # Pump protections
-        # informative_1h['hl_pct_change_48'] = range_percent_change(informative_1h, 'HL', length=48)
-        # informative_1h['hl_pct_change_36'] = range_percent_change(informative_1h, 'HL', length=36)
-        # informative_1h['hl_pct_change_24'] = range_percent_change(informative_1h, 'HL', length=24)
-        # informative_1h['hl_pct_change_12'] = range_percent_change(informative_1h, 'HL', length=12)
-        # informative_1h['hl_pct_change_6'] = range_percent_change(informative_1h, 'HL', length=6)
-
-        return informative_1h
 
     ############################################################################
 
@@ -642,16 +567,14 @@ class BB_RPB_TSL_BIV1(IStrategy):
 
         if (
             (current_profit < -0.05)
-            and (last_candle["close"] < last_candle["ema_200"] * self.sell_ema.value)
-            and (last_candle["cmf"] < self.sell_cmf.value)
+            and (last_candle["close"] < last_candle["ema_200"] * 0.988)
+            and (last_candle["cmf"] < -0.046)
             and (
                 ((last_candle["ema_200"] - last_candle["close"]) / last_candle["close"])
-                < self.sell_ema_close_delta.value
+                < 0.022
             )
             and last_candle["rsi"] > previous_candle_1["rsi"]
-            and (
-                last_candle["rsi"] > (last_candle["rsi_1h"] + self.sell_rsi_delta.value)
-            )
+            and (last_candle["rsi"] > (last_candle["rsi_1h"] + 10.0))
         ):
             return "sell_stoploss_u_e_1"
 
@@ -708,6 +631,253 @@ class BB_RPB_TSL_BIV1(IStrategy):
         return True
 
     ############################################################################
+
+    def informative_1h_indicators(
+        self, dataframe: DataFrame, metadata: dict
+    ) -> DataFrame:
+
+        assert self.dp, "DataProvider is required for multiple timeframes."
+        # Get the informative pair
+        informative_1h = self.dp.get_pair_dataframe(
+            pair=metadata["pair"], timeframe=self.inf_1h
+        )
+
+        # EMA
+        informative_1h["ema_8"] = ta.EMA(informative_1h, timeperiod=8)
+        informative_1h["ema_50"] = ta.EMA(informative_1h, timeperiod=50)
+        informative_1h["ema_100"] = ta.EMA(informative_1h, timeperiod=100)
+        informative_1h["ema_200"] = ta.EMA(informative_1h, timeperiod=200)
+
+        # CTI
+        informative_1h["cti"] = pta.cti(informative_1h["close"], length=20)
+
+        # CRSI (3, 2, 100)
+        crsi_closechange = informative_1h["close"] / informative_1h["close"].shift(1)
+        crsi_updown = np.where(
+            crsi_closechange.gt(1), 1.0, np.where(crsi_closechange.lt(1), -1.0, 0.0)
+        )
+        informative_1h["crsi"] = (
+            ta.RSI(informative_1h["close"], timeperiod=3)
+            + ta.RSI(crsi_updown, timeperiod=2)
+            + ta.ROC(informative_1h["close"], 100)
+        ) / 3
+
+        # Williams %R
+        informative_1h["r_480"] = williams_r(informative_1h, period=480)
+
+        # Bollinger bands
+        bollinger2 = qtpylib.bollinger_bands(
+            qtpylib.typical_price(informative_1h), window=20, stds=2
+        )
+        informative_1h["bb_lowerband2"] = bollinger2["lower"]
+        informative_1h["bb_middleband2"] = bollinger2["mid"]
+        informative_1h["bb_upperband2"] = bollinger2["upper"]
+        informative_1h["bb_width"] = (
+            informative_1h["bb_upperband2"] - informative_1h["bb_lowerband2"]
+        ) / informative_1h["bb_middleband2"]
+
+        # ROC
+        informative_1h["roc"] = ta.ROC(dataframe, timeperiod=9)
+
+        # MOMDIV
+        mom = momdiv(informative_1h)
+        informative_1h["momdiv_buy"] = mom["momdiv_buy"]
+        informative_1h["momdiv_sell"] = mom["momdiv_sell"]
+        informative_1h["momdiv_coh"] = mom["momdiv_coh"]
+        informative_1h["momdiv_col"] = mom["momdiv_col"]
+
+        # RSI
+        informative_1h["rsi"] = ta.RSI(informative_1h, timeperiod=14)
+
+        # CMF
+        informative_1h["cmf"] = chaikin_money_flow(informative_1h, 20)
+
+        # Heikin Ashi
+        inf_heikinashi = qtpylib.heikinashi(informative_1h)
+        informative_1h["ha_close"] = inf_heikinashi["close"]
+        informative_1h["rocr"] = ta.ROCR(informative_1h["ha_close"], timeperiod=168)
+
+        # Pump protections
+        # informative_1h['hl_pct_change_48'] = range_percent_change(informative_1h, 'HL', length=48)
+        # informative_1h['hl_pct_change_36'] = range_percent_change(informative_1h, 'HL', length=36)
+        # informative_1h['hl_pct_change_24'] = range_percent_change(informative_1h, 'HL', length=24)
+        # informative_1h['hl_pct_change_12'] = range_percent_change(informative_1h, 'HL', length=12)
+        # informative_1h['hl_pct_change_6'] = range_percent_change(informative_1h, 'HL', length=6)
+
+        return informative_1h
+
+    def informative_5m_indicators(
+        self, dataframe: DataFrame, metadata: dict
+    ) -> DataFrame:
+
+        assert self.dp, "DataProvider is required for multiple timeframes."
+        # Get the informative pair
+        informative_5m = self.dp.get_pair_dataframe(
+            pair=metadata["pair"], timeframe=self.inf_5m
+        )
+
+        # Bollinger bands
+        bollinger2 = qtpylib.bollinger_bands(
+            qtpylib.typical_price(informative_5m), window=20, stds=2
+        )
+        informative_5m["bb_lowerband2"] = bollinger2["lower"]
+        informative_5m["bb_middleband2"] = bollinger2["mid"]
+        informative_5m["bb_upperband2"] = bollinger2["upper"]
+
+        bollinger3 = qtpylib.bollinger_bands(
+            qtpylib.typical_price(informative_5m), window=20, stds=3
+        )
+        informative_5m["bb_lowerband3"] = bollinger3["lower"]
+        informative_5m["bb_middleband3"] = bollinger3["mid"]
+        informative_5m["bb_upperband3"] = bollinger3["upper"]
+
+        ### Other BB checks
+        informative_5m["bb_width"] = (
+            informative_5m["bb_upperband2"] - informative_5m["bb_lowerband2"]
+        ) / informative_5m["bb_middleband2"]
+        informative_5m["bb_delta"] = (
+            informative_5m["bb_lowerband2"] - informative_5m["bb_lowerband3"]
+        ) / informative_5m["bb_lowerband2"]
+
+        # CCI hyperopt
+        for val in self.buy_cci_length.range:
+            informative_5m[f"cci_length_{val}"] = ta.CCI(informative_5m, val)
+
+        informative_5m["cci"] = ta.CCI(informative_5m, 26)
+        informative_5m["cci_long"] = ta.CCI(informative_5m, 170)
+
+        # RMI hyperopt
+        for val in self.buy_rmi_length.range:
+            informative_5m[f"rmi_length_{val}"] = RMI(informative_5m, length=val, mom=4)
+
+        # SRSI hyperopt
+        stoch = ta.STOCHRSI(informative_5m, 15, 20, 2, 2)
+        informative_5m["srsi_fk"] = stoch["fastk"]
+        informative_5m["srsi_fd"] = stoch["fastd"]
+
+        # BinH
+        informative_5m["closedelta"] = (
+            informative_5m["close"] - informative_5m["close"].shift()
+        ).abs()
+
+        # SMA
+        informative_5m["sma_9"] = ta.SMA(informative_5m, timeperiod=9)
+        informative_5m["sma_15"] = ta.SMA(informative_5m, timeperiod=15)
+        informative_5m["sma_21"] = ta.SMA(informative_5m, timeperiod=21)
+        informative_5m["sma_30"] = ta.SMA(informative_5m, timeperiod=30)
+        informative_5m["sma_75"] = ta.SMA(informative_5m, timeperiod=75)
+
+        # CTI
+        informative_5m["cti"] = pta.cti(informative_5m["close"], length=20)
+
+        # CMF
+        informative_5m["cmf"] = chaikin_money_flow(informative_5m, 20)
+
+        # CRSI (3, 2, 100)
+        crsi_closechange = informative_5m["close"] / informative_5m["close"].shift(1)
+        crsi_updown = np.where(
+            crsi_closechange.gt(1), 1.0, np.where(crsi_closechange.lt(1), -1.0, 0.0)
+        )
+        informative_5m["crsi"] = (
+            ta.RSI(informative_5m["close"], timeperiod=3)
+            + ta.RSI(crsi_updown, timeperiod=2)
+            + ta.ROC(informative_5m["close"], 100)
+        ) / 3
+
+        # EMA
+        informative_5m["ema_8"] = ta.EMA(informative_5m, timeperiod=8)
+        informative_5m["ema_12"] = ta.EMA(informative_5m, timeperiod=12)
+        informative_5m["ema_13"] = ta.EMA(informative_5m, timeperiod=13)
+        informative_5m["ema_16"] = ta.EMA(informative_5m, timeperiod=16)
+        informative_5m["ema_20"] = ta.EMA(informative_5m, timeperiod=20)
+        informative_5m["ema_26"] = ta.EMA(informative_5m, timeperiod=26)
+        informative_5m["ema_50"] = ta.EMA(informative_5m, timeperiod=50)
+        informative_5m["ema_100"] = ta.EMA(informative_5m, timeperiod=100)
+        informative_5m["ema_200"] = ta.EMA(informative_5m, timeperiod=200)
+
+        # RSI
+        informative_5m["rsi"] = ta.RSI(informative_5m, timeperiod=14)
+        informative_5m["rsi_fast"] = ta.RSI(informative_5m, timeperiod=4)
+        informative_5m["rsi_slow"] = ta.RSI(informative_5m, timeperiod=20)
+
+        # Elliot
+        informative_5m["EWO"] = EWO(informative_5m, 50, 200)
+
+        # Williams %R
+        informative_5m["r_14"] = williams_r(informative_5m, period=14)
+        informative_5m["r_32"] = williams_r(informative_5m, period=32)
+        informative_5m["r_64"] = williams_r(informative_5m, period=64)
+        informative_5m["r_96"] = williams_r(informative_5m, period=96)
+        informative_5m["r_480"] = williams_r(informative_5m, period=480)
+
+        # Volume
+        informative_5m["volume_mean_4"] = (
+            informative_5m["volume"].rolling(4).mean().shift(1)
+        )
+        informative_5m["volume_mean_12"] = (
+            informative_5m["volume"].rolling(12).mean().shift(1)
+        )
+        informative_5m["volume_mean_24"] = (
+            informative_5m["volume"].rolling(24).mean().shift(1)
+        )
+
+        # MFI
+        informative_5m["mfi"] = ta.MFI(informative_5m)
+
+        # Heiken Ashi
+        heikinashi = qtpylib.heikinashi(informative_5m)
+        informative_5m["ha_open"] = heikinashi["open"]
+        informative_5m["ha_close"] = heikinashi["close"]
+        informative_5m["ha_high"] = heikinashi["high"]
+        informative_5m["ha_low"] = heikinashi["low"]
+
+        ## BB 40
+        bollinger2_40 = qtpylib.bollinger_bands(
+            ha_typical_price(informative_5m), window=40, stds=2
+        )
+        informative_5m["bb_lowerband2_40"] = bollinger2_40["lower"]
+        informative_5m["bb_middleband2_40"] = bollinger2_40["mid"]
+        informative_5m["bb_upperband2_40"] = bollinger2_40["upper"]
+
+        # ClucHA
+        informative_5m["bb_delta_cluc"] = (
+            informative_5m["bb_middleband2_40"] - informative_5m["bb_lowerband2_40"]
+        ).abs()
+        informative_5m["ha_closedelta"] = (
+            informative_5m["ha_close"] - informative_5m["ha_close"].shift()
+        ).abs()
+        informative_5m["tail"] = (
+            informative_5m["ha_close"] - informative_5m["ha_low"]
+        ).abs()
+        informative_5m["ema_slow"] = ta.EMA(informative_5m["ha_close"], timeperiod=50)
+        informative_5m["rocr"] = ta.ROCR(informative_5m["ha_close"], timeperiod=28)
+
+        # Cofi
+        stoch_fast = ta.STOCHF(informative_5m, 5, 3, 0, 3, 0)
+        informative_5m["fastd"] = stoch_fast["fastd"]
+        informative_5m["fastk"] = stoch_fast["fastk"]
+        informative_5m["adx"] = ta.ADX(informative_5m)
+
+        # Profit Maximizer - PMAX
+        informative_5m["pm"], informative_5m["pmx"] = pmax(
+            heikinashi, MAtype=1, length=9, multiplier=27, period=10, src=3
+        )
+        informative_5m["source"] = (
+            informative_5m["high"]
+            + informative_5m["low"]
+            + informative_5m["open"]
+            + informative_5m["close"]
+        ) / 4
+        informative_5m["pmax_thresh"] = ta.EMA(informative_5m["source"], timeperiod=9)
+
+        # MOMDIV
+        mom = momdiv(informative_5m)
+        informative_5m["momdiv_buy"] = mom["momdiv_buy"]
+        informative_5m["momdiv_sell"] = mom["momdiv_sell"]
+        informative_5m["momdiv_coh"] = mom["momdiv_coh"]
+        informative_5m["momdiv_col"] = mom["momdiv_col"]
+
+        return informative_5m
 
     def normal_tf_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
 
@@ -874,6 +1044,11 @@ class BB_RPB_TSL_BIV1(IStrategy):
         informative_1h = self.informative_1h_indicators(dataframe, metadata)
         dataframe = merge_informative_pair(
             dataframe, informative_1h, self.timeframe, self.inf_1h, ffill=True
+        )
+
+        informative_5m = self.informative_5m_indicators(dataframe, metadata)
+        dataframe = merge_informative_pair(
+            dataframe, informative_5m, self.timeframe, self.inf_5m, ffill=True
         )
 
         # The indicators for the normal (5m) timeframe
@@ -1086,15 +1261,214 @@ class BB_RPB_TSL_BIV1(IStrategy):
             & (dataframe["r_14"] < self.buy_nfix_39_r14.value)
         )
 
-        is_nfix_51 = (
-            (dataframe["close"].shift(3) < dataframe["ema_16"].shift(3) * 0.944)
-            & (dataframe["EWO"].shift(3) < -1.0)
-            & (dataframe["rsi"].shift(3) > 28.0)
-            & (dataframe["cti"].shift(3) < -0.84)
-            & (dataframe["r_14"].shift(3) < -94.0)
-            & (dataframe["rsi"] > 30.0)
-            & (dataframe["crsi_1h"] > 1.0)
+        # --------------------
+
+        is_dip_5m = (
+            (
+                dataframe[f"rmi_length_{self.buy_rmi_length.value}_5m"]
+                < self.buy_rmi.value
+            )
+            & (
+                dataframe[f"cci_length_{self.buy_cci_length.value}_5m"]
+                <= self.buy_cci.value
+            )
+            & (dataframe["srsi_fk_5m"] < self.buy_srsi_fk.value)
         )
+
+        is_break_5m = (
+            (dataframe["bb_delta_5m"] > self.buy_bb_delta.value)
+            & (dataframe["bb_width_5m"] > self.buy_bb_width.value)
+            & (
+                dataframe["closedelta_5m"]
+                > dataframe["close"] * self.buy_closedelta.value / 1000
+            )  # from BinH
+            & (
+                dataframe["close"]
+                < dataframe["bb_lowerband3_5m"] * self.buy_bb_factor.value
+            )
+        )
+
+        is_local_uptrend_5m = (  # from NFI next gen
+            (dataframe["ema_26_5m"] > dataframe["ema_12_5m"])
+            & (
+                dataframe["ema_26_5m"] - dataframe["ema_12_5m"]
+                > dataframe["open"] * self.buy_ema_diff.value
+            )
+            & (
+                dataframe["ema_26_5m"].shift() - dataframe["ema_12_5m"].shift()
+                > dataframe["open"] / 100
+            )
+            & (
+                dataframe["close"]
+                < dataframe["bb_lowerband2_5m"] * self.buy_bb_factor.value
+            )
+            & (
+                dataframe["closedelta_5m"]
+                > dataframe["close"] * self.buy_closedelta.value / 1000
+            )
+        )
+
+        is_local_dip_5m = (
+            (dataframe["ema_26_5m"] > dataframe["ema_12_5m"])
+            & (
+                dataframe["ema_26_5m"] - dataframe["ema_12"]
+                > dataframe["open"] * self.buy_ema_diff_local_dip.value
+            )
+            & (
+                dataframe["ema_26_5m"].shift() - dataframe["ema_12_5m"].shift()
+                > dataframe["open"] / 100
+            )
+            & (
+                dataframe["close_5m"]
+                < dataframe["ema_20"] * self.buy_ema_high_local_dip.value
+            )
+            & (dataframe["rsi_5m"] < self.buy_rsi_local_dip.value)
+            & (dataframe["crsi_5m"] > self.buy_crsi_local_dip.value)
+            & (
+                dataframe["closedelta_5m"]
+                > dataframe["close"] * self.buy_closedelta_local_dip.value / 1000
+            )
+        )
+
+        is_ewo_5m = (  # from SMA offset
+            (dataframe["rsi_fast_5m"] < self.buy_rsi_fast.value)
+            & (dataframe["close"] < dataframe["ema_8_5m"] * self.buy_ema_low.value)
+            & (dataframe["EWO_5m"] > self.buy_ewo.value)
+            & (dataframe["close"] < dataframe["ema_16_5m"] * self.buy_ema_high.value)
+            & (dataframe["rsi_5m"] < self.buy_rsi.value)
+        )
+
+        is_ewo_2_5m = (
+            (dataframe["ema_200_1h"] > dataframe["ema_200_1h"].shift(12))
+            & (dataframe["ema_200_1h"].shift(12) > dataframe["ema_200_1h"].shift(24))
+            & (dataframe["rsi_fast_5m"] < self.buy_rsi_fast_ewo_2.value)
+            & (dataframe["close"] < dataframe["ema_8_5m"] * self.buy_ema_low_2.value)
+            & (dataframe["EWO_5m"] > self.buy_ewo_high_2.value)
+            & (dataframe["close"] < dataframe["ema_16_5m"] * self.buy_ema_high_2.value)
+            & (dataframe["rsi_5m"] < self.buy_rsi_ewo_2.value)
+        )
+
+        is_r_deadfish_5m = (  # reverse deadfish
+            (
+                dataframe["ema_100_5m"]
+                < dataframe["ema_200_5m"] * self.buy_r_deadfish_ema.value
+            )
+            & (dataframe["bb_width_5m"] > self.buy_r_deadfish_bb_width.value)
+            & (
+                dataframe["close"]
+                < dataframe["bb_middleband2_5m"] * self.buy_r_deadfish_bb_factor.value
+            )
+            & (
+                dataframe["volume_mean_12_5m"]
+                > dataframe["volume_mean_24_5m"]
+                * self.buy_r_deadfish_volume_factor.value
+            )
+            & (dataframe["cti_5m"] < self.buy_r_deadfish_cti.value)
+            & (dataframe["r_14_5m"] < self.buy_r_deadfish_r14.value)
+        )
+
+        is_clucHA_5m = (dataframe["rocr_1h"] > self.buy_clucha_rocr_1h.value) & (
+            (
+                (dataframe["bb_lowerband2_40_5m"].shift() > 0)
+                & (
+                    dataframe["bb_delta_cluc_5m"]
+                    > dataframe["ha_close_5m"] * self.buy_clucha_bbdelta_close.value
+                )
+                & (
+                    dataframe["ha_closedelta_5m"]
+                    > dataframe["ha_close_5m"] * self.buy_clucha_closedelta_close.value
+                )
+                & (
+                    dataframe["tail"]
+                    < dataframe["bb_delta_cluc_5m"] * self.buy_clucha_bbdelta_tail.value
+                )
+                & (dataframe["ha_close_5m"] < dataframe["bb_lowerband2_40_5m"].shift())
+                & (dataframe["ha_close_5m"] < dataframe["ha_close_5m"].shift())
+            )
+            | (
+                (dataframe["ha_close_5m"] < dataframe["ema_slow_5m"])
+                & (
+                    dataframe["ha_close_5m"]
+                    < self.buy_clucha_close_bblower.value
+                    * dataframe["bb_lowerband2_5m"]
+                )
+            )
+        )
+
+        is_cofi_5m = (
+            (dataframe["open"] < dataframe["ema_8_5m"] * self.buy_ema_cofi.value)
+            & (qtpylib.crossed_above(dataframe["fastk_5m"], dataframe["fastd_5m"]))
+            & (dataframe["fastk_5m"] < self.buy_fastk.value)
+            & (dataframe["fastd_5m"] < self.buy_fastd.value)
+            & (dataframe["adx_5m"] > self.buy_adx.value)
+            & (dataframe["EWO_5m"] > self.buy_ewo_high.value)
+            & (dataframe["cti_5m"] < self.buy_cofi_cti.value)
+            & (dataframe["r_14_5m"] < self.buy_cofi_39_r14.value)
+        )
+
+        # NFI quick mode
+        is_nfi_13_5m = (
+            (dataframe["ema_50_1h"] > dataframe["ema_100_1h"])
+            & (dataframe["close"] < dataframe["sma_30_5m"] * 0.99)
+            & (dataframe["cti_5m"] < -0.92)
+            & (dataframe["EWO_5m"] < -5.585)
+            & (dataframe["cti_1h"] < -0.88)
+            & (dataframe["crsi_1h"] > 10.0)
+        )
+
+        is_nfi_32_5m = (  # NFIX 26
+            (dataframe["rsi_slow_5m"] < dataframe["rsi_slow_5m"].shift(1))
+            & (dataframe["rsi_fast_5m"] < 46)
+            & (dataframe["rsi_5m"] > 25.0)
+            & (dataframe["close"] < dataframe["sma_15_5m"] * 0.93)
+            & (dataframe["cti_5m"] < -0.9)
+        )
+
+        is_nfi_33_5m = (
+            (dataframe["close"] < (dataframe["ema_13_5m"] * 0.978))
+            & (dataframe["EWO_5m"] > 8)
+            & (dataframe["cti_5m"] < -0.88)
+            & (dataframe["rsi_5m"] < 32)
+            & (dataframe["r_14_5m"] < -98.0)
+            & (dataframe["volume"] < (dataframe["volume_mean_4_5m"] * 2.5))
+        )
+
+        is_nfi_38_5m = (
+            (dataframe["pm_5m"] > dataframe["pmax_thresh_5m"])
+            & (dataframe["close"] < dataframe["sma_75_5m"] * 0.98)
+            & (dataframe["EWO_5m"] < -4.4)
+            & (dataframe["cti_5m"] < -0.95)
+            & (dataframe["r_14_5m"] < -97)
+            & (dataframe["crsi_1h"] > 0.5)
+        )
+
+        is_nfix_5_5m = (
+            (dataframe["ema_200_1h"] > dataframe["ema_200_1h"].shift(12))
+            & (dataframe["ema_200_1h"].shift(12) > dataframe["ema_200_1h"].shift(24))
+            & (dataframe["close"] < dataframe["sma_75_5m"] * 0.932)
+            & (dataframe["EWO_5m"] > 3.6)
+            & (dataframe["cti_5m"] < -0.9)
+            & (dataframe["r_14_5m"] < -97.0)
+        )
+
+        is_nfix_49_5m = (
+            (dataframe["ema_26_5m"].shift(3) > dataframe["ema_12_5m"].shift(3))
+            & (
+                dataframe["ema_26_5m"].shift(3) - dataframe["ema_12_5m"].shift(3)
+                > dataframe["open"].shift(3) * 0.032
+            )
+            & (
+                dataframe["ema_26_5m"].shift(9) - dataframe["ema_12_5m"].shift(9)
+                > dataframe["open"].shift(3) / 100
+            )
+            & (dataframe["close"].shift(3) < dataframe["ema_20_5m"].shift(3) * 0.916)
+            & (dataframe["rsi_5m"].shift(3) < 32.5)
+            & (dataframe["crsi_5m"].shift(3) > 18.0)
+            & (dataframe["cti_5m"] < self.buy_nfix_39_cti.value)
+            & (dataframe["r_14_5m"] < self.buy_nfix_39_r14.value)
+        )
+
+        # --------------------
 
         is_additional_check = (dataframe["roc_1h"] < self.buy_roc_1h.value) & (
             dataframe["bb_width_1h"] < self.buy_bb_width_1h.value
@@ -1104,28 +1478,28 @@ class BB_RPB_TSL_BIV1(IStrategy):
         is_BB_checked = is_dip & is_break
 
         ## Condition Append
-        conditions.append(is_BB_checked)  # ~0.93 / 90.9% / 34.09%      D
+        conditions.append(is_BB_checked)  # ~2.32 / 91.1% / 46.27%      D
         dataframe.loc[is_BB_checked, "buy_tag"] += "bb "
 
-        conditions.append(is_local_uptrend)  # ~1.92 / 92.3% / 58.64%      D
+        conditions.append(is_local_uptrend)  # ~3.28 / 92.4% / 69.72%
         dataframe.loc[is_local_uptrend, "buy_tag"] += "local_uptrend "
 
-        conditions.append(is_local_dip)  # ~0.26 / 97.8% / 7.74%       D
+        conditions.append(is_local_dip)  # ~0.76 / 91.1% / 15.54%
         dataframe.loc[is_local_dip, "buy_tag"] += "local_dip "
 
-        conditions.append(is_ewo)  # ~0.33 / 86.4% / 49.25%      D
+        conditions.append(is_ewo)  # ~0.92 / 92.0% / 43.74%      D
         dataframe.loc[is_ewo, "buy_tag"] += "ewo "
 
-        conditions.append(is_ewo_2)  # ~0.95 / 87% / 21.77%        D
+        conditions.append(is_ewo_2)  # ~2.5 / 89.6% / 33.31%       D
         dataframe.loc[is_ewo_2, "buy_tag"] += "ewo2 "
 
-        conditions.append(is_r_deadfish)  # ~0.65 / 93.9% / 36.87%      D
+        conditions.append(is_r_deadfish)  # ~0.99 / 86.9% / 21.93%      D
         dataframe.loc[is_r_deadfish, "buy_tag"] += "r_deadfish "
 
-        conditions.append(is_clucHA)  # ~0.34 / 93.4% / 37.01%      F
+        conditions.append(is_clucHA)  # ~7.34 / 86.6% / 100.11%     F
         dataframe.loc[is_clucHA, "buy_tag"] += "clucHA "
 
-        conditions.append(is_cofi)  # ~0.36 / 89.1% / 10.32%      D
+        conditions.append(is_cofi)  # ~0.4 / 94.4% / 9.59%        D
         dataframe.loc[is_cofi, "buy_tag"] += "cofi "
 
         conditions.append(is_nfi_13)  # ~0.4 / 100%                 D
@@ -1145,6 +1519,54 @@ class BB_RPB_TSL_BIV1(IStrategy):
 
         conditions.append(is_nfix_49)  # ~0.33 / 100% / 0%           D
         dataframe.loc[is_nfix_49, "buy_tag"] += "nfix_49 "
+
+        # ----------
+        ## Additional Check
+        is_BB_checked_5m = is_dip_5m & is_break_5m
+
+        ## Condition Append
+        conditions.append(is_BB_checked_5m)  # ~2.32 / 91.1% / 46.27%      D
+        dataframe.loc[is_BB_checked_5m, "buy_tag"] += "bb "
+
+        conditions.append(is_local_uptrend_5m)  # ~3.28 / 92.4% / 69.72%
+        dataframe.loc[is_local_uptrend_5m, "buy_tag"] += "local_uptrend "
+
+        conditions.append(is_local_dip_5m)  # ~0.76 / 91.1% / 15.54%
+        dataframe.loc[is_local_dip_5m, "buy_tag"] += "local_dip "
+
+        conditions.append(is_ewo_5m)  # ~0.92 / 92.0% / 43.74%      D
+        dataframe.loc[is_ewo_5m, "buy_tag"] += "ewo "
+
+        conditions.append(is_ewo_2_5m)  # ~2.5 / 89.6% / 33.31%       D
+        dataframe.loc[is_ewo_2_5m, "buy_tag"] += "ewo2 "
+
+        conditions.append(is_r_deadfish_5m)  # ~0.99 / 86.9% / 21.93%      D
+        dataframe.loc[is_r_deadfish_5m, "buy_tag"] += "r_deadfish "
+
+        conditions.append(is_clucHA_5m)  # ~7.34 / 86.6% / 100.11%     F
+        dataframe.loc[is_clucHA_5m, "buy_tag"] += "clucHA "
+
+        conditions.append(is_cofi_5m)  # ~0.4 / 94.4% / 9.59%        D
+        dataframe.loc[is_cofi_5m, "buy_tag"] += "cofi "
+
+        conditions.append(is_nfi_13_5m)  # ~0.4 / 100%                 D
+        dataframe.loc[is_nfi_13_5m, "buy_tag"] += "nfi_13 "
+
+        conditions.append(is_nfi_32_5m)  # ~0.78 / 92.0 % / 37.41%     D
+        dataframe.loc[is_nfi_32_5m, "buy_tag"] += "nfi_32 "
+
+        conditions.append(is_nfi_33_5m)  # ~0.11 / 100%                D
+        dataframe.loc[is_nfi_33_5m, "buy_tag"] += "nfi_33 "
+
+        conditions.append(is_nfi_38_5m)  # ~1.07 / 83.2% / 70.22%      F
+        dataframe.loc[is_nfi_38_5m, "buy_tag"] += "nfi_38 "
+
+        conditions.append(is_nfix_5_5m)  # ~0.25 / 97.7% / 6.53%       D
+        dataframe.loc[is_nfix_5_5m, "buy_tag"] += "nfix_5 "
+
+        conditions.append(is_nfix_49_5m)  # ~0.33 / 100% / 0%           D
+        dataframe.loc[is_nfix_49_5m, "buy_tag"] += "nfix_49 "
+        # ----------
 
         if conditions:
             dataframe.loc[

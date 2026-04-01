@@ -3,6 +3,7 @@ import os
 import json
 import subprocess
 import argparse
+import re
 from datetime import datetime, timedelta
 
 
@@ -23,6 +24,34 @@ def get_timerange(period: str) -> str:
     return f"{start.strftime('%Y%m%d')}-{now.strftime('%Y%m%d')}"
 
 
+def get_strategy_timeframe(
+    strategy_name: str, registry: dict, strategies_dir: str
+) -> str:
+    """Detect timeframe for a strategy, prioritizing registry then file inspection."""
+    # Try registry first
+    if strategy_name in registry and "timeframe" in registry[strategy_name]:
+        tf = registry[strategy_name]["timeframe"]
+        if tf:
+            return tf
+
+    # Fallback: inspect the strategy file
+    strategies_dir = os.path.join(
+        os.path.dirname(os.path.realpath(__file__)), os.pardir, strategies_dir
+    )
+    for ext in ("", ".py"):
+        filepath = os.path.join(strategies_dir, strategy_name + ext)
+        if os.path.exists(filepath):
+            with open(filepath, "r") as f:
+                content = f.read()
+            # Match timeframe = "5m" or timeframe = '5m'
+            match = re.search(r"timeframe\s*=\s*[\"']([^\"']+)[\"']", content)
+            if match:
+                return match.group(1)
+
+    # Ultimate fallback
+    return "5m"
+
+
 def main():
     parser = argparse.ArgumentParser(description="Run Batched Freqtrade Backtests")
     parser.add_argument(
@@ -36,13 +65,17 @@ def main():
             "last_6_months",
         ],
     )
-    parser.add_argument("--batch", type=int, required=False, help="Batch ID (1-indexed)")
+    parser.add_argument(
+        "--batch", type=int, required=False, help="Batch ID (1-indexed)"
+    )
     parser.add_argument(
         "--total-batches", type=int, required=False, help="Total number of batches"
     )
     parser.add_argument("--docker", action="store_true", help="Use Docker mode")
     parser.add_argument(
-        "--docker-image", default="neozhou2009/freqtrade-full:latest", help="Docker image"
+        "--docker-image",
+        default="neozhou2009/freqtrade-full:latest",
+        help="Docker image",
     )
     parser.add_argument(
         "--skip-errors", action="store_true", help="Skip strategies with errors"
@@ -51,6 +84,12 @@ def main():
         "--strategy",
         help="Run a single specific strategy (overrides batch selectors)",
         default=None,
+    )
+    parser.add_argument(
+        "--timeframe",
+        "-t",
+        help="Timeframe for batch mode (ignored in --skip-errors mode, per-strategy timeframe is used)",
+        default="5m",
     )
     args = parser.parse_args()
 
@@ -67,14 +106,10 @@ def main():
     repo_root = os.path.abspath(os.path.join(script_dir, os.pardir))
 
     registry_file = os.path.join(repo_root, "strategy_registry.json")
-    if not os.path.exists(registry_file):
-        print(
-            "[!] strategy_registry.json not found! Run: python scripts/classify_strategies.py"
-        )
-        return
-
-    with open(registry_file, "r") as f:
-        registry = json.load(f)
+    registry = {}
+    if os.path.exists(registry_file):
+        with open(registry_file, "r") as f:
+            registry = json.load(f)
 
     if args.strategy:
         batch_strats = [args.strategy]
@@ -107,13 +142,13 @@ def main():
         return
 
     if args.skip_errors:
-        run_strategies_individually(args, batch_strats, test_dir, timerange)
+        run_strategies_individually(args, batch_strats, test_dir, timerange, registry)
     else:
         run_strategies_batch(args, batch_strats, test_dir, timerange)
 
 
 def run_strategies_batch(args, batch_strats, test_dir, timerange):
-    """Run all strategies in a single batch."""
+    """Run all strategies in a single batch (shared timeframe for all)."""
     if args.docker:
         print(f"[*] Using Docker mode with image: {args.docker_image}")
         cmd = (
@@ -133,6 +168,8 @@ def run_strategies_batch(args, batch_strats, test_dir, timerange):
             + [
                 "--timerange",
                 timerange,
+                "--timeframe",
+                args.timeframe,
                 "--config",
                 "/work/freqtrade_test/config.json",
                 "--max-open-trades",
@@ -151,6 +188,8 @@ def run_strategies_batch(args, batch_strats, test_dir, timerange):
             + [
                 "--timerange",
                 timerange,
+                "--timeframe",
+                args.timeframe,
                 "--config",
                 os.path.join(test_dir, "config.json"),
             ]
@@ -168,14 +207,17 @@ def run_strategies_batch(args, batch_strats, test_dir, timerange):
         print(f"[*] Backtest completed for batch {args.batch}")
 
 
-def run_strategies_individually(args, batch_strats, test_dir, timerange):
-    """Run each strategy individually, skipping errors."""
+def run_strategies_individually(args, batch_strats, test_dir, timerange, registry):
+    """Run each strategy individually, skipping errors. Uses per-strategy timeframe."""
     success_count = 0
     fail_count = 0
     failed_strategies = []
 
+    strategies_dir = "test/user_data/strategies"
+
     for strategy in batch_strats:
-        print(f"\n[*] Testing strategy: {strategy}")
+        timeframe = get_strategy_timeframe(strategy, registry, strategies_dir)
+        print(f"\n[*] Testing strategy: {strategy} (timeframe: {timeframe})")
 
         if args.docker:
             cmd = [
@@ -192,6 +234,8 @@ def run_strategies_individually(args, batch_strats, test_dir, timerange):
                 strategy,
                 "--timerange",
                 timerange,
+                "--timeframe",
+                timeframe,
                 "--config",
                 "/work/freqtrade_test/config.json",
                 "--max-open-trades",
@@ -209,6 +253,8 @@ def run_strategies_individually(args, batch_strats, test_dir, timerange):
                 strategy,
                 "--timerange",
                 timerange,
+                "--timeframe",
+                timeframe,
                 "--config",
                 os.path.join(test_dir, "config.json"),
             ]
@@ -219,8 +265,8 @@ def run_strategies_individually(args, batch_strats, test_dir, timerange):
 
         if result.returncode != 0:
             print(f"  [✗] Failed: {strategy}")
-            print(result.stdout)
-            print(result.stderr)
+            print(result.stdout[-1000:] if result.stdout else "(no stdout)")
+            print(result.stderr[-500:] if result.stderr else "(no stderr)")
             fail_count += 1
             failed_strategies.append(strategy)
         else:

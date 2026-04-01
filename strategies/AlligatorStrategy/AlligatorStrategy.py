@@ -6,8 +6,13 @@ import numpy as np  # noqa
 import pandas as pd  # noqa
 from pandas import DataFrame
 
-from freqtrade.strategy import (BooleanParameter, CategoricalParameter, DecimalParameter,
-                                IStrategy, IntParameter)
+from freqtrade.strategy import (
+    BooleanParameter,
+    CategoricalParameter,
+    DecimalParameter,
+    IStrategy,
+    IntParameter,
+)
 
 # --------------------------------
 # Add your lib to import here
@@ -67,6 +72,7 @@ class AlligatorStrategy(IStrategy):
     You should keep:
     - timeframe, minimal_roi, stoploss, trailing_*
     """
+
     # Strategy interface version - allow new iterations of the strategy interface.
     # Check the documentation or the Sample strategy to get the latest version.
     INTERFACE_VERSION = 3
@@ -76,12 +82,12 @@ class AlligatorStrategy(IStrategy):
     minimal_roi = {
         "0": 0.10,
         "30": 0.05,
-        "60": 0.02 # inactive
+        "60": 0.02,  # inactive
     }
 
     # Optimal stoploss designed for the strategy.
     # This attribute will be overridden if the config file contains "stoploss".
-    stoploss = -0.99 # inactive
+    stoploss = -0.99  # inactive
 
     # Trailing stoploss
     trailing_stop = True
@@ -94,7 +100,7 @@ class AlligatorStrategy(IStrategy):
     sell_stoch_rsi = DecimalParameter(0, 0.5, decimals=3, default=0.2, space="exit")
 
     # Optimal timeframe for the strategy.
-    timeframe = '1h'
+    timeframe = "1h"
 
     # Run "populate_indicators()" only for new candle.
     process_only_new_candles = False
@@ -105,36 +111,29 @@ class AlligatorStrategy(IStrategy):
     ignore_roi_if_entry_signal = False
 
     # Number of candles the strategy requires before producing valid signals
-    startup_candle_count = 200 # EMA200
+    startup_candle_count = 40  # was 200 (EMA200), reduced for data coverage
 
     # Optional order type mapping.
     order_types = {
-        'entry': 'limit',
-        'exit': 'limit',
-        'stoploss': 'market',
-        'stoploss_on_exchange': False
+        "entry": "limit",
+        "exit": "limit",
+        "stoploss": "market",
+        "stoploss_on_exchange": False,
     }
 
     # Optional order time in force.
-    order_time_in_force = {
-        'entry': 'GTC',
-        'exit': 'GTC'
-    }
+    order_time_in_force = {"entry": "GTC", "exit": "GTC"}
 
     plot_config = {
-        'main_plot': {
-            'ema7':{},
-            'ema30':{},
-            'ema50':{},
-            'ema100':{},
-            'ema121':{},
-            'ema200':{}
+        "main_plot": {
+            "ema7": {},
+            "ema30": {},
+            "ema50": {},
+            "ema100": {},
+            "ema121": {},
+            "ema200": {},
         },
-        'subplots': {
-            "STOCH RSI": {
-                'stoch_rsi': {}
-            }
-        }
+        "subplots": {"STOCH RSI": {"stoch_rsi": {}}},
     }
 
     def informative_pairs(self):
@@ -166,18 +165,26 @@ class AlligatorStrategy(IStrategy):
         # ------------------------------------
 
         # # Stochastic RSI
-        dataframe['stoch_rsi'] = ta.momentum.stochrsi(close=dataframe['close'], window=14, smooth1=3, smooth2=3) #Non moyenné 
+        dataframe["stoch_rsi"] = ta.momentum.stochrsi(
+            close=dataframe["close"], window=14, smooth1=3, smooth2=3
+        )  # Non moyenné
 
         # Overlap Studies
         # ------------------------------------
 
         # # EMA - Exponential Moving Average
-        dataframe['ema7']=ta.trend.ema_indicator(close=dataframe['close'], window=7)
-        dataframe['ema30']=ta.trend.ema_indicator(close=dataframe['close'], window=30)
-        dataframe['ema50']=ta.trend.ema_indicator(close=dataframe['close'], window=50)
-        dataframe['ema100']=ta.trend.ema_indicator(close=dataframe['close'], window=100)
-        dataframe['ema121']=ta.trend.ema_indicator(close=dataframe['close'], window=121)
-        dataframe['ema200']=ta.trend.ema_indicator(close=dataframe['close'], window=200)
+        dataframe["ema7"] = ta.trend.ema_indicator(close=dataframe["close"], window=7)
+        dataframe["ema30"] = ta.trend.ema_indicator(close=dataframe["close"], window=30)
+        dataframe["ema50"] = ta.trend.ema_indicator(close=dataframe["close"], window=50)
+        dataframe["ema100"] = ta.trend.ema_indicator(
+            close=dataframe["close"], window=100
+        )
+        dataframe["ema121"] = ta.trend.ema_indicator(
+            close=dataframe["close"], window=121
+        )
+        dataframe["ema200"] = ta.trend.ema_indicator(
+            close=dataframe["close"], window=200
+        )
 
         return dataframe
 
@@ -190,15 +197,16 @@ class AlligatorStrategy(IStrategy):
         """
         dataframe.loc[
             (
-                (dataframe['ema7'] > dataframe['ema30']) &
-                (dataframe['ema30'] > dataframe['ema50']) &
-                (dataframe['ema50'] > dataframe['ema100']) &
-                (dataframe['ema100'] > dataframe['ema121']) &
-                (dataframe['ema121'] > dataframe['ema200']) &
-                (dataframe['stoch_rsi'] < self.buy_stoch_rsi.value) &
-                (dataframe['volume'] > 0)
+                (dataframe["ema7"] > dataframe["ema30"])
+                & (dataframe["ema30"] > dataframe["ema50"])
+                & (dataframe["ema50"] > dataframe["ema100"])
+                & (dataframe["ema100"] > dataframe["ema121"])
+                & (dataframe["ema121"] > dataframe["ema200"])
+                & (dataframe["stoch_rsi"] < self.buy_stoch_rsi.value)
+                & (dataframe["volume"] > 0)
             ),
-            'entry'] = 1
+            "entry",
+        ] = 1
 
         return dataframe
 
@@ -211,9 +219,10 @@ class AlligatorStrategy(IStrategy):
         """
         dataframe.loc[
             (
-                (dataframe['ema121'] > dataframe['ema7']) &
-                (dataframe['stoch_rsi'] > self.sell_stoch_rsi.value) &
-                (dataframe['volume'] > 0)
+                (dataframe["ema121"] > dataframe["ema7"])
+                & (dataframe["stoch_rsi"] > self.sell_stoch_rsi.value)
+                & (dataframe["volume"] > 0)
             ),
-            'exit'] = 1
+            "exit",
+        ] = 1
         return dataframe

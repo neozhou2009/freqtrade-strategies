@@ -585,7 +585,8 @@
       "Momentum",
       "Mean Reversion"
     ],
-    "timeframe": "3m"
+    "timeframe": "3m",
+    "excluded": "OKX exchange does not support 3m data granularity - requires re-hyperopt to change timeframe"
   },
   "BB_RPB_TSL_BI": {
     "complexity": 10,
