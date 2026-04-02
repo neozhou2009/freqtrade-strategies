@@ -115,6 +115,12 @@ def main():
         batch_strats = [args.strategy]
     else:
         strategies = sorted(list(registry.keys()))
+        excluded = [s for s in strategies if registry.get(s, {}).get("excluded")]
+        strategies = [s for s in strategies if not registry.get(s, {}).get("excluded")]
+        if excluded:
+            print(
+                f"[*] Skipping {len(excluded)} excluded strategies: {', '.join(sorted(excluded))}"
+            )
         total_strats = len(strategies)
         batch_size = (total_strats + args.total_batches - 1) // args.total_batches
         start_idx = (args.batch - 1) * batch_size
