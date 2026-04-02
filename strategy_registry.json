@@ -14,7 +14,9 @@
       "Scalping",
       "Trend"
     ],
-    "timeframe": "1h"
+    "timeframe": "1h",
+    "directory": "ADXMomentum",
+    "filename": "ADXMomentum.py"
   },
   "ADX_15M_USDT": {
     "complexity": 2,
@@ -31,7 +33,9 @@
       "Trend",
       "Momentum"
     ],
-    "timeframe": "15m"
+    "timeframe": "15m",
+    "directory": "ADX_15M_USDT",
+    "filename": "ADX_15M_USDT.py"
   },
   "ADX_15M_USDT2": {
     "complexity": 2,
@@ -48,7 +52,9 @@
       "Trend",
       "Momentum"
     ],
-    "timeframe": "15m"
+    "timeframe": "15m",
+    "directory": "ADX_15M_USDT2",
+    "filename": "ADX_15M_USDT2.py"
   },
   "ASDTSRockwellTrading": {
     "complexity": 1,
@@ -63,7 +69,9 @@
       "Trend",
       "Breakout"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "ASDTSRockwellTrading",
+    "filename": "ASDTSRockwellTrading.py"
   },
   "ActionZone": {
     "complexity": 8,
@@ -84,7 +92,9 @@
     "style": [
       "Trend"
     ],
-    "timeframe": "1d"
+    "timeframe": "1d",
+    "directory": "ActionZone",
+    "filename": "ActionZone.py"
   },
   "AdxSmas": {
     "complexity": 2,
@@ -100,7 +110,9 @@
       "Trend",
       "Scalping"
     ],
-    "timeframe": "1h"
+    "timeframe": "1h",
+    "directory": "AdxSmas",
+    "filename": "AdxSmas.py"
   },
   "AlligatorStrat": {
     "complexity": 3,
@@ -117,7 +129,9 @@
     "style": [
       "Trend"
     ],
-    "timeframe": "4h"
+    "timeframe": "4h",
+    "directory": "AlligatorStrat",
+    "filename": "AlligatorStrat.py"
   },
   "AlligatorStrategy": {
     "complexity": 7,
@@ -139,7 +153,9 @@
       "Trend",
       "Momentum"
     ],
-    "timeframe": "1h"
+    "timeframe": "1h",
+    "directory": "AlligatorStrategy",
+    "filename": "AlligatorStrategy.py"
   },
   "AlwaysBuy": {
     "features": [
@@ -150,7 +166,9 @@
     "style": [
       "Special"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "AlwaysBuy",
+    "filename": "AlwaysBuy.py"
   },
   "Apollo11": {
     "complexity": 4,
@@ -171,7 +189,9 @@
       "Scalping",
       "Trend"
     ],
-    "timeframe": "15m"
+    "timeframe": "15m",
+    "directory": "Apollo11",
+    "filename": "Apollo11.py"
   },
   "AverageStrategy": {
     "complexity": 1,
@@ -185,7 +205,9 @@
     "style": [
       "Trend"
     ],
-    "timeframe": "4h"
+    "timeframe": "4h",
+    "directory": "AverageStrategy",
+    "filename": "AverageStrategy.py"
   },
   "AwesomeMacd": {
     "complexity": 2,
@@ -202,7 +224,9 @@
       "Scalping",
       "Trend"
     ],
-    "timeframe": "1h"
+    "timeframe": "1h",
+    "directory": "AwesomeMacd",
+    "filename": "AwesomeMacd.py"
   },
   "BBMod1": {
     "complexity": 10,
@@ -242,7 +266,9 @@
       "Momentum",
       "Mean Reversion"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "BBMod1",
+    "filename": "BBMod1.py"
   },
   "BBRSI": {
     "complexity": 5,
@@ -261,7 +287,9 @@
     "style": [
       "Mean Reversion"
     ],
-    "timeframe": "4h"
+    "timeframe": "4h",
+    "directory": "BBRSI",
+    "filename": "BBRSI.py"
   },
   "BBRSI2": {
     "complexity": 2,
@@ -278,7 +306,9 @@
     "style": [
       "Mean Reversion"
     ],
-    "timeframe": "1m"
+    "timeframe": "1m",
+    "directory": "BBRSI2",
+    "filename": "BBRSI2.py"
   },
   "BBRSI21": {
     "complexity": 3,
@@ -297,7 +327,9 @@
       "Mean Reversion",
       "Scalping"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "BBRSI21",
+    "filename": "BBRSI21.py"
   },
   "BBRSI3366": {
     "complexity": 3,
@@ -317,7 +349,9 @@
       "Mean Reversion",
       "Scalping"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "BBRSI3366",
+    "filename": "BBRSI3366.py"
   },
   "BBRSI4cust": {
     "complexity": 5,
@@ -338,7 +372,9 @@
       "Mean Reversion",
       "Breakout"
     ],
-    "timeframe": "15m"
+    "timeframe": "15m",
+    "directory": "BBRSI4cust",
+    "filename": "BBRSI4cust.py"
   },
   "BBRSINaiveStrategy": {
     "complexity": 4,
@@ -356,7 +392,9 @@
     "style": [
       "Mean Reversion"
     ],
-    "timeframe": "15m"
+    "timeframe": "15m",
+    "directory": "BBRSINaiveStrategy",
+    "filename": "BBRSINaiveStrategy.py"
   },
   "BBRSIOptim2020Strategy": {
     "complexity": 5,
@@ -375,7 +413,9 @@
     "style": [
       "Mean Reversion"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "BBRSIOptim2020Strategy",
+    "filename": "BBRSIOptim2020Strategy.py"
   },
   "BBRSIOptimStrategy": {
     "complexity": 5,
@@ -394,7 +434,9 @@
     "style": [
       "Mean Reversion"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "BBRSIOptimStrategy",
+    "filename": "BBRSIOptimStrategy.py"
   },
   "BBRSIOptimizedStrategy": {
     "complexity": 4,
@@ -412,7 +454,9 @@
     "style": [
       "Mean Reversion"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "BBRSIOptimizedStrategy",
+    "filename": "BBRSIOptimizedStrategy.py"
   },
   "BBRSIS": {
     "complexity": 2,
@@ -429,7 +473,9 @@
       "Trend",
       "Mean Reversion"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "BBRSIS",
+    "filename": "BBRSIS.py"
   },
   "BBRSIStrategy": {
     "complexity": 5,
@@ -448,7 +494,9 @@
     "style": [
       "Mean Reversion"
     ],
-    "timeframe": "15m"
+    "timeframe": "15m",
+    "directory": "BBRSIStrategy",
+    "filename": "BBRSIStrategy.py"
   },
   "BBRSITV": {
     "complexity": 6,
@@ -470,7 +518,9 @@
       "Trend",
       "Scalping"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "BBRSITV",
+    "filename": "BBRSITV.py"
   },
   "BBRSIoriginal": {
     "complexity": 2,
@@ -485,7 +535,9 @@
     "style": [
       "Mean Reversion"
     ],
-    "timeframe": "1h"
+    "timeframe": "1h",
+    "directory": "BBRSIoriginal",
+    "filename": "BBRSIoriginal.py"
   },
   "BBRSIv2": {
     "complexity": 4,
@@ -505,7 +557,9 @@
       "Mean Reversion",
       "Scalping"
     ],
-    "timeframe": "15m"
+    "timeframe": "15m",
+    "directory": "BBRSIv2",
+    "filename": "BBRSIv2.py"
   },
   "BB_RPB_TSL": {
     "complexity": 10,
@@ -546,7 +600,9 @@
       "Momentum",
       "Mean Reversion"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "BB_RPB_TSL",
+    "filename": "BB_RPB_TSL.py"
   },
   "BB_RPB_TSL_2": {
     "complexity": 10,
@@ -586,7 +642,9 @@
       "Mean Reversion"
     ],
     "timeframe": "3m",
-    "excluded": "OKX exchange does not support 3m data granularity - requires re-hyperopt to change timeframe"
+    "excluded": "OKX exchange does not support 3m data granularity - requires re-hyperopt to change timeframe",
+    "directory": "BB_RPB_TSL_2",
+    "filename": "BB_RPB_TSL_2.py"
   },
   "BB_RPB_TSL_BI": {
     "complexity": 10,
@@ -625,7 +683,9 @@
       "Momentum",
       "Mean Reversion"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "BB_RPB_TSL_BI",
+    "filename": "BB_RPB_TSL_BI.py"
   },
   "BB_RPB_TSL_BIV1": {
     "complexity": 10,
@@ -664,7 +724,9 @@
       "Momentum",
       "Mean Reversion"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "BB_RPB_TSL_BIV1",
+    "filename": "BB_RPB_TSL_BIV1.py"
   },
   "BB_RPB_TSL_RNG": {
     "complexity": 10,
@@ -693,7 +755,9 @@
       "Mean Reversion",
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "BB_RPB_TSL_RNG",
+    "filename": "BB_RPB_TSL_RNG.py"
   },
   "BB_RPB_TSL_RNG_2": {
     "complexity": 10,
@@ -722,7 +786,9 @@
       "Mean Reversion",
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "BB_RPB_TSL_RNG_2",
+    "filename": "BB_RPB_TSL_RNG_2.py"
   },
   "BB_RPB_TSL_RNG_TBS": {
     "complexity": 10,
@@ -752,7 +818,9 @@
       "Mean Reversion",
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "BB_RPB_TSL_RNG_TBS",
+    "filename": "BB_RPB_TSL_RNG_TBS.py"
   },
   "BB_RPB_TSL_RNG_TBS_GOLD": {
     "complexity": 10,
@@ -782,7 +850,9 @@
       "Mean Reversion",
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "BB_RPB_TSL_RNG_TBS_GOLD",
+    "filename": "BB_RPB_TSL_RNG_TBS_GOLD.py"
   },
   "BB_RPB_TSL_RNG_VWAP": {
     "complexity": 10,
@@ -812,7 +882,9 @@
       "Mean Reversion",
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "BB_RPB_TSL_RNG_VWAP",
+    "filename": "BB_RPB_TSL_RNG_VWAP.py"
   },
   "BB_RPB_TSL_SMA_Tranz": {
     "complexity": 10,
@@ -854,7 +926,9 @@
       "Momentum",
       "Mean Reversion"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "BB_RPB_TSL_SMA_Tranz",
+    "filename": "BB_RPB_TSL_SMA_Tranz.py"
   },
   "BB_RPB_TSL_SMA_Tranz_TB_1_1_1": {
     "complexity": 10,
@@ -895,7 +969,9 @@
       "Momentum",
       "Mean Reversion"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "BB_RPB_TSL_SMA_Tranz_TB_1_1_1",
+    "filename": "BB_RPB_TSL_SMA_Tranz_TB_1_1_1.py"
   },
   "BB_RPB_TSL_SMA_Tranz_TB_MOD": {
     "complexity": 10,
@@ -936,7 +1012,9 @@
       "Momentum",
       "Mean Reversion"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "BB_RPB_TSL_SMA_Tranz_TB_MOD",
+    "filename": "BB_RPB_TSL_SMA_Tranz_TB_MOD.py"
   },
   "BB_RPB_TSL_Tranz": {
     "complexity": 10,
@@ -977,7 +1055,9 @@
       "Momentum",
       "Mean Reversion"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "BB_RPB_TSL_Tranz",
+    "filename": "BB_RPB_TSL_Tranz.py"
   },
   "BB_RPB_TSL_c7c477d_20211030": {
     "complexity": 10,
@@ -1007,7 +1087,9 @@
       "Mean Reversion",
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "BB_RPB_TSL_c7c477d_20211030",
+    "filename": "BB_RPB_TSL_c7c477d_20211030.py"
   },
   "BB_RPB_TSLmeneguzzo": {
     "complexity": 10,
@@ -1047,7 +1129,9 @@
       "Momentum",
       "Mean Reversion"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "BB_RPB_TSLmeneguzzo",
+    "filename": "BB_RPB_TSLmeneguzzo.py"
   },
   "BB_RSI": {
     "complexity": 4,
@@ -1065,7 +1149,9 @@
     "style": [
       "Mean Reversion"
     ],
-    "timeframe": "1h"
+    "timeframe": "1h",
+    "directory": "BB_RSI",
+    "filename": "BB_RSI.py"
   },
   "BB_Strategy04": {
     "complexity": 4,
@@ -1083,7 +1169,9 @@
     "style": [
       "Mean Reversion"
     ],
-    "timeframe": "1h"
+    "timeframe": "1h",
+    "directory": "BB_Strategy04",
+    "filename": "BB_Strategy04.py"
   },
   "BBands": {
     "complexity": 10,
@@ -1117,7 +1205,9 @@
       "Mean Reversion",
       "Momentum"
     ],
-    "timeframe": "1m"
+    "timeframe": "1m",
+    "directory": "BBands",
+    "filename": "BBands.py"
   },
   "BBandsRSI": {
     "complexity": 4,
@@ -1135,7 +1225,9 @@
     "style": [
       "Mean Reversion"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "BBandsRSI",
+    "filename": "BBandsRSI.py"
   },
   "BBlower": {
     "complexity": 5,
@@ -1156,7 +1248,9 @@
       "Trend",
       "Mean Reversion"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "BBlower",
+    "filename": "BBlower.py"
   },
   "Babico_SMA5xBBmid": {
     "complexity": 2,
@@ -1173,7 +1267,9 @@
     "style": [
       "Trend"
     ],
-    "timeframe": "1d"
+    "timeframe": "1d",
+    "directory": "Babico_SMA5xBBmid",
+    "filename": "Babico_SMA5xBBmid.py"
   },
   "Bandtastic": {
     "complexity": 6,
@@ -1196,7 +1292,9 @@
       "Mean Reversion",
       "Momentum"
     ],
-    "timeframe": "15m"
+    "timeframe": "15m",
+    "directory": "Bandtastic",
+    "filename": "Bandtastic.py"
   },
   "BbRoi": {
     "complexity": 3,
@@ -1215,7 +1313,9 @@
       "Trend",
       "Mean Reversion"
     ],
-    "timeframe": "15m"
+    "timeframe": "15m",
+    "directory": "BbRoi",
+    "filename": "BbRoi.py"
   },
   "BbandRsi": {
     "complexity": 2,
@@ -1231,7 +1331,9 @@
       "Mean Reversion",
       "Scalping"
     ],
-    "timeframe": "1h"
+    "timeframe": "1h",
+    "directory": "BbandRsi",
+    "filename": "BbandRsi.py"
   },
   "BbandRsiRolling": {
     "complexity": 2,
@@ -1246,7 +1348,9 @@
     "style": [
       "Mean Reversion"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "BbandRsiRolling",
+    "filename": "BbandRsiRolling.py"
   },
   "BcmbigzDevelop": {
     "complexity": 10,
@@ -1274,7 +1378,9 @@
       "Mean Reversion",
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "BcmbigzDevelop",
+    "filename": "BcmbigzDevelop.py"
   },
   "BcmbigzV1": {
     "complexity": 10,
@@ -1299,7 +1405,9 @@
       "Trend",
       "Mean Reversion"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "BcmbigzV1",
+    "filename": "BcmbigzV1.py"
   },
   "BigPete": {
     "complexity": 10,
@@ -1326,7 +1434,9 @@
       "Mean Reversion",
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "BigPete",
+    "filename": "BigPete.py"
   },
   "BigZ03": {
     "complexity": 8,
@@ -1349,7 +1459,9 @@
       "Mean Reversion",
       "Scalping"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "BigZ03",
+    "filename": "BigZ03.py"
   },
   "BigZ0307HO": {
     "complexity": 10,
@@ -1377,7 +1489,9 @@
       "Mean Reversion",
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "BigZ0307HO",
+    "filename": "BigZ0307HO.py"
   },
   "BigZ03HO": {
     "complexity": 8,
@@ -1400,7 +1514,9 @@
       "Mean Reversion",
       "Scalping"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "BigZ03HO",
+    "filename": "BigZ03HO.py"
   },
   "BigZ04": {
     "complexity": 10,
@@ -1425,7 +1541,9 @@
       "Mean Reversion",
       "Scalping"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "BigZ04",
+    "filename": "BigZ04.py"
   },
   "BigZ0407": {
     "complexity": 10,
@@ -1453,7 +1571,9 @@
       "Mean Reversion",
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "BigZ0407",
+    "filename": "BigZ0407.py"
   },
   "BigZ0407HO": {
     "complexity": 10,
@@ -1481,7 +1601,9 @@
       "Mean Reversion",
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "BigZ0407HO",
+    "filename": "BigZ0407HO.py"
   },
   "BigZ04HO": {
     "complexity": 10,
@@ -1506,7 +1628,9 @@
       "Mean Reversion",
       "Scalping"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "BigZ04HO",
+    "filename": "BigZ04HO.py"
   },
   "BigZ04HO2": {
     "complexity": 10,
@@ -1531,7 +1655,9 @@
       "Mean Reversion",
       "Scalping"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "BigZ04HO2",
+    "filename": "BigZ04HO2.py"
   },
   "BigZ04_TSL3": {
     "complexity": 10,
@@ -1557,7 +1683,9 @@
       "Mean Reversion",
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "BigZ04_TSL3",
+    "filename": "BigZ04_TSL3.py"
   },
   "BigZ04_TSL4": {
     "complexity": 10,
@@ -1585,7 +1713,9 @@
       "Mean Reversion",
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "BigZ04_TSL4",
+    "filename": "BigZ04_TSL4.py"
   },
   "BigZ06": {
     "complexity": 10,
@@ -1610,7 +1740,9 @@
       "Mean Reversion",
       "Scalping"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "BigZ06",
+    "filename": "BigZ06.py"
   },
   "BigZ07": {
     "complexity": 10,
@@ -1635,7 +1767,9 @@
       "Mean Reversion",
       "Scalping"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "BigZ07",
+    "filename": "BigZ07.py"
   },
   "BigZ07Next": {
     "complexity": 10,
@@ -1663,7 +1797,9 @@
       "Mean Reversion",
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "BigZ07Next",
+    "filename": "BigZ07Next.py"
   },
   "BigZ07Next2": {
     "complexity": 10,
@@ -1691,7 +1827,9 @@
       "Mean Reversion",
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "BigZ07Next2",
+    "filename": "BigZ07Next2.py"
   },
   "BinClucMad": {
     "complexity": 10,
@@ -1715,7 +1853,9 @@
       "Mean Reversion",
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "BinClucMad",
+    "filename": "BinClucMad.py"
   },
   "BinClucMadDevelop": {
     "complexity": 10,
@@ -1742,7 +1882,9 @@
       "Mean Reversion",
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "BinClucMadDevelop",
+    "filename": "BinClucMadDevelop.py"
   },
   "BinClucMadSMADevelop": {
     "complexity": 10,
@@ -1770,7 +1912,9 @@
       "Mean Reversion",
       "Scalping"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "BinClucMadSMADevelop",
+    "filename": "BinClucMadSMADevelop.py"
   },
   "BinClucMadV1": {
     "complexity": 10,
@@ -1796,7 +1940,9 @@
       "Mean Reversion",
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "BinClucMadV1",
+    "filename": "BinClucMadV1.py"
   },
   "BinHV27": {
     "complexity": 3,
@@ -1813,7 +1959,9 @@
     "style": [
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "BinHV27",
+    "filename": "BinHV27.py"
   },
   "BinHV45": {
     "complexity": 3,
@@ -1829,7 +1977,9 @@
     "style": [
       "Trend"
     ],
-    "timeframe": "1m"
+    "timeframe": "1m",
+    "directory": "BinHV45",
+    "filename": "BinHV45.py"
   },
   "BinHV45HO": {
     "complexity": 3,
@@ -1845,7 +1995,9 @@
     "style": [
       "Trend"
     ],
-    "timeframe": "1m"
+    "timeframe": "1m",
+    "directory": "BinHV45HO",
+    "filename": "BinHV45HO.py"
   },
   "BreakEven": {
     "complexity": 1,
@@ -1857,7 +2009,9 @@
     "style": [
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "BreakEven",
+    "filename": "BreakEven.py"
   },
   "BuyAllSellAllStrategy": {
     "complexity": 2,
@@ -1871,7 +2025,9 @@
     "style": [
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "BuyAllSellAllStrategy",
+    "filename": "BuyAllSellAllStrategy.py"
   },
   "BuyOnly": {
     "features": [
@@ -1882,7 +2038,9 @@
     "style": [
       "Special"
     ],
-    "timeframe": "15m"
+    "timeframe": "15m",
+    "directory": "BuyOnly",
+    "filename": "BuyOnly.py"
   },
   "CBPete9": {
     "complexity": 8,
@@ -1905,7 +2063,9 @@
       "Mean Reversion",
       "Scalping"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "CBPete9",
+    "filename": "CBPete9.py"
   },
   "CCIStrategy": {
     "complexity": 3,
@@ -1924,7 +2084,9 @@
       "Mean Reversion",
       "Trend"
     ],
-    "timeframe": "1m"
+    "timeframe": "1m",
+    "directory": "CCIStrategy",
+    "filename": "CCIStrategy.py"
   },
   "CMCWinner": {
     "complexity": 2,
@@ -1940,7 +2102,9 @@
       "Mean Reversion",
       "Momentum"
     ],
-    "timeframe": "15m"
+    "timeframe": "15m",
+    "directory": "CMCWinner",
+    "filename": "CMCWinner.py"
   },
   "Cci": {
     "complexity": 2,
@@ -1955,7 +2119,9 @@
     "style": [
       "Trend"
     ],
-    "timeframe": "1m"
+    "timeframe": "1m",
+    "directory": "Cci",
+    "filename": "Cci.py"
   },
   "Chandem": {
     "complexity": 4,
@@ -1972,7 +2138,9 @@
     "style": [
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "Chandem",
+    "filename": "Chandem.py"
   },
   "Chandemtwo": {
     "complexity": 4,
@@ -1989,7 +2157,9 @@
     "style": [
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "Chandemtwo",
+    "filename": "Chandemtwo.py"
   },
   "Chispei": {
     "complexity": 2,
@@ -2005,7 +2175,9 @@
       "Trend",
       "Momentum"
     ],
-    "timeframe": "4h"
+    "timeframe": "4h",
+    "directory": "Chispei",
+    "filename": "Chispei.py"
   },
   "Cluc4": {
     "complexity": 4,
@@ -2024,7 +2196,9 @@
       "Mean Reversion",
       "Momentum"
     ],
-    "timeframe": "1m"
+    "timeframe": "1m",
+    "directory": "Cluc4",
+    "filename": "Cluc4.py"
   },
   "Cluc4werk": {
     "complexity": 5,
@@ -2045,7 +2219,9 @@
       "Mean Reversion",
       "Momentum"
     ],
-    "timeframe": "1m"
+    "timeframe": "1m",
+    "directory": "Cluc4werk",
+    "filename": "Cluc4werk.py"
   },
   "Cluc5werk": {
     "complexity": 5,
@@ -2065,7 +2241,9 @@
       "Mean Reversion",
       "Momentum"
     ],
-    "timeframe": "1m"
+    "timeframe": "1m",
+    "directory": "Cluc5werk",
+    "filename": "Cluc5werk.py"
   },
   "Cluc7werk": {
     "complexity": 3,
@@ -2084,7 +2262,9 @@
       "Trend",
       "Mean Reversion"
     ],
-    "timeframe": "1m"
+    "timeframe": "1m",
+    "directory": "Cluc7werk",
+    "filename": "Cluc7werk.py"
   },
   "ClucFiatROI": {
     "complexity": 3,
@@ -2104,7 +2284,9 @@
       "Trend",
       "Mean Reversion"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "ClucFiatROI",
+    "filename": "ClucFiatROI.py"
   },
   "ClucFiatSlow": {
     "complexity": 3,
@@ -2123,7 +2305,9 @@
       "Trend",
       "Mean Reversion"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "ClucFiatSlow",
+    "filename": "ClucFiatSlow.py"
   },
   "ClucHAnix": {
     "complexity": 10,
@@ -2148,7 +2332,9 @@
       "Mean Reversion",
       "Momentum"
     ],
-    "timeframe": "1m"
+    "timeframe": "1m",
+    "directory": "ClucHAnix",
+    "filename": "ClucHAnix.py"
   },
   "ClucHAnix5m": {
     "complexity": 10,
@@ -2179,7 +2365,9 @@
       "Mean Reversion",
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "ClucHAnix5m",
+    "filename": "ClucHAnix5m.py"
   },
   "ClucHAnix_5m": {
     "complexity": 10,
@@ -2204,7 +2392,9 @@
       "Mean Reversion",
       "Momentum"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "ClucHAnix_5m",
+    "filename": "ClucHAnix_5m.py"
   },
   "ClucHAnix_5m1": {
     "complexity": 10,
@@ -2230,7 +2420,9 @@
       "Mean Reversion",
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "ClucHAnix_5m1",
+    "filename": "ClucHAnix_5m1.py"
   },
   "ClucHAnix_BB_RPB_MOD": {
     "complexity": 10,
@@ -2260,7 +2452,9 @@
       "Mean Reversion",
       "Trend"
     ],
-    "timeframe": "1m"
+    "timeframe": "1m",
+    "directory": "ClucHAnix_BB_RPB_MOD",
+    "filename": "ClucHAnix_BB_RPB_MOD.py"
   },
   "ClucHAnix_BB_RPB_MOD2_ROI": {
     "complexity": 10,
@@ -2291,7 +2485,9 @@
       "Mean Reversion",
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "ClucHAnix_BB_RPB_MOD2_ROI",
+    "filename": "ClucHAnix_BB_RPB_MOD2_ROI.py"
   },
   "ClucHAnix_BB_RPB_MOD_CTT": {
     "complexity": 10,
@@ -2322,7 +2518,9 @@
       "Mean Reversion",
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "ClucHAnix_BB_RPB_MOD_CTT",
+    "filename": "ClucHAnix_BB_RPB_MOD_CTT.py"
   },
   "ClucHAnix_BB_RPB_MOD_E0V1E_ROI": {
     "complexity": 10,
@@ -2353,7 +2551,9 @@
       "Mean Reversion",
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "ClucHAnix_BB_RPB_MOD_E0V1E_ROI",
+    "filename": "ClucHAnix_BB_RPB_MOD_E0V1E_ROI.py"
   },
   "ClucHAnix_hhll": {
     "complexity": 10,
@@ -2382,7 +2582,9 @@
       "Mean Reversion",
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "ClucHAnix_hhll",
+    "filename": "ClucHAnix_hhll.py"
   },
   "ClucHAwerk": {
     "complexity": 6,
@@ -2404,7 +2606,9 @@
       "Mean Reversion",
       "Momentum"
     ],
-    "timeframe": "1m"
+    "timeframe": "1m",
+    "directory": "ClucHAwerk",
+    "filename": "ClucHAwerk.py"
   },
   "ClucMay72018": {
     "complexity": 3,
@@ -2423,7 +2627,9 @@
       "Trend",
       "Mean Reversion"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "ClucMay72018",
+    "filename": "ClucMay72018.py"
   },
   "CofiBitStrategy": {
     "complexity": 4,
@@ -2443,7 +2649,9 @@
       "Trend",
       "Momentum"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "CofiBitStrategy",
+    "filename": "CofiBitStrategy.py"
   },
   "CombinedBinHAndCluc": {
     "complexity": 2,
@@ -2459,7 +2667,9 @@
       "Trend",
       "Mean Reversion"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "CombinedBinHAndCluc",
+    "filename": "CombinedBinHAndCluc.py"
   },
   "CombinedBinHAndCluc2021": {
     "complexity": 2,
@@ -2476,7 +2686,9 @@
       "Trend",
       "Mean Reversion"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "CombinedBinHAndCluc2021",
+    "filename": "CombinedBinHAndCluc2021.py"
   },
   "CombinedBinHAndCluc2021Bull": {
     "complexity": 2,
@@ -2493,7 +2705,9 @@
       "Trend",
       "Mean Reversion"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "CombinedBinHAndCluc2021Bull",
+    "filename": "CombinedBinHAndCluc2021Bull.py"
   },
   "CombinedBinHAndClucHyperV0": {
     "complexity": 5,
@@ -2513,7 +2727,9 @@
       "Trend",
       "Mean Reversion"
     ],
-    "timeframe": "1m"
+    "timeframe": "1m",
+    "directory": "CombinedBinHAndClucHyperV0",
+    "filename": "CombinedBinHAndClucHyperV0.py"
   },
   "CombinedBinHAndClucHyperV3": {
     "complexity": 6,
@@ -2534,7 +2750,9 @@
       "Mean Reversion",
       "Trend"
     ],
-    "timeframe": "1m"
+    "timeframe": "1m",
+    "directory": "CombinedBinHAndClucHyperV3",
+    "filename": "CombinedBinHAndClucHyperV3.py"
   },
   "CombinedBinHAndClucV2": {
     "complexity": 5,
@@ -2556,7 +2774,9 @@
       "Mean Reversion",
       "Trend"
     ],
-    "timeframe": "1h"
+    "timeframe": "1h",
+    "directory": "CombinedBinHAndClucV2",
+    "filename": "CombinedBinHAndClucV2.py"
   },
   "CombinedBinHAndClucV3": {
     "complexity": 4,
@@ -2575,7 +2795,9 @@
       "Mean Reversion",
       "Breakout"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "CombinedBinHAndClucV3",
+    "filename": "CombinedBinHAndClucV3.py"
   },
   "CombinedBinHAndClucV4": {
     "complexity": 4,
@@ -2594,7 +2816,9 @@
       "Trend",
       "Mean Reversion"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "CombinedBinHAndClucV4",
+    "filename": "CombinedBinHAndClucV4.py"
   },
   "CombinedBinHAndClucV5": {
     "complexity": 4,
@@ -2613,7 +2837,9 @@
       "Trend",
       "Mean Reversion"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "CombinedBinHAndClucV5",
+    "filename": "CombinedBinHAndClucV5.py"
   },
   "CombinedBinHAndClucV5Hyperoptable": {
     "complexity": 5,
@@ -2633,7 +2859,9 @@
       "Trend",
       "Mean Reversion"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "CombinedBinHAndClucV5Hyperoptable",
+    "filename": "CombinedBinHAndClucV5Hyperoptable.py"
   },
   "CombinedBinHAndClucV6": {
     "complexity": 7,
@@ -2655,7 +2883,9 @@
       "Mean Reversion",
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "CombinedBinHAndClucV6",
+    "filename": "CombinedBinHAndClucV6.py"
   },
   "CombinedBinHAndClucV6H": {
     "complexity": 8,
@@ -2678,7 +2908,9 @@
       "Mean Reversion",
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "CombinedBinHAndClucV6H",
+    "filename": "CombinedBinHAndClucV6H.py"
   },
   "CombinedBinHAndClucV7": {
     "complexity": 10,
@@ -2704,7 +2936,9 @@
       "Mean Reversion",
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "CombinedBinHAndClucV7",
+    "filename": "CombinedBinHAndClucV7.py"
   },
   "CombinedBinHAndClucV8": {
     "complexity": 10,
@@ -2731,7 +2965,9 @@
       "Mean Reversion",
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "CombinedBinHAndClucV8",
+    "filename": "CombinedBinHAndClucV8.py"
   },
   "CombinedBinHAndClucV8Hyper": {
     "complexity": 10,
@@ -2758,7 +2994,9 @@
       "Mean Reversion",
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "CombinedBinHAndClucV8Hyper",
+    "filename": "CombinedBinHAndClucV8Hyper.py"
   },
   "CombinedBinHAndClucV8XH": {
     "complexity": 10,
@@ -2785,7 +3023,9 @@
       "Mean Reversion",
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "CombinedBinHAndClucV8XH",
+    "filename": "CombinedBinHAndClucV8XH.py"
   },
   "CombinedBinHAndClucV8XHO": {
     "complexity": 10,
@@ -2812,7 +3052,9 @@
       "Mean Reversion",
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "CombinedBinHAndClucV8XHO",
+    "filename": "CombinedBinHAndClucV8XHO.py"
   },
   "CombinedBinHClucAndMADV3": {
     "complexity": 6,
@@ -2833,7 +3075,9 @@
       "Trend",
       "Mean Reversion"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "CombinedBinHClucAndMADV3",
+    "filename": "CombinedBinHClucAndMADV3.py"
   },
   "CombinedBinHClucAndMADV5": {
     "complexity": 7,
@@ -2855,7 +3099,9 @@
       "Mean Reversion",
       "Scalping"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "CombinedBinHClucAndMADV5",
+    "filename": "CombinedBinHClucAndMADV5.py"
   },
   "CombinedBinHClucAndMADV6": {
     "complexity": 7,
@@ -2877,7 +3123,9 @@
       "Mean Reversion",
       "Scalping"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "CombinedBinHClucAndMADV6",
+    "filename": "CombinedBinHClucAndMADV6.py"
   },
   "CombinedBinHClucAndMADV9": {
     "complexity": 8,
@@ -2900,7 +3148,9 @@
       "Mean Reversion",
       "Scalping"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "CombinedBinHClucAndMADV9",
+    "filename": "CombinedBinHClucAndMADV9.py"
   },
   "Combined_Indicators": {
     "complexity": 2,
@@ -2918,7 +3168,9 @@
       "Trend",
       "Mean Reversion"
     ],
-    "timeframe": "1m"
+    "timeframe": "1m",
+    "directory": "Combined_Indicators",
+    "filename": "Combined_Indicators.py"
   },
   "Combined_NFIv6_SMA": {
     "complexity": 10,
@@ -2945,7 +3197,9 @@
       "Mean Reversion",
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "Combined_NFIv6_SMA",
+    "filename": "Combined_NFIv6_SMA.py"
   },
   "Combined_NFIv7_SMA": {
     "complexity": 10,
@@ -2972,7 +3226,9 @@
       "Mean Reversion",
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "Combined_NFIv7_SMA",
+    "filename": "Combined_NFIv7_SMA.py"
   },
   "Combined_NFIv7_SMA_Rallipanos_20210707": {
     "complexity": 10,
@@ -2999,7 +3255,9 @@
       "Mean Reversion",
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "Combined_NFIv7_SMA_Rallipanos_20210707",
+    "filename": "Combined_NFIv7_SMA_Rallipanos_20210707.py"
   },
   "Combined_NFIv7_SMA_bAdBoY_20211204": {
     "complexity": 10,
@@ -3026,7 +3284,9 @@
       "Mean Reversion",
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "Combined_NFIv7_SMA_bAdBoY_20211204",
+    "filename": "Combined_NFIv7_SMA_bAdBoY_20211204.py"
   },
   "CoreStrategy": {
     "complexity": 10,
@@ -3054,7 +3314,9 @@
       "Mean Reversion",
       "Scalping"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "CoreStrategy",
+    "filename": "CoreStrategy.py"
   },
   "CrossEMAStrategy": {
     "complexity": 6,
@@ -3074,7 +3336,9 @@
     "style": [
       "Momentum"
     ],
-    "timeframe": "1h"
+    "timeframe": "1h",
+    "directory": "CrossEMAStrategy",
+    "filename": "CrossEMAStrategy.py"
   },
   "CryptoFrog": {
     "complexity": 10,
@@ -3106,7 +3370,9 @@
       "Momentum",
       "Mean Reversion"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "CryptoFrog",
+    "filename": "CryptoFrog.py"
   },
   "CryptoFrogHO": {
     "complexity": 10,
@@ -3138,7 +3404,9 @@
       "Momentum",
       "Mean Reversion"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "CryptoFrogHO",
+    "filename": "CryptoFrogHO.py"
   },
   "CryptoFrogHO2": {
     "complexity": 10,
@@ -3170,7 +3438,9 @@
       "Momentum",
       "Mean Reversion"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "CryptoFrogHO2",
+    "filename": "CryptoFrogHO2.py"
   },
   "CryptoFrogHO2A": {
     "complexity": 10,
@@ -3202,7 +3472,9 @@
       "Momentum",
       "Mean Reversion"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "CryptoFrogHO2A",
+    "filename": "CryptoFrogHO2A.py"
   },
   "CryptoFrogHO3A1": {
     "complexity": 10,
@@ -3234,7 +3506,9 @@
       "Momentum",
       "Mean Reversion"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "CryptoFrogHO3A1",
+    "filename": "CryptoFrogHO3A1.py"
   },
   "CryptoFrogHO3A2": {
     "complexity": 10,
@@ -3266,7 +3540,9 @@
       "Momentum",
       "Mean Reversion"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "CryptoFrogHO3A2",
+    "filename": "CryptoFrogHO3A2.py"
   },
   "CryptoFrogHO3A3": {
     "complexity": 10,
@@ -3298,7 +3574,9 @@
       "Momentum",
       "Mean Reversion"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "CryptoFrogHO3A3",
+    "filename": "CryptoFrogHO3A3.py"
   },
   "CryptoFrogHO3A4": {
     "complexity": 10,
@@ -3330,7 +3608,9 @@
       "Momentum",
       "Mean Reversion"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "CryptoFrogHO3A4",
+    "filename": "CryptoFrogHO3A4.py"
   },
   "CryptoFrogNFI": {
     "complexity": 10,
@@ -3365,7 +3645,9 @@
       "Momentum",
       "Mean Reversion"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "CryptoFrogNFI",
+    "filename": "CryptoFrogNFI.py"
   },
   "CryptoFrogNFIHO1A": {
     "complexity": 10,
@@ -3400,7 +3682,9 @@
       "Momentum",
       "Mean Reversion"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "CryptoFrogNFIHO1A",
+    "filename": "CryptoFrogNFIHO1A.py"
   },
   "CryptoFrogOffset": {
     "complexity": 10,
@@ -3435,7 +3719,9 @@
       "Momentum",
       "Mean Reversion"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "CryptoFrogOffset",
+    "filename": "CryptoFrogOffset.py"
   },
   "CustomStoplossWithPSAR": {
     "complexity": 3,
@@ -3452,7 +3738,9 @@
     "style": [
       "Trend"
     ],
-    "timeframe": "1h"
+    "timeframe": "1h",
+    "directory": "CustomStoplossWithPSAR",
+    "filename": "CustomStoplossWithPSAR.py"
   },
   "DCBBBounce": {
     "complexity": 10,
@@ -3481,7 +3769,9 @@
       "Trend",
       "Mean Reversion"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "DCBBBounce",
+    "filename": "DCBBBounce.py"
   },
   "DD": {
     "complexity": 3,
@@ -3500,7 +3790,9 @@
       "Mean Reversion",
       "Scalping"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "DD",
+    "filename": "DD.py"
   },
   "DIV_v1": {
     "complexity": 2,
@@ -3516,7 +3808,9 @@
     "style": [
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "DIV_v1",
+    "filename": "DIV_v1.py"
   },
   "DevilStra": {
     "complexity": 6,
@@ -3537,7 +3831,9 @@
       "Trend",
       "Momentum"
     ],
-    "timeframe": "4h"
+    "timeframe": "4h",
+    "directory": "DevilStra",
+    "filename": "DevilStra.py"
   },
   "Diamond": {
     "complexity": 3,
@@ -3555,7 +3851,9 @@
       "Trend",
       "Scalping"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "Diamond",
+    "filename": "Diamond.py"
   },
   "Divergences": {
     "complexity": 10,
@@ -3588,7 +3886,9 @@
       "Mean Reversion",
       "Momentum"
     ],
-    "timeframe": "1h"
+    "timeframe": "1h",
+    "directory": "Divergences",
+    "filename": "Divergences.py"
   },
   "Dracula": {
     "complexity": 6,
@@ -3610,7 +3910,9 @@
       "Mean Reversion",
       "Scalping"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "Dracula",
+    "filename": "Dracula.py"
   },
   "Dyna_opti": {
     "complexity": 9,
@@ -3635,7 +3937,9 @@
       "Mean Reversion",
       "Momentum"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "Dyna_opti",
+    "filename": "Dyna_opti.py"
   },
   "EI3v2_tag_cofi_green": {
     "complexity": 10,
@@ -3661,7 +3965,9 @@
       "Trend",
       "Scalping"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "EI3v2_tag_cofi_green",
+    "filename": "EI3v2_tag_cofi_green.py"
   },
   "EMA50": {
     "complexity": 10,
@@ -3696,7 +4002,9 @@
       "Mean Reversion",
       "Momentum"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "EMA50",
+    "filename": "EMA50.py"
   },
   "EMA520015_V17": {
     "complexity": 3,
@@ -3714,7 +4022,9 @@
     "style": [
       "Trend"
     ],
-    "timeframe": "4h"
+    "timeframe": "4h",
+    "directory": "EMA520015_V17",
+    "filename": "EMA520015_V17.py"
   },
   "EMABBRSI": {
     "complexity": 2,
@@ -3731,7 +4041,9 @@
       "Trend",
       "Mean Reversion"
     ],
-    "timeframe": "1h"
+    "timeframe": "1h",
+    "directory": "EMABBRSI",
+    "filename": "EMABBRSI.py"
   },
   "EMABreakout": {
     "complexity": 10,
@@ -3765,7 +4077,9 @@
       "Mean Reversion",
       "Momentum"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "EMABreakout",
+    "filename": "EMABreakout.py"
   },
   "EMASkipPump": {
     "complexity": 2,
@@ -3780,7 +4094,9 @@
     "style": [
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "EMASkipPump",
+    "filename": "EMASkipPump.py"
   },
   "EMAVolume": {
     "complexity": 1,
@@ -3794,7 +4110,9 @@
     "style": [
       "Trend"
     ],
-    "timeframe": "15m"
+    "timeframe": "15m",
+    "directory": "EMAVolume",
+    "filename": "EMAVolume.py"
   },
   "EMA_CROSSOVER_STRATEGY": {
     "complexity": 4,
@@ -3812,7 +4130,9 @@
     "style": [
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "EMA_CROSSOVER_STRATEGY",
+    "filename": "EMA_CROSSOVER_STRATEGY.py"
   },
   "EXPERIMENTAL_STRATEGY": {
     "features": [
@@ -3823,7 +4143,9 @@
     "style": [
       "Special"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "EXPERIMENTAL_STRATEGY",
+    "filename": "EXPERIMENTAL_STRATEGY.py"
   },
   "ElliotV2": {
     "complexity": 10,
@@ -3859,7 +4181,9 @@
       "Mean Reversion",
       "Momentum"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "ElliotV2",
+    "filename": "ElliotV2.py"
   },
   "ElliotV4": {
     "complexity": 10,
@@ -3894,7 +4218,9 @@
       "Mean Reversion",
       "Momentum"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "ElliotV4",
+    "filename": "ElliotV4.py"
   },
   "ElliotV531": {
     "complexity": 10,
@@ -3930,7 +4256,9 @@
       "Mean Reversion",
       "Momentum"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "ElliotV531",
+    "filename": "ElliotV531.py"
   },
   "ElliotV5HO": {
     "complexity": 10,
@@ -3966,7 +4294,9 @@
       "Mean Reversion",
       "Momentum"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "ElliotV5HO",
+    "filename": "ElliotV5HO.py"
   },
   "ElliotV5HOMod2": {
     "complexity": 8,
@@ -3988,7 +4318,9 @@
       "Trend",
       "Scalping"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "ElliotV5HOMod2",
+    "filename": "ElliotV5HOMod2.py"
   },
   "ElliotV5HOMod3": {
     "complexity": 8,
@@ -4010,7 +4342,9 @@
       "Trend",
       "Scalping"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "ElliotV5HOMod3",
+    "filename": "ElliotV5HOMod3.py"
   },
   "ElliotV7": {
     "complexity": 9,
@@ -4035,7 +4369,9 @@
       "Mean Reversion",
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "ElliotV7",
+    "filename": "ElliotV7.py"
   },
   "ElliotV8HO": {
     "complexity": 8,
@@ -4058,7 +4394,9 @@
       "Trend",
       "Scalping"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "ElliotV8HO",
+    "filename": "ElliotV8HO.py"
   },
   "ElliotV8_original": {
     "complexity": 5,
@@ -4079,7 +4417,9 @@
       "Trend",
       "Scalping"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "ElliotV8_original",
+    "filename": "ElliotV8_original.py"
   },
   "ElliotV8_original_ichiv2": {
     "complexity": 5,
@@ -4100,7 +4440,9 @@
       "Trend",
       "Scalping"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "ElliotV8_original_ichiv2",
+    "filename": "ElliotV8_original_ichiv2.py"
   },
   "ElliotV8_original_ichiv3": {
     "complexity": 5,
@@ -4121,7 +4463,9 @@
       "Trend",
       "Scalping"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "ElliotV8_original_ichiv3",
+    "filename": "ElliotV8_original_ichiv3.py"
   },
   "Elliotv8": {
     "complexity": 6,
@@ -4143,7 +4487,9 @@
       "Trend",
       "Scalping"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "Elliotv8",
+    "filename": "Elliotv8.py"
   },
   "FRAYSTRAT": {
     "complexity": 10,
@@ -4177,7 +4523,9 @@
       "Mean Reversion",
       "Momentum"
     ],
-    "timeframe": "15m"
+    "timeframe": "15m",
+    "directory": "FRAYSTRAT",
+    "filename": "FRAYSTRAT.py"
   },
   "Fakebuy": {
     "features": [
@@ -4188,7 +4536,9 @@
     "style": [
       "Special"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "Fakebuy",
+    "filename": "Fakebuy.py"
   },
   "FastSupertrend": {
     "complexity": 4,
@@ -4206,7 +4556,9 @@
     "style": [
       "Trend"
     ],
-    "timeframe": "1h"
+    "timeframe": "1h",
+    "directory": "FastSupertrend",
+    "filename": "FastSupertrend.py"
   },
   "FastSupertrendOpt": {
     "complexity": 4,
@@ -4224,7 +4576,9 @@
     "style": [
       "Trend"
     ],
-    "timeframe": "1h"
+    "timeframe": "1h",
+    "directory": "FastSupertrendOpt",
+    "filename": "FastSupertrendOpt.py"
   },
   "FiveMinCrossAbove": {
     "complexity": 4,
@@ -4242,7 +4596,9 @@
     "style": [
       "Mean Reversion"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "FiveMinCrossAbove",
+    "filename": "FiveMinCrossAbove.py"
   },
   "FixedRiskRewardLoss": {
     "complexity": 3,
@@ -4259,7 +4615,9 @@
     "style": [
       "Breakout"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "FixedRiskRewardLoss",
+    "filename": "FixedRiskRewardLoss.py"
   },
   "ForexSignal": {
     "complexity": 4,
@@ -4277,7 +4635,9 @@
     "style": [
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "ForexSignal",
+    "filename": "ForexSignal.py"
   },
   "FrostAuraM115mStrategy": {
     "complexity": 4,
@@ -4295,7 +4655,9 @@
     "style": [
       "Mean Reversion"
     ],
-    "timeframe": "15m"
+    "timeframe": "15m",
+    "directory": "FrostAuraM115mStrategy",
+    "filename": "FrostAuraM115mStrategy.py"
   },
   "FrostAuraM11hStrategy": {
     "complexity": 4,
@@ -4313,7 +4675,9 @@
     "style": [
       "Mean Reversion"
     ],
-    "timeframe": "1h"
+    "timeframe": "1h",
+    "directory": "FrostAuraM11hStrategy",
+    "filename": "FrostAuraM11hStrategy.py"
   },
   "FrostAuraM21hStrategy": {
     "complexity": 4,
@@ -4331,7 +4695,9 @@
     "style": [
       "Momentum"
     ],
-    "timeframe": "15m"
+    "timeframe": "15m",
+    "directory": "FrostAuraM21hStrategy",
+    "filename": "FrostAuraM21hStrategy.py"
   },
   "FrostAuraM315mStrategy": {
     "complexity": 5,
@@ -4351,7 +4717,9 @@
       "Mean Reversion",
       "Momentum"
     ],
-    "timeframe": "15m"
+    "timeframe": "15m",
+    "directory": "FrostAuraM315mStrategy",
+    "filename": "FrostAuraM315mStrategy.py"
   },
   "FrostAuraM31hStrategy": {
     "complexity": 5,
@@ -4371,7 +4739,9 @@
       "Mean Reversion",
       "Momentum"
     ],
-    "timeframe": "1h"
+    "timeframe": "1h",
+    "directory": "FrostAuraM31hStrategy",
+    "filename": "FrostAuraM31hStrategy.py"
   },
   "FrostAuraRandomStrategy": {
     "complexity": 3,
@@ -4387,7 +4757,9 @@
     "style": [
       "Trend"
     ],
-    "timeframe": "1h"
+    "timeframe": "1h",
+    "directory": "FrostAuraRandomStrategy",
+    "filename": "FrostAuraRandomStrategy.py"
   },
   "GodCard": {
     "complexity": 8,
@@ -4409,7 +4781,9 @@
       "Trend",
       "Mean Reversion"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "GodCard",
+    "filename": "GodCard.py"
   },
   "GodStraNew": {
     "complexity": 7,
@@ -4434,7 +4808,9 @@
       "Trend",
       "Momentum"
     ],
-    "timeframe": "4h"
+    "timeframe": "4h",
+    "directory": "GodStraNew",
+    "filename": "GodStraNew.py"
   },
   "GodStraNew40": {
     "complexity": 7,
@@ -4459,7 +4835,9 @@
       "Trend",
       "Momentum"
     ],
-    "timeframe": "4h"
+    "timeframe": "4h",
+    "directory": "GodStraNew40",
+    "filename": "GodStraNew40.py"
   },
   "GodStraNew_SMAonly": {
     "complexity": 8,
@@ -4485,7 +4863,9 @@
       "Trend",
       "Momentum"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "GodStraNew_SMAonly",
+    "filename": "GodStraNew_SMAonly.py"
   },
   "Guacamole": {
     "complexity": 5,
@@ -4506,7 +4886,9 @@
       "Trend",
       "Momentum"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "Guacamole",
+    "filename": "Guacamole.py"
   },
   "Gumbo1": {
     "complexity": 8,
@@ -4529,7 +4911,9 @@
       "Trend",
       "Mean Reversion"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "Gumbo1",
+    "filename": "Gumbo1.py"
   },
   "Hacklemore2": {
     "complexity": 3,
@@ -4548,7 +4932,9 @@
       "Trend",
       "Momentum"
     ],
-    "timeframe": "15m"
+    "timeframe": "15m",
+    "directory": "Hacklemore2",
+    "filename": "Hacklemore2.py"
   },
   "Hacklemore3": {
     "complexity": 5,
@@ -4568,7 +4954,9 @@
       "Trend",
       "Momentum"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "Hacklemore3",
+    "filename": "Hacklemore3.py"
   },
   "HansenSmaOffsetV1": {
     "complexity": 1,
@@ -4583,7 +4971,9 @@
       "Trend",
       "Scalping"
     ],
-    "timeframe": "15m"
+    "timeframe": "15m",
+    "directory": "HansenSmaOffsetV1",
+    "filename": "HansenSmaOffsetV1.py"
   },
   "HarmonicDivergence": {
     "complexity": 10,
@@ -4616,7 +5006,9 @@
       "Mean Reversion",
       "Momentum"
     ],
-    "timeframe": "15m"
+    "timeframe": "15m",
+    "directory": "HarmonicDivergence",
+    "filename": "HarmonicDivergence.py"
   },
   "Heracles": {
     "complexity": 2,
@@ -4634,7 +5026,9 @@
       "Breakout"
     ],
     "timeframe": "12h",
-    "excluded": "OKX exchange does not support 12h data granularity"
+    "excluded": "OKX exchange does not support 12h data granularity",
+    "directory": "Heracles",
+    "filename": "Heracles.py"
   },
   "HourBasedStrategy": {
     "complexity": 2,
@@ -4648,7 +5042,9 @@
     "style": [
       "Trend"
     ],
-    "timeframe": "1h"
+    "timeframe": "1h",
+    "directory": "HourBasedStrategy",
+    "filename": "HourBasedStrategy.py"
   },
   "HyperStra_GSN_SMAOnly": {
     "complexity": 4,
@@ -4664,7 +5060,9 @@
     "style": [
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "HyperStra_GSN_SMAOnly",
+    "filename": "HyperStra_GSN_SMAOnly.py"
   },
   "HyperStra_SMAOnly": {
     "complexity": 4,
@@ -4680,7 +5078,9 @@
     "style": [
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "HyperStra_SMAOnly",
+    "filename": "HyperStra_SMAOnly.py"
   },
   "INSIDEUP": {
     "complexity": 3,
@@ -4698,7 +5098,9 @@
     "style": [
       "Trend"
     ],
-    "timeframe": "1d"
+    "timeframe": "1d",
+    "directory": "INSIDEUP",
+    "filename": "INSIDEUP.py"
   },
   "Ichess": {
     "complexity": 5,
@@ -4718,7 +5120,9 @@
       "Scalping",
       "Trend"
     ],
-    "timeframe": "1d"
+    "timeframe": "1d",
+    "directory": "Ichess",
+    "filename": "Ichess.py"
   },
   "Ichi": {
     "complexity": 3,
@@ -4735,7 +5139,9 @@
     "style": [
       "Trend"
     ],
-    "timeframe": "15m"
+    "timeframe": "15m",
+    "directory": "Ichi",
+    "filename": "Ichi.py"
   },
   "Ichimoku": {
     "complexity": 4,
@@ -4752,7 +5158,9 @@
     "style": [
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "Ichimoku",
+    "filename": "Ichimoku.py"
   },
   "Ichimoku_SenkouSpanCross": {
     "complexity": 4,
@@ -4770,7 +5178,9 @@
     "style": [
       "Trend"
     ],
-    "timeframe": "4h"
+    "timeframe": "4h",
+    "directory": "Ichimoku_SenkouSpanCross",
+    "filename": "Ichimoku_SenkouSpanCross.py"
   },
   "Ichimoku_v12": {
     "complexity": 4,
@@ -4787,7 +5197,9 @@
     "style": [
       "Trend"
     ],
-    "timeframe": "4h"
+    "timeframe": "4h",
+    "directory": "Ichimoku_v12",
+    "filename": "Ichimoku_v12.py"
   },
   "Ichimoku_v30": {
     "complexity": 4,
@@ -4804,7 +5216,9 @@
     "style": [
       "Trend"
     ],
-    "timeframe": "4h"
+    "timeframe": "4h",
+    "directory": "Ichimoku_v30",
+    "filename": "Ichimoku_v30.py"
   },
   "Ichimoku_v31": {
     "complexity": 5,
@@ -4822,7 +5236,9 @@
     "style": [
       "Trend"
     ],
-    "timeframe": "1h"
+    "timeframe": "1h",
+    "directory": "Ichimoku_v31",
+    "filename": "Ichimoku_v31.py"
   },
   "Ichimoku_v32": {
     "complexity": 5,
@@ -4841,7 +5257,9 @@
     "style": [
       "Trend"
     ],
-    "timeframe": "4h"
+    "timeframe": "4h",
+    "directory": "Ichimoku_v32",
+    "filename": "Ichimoku_v32.py"
   },
   "Ichimoku_v33": {
     "complexity": 4,
@@ -4859,7 +5277,9 @@
     "style": [
       "Trend"
     ],
-    "timeframe": "4h"
+    "timeframe": "4h",
+    "directory": "Ichimoku_v33",
+    "filename": "Ichimoku_v33.py"
   },
   "Ichimoku_v37": {
     "complexity": 5,
@@ -4877,7 +5297,9 @@
     "style": [
       "Trend"
     ],
-    "timeframe": "4h"
+    "timeframe": "4h",
+    "directory": "Ichimoku_v37",
+    "filename": "Ichimoku_v37.py"
   },
   "InformativeSample": {
     "features": [
@@ -4888,7 +5310,9 @@
     "style": [
       "Special"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "InformativeSample",
+    "filename": "InformativeSample.py"
   },
   "Inverse": {
     "complexity": 8,
@@ -4913,7 +5337,9 @@
       "Momentum",
       "Mean Reversion"
     ],
-    "timeframe": "1h"
+    "timeframe": "1h",
+    "directory": "Inverse",
+    "filename": "Inverse.py"
   },
   "InverseV2": {
     "complexity": 8,
@@ -4938,7 +5364,9 @@
       "Momentum",
       "Mean Reversion"
     ],
-    "timeframe": "1h"
+    "timeframe": "1h",
+    "directory": "InverseV2",
+    "filename": "InverseV2.py"
   },
   "JustROCR": {
     "complexity": 2,
@@ -4954,7 +5382,9 @@
     "style": [
       "Momentum"
     ],
-    "timeframe": "1h"
+    "timeframe": "1h",
+    "directory": "JustROCR",
+    "filename": "JustROCR.py"
   },
   "JustROCR3": {
     "complexity": 2,
@@ -4970,7 +5400,9 @@
     "style": [
       "Momentum"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "JustROCR3",
+    "filename": "JustROCR3.py"
   },
   "JustROCR5": {
     "complexity": 1,
@@ -4984,7 +5416,9 @@
     "style": [
       "Momentum"
     ],
-    "timeframe": "1m"
+    "timeframe": "1m",
+    "directory": "JustROCR5",
+    "filename": "JustROCR5.py"
   },
   "JustROCR6": {
     "complexity": 2,
@@ -5000,7 +5434,9 @@
     "style": [
       "Momentum"
     ],
-    "timeframe": "1m"
+    "timeframe": "1m",
+    "directory": "JustROCR6",
+    "filename": "JustROCR6.py"
   },
   "KAMACCIRSI": {
     "complexity": 6,
@@ -5019,7 +5455,9 @@
     "style": [
       "Mean Reversion"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "KAMACCIRSI",
+    "filename": "KAMACCIRSI.py"
   },
   "KC_BB": {
     "complexity": 8,
@@ -5044,7 +5482,9 @@
       "Mean Reversion",
       "Scalping"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "KC_BB",
+    "filename": "KC_BB.py"
   },
   "Kamaflage": {
     "complexity": 5,
@@ -5065,7 +5505,9 @@
       "Trend",
       "Momentum"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "Kamaflage",
+    "filename": "Kamaflage.py"
   },
   "Leveraged": {
     "complexity": 4,
@@ -5086,7 +5528,9 @@
       "Mean Reversion",
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "Leveraged",
+    "filename": "Leveraged.py"
   },
   "LookaheadStrategy": {
     "complexity": 2,
@@ -5103,7 +5547,9 @@
     "style": [
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "LookaheadStrategy",
+    "filename": "LookaheadStrategy.py"
   },
   "Low_BB": {
     "complexity": 3,
@@ -5122,7 +5568,9 @@
       "Mean Reversion",
       "Momentum"
     ],
-    "timeframe": "1m"
+    "timeframe": "1m",
+    "directory": "Low_BB",
+    "filename": "Low_BB.py"
   },
   "LuxOSC": {
     "complexity": 4,
@@ -5141,7 +5589,9 @@
       "Trend",
       "Breakout"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "LuxOSC",
+    "filename": "LuxOSC.py"
   },
   "MAC": {
     "complexity": 7,
@@ -5162,7 +5612,9 @@
     "style": [
       "Trend"
     ],
-    "timeframe": "1d"
+    "timeframe": "1d",
+    "directory": "MAC",
+    "filename": "MAC.py"
   },
   "MACDCCI": {
     "complexity": 4,
@@ -5181,7 +5633,9 @@
       "Trend"
     ],
     "timeframe": "30m",
-    "excluded": "OKX exchange does not support 30m data granularity"
+    "excluded": "OKX exchange does not support 30m data granularity",
+    "directory": "MACDCCI",
+    "filename": "MACDCCI.py"
   },
   "MACDRSI200": {
     "complexity": 2,
@@ -5197,7 +5651,9 @@
     "style": [
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "MACDRSI200",
+    "filename": "MACDRSI200.py"
   },
   "MACDStrategy": {
     "complexity": 3,
@@ -5214,7 +5670,9 @@
     "style": [
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "MACDStrategy",
+    "filename": "MACDStrategy.py"
   },
   "MACDStrategy_crossed": {
     "complexity": 2,
@@ -5229,7 +5687,9 @@
     "style": [
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "MACDStrategy_crossed",
+    "filename": "MACDStrategy_crossed.py"
   },
   "MACD_EMA": {
     "complexity": 2,
@@ -5245,7 +5705,9 @@
       "Trend",
       "Scalping"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "MACD_EMA",
+    "filename": "MACD_EMA.py"
   },
   "MACD_TRIPLE_MA": {
     "complexity": 2,
@@ -5263,7 +5725,9 @@
       "Trend",
       "Scalping"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "MACD_TRIPLE_MA",
+    "filename": "MACD_TRIPLE_MA.py"
   },
   "MACD_TRI_EMA": {
     "complexity": 2,
@@ -5279,7 +5743,9 @@
     "style": [
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "MACD_TRI_EMA",
+    "filename": "MACD_TRI_EMA.py"
   },
   "MADisplaceV3": {
     "complexity": 8,
@@ -5301,7 +5767,9 @@
       "Trend",
       "Scalping"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "MADisplaceV3",
+    "filename": "MADisplaceV3.py"
   },
   "MFI": {
     "complexity": 2,
@@ -5318,7 +5786,9 @@
       "Momentum",
       "Scalping"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "MFI",
+    "filename": "MFI.py"
   },
   "Macd": {
     "complexity": 5,
@@ -5337,7 +5807,9 @@
       "Scalping",
       "Momentum"
     ],
-    "timeframe": "1h"
+    "timeframe": "1h",
+    "directory": "Macd",
+    "filename": "Macd.py"
   },
   "MacheteV8b": {
     "complexity": 10,
@@ -5374,7 +5846,9 @@
       "Trend",
       "Momentum"
     ],
-    "timeframe": "15m"
+    "timeframe": "15m",
+    "directory": "MacheteV8b",
+    "filename": "MacheteV8b.py"
   },
   "MacheteV8bRallimod2": {
     "complexity": 10,
@@ -5402,7 +5876,9 @@
       "Mean Reversion",
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "MacheteV8bRallimod2",
+    "filename": "MacheteV8bRallimod2.py"
   },
   "MarketChyperHyperStrategy": {
     "complexity": 7,
@@ -5426,7 +5902,9 @@
       "Trend",
       "Breakout"
     ],
-    "timeframe": "1h"
+    "timeframe": "1h",
+    "directory": "MarketChyperHyperStrategy",
+    "filename": "MarketChyperHyperStrategy.py"
   },
   "Maro4hMacdSd": {
     "complexity": 2,
@@ -5442,7 +5920,9 @@
     "style": [
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "Maro4hMacdSd",
+    "filename": "Maro4hMacdSd.py"
   },
   "Martin": {
     "complexity": 10,
@@ -5475,7 +5955,9 @@
       "Mean Reversion",
       "Momentum"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "Martin",
+    "filename": "Martin.py"
   },
   "MiniLambo": {
     "complexity": 10,
@@ -5500,7 +5982,9 @@
       "Trend",
       "Mean Reversion"
     ],
-    "timeframe": "1m"
+    "timeframe": "1m",
+    "directory": "MiniLambo",
+    "filename": "MiniLambo.py"
   },
   "Minmax": {
     "complexity": 1,
@@ -5514,7 +5998,9 @@
     "style": [
       "Trend"
     ],
-    "timeframe": "1h"
+    "timeframe": "1h",
+    "directory": "Minmax",
+    "filename": "Minmax.py"
   },
   "MomStrategy": {
     "complexity": 10,
@@ -5548,7 +6034,9 @@
       "Momentum",
       "Mean Reversion"
     ],
-    "timeframe": "1h"
+    "timeframe": "1h",
+    "directory": "MomStrategy",
+    "filename": "MomStrategy.py"
   },
   "Momentumv2": {
     "complexity": 6,
@@ -5569,7 +6057,9 @@
       "Trend",
       "Breakout"
     ],
-    "timeframe": "4h"
+    "timeframe": "4h",
+    "directory": "Momentumv2",
+    "filename": "Momentumv2.py"
   },
   "MontrealStrategy": {
     "complexity": 4,
@@ -5587,7 +6077,9 @@
     "style": [
       "Mean Reversion"
     ],
-    "timeframe": "15m"
+    "timeframe": "15m",
+    "directory": "MontrealStrategy",
+    "filename": "MontrealStrategy.py"
   },
   "MostOfAll": {
     "complexity": 5,
@@ -5605,7 +6097,9 @@
     "style": [
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "MostOfAll",
+    "filename": "MostOfAll.py"
   },
   "MultiMA_TSL": {
     "complexity": 6,
@@ -5626,7 +6120,9 @@
       "Trend",
       "Scalping"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "MultiMA_TSL",
+    "filename": "MultiMA_TSL.py"
   },
   "MultiMA_TSL3": {
     "complexity": 10,
@@ -5657,7 +6153,9 @@
       "Mean Reversion",
       "Scalping"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "MultiMA_TSL3",
+    "filename": "MultiMA_TSL3.py"
   },
   "MultiMA_TSL3_Mod": {
     "complexity": 10,
@@ -5686,7 +6184,9 @@
       "Trend",
       "Scalping"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "MultiMA_TSL3_Mod",
+    "filename": "MultiMA_TSL3_Mod.py"
   },
   "MultiMa": {
     "complexity": 4,
@@ -5704,7 +6204,9 @@
     "style": [
       "Trend"
     ],
-    "timeframe": "4h"
+    "timeframe": "4h",
+    "directory": "MultiMa",
+    "filename": "MultiMa.py"
   },
   "MultiOffsetLamboV0": {
     "complexity": 6,
@@ -5725,7 +6227,9 @@
       "Trend",
       "Scalping"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "MultiOffsetLamboV0",
+    "filename": "MultiOffsetLamboV0.py"
   },
   "MultiRSI": {
     "complexity": 2,
@@ -5740,7 +6244,9 @@
     "style": [
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "MultiRSI",
+    "filename": "MultiRSI.py"
   },
   "NASOSRv6_private_Reinuvader_20211121": {
     "complexity": 10,
@@ -5772,7 +6278,9 @@
       "Mean Reversion",
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "NASOSRv6_private_Reinuvader_20211121",
+    "filename": "NASOSRv6_private_Reinuvader_20211121.py"
   },
   "NASOSv4": {
     "complexity": 8,
@@ -5796,7 +6304,9 @@
       "Mean Reversion",
       "Scalping"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "NASOSv4",
+    "filename": "NASOSv4.py"
   },
   "NASOSv5": {
     "complexity": 8,
@@ -5820,7 +6330,9 @@
       "Mean Reversion",
       "Scalping"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "NASOSv5",
+    "filename": "NASOSv5.py"
   },
   "NASOSv5_mod1": {
     "complexity": 10,
@@ -5846,7 +6358,9 @@
       "Mean Reversion",
       "Scalping"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "NASOSv5_mod1",
+    "filename": "NASOSv5_mod1.py"
   },
   "NASOSv5_mod1_DanMod": {
     "complexity": 8,
@@ -5870,7 +6384,9 @@
       "Trend",
       "Scalping"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "NASOSv5_mod1_DanMod",
+    "filename": "NASOSv5_mod1_DanMod.py"
   },
   "NASOSv5_mod2": {
     "complexity": 10,
@@ -5896,7 +6412,9 @@
       "Mean Reversion",
       "Scalping"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "NASOSv5_mod2",
+    "filename": "NASOSv5_mod2.py"
   },
   "NASOSv5_mod3": {
     "complexity": 10,
@@ -5922,7 +6440,9 @@
       "Mean Reversion",
       "Scalping"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "NASOSv5_mod3",
+    "filename": "NASOSv5_mod3.py"
   },
   "NFI46": {
     "complexity": 10,
@@ -5950,7 +6470,9 @@
       "Mean Reversion",
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "NFI46",
+    "filename": "NFI46.py"
   },
   "NFI46Frog": {
     "complexity": 10,
@@ -5986,7 +6508,9 @@
       "Momentum",
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "NFI46Frog",
+    "filename": "NFI46Frog.py"
   },
   "NFI46FrogZ": {
     "complexity": 10,
@@ -6022,7 +6546,9 @@
       "Momentum",
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "NFI46FrogZ",
+    "filename": "NFI46FrogZ.py"
   },
   "NFI46Offset": {
     "complexity": 10,
@@ -6050,7 +6576,9 @@
       "Mean Reversion",
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "NFI46Offset",
+    "filename": "NFI46Offset.py"
   },
   "NFI46OffsetHOA1": {
     "complexity": 10,
@@ -6078,7 +6606,9 @@
       "Mean Reversion",
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "NFI46OffsetHOA1",
+    "filename": "NFI46OffsetHOA1.py"
   },
   "NFI46Z": {
     "complexity": 10,
@@ -6107,7 +6637,9 @@
       "Mean Reversion",
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "NFI46Z",
+    "filename": "NFI46Z.py"
   },
   "NFI47V2": {
     "complexity": 10,
@@ -6135,7 +6667,9 @@
       "Mean Reversion",
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "NFI47V2",
+    "filename": "NFI47V2.py"
   },
   "NFI4Frog": {
     "complexity": 10,
@@ -6171,7 +6705,9 @@
       "Momentum",
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "NFI4Frog",
+    "filename": "NFI4Frog.py"
   },
   "NFI5MOHO": {
     "complexity": 10,
@@ -6197,7 +6733,9 @@
       "Mean Reversion",
       "Scalping"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "NFI5MOHO",
+    "filename": "NFI5MOHO.py"
   },
   "NFI5MOHO2": {
     "complexity": 10,
@@ -6224,7 +6762,9 @@
       "Mean Reversion",
       "Scalping"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "NFI5MOHO2",
+    "filename": "NFI5MOHO2.py"
   },
   "NFI5MOHO_WIP": {
     "complexity": 10,
@@ -6251,7 +6791,9 @@
       "Mean Reversion",
       "Scalping"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "NFI5MOHO_WIP",
+    "filename": "NFI5MOHO_WIP.py"
   },
   "NFI5MOHO_WIP_1": {
     "complexity": 10,
@@ -6278,7 +6820,9 @@
       "Mean Reversion",
       "Scalping"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "NFI5MOHO_WIP_1",
+    "filename": "NFI5MOHO_WIP_1.py"
   },
   "NFI5MOHO_WIP_2": {
     "complexity": 10,
@@ -6305,7 +6849,9 @@
       "Mean Reversion",
       "Scalping"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "NFI5MOHO_WIP_2",
+    "filename": "NFI5MOHO_WIP_2.py"
   },
   "NFI731_BUSD": {
     "complexity": 10,
@@ -6339,7 +6885,9 @@
       "Mean Reversion",
       "Momentum"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "NFI731_BUSD",
+    "filename": "NFI731_BUSD.py"
   },
   "NFI7MOHO": {
     "complexity": 10,
@@ -6366,7 +6914,9 @@
       "Mean Reversion",
       "Scalping"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "NFI7MOHO",
+    "filename": "NFI7MOHO.py"
   },
   "NFINextMOHO": {
     "complexity": 10,
@@ -6393,7 +6943,9 @@
       "Mean Reversion",
       "Scalping"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "NFINextMOHO",
+    "filename": "NFINextMOHO.py"
   },
   "NFINextMOHO2": {
     "complexity": 10,
@@ -6420,7 +6972,9 @@
       "Mean Reversion",
       "Scalping"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "NFINextMOHO2",
+    "filename": "NFINextMOHO2.py"
   },
   "NFINextMultiOffsetAndHO": {
     "complexity": 10,
@@ -6449,7 +7003,9 @@
       "Mean Reversion",
       "Momentum"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "NFINextMultiOffsetAndHO",
+    "filename": "NFINextMultiOffsetAndHO.py"
   },
   "NFINextMultiOffsetAndHO2": {
     "complexity": 10,
@@ -6478,7 +7034,9 @@
       "Mean Reversion",
       "Momentum"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "NFINextMultiOffsetAndHO2",
+    "filename": "NFINextMultiOffsetAndHO2.py"
   },
   "NFIX_BB_RPB": {
     "complexity": 10,
@@ -6518,7 +7076,9 @@
       "Momentum",
       "Mean Reversion"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "NFIX_BB_RPB",
+    "filename": "NFIX_BB_RPB.py"
   },
   "NFIX_BB_RPB_c7c477d_20211030": {
     "complexity": 10,
@@ -6556,7 +7116,9 @@
       "Momentum",
       "Mean Reversion"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "NFIX_BB_RPB_c7c477d_20211030",
+    "filename": "NFIX_BB_RPB_c7c477d_20211030.py"
   },
   "NfiNextModded": {
     "complexity": 10,
@@ -6592,7 +7154,9 @@
       "Mean Reversion",
       "Momentum"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "NfiNextModded",
+    "filename": "NfiNextModded.py"
   },
   "NormalizerStrategy": {
     "complexity": 3,
@@ -6607,7 +7171,9 @@
     "style": [
       "Trend"
     ],
-    "timeframe": "1h"
+    "timeframe": "1h",
+    "directory": "NormalizerStrategy",
+    "filename": "NormalizerStrategy.py"
   },
   "NormalizerStrategyHO2": {
     "complexity": 3,
@@ -6622,7 +7188,9 @@
     "style": [
       "Trend"
     ],
-    "timeframe": "1h"
+    "timeframe": "1h",
+    "directory": "NormalizerStrategyHO2",
+    "filename": "NormalizerStrategyHO2.py"
   },
   "Nostalgia": {
     "complexity": 10,
@@ -6651,7 +7219,9 @@
       "Mean Reversion",
       "Momentum"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "Nostalgia",
+    "filename": "Nostalgia.py"
   },
   "NostalgiaForInfinityNext": {
     "complexity": 10,
@@ -6685,7 +7255,9 @@
       "Mean Reversion",
       "Momentum"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "NostalgiaForInfinityNext",
+    "filename": "NostalgiaForInfinityNext.py"
   },
   "NostalgiaForInfinityNextGen": {
     "complexity": 10,
@@ -6718,7 +7290,9 @@
       "Mean Reversion",
       "Momentum"
     ],
-    "timeframe": "15m"
+    "timeframe": "15m",
+    "directory": "NostalgiaForInfinityNextGen",
+    "filename": "NostalgiaForInfinityNextGen.py"
   },
   "NostalgiaForInfinityNextGen_TSL": {
     "complexity": 10,
@@ -6750,7 +7324,9 @@
       "Mean Reversion",
       "Trend"
     ],
-    "timeframe": "15m"
+    "timeframe": "15m",
+    "directory": "NostalgiaForInfinityNextGen_TSL",
+    "filename": "NostalgiaForInfinityNextGen_TSL.py"
   },
   "NostalgiaForInfinityNextV7155": {
     "complexity": 10,
@@ -6786,7 +7362,9 @@
       "Mean Reversion",
       "Momentum"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "NostalgiaForInfinityNextV7155",
+    "filename": "NostalgiaForInfinityNextV7155.py"
   },
   "NostalgiaForInfinityNext_ChangeToTower_V5_2": {
     "complexity": 10,
@@ -6820,7 +7398,9 @@
       "Mean Reversion",
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "NostalgiaForInfinityNext_ChangeToTower_V5_2",
+    "filename": "NostalgiaForInfinityNext_ChangeToTower_V5_2.py"
   },
   "NostalgiaForInfinityNext_ChangeToTower_V5_3": {
     "complexity": 10,
@@ -6854,7 +7434,9 @@
       "Mean Reversion",
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "NostalgiaForInfinityNext_ChangeToTower_V5_3",
+    "filename": "NostalgiaForInfinityNext_ChangeToTower_V5_3.py"
   },
   "NostalgiaForInfinityNext_ChangeToTower_V6": {
     "complexity": 10,
@@ -6888,7 +7470,9 @@
       "Mean Reversion",
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "NostalgiaForInfinityNext_ChangeToTower_V6",
+    "filename": "NostalgiaForInfinityNext_ChangeToTower_V6.py"
   },
   "NostalgiaForInfinityNext_maximizer": {
     "complexity": 10,
@@ -6922,7 +7506,9 @@
       "Mean Reversion",
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "NostalgiaForInfinityNext_maximizer",
+    "filename": "NostalgiaForInfinityNext_maximizer.py"
   },
   "NostalgiaForInfinityV1": {
     "complexity": 7,
@@ -6944,7 +7530,9 @@
       "Mean Reversion",
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "NostalgiaForInfinityV1",
+    "filename": "NostalgiaForInfinityV1.py"
   },
   "NostalgiaForInfinityV2": {
     "complexity": 8,
@@ -6968,7 +7556,9 @@
       "Mean Reversion",
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "NostalgiaForInfinityV2",
+    "filename": "NostalgiaForInfinityV2.py"
   },
   "NostalgiaForInfinityV3": {
     "complexity": 10,
@@ -6995,7 +7585,9 @@
       "Mean Reversion",
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "NostalgiaForInfinityV3",
+    "filename": "NostalgiaForInfinityV3.py"
   },
   "NostalgiaForInfinityV4": {
     "complexity": 10,
@@ -7023,7 +7615,9 @@
       "Mean Reversion",
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "NostalgiaForInfinityV4",
+    "filename": "NostalgiaForInfinityV4.py"
   },
   "NostalgiaForInfinityV4HO": {
     "complexity": 10,
@@ -7051,7 +7645,9 @@
       "Mean Reversion",
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "NostalgiaForInfinityV4HO",
+    "filename": "NostalgiaForInfinityV4HO.py"
   },
   "NostalgiaForInfinityV5": {
     "complexity": 10,
@@ -7078,7 +7674,9 @@
       "Mean Reversion",
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "NostalgiaForInfinityV5",
+    "filename": "NostalgiaForInfinityV5.py"
   },
   "NostalgiaForInfinityV5MultiOffsetAndHO": {
     "complexity": 10,
@@ -7105,7 +7703,9 @@
       "Mean Reversion",
       "Scalping"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "NostalgiaForInfinityV5MultiOffsetAndHO",
+    "filename": "NostalgiaForInfinityV5MultiOffsetAndHO.py"
   },
   "NostalgiaForInfinityV5MultiOffsetAndHO2": {
     "complexity": 10,
@@ -7132,7 +7732,9 @@
       "Mean Reversion",
       "Scalping"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "NostalgiaForInfinityV5MultiOffsetAndHO2",
+    "filename": "NostalgiaForInfinityV5MultiOffsetAndHO2.py"
   },
   "NostalgiaForInfinityV6": {
     "complexity": 10,
@@ -7159,7 +7761,9 @@
       "Mean Reversion",
       "Scalping"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "NostalgiaForInfinityV6",
+    "filename": "NostalgiaForInfinityV6.py"
   },
   "NostalgiaForInfinityV6HO": {
     "complexity": 10,
@@ -7186,7 +7790,9 @@
       "Mean Reversion",
       "Scalping"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "NostalgiaForInfinityV6HO",
+    "filename": "NostalgiaForInfinityV6HO.py"
   },
   "NostalgiaForInfinityV7": {
     "complexity": 10,
@@ -7213,7 +7819,9 @@
       "Mean Reversion",
       "Scalping"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "NostalgiaForInfinityV7",
+    "filename": "NostalgiaForInfinityV7.py"
   },
   "NostalgiaForInfinityV7_7_2": {
     "complexity": 10,
@@ -7246,7 +7854,9 @@
       "Mean Reversion",
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "NostalgiaForInfinityV7_7_2",
+    "filename": "NostalgiaForInfinityV7_7_2.py"
   },
   "NostalgiaForInfinityV7_SMA": {
     "complexity": 10,
@@ -7273,7 +7883,9 @@
       "Mean Reversion",
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "NostalgiaForInfinityV7_SMA",
+    "filename": "NostalgiaForInfinityV7_SMA.py"
   },
   "NostalgiaForInfinityV7_SMAv2": {
     "complexity": 10,
@@ -7300,7 +7912,9 @@
       "Mean Reversion",
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "NostalgiaForInfinityV7_SMAv2",
+    "filename": "NostalgiaForInfinityV7_SMAv2.py"
   },
   "NostalgiaForInfinityV7_SMAv2_1": {
     "complexity": 10,
@@ -7327,7 +7941,9 @@
       "Mean Reversion",
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "NostalgiaForInfinityV7_SMAv2_1",
+    "filename": "NostalgiaForInfinityV7_SMAv2_1.py"
   },
   "NostalgiaForInfinityX": {
     "complexity": 10,
@@ -7367,7 +7983,9 @@
       "Momentum",
       "Mean Reversion"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "NostalgiaForInfinityX",
+    "filename": "NostalgiaForInfinityX.py"
   },
   "NostalgiaForInfinityX2": {
     "complexity": 10,
@@ -7397,7 +8015,9 @@
       "Mean Reversion",
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "NostalgiaForInfinityX2",
+    "filename": "NostalgiaForInfinityX2.py"
   },
   "NostalgiaForInfinityXw": {
     "complexity": 10,
@@ -7438,7 +8058,9 @@
       "Momentum",
       "Mean Reversion"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "NostalgiaForInfinityXw",
+    "filename": "NostalgiaForInfinityXw.py"
   },
   "NotAnotherSMAOffSetStrategy_V2": {
     "complexity": 5,
@@ -7459,7 +8081,9 @@
       "Trend",
       "Scalping"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "NotAnotherSMAOffSetStrategy_V2",
+    "filename": "NotAnotherSMAOffSetStrategy_V2.py"
   },
   "NotAnotherSMAOffsetStrategy": {
     "complexity": 5,
@@ -7480,7 +8104,9 @@
       "Trend",
       "Scalping"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "NotAnotherSMAOffsetStrategy",
+    "filename": "NotAnotherSMAOffsetStrategy.py"
   },
   "NotAnotherSMAOffsetStrategyHO": {
     "complexity": 5,
@@ -7501,7 +8127,9 @@
       "Trend",
       "Scalping"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "NotAnotherSMAOffsetStrategyHO",
+    "filename": "NotAnotherSMAOffsetStrategyHO.py"
   },
   "NotAnotherSMAOffsetStrategyHOv3": {
     "complexity": 6,
@@ -7523,7 +8151,9 @@
       "Trend",
       "Scalping"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "NotAnotherSMAOffsetStrategyHOv3",
+    "filename": "NotAnotherSMAOffsetStrategyHOv3.py"
   },
   "NotAnotherSMAOffsetStrategyLite": {
     "complexity": 5,
@@ -7542,7 +8172,9 @@
       "Trend",
       "Scalping"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "NotAnotherSMAOffsetStrategyLite",
+    "filename": "NotAnotherSMAOffsetStrategyLite.py"
   },
   "NotAnotherSMAOffsetStrategyModHO": {
     "complexity": 6,
@@ -7565,7 +8197,9 @@
       "Trend",
       "Scalping"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "NotAnotherSMAOffsetStrategyModHO",
+    "filename": "NotAnotherSMAOffsetStrategyModHO.py"
   },
   "NotAnotherSMAOffsetStrategyModHO_LamineDz_20210901": {
     "complexity": 6,
@@ -7588,7 +8222,9 @@
       "Trend",
       "Scalping"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "NotAnotherSMAOffsetStrategyModHO_LamineDz_20210901",
+    "filename": "NotAnotherSMAOffsetStrategyModHO_LamineDz_20210901.py"
   },
   "NotAnotherSMAOffsetStrategyX1": {
     "complexity": 6,
@@ -7610,7 +8246,9 @@
       "Trend",
       "Scalping"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "NotAnotherSMAOffsetStrategyX1",
+    "filename": "NotAnotherSMAOffsetStrategyX1.py"
   },
   "NotAnotherSMAOffsetStrategy_uzi": {
     "complexity": 5,
@@ -7631,7 +8269,9 @@
       "Trend",
       "Scalping"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "NotAnotherSMAOffsetStrategy_uzi",
+    "filename": "NotAnotherSMAOffsetStrategy_uzi.py"
   },
   "NotAnotherSMAOffsetStrategy_uzi3": {
     "complexity": 5,
@@ -7653,7 +8293,9 @@
       "Mean Reversion",
       "Scalping"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "NotAnotherSMAOffsetStrategy_uzi3",
+    "filename": "NotAnotherSMAOffsetStrategy_uzi3.py"
   },
   "NowoIchimoku1hV1": {
     "complexity": 9,
@@ -7678,7 +8320,9 @@
       "Trend"
     ],
     "timeframe": "1h",
-    "excluded": "Code-level bug: 'buy' column accessed before initialization in populate_entry_trend loop (line 196), file declares 'This version of the strategy is broken!'"
+    "excluded": "Code-level bug: 'buy' column accessed before initialization in populate_entry_trend loop (line 196), file declares 'This version of the strategy is broken!'",
+    "directory": "NowoIchimoku1hV1",
+    "filename": "NowoIchimoku1hV1.py"
   },
   "NowoIchimoku1hV2": {
     "complexity": 6,
@@ -7701,7 +8345,9 @@
       "Mean Reversion",
       "Trend"
     ],
-    "timeframe": "1h"
+    "timeframe": "1h",
+    "directory": "NowoIchimoku1hV2",
+    "filename": "NowoIchimoku1hV2.py"
   },
   "NowoIchimoku5mV2": {
     "complexity": 8,
@@ -7725,7 +8371,9 @@
       "Mean Reversion",
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "NowoIchimoku5mV2",
+    "filename": "NowoIchimoku5mV2.py"
   },
   "ONUR": {
     "complexity": 2,
@@ -7742,7 +8390,9 @@
     "style": [
       "Mean Reversion"
     ],
-    "timeframe": "15m"
+    "timeframe": "15m",
+    "directory": "ONUR",
+    "filename": "ONUR.py"
   },
   "ObeliskIM_v1_1": {
     "complexity": 4,
@@ -7761,7 +8411,9 @@
       "Trend",
       "Breakout"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "ObeliskIM_v1_1",
+    "filename": "ObeliskIM_v1_1.py"
   },
   "ObeliskRSI_v6_1": {
     "complexity": 3,
@@ -7777,7 +8429,9 @@
     "style": [
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "ObeliskRSI_v6_1",
+    "filename": "ObeliskRSI_v6_1.py"
   },
   "Obelisk_3EMA_StochRSI_ATR": {
     "complexity": 6,
@@ -7798,7 +8452,9 @@
       "Momentum",
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "Obelisk_3EMA_StochRSI_ATR",
+    "filename": "Obelisk_3EMA_StochRSI_ATR.py"
   },
   "Obelisk_Ichimoku_Slow_v1_3": {
     "complexity": 5,
@@ -7818,7 +8474,9 @@
       "Scalping",
       "Trend"
     ],
-    "timeframe": "1h"
+    "timeframe": "1h",
+    "directory": "Obelisk_Ichimoku_Slow_v1_3",
+    "filename": "Obelisk_Ichimoku_Slow_v1_3.py"
   },
   "Obelisk_Ichimoku_ZEMA_v1": {
     "complexity": 6,
@@ -7838,7 +8496,9 @@
       "Trend",
       "Scalping"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "Obelisk_Ichimoku_ZEMA_v1",
+    "filename": "Obelisk_Ichimoku_ZEMA_v1.py"
   },
   "Obelisk_TradePro_Ichi_v1_1": {
     "complexity": 1,
@@ -7852,7 +8512,9 @@
     "style": [
       "Trend"
     ],
-    "timeframe": "1h"
+    "timeframe": "1h",
+    "directory": "Obelisk_TradePro_Ichi_v1_1",
+    "filename": "Obelisk_TradePro_Ichi_v1_1.py"
   },
   "Obelisk_TradePro_Ichi_v2_1": {
     "complexity": 3,
@@ -7872,7 +8534,9 @@
       "Momentum",
       "Trend"
     ],
-    "timeframe": "1h"
+    "timeframe": "1h",
+    "directory": "Obelisk_TradePro_Ichi_v2_1",
+    "filename": "Obelisk_TradePro_Ichi_v2_1.py"
   },
   "PRICEFOLLOWING": {
     "complexity": 10,
@@ -7900,7 +8564,9 @@
       "Trend",
       "Momentum"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "PRICEFOLLOWING",
+    "filename": "PRICEFOLLOWING.py"
   },
   "PRICEFOLLOWING2": {
     "complexity": 10,
@@ -7928,7 +8594,9 @@
       "Trend",
       "Momentum"
     ],
-    "timeframe": "15m"
+    "timeframe": "15m",
+    "directory": "PRICEFOLLOWING2",
+    "filename": "PRICEFOLLOWING2.py"
   },
   "PRICEFOLLOWINGX": {
     "complexity": 10,
@@ -7958,7 +8626,9 @@
       "Trend",
       "Mean Reversion"
     ],
-    "timeframe": "15m"
+    "timeframe": "15m",
+    "directory": "PRICEFOLLOWINGX",
+    "filename": "PRICEFOLLOWINGX.py"
   },
   "Persia": {
     "complexity": 3,
@@ -7974,7 +8644,9 @@
     "style": [
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "Persia",
+    "filename": "Persia.py"
   },
   "PrawnstarOBV": {
     "complexity": 6,
@@ -7994,7 +8666,9 @@
     "style": [
       "Trend"
     ],
-    "timeframe": "1h"
+    "timeframe": "1h",
+    "directory": "PrawnstarOBV",
+    "filename": "PrawnstarOBV.py"
   },
   "PumpDetector": {
     "complexity": 3,
@@ -8010,7 +8684,9 @@
     "style": [
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "PumpDetector",
+    "filename": "PumpDetector.py"
   },
   "Quickie": {
     "complexity": 3,
@@ -8030,7 +8706,9 @@
       "Trend",
       "Scalping"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "Quickie",
+    "filename": "Quickie.py"
   },
   "RSI": {
     "complexity": 4,
@@ -8049,7 +8727,9 @@
       "Momentum"
     ],
     "timeframe": "15m",
-    "excluded": "OKX exchange does not support 30m informative data required by this strategy"
+    "excluded": "OKX exchange does not support 30m informative data required by this strategy",
+    "directory": "RSI",
+    "filename": "RSI.py"
   },
   "RSIBB02": {
     "complexity": 2,
@@ -8064,7 +8744,9 @@
     "style": [
       "Mean Reversion"
     ],
-    "timeframe": "1h"
+    "timeframe": "1h",
+    "directory": "RSIBB02",
+    "filename": "RSIBB02.py"
   },
   "RSIv2": {
     "complexity": 4,
@@ -8083,7 +8765,9 @@
       "Momentum"
     ],
     "timeframe": "15m",
-    "excluded": "OKX exchange does not support 30m informative data required by this strategy"
+    "excluded": "OKX exchange does not support 30m informative data required by this strategy",
+    "directory": "RSIv2",
+    "filename": "RSIv2.py"
   },
   "RalliV1": {
     "complexity": 8,
@@ -8106,7 +8790,9 @@
       "Trend",
       "Scalping"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "RalliV1",
+    "filename": "RalliV1.py"
   },
   "RalliV1_disable56": {
     "complexity": 8,
@@ -8129,7 +8815,9 @@
       "Trend",
       "Scalping"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "RalliV1_disable56",
+    "filename": "RalliV1_disable56.py"
   },
   "RaposaDivergenceV1": {
     "complexity": 4,
@@ -8147,7 +8835,9 @@
     "style": [
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "RaposaDivergenceV1",
+    "filename": "RaposaDivergenceV1.py"
   },
   "ReinforcedAverageStrategy": {
     "complexity": 3,
@@ -8166,7 +8856,9 @@
       "Trend",
       "Mean Reversion"
     ],
-    "timeframe": "4h"
+    "timeframe": "4h",
+    "directory": "ReinforcedAverageStrategy",
+    "filename": "ReinforcedAverageStrategy.py"
   },
   "ReinforcedQuickie": {
     "complexity": 4,
@@ -8187,7 +8879,9 @@
       "Mean Reversion",
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "ReinforcedQuickie",
+    "filename": "ReinforcedQuickie.py"
   },
   "ReinforcedSmoothScalp": {
     "complexity": 4,
@@ -8209,7 +8903,9 @@
       "Mean Reversion",
       "Momentum"
     ],
-    "timeframe": "1m"
+    "timeframe": "1m",
+    "directory": "ReinforcedSmoothScalp",
+    "filename": "ReinforcedSmoothScalp.py"
   },
   "Renko": {
     "complexity": 1,
@@ -8223,7 +8919,9 @@
     "style": [
       "Breakout"
     ],
-    "timeframe": "15m"
+    "timeframe": "15m",
+    "directory": "Renko",
+    "filename": "Renko.py"
   },
   "RobotradingBody": {
     "complexity": 5,
@@ -8240,7 +8938,9 @@
     "style": [
       "Trend"
     ],
-    "timeframe": "4h"
+    "timeframe": "4h",
+    "directory": "RobotradingBody",
+    "filename": "RobotradingBody.py"
   },
   "Roth01": {
     "complexity": 4,
@@ -8262,7 +8962,9 @@
       "Mean Reversion",
       "Momentum"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "Roth01",
+    "filename": "Roth01.py"
   },
   "Roth03": {
     "complexity": 4,
@@ -8284,7 +8986,9 @@
       "Mean Reversion",
       "Momentum"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "Roth03",
+    "filename": "Roth03.py"
   },
   "SAR": {
     "complexity": 10,
@@ -8317,7 +9021,9 @@
       "Mean Reversion",
       "Momentum"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "SAR",
+    "filename": "SAR.py"
   },
   "SMAIP3": {
     "complexity": 5,
@@ -8336,7 +9042,9 @@
     "style": [
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "SMAIP3",
+    "filename": "SMAIP3.py"
   },
   "SMAIP3v2": {
     "complexity": 4,
@@ -8355,7 +9063,9 @@
     "style": [
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "SMAIP3v2",
+    "filename": "SMAIP3v2.py"
   },
   "SMAOG": {
     "complexity": 4,
@@ -8374,7 +9084,9 @@
     "style": [
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "SMAOG",
+    "filename": "SMAOG.py"
   },
   "SMAOPv1_TTF": {
     "complexity": 8,
@@ -8396,7 +9108,9 @@
       "Trend",
       "Scalping"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "SMAOPv1_TTF",
+    "filename": "SMAOPv1_TTF.py"
   },
   "SMAOffset": {
     "complexity": 5,
@@ -8415,7 +9129,9 @@
     "style": [
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "SMAOffset",
+    "filename": "SMAOffset.py"
   },
   "SMAOffsetProtectOpt": {
     "complexity": 8,
@@ -8437,7 +9153,9 @@
       "Trend",
       "Scalping"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "SMAOffsetProtectOpt",
+    "filename": "SMAOffsetProtectOpt.py"
   },
   "SMAOffsetProtectOptV0": {
     "complexity": 10,
@@ -8461,7 +9179,9 @@
       "Trend",
       "Scalping"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "SMAOffsetProtectOptV0",
+    "filename": "SMAOffsetProtectOptV0.py"
   },
   "SMAOffsetProtectOptV1": {
     "complexity": 8,
@@ -8483,7 +9203,9 @@
       "Trend",
       "Scalping"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "SMAOffsetProtectOptV1",
+    "filename": "SMAOffsetProtectOptV1.py"
   },
   "SMAOffsetProtectOptV1HO1": {
     "complexity": 8,
@@ -8505,7 +9227,9 @@
       "Trend",
       "Scalping"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "SMAOffsetProtectOptV1HO1",
+    "filename": "SMAOffsetProtectOptV1HO1.py"
   },
   "SMAOffsetProtectOptV1Mod": {
     "complexity": 8,
@@ -8527,7 +9251,9 @@
       "Trend",
       "Scalping"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "SMAOffsetProtectOptV1Mod",
+    "filename": "SMAOffsetProtectOptV1Mod.py"
   },
   "SMAOffsetProtectOptV1Mod2": {
     "complexity": 9,
@@ -8550,7 +9276,9 @@
       "Trend",
       "Scalping"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "SMAOffsetProtectOptV1Mod2",
+    "filename": "SMAOffsetProtectOptV1Mod2.py"
   },
   "SMAOffsetProtectOptV1_kkeue_20210619": {
     "complexity": 8,
@@ -8572,7 +9300,9 @@
       "Trend",
       "Scalping"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "SMAOffsetProtectOptV1_kkeue_20210619",
+    "filename": "SMAOffsetProtectOptV1_kkeue_20210619.py"
   },
   "SMAOffsetV2": {
     "complexity": 5,
@@ -8590,7 +9320,9 @@
     "style": [
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "SMAOffsetV2",
+    "filename": "SMAOffsetV2.py"
   },
   "SMA_BBRSI": {
     "complexity": 10,
@@ -8616,7 +9348,9 @@
       "Scalping",
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "SMA_BBRSI",
+    "filename": "SMA_BBRSI.py"
   },
   "SRsi": {
     "complexity": 3,
@@ -8632,7 +9366,9 @@
     "style": [
       "Trend"
     ],
-    "timeframe": "1m"
+    "timeframe": "1m",
+    "directory": "SRsi",
+    "filename": "SRsi.py"
   },
   "STRATEGY_RSI_BB_BOUNDS_CROSS": {
     "complexity": 5,
@@ -8652,7 +9388,9 @@
       "Mean Reversion",
       "Breakout"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "STRATEGY_RSI_BB_BOUNDS_CROSS",
+    "filename": "STRATEGY_RSI_BB_BOUNDS_CROSS.py"
   },
   "STRATEGY_RSI_BB_CROSS": {
     "complexity": 4,
@@ -8671,7 +9409,9 @@
       "Mean Reversion",
       "Breakout"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "STRATEGY_RSI_BB_CROSS",
+    "filename": "STRATEGY_RSI_BB_CROSS.py"
   },
   "SampleStrategy": {
     "features": [
@@ -8682,7 +9422,9 @@
     "style": [
       "Special"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "SampleStrategy",
+    "filename": "SampleStrategy.py"
   },
   "SampleStrategyV2": {
     "features": [
@@ -8693,7 +9435,9 @@
     "style": [
       "Special"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "SampleStrategyV2",
+    "filename": "SampleStrategyV2.py"
   },
   "Saturn5": {
     "complexity": 4,
@@ -8714,7 +9458,9 @@
       "Scalping",
       "Trend"
     ],
-    "timeframe": "15m"
+    "timeframe": "15m",
+    "directory": "Saturn5",
+    "filename": "Saturn5.py"
   },
   "Scalp": {
     "complexity": 3,
@@ -8732,7 +9478,9 @@
       "Scalping",
       "Trend"
     ],
-    "timeframe": "1m"
+    "timeframe": "1m",
+    "directory": "Scalp",
+    "filename": "Scalp.py"
   },
   "Schism": {
     "complexity": 7,
@@ -8753,7 +9501,9 @@
       "Momentum",
       "Breakout"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "Schism",
+    "filename": "Schism.py"
   },
   "Schism2": {
     "complexity": 7,
@@ -8775,7 +9525,9 @@
       "Momentum",
       "Breakout"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "Schism2",
+    "filename": "Schism2.py"
   },
   "Schism2MM": {
     "complexity": 7,
@@ -8798,7 +9550,9 @@
       "Breakout"
     ],
     "timeframe": "5m",
-    "excluded": "OKX exchange does not support leverage tiers for DOGE/USDT, DOT/USDT, TRX/USDT - backtesting requires leverage tiers"
+    "excluded": "OKX exchange does not support leverage tiers for DOGE/USDT, DOT/USDT, TRX/USDT - backtesting requires leverage tiers",
+    "directory": "Schism2MM",
+    "filename": "Schism2MM.py"
   },
   "Schism3": {
     "complexity": 7,
@@ -8819,7 +9573,9 @@
       "Momentum",
       "Breakout"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "Schism3",
+    "filename": "Schism3.py"
   },
   "Schism4": {
     "complexity": 7,
@@ -8840,7 +9596,9 @@
       "Momentum",
       "Breakout"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "Schism4",
+    "filename": "Schism4.py"
   },
   "Schism5": {
     "complexity": 8,
@@ -8860,7 +9618,9 @@
     "style": [
       "Momentum"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "Schism5",
+    "filename": "Schism5.py"
   },
   "Schism6": {
     "complexity": 7,
@@ -8881,7 +9641,9 @@
       "Momentum",
       "Breakout"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "Schism6",
+    "filename": "Schism6.py"
   },
   "Seb": {
     "complexity": 10,
@@ -8910,7 +9672,9 @@
       "Mean Reversion",
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "Seb",
+    "filename": "Seb.py"
   },
   "Simple": {
     "complexity": 2,
@@ -8927,7 +9691,9 @@
       "Mean Reversion",
       "Scalping"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "Simple",
+    "filename": "Simple.py"
   },
   "SlowPotato": {
     "complexity": 2,
@@ -8941,7 +9707,9 @@
     "style": [
       "Breakout"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "SlowPotato",
+    "filename": "SlowPotato.py"
   },
   "Slowbro": {
     "complexity": 3,
@@ -8955,7 +9723,9 @@
     "style": [
       "Breakout"
     ],
-    "timeframe": "1h"
+    "timeframe": "1h",
+    "directory": "Slowbro",
+    "filename": "Slowbro.py"
   },
   "SmoothOperator": {
     "complexity": 5,
@@ -8978,7 +9748,9 @@
       "Mean Reversion",
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "SmoothOperator",
+    "filename": "SmoothOperator.py"
   },
   "SmoothScalp": {
     "complexity": 4,
@@ -9000,7 +9772,9 @@
       "Mean Reversion",
       "Momentum"
     ],
-    "timeframe": "1m"
+    "timeframe": "1m",
+    "directory": "SmoothScalp",
+    "filename": "SmoothScalp.py"
   },
   "Stavix2": {
     "complexity": 1,
@@ -9014,7 +9788,9 @@
     "style": [
       "Trend"
     ],
-    "timeframe": "1m"
+    "timeframe": "1m",
+    "directory": "Stavix2",
+    "filename": "Stavix2.py"
   },
   "Stinkfist": {
     "complexity": 8,
@@ -9037,7 +9813,9 @@
       "Momentum",
       "Breakout"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "Stinkfist",
+    "filename": "Stinkfist.py"
   },
   "StochRSITEMA": {
     "complexity": 5,
@@ -9058,7 +9836,9 @@
       "Breakout",
       "Momentum"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "StochRSITEMA",
+    "filename": "StochRSITEMA.py"
   },
   "Strategy001": {
     "complexity": 5,
@@ -9077,7 +9857,9 @@
     "style": [
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "Strategy001",
+    "filename": "Strategy001.py"
   },
   "Strategy001_custom_sell": {
     "complexity": 7,
@@ -9098,7 +9880,9 @@
     "style": [
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "Strategy001_custom_sell",
+    "filename": "Strategy001_custom_sell.py"
   },
   "Strategy002": {
     "complexity": 5,
@@ -9119,7 +9903,9 @@
       "Mean Reversion",
       "Momentum"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "Strategy002",
+    "filename": "Strategy002.py"
   },
   "Strategy003": {
     "complexity": 6,
@@ -9143,7 +9929,9 @@
       "Mean Reversion",
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "Strategy003",
+    "filename": "Strategy003.py"
   },
   "Strategy004": {
     "complexity": 5,
@@ -9164,7 +9952,9 @@
       "Trend",
       "Momentum"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "Strategy004",
+    "filename": "Strategy004.py"
   },
   "Strategy005": {
     "complexity": 7,
@@ -9188,7 +9978,9 @@
       "Trend",
       "Momentum"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "Strategy005",
+    "filename": "Strategy005.py"
   },
   "StrategyScalpingFast": {
     "complexity": 4,
@@ -9210,7 +10002,9 @@
       "Mean Reversion",
       "Momentum"
     ],
-    "timeframe": "1m"
+    "timeframe": "1m",
+    "directory": "StrategyScalpingFast",
+    "filename": "StrategyScalpingFast.py"
   },
   "StrategyScalpingFast2": {
     "complexity": 6,
@@ -9234,7 +10028,9 @@
       "Mean Reversion",
       "Momentum"
     ],
-    "timeframe": "1m"
+    "timeframe": "1m",
+    "directory": "StrategyScalpingFast2",
+    "filename": "StrategyScalpingFast2.py"
   },
   "SuperHV27": {
     "complexity": 6,
@@ -9256,7 +10052,9 @@
       "Trend",
       "Momentum"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "SuperHV27",
+    "filename": "SuperHV27.py"
   },
   "SuperTrend": {
     "complexity": 4,
@@ -9274,7 +10072,9 @@
     "style": [
       "Trend"
     ],
-    "timeframe": "1h"
+    "timeframe": "1h",
+    "directory": "SuperTrend",
+    "filename": "SuperTrend.py"
   },
   "SuperTrendPure": {
     "complexity": 2,
@@ -9291,7 +10091,9 @@
     "style": [
       "Trend"
     ],
-    "timeframe": "1h"
+    "timeframe": "1h",
+    "directory": "SuperTrendPure",
+    "filename": "SuperTrendPure.py"
   },
   "SupertrendStrategy": {
     "complexity": 7,
@@ -9313,7 +10115,9 @@
       "Trend",
       "Momentum"
     ],
-    "timeframe": "1h"
+    "timeframe": "1h",
+    "directory": "SupertrendStrategy",
+    "filename": "SupertrendStrategy.py"
   },
   "SwingHigh": {
     "complexity": 4,
@@ -9332,7 +10136,9 @@
       "Trend"
     ],
     "timeframe": "30m",
-    "excluded": "OKX exchange does not support 30m data granularity"
+    "excluded": "OKX exchange does not support 30m data granularity",
+    "directory": "SwingHigh",
+    "filename": "SwingHigh.py"
   },
   "SwingHighToSky": {
     "complexity": 5,
@@ -9350,7 +10156,9 @@
     "style": [
       "Trend"
     ],
-    "timeframe": "15m"
+    "timeframe": "15m",
+    "directory": "SwingHighToSky",
+    "filename": "SwingHighToSky.py"
   },
   "TDSequentialStrategy": {
     "complexity": 4,
@@ -9365,7 +10173,9 @@
     "style": [
       "Trend"
     ],
-    "timeframe": "1h"
+    "timeframe": "1h",
+    "directory": "TDSequentialStrategy",
+    "filename": "TDSequentialStrategy.py"
   },
   "TEMA": {
     "complexity": 10,
@@ -9399,7 +10209,9 @@
       "Mean Reversion",
       "Momentum"
     ],
-    "timeframe": "1m"
+    "timeframe": "1m",
+    "directory": "TEMA",
+    "filename": "TEMA.py"
   },
   "TechnicalExampleStrategy": {
     "complexity": 1,
@@ -9411,7 +10223,9 @@
     "style": [
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "TechnicalExampleStrategy",
+    "filename": "TechnicalExampleStrategy.py"
   },
   "TemaMaster": {
     "complexity": 5,
@@ -9430,7 +10244,9 @@
     "style": [
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "TemaMaster",
+    "filename": "TemaMaster.py"
   },
   "TemaMaster3": {
     "complexity": 5,
@@ -9449,7 +10265,9 @@
     "style": [
       "Trend"
     ],
-    "timeframe": "1m"
+    "timeframe": "1m",
+    "directory": "TemaMaster3",
+    "filename": "TemaMaster3.py"
   },
   "TemaPure": {
     "complexity": 5,
@@ -9469,7 +10287,9 @@
       "Trend",
       "Breakout"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "TemaPure",
+    "filename": "TemaPure.py"
   },
   "TemaPureNeat": {
     "complexity": 5,
@@ -9488,7 +10308,9 @@
     "style": [
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "TemaPureNeat",
+    "filename": "TemaPureNeat.py"
   },
   "TemaPureTwo": {
     "complexity": 5,
@@ -9508,7 +10330,9 @@
       "Trend",
       "Breakout"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "TemaPureTwo",
+    "filename": "TemaPureTwo.py"
   },
   "TenderEnter": {
     "complexity": 10,
@@ -9542,7 +10366,9 @@
       "Mean Reversion",
       "Momentum"
     ],
-    "timeframe": "15m"
+    "timeframe": "15m",
+    "directory": "TenderEnter",
+    "filename": "TenderEnter.py"
   },
   "TheForce": {
     "complexity": 6,
@@ -9564,7 +10390,9 @@
       "Trend",
       "Momentum"
     ],
-    "timeframe": "15m"
+    "timeframe": "15m",
+    "directory": "TheForce",
+    "filename": "TheForce.py"
   },
   "TheRealPullbackV2": {
     "complexity": 5,
@@ -9587,7 +10415,9 @@
       "Mean Reversion",
       "Momentum"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "TheRealPullbackV2",
+    "filename": "TheRealPullbackV2.py"
   },
   "TrailingBuyStrat2": {
     "features": [
@@ -9599,7 +10429,9 @@
       "Special"
     ],
     "timeframe": "unknown",
-    "excluded": "Strategy explicitly states 'NOT COMPATIBLE WITH BACKTEST/HYPEROPT' and lacks a defined timeframe"
+    "excluded": "Strategy explicitly states 'NOT COMPATIBLE WITH BACKTEST/HYPEROPT' and lacks a defined timeframe",
+    "directory": "TrailingBuyStrat2",
+    "filename": "TrailingBuyStrat2.py"
   },
   "Trend_Strength_Directional": {
     "complexity": 4,
@@ -9617,7 +10449,9 @@
     "style": [
       "Trend"
     ],
-    "timeframe": "15m"
+    "timeframe": "15m",
+    "directory": "Trend_Strength_Directional",
+    "filename": "Trend_Strength_Directional.py"
   },
   "TrixStrategy": {
     "complexity": 7,
@@ -9638,7 +10472,9 @@
     "style": [
       "Momentum"
     ],
-    "timeframe": "1h"
+    "timeframe": "1h",
+    "directory": "TrixStrategy",
+    "filename": "TrixStrategy.py"
   },
   "TrixV15Strategy": {
     "complexity": 8,
@@ -9662,7 +10498,9 @@
       "Trend",
       "Momentum"
     ],
-    "timeframe": "1h"
+    "timeframe": "1h",
+    "directory": "TrixV15Strategy",
+    "filename": "TrixV15Strategy.py"
   },
   "TrixV21Strategy": {
     "complexity": 8,
@@ -9687,7 +10525,9 @@
       "Trend",
       "Momentum"
     ],
-    "timeframe": "1h"
+    "timeframe": "1h",
+    "directory": "TrixV21Strategy",
+    "filename": "TrixV21Strategy.py"
   },
   "TrixV23Strategy": {
     "complexity": 8,
@@ -9712,7 +10552,9 @@
       "Breakout"
     ],
     "timeframe": "1h",
-    "excluded": "OKX exchange does not have BTC/USDT futures data at 1h timeframe needed for informative pair (BTC/{stake})"
+    "excluded": "OKX exchange does not have BTC/USDT futures data at 1h timeframe needed for informative pair (BTC/{stake})",
+    "directory": "TrixV23Strategy",
+    "filename": "TrixV23Strategy.py"
   },
   "UltimateMomentumIndicator": {
     "complexity": 4,
@@ -9732,7 +10574,9 @@
       "Trend",
       "Momentum"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "UltimateMomentumIndicator",
+    "filename": "UltimateMomentumIndicator.py"
   },
   "Uptrend": {
     "complexity": 6,
@@ -9755,7 +10599,9 @@
       "Mean Reversion",
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "Uptrend",
+    "filename": "Uptrend.py"
   },
   "UziChan": {
     "complexity": 2,
@@ -9771,7 +10617,9 @@
     "style": [
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "UziChan",
+    "filename": "UziChan.py"
   },
   "UziChan2": {
     "complexity": 2,
@@ -9787,7 +10635,9 @@
     "style": [
       "Trend"
     ],
-    "timeframe": "1m"
+    "timeframe": "1m",
+    "directory": "UziChan2",
+    "filename": "UziChan2.py"
   },
   "VWAP": {
     "complexity": 2,
@@ -9802,7 +10652,9 @@
     "style": [
       "Scalping"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "VWAP",
+    "filename": "VWAP.py"
   },
   "WaveTrendStra": {
     "complexity": 2,
@@ -9818,7 +10670,9 @@
       "Trend",
       "Scalping"
     ],
-    "timeframe": "4h"
+    "timeframe": "4h",
+    "directory": "WaveTrendStra",
+    "filename": "WaveTrendStra.py"
   },
   "XebTradeStrat": {
     "complexity": 2,
@@ -9836,7 +10690,9 @@
       "Trend",
       "Mean Reversion"
     ],
-    "timeframe": "1m"
+    "timeframe": "1m",
+    "directory": "XebTradeStrat",
+    "filename": "XebTradeStrat.py"
   },
   "XtraThicc": {
     "complexity": 4,
@@ -9853,7 +10709,9 @@
     "style": [
       "Momentum"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "XtraThicc",
+    "filename": "XtraThicc.py"
   },
   "YOLO": {
     "features": [
@@ -9864,7 +10722,9 @@
     "style": [
       "Special"
     ],
-    "timeframe": "1m"
+    "timeframe": "1m",
+    "directory": "YOLO",
+    "filename": "YOLO.py"
   },
   "adaptive": {
     "complexity": 3,
@@ -9882,7 +10742,9 @@
       "Momentum",
       "Scalping"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "adaptive",
+    "filename": "adaptive.py"
   },
   "adx_opt_strat": {
     "complexity": 3,
@@ -9902,7 +10764,9 @@
       "Trend"
     ],
     "timeframe": "unknown",
-    "excluded": "Registry has invalid timeframe 'unknown' - no valid timeframe could be determined for this strategy"
+    "excluded": "Registry has invalid timeframe 'unknown' - no valid timeframe could be determined for this strategy",
+    "directory": "adx_opt_strat",
+    "filename": "adx_opt_strat.py"
   },
   "adxbbrsi2": {
     "complexity": 4,
@@ -9925,7 +10789,9 @@
       "Mean Reversion",
       "Momentum"
     ],
-    "timeframe": "1h"
+    "timeframe": "1h",
+    "directory": "adxbbrsi2",
+    "filename": "adxbbrsi2.py"
   },
   "bb_rsi_opt_new": {
     "complexity": 5,
@@ -9945,7 +10811,9 @@
       "Mean Reversion"
     ],
     "timeframe": "unknown",
-    "excluded": "Registry has invalid timeframe 'unknown' - no valid timeframe could be determined for this strategy"
+    "excluded": "Registry has invalid timeframe 'unknown' - no valid timeframe could be determined for this strategy",
+    "directory": "bb_rsi_opt_new",
+    "filename": "bb_rsi_opt_new.py"
   },
   "bbema": {
     "complexity": 4,
@@ -9962,7 +10830,9 @@
     "style": [
       "Trend"
     ],
-    "timeframe": "1h"
+    "timeframe": "1h",
+    "directory": "bbema",
+    "filename": "bbema.py"
   },
   "bbrsi1_strategy": {
     "complexity": 6,
@@ -9983,7 +10853,9 @@
       "Mean Reversion"
     ],
     "timeframe": "5m",
-    "excluded": "Strategy class fails to load - Python code error (class not found in file)"
+    "excluded": "Strategy class fails to load - Python code error (class not found in file)",
+    "directory": "bbrsi1_strategy",
+    "filename": "bbrsi1_strategy.py"
   },
   "bbrsi4Freq": {
     "complexity": 5,
@@ -10002,7 +10874,9 @@
     "style": [
       "Mean Reversion"
     ],
-    "timeframe": "1h"
+    "timeframe": "1h",
+    "directory": "bbrsi4Freq",
+    "filename": "bbrsi4Freq.py"
   },
   "bestV2": {
     "complexity": 8,
@@ -10024,7 +10898,9 @@
       "Trend",
       "Scalping"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "bestV2",
+    "filename": "bestV2.py"
   },
   "botbaby": {
     "complexity": 5,
@@ -10042,7 +10918,9 @@
       "Trend"
     ],
     "timeframe": "30m",
-    "excluded": "OKX exchange does not support 30m data granularity"
+    "excluded": "OKX exchange does not support 30m data granularity",
+    "directory": "botbaby",
+    "filename": "botbaby.py"
   },
   "conny": {
     "complexity": 7,
@@ -10069,7 +10947,9 @@
       "Trend",
       "Momentum"
     ],
-    "timeframe": "15m"
+    "timeframe": "15m",
+    "directory": "conny",
+    "filename": "conny.py"
   },
   "cryptohassle": {
     "complexity": 4,
@@ -10092,7 +10972,9 @@
       "Momentum"
     ],
     "timeframe": "unknown",
-    "excluded": "Registry has invalid timeframe 'unknown' - no valid timeframe could be determined for this strategy"
+    "excluded": "Registry has invalid timeframe 'unknown' - no valid timeframe could be determined for this strategy",
+    "directory": "cryptohassle",
+    "filename": "cryptohassle.py"
   },
   "custom": {
     "complexity": 10,
@@ -10119,7 +11001,9 @@
       "Mean Reversion",
       "Momentum"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "custom",
+    "filename": "custom.py"
   },
   "custom_sell": {
     "complexity": 5,
@@ -10137,7 +11021,9 @@
     "style": [
       "Breakout"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "custom_sell",
+    "filename": "custom_sell.py"
   },
   "e6v34": {
     "complexity": 5,
@@ -10157,7 +11043,9 @@
       "Trend",
       "Momentum"
     ],
-    "timeframe": "15m"
+    "timeframe": "15m",
+    "directory": "e6v34",
+    "filename": "e6v34.py"
   },
   "ema": {
     "complexity": 2,
@@ -10174,7 +11062,9 @@
     "style": [
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "ema",
+    "filename": "ema.py"
   },
   "epretrace": {
     "complexity": 7,
@@ -10198,7 +11088,9 @@
       "Trend",
       "Scalping"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "epretrace",
+    "filename": "epretrace.py"
   },
   "fahmibah": {
     "complexity": 10,
@@ -10223,7 +11115,9 @@
       "Mean Reversion",
       "Momentum"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "fahmibah",
+    "filename": "fahmibah.py"
   },
   "flawless_lambo": {
     "complexity": 10,
@@ -10252,7 +11146,9 @@
       "Mean Reversion",
       "Trend"
     ],
-    "timeframe": "15m"
+    "timeframe": "15m",
+    "directory": "flawless_lambo",
+    "filename": "flawless_lambo.py"
   },
   "hansencandlepatternV1": {
     "complexity": 1,
@@ -10267,7 +11163,9 @@
       "Trend",
       "Scalping"
     ],
-    "timeframe": "1h"
+    "timeframe": "1h",
+    "directory": "hansencandlepatternV1",
+    "filename": "hansencandlepatternV1.py"
   },
   "heikin": {
     "complexity": 3,
@@ -10285,7 +11183,9 @@
       "Trend",
       "Scalping"
     ],
-    "timeframe": "1h"
+    "timeframe": "1h",
+    "directory": "heikin",
+    "filename": "heikin.py"
   },
   "hlhb": {
     "complexity": 5,
@@ -10304,7 +11204,9 @@
     "style": [
       "Trend"
     ],
-    "timeframe": "4h"
+    "timeframe": "4h",
+    "directory": "hlhb",
+    "filename": "hlhb.py"
   },
   "ichiV1": {
     "complexity": 6,
@@ -10326,7 +11228,9 @@
       "Trend",
       "Breakout"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "ichiV1",
+    "filename": "ichiV1.py"
   },
   "ichiV1_Marius": {
     "complexity": 10,
@@ -10354,7 +11258,9 @@
       "Momentum"
     ],
     "timeframe": "5m",
-    "excluded": "Hyperopt parameter 'max_slip' and other buy parameters lack space= argument required by Freqtrade v3"
+    "excluded": "Hyperopt parameter 'max_slip' and other buy parameters lack space= argument required by Freqtrade v3",
+    "directory": "ichiV1_Marius",
+    "filename": "ichiV1_Marius.py"
   },
   "keltnerchannel": {
     "complexity": 3,
@@ -10372,7 +11278,9 @@
       "Breakout"
     ],
     "timeframe": "6h",
-    "excluded": "OKX exchange does not support 6h data granularity"
+    "excluded": "OKX exchange does not support 6h data granularity",
+    "directory": "keltnerchannel",
+    "filename": "keltnerchannel.py"
   },
   "mabStra": {
     "complexity": 3,
@@ -10389,7 +11297,9 @@
       "Trend",
       "Scalping"
     ],
-    "timeframe": "4h"
+    "timeframe": "4h",
+    "directory": "mabStra",
+    "filename": "mabStra.py"
   },
   "macd_recovery": {
     "complexity": 2,
@@ -10405,7 +11315,9 @@
     "style": [
       "Trend"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "macd_recovery",
+    "filename": "macd_recovery.py"
   },
   "mark_strat": {
     "complexity": 6,
@@ -10429,7 +11341,9 @@
       "Mean Reversion",
       "Momentum"
     ],
-    "timeframe": "1m"
+    "timeframe": "1m",
+    "directory": "mark_strat",
+    "filename": "mark_strat.py"
   },
   "mark_strat_opt": {
     "complexity": 7,
@@ -10455,7 +11369,9 @@
       "Momentum"
     ],
     "timeframe": "1m",
-    "excluded": "Strategy class fails to load - Python code error (class not found in file)"
+    "excluded": "Strategy class fails to load - Python code error (class not found in file)",
+    "directory": "mark_strat_opt",
+    "filename": "mark_strat_opt.py"
   },
   "quantumfirst": {
     "complexity": 6,
@@ -10478,7 +11394,9 @@
       "Trend",
       "Momentum"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "quantumfirst",
+    "filename": "quantumfirst.py"
   },
   "redditMA": {
     "complexity": 4,
@@ -10496,7 +11414,9 @@
       "Trend",
       "Breakout"
     ],
-    "timeframe": "15m"
+    "timeframe": "15m",
+    "directory": "redditMA",
+    "filename": "redditMA.py"
   },
   "stoploss": {
     "complexity": 10,
@@ -10529,7 +11449,9 @@
       "Mean Reversion",
       "Momentum"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "stoploss",
+    "filename": "stoploss.py"
   },
   "stratfib": {
     "complexity": 7,
@@ -10550,7 +11472,9 @@
     "style": [
       "Trend"
     ],
-    "timeframe": "1h"
+    "timeframe": "1h",
+    "directory": "stratfib",
+    "filename": "stratfib.py"
   },
   "strato": {
     "complexity": 3,
@@ -10566,7 +11490,9 @@
     "style": [
       "Trend"
     ],
-    "timeframe": "1m"
+    "timeframe": "1m",
+    "directory": "strato",
+    "filename": "strato.py"
   },
   "true_lambo": {
     "complexity": 10,
@@ -10599,7 +11525,9 @@
       "Mean Reversion",
       "Momentum"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "directory": "true_lambo",
+    "filename": "true_lambo.py"
   },
   "wtc": {
     "complexity": 4,
@@ -10619,6 +11547,8 @@
       "Momentum"
     ],
     "timeframe": "30m",
-    "excluded": "OKX exchange does not support 30m data granularity"
+    "excluded": "OKX exchange does not support 30m data granularity",
+    "directory": "wtc",
+    "filename": "wtc.py"
   }
 }
