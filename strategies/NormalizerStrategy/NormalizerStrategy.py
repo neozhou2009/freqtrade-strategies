@@ -6,23 +6,21 @@ from pandas import DataFrame
 from datetime import datetime, timedelta
 
 
-
-
 class NormalizerStrategy(IStrategy):
     INTERFACE_VERSION = 3
 
-    minimal_roi = {
-        "0": 0.18
-    }
+    minimal_roi = {"0": 0.18}
 
-    stoploss = -0.99 # effectively disabled.
+    stoploss = -0.99  # effectively disabled.
 
-    timeframe = '1h'
+    timeframe = "1h"
 
     # Sell signal
     use_exit_signal = True
     exit_profit_only = True
-    exit_profit_offset = 0.001 # it doesn't meant anything, just to guarantee there is a minimal profit.
+    exit_profit_offset = (
+        0.001  # it doesn't meant anything, just to guarantee there is a minimal profit.
+    )
     ignore_roi_if_entry_signal = True
 
     # Trailing stoploss
@@ -38,57 +36,64 @@ class NormalizerStrategy(IStrategy):
     process_only_new_candles = False
 
     # Number of candles the strategy requires before producing valid signals
-    startup_candle_count: int = 610
+    startup_candle_count: int = 40
 
     # Optional order type mapping.
     order_types = {
-        'entry': 'limit',
-        'exit': 'limit',
-        'stoploss': 'market',
-        'stoploss_on_exchange': False
+        "entry": "limit",
+        "exit": "limit",
+        "stoploss": "market",
+        "stoploss_on_exchange": False,
     }
 
-    def custom_stoploss(self, pair: str, trade: 'Trade', current_time: datetime,
-                        current_rate: float, current_profit: float, **kwargs) -> float:
+    def custom_stoploss(
+        self,
+        pair: str,
+        trade: "Trade",
+        current_time: datetime,
+        current_rate: float,
+        current_profit: float,
+        **kwargs,
+    ) -> float:
         # Manage losing trades and open room for better ones.
-        if (current_profit < 0) & (current_time - timedelta(minutes=300) > trade.open_date_utc):
+        if (current_profit < 0) & (
+            current_time - timedelta(minutes=300) > trade.open_date_utc
+        ):
             return 0.01
         return 0.99
 
     def fischer_norm(self, x, lookback):
         res = np.zeros_like(x)
         for i in range(lookback, len(x)):
-            x_min = np.min(x[i-lookback: i +1])
-            x_max = np.max(x[i-lookback: i +1])
-            #res[i] = (2*(x[i] - x_min) / (x_max - x_min)) - 1
+            x_min = np.min(x[i - lookback : i + 1])
+            x_max = np.max(x[i - lookback : i + 1])
+            # res[i] = (2*(x[i] - x_min) / (x_max - x_min)) - 1
             res[i] = (x[i] - x_min) / (x_max - x_min)
         return res
-    
+
     def populate_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         lookback = [13, 21, 34, 55, 89, 144, 233, 377, 610]
         for look in lookback:
-            dataframe[f"norm_{look}"] = self.fischer_norm(dataframe["close"].values, look)
+            dataframe[f"norm_{look}"] = self.fischer_norm(
+                dataframe["close"].values, look
+            )
         collist = [col for col in dataframe.columns if col.startswith("norm")]
         dataframe["pct_sum"] = dataframe[collist].sum(axis=1)
-
-
 
         return dataframe
 
     def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
-            (dataframe['pct_sum'] < .2) &
-            (dataframe['volume'] > 0) # Make sure Volume is not 0
-            ,
-            'buy'
+            (dataframe["pct_sum"] < 0.2)
+            & (dataframe["volume"] > 0),  # Make sure Volume is not 0
+            "buy",
         ] = 1
         return dataframe
 
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
-            (dataframe['pct_sum'] > 8) &
-            (dataframe['volume'] > 0) # Make sure Volume is not 0
-            ,
-            'sell'
+            (dataframe["pct_sum"] > 8)
+            & (dataframe["volume"] > 0),  # Make sure Volume is not 0
+            "sell",
         ] = 1
         return dataframe

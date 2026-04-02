@@ -806,7 +806,7 @@ class flawless_lambo(IStrategy):
     timeframe = '15m'
 
     # These values can be overridden in the "ask_strategy" section in the config.
-    use_sell_signal = True
+    use_exit_signal = True
     sell_profit_only = True
     # sell_profit_offset = 0.019
     ignore_roi_if_buy_signal = False

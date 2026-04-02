@@ -43,6 +43,8 @@ TODO:
 
 
 INTERFACE_VERSION = 3
+
+
 class Schism2(IStrategy):
     """
     Strategy Configuration Items
@@ -192,7 +194,7 @@ class Schism2(IStrategy):
     """
 
     def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
-        params = self.get_pair_params(metadata["pair"], "buy")
+        params = self.get_pair_params(metadata["pair"], "entry")
         trade_data = self.custom_trade_info[metadata["pair"]]
         conditions = []
 
@@ -259,7 +261,7 @@ class Schism2(IStrategy):
     """
 
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
-        params = self.get_pair_params(metadata["pair"], "sell")
+        params = self.get_pair_params(metadata["pair"], "exit")
         trade_data = self.custom_trade_info[metadata["pair"]]
         conditions = []
 
@@ -504,9 +506,9 @@ class Schism2(IStrategy):
     """
 
     def min_roi_reached_entry(
-        self, trade_dur: int, pair: str = "backtest"
+        self, trade: Trade, trade_dur: int, current_time: datetime
     ) -> Tuple[Optional[int], Optional[float]]:
-        minimal_roi = self.get_pair_params(pair, "minimal_roi")
+        minimal_roi = self.get_pair_params(trade.pair, "minimal_roi")
 
         roi_list = list(filter(lambda x: x <= trade_dur, minimal_roi.keys()))
         if not roi_list:
@@ -521,7 +523,7 @@ class Schism2(IStrategy):
         trade_dur = int(
             (current_time.timestamp() - trade.open_date_utc.timestamp()) // 60
         )
-        _, roi = self.min_roi_reached_entry(trade_dur, trade.pair)
+        _, roi = self.min_roi_reached_entry(trade, trade_dur, current_time)
         if roi is None:
             return False
         else:

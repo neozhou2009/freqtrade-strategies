@@ -502,7 +502,7 @@ class Dyna_opti(IStrategy):
         
         params = self.sell_params
         minimal_roi = self.minimal_roi
-        _, table_roi = self.min_roi_reached_entry(trade_dur)
+        _, table_roi = self.min_roi_reached_entry(trade, trade_dur, current_time)
 
         # see if we have the data we need to do this, otherwise fall back to the standard table
         if self.custom_trade_info and trade and trade.pair in self.custom_trade_info:
@@ -554,7 +554,7 @@ class Dyna_opti(IStrategy):
         if self.use_dynamic_roi:
             _, roi = self.min_roi_reached_dynamic(trade, current_profit, current_time, trade_dur)
         else:
-            _, roi = self.min_roi_reached_entry(trade_dur)
+            _, roi = self.min_roi_reached_entry(trade, trade_dur, current_time)
         if roi is None:
             return False
         else:

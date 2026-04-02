@@ -64,14 +64,14 @@ class Martin(IStrategy):
 
     # Optional order type mapping.
     order_types = {
-        "buy": "limit",
-        "sell": "limit",
+        "entry": "limit",
+        "exit": "limit",
         "stoploss": "market",
         "stoploss_on_exchange": False,
     }
 
     # Optional order time in force.
-    order_time_in_force = {"buy": "GTC", "sell": "GTC"}
+    order_time_in_force = {"entry": "GTC", "exit": "GTC"}
 
     plot_config = {
         # Main plot indicators (Moving averages, ...)

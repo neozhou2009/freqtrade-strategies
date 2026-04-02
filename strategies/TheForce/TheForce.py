@@ -11,14 +11,9 @@ from technical import qtpylib
 
 
 class TheForce(IStrategy):
-  
     INTERFACE_VERSION = 2
 
-    minimal_roi = {
-        "30": 0.005,
-        "15": 0.01,
-        "0": 0.012
-    }
+    minimal_roi = {"30": 0.005, "15": 0.01, "0": 0.012}
 
     stoploss = -0.015
 
@@ -29,13 +24,13 @@ class TheForce(IStrategy):
     # trailing_stop_positive_offset = 0.0  # Disabled / not configured
 
     # Optimal timeframe for the strategy.
-    timeframe = '15m'
+    timeframe = "15m"
 
     # Run "populate_indicators()" only for new candle.
     process_only_new_candles = False
 
     # These values can be overridden in the "ask_strategy" section in the config.
-    use_sell_signal = True
+    use_exit_signal = True
     sell_profit_only = True
     ignore_roi_if_buy_signal = False
 
@@ -44,35 +39,33 @@ class TheForce(IStrategy):
 
     # Optional order type mapping.
     order_types = {
-        'buy': 'limit',
-        'sell': 'limit',
-        'stoploss': 'market',
-        'stoploss_on_exchange': False
+        "entry": "limit",
+        "exit": "limit",
+        "stoploss": "market",
+        "stoploss_on_exchange": False,
     }
 
     # Optional order time in force.
-    order_time_in_force = {
-        'buy': 'GTC',
-        'sell': 'GTC'
-    }
-    
+    order_time_in_force = {"entry": "GTC", "exit": "GTC"}
+
     plot_config = {
         # Main plot indicators (Moving averages, ...)
-        'main_plot': {
-            'tema': {},
-            'sar': {'color': 'white'},
+        "main_plot": {
+            "tema": {},
+            "sar": {"color": "white"},
         },
-        'subplots': {
+        "subplots": {
             # Subplots - each dict defines one additional plot
             "MACD": {
-                'macd': {'color': 'blue'},
-                'macdsignal': {'color': 'orange'},
+                "macd": {"color": "blue"},
+                "macdsignal": {"color": "orange"},
             },
             "RSI": {
-                'rsi': {'color': 'red'},
-            }
-        }
+                "rsi": {"color": "red"},
+            },
+        },
     }
+
     def informative_pairs(self):
         """
         Define additional, informative pair/interval combinations to be cached from the exchange.
@@ -97,31 +90,30 @@ class TheForce(IStrategy):
         :param metadata: Additional information, like the currently traded pair
         :return: a Dataframe with all mandatory indicators for the strategies
         """
-        
+
         # Momentum Indicators
         # ------------------------------------
 
         # Stochastic Fast
-        stoch_fast = ta.STOCHF(dataframe,5,3,3)
-        dataframe['fastd'] = stoch_fast['fastd']
-        dataframe['fastk'] = stoch_fast['fastk']
+        stoch_fast = ta.STOCHF(dataframe, 5, 3, 3)
+        dataframe["fastd"] = stoch_fast["fastd"]
+        dataframe["fastk"] = stoch_fast["fastk"]
 
         # # Stochastic RSI
         stoch_rsi = ta.STOCHRSI(dataframe)
-        dataframe['fastd_rsi'] = stoch_rsi['fastd']
-        dataframe['fastk_rsi'] = stoch_rsi['fastk']
+        dataframe["fastd_rsi"] = stoch_rsi["fastd"]
+        dataframe["fastk_rsi"] = stoch_rsi["fastk"]
 
         # MACD
-        macd = ta.MACD(dataframe,12,26,1)
-        dataframe['macd'] = macd['macd']
-        dataframe['macdsignal'] = macd['macdsignal']
-        dataframe['macdhist'] = macd['macdhist']
+        macd = ta.MACD(dataframe, 12, 26, 1)
+        dataframe["macd"] = macd["macd"]
+        dataframe["macdsignal"] = macd["macdsignal"]
+        dataframe["macdhist"] = macd["macdhist"]
 
         # # EMA - Exponential Moving Average
 
-        dataframe['ema5c'] = ta.EMA(dataframe['close'], timeperiod=5)
-        dataframe['ema5o'] = ta.EMA(dataframe['open'], timeperiod=5)
-
+        dataframe["ema5c"] = ta.EMA(dataframe["close"], timeperiod=5)
+        dataframe["ema5o"] = ta.EMA(dataframe["open"], timeperiod=5)
 
         return dataframe
 
@@ -135,26 +127,20 @@ class TheForce(IStrategy):
         dataframe.loc[
             (
                 (
-                    (dataframe['fastk'] >= 20) & (dataframe['fastk'] <= 80)
-                    &
-                    (dataframe['fastd'] >= 20) & (dataframe['fastd'] <= 80)
+                    (dataframe["fastk"] >= 20)
+                    & (dataframe["fastk"] <= 80)
+                    & (dataframe["fastd"] >= 20)
+                    & (dataframe["fastd"] <= 80)
                 )
-                &
-                (
-                    (dataframe['macd'] > dataframe['macd'].shift(1))
-                    &
-                    (dataframe['macdsignal'] > dataframe['macdsignal'].shift(1))
+                & (
+                    (dataframe["macd"] > dataframe["macd"].shift(1))
+                    & (dataframe["macdsignal"] > dataframe["macdsignal"].shift(1))
                 )
-                &
-                (
-                    (dataframe['close'] > dataframe['close'].shift(1))
-                )
-                &
-                (
-                    (dataframe['ema5c'] >= dataframe['ema5o'])
-                )
+                & (dataframe["close"] > dataframe["close"].shift(1))
+                & (dataframe["ema5c"] >= dataframe["ema5o"])
             ),
-            'buy'] = 1
+            "buy",
+        ] = 1
 
         return dataframe
 
@@ -167,23 +153,13 @@ class TheForce(IStrategy):
         """
         dataframe.loc[
             (
-                (
-                    (dataframe['fastk'] <= 80)
-                    &
-                    (dataframe['fastd'] <= 80)
+                ((dataframe["fastk"] <= 80) & (dataframe["fastd"] <= 80))
+                & (
+                    (dataframe["macd"] < dataframe["macd"].shift(1))
+                    & (dataframe["macdsignal"] < dataframe["macdsignal"].shift(1))
                 )
-                &
-                (
-                    (dataframe['macd'] < dataframe['macd'].shift(1))
-                    &
-                    (dataframe['macdsignal'] < dataframe['macdsignal'].shift(1))
-                )
-                &
-                (
-                    (dataframe['ema5c'] < dataframe['ema5o'])
-                )
-                
+                & (dataframe["ema5c"] < dataframe["ema5o"])
             ),
-            'sell'] = 1
+            "sell",
+        ] = 1
         return dataframe
-    

@@ -45,7 +45,7 @@ class bbrsi1_strategy (IStrategy):
     process_only_new_candles = False
 
     # These values can be overridden in the "ask_strategy" section in the config.
-    use_sell_signal = True
+    use_exit_signal = True
     sell_profit_only = True
     ignore_roi_if_buy_signal = False
 

@@ -118,7 +118,7 @@ class custom(IStrategy):
     #trailing_only_offset_is_reached = True
 
     # Sell signal
-    use_sell_signal = False
+    use_exit_signal = False
     sell_profit_only = True
     sell_profit_offset = 0.01
     ignore_roi_if_buy_signal = False

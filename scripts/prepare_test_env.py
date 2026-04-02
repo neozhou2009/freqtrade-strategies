@@ -41,13 +41,21 @@ def fix_class_names(directory):
         print(f"[✓] Fixed {fixed_count} class name mismatches")
 
 
-def fix_numpy_compatibility(directory):
-    """Fix NumPy 2.0 compatibility issues in strategy files."""
+def fix_freqtrade_v3_compatibility(directory):
     replacements = [
         ("np.NaN", "np.nan"),
         ("numpy.NaN", "numpy.nan"),
         ("np.NAN", "np.nan"),
         ("numpy.NAN", "numpy.nan"),
+        ("sell_profit_only", "exit_profit_only"),
+        ("use_sell_signal", "use_exit_signal"),
+        ("sell_signal", "exit_signal"),
+        ("ignore_roi_if_buy_signal", "ignore_roi_if_entry_signal"),
+        ("from freqtrade.strategy.hyper import", "from freqtrade.strategy import"),
+        ("from freqtrade.strategy.hyper import\n", "from freqtrade.strategy import\n"),
+        ("sell_profit_offset", "exit_profit_offset"),
+        ("def custom_sell(", "def custom_exit("),
+        ("self.custom_sell(", "self.custom_exit("),
     ]
 
     fixed_count = 0
@@ -75,13 +83,61 @@ def fix_numpy_compatibility(directory):
                 content = new_content
                 modified = True
 
+        # Fix order_time_in_force v2→v3 keys
+        if re.search(r"order_time_in_force\s*=", content):
+            content = re.sub(
+                r"(order_time_in_force\s*=\s*\{[^}]*?)'buy'(\s*:\s*')",
+                r"\1'entry'\2",
+                content,
+            )
+            content = re.sub(
+                r"(order_time_in_force\s*=\s*\{[^}]*?)'sell'(\s*:\s*')",
+                r"\1'exit'\2",
+                content,
+            )
+            content = re.sub(
+                r'(order_time_in_force\s*=\s*\{[^}]*)"buy"(\s*:\s*")',
+                r'\1"entry"\2',
+                content,
+            )
+            content = re.sub(
+                r'(order_time_in_force\s*=\s*\{[^}]*)"sell"(\s*:\s*")',
+                r'\1"exit"\2',
+                content,
+            )
+            modified = True
+
+        # Fix order_types v2→v3 keys ('buy'→'entry', 'sell'→'exit')
+        if re.search(r"order_types\s*=", content):
+            content = re.sub(
+                r"(order_types\s*=\s*\{[^}]*?)'buy'(\s*:)",
+                r"\1'entry'\2",
+                content,
+            )
+            content = re.sub(
+                r"(order_types\s*=\s*\{[^}]*?)'sell'(\s*:)",
+                r"\1'exit'\2",
+                content,
+            )
+            content = re.sub(
+                r'(order_types\s*=\s*\{[^}]*)"buy"(\s*:)',
+                r'\1"entry"\2',
+                content,
+            )
+            content = re.sub(
+                r'(order_types\s*=\s*\{[^}]*)"sell"(\s*:)',
+                r'\1"exit"\2',
+                content,
+            )
+            modified = True
+
         if modified:
             with open(filepath, "w") as f:
                 f.write(content)
             fixed_count += 1
 
     if fixed_count > 0:
-        print(f"[✓] Fixed NumPy 2.0 compatibility in {fixed_count} files")
+        print(f"[✓] Fixed Freqtrade v3 compatibility in {fixed_count} files")
 
 
 def flatten_strategies():
@@ -107,7 +163,7 @@ def flatten_strategies():
 
     print(f"[✓] Flattened {count} strategy files to {dst_dir}")
     fix_class_names(dst_dir)
-    fix_numpy_compatibility(dst_dir)
+    fix_freqtrade_v3_compatibility(dst_dir)
     return count
 
 

@@ -36,7 +36,7 @@ class Ichimoku_v37(IStrategy):
     ignore_roi_if_entry_signal = True
 
     # Number of candles the strategy requires before producing valid signals
-    startup_candle_count = 150
+    startup_candle_count = 40
 
     # Optional order type mapping.
     order_types = {

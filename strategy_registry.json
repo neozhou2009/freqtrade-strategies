@@ -4633,7 +4633,8 @@
     "style": [
       "Breakout"
     ],
-    "timeframe": "12h"
+    "timeframe": "12h",
+    "excluded": "OKX exchange does not support 12h data granularity"
   },
   "HourBasedStrategy": {
     "complexity": 2,
@@ -5179,7 +5180,8 @@
     "style": [
       "Trend"
     ],
-    "timeframe": "30m"
+    "timeframe": "30m",
+    "excluded": "OKX exchange does not support 30m data granularity"
   },
   "MACDRSI200": {
     "complexity": 2,
@@ -7675,7 +7677,8 @@
       "Mean Reversion",
       "Trend"
     ],
-    "timeframe": "1h"
+    "timeframe": "1h",
+    "excluded": "Code-level bug: 'buy' column accessed before initialization in populate_entry_trend loop (line 196), file declares 'This version of the strategy is broken!'"
   },
   "NowoIchimoku1hV2": {
     "complexity": 6,
@@ -8045,7 +8048,8 @@
     "style": [
       "Momentum"
     ],
-    "timeframe": "15m"
+    "timeframe": "15m",
+    "excluded": "OKX exchange does not support 30m informative data required by this strategy"
   },
   "RSIBB02": {
     "complexity": 2,
@@ -8078,7 +8082,8 @@
     "style": [
       "Momentum"
     ],
-    "timeframe": "15m"
+    "timeframe": "15m",
+    "excluded": "OKX exchange does not support 30m informative data required by this strategy"
   },
   "RalliV1": {
     "complexity": 8,
@@ -8792,7 +8797,8 @@
       "Momentum",
       "Breakout"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "excluded": "OKX exchange does not support leverage tiers for DOGE/USDT, DOT/USDT, TRX/USDT - backtesting requires leverage tiers"
   },
   "Schism3": {
     "complexity": 7,
@@ -9325,7 +9331,8 @@
     "style": [
       "Trend"
     ],
-    "timeframe": "30m"
+    "timeframe": "30m",
+    "excluded": "OKX exchange does not support 30m data granularity"
   },
   "SwingHighToSky": {
     "complexity": 5,
@@ -9591,7 +9598,8 @@
     "style": [
       "Special"
     ],
-    "timeframe": "unknown"
+    "timeframe": "unknown",
+    "excluded": "Strategy explicitly states 'NOT COMPATIBLE WITH BACKTEST/HYPEROPT' and lacks a defined timeframe"
   },
   "Trend_Strength_Directional": {
     "complexity": 4,
@@ -9703,7 +9711,8 @@
       "Trend",
       "Breakout"
     ],
-    "timeframe": "1h"
+    "timeframe": "1h",
+    "excluded": "OKX exchange does not have BTC/USDT futures data at 1h timeframe needed for informative pair (BTC/{stake})"
   },
   "UltimateMomentumIndicator": {
     "complexity": 4,
@@ -9892,7 +9901,8 @@
       "Scalping",
       "Trend"
     ],
-    "timeframe": "unknown"
+    "timeframe": "unknown",
+    "excluded": "Registry has invalid timeframe 'unknown' - no valid timeframe could be determined for this strategy"
   },
   "adxbbrsi2": {
     "complexity": 4,
@@ -9934,7 +9944,8 @@
     "style": [
       "Mean Reversion"
     ],
-    "timeframe": "unknown"
+    "timeframe": "unknown",
+    "excluded": "Registry has invalid timeframe 'unknown' - no valid timeframe could be determined for this strategy"
   },
   "bbema": {
     "complexity": 4,
@@ -9971,7 +9982,8 @@
     "style": [
       "Mean Reversion"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "excluded": "Strategy class fails to load - Python code error (class not found in file)"
   },
   "bbrsi4Freq": {
     "complexity": 5,
@@ -10029,7 +10041,8 @@
     "style": [
       "Trend"
     ],
-    "timeframe": "30m"
+    "timeframe": "30m",
+    "excluded": "OKX exchange does not support 30m data granularity"
   },
   "conny": {
     "complexity": 7,
@@ -10078,7 +10091,8 @@
       "Trend",
       "Momentum"
     ],
-    "timeframe": "unknown"
+    "timeframe": "unknown",
+    "excluded": "Registry has invalid timeframe 'unknown' - no valid timeframe could be determined for this strategy"
   },
   "custom": {
     "complexity": 10,
@@ -10339,7 +10353,8 @@
       "Trend",
       "Momentum"
     ],
-    "timeframe": "5m"
+    "timeframe": "5m",
+    "excluded": "Hyperopt parameter 'max_slip' and other buy parameters lack space= argument required by Freqtrade v3"
   },
   "keltnerchannel": {
     "complexity": 3,
@@ -10356,7 +10371,8 @@
     "style": [
       "Breakout"
     ],
-    "timeframe": "6h"
+    "timeframe": "6h",
+    "excluded": "OKX exchange does not support 6h data granularity"
   },
   "mabStra": {
     "complexity": 3,
@@ -10438,7 +10454,8 @@
       "Mean Reversion",
       "Momentum"
     ],
-    "timeframe": "1m"
+    "timeframe": "1m",
+    "excluded": "Strategy class fails to load - Python code error (class not found in file)"
   },
   "quantumfirst": {
     "complexity": 6,
@@ -10601,6 +10618,7 @@
       "Trend",
       "Momentum"
     ],
-    "timeframe": "30m"
+    "timeframe": "30m",
+    "excluded": "OKX exchange does not support 30m data granularity"
   }
 }

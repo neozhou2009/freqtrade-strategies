@@ -27,7 +27,7 @@ class XtraThicc(IStrategy):
     timeframe = '5m'
     inf_timeframe = '1h'
 
-    use_sell_signal = True
+    use_exit_signal = True
     sell_profit_only = True
     ignore_roi_if_buy_signal = True
 

@@ -229,7 +229,7 @@ class FastSupertrend(IStrategy):
 
         # Mark the trend direction up/down
         df[stx] = np.where(
-            (df[st] > 0.00), np.where((df["close"] < df[st]), "down", "up"), np.NaN
+            (df[st] > 0.00), np.where((df["close"] < df[st]), "down", "up"), "NaN"
         )
 
         df.fillna(0, inplace=True)

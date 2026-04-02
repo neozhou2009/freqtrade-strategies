@@ -6,7 +6,7 @@ from pandas import DataFrame, Series
 from freqtrade.persistence import Trade
 from datetime import datetime
 import talib.abstract as ta
-import ta
+import ta as ta_lib
 from functools import reduce
 import numpy as np
 
@@ -154,15 +154,15 @@ class Dracula(IStrategy):
     supResFinder = SupResFinder()
 
     def populate_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
-        dataframe["bb_bbh"] = ta.volatility.bollinger_hband(
+        dataframe["bb_bbh"] = ta_lib.volatility.bollinger_hband(
             close=dataframe["close"], window=20
         )
-        dataframe["bb_bbl"] = ta.volatility.bollinger_lband(
+        dataframe["bb_bbl"] = ta_lib.volatility.bollinger_lband(
             close=dataframe["close"], window=20
         )
 
         dataframe["bb_bbh_i"] = dataframe["high"] >= dataframe["bb_bbh"]
-        dataframe["bb_bbl_i"] = ta.volatility.bollinger_lband_indicator(
+        dataframe["bb_bbl_i"] = ta_lib.volatility.bollinger_lband_indicator(
             close=dataframe["low"], window=20
         )
         dataframe["bb_bbt"] = (dataframe["bb_bbh"] - dataframe["bb_bbl"]) / dataframe[

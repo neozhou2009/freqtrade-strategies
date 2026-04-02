@@ -23,7 +23,7 @@ class conny(IStrategy):
 
     process_only_new_candles = True
 
-    use_sell_signal = True
+    use_exit_signal = True
     sell_profit_only = True
     ignore_roi_if_buy_signal = True
 

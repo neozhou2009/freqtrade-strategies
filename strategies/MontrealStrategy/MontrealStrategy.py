@@ -49,14 +49,14 @@ class MontrealStrategy(IStrategy):
 
     # Optional order type mapping.
     order_types = {
-        "buy": "limit",
-        "sell": "limit",
+        "entry": "limit",
+        "exit": "limit",
         "stoploss": "market",
         "stoploss_on_exchange": True,
     }
 
     # Optional order time in force.
-    order_time_in_force = {"buy": "GTC", "sell": "GTC"}
+    order_time_in_force = {"entry": "GTC", "exit": "GTC"}
 
     plot_config = {
         "main_plot": {},

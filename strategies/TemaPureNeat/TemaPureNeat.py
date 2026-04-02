@@ -57,7 +57,7 @@ class TemaPureNeat(IStrategy):
     ta_on_candle = False
 
     # Experimental settings (configuration will overide these if set)
-    use_sell_signal = True
+    use_exit_signal = True
     sell_profit_only = True
     ignore_roi_if_buy_signal = False
 
