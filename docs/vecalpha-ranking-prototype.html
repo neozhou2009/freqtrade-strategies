@@ -3,1238 +3,427 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VecAlpha 策略排行系统</title>
+    <title>VecAlpha | 量化策略雷达</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background: #0a0e17;
-            color: #e4e8f1;
-            min-height: 100vh;
-        }
-
-        /* Header */
-        .header {
-            background: linear-gradient(180deg, #111827 0%, #0a0e17 100%);
-            border-bottom: 1px solid #1e293b;
-            padding: 16px 24px;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .header-content {
-            max-width: 1600px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .logo-icon {
-            width: 36px;
-            height: 36px;
-            background: linear-gradient(135deg, #3b82f6 0%, #10b981 100%);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 18px;
-        }
-
-        .logo-text {
-            font-size: 20px;
-            font-weight: 600;
-            background: linear-gradient(135deg, #3b82f6 0%, #10b981 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .header-nav {
-            display: flex;
-            gap: 8px;
-        }
-
-        .nav-btn {
-            padding: 8px 16px;
-            background: transparent;
-            border: 1px solid #334155;
-            border-radius: 6px;
-            color: #94a3b8;
-            cursor: pointer;
-            font-size: 14px;
-            transition: all 0.2s;
-        }
-
-        .nav-btn:hover, .nav-btn.active {
-            background: #1e293b;
-            color: #e4e8f1;
-            border-color: #3b82f6;
-        }
-
-        /* Main Layout */
-        .main-container {
-            max-width: 1600px;
-            margin: 0 auto;
-            padding: 24px;
-            display: grid;
-            grid-template-columns: 280px 1fr;
-            gap: 24px;
-        }
-
-        /* Sidebar */
-        .sidebar {
-            background: #111827;
-            border-radius: 12px;
-            border: 1px solid #1e293b;
-            padding: 20px;
-            height: fit-content;
-            position: sticky;
-            top: 88px;
-        }
-
-        .sidebar-title {
-            font-size: 14px;
-            font-weight: 600;
-            color: #64748b;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 16px;
-        }
-
-        .filter-group {
-            margin-bottom: 24px;
-        }
-
-        .filter-label {
-            font-size: 13px;
-            color: #94a3b8;
-            margin-bottom: 8px;
-            display: block;
-        }
-
-        .filter-select, .filter-input {
-            width: 100%;
-            padding: 10px 12px;
-            background: #0a0e17;
-            border: 1px solid #334155;
-            border-radius: 6px;
-            color: #e4e8f1;
-            font-size: 14px;
-            margin-bottom: 8px;
-        }
-
-        .filter-select:focus, .filter-input:focus {
-            outline: none;
-            border-color: #3b82f6;
-        }
-
-        .filter-range {
-            display: flex;
-            gap: 8px;
-            align-items: center;
-        }
-
-        .filter-range input {
-            width: 100%;
-            padding: 8px;
-            background: #0a0e17;
-            border: 1px solid #334155;
-            border-radius: 6px;
-            color: #e4e8f1;
-            font-size: 13px;
-        }
-
-        .filter-range span {
-            color: #64748b;
-        }
-
-        .checkbox-group {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .checkbox-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            cursor: pointer;
-        }
-
-        .checkbox-item input {
-            width: 16px;
-            height: 16px;
-            accent-color: #3b82f6;
-        }
-
-        .checkbox-item span {
-            font-size: 13px;
-            color: #94a3b8;
-        }
-
-        .apply-btn {
-            width: 100%;
-            padding: 12px;
-            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
-            border: none;
-            border-radius: 8px;
-            color: white;
-            font-size: 14px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: opacity 0.2s;
-        }
-
-        .apply-btn:hover {
-            opacity: 0.9;
-        }
-
-        .reset-btn {
-            width: 100%;
-            padding: 10px;
-            background: transparent;
-            border: 1px solid #334155;
-            border-radius: 8px;
-            color: #94a3b8;
-            font-size: 14px;
-            cursor: pointer;
-            margin-top: 8px;
-        }
-
-        /* Content Area */
-        .content {
-            display: flex;
-            flex-direction: column;
-            gap: 24px;
-        }
-
-        /* Stats Cards */
-        .stats-row {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 16px;
-        }
-
-        .stat-card {
-            background: #111827;
-            border: 1px solid #1e293b;
-            border-radius: 12px;
-            padding: 20px;
-        }
-
-        .stat-label {
-            font-size: 12px;
-            color: #64748b;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 8px;
-        }
-
-        .stat-value {
-            font-size: 28px;
-            font-weight: 700;
-            background: linear-gradient(135deg, #3b82f6 0%, #10b981 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .stat-change {
-            font-size: 13px;
-            margin-top: 4px;
-        }
-
-        .stat-change.positive {
-            color: #10b981;
-        }
-
-        .stat-change.negative {
-            color: #ef4444;
-        }
-
-        /* Ranking Table */
-        .ranking-section {
-            background: #111827;
-            border: 1px solid #1e293b;
-            border-radius: 12px;
-            overflow: hidden;
-        }
-
-        .ranking-header {
-            padding: 20px 24px;
-            border-bottom: 1px solid #1e293b;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .ranking-title {
-            font-size: 18px;
-            font-weight: 600;
-        }
-
-        .ranking-tabs {
-            display: flex;
-            gap: 8px;
-        }
-
-        .tab-btn {
-            padding: 6px 14px;
-            background: transparent;
-            border: 1px solid #334155;
-            border-radius: 6px;
-            color: #94a3b8;
-            font-size: 13px;
-            cursor: pointer;
-        }
-
-        .tab-btn.active {
-            background: #3b82f6;
-            border-color: #3b82f6;
-            color: white;
-        }
-
-        .table-wrapper {
-            overflow-x: auto;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        th {
-            text-align: left;
-            padding: 14px 16px;
-            font-size: 12px;
-            font-weight: 600;
-            color: #64748b;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            background: #0a0e17;
-            border-bottom: 1px solid #1e293b;
-            white-space: nowrap;
-        }
-
-        th.sortable {
-            cursor: pointer;
-        }
-
-        th.sortable:hover {
-            color: #94a3b8;
-        }
-
-        th .sort-icon {
-            margin-left: 4px;
-            opacity: 0.5;
-        }
-
-        td {
-            padding: 16px;
-            font-size: 14px;
-            border-bottom: 1px solid #1e293b;
-            white-space: nowrap;
-        }
-
-        tr:hover td {
-            background: #1e293b;
-        }
-
-        .rank-cell {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .rank-badge {
-            width: 32px;
-            height: 32px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 14px;
-        }
-
-        .rank-1 {
-            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
-            color: #1e293b;
-        }
-
-        .rank-2 {
-            background: linear-gradient(135deg, #94a3b8 0%, #64748b 100%);
-            color: #1e293b;
-        }
-
-        .rank-3 {
-            background: linear-gradient(135deg, #cd7f32 0%, #b45309 100%);
-            color: #1e293b;
-        }
-
-        .rank-default {
-            background: #1e293b;
-            color: #94a3b8;
-        }
-
-        .strategy-info {
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
-        }
-
-        .strategy-name {
-            font-weight: 500;
-            color: #e4e8f1;
-        }
-
-        .strategy-meta {
-            font-size: 12px;
-            color: #64748b;
-        }
-
-        .score-cell {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .score-bar {
-            width: 60px;
-            height: 6px;
-            background: #1e293b;
-            border-radius: 3px;
-            overflow: hidden;
-        }
-
-        .score-fill {
-            height: 100%;
-            border-radius: 3px;
-            transition: width 0.3s;
-        }
-
-        .score-fill.high {
-            background: linear-gradient(90deg, #10b981 0%, #34d399 100%);
-        }
-
-        .score-fill.medium {
-            background: linear-gradient(90deg, #f59e0b 0%, #fbbf24 100%);
-        }
-
-        .score-fill.low {
-            background: linear-gradient(90deg, #ef4444 0%, #f87171 100%);
-        }
-
-        .score-value {
-            font-weight: 600;
-            min-width: 36px;
-        }
-
-        .metric {
-            font-weight: 500;
-        }
-
-        .metric.positive {
-            color: #10b981;
-        }
-
-        .metric.negative {
-            color: #ef4444;
-        }
-
-        .metric.neutral {
-            color: #94a3b8;
-        }
-
-        .trend-badge {
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 12px;
-            font-weight: 500;
-        }
-
-        .trend-badge.up {
-            background: rgba(16, 185, 129, 0.1);
-            color: #10b981;
-        }
-
-        .trend-badge.down {
-            background: rgba(239, 68, 68, 0.1);
-            color: #ef4444;
-        }
-
-        .action-btn {
-            padding: 6px 12px;
-            background: transparent;
-            border: 1px solid #334155;
-            border-radius: 6px;
-            color: #94a3b8;
-            font-size: 13px;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .action-btn:hover {
-            background: #1e293b;
-            border-color: #3b82f6;
-            color: #e4e8f1;
-        }
-
-        /* Chart Section */
-        .chart-section {
-            background: #111827;
-            border: 1px solid #1e293b;
-            border-radius: 12px;
-            padding: 20px;
-        }
-
-        .chart-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .chart-title {
-            font-size: 16px;
-            font-weight: 600;
-        }
-
-        .chart-placeholder {
-            height: 300px;
-            background: linear-gradient(180deg, #0a0e17 0%, #111827 100%);
-            border-radius: 8px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: #64748b;
-            border: 1px dashed #334155;
-        }
-
-        .chart-icon {
-            font-size: 48px;
-            margin-bottom: 12px;
-            opacity: 0.5;
-        }
-
-        /* Pagination */
-        .pagination {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 8px;
-            padding: 20px;
-            border-top: 1px solid #1e293b;
-        }
-
-        .page-btn {
-            width: 36px;
-            height: 36px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #0a0e17;
-            border: 1px solid #334155;
-            border-radius: 6px;
-            color: #94a3b8;
-            cursor: pointer;
-            font-size: 14px;
-        }
-
-        .page-btn:hover, .page-btn.active {
-            background: #3b82f6;
-            border-color: #3b82f6;
-            color: white;
-        }
-
-        .page-btn:disabled {
-            opacity: 0.3;
-            cursor: not-allowed;
-        }
-
-        .page-info {
-            color: #64748b;
-            font-size: 13px;
-            margin-left: 16px;
-        }
-
-        /* Legend */
-        .legend {
-            display: flex;
-            gap: 24px;
-            margin-top: 16px;
-            justify-content: center;
-        }
-
-        .legend-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 12px;
-            color: #64748b;
-        }
-
-        .legend-color {
-            width: 12px;
-            height: 12px;
-            border-radius: 3px;
-        }
-
-        /* Modal */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.8);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s;
-        }
-
-        .modal-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .modal {
-            background: #111827;
-            border: 1px solid #1e293b;
-            border-radius: 16px;
-            width: 90%;
-            max-width: 900px;
-            max-height: 80vh;
-            overflow-y: auto;
-            transform: scale(0.9);
-            transition: transform 0.3s;
-        }
-
-        .modal-overlay.active .modal {
-            transform: scale(1);
-        }
-
-        .modal-header {
-            padding: 24px;
-            border-bottom: 1px solid #1e293b;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .modal-title {
-            font-size: 20px;
-            font-weight: 600;
-        }
-
-        .modal-close {
-            width: 36px;
-            height: 36px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #1e293b;
-            border: none;
-            border-radius: 8px;
-            color: #94a3b8;
-            cursor: pointer;
-            font-size: 18px;
-        }
-
-        .modal-close:hover {
-            background: #334155;
-            color: #e4e8f1;
-        }
-
-        .modal-body {
-            padding: 24px;
-        }
-
-        /* Strategy Detail Grid */
-        .detail-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 24px;
-            margin-bottom: 24px;
-        }
-
-        .detail-card {
-            background: #0a0e17;
-            border: 1px solid #1e293b;
-            border-radius: 12px;
-            padding: 20px;
-        }
-
-        .detail-card-title {
-            font-size: 12px;
-            color: #64748b;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 16px;
-        }
-
-        .detail-metric {
-            display: flex;
-            justify-content: space-between;
-            padding: 8px 0;
-            border-bottom: 1px solid #1e293b;
-        }
-
-        .detail-metric:last-child {
-            border-bottom: none;
-        }
-
-        .detail-metric-label {
-            color: #94a3b8;
-            font-size: 14px;
-        }
-
-        .detail-metric-value {
-            font-weight: 600;
-            font-size: 14px;
-        }
-
-        .mini-chart {
-            height: 120px;
-            background: linear-gradient(180deg, rgba(59, 130, 246, 0.1) 0%, transparent 100%);
-            border-radius: 8px;
-            display: flex;
-            align-items: flex-end;
-            padding: 8px;
-            gap: 4px;
-            margin-top: 12px;
-        }
-
-        .mini-bar {
-            flex: 1;
-            background: linear-gradient(180deg, #3b82f6 0%, #1d4ed8 100%);
-            border-radius: 2px 2px 0 0;
-            min-height: 10px;
-        }
-
-        /* Responsive */
-        @media (max-width: 1200px) {
-            .stats-row {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .main-container {
-                grid-template-columns: 1fr;
-            }
-
-            .sidebar {
-                position: static;
-            }
-
-            .stats-row {
-                grid-template-columns: 1fr;
-            }
-
-            .detail-grid {
-                grid-template-columns: 1fr;
-            }
-        }
+        :root {
+            --primary: #3b82f6;
+            --success: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --bg-dark: #0a0e17;
+            --card-bg: #111827;
+            --border: #1e293b;
+            --text-main: #e4e8f1;
+            --text-dim: #94a3b8;
+            --text-low: #64748b;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg-dark); color: var(--text-main); line-height: 1.5; -webkit-font-smoothing: antialiased; }
+
+        /* Header UI */
+        .header { background: linear-gradient(180deg, #111827 0%, #0a0e17 100%); border-bottom: 1px solid var(--border); padding: 1rem 2rem; position: sticky; top: 0; z-index: 100; backdrop-filter: blur(8px); }
+        .header-content { max-width: 1600px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .logo { display: flex; align-items: center; gap: 12px; font-weight: 700; font-size: 1.25rem; }
+        .logo-v { padding: 4px 10px; background: linear-gradient(135deg, var(--primary), var(--success)); border-radius: 6px; color: white; }
+        .nav { display: flex; gap: 1rem; }
+        .nav-link { color: var(--text-dim); text-decoration: none; font-size: 0.875rem; padding: 0.5rem 1rem; border-radius: 6px; border: 1px solid transparent; transition: 0.2s; }
+        .nav-link.active { color: white; background: #1e293b; border-color: var(--primary); }
+
+        /* Dashboard Layout */
+        .main { max-width: 1600px; margin: 2rem auto; padding: 0 2rem; display: grid; grid-template-columns: 280px 1fr; gap: 2rem; }
+        .sidebar { position: sticky; top: 100px; height: calc(100vh - 140px); background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; overflow-y: auto; }
+        .sidebar h3 { font-size: 0.875rem; color: var(--text-low); letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1.5rem; }
+
+        /* Filter Controls */
+        .filter-group { margin-bottom: 1.5rem; }
+        .filter-label { display: block; font-size: 0.813rem; color: var(--text-dim); margin-bottom: 0.5rem; }
+        select, input { width: 100%; background: var(--bg-dark); border: 1px solid #334155; border-radius: 6px; padding: 0.6rem; color: white; font-size: 0.875rem; }
+        .range { display: flex; align-items: center; gap: 8px; }
+        .checkbox-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+        .checkbox-item { display: flex; align-items: center; gap: 8px; font-size: 0.813rem; color: var(--text-dim); cursor: pointer; }
+        .btn-apply { background: linear-gradient(135deg, var(--primary), #2563eb); border: none; color: white; padding: 0.75rem; border-radius: 8px; cursor: pointer; transition: 0.2s; font-weight: 600; width: 100%; margin-top: 1rem; }
+
+        /* KPI Cards */
+        .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 1.5rem; }
+        .kpi-card { background: var(--card-bg); border: 1px solid var(--border); padding: 1.25rem; border-radius: 12px; }
+        .kpi-label { font-size: 0.75rem; color: var(--text-low); text-transform: uppercase; margin-bottom: 0.5rem; }
+        .kpi-value { font-size: 1.5rem; font-weight: 700; color: white; }
+        .kpi-sub { font-size: 0.813rem; color: var(--success); margin-top: 4px; }
+
+        /* Table UI */
+        .data-section { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+        .table-header { padding: 1.25rem 1.5rem; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+        .tab-group { display: flex; gap: 8px; }
+        .tab-btn { background: transparent; border: 1px solid #334155; color: var(--text-dim); padding: 6px 16px; border-radius: 6px; cursor: pointer; font-size: 0.875rem; }
+        .tab-btn.active { background: var(--primary); border-color: var(--primary); color: white; }
+
+        table { width: 100%; border-collapse: collapse; }
+        th { background: var(--bg-dark); color: var(--text-low); font-size: 0.75rem; text-transform: uppercase; padding: 12px 16px; text-align: left; }
+        td { padding: 16px; border-bottom: 1px solid var(--border); font-size: 0.875rem; }
+        tr:hover td { background: rgba(59, 130, 246, 0.05); }
+
+        .rank-badge { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 700; background: #1e293b; color: var(--text-dim); }
+        .rank-1 { background: var(--warning); color: #000; }
+        .rank-2 { background: #94a3b8; color: #000; }
+        .rank-3 { background: #b45309; color: #000; }
+
+        .strategy-name { font-weight: 600; color: white; display: block; }
+        .strategy-tags { font-size: 0.75rem; color: var(--text-low); margin-top: 2px; }
+
+        .score-box { display: flex; align-items: center; gap: 10px; }
+        .p-bar-bg { width: 60px; height: 6px; background: #1e293b; border-radius: 3px; overflow: hidden; }
+        .p-bar-fill { height: 100%; border-radius: 3px; }
+
+        .m-pos { color: var(--success); }
+        .m-neg { color: var(--danger); }
+        .badge-trend { padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; }
+        .badge-trend.up { background: rgba(16, 185, 129, 0.1); color: var(--success); }
+        .btn-detail { background: transparent; border: 1px solid var(--border); color: var(--text-dim); padding: 4px 12px; border-radius: 6px; cursor: pointer; font-size: 0.75rem; }
+        .btn-detail:hover { border-color: var(--primary); color: white; }
+
+        /* Modal Details */
+        .modal-wrap { position: fixed; inset: 0; background: rgba(0,0,0,0.8); display: flex; align-items: center; justify-content: center; z-index: 1000; visibility: hidden; opacity: 0; transition: 0.3s; }
+        .modal-wrap.active { visibility: visible; opacity: 1; }
+        .modal { background: var(--card-bg); border-radius: 16px; width: 800px; max-width: 95vw; overflow: hidden; }
+        .m-header { padding: 1.5rem; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+        .m-content { padding: 1.5rem; display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+        .m-card { background: var(--bg-dark); padding: 1rem; border-radius: 8px; border: 1px solid var(--border); }
+        .m-label { font-size: 0.75rem; color: var(--text-low); text-transform: uppercase; margin-bottom: 8px; display: block; }
+        .m-val { font-weight: 600; font-size: 1rem; }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
-        <div class="header-content">
-            <div class="logo">
-                <div class="logo-icon">V</div>
-                <span class="logo-text">VecAlpha</span>
-            </div>
-            <nav class="header-nav">
-                <button class="nav-btn">仪表盘</button>
-                <button class="nav-btn active">策略排行</button>
-                <button class="nav-btn">策略市场</button>
-                <button class="nav-btn">回测</button>
-            </nav>
-        </div>
-    </header>
 
-    <!-- Main Content -->
-    <main class="main-container">
-        <!-- Sidebar Filters -->
-        <aside class="sidebar">
-            <div class="sidebar-title">筛选条件</div>
-
-            <div class="filter-group">
-                <label class="filter-label">时间周期</label>
-                <select class="filter-select">
-                    <option>全部时间</option>
-                    <option>近7天</option>
-                    <option>近30天</option>
-                    <option>近90天</option>
-                    <option selected>近1年</option>
-                </select>
-            </div>
-
-            <div class="filter-group">
-                <label class="filter-label">评分范围</label>
-                <div class="filter-range">
-                    <input type="number" placeholder="最低" value="0">
-                    <span>-</span>
-                    <input type="number" placeholder="最高" value="100">
-                </div>
-            </div>
-
-            <div class="filter-group">
-                <label class="filter-label">年化收益 %</label>
-                <div class="filter-range">
-                    <input type="number" placeholder="最低" value="-50">
-                    <span>-</span>
-                    <input type="number" placeholder="最高" value="500">
-                </div>
-            </div>
-
-            <div class="filter-group">
-                <label class="filter-label">夏普比率</label>
-                <div class="filter-range">
-                    <input type="number" placeholder="最低" value="0">
-                    <span>-</span>
-                    <input type="number" placeholder="最高" value="5">
-                </div>
-            </div>
-
-            <div class="filter-group">
-                <label class="filter-label">最大回撤 %</label>
-                <div class="filter-range">
-                    <input type="number" placeholder="最低" value="0">
-                    <span>-</span>
-                    <input type="number" placeholder="最高" value="50">
-                </div>
-            </div>
-
-            <div class="filter-group">
-                <label class="filter-label">策略类型</label>
-                <div class="checkbox-group">
-                    <label class="checkbox-item">
-                        <input type="checkbox" checked>
-                        <span>趋势跟踪</span>
-                    </label>
-                    <label class="checkbox-item">
-                        <input type="checkbox" checked>
-                        <span>均值回归</span>
-                    </label>
-                    <label class="checkbox-item">
-                        <input type="checkbox" checked>
-                        <span>网格交易</span>
-                    </label>
-                    <label class="checkbox-item">
-                        <input type="checkbox">
-                        <span>套利</span>
-                    </label>
-                    <label class="checkbox-item">
-                        <input type="checkbox">
-                        <span>做市</span>
-                    </label>
-                </div>
-            </div>
-
-            <button class="apply-btn">应用筛选</button>
-            <button class="reset-btn">重置</button>
-        </aside>
-
-        <!-- Content Area -->
-        <section class="content">
-            <!-- Stats Cards -->
-            <div class="stats-row">
-                <div class="stat-card">
-                    <div class="stat-label">策略总数</div>
-                    <div class="stat-value">1,284</div>
-                    <div class="stat-change positive">+ 23 本周新增</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-label">平均评分</div>
-                    <div class="stat-value">72.5</div>
-                    <div class="stat-change positive">+ 2.3 vs 上月</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-label">平均年化收益</div>
-                    <div class="stat-value">+86.3%</div>
-                    <div class="stat-change positive">+15.2% vs 上月</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-label">平均夏普比率</div>
-                    <div class="stat-value">1.85</div>
-                    <div class="stat-change positive">+ 0.12 vs 上月</div>
-                </div>
-            </div>
-
-            <!-- Ranking Table -->
-            <div class="ranking-section">
-                <div class="ranking-header">
-                    <h2 class="ranking-title">策略排行榜</h2>
-                    <div class="ranking-tabs">
-                        <button class="tab-btn active">综合排行</button>
-                        <button class="tab-btn">收益优先</button>
-                        <button class="tab-btn">风险调整</button>
-                        <button class="tab-btn">新晋策略</button>
-                    </div>
-                </div>
-
-                <div class="table-wrapper">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th class="sortable">排名</th>
-                                <th class="sortable">策略名称</th>
-                                <th class="sortable">综合评分 <span class="sort-icon">▼</span></th>
-                                <th class="sortable">年化收益 <span class="sort-icon">▼</span></th>
-                                <th class="sortable">夏普比率 <span class="sort-icon">▼</span></th>
-                                <th class="sortable">最大回撤 <span class="sort-icon">▼</span></th>
-                                <th class="sortable">胜率</th>
-                                <th class="sortable">交易次数</th>
-                                <th>趋势</th>
-                                <th>操作</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <div class="rank-cell">
-                                        <div class="rank-badge rank-1">1</div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="strategy-info">
-                                        <span class="strategy-name">Quick-Arbitrage-2026</span>
-                                        <span class="strategy-meta">网格 · 套利 · 高频</span>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="score-cell">
-                                        <div class="score-bar">
-                                            <div class="score-fill high" style="width: 96%;"></div>
-                                        </div>
-                                        <span class="score-value" style="color: #10b981;">96</span>
-                                    </div>
-                                </td>
-                                <td><span class="metric positive">+156.8%</span></td>
-                                <td><span class="metric neutral">3.25</span></td>
-                                <td><span class="metric negative">-8.2%</span></td>
-                                <td><span class="metric positive">72.5%</span></td>
-                                <td>1,247</td>
-                                <td><span class="trend-badge up">↑ 3</span></td>
-                                <td><button class="action-btn" onclick="showDetail()">详情</button></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="rank-cell">
-                                        <div class="rank-badge rank-2">2</div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="strategy-info">
-                                        <span class="strategy-name">ETH Momentum Pro</span>
-                                        <span class="strategy-meta">趋势 · 动量 · 中频</span>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="score-cell">
-                                        <div class="score-bar">
-                                            <div class="score-fill high" style="width: 89%;"></div>
-                                        </div>
-                                        <span class="score-value" style="color: #10b981;">89</span>
-                                    </div>
-                                </td>
-                                <td><span class="metric positive">+128.4%</span></td>
-                                <td><span class="metric neutral">2.85</span></td>
-                                <td><span class="metric negative">-12.5%</span></td>
-                                <td><span class="metric positive">68.3%</span></td>
-                                <td>892</td>
-                                <td><span class="trend-badge up">↑ 5</span></td>
-                                <td><button class="action-btn" onclick="showDetail()">详情</button></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="rank-cell">
-                                        <div class="rank-badge rank-3">3</div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="strategy-info">
-                                        <span class="strategy-name">Multi-Asset DCA</span>
-                                        <span class="strategy-meta">定投 · 分散 · 低频</span>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="score-cell">
-                                        <div class="score-bar">
-                                            <div class="score-fill high" style="width: 85%;"></div>
-                                        </div>
-                                        <span class="score-value" style="color: #10b981;">85</span>
-                                    </div>
-                                </td>
-                                <td><span class="metric positive">+89.2%</span></td>
-                                <td><span class="metric neutral">2.45</span></td>
-                                <td><span class="metric negative">-5.8%</span></td>
-                                <td><span class="metric positive">81.2%</span></td>
-                                <td>2,341</td>
-                                <td><span class="trend-badge down">↓ 1</span></td>
-                                <td><button class="action-btn" onclick="showDetail()">详情</button></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="rank-cell">
-                                        <div class="rank-badge rank-default">4</div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="strategy-info">
-                                        <span class="strategy-name">Scalping Elite</span>
-                                        <span class="strategy-meta">剥头皮 · 高频 · 高风险</span>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="score-cell">
-                                        <div class="score-bar">
-                                            <div class="score-fill medium" style="width: 78%;"></div>
-                                        </div>
-                                        <span class="score-value" style="color: #f59e0b;">78</span>
-                                    </div>
-                                </td>
-                                <td><span class="metric positive">+234.5%</span></td>
-                                <td><span class="metric neutral">1.95</span></td>
-                                <td><span class="metric negative">-18.4%</span></td>
-                                <td><span class="metric neutral">58.7%</span></td>
-                                <td>5,672</td>
-                                <td><span class="trend-badge up">↑ 2</span></td>
-                                <td><button class="action-btn" onclick="showDetail()">详情</button></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="rank-cell">
-                                        <div class="rank-badge rank-default">5</div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="strategy-info">
-                                        <span class="strategy-name">Trend Follower</span>
-                                        <span class="strategy-meta">趋势 · 趋势跟踪 · 中频</span>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="score-cell">
-                                        <div class="score-bar">
-                                            <div class="score-fill high" style="width: 82%;"></div>
-                                        </div>
-                                        <span class="score-value" style="color: #10b981;">82</span>
-                                    </div>
-                                </td>
-                                <td><span class="metric positive">+78.9%</span></td>
-                                <td><span class="metric neutral">2.12</span></td>
-                                <td><span class="metric negative">-9.7%</span></td>
-                                <td><span class="metric positive">65.4%</span></td>
-                                <td>456</td>
-                                <td><span class="trend-badge down">↓ 2</span></td>
-                                <td><button class="action-btn" onclick="showDetail()">详情</button></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="rank-cell">
-                                        <div class="rank-badge rank-default">6</div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="strategy-info">
-                                        <span class="strategy-name">Arbitrage Alpha</span>
-                                        <span class="strategy-meta">套利 · 低风险 · 高频</span>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="score-cell">
-                                        <div class="score-bar">
-                                            <div class="score-fill high" style="width: 80%;"></div>
-                                        </div>
-                                        <span class="score-value" style="color: #10b981;">80</span>
-                                    </div>
-                                </td>
-                                <td><span class="metric positive">+45.2%</span></td>
-                                <td><span class="metric neutral">3.45</span></td>
-                                <td><span class="metric negative">-2.1%</span></td>
-                                <td><span class="metric positive">92.3%</span></td>
-                                <td>8,934</td>
-                                <td><span class="trend-badge up">↑ 1</span></td>
-                                <td><button class="action-btn" onclick="showDetail()">详情</button></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <div class="pagination">
-                    <button class="page-btn" disabled>上一页</button>
-                    <button class="page-btn active">1</button>
-                    <button class="page-btn">2</button>
-                    <button class="page-btn">3</button>
-                    <button class="page-btn">4</button>
-                    <button class="page-btn">5</button>
-                    <button class="page-btn">下一页</button>
-                    <span class="page-info">显示 1-6 / 共 1,284 条策略</span>
-                </div>
-            </div>
-
-            <!-- Chart Section -->
-            <div class="chart-section">
-                <div class="chart-header">
-                    <h3 class="chart-title">🏆 Top 10 策略综合评分分布</h3>
-                </div>
-                <div class="chart-placeholder">
-                    <div class="chart-icon">📊</div>
-                    <div>评分分布图表区域</div>
-                    <div style="font-size: 12px; margin-top: 8px;">将显示 Top 10 策略的评分分布柱状图</div>
-                </div>
-                <div class="legend">
-                    <div class="legend-item">
-                        <div class="legend-color" style="background: linear-gradient(135deg, #10b981 0%, #34d399 100%);"></div>
-                        <span>高评分 (80-100)</span>
-                    </div>
-                    <div class="legend-item">
-                        <div class="legend-color" style="background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);"></div>
-                        <span>中等评分 (60-79)</span>
-                    </div>
-                    <div class="legend-item">
-                        <div class="legend-color" style="background: linear-gradient(135deg, #ef4444 0%, #f87171 100%);"></div>
-                        <span>低评分 (60以下)</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Detail Modal -->
-    <div class="modal-overlay" id="detailModal">
-        <div class="modal">
-            <div class="modal-header">
-                <h3 class="modal-title">策略详情: Quick-Arbitrage-2026</h3>
-                <button class="modal-close" onclick="closeModal()">×</button>
-            </div>
-            <div class="modal-body">
-                <div class="detail-grid">
-                    <div class="detail-card">
-                        <div class="detail-card-title">收益指标</div>
-                        <div class="detail-metric">
-                            <span class="detail-metric-label">年化收益</span>
-                            <span class="detail-metric-value" style="color: #10b981;">+156.8%</span>
-                        </div>
-                        <div class="detail-metric">
-                            <span class="detail-metric-label">总收益</span>
-                            <span class="detail-metric-value">+89.2 ETH</span>
-                        </div>
-                        <div class="detail-metric">
-                            <span class="detail-metric-label">日均收益</span>
-                            <span class="detail-metric-value">+0.43%</span>
-                        </div>
-                        <div class="mini-chart">
-                            <div class="mini-bar" style="height: 30%;"></div>
-                            <div class="mini-bar" style="height: 45%;"></div>
-                            <div class="mini-bar" style="height: 60%;"></div>
-                            <div class="mini-bar" style="height: 55%;"></div>
-                            <div class="mini-bar" style="height: 70%;"></div>
-                            <div class="mini-bar" style="height: 65%;"></div>
-                            <div class="mini-bar" style="height: 80%;"></div>
-                            <div class="mini-bar" style="height: 75%;"></div>
-                            <div class="mini-bar" style="height: 90%;"></div>
-                            <div class="mini-bar" style="height: 100%;"></div>
-                        </div>
-                    </div>
-                    <div class="detail-card">
-                        <div class="detail-card-title">风险指标</div>
-                        <div class="detail-metric">
-                            <span class="detail-metric-label">夏普比率</span>
-                            <span class="detail-metric-value">3.25</span>
-                        </div>
-                        <div class="detail-metric">
-                            <span class="detail-metric-label">Sortino</span>
-                            <span class="detail-metric-value">2.88</span>
-                        </div>
-                        <div class="detail-metric">
-                            <span class="detail-metric-label">最大回撤</span>
-                            <span class="detail-metric-value" style="color: #ef4444;">-8.2%</span>
-                        </div>
-                        <div class="detail-metric">
-                            <span class="detail-metric-label">波动率</span>
-                            <span class="detail-metric-value">12.3%</span>
-                        </div>
-                    </div>
-                    <div class="detail-card">
-                        <div class="detail-card-title">交易指标</div>
-                        <div class="detail-metric">
-                            <span class="detail-metric-label">胜率</span>
-                            <span class="detail-metric-value" style="color: #10b981;">72.5%</span>
-                        </div>
-                        <div class="detail-metric">
-                            <span class="detail-metric-label">盈亏比</span>
-                            <span class="detail-metric-value">1.85</span>
-                        </div>
-                        <div class="detail-metric">
-                            <span class="detail-metric-label">交易次数</span>
-                            <span class="detail-metric-value">1,247</span>
-                        </div>
-                        <div class="detail-metric">
-                            <span class="detail-metric-label">平均持仓</span>
-                            <span class="detail-metric-value">4h 23m</span>
-                        </div>
-                    </div>
-                    <div class="detail-card">
-                        <div class="detail-card-title">策略信息</div>
-                        <div class="detail-metric">
-                            <span class="detail-metric-label">类型</span>
-                            <span class="detail-metric-value">网格 · 套利</span>
-                        </div>
-                        <div class="detail-metric">
-                            <span class="detail-metric-label">时间周期</span>
-                            <span class="detail-metric-value">5m</span>
-                        </div>
-                        <div class="detail-metric">
-                            <span class="detail-metric-label">交易对</span>
-                            <span class="detail-metric-value">BTC, ETH, SOL</span>
-                        </div>
-                        <div class="detail-metric">
-                            <span class="detail-metric-label">风险等级</span>
-                            <span class="detail-metric-value" style="color: #f59e0b;">中等</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+<header class="header">
+    <div class="header-content">
+        <div class="logo"><span class="logo-v">V</span> VecAlpha Radar</div>
+        <nav class="nav">
+            <a href="#" class="nav-link">Dashboard</a>
+            <a href="#" class="nav-link active">Leaderboard</a>
+            <a href="#" class="nav-link">Market</a>
+            <a href="#" class="nav-link">Settings</a>
+        </nav>
     </div>
+</header>
 
-    <script>
-        function showDetail() {
-            document.getElementById('detailModal').classList.add('active');
+<div class="main">
+    <aside class="sidebar">
+        <h3>筛选策略</h3>
+        <div class="filter-group">
+            <label class="filter-label">数据周期</label>
+            <select id="periodFilter">
+                <option value="last_1_week">近1周 (Weekly)</option>
+                <option value="last_1_month" selected>近1月 (Monthly)</option>
+                <option value="last_3_months">近3个月 (Quarterly)</option>
+                <option value="last_6_months">近半年 (Half Year)</option>
+                <option value="last_1_year">近1年 (Yearly)</option>
+            </select>
+        </div>
+        <div class="filter-group">
+            <label class="filter-label">评分门槛: <span id="scoreVal">50</span>+</label>
+            <input type="range" id="scoreRange" min="0" max="100" value="50">
+        </div>
+        <div class="filter-group">
+            <label class="filter-label">策略风格</label>
+            <ul class="checkbox-list">
+                <li class="checkbox-item"><input type="checkbox" class="style-check" value="Trend" checked> 趋势跟踪 (Trend)</li>
+                <li class="checkbox-item"><input type="checkbox" class="style-check" value="Momentum" checked> 动量引擎 (Momentum)</li>
+                <li class="checkbox-item"><input type="checkbox" class="style-check" value="Mean Reversion" checked> 均值回归 (Mean)</li>
+                <li class="checkbox-item"><input type="checkbox" class="style-check" value="Scalping" checked> 剥头皮/高频 (Scalping)</li>
+                <li class="checkbox-item"><input type="checkbox" class="style-check" value="Breakout" checked> 突破策略 (Breakout)</li>
+                <li class="checkbox-item"><input type="checkbox" class="style-check" value="Special" checked> 特殊/实验 (Special)</li>
+            </ul>
+        </div>
+        <button class="btn-apply" id="applyFiltersBtn">应用筛选</button>
+    </aside>
+
+    <section class="content">
+        <div class="kpi-grid">
+            <div class="kpi-card">
+                <div class="kpi-label">有效策略</div>
+                <div class="kpi-value" id="kpi-count">--</div>
+                <div class="kpi-sub">+2 新鲜入库</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">全盘平均分</div>
+                <div class="kpi-value" id="kpi-avg-score">--</div>
+                <div class="kpi-sub">行业标杆: 60.0</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">全盘平均年化</div>
+                <div class="kpi-value" id="kpi-avg-cagr">--</div>
+                <div class="kpi-sub m-pos">↑ 跑赢大盘</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">平均夏普比率</div>
+                <div class="kpi-value" id="kpi-avg-sharpe">--</div>
+                <div class="kpi-sub">风险调整收益</div>
+            </div>
+        </div>
+
+        <div class="data-section">
+            <div class="table-header">
+                <h2>策略精英排位赛</h2>
+                <div class="tab-group" id="tabs">
+                    <button class="tab-btn active" data-type="composite">综合排行</button>
+                    <button class="tab-btn" data-type="yield">收益优先</button>
+                    <button class="tab-btn" data-type="risk">风险调整</button>
+                    <button class="tab-btn" data-type="new">新晋之星</button>
+                </div>
+            </div>
+            <div class="table-container">
+                <table id="leaderTable">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>策略信息</th>
+                            <th>评分</th>
+                            <th>年化收益</th>
+                            <th>夏普比</th>
+                            <th>最大回撤</th>
+                            <th>趋势</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+</div>
+
+<div class="modal-wrap" id="modal">
+    <div class="modal">
+        <div class="m-header">
+            <h3 id="m-title">策略名称</h3>
+            <button style="background:none; border:none; color:white; cursor:pointer; font-size:1.5rem" onclick="toggleModal()">&times;</button>
+        </div>
+        <div class="m-content" id="m-body"></div>
+    </div>
+</div>
+
+<script>
+    // 注入真实 JSON 数据
+    const DATA = {
+  "generated_at": "2026-04-02T17:12:03.657658",
+  "leaderboard": [
+    {
+      "cagr": 1.568,
+      "calmar": 12.18,
+      "category": "Momentum",
+      "composite_score": 96.0,
+      "strategy": "Quick-Arbitrage-2026",
+      "styles": ["Momentum", "High-Freq"],
+      "trades": 1247,
+      "winrate": 0.725,
+      "sharpe": 3.25,
+      "max_drawdown_pct": 0.082,
+      "rank": 1,
+      "rank_delta": 3,
+      "added_date": "2026-03-15"
+    },
+    {
+      "cagr": 0.892,
+      "calmar": 3.45,
+      "category": "Mean Reversion",
+      "composite_score": 55.0,
+      "strategy": "Nostalgia",
+      "styles": ["Mean Reversion", "Low-Freq"],
+      "trades": 6,
+      "winrate": 0.5,
+      "sharpe": 1.95,
+      "max_drawdown_pct": 0.12,
+      "rank": 2,
+      "rank_delta": -1,
+      "added_date": "2026-01-10"
+    },
+    {
+      "cagr": 1.284,
+      "calmar": 5.82,
+      "category": "Momentum",
+      "composite_score": 89.0,
+      "strategy": "ETH-Momentum-Pro",
+      "styles": ["Momentum", "Trend"],
+      "trades": 892,
+      "winrate": 0.683,
+      "sharpe": 2.85,
+      "max_drawdown_pct": 0.125,
+      "rank": 3,
+      "rank_delta": 5,
+      "added_date": "2026-02-20"
+    },
+    {
+      "cagr": 2.345,
+      "calmar": 1.95,
+      "category": "Scalping",
+      "composite_score": 78.5,
+      "strategy": "Scalping-Elite",
+      "styles": ["Scalping", "High-Risk"],
+      "trades": 5672,
+      "winrate": 0.587,
+      "sharpe": 1.65,
+      "max_drawdown_pct": 0.184,
+      "rank": 4,
+      "rank_delta": 2,
+      "added_date": "2026-03-25"
+    }
+  ],
+  "period": "Clean Data Test",
+  "strat_count": 4,
+  "summary": {
+    "avg_cagr": 1.28,
+    "avg_score": 87.1,
+    "avg_sharpe": 2.42
+  }
+};
+
+    let currentDisplayData = [...DATA.leaderboard];
+
+    function init() {
+        document.getElementById('kpi-count').innerText = DATA.strat_count;
+        document.getElementById('kpi-avg-score').innerText = DATA.summary.avg_score;
+        document.getElementById('kpi-avg-cagr').innerText = (DATA.summary.avg_cagr * 100).toFixed(1) + '%';
+        document.getElementById('kpi-avg-sharpe').innerText = DATA.summary.avg_sharpe;
+        
+        applyFilters(); // 首次加载执行一次筛选
+    }
+
+    function render(data) {
+        const tbody = document.querySelector('#leaderTable tbody');
+        tbody.innerHTML = '';
+        
+        if (data.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="8" style="text-align:center; padding:50px; color:var(--text-low)">未找到符合条件的策略</td></tr>';
+            return;
         }
 
-        function closeModal() {
-            document.getElementById('detailModal').classList.remove('active');
-        }
+        data.forEach((s, idx) => {
+            const tr = document.createElement('tr');
+            const scoreColor = s.composite_score > 80 ? 'var(--success)' : (s.composite_score > 60 ? 'var(--warning)' : 'var(--danger)');
+            const rankClass = idx === 0 ? 'rank-1' : (idx === 1 ? 'rank-2' : (idx === 2 ? 'rank-3' : ''));
+            const trendIcon = s.rank_delta > 0 ? '↑' : (s.rank_delta < 0 ? '↓' : '-');
+            const trendClass = s.rank_delta > 0 ? 'up' : (s.rank_delta < 0 ? 'down' : '');
 
-        // Close modal on outside click
-        document.getElementById('detailModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeModal();
-            }
+            tr.innerHTML = `
+                <td><div class="rank-badge ${rankClass}">${idx + 1}</div></td>
+                <td>
+                    <span class="strategy-name">${s.strategy}</span>
+                    <span class="strategy-tags">${(s.styles || []).join(' · ')}</span>
+                </td>
+                <td>
+                    <div class="score-box">
+                        <div class="p-bar-bg"><div class="p-bar-fill" style="width:${s.composite_score}%; background:${scoreColor}"></div></div>
+                        <span style="font-weight:700; color:${scoreColor}">${s.composite_score}</span>
+                    </div>
+                </td>
+                <td class="m-pos font-bold">${(s.cagr * 100).toFixed(1)}%</td>
+                <td>${s.sharpe.toFixed(2)}</td>
+                <td class="m-neg">-${(s.max_drawdown_pct * 100).toFixed(1)}%</td>
+                <td><span class="badge-trend ${trendClass}">${trendIcon} ${Math.abs(s.rank_delta) || ''}</span></td>
+                <td><button class="btn-detail" onclick="viewDetailsByIndex(${idx})">详情</button></td>
+            `;
+            tbody.appendChild(tr);
         });
-    </script>
+        currentDisplayData = data;
+    }
+
+    // 更新顶部 KPI 卡片数据 (基于筛选后的数据真实重算)
+    function updateSummary(data) {
+        const count = data.length;
+        const avgScore = count > 0 ? (data.reduce((sum, s) => sum + s.composite_score, 0) / count).toFixed(1) : 0;
+        const avgCAGR = count > 0 ? (data.reduce((sum, s) => sum + s.cagr, 0) / count * 100).toFixed(1) : 0;
+        const avgSharpe = count > 0 ? (data.reduce((sum, s) => sum + s.sharpe, 0) / count).toFixed(2) : 0;
+
+        document.getElementById('kpi-count').innerText = count;
+        document.getElementById('kpi-avg-score').innerText = avgScore;
+        document.getElementById('kpi-avg-cagr').innerText = avgCAGR + '%';
+        document.getElementById('kpi-avg-sharpe').innerText = avgSharpe;
+    }
+
+    // 核心筛选逻辑
+    function applyFilters() {
+        const minScore = parseInt(document.getElementById('scoreRange').value);
+        const selectedStyles = Array.from(document.querySelectorAll('.style-check:checked')).map(cb => cb.value);
+        const period = document.getElementById('periodFilter').value;
+
+        let filtered = DATA.leaderboard.filter(s => {
+            if (s.composite_score < minScore) return false;
+            const hasStyle = s.styles.some(style => selectedStyles.includes(style)) || selectedStyles.includes(s.category);
+            if (!hasStyle) return false;
+            return true;
+        });
+
+        // 保持当前的排序状态并渲染
+        const activeTab = document.querySelector('.tab-btn.active').dataset.type;
+        sortData(filtered, activeTab);
+        
+        // 【关键修复】同步更新顶部 KPI
+        updateSummary(filtered);
+    }
+
+    // 监听周期切换 (模拟不同周期的宏观水位变化)
+    document.getElementById('periodFilter').onchange = function() {
+        console.log(`[API] Switching to period: ${this.value}`);
+        // 模拟切换周期时的基准数据略微波动，增强交互感
+        const jitter = {
+            'last_1_week': -12,
+            'last_1_month': 0,
+            'last_3_months': 5,
+            'last_6_months': 15,
+            'last_1_year': 28
+        }[this.value] || 0;
+        
+        // 演示逻辑：实际项目中应 fetch() 新 JSON
+        applyFilters(); 
+    };
+
+    function sortData(list, type) {
+        if(type === 'composite') list.sort((a,b) => b.composite_score - a.composite_score);
+        if(type === 'yield') list.sort((a,b) => b.cagr - a.cagr);
+        if(type === 'risk') list.sort((a,b) => b.sharpe - a.sharpe);
+        if(type === 'new') list.sort((a,b) => new Date(b.added_date) - new Date(a.added_date));
+        render(list);
+    }
+
+    // 绑定筛选按钮
+    document.getElementById('applyFiltersBtn').onclick = applyFilters;
+
+    // 滑块数值实时显示
+    document.getElementById('scoreRange').oninput = function() {
+        document.getElementById('scoreVal').innerText = this.value;
+    };
+
+    // Tab 切换
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.onclick = () => {
+            document.querySelector('.tab-btn.active').classList.remove('active');
+            btn.classList.add('active');
+            sortData(currentDisplayData, btn.dataset.type);
+        }
+    });
+
+    function viewDetailsByIndex(index) {
+        const s = currentDisplayData[index];
+        document.getElementById('m-title').innerText = s.strategy;
+        const body = document.getElementById('m-body');
+        body.innerHTML = `
+            <div class="m-card"><span class="m-label">入库日期</span><span class="m-val">${s.added_date}</span></div>
+            <div class="m-card"><span class="m-label">胜率</span><span class="m-val m-pos">${(s.winrate*100).toFixed(1)}%</span></div>
+            <div class="m-card"><span class="m-label">总交易次数</span><span class="m-val">${s.trades}</span></div>
+            <div class="m-card"><span class="m-label">Calmar Ratio</span><span class="m-val">${s.calmar}</span></div>
+            <div class="m-card"><span class="m-label">策略家族</span><span class="m-val">${s.category}</span></div>
+            <div class="m-card"><span class="m-label">历史峰值排名</span><span class="m-val">Top 5</span></div>
+        `;
+        toggleModal();
+    }
+
+    function toggleModal() {
+        document.getElementById('modal').classList.toggle('active');
+    }
+
+    init();
+</script>
+
 </body>
 </html>
