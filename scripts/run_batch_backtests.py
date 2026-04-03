@@ -71,7 +71,10 @@ def main():
     parser.add_argument(
         "--total-batches", type=int, required=False, help="Total number of batches"
     )
-    parser.add_argument("--docker", action="store_true", help="Use Docker mode")
+    import shutil
+    has_freqtrade = shutil.which("freqtrade") is not None
+
+    parser.add_argument("--docker", action="store_true", default=not has_freqtrade, help="Use Docker mode")
     parser.add_argument(
         "--docker-image",
         default="neozhou2009/freqtrade-full:latest",

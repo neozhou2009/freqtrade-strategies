@@ -23,11 +23,15 @@ def main():
         ],
         help="Timeframe period for the backtests"
     )
+    # Auto-detect if freqtrade binary is in path
+    import shutil
+    has_freqtrade = shutil.which("freqtrade") is not None
+
     parser.add_argument(
         "--docker",
         action="store_true",
-        default=False,
-        help="Use Docker mode (passed through to run_batch_backtests.py)"
+        default=not has_freqtrade,
+        help="Use Docker mode (defaulted to True if 'freqtrade' binary is not found)"
     )
     parser.add_argument(
         "--docker-image",
@@ -53,6 +57,48 @@ def main():
     print(f"Period: {period}")
     print(f"Skip errors: {args.skip_errors} (each strategy runs individually when True)")
     print()
+
+    # Step 1: Data Check & Download
+    print("[*] Step 1: Ensuring backtest data is available...")
+    from datetime import datetime, timedelta
+    
+    # Calculate timerange (matching run_batch_backtests logic)
+    now = datetime.now()
+    if period == "2025_year":
+        timerange = "20250101-20251231"
+    elif period == "last_1_week":
+        timerange = f"{(now - timedelta(days=7)).strftime('%Y%m%d')}-{now.strftime('%Y%m%d')}"
+    elif period == "last_1_month":
+        timerange = f"{(now - timedelta(days=30)).strftime('%Y%m%d')}-{now.strftime('%Y%m%d')}"
+    elif period == "last_3_months":
+        timerange = f"{(now - timedelta(days=90)).strftime('%Y%m%d')}-{now.strftime('%Y%m%d')}"
+    elif period == "last_6_months":
+        timerange = f"{(now - timedelta(days=180)).strftime('%Y%m%d')}-{now.strftime('%Y%m%d')}"
+    
+    import os
+    test_dir = os.path.abspath("test")
+    
+    # Download data command (Common timeframes used in registry)
+    download_cmd = [
+        "docker", "run", "--rm",
+        "-v", f"{test_dir}:/work/freqtrade_test",
+        args.docker_image,
+        "download-data",
+        "--userdir", "/work/freqtrade_test/user_data",
+        "--config", "/work/freqtrade_test/config.json",
+        "--timerange", timerange,
+        "-t", "5m", "15m", "1h", "4h", "1d",
+        "--trading-mode", "futures"
+    ]
+    
+    print(f"[*] Executing Data Download:\n{' '.join(download_cmd)}")
+    download_res = subprocess.run(download_cmd)
+    if download_res.returncode != 0:
+        print("[!] Data download failed or was interrupted. Proceeding with existing data...")
+    else:
+        print("[✓] Data check/download completed.")
+
+    print(f"\n[*] Step 2: Running {TOTAL_BATCHES} backtest batches...")
 
     success_batches = []
     failed_batches = []
