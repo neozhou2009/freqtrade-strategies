@@ -151,23 +151,29 @@ def main():
         "avg_sharpe": round(sum(r["sharpe"] for r in results) / len(results), 2),
     }
 
+    # Output filenames based on period
+    period_slug = args.period.lower().replace(" ", "_").replace("/", "_")
+    out_json = os.path.join(OUTPUT_DIR, f"leaderboard_{period_slug}.json")
+    out_md = os.path.join(OUTPUT_DIR, f"LEADERBOARD_{period_slug}.md")
+
     # Output JSON aggregate
-    with open(OUT_JSON, "w") as f:
+    with open(out_json, "w") as f:
         json.dump({
             "generated_at": datetime.now().isoformat(),
             "period": args.period,
+            "period_slug": period_slug,
             "strat_count": len(results),
             "summary": summary,
             "leaderboard": results,
         }, f, indent=2, sort_keys=True)
-    print(f"[*] Generated JSON leaderboard at {OUT_JSON}")
+    print(f"[*] Generated JSON leaderboard at {out_json}")
 
     # Generate Markdown
     categories = {}
     for r in results:
         categories.setdefault(r["category"], []).append(r)
 
-    with open(OUT_MD, "w") as f:
+    with open(out_md, "w") as f:
         f.write(f"# Strategy Leaderboard: {args.period}\n\n")
         f.write(f"Generated at: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n\n")
         f.write("| Metrics | Average |\n|---|---|\n")
@@ -185,7 +191,7 @@ def main():
                 f.write(f"| {r['rank']} | {delta} | {r['strategy']} | **{r['composite_score']}** | {r.get('cagr', 0)*100:.1f}% | {r['sharpe']:.2f} | {r.get('max_drawdown_pct', 0)*100:.1f}% | {r['winrate']*100:.1f}% | {r['trades']} |\n")
             f.write("\n")
 
-    print(f"[*] Generated Markdown leaderboard at {OUT_MD}")
+    print(f"[*] Generated Markdown leaderboard at {out_md}")
 
 def process_backtest_data(data, registry, results):
     """Process backtest data and append to results."""

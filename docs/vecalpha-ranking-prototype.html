@@ -143,12 +143,12 @@
             <div class="kpi-card">
                 <div class="kpi-label">有效策略</div>
                 <div class="kpi-value" id="kpi-count">--</div>
-                <div class="kpi-sub">+2 新鲜入库</div>
+                <div class="kpi-sub" id="strat-updated">最新同步</div>
             </div>
             <div class="kpi-card">
                 <div class="kpi-label">全盘平均分</div>
                 <div class="kpi-value" id="kpi-avg-score">--</div>
-                <div class="kpi-sub">行业标杆: 60.0</div>
+                <div class="kpi-sub">基准线: 60.0</div>
             </div>
             <div class="kpi-card">
                 <div class="kpi-label">全盘平均年化</div>
@@ -158,13 +158,13 @@
             <div class="kpi-card">
                 <div class="kpi-label">平均夏普比率</div>
                 <div class="kpi-value" id="kpi-avg-sharpe">--</div>
-                <div class="kpi-sub">风险调整收益</div>
+                <div class="kpi-sub">风险自适应</div>
             </div>
         </div>
 
         <div class="data-section">
             <div class="table-header">
-                <h2>策略精英排位赛</h2>
+                <h2 id="period-display">策略排行</h2>
                 <div class="tab-group" id="tabs">
                     <button class="tab-btn active" data-type="composite">综合排行</button>
                     <button class="tab-btn" data-type="yield">收益优先</button>
@@ -204,89 +204,40 @@
 </div>
 
 <script>
-    // 注入真实 JSON 数据
-    const DATA = {
-  "generated_at": "2026-04-02T17:12:03.657658",
-  "leaderboard": [
-    {
-      "cagr": 1.568,
-      "calmar": 12.18,
-      "category": "Momentum",
-      "composite_score": 96.0,
-      "strategy": "Quick-Arbitrage-2026",
-      "styles": ["Momentum", "High-Freq"],
-      "trades": 1247,
-      "winrate": 0.725,
-      "sharpe": 3.25,
-      "max_drawdown_pct": 0.082,
-      "rank": 1,
-      "rank_delta": 3,
-      "added_date": "2026-03-15"
-    },
-    {
-      "cagr": 0.892,
-      "calmar": 3.45,
-      "category": "Mean Reversion",
-      "composite_score": 55.0,
-      "strategy": "Nostalgia",
-      "styles": ["Mean Reversion", "Low-Freq"],
-      "trades": 6,
-      "winrate": 0.5,
-      "sharpe": 1.95,
-      "max_drawdown_pct": 0.12,
-      "rank": 2,
-      "rank_delta": -1,
-      "added_date": "2026-01-10"
-    },
-    {
-      "cagr": 1.284,
-      "calmar": 5.82,
-      "category": "Momentum",
-      "composite_score": 89.0,
-      "strategy": "ETH-Momentum-Pro",
-      "styles": ["Momentum", "Trend"],
-      "trades": 892,
-      "winrate": 0.683,
-      "sharpe": 2.85,
-      "max_drawdown_pct": 0.125,
-      "rank": 3,
-      "rank_delta": 5,
-      "added_date": "2026-02-20"
-    },
-    {
-      "cagr": 2.345,
-      "calmar": 1.95,
-      "category": "Scalping",
-      "composite_score": 78.5,
-      "strategy": "Scalping-Elite",
-      "styles": ["Scalping", "High-Risk"],
-      "trades": 5672,
-      "winrate": 0.587,
-      "sharpe": 1.65,
-      "max_drawdown_pct": 0.184,
-      "rank": 4,
-      "rank_delta": 2,
-      "added_date": "2026-03-25"
-    }
-  ],
-  "period": "Clean Data Test",
-  "strat_count": 4,
-  "summary": {
-    "avg_cagr": 1.28,
-    "avg_score": 87.1,
-    "avg_sharpe": 2.42
-  }
-};
+    let DATA = { leaderboard: [], summary: {} };
+    let currentDisplayData = [];
 
-    let currentDisplayData = [...DATA.leaderboard];
-
-    function init() {
-        document.getElementById('kpi-count').innerText = DATA.strat_count;
-        document.getElementById('kpi-avg-score').innerText = DATA.summary.avg_score;
-        document.getElementById('kpi-avg-cagr').innerText = (DATA.summary.avg_cagr * 100).toFixed(1) + '%';
-        document.getElementById('kpi-avg-sharpe').innerText = DATA.summary.avg_sharpe;
+    // 核心初始化：从本地文件异步加载
+    async function init() {
+        const period = document.getElementById('periodFilter').value;
+        await loadPeriodData(period);
         
-        applyFilters(); // 首次加载执行一次筛选
+        // 初始渲染
+        applyFilters();
+    }
+
+    async function loadPeriodData(period) {
+        console.log(`[Network] Loading real data for: ${period}`);
+        try {
+            // 拼接服务器相对路径
+            const response = await fetch(`../user_data/leaderboard/leaderboard_${period}.json`);
+            if (!response.ok) throw new Error("File not found");
+            DATA = await response.json();
+            
+            // 更新汇总 KPI
+            document.getElementById('kpi-count').innerText = DATA.strat_count;
+            document.getElementById('kpi-avg-score').innerText = DATA.summary.avg_score;
+            document.getElementById('kpi-avg-cagr').innerText = (DATA.summary.avg_cagr * 100).toFixed(1) + '%';
+            document.getElementById('kpi-avg-sharpe').innerText = DATA.summary.avg_sharpe;
+            document.getElementById('period-display').innerText = `策略英雄榜 (${DATA.period})`;
+            document.getElementById('strat-updated').innerText = `同步于: ${new Date(DATA.generated_at).toLocaleTimeString()}`;
+            
+            return true;
+        } catch (e) {
+            console.error("[Error] Failed to load data:", e);
+            document.querySelector('#leaderTable tbody').innerHTML = `<tr><td colspan="8" style="text-align:center; padding:50px; color:var(--danger)">无法加载或未找到周期文件: leaderboard_${period}.json<br><small>请确保已运行 python scripts/generate_leaderboard.py --period ${period}</small></td></tr>`;
+            return false;
+        }
     }
 
     function render(data) {
@@ -317,7 +268,7 @@
                         <span style="font-weight:700; color:${scoreColor}">${s.composite_score}</span>
                     </div>
                 </td>
-                <td class="m-pos font-bold">${(s.cagr * 100).toFixed(1)}%</td>
+                <td class="${s.cagr >= 0 ? 'm-pos' : 'm-neg'} font-bold">${(s.cagr * 100).toFixed(1)}%</td>
                 <td>${s.sharpe.toFixed(2)}</td>
                 <td class="m-neg">-${(s.max_drawdown_pct * 100).toFixed(1)}%</td>
                 <td><span class="badge-trend ${trendClass}">${trendIcon} ${Math.abs(s.rank_delta) || ''}</span></td>
@@ -328,55 +279,21 @@
         currentDisplayData = data;
     }
 
-    // 更新顶部 KPI 卡片数据 (基于筛选后的数据真实重算)
-    function updateSummary(data) {
-        const count = data.length;
-        const avgScore = count > 0 ? (data.reduce((sum, s) => sum + s.composite_score, 0) / count).toFixed(1) : 0;
-        const avgCAGR = count > 0 ? (data.reduce((sum, s) => sum + s.cagr, 0) / count * 100).toFixed(1) : 0;
-        const avgSharpe = count > 0 ? (data.reduce((sum, s) => sum + s.sharpe, 0) / count).toFixed(2) : 0;
-
-        document.getElementById('kpi-count').innerText = count;
-        document.getElementById('kpi-avg-score').innerText = avgScore;
-        document.getElementById('kpi-avg-cagr').innerText = avgCAGR + '%';
-        document.getElementById('kpi-avg-sharpe').innerText = avgSharpe;
-    }
-
-    // 核心筛选逻辑
     function applyFilters() {
         const minScore = parseInt(document.getElementById('scoreRange').value);
         const selectedStyles = Array.from(document.querySelectorAll('.style-check:checked')).map(cb => cb.value);
-        const period = document.getElementById('periodFilter').value;
+
+        if (!DATA.leaderboard) return;
 
         let filtered = DATA.leaderboard.filter(s => {
             if (s.composite_score < minScore) return false;
-            const hasStyle = s.styles.some(style => selectedStyles.includes(style)) || selectedStyles.includes(s.category);
-            if (!hasStyle) return false;
-            return true;
+            const hasStyle = (s.styles || []).some(style => selectedStyles.includes(style)) || selectedStyles.includes(s.category);
+            return hasStyle;
         });
 
-        // 保持当前的排序状态并渲染
         const activeTab = document.querySelector('.tab-btn.active').dataset.type;
         sortData(filtered, activeTab);
-        
-        // 【关键修复】同步更新顶部 KPI
-        updateSummary(filtered);
     }
-
-    // 监听周期切换 (模拟不同周期的宏观水位变化)
-    document.getElementById('periodFilter').onchange = function() {
-        console.log(`[API] Switching to period: ${this.value}`);
-        // 模拟切换周期时的基准数据略微波动，增强交互感
-        const jitter = {
-            'last_1_week': -12,
-            'last_1_month': 0,
-            'last_3_months': 5,
-            'last_6_months': 15,
-            'last_1_year': 28
-        }[this.value] || 0;
-        
-        // 演示逻辑：实际项目中应 fetch() 新 JSON
-        applyFilters(); 
-    };
 
     function sortData(list, type) {
         if(type === 'composite') list.sort((a,b) => b.composite_score - a.composite_score);
@@ -386,15 +303,18 @@
         render(list);
     }
 
-    // 绑定筛选按钮
     document.getElementById('applyFiltersBtn').onclick = applyFilters;
 
-    // 滑块数值实时显示
     document.getElementById('scoreRange').oninput = function() {
         document.getElementById('scoreVal').innerText = this.value;
     };
 
-    // Tab 切换
+    // 周期切换监听
+    document.getElementById('periodFilter').onchange = async function() {
+        const success = await loadPeriodData(this.value);
+        if (success) applyFilters();
+    };
+
     document.querySelectorAll('.tab-btn').forEach(btn => {
         btn.onclick = () => {
             document.querySelector('.tab-btn.active').classList.remove('active');
@@ -408,12 +328,12 @@
         document.getElementById('m-title').innerText = s.strategy;
         const body = document.getElementById('m-body');
         body.innerHTML = `
-            <div class="m-card"><span class="m-label">入库日期</span><span class="m-val">${s.added_date}</span></div>
+            <div class="m-card"><span class="m-label">入库日期</span><span class="m-val">${s.added_date || '2026-01-01'}</span></div>
+            <div class="m-card"><span class="m-label">核心家族</span><span class="m-val">${s.family}</span></div>
             <div class="m-card"><span class="m-label">胜率</span><span class="m-val m-pos">${(s.winrate*100).toFixed(1)}%</span></div>
             <div class="m-card"><span class="m-label">总交易次数</span><span class="m-val">${s.trades}</span></div>
-            <div class="m-card"><span class="m-label">Calmar Ratio</span><span class="m-val">${s.calmar}</span></div>
-            <div class="m-card"><span class="m-label">策略家族</span><span class="m-val">${s.category}</span></div>
-            <div class="m-card"><span class="m-label">历史峰值排名</span><span class="m-val">Top 5</span></div>
+            <div class="m-card"><span class="m-label">获利因子 (PF)</span><span class="m-val">${s.profit_factor.toFixed(2)}</span></div>
+            <div class="m-card"><span class="m-label">Calmar Ratio</span><span class="m-val">${s.calmar.toFixed(2)}</span></div>
         `;
         toggleModal();
     }
