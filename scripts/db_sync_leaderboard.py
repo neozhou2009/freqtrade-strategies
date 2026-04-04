@@ -1,0 +1,130 @@
+#!/usr/bin/env python3
+import os
+import json
+import glob
+import logging
+import argparse
+from datetime import datetime
+import psycopg2
+from psycopg2.extras import Json
+
+# Configure logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
+
+# Default Database connection string
+DEFAULT_DB_URL = os.getenv("DATABASE_URL", "postgresql://postgres:postgres@localhost:5432/quantrading")
+
+def sync_leaderboard_file(file_path, conn):
+    """Sync a single leaderboard JSON file to the database."""
+    try:
+        with open(file_path, 'r') as f:
+            data = json.load(f)
+        
+        period = data.get("period_slug", data.get("period", "unknown"))
+        generated_at = data.get("generated_at")
+        leaderboard = data.get("leaderboard", [])
+        
+        logger.info(f"Syncing {len(leaderboard)} strategies for period: {period}")
+        
+        with conn.cursor() as cur:
+            for strat in leaderboard:
+                strategy_name = strat.get("strategy")
+                if not strategy_name:
+                    continue
+                
+                # Extract main metrics
+                composite_score = strat.get("composite_score", 0)
+                cagr = strat.get("cagr", 0)
+                sharpe = strat.get("sharpe", 0)
+                max_drawdown_pct = strat.get("max_drawdown_pct", 0)
+                winrate = strat.get("winrate", 0)
+                trades = strat.get("trades", 0)
+                
+                # Prepare metadata (styles, indicators, category, family, complexity, side, timeframe,
+                #                   rank_delta, profit_factor, calmar)
+                metadata = {
+                    "styles": strat.get("styles", []),
+                    "category": strat.get("category", "Uncategorized"),
+                    "family": strat.get("family"),
+                    "complexity": strat.get("complexity"),
+                    "side": strat.get("side"),
+                    "indicators": strat.get("indicators", []),
+                    "timeframe": strat.get("timeframe"),
+                    "rank_delta": strat.get("rank_delta", 0),
+                    "profit_factor": strat.get("profit_factor", 0),
+                    "calmar": strat.get("calmar", 0),
+                }
+                
+                # UPSERT logic: INSERT ... ON CONFLICT (strategy_name, period) DO UPDATE
+                upsert_query = """
+                INSERT INTO public.strategy_leaderboard (
+                    strategy_name, period, composite_score, cagr, sharpe, 
+                    max_drawdown_pct, winrate, trades, metadata, generated_at, updated_at
+                ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, CURRENT_TIMESTAMP)
+                ON CONFLICT (strategy_name, period) DO UPDATE SET
+                    composite_score = EXCLUDED.composite_score,
+                    cagr = EXCLUDED.cagr,
+                    sharpe = EXCLUDED.sharpe,
+                    max_drawdown_pct = EXCLUDED.max_drawdown_pct,
+                    winrate = EXCLUDED.winrate,
+                    trades = EXCLUDED.trades,
+                    metadata = EXCLUDED.metadata,
+                    generated_at = EXCLUDED.generated_at,
+                    updated_at = CURRENT_TIMESTAMP;
+                """
+                
+                cur.execute(upsert_query, (
+                    strategy_name, period, composite_score, cagr, sharpe,
+                    max_drawdown_pct, winrate, trades, Json(metadata), generated_at
+                ))
+            
+            # Record history snapshot (Optional but recommended)
+            for idx, strat in enumerate(leaderboard):
+                rank = idx + 1
+                history_query = """
+                INSERT INTO public.leaderboard_history (
+                    strategy_name, period, rank, score, recorded_at
+                ) VALUES (%s, %s, %s, %s, %s)
+                """
+                cur.execute(history_query, (
+                    strat["strategy"], period, rank, strat["composite_score"], generated_at
+                ))
+                
+        conn.commit()
+        logger.info(f"[✓] Successfully synced {file_path}")
+        
+    except Exception as e:
+        conn.rollback()
+        logger.error(f"[✗] Error syncing {file_path}: {e}")
+
+def main():
+    parser = argparse.ArgumentParser(description="Sync Strategy Leaderboard JSON results to PostgreSQL")
+    parser.add_argument("--dir", default="user_data/leaderboard", help="Directory containing leaderboard JSON files")
+    parser.add_argument("--db", default=DEFAULT_DB_URL, help="Database connection URL")
+    args = parser.parse_args()
+    
+    # 1. Connect to Database
+    try:
+        conn = psycopg2.connect(args.db)
+        logger.info(f"Connected to database: {args.db.split('@')[-1]}")
+    except Exception as e:
+        logger.error(f"Failed to connect to database: {e}")
+        return
+
+    # 2. Find all leaderboard_*.json files
+    json_files = glob.glob(os.path.join(args.dir, "leaderboard_*.json"))
+    if not json_files:
+        logger.warning(f"No leaderboard JSON files found in {args.dir}")
+        conn.close()
+        return
+
+    # 3. Sync each file
+    for file_path in sorted(json_files):
+        sync_leaderboard_file(file_path, conn)
+
+    conn.close()
+    logger.info("Sync completed.")
+
+if __name__ == "__main__":
+    main()
