@@ -4,6 +4,7 @@ import json
 import glob
 import logging
 import argparse
+import subprocess
 from datetime import datetime
 import psycopg2
 from psycopg2.extras import Json
@@ -12,8 +13,61 @@ from psycopg2.extras import Json
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
-# Default Database connection string
-DEFAULT_DB_URL = os.getenv("DATABASE_URL", "postgresql://postgres:postgres@localhost:5432/quantrading")
+# ─── Environment presets ────────────────────────────────────────────────────────
+# local: plain PostgreSQL on localhost (dev / CI)
+LOCAL_DB_URL = "postgresql://postgres:postgres@localhost:5432/quantrading"
+
+# k3s: HA pgpool inside the cluster — credentials read from env or defaults
+K3S_PG_USER     = os.getenv("K3S_PG_USER",     os.getenv("POSTGRES_USER",     "quantrading"))
+K3S_PG_PASSWORD = os.getenv("K3S_PG_PASSWORD", os.getenv("POSTGRES_PASSWORD", "quantrading123"))
+K3S_PG_DB       = os.getenv("K3S_PG_DB",       os.getenv("POSTGRES_DB",       "quantrading"))
+K3S_PG_SVC      = os.getenv("K3S_PG_SVC",      "mx-postgres-ha-postgresql-ha-pgpool")
+K3S_PG_NS       = os.getenv("K3S_PG_NS",       "infra")
+
+
+def _k3s_db_url() -> str:
+    """Resolve the pgpool ClusterIP via kubectl and return the connection URL."""
+    try:
+        ip = subprocess.check_output(
+            ["kubectl", "get", "svc", K3S_PG_SVC, "-n", K3S_PG_NS,
+             "-o", "jsonpath={.spec.clusterIP}"],
+            stderr=subprocess.DEVNULL,
+            timeout=10,
+        ).decode().strip()
+        if not ip:
+            raise RuntimeError("empty ClusterIP returned by kubectl")
+        return f"postgresql://{K3S_PG_USER}:{K3S_PG_PASSWORD}@{ip}:5432/{K3S_PG_DB}"
+    except Exception as e:
+        raise RuntimeError(f"Could not resolve k3s pgpool ClusterIP: {e}")
+
+
+def _resolve_db_url(env: str, explicit_db: str | None) -> str:
+    """Return the DB URL for the requested environment."""
+    # Explicit --db flag always wins
+    if explicit_db:
+        return explicit_db
+    # DATABASE_URL env var wins over auto-detection (but not over --db)
+    if "DATABASE_URL" in os.environ:
+        return os.environ["DATABASE_URL"]
+
+    if env == "local":
+        return LOCAL_DB_URL
+    if env == "k3s":
+        return _k3s_db_url()
+    # env == "auto": probe local first, fall back to k3s
+    try:
+        test = psycopg2.connect(LOCAL_DB_URL, connect_timeout=3)
+        test.close()
+        logger.info("Auto-detected: local PostgreSQL is reachable")
+        return LOCAL_DB_URL
+    except Exception:
+        pass
+    logger.info("Local PostgreSQL not reachable — trying k3s cluster...")
+    return _k3s_db_url()
+
+
+# Legacy default (used only when --db flag is parsed with its argparse default)
+DEFAULT_DB_URL = os.getenv("DATABASE_URL", LOCAL_DB_URL)
 
 def sync_leaderboard_file(file_path, conn):
     """Sync a single leaderboard JSON file to the database."""
@@ -86,6 +140,7 @@ def sync_leaderboard_file(file_path, conn):
                 INSERT INTO public.leaderboard_history (
                     strategy_name, period, rank, score, recorded_at
                 ) VALUES (%s, %s, %s, %s, %s)
+                ON CONFLICT (strategy_name, period, recorded_at) DO NOTHING
                 """
                 cur.execute(history_query, (
                     strat["strategy"], period, rank, strat["composite_score"], generated_at
@@ -101,13 +156,31 @@ def sync_leaderboard_file(file_path, conn):
 def main():
     parser = argparse.ArgumentParser(description="Sync Strategy Leaderboard JSON results to PostgreSQL")
     parser.add_argument("--dir", default="user_data/leaderboard", help="Directory containing leaderboard JSON files")
-    parser.add_argument("--db", default=DEFAULT_DB_URL, help="Database connection URL")
+    parser.add_argument("--db", default=None, help="Explicit database connection URL (overrides --env)")
+    parser.add_argument(
+        "--env",
+        default="auto",
+        choices=["auto", "local", "k3s"],
+        help=(
+            "Target environment: "
+            "'local' = localhost:5432, "
+            "'k3s' = resolve pgpool ClusterIP via kubectl, "
+            "'auto' = try local first then k3s (default)"
+        ),
+    )
     args = parser.parse_args()
-    
-    # 1. Connect to Database
+
+    # 1. Resolve DB URL
     try:
-        conn = psycopg2.connect(args.db)
-        logger.info(f"Connected to database: {args.db.split('@')[-1]}")
+        db_url = _resolve_db_url(args.env, args.db)
+    except RuntimeError as e:
+        logger.error(f"Failed to resolve database URL: {e}")
+        return
+
+    # 2. Connect to Database
+    try:
+        conn = psycopg2.connect(db_url)
+        logger.info(f"Connected to database: {db_url.split('@')[-1]}")
     except Exception as e:
         logger.error(f"Failed to connect to database: {e}")
         return
