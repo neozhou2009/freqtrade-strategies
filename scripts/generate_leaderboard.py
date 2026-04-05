@@ -153,6 +153,9 @@ def main():
 
     # Output filenames based on period
     period_slug = args.period.lower().replace(" ", "_").replace("/", "_")
+    # Normalise aliases so DB period values match the leaderboard API enum
+    _PERIOD_ALIAS = {"2025_year": "last_1_year"}
+    period_slug = _PERIOD_ALIAS.get(period_slug, period_slug)
     out_json = os.path.join(OUTPUT_DIR, f"leaderboard_{period_slug}.json")
     out_md = os.path.join(OUTPUT_DIR, f"LEADERBOARD_{period_slug}.md")
 

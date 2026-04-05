@@ -20,6 +20,7 @@ def main():
             "last_1_month",
             "last_3_months",
             "last_6_months",
+            "last_1_year",
         ],
         help="Timeframe period for the backtests"
     )
@@ -74,6 +75,8 @@ def main():
         timerange = f"{(now - timedelta(days=90)).strftime('%Y%m%d')}-{now.strftime('%Y%m%d')}"
     elif period == "last_6_months":
         timerange = f"{(now - timedelta(days=180)).strftime('%Y%m%d')}-{now.strftime('%Y%m%d')}"
+    elif period == "last_1_year":
+        timerange = f"{(now - timedelta(days=365)).strftime('%Y%m%d')}-{now.strftime('%Y%m%d')}"
     
     import os
     test_dir = os.path.abspath("test")

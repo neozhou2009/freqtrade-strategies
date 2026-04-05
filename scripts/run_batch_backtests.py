@@ -19,6 +19,8 @@ def get_timerange(period: str) -> str:
         start = now - timedelta(days=90)
     elif period == "last_6_months":
         start = now - timedelta(days=180)
+    elif period == "last_1_year":
+        start = now - timedelta(days=365)
     else:
         raise ValueError(f"Unknown period: {period}")
     return f"{start.strftime('%Y%m%d')}-{now.strftime('%Y%m%d')}"
@@ -63,6 +65,7 @@ def main():
             "last_1_month",
             "last_3_months",
             "last_6_months",
+            "last_1_year",
         ],
     )
     parser.add_argument(
