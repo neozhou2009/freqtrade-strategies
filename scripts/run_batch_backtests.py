@@ -55,7 +55,30 @@ def get_strategy_timeframe(
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Run Batched Freqtrade Backtests")
+    parser = argparse.ArgumentParser(
+        description="Run Batched Freqtrade Backtests",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""\
+Examples:
+  # Run all strategies for last 1 week (skip errors, use per-strategy timeframe):
+  %(prog)s --period last_1_week --batch 1 --total-batches 1 --skip-errors
+
+  # Run all strategies for last 1 month, split into 4 parallel batches:
+  %(prog)s --period last_1_month --batch 1 --total-batches 4 --skip-errors
+  %(prog)s --period last_1_month --batch 2 --total-batches 4 --skip-errors
+  %(prog)s --period last_1_month --batch 3 --total-batches 4 --skip-errors
+  %(prog)s --period last_1_month --batch 4 --total-batches 4 --skip-errors
+
+  # Run a single strategy:
+  %(prog)s --period last_3_months --strategy MyStrategy --skip-errors
+
+  # Run for 2025 full year using Docker:
+  %(prog)s --period 2025_year --batch 1 --total-batches 1 --skip-errors --docker
+
+  # Run with a specific timeframe (batch mode, all strategies share this timeframe):
+  %(prog)s --period last_1_week --batch 1 --total-batches 1 --timeframe 1h
+""",
+    )
     parser.add_argument(
         "--period",
         required=True,
