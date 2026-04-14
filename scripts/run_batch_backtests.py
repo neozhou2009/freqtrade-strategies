@@ -166,23 +166,23 @@ Examples:
     )
 
     project_root = repo_root
-    test_dir = os.path.join(project_root, "test")
+    user_data_dir = os.path.join(project_root, "user_data")
 
-    if not os.path.exists(test_dir):
-        print(f"[!] Test directory not found: {test_dir}")
+    if not os.path.exists(user_data_dir):
+        print(f"[!] user_data directory not found: {user_data_dir}")
         return
 
-    if not os.path.exists(os.path.join(test_dir, "config.json")):
-        print(f"[!] Config not found: {test_dir}/config.json")
+    if not os.path.exists(os.path.join(user_data_dir, "config.json")):
+        print(f"[!] Config not found: {user_data_dir}/config.json")
         return
 
     if args.skip_errors:
-        run_strategies_individually(args, batch_strats, test_dir, timerange, registry)
+        run_strategies_individually(args, batch_strats, user_data_dir, timerange, registry)
     else:
-        run_strategies_batch(args, batch_strats, test_dir, timerange)
+        run_strategies_batch(args, batch_strats, user_data_dir, timerange)
 
 
-def run_strategies_batch(args, batch_strats, test_dir, timerange):
+def run_strategies_batch(args, batch_strats, user_data_dir, timerange):
     """Run all strategies in a single batch (shared timeframe for all)."""
     if args.docker:
         print(f"[*] Using Docker mode with image: {args.docker_image}")
@@ -192,11 +192,11 @@ def run_strategies_batch(args, batch_strats, test_dir, timerange):
                 "run",
                 "--rm",
                 "-v",
-                f"{test_dir}:/work/freqtrade_test",
+                f"{user_data_dir}:/freqtrade/user_data",
                 args.docker_image,
                 "backtesting",
                 "--userdir",
-                "/work/freqtrade_test/user_data",
+                "/freqtrade/user_data",
                 "--strategy-list",
             ]
             + batch_strats
@@ -206,7 +206,7 @@ def run_strategies_batch(args, batch_strats, test_dir, timerange):
                 "--timeframe",
                 args.timeframe,
                 "--config",
-                "/work/freqtrade_test/config.json",
+                "/freqtrade/user_data/config.json",
                 "--max-open-trades",
                 "3",
                 "--stake-amount",
@@ -226,7 +226,7 @@ def run_strategies_batch(args, batch_strats, test_dir, timerange):
                 "--timeframe",
                 args.timeframe,
                 "--config",
-                os.path.join(test_dir, "config.json"),
+                os.path.join(user_data_dir, "config.json"),
             ]
         )
 
@@ -242,13 +242,13 @@ def run_strategies_batch(args, batch_strats, test_dir, timerange):
         print(f"[*] Backtest completed for batch {args.batch}")
 
 
-def run_strategies_individually(args, batch_strats, test_dir, timerange, registry):
+def run_strategies_individually(args, batch_strats, user_data_dir, timerange, registry):
     """Run each strategy individually, skipping errors. Uses per-strategy timeframe."""
     success_count = 0
     fail_count = 0
     failed_strategies = []
 
-    strategies_dir = "test/user_data/strategies"
+    strategies_dir = "user_data/strategies"
 
     for strategy in batch_strats:
         timeframe = get_strategy_timeframe(strategy, registry, strategies_dir)
@@ -260,11 +260,11 @@ def run_strategies_individually(args, batch_strats, test_dir, timerange, registr
                 "run",
                 "--rm",
                 "-v",
-                f"{test_dir}:/work/freqtrade_test",
+                f"{user_data_dir}:/freqtrade/user_data",
                 args.docker_image,
                 "backtesting",
                 "--userdir",
-                "/work/freqtrade_test/user_data",
+                "/freqtrade/user_data",
                 "--strategy",
                 strategy,
                 "--timerange",
@@ -272,7 +272,7 @@ def run_strategies_individually(args, batch_strats, test_dir, timerange, registr
                 "--timeframe",
                 timeframe,
                 "--config",
-                "/work/freqtrade_test/config.json",
+                "/freqtrade/user_data/config.json",
                 "--max-open-trades",
                 "3",
                 "--stake-amount",
@@ -291,7 +291,7 @@ def run_strategies_individually(args, batch_strats, test_dir, timerange, registr
                 "--timeframe",
                 timeframe,
                 "--config",
-                os.path.join(test_dir, "config.json"),
+                os.path.join(user_data_dir, "config.json"),
             ]
 
         result = subprocess.run(

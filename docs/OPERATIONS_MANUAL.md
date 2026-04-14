@@ -38,11 +38,11 @@ python scripts/check_data_range.py
 *   **作用**：列出每个币种和每个时间框架的起始记录时间，确保没有数据空洞或覆盖不足。
 
 ## 3. 准备回测运行环境 (Flatten Env)
-**目标**：将子目录中的策略展平并同步到 `test/` 运行目录。
+**目标**：将子目录中的策略展平并同步到 `user_data/` 运行目录。
 ```bash
 python scripts/prepare_test_env.py
 ```
-*   **产出**：`test/user_data/strategies/` 目录下将包含所有可运行的策略。
+*   **产出**：`user_data/strategies/` 目录下将包含所有可运行的策略。
 
 ## 4. 执行批量并行回测 (Execution)
 **目标**：调度 Freqtrade 进行大规模分片计算。我们提供了两个层级的方案：
@@ -76,7 +76,7 @@ python scripts/generate_leaderboard.py --period "2025年全年回测报告"
 ## 维护与更新
 - **新增策略**：请重新执行 **Step 1** 和 **Step 3**。
 - **时间更新**：请重新执行 **Step 2** 补全最新月份的数据。
-- **重新跑榜**：请清理 `test/user_data/backtest_results/` 目录后重复 **Step 4** 和 **Step 5**。
+- **重新跑榜**：请清理 `user_data/backtest_results/` 目录后重复 **Step 4** 和 **Step 5**。
 
 ---
 

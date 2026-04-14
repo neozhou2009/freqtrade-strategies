@@ -79,16 +79,16 @@ def main():
         timerange = f"{(now - timedelta(days=365)).strftime('%Y%m%d')}-{now.strftime('%Y%m%d')}"
     
     import os
-    test_dir = os.path.abspath("test")
-    
+    user_data_dir = os.path.abspath("user_data")
+
     # Download data command (Common timeframes used in registry)
     download_cmd = [
         "docker", "run", "--rm",
-        "-v", f"{test_dir}:/work/freqtrade_test",
+        "-v", f"{user_data_dir}:/freqtrade/user_data",
         args.docker_image,
         "download-data",
-        "--userdir", "/work/freqtrade_test/user_data",
-        "--config", "/work/freqtrade_test/config.json",
+        "--userdir", "/freqtrade/user_data",
+        "--config", "/freqtrade/user_data/config.json",
         "--timerange", timerange,
         "-t", "5m", "15m", "1h", "4h", "1d",
         "--trading-mode", "futures"

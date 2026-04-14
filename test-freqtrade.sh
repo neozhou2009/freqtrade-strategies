@@ -14,12 +14,12 @@ fi
 # Configuration
 IMAGE_NAME="neozhou2009/freqtrade-full:latest"
 # Mount the user_data directory inside the container
-BASE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-USER_DATA_DIR="$BASE_DIR/user_data"
+PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+USER_DATA_DIR="$PROJECT_ROOT/user_data"
 DATA_DIR="$USER_DATA_DIR/data"
 
 # Default config file
-CONFIG_FILE="$BASE_DIR/config.json"
+CONFIG_FILE="$USER_DATA_DIR/config.json"
 
 # Check if we are in the correct directory (optional safety check)
 # if [ ! -f "$USER_DATA_DIR/config.json" ]; then
@@ -212,7 +212,7 @@ auto_download_data() {
         docker run --rm --workdir /freqtrade/user_data \
             -v "$USER_DATA_DIR:/freqtrade/user_data" \
             "$IMAGE_NAME" download-data \
-            --userdir . \
+            --userdir /freqtrade/user_data \
             --exchange binance \
             $timeframe_args \
             -p $pairs_spaced \
@@ -385,26 +385,19 @@ case "$CMD" in
         # Run create-userdir to generate standard structure
         docker run --rm -v "$USER_DATA_DIR:/freqtrade/user_data" "$IMAGE_NAME" create-userdir --userdir /freqtrade/user_data
         
-        # Copy custom files
-        echo "Copying custom config and strategies..."
-        [ -f "$BASE_DIR/config.json" ] && cp "$BASE_DIR/config.json" "$USER_DATA_DIR/"
-        [ -d "$BASE_DIR/strategies" ] && cp -r "$BASE_DIR/strategies/"* "$USER_DATA_DIR/strategies/"
-        [ -d "$BASE_DIR/hyperopts" ] && cp -r "$BASE_DIR/hyperopts/"* "$USER_DATA_DIR/hyperopts/"
-        [ -d "$BASE_DIR/notebooks" ] && cp -r "$BASE_DIR/notebooks/"* "$USER_DATA_DIR/notebooks/"
-        
         echo "Initialization complete."
         ;;
     download)
         echo "Running: freqtrade download-data $@"
-        docker run --rm --workdir /freqtrade/user_data -v "$USER_DATA_DIR:/freqtrade/user_data" "$IMAGE_NAME" download-data --userdir . "$@"
+        docker run --rm --workdir /freqtrade/user_data -v "$USER_DATA_DIR:/freqtrade/user_data" "$IMAGE_NAME" download-data --userdir /freqtrade/user_data "$@"
         ;;
     list-data)
         echo "Running: freqtrade list-data $@"
-        docker run --rm --workdir /freqtrade/user_data -v "$USER_DATA_DIR:/freqtrade/user_data" "$IMAGE_NAME" list-data --userdir . "$@"
+        docker run --rm --workdir /freqtrade/user_data -v "$USER_DATA_DIR:/freqtrade/user_data" "$IMAGE_NAME" list-data --userdir /freqtrade/user_data "$@"
         ;;
     backtest)
         echo "Running: freqtrade backtesting $@"
-        docker run --rm --workdir /freqtrade/user_data -v "$USER_DATA_DIR:/freqtrade/user_data" "$IMAGE_NAME" backtesting --userdir . "$@"
+        docker run --rm --workdir /freqtrade/user_data -v "$USER_DATA_DIR:/freqtrade/user_data" "$IMAGE_NAME" backtesting --userdir /freqtrade/user_data "$@"
         ;;
     backtest-gui)
         echo "Running: freqtrade backtesting (to generate results for UI)..."
@@ -428,7 +421,7 @@ case "$CMD" in
                 --workdir /freqtrade/user_data \
                 -v "$USER_DATA_DIR:/freqtrade/user_data" \
                 "$IMAGE_NAME" \
-                webserver --userdir . -c config.json
+                webserver --userdir /freqtrade/user_data -c /freqtrade/user_data/config.json
         fi
         ;;
     *)

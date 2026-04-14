@@ -78,7 +78,7 @@ def main():
     )
     parser.add_argument(
         "--input-dir",
-        default="test/user_data/backtest_results",
+        default="user_data/backtest_results",
         help="Directory containing backtest files",
     )
     parser.add_argument(

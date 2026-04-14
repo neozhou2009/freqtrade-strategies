@@ -2126,7 +2126,7 @@ find strategies -name "*.py" -type f -exec sed -i 's/INTERFACE_VERSION = 2/INTER
   ```
 - 使用TA-Lib镜像进行测试:
   ```bash
-  docker run --rm -v $(pwd)/test:/work/freqtrade_test -v $(pwd)/strategies:/work/freqtrade_test/user_data/strategies freqtrade-talib:latest backtesting --strategy BB_RSI --timerange 20250101-20250301
+  docker run --rm -v $(pwd)/user_data:/freqtrade/user_data freqtrade-talib:latest backtesting --strategy BB_RSI --timerange 20250101-20250301 --config /freqtrade/user_data/config.json
   ```
 - 策略目录中需要添加`requirements.txt`文件说明依赖
 

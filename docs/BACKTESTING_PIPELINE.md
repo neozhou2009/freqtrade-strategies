@@ -90,13 +90,12 @@
    ```
 
 2. **该脚本会自动：**
-   - 将所有策略文件平铺复制到 `test/user_data/strategies/`
-   - 将数据文件复制到 `test/user_data/data/`
+   - 将所有策略文件平铺复制到 `user_data/strategies/`
+   - 修复类名不匹配和 Freqtrade v3 兼容性问题
 
 3. **预期输出：**
    ```
-   [✓] Flattened 430 strategy files to test/user_data/strategies/
-   [✓] Copied 13 data files to test/user_data/data/binance/
+   [✓] Flattened 430 strategy files to user_data/strategies/
    ```
 
 ### 第三步：在本地运行单个批次的回测
@@ -127,7 +126,7 @@ python scripts/run_batch_backtests.py --period 2025_year --batch 1 --total-batch
 python scripts/generate_leaderboard.py --period 2025_year
 ```
 
-**注意**：脚本默认从 `test/user_data/backtest_results/` 读取结果，支持 `.zip` 和 `.json` 格式。
+**注意**：脚本默认从 `user_data/backtest_results/` 读取结果，支持 `.zip` 和 `.json` 格式。
 
 **预期结果：**
 - 在当前根目录将生成两个文件：

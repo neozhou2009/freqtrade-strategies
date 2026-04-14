@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
 """
-Prepare test environment for batch backtesting
+Prepare environment for batch backtesting
 
 This script:
-1. Flattens strategies from strategies/ to test/user_data/strategies/
-2. Copies data from user_data/data/ to test/user_data/data/
+1. Flattens strategies from strategies/ to user_data/strategies/
 
 Usage:
     python scripts/prepare_test_env.py
@@ -141,18 +140,27 @@ def fix_freqtrade_v3_compatibility(directory):
 
 
 def flatten_strategies():
-    """Copy all strategy files to test/user_data/strategies/"""
+    """Copy all strategy files to user_data/strategies/"""
     src_dir = "strategies"
-    dst_dir = "test/user_data/strategies"
+    dst_dir = "user_data/strategies"
 
     os.makedirs(dst_dir, exist_ok=True)
 
-    # Clear existing files
-    for f in glob.glob(os.path.join(dst_dir, "*.py")):
-        os.remove(f)
-
+    # Clear existing flattened strategy files (only those from strategies/ dir,
+    # not community-contributed files that were already in user_data/strategies/)
     count = 0
     # Find all .py files in strategy subdirectories
+    src_basenames = set()
+    for filepath in glob.glob(os.path.join(src_dir, "**/*.py"), recursive=True):
+        basename = os.path.basename(filepath)
+        if basename != "__init__.py":
+            src_basenames.add(basename)
+
+    # Remove old flattened copies that came from strategies/
+    for f in glob.glob(os.path.join(dst_dir, "*.py")):
+        if os.path.basename(f) in src_basenames:
+            os.remove(f)
+
     for filepath in glob.glob(os.path.join(src_dir, "**/*.py"), recursive=True):
         basename = os.path.basename(filepath)
         if basename == "__init__.py":
@@ -167,60 +175,26 @@ def flatten_strategies():
     return count
 
 
-def copy_data():
-    """Copy data from user_data/data/ to test/user_data/data/"""
-    src_dir = "user_data/data/okx"
-    dst_dir = "test/user_data/data/okx"
-
-    if not os.path.exists(src_dir):
-        print(f"[!] Source data directory not found: {src_dir}")
-        return 0
-
-    os.makedirs(os.path.dirname(dst_dir), exist_ok=True)
-
-    # Remove existing data
-    if os.path.exists(dst_dir):
-        shutil.rmtree(dst_dir)
-
-    shutil.copytree(src_dir, dst_dir)
-
-    file_count = sum(
-        1
-        for _ in glob.glob(os.path.join(dst_dir, "**/*"), recursive=True)
-        if os.path.isfile(_)
-    )
-    print(f"[✓] Copied {file_count} data files to {dst_dir}")
-    return file_count
-
-
 def main():
-    print("=== Preparing Test Environment ===")
+    print("=== Preparing Backtest Environment ===")
     print()
 
     strategies = flatten_strategies()
-    data = copy_data()
-
-    print()
-
-    # Ensure backtest configuration stays synced with user_data/config.json
-    # (Fixes the issue where an outdated test/config.json causes failures like Binance US restrictions)
-    shutil.copy2("user_data/config.json", "test/config.json")
 
     # Pre-create backtest results directory and grant generous permissions
     # This prevents PermissionError when the docker container (ftuser) tries to write
-    # to the directory created by the github actions runner
-    backtest_dir = "test/user_data/backtest_results"
+    backtest_dir = "user_data/backtest_results"
     os.makedirs(backtest_dir, exist_ok=True)
-    for root, dirs, files in os.walk("test/user_data"):
+    for root, dirs, files in os.walk("user_data"):
         for d in dirs:
             os.chmod(os.path.join(root, d), 0o777)
         for f in files:
             os.chmod(os.path.join(root, f), 0o666)
-    os.chmod("test/user_data", 0o777)
+    os.chmod("user_data", 0o777)
 
+    print()
     print("=== Summary ===")
     print(f"Strategies: {strategies}")
-    print(f"Data files: {data}")
     print()
     print("Ready for batch backtesting!")
 

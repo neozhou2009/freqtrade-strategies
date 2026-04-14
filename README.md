@@ -33,14 +33,13 @@ docker build -f Dockerfile.freqtrade-talib -t freqtrade-talib:latest .
 ```bash
 # Test a strategy with TA-Lib dependency
 docker run --rm \
-  -v $(pwd)/test:/work/freqtrade_test \
-  -v $(pwd)/strategies:/work/freqtrade_test/user_data/strategies \
+  -v $(pwd)/user_data:/freqtrade/user_data \
   freqtrade-talib:latest \
-  backtesting --strategy BB_RSI --timerange 20250101-20250301
+  backtesting --strategy BB_RSI --timerange 20250101-20250301 --config /freqtrade/user_data/config.json
 
 # List all available strategies
 docker run --rm \
-  -v $(pwd)/strategies:/work/freqtrade_test/user_data/strategies \
+  -v $(pwd)/user_data:/freqtrade/user_data \
   freqtrade-talib:latest \
   list-strategies
 
