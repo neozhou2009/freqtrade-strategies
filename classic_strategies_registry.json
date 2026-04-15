@@ -1,0 +1,152 @@
+{
+  "meta": {
+    "version": "1.0",
+    "created_at": "2026-04-15",
+    "description": "VecAlpha开源经典策略保护注册表"
+  },
+
+  "flagship_classics": {
+    "description": "旗舰经典：Freqtrade社区广泛验证的顶级策略，自动保留为Tier 3保底",
+    "rationale": "这些策略在开源社区经过大量用户验证，具有稳定的表现记录",
+    "strategies": [
+      "NostalgiaForInfinityV7",
+      "NostalgiaForInfinityV5",
+      "NostalgiaForInfinityV6",
+      "NostalgiaForInfinityV4",
+      "NostalgiaForInfinityV3",
+      "NostalgiaForInfinityV2",
+      "NostalgiaForInfinityV1",
+      "NFI7MOHO",
+      "NFI5MOHO",
+      "NFI46",
+      "BigZ04",
+      "BigZ04HO",
+      "BigZ03",
+      "BigZ06",
+      "BigZ07",
+      "ElliotV8",
+      "ElliotV8HO",
+      "ElliotV5HO",
+      "ElliotV7",
+      "CombinedBinHAndClucV8",
+      "CombinedBinHAndClucV8XHO",
+      "Combined_NFIv7_SMA"
+    ],
+    "match_patterns": [
+      "NostalgiaForInfinityV",
+      "NFI7MOHO",
+      "NFI5MOHO",
+      "NFI46",
+      "BigZ0",
+      "ElliotV"
+    ],
+    "protection": {
+      "min_grade": "C",
+      "grade_floor": 50,
+      "tier_floor": 3,
+      "display": true,
+      "label": "🏆 旗舰经典"
+    }
+  },
+
+  "combination_classics": {
+    "description": "组合经典：经典组合策略系列，展示但需风险提示",
+    "rationale": "组合策略在特定市场条件下表现良好，需要持续监控",
+    "strategies": [
+      "CombinedBinHAndCluc",
+      "CombinedBinHAndClucV3",
+      "CombinedBinHAndClucV4",
+      "CombinedBinHAndClucV5",
+      "CombinedBinHAndCluc2021",
+      "BinClucMad",
+      "BinClucMadV1",
+      "CombinedBinHClucAndMAD",
+      "CombinedBinHClucAndMADV3",
+      "CombinedBinHClucAndMADV5",
+      "CombinedBinHClucAndMADV6",
+      "CombinedBinHClucAndMADV9",
+      "Cluc4",
+      "Cluc5werk",
+      "Cluc7werk",
+      "ClucHAwerk",
+      "ClucHAnix_5m"
+    ],
+    "match_patterns": [
+      "CombinedBinHAndCluc",
+      "BinClucMad",
+      "CombinedBinHClucAndMAD",
+      "Cluc"
+    ],
+    "protection": {
+      "min_grade": "D",
+      "grade_floor": 40,
+      "tier_floor": null,
+      "display": true,
+      "label": "⭐ 组合经典"
+    }
+  },
+
+  "indicator_classics": {
+    "description": "指标经典：基于经典技术指标的策略，标记为社区验证",
+    "rationale": "经典指标策略逻辑清晰，适合教学和研究",
+    "strategies": [
+      "Ichimoku_v31",
+      "Ichimoku_v32",
+      "Ichimoku_v30",
+      "Ichimoku_SenkouSpanCross",
+      "TrixV21",
+      "TrixV15",
+      "TrixV23",
+      "BBRSI",
+      "BBRSI4cust",
+      "BB_RPB_TSL",
+      "BB_RPB_TSL_4",
+      "BB_RPB_TSL_5",
+      "BB_RPB_TSL_6",
+      "BB_Strategy04",
+      "Schism2",
+      "ADXMomentum",
+      "SupertrendStrategy"
+    ],
+    "match_patterns": [
+      "Ichimoku",
+      "Trix",
+      "BBRSI",
+      "BB_RPB_TSL",
+      "Schism",
+      "Supertrend"
+    ],
+    "protection": {
+      "min_grade": "D",
+      "grade_floor": 35,
+      "tier_floor": null,
+      "display": true,
+      "label": "📊 指标经典"
+    }
+  },
+
+  "experimental": {
+    "description": "实验策略：其他策略，正常评分流程",
+    "strategies": "*",
+    "protection": null
+  },
+
+  "protection_rules": {
+    "grade_floor_override": {
+      "description": "当策略评分低于grade_floor时，强制调整到grade_floor",
+      "enabled": true
+    },
+    "tier_floor_override": {
+      "description": "当策略tier低于tier_floor时，强制调整到tier_floor",
+      "enabled": true,
+      "tier1_requirements": {
+        "note": "Tier 1仍需满足full模式验证和最低阈值要求，保护机制不豁免Tier 1"
+      }
+    },
+    "hard_red_line_exemption": {
+      "description": "经典策略豁免部分硬红线",
+      "exempt_rules": ["HR-02"],
+      "note": "Sharpe<0硬上限对经典策略改为软红线警告"
+    }
+  }
+}

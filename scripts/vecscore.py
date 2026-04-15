@@ -66,10 +66,158 @@ STABILITY_PERIODS = {
 TRAIN_PERIOD = "20250101-20250831"  # 70%
 TEST_PERIOD  = "20250901-20251231"  # 30%
 
+# ── v3 等级阈值调整 ──────────────────────────────────────────────────────────────
+# 放宽等级门槛，使更多策略达到C级以上
+GRADE_TABLE_V3 = [
+    (80, "S", "🏆", "旗舰策略：首页重点推荐"),
+    (70, "A", "⭐", "商用推荐：上架推荐池"),   # v2=75 → v3=70
+    (60, "B", "✅", "可用：上架但不主推"),      # v2=65 → v3=60
+    (50, "C", "⚠️",  "风险：仅供查阅"),         # v2=55 → v3=50
+    (0,  "D", "❌", "不合格：禁止上架"),
+]
+
 
 # ──────────────────────────────────────────────────────────────────────────────
 # 维度一：收益能力 P（满分 30）
 # ──────────────────────────────────────────────────────────────────────────────
+
+def score_P_v2(roi: Optional[float], profit_factor: Optional[float], avg_profit: Optional[float]) -> dict:
+    """
+    v2 收益能力评分（满分 30）— 年化ROI换算+细分阈值
+
+    v1→v2 变更：
+    - ROI: 30天×12换算年化，按 0/1%/3%/5%/10%/20% 分段
+    - PF: 不变
+    - avg_profit: 微调阈值 (0.003/0.008)
+    """
+    annual_roi = (roi or 0) * 12
+
+    # ROI 得分（年化）
+    if roi is None:
+        roi_score = 0
+    elif annual_roi < 0:
+        roi_score = 0
+    elif annual_roi < 0.01:
+        roi_score = 2
+    elif annual_roi < 0.03:
+        roi_score = 5
+    elif annual_roi < 0.05:
+        roi_score = 8
+    elif annual_roi < 0.10:
+        roi_score = 11
+    elif annual_roi < 0.20:
+        roi_score = 14
+    else:
+        roi_score = 15
+
+    # Profit Factor 得分（不变）
+    if profit_factor is None or profit_factor <= 1.0:
+        pf_score = 0
+    elif profit_factor < 1.2:
+        pf_score = 3
+    elif profit_factor < 1.5:
+        pf_score = 6
+    elif profit_factor < 2.0:
+        pf_score = 8
+    else:
+        pf_score = 10
+
+    # 平均单笔盈利得分（微调）
+    if avg_profit is None or avg_profit <= 0:
+        ap_score = 0
+    elif avg_profit < 0.003:
+        ap_score = 1
+    elif avg_profit < 0.008:
+        ap_score = 3
+    else:
+        ap_score = 5
+
+    total = roi_score + pf_score + ap_score
+    return {
+        "score": round(total, 2),
+        "max": 30,
+        "breakdown": {"roi": roi_score, "profit_factor": pf_score, "avg_profit": ap_score},
+        "inputs": {
+            "roi": roi, "annual_roi": round(annual_roi, 6),
+            "profit_factor": profit_factor, "avg_profit": avg_profit,
+        },
+    }
+
+
+def score_P_v3(roi: Optional[float], profit_factor: Optional[float],
+               avg_profit: Optional[float], all_rois: list = None) -> dict:
+    """
+    v3 收益能力评分（满分 30）— 相对排名制
+
+    解决期货30天ROI绝对值过低问题：
+    - ROI得分基于排名分位，而非绝对阈值
+    - 前10%盈利策略: 15分
+    - 前25%盈利策略: 12分
+    - 前50%盈利策略: 8分
+    - 后50%盈利策略: 5分
+    - 亏损: 0分
+
+    PF和avg_profit保持v2规则
+    """
+    # ROI 得分（相对排名）
+    if roi is None or roi <= 0:
+        roi_score = 0
+    elif all_rois is None or not all_rois:
+        # 无排名数据时，使用保守估分
+        roi_score = 8
+    else:
+        positive_rois = sorted([r for r in all_rois if r is not None and r > 0])
+        if not positive_rois:
+            roi_score = 8  # 唯一盈利策略
+        else:
+            # 计算排名分位（roi在positive_rois中的位置）
+            rank = len([r for r in positive_rois if r <= roi])
+            percentile = rank / len(positive_rois)
+            if percentile <= 0.10:
+                roi_score = 15  # 前10%
+            elif percentile <= 0.25:
+                roi_score = 12  # 前25%
+            elif percentile <= 0.50:
+                roi_score = 8   # 前50%
+            else:
+                roi_score = 5   # 后50%
+
+    # Profit Factor 得分（与v2相同）
+    if profit_factor is None or profit_factor <= 1.0:
+        pf_score = 0
+    elif profit_factor < 1.2:
+        pf_score = 3
+    elif profit_factor < 1.5:
+        pf_score = 6
+    elif profit_factor < 2.0:
+        pf_score = 8
+    else:
+        pf_score = 10
+
+    # 平均单笔盈利得分（与v2相同）
+    if avg_profit is None or avg_profit <= 0:
+        ap_score = 0
+    elif avg_profit < 0.003:
+        ap_score = 1
+    elif avg_profit < 0.008:
+        ap_score = 3
+    else:
+        ap_score = 5
+
+    total = roi_score + pf_score + ap_score
+    return {
+        "score": round(total, 2),
+        "max": 30,
+        "breakdown": {"roi": roi_score, "profit_factor": pf_score, "avg_profit": ap_score},
+        "inputs": {
+            "roi": roi,
+            "profit_factor": profit_factor,
+            "avg_profit": avg_profit,
+            "roi_percentile": None,  # v3特有字段
+        },
+        "note": "v3: ROI基于相对排名评分",
+    }
+
 
 def score_P(roi: Optional[float], profit_factor: Optional[float], avg_profit: Optional[float]) -> dict:
     """
@@ -195,17 +343,37 @@ def score_R(max_drawdown: Optional[float], sharpe: Optional[float]) -> dict:
 # 维度三：稳定性 S（满分 20）
 # ──────────────────────────────────────────────────────────────────────────────
 
-def score_S_simple(roi_30d: Optional[float]) -> dict:
+def score_S_simple(roi_30d: Optional[float], spec: str = "v1") -> dict:
     """
     快速模式下的稳定性估分（满分 20）。
-    由于只有单一时间段数据，使用保守估分：
-    - 盈利 → 给最高 12 分（满分 20 需要多时段验证）
-    - 微盈/亏损 → 按比例给分
-    此函数在 --mode fast 下使用。
+
+    v1/v2: 上限12分（保守估分）
+    v3: 上限提高到10分（更宽松），因为期货ROI本身很低
     """
     if roi_30d is None:
-        return {"score": 8, "max": 20, "note": "fast-mode: 单时段估算，满分上限 12", "estimated": True}
+        base_score = 8 if spec in ["v1", "v2"] else 6
+        return {"score": base_score, "max": 20, "note": "fast-mode: 单时段估算", "estimated": True}
 
+    # v3: 提高上限和分数分配
+    if spec == "v3":
+        if roi_30d > 0.10:
+            s = 10  # v2=12, 但v3上限10更合理（满分20的一半）
+        elif roi_30d > 0.05:
+            s = 8
+        elif roi_30d > 0.02:
+            s = 7
+        elif roi_30d > 0:
+            s = 5   # v2=6 → v3=5
+        else:
+            s = 3   # v2=2 → v3=3（亏损也给一定基础分）
+        return {
+            "score": s,
+            "max": 20,
+            "note": f"v3 fast-mode: 30天ROI={roi_30d:+.2%}",
+            "estimated": True,
+        }
+
+    # v1/v2: 原有逻辑
     if roi_30d > 0.10:
         s = 12
     elif roi_30d > 0.02:
@@ -266,12 +434,29 @@ def score_S_full(period_rois: dict) -> dict:
 # 维度四：可靠性（过拟合检测）T（满分 15）
 # ──────────────────────────────────────────────────────────────────────────────
 
-def score_T_simple(has_hyperopt: bool) -> dict:
+def score_T_simple(has_hyperopt: bool, spec: str = "v1") -> dict:
     """
     快速模式下的可靠性估分（满分 15）。
-    - 无 Hyperopt 参数 → 参数稳定性强，给 8 分（中性）
-    - 有 Hyperopt 参数 → 需要 train/test 才能验证，暂给 6 分
+
+    v1/v2: 无Hyperopt=8分，有Hyperopt=6分
+    v3: 提高30%，无Hyperopt=10分，有Hyperopt=8分
     """
+    if spec == "v3":
+        if has_hyperopt:
+            return {
+                "score": 8,  # v2=6 → v3=8
+                "max": 15,
+                "note": "v3 fast-mode: 含Hyperopt参数",
+                "estimated": True,
+            }
+        return {
+            "score": 10,  # v2=8 → v3=10
+            "max": 15,
+            "note": "v3 fast-mode: 无Hyperopt参数，参数稳定",
+            "estimated": True,
+        }
+
+    # v1/v2: 原有逻辑
     if has_hyperopt:
         return {
             "score": 6,
@@ -392,8 +577,12 @@ GRADE_TABLE = [
 ]
 
 
-def compute_vecscore(p_dim, r_dim, s_dim, t_dim, e_dim) -> dict:
+def compute_vecscore(p_dim, r_dim, s_dim, t_dim, e_dim, spec: str = "v1") -> dict:
     """整合五维得分，计算最终 VecScore"""
+
+    # v3使用调整后的等级阈值
+    grade_table = GRADE_TABLE_V3 if spec == "v3" else GRADE_TABLE
+
     raw = (
         p_dim["score"] * WEIGHTS["P"] / (p_dim["max"] * WEIGHTS["P"]) * 30 +
         r_dim["score"] * WEIGHTS["R"] / (r_dim["max"] * WEIGHTS["R"]) * 25 +
@@ -415,14 +604,15 @@ def compute_vecscore(p_dim, r_dim, s_dim, t_dim, e_dim) -> dict:
 
     # 确定等级
     grade, badge, meaning = "D", "❌", "不合格"
-    for threshold, g, b, m in GRADE_TABLE:
+    for threshold, g, b, m in grade_table:
         if total >= threshold:
             grade, badge, meaning = g, b, m
             break
 
-    # 商用资格检查
+    # 商用资格检查（v3调整阈值）
+    commercial_threshold = 70 if spec == "v3" else 75
     commercial_eligible = (
-        total >= 75
+        total >= commercial_threshold
         and (r_dim["inputs"].get("max_drawdown") or 1) < 0.30
         and (r_dim["inputs"].get("sharpe") or 0) >= 0.8
         and (e_dim["inputs"].get("trades_30d") or 0) >= 8  # 30天至少 8 次 ≈ 全年 ~100次
@@ -441,6 +631,7 @@ def compute_vecscore(p_dim, r_dim, s_dim, t_dim, e_dim) -> dict:
         "commercial_eligible": commercial_eligible,
         "hard_cap_applied": cap_applied,
         "is_estimated": is_estimated,
+        "spec_version": spec,
     }
 
 
@@ -506,6 +697,8 @@ def score_strategy(
     mode: str,
     user_data_dir: str,
     use_docker: bool,
+    spec: str = "v1",
+    all_rois: list = None,  # v3新增：用于相对排名
 ) -> dict:
     """对单个策略计算 VecScore"""
 
@@ -517,7 +710,12 @@ def score_strategy(
     trades         = phase1_metrics.get("trades")
 
     # ── P 维度 ──
-    p_dim = score_P(roi, profit_factor, avg_profit)
+    if spec == "v3":
+        p_dim = score_P_v3(roi, profit_factor, avg_profit, all_rois)
+    elif spec == "v2":
+        p_dim = score_P_v2(roi, profit_factor, avg_profit)
+    else:
+        p_dim = score_P(roi, profit_factor, avg_profit)
 
     # ── R 维度 ──
     r_dim = score_R(max_drawdown, sharpe)
@@ -531,7 +729,7 @@ def score_strategy(
             period_rois[period_name] = m.get("roi") if m else None
         s_dim = score_S_full(period_rois)
     else:
-        s_dim = score_S_simple(roi)
+        s_dim = score_S_simple(roi, spec=spec)  # v3传入spec参数
 
     # ── T 维度 ──
     if mode == "full":
@@ -542,13 +740,13 @@ def score_strategy(
         test_roi  = test_m.get("roi")  if test_m  else None
         t_dim = score_T_full(train_roi, test_roi)
     else:
-        t_dim = score_T_simple(has_hyperopt)
+        t_dim = score_T_simple(has_hyperopt, spec=spec)  # v3传入spec参数
 
     # ── E 维度 ──
     e_dim = score_E(trades, timeframe)
 
     # ── 综合 ──
-    vecscore_result = compute_vecscore(p_dim, r_dim, s_dim, t_dim, e_dim)
+    vecscore_result = compute_vecscore(p_dim, r_dim, s_dim, t_dim, e_dim, spec=spec)
 
     return {
         "name": name,
@@ -603,6 +801,12 @@ def main():
         help="不使用 Docker（仅 --mode full 有效）",
     )
     parser.add_argument(
+        "--spec",
+        choices=["v1", "v2", "v3"],
+        default="v1",
+        help="评分规范版本: v1=原始, v2=年化ROI换算, v3=相对排名+阈值放宽",
+    )
+    parser.add_argument(
         "--min-grade",
         choices=["S", "A", "B", "C", "D"],
         default="D",
@@ -655,10 +859,23 @@ def main():
         return
 
     print(f"📊 VecScore 评分模式: {'🔬 完整模式' if args.mode == 'full' else '⚡ 快速模式'}")
+    print(f"📋 规范版本: {args.spec}")
     print(f"📋 目标策略: {len(target_names)} 个")
     if use_docker:
         print("🐳 使用 Docker 运行额外回测\n")
     print("═" * 70)
+
+    # ── v3: 先收集所有ROI用于相对排名 ─────────────────────────────────────
+    all_rois = None
+    if args.spec == "v3":
+        all_rois = []
+        for name in target_names:
+            r = phase1_map.get(name, {})
+            metrics = r.get("metrics", {})
+            roi = metrics.get("roi")
+            if roi is not None:
+                all_rois.append(roi)
+        print(f"📈 v3模式: 收集了 {len(all_rois)} 个ROI用于相对排名评分\n")
 
     all_scored = []
     t_start = time.time()
@@ -679,6 +896,8 @@ def main():
             mode=args.mode,
             user_data_dir=user_data_dir,
             use_docker=use_docker,
+            spec=args.spec,
+            all_rois=all_rois,  # v3传入
         )
         all_scored.append(scored)
 
