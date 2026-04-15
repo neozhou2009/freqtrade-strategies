@@ -647,7 +647,7 @@ class BigZ03(IStrategy):
                 )
                 & (dataframe["volume"] > 0)
             ),
-            "buy",
+            "enter_long",
         ] = 1
 
         return dataframe
@@ -660,6 +660,6 @@ class BigZ03(IStrategy):
                 )  # Don't be gready, sell fast
                 & (dataframe["volume"] > 0)  # Make sure Volume is not 0
             ),
-            "sell",
+            "exit_long",
         ] = 0
         return dataframe

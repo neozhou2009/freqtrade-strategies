@@ -54,7 +54,7 @@ class adx_opt_strat(IStrategy):
                     (dataframe['plus_di'] < dataframe['minus_di'])
 
             ),
-            'buy'] = 1
+            'enter_long'] = 1
         
         return dataframe
 
@@ -66,5 +66,5 @@ class adx_opt_strat(IStrategy):
                     (dataframe['plus_di'] > dataframe['minus_di'])
 
             ),
-            'sell'] = 1
+            'exit_long'] = 1
         return dataframe

@@ -278,7 +278,7 @@ class MacheteV8bRallimod2(IStrategy):
                 (self.get_buy_signal_bbrsi_strategy(dataframe) == True)
             )
             #(dataframe['sslUp_inf'] > dataframe['sslDown_inf'])
-        ,'buy'] = 1
+        ,'enter_long'] = 1
 
         return dataframe
 
@@ -341,7 +341,7 @@ class MacheteV8bRallimod2(IStrategy):
             #(dataframe['vfi'] < 0.0) &
             #(dataframe['volume'] > 0)
 
-        ,'sell'] = 1
+        ,'exit_long'] = 1
 
         return dataframe
 

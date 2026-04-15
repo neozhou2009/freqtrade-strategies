@@ -66,7 +66,7 @@ class ClucMay72018(IStrategy):
                     (dataframe['close'] < 0.985 * dataframe['bb_lowerband']) &
                     (dataframe['volume'] < (dataframe['volume'].rolling(window=30).mean().shift(1) * 20))
             ),
-            'buy'] = 1
+            'enter_long'] = 1
 
         return dataframe
 
@@ -80,5 +80,5 @@ class ClucMay72018(IStrategy):
             (
                 (dataframe['close'] > dataframe['bb_middleband'])
             ),
-            'sell'] = 1
+            'exit_long'] = 1
         return dataframe

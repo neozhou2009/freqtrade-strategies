@@ -93,7 +93,7 @@ class Low_BB(IStrategy):
 
             )
             ,
-            'buy'] = 1
+            'enter_long'] = 1
 
         return dataframe
 
@@ -105,5 +105,5 @@ class Low_BB(IStrategy):
         """
         dataframe.loc[
             (),
-            'sell'] = 1
+            'exit_long'] = 1
         return dataframe

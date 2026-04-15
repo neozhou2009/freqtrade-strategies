@@ -347,7 +347,7 @@ class MomStrategy(IStrategy):
             (
                 dataframe['signal'] == 1
             ),
-            'buy'] = 1
+            'enter_long'] = 1
         return dataframe
 
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
@@ -361,5 +361,5 @@ class MomStrategy(IStrategy):
             (
                 dataframe['signal'] == -1
             ),
-            'sell'] = 1
+            'exit_long'] = 1
         return dataframe

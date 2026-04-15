@@ -159,7 +159,7 @@ class mark_strat_opt (IStrategy):
                 (dataframe['rsi'] < 34) &
                 (dataframe['close'] < dataframe['bb_lowerband4'])
             ),
-            'entry'] = 1
+            'enter_long'] = 1
         return dataframe
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         """
@@ -175,5 +175,5 @@ class mark_strat_opt (IStrategy):
                 (dataframe['rsi'] > 94) &
                 (qtpylib.crossed_above(dataframe['sar'], dataframe['close']))
             ),
-            'exit'] = 1
+            'exit_long'] = 1
         return dataframe

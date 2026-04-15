@@ -116,7 +116,7 @@ class Heracles(IStrategy):
 
         dataframe.loc[
             (DFIND < DFCRS),
-            'buy'] = 1
+            'enter_long'] = 1
 
         return dataframe
 
@@ -129,6 +129,6 @@ class Heracles(IStrategy):
 
         dataframe.loc[
             (qtpylib.crossed_below(DFIND, DFCRS)),
-            'sell'] = 1
+            'exit_long'] = 1
 
         return dataframe

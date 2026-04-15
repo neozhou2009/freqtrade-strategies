@@ -30,7 +30,7 @@ class Stavix2(IStrategy):
                     (dataframe['close'] > dataframe['senkou_span_b']) & 
                     (qtpylib.crossed_above(dataframe['kijun_sen'], dataframe['tenkan_sen']))
                     ),
-                'buy'] = 1
+                'enter_long'] = 1
         return dataframe
 
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
@@ -40,5 +40,5 @@ class Stavix2(IStrategy):
                     (dataframe['close'] < dataframe['senkou_span_b']) & 
                     (qtpylib.crossed_above(dataframe['tenkan_sen'], dataframe['kijun_sen']))
                     ),
-                'sell'] = 1
+                'exit_long'] = 1
         return dataframe

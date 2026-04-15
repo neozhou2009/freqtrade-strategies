@@ -89,7 +89,7 @@ class RSIBB02(IStrategy):
                 (dataframe['rsi'] > 19) &
                 (dataframe["close"] < dataframe['bb_lowerband'] )
             ),
-            'buy'] = 1
+            'enter_long'] = 1
         return dataframe
 
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
@@ -105,6 +105,6 @@ class RSIBB02(IStrategy):
                 (dataframe['rsi'] > 83) &
                 (dataframe["close"] > dataframe['bb_middleband'] )
             ),
-            'sell'] = 1
+            'exit_long'] = 1
 
         return dataframe

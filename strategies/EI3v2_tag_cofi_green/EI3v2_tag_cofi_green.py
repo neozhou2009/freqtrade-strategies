@@ -305,7 +305,7 @@ class EI3v2_tag_cofi_green(IStrategy):
 
     def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
-        dataframe.loc[:, 'buy_tag'] = ''
+        dataframe.loc[:, 'enter_tag'] = ''
 
         lambo2 = (
             #bool(self.lambo2_enabled.value) &
@@ -314,7 +314,7 @@ class EI3v2_tag_cofi_green(IStrategy):
             (dataframe['rsi_4'] < int(self.lambo2_rsi_4_limit.value)) &
             (dataframe['rsi_14'] < int(self.lambo2_rsi_14_limit.value))
         )
-        dataframe.loc[lambo2, 'buy_tag'] += 'lambo2_'
+        dataframe.loc[lambo2, 'enter_tag'] += 'lambo2_'
         conditions.append(lambo2)
 
         buy1ewo = (
@@ -325,7 +325,7 @@ class EI3v2_tag_cofi_green(IStrategy):
                 (dataframe['volume'] > 0)&
                 (dataframe['close'] < (dataframe[f'ma_sell_{self.base_nb_candles_sell.value}'] * self.high_offset.value))
         )
-        dataframe.loc[buy1ewo, 'buy_tag'] += 'buy1eworsi_'
+        dataframe.loc[buy1ewo, 'enter_tag'] += 'buy1eworsi_'
         conditions.append(buy1ewo)
 
         buy2ewo = (
@@ -335,7 +335,7 @@ class EI3v2_tag_cofi_green(IStrategy):
                 (dataframe['volume'] > 0)&
                 (dataframe['close'] < (dataframe[f'ma_sell_{self.base_nb_candles_sell.value}'] * self.high_offset.value))
         )
-        dataframe.loc[buy2ewo, 'buy_tag'] += 'buy2ewo_'
+        dataframe.loc[buy2ewo, 'enter_tag'] += 'buy2ewo_'
         conditions.append(buy2ewo)
 
         is_cofi = (
@@ -346,7 +346,7 @@ class EI3v2_tag_cofi_green(IStrategy):
                 (dataframe['adx'] > self.buy_adx.value) &
                 (dataframe['EWO'] > self.buy_ewo_high.value)
             )
-        dataframe.loc[is_cofi, 'buy_tag'] += 'cofi_'
+        dataframe.loc[is_cofi, 'enter_tag'] += 'cofi_'
         conditions.append(is_cofi)
 
         if conditions:
@@ -366,7 +366,7 @@ class EI3v2_tag_cofi_green(IStrategy):
 
         if dont_buy_conditions:
             for condition in dont_buy_conditions:
-                dataframe.loc[condition, 'buy'] = 0
+                dataframe.loc[condition, 'enter_long'] = 0
 
         return dataframe
 

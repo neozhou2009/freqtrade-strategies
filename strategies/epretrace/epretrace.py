@@ -151,7 +151,7 @@ class epretrace(IStrategy):
                 #qtpylib.crossed_above(dataframe['ema25'], dataframe['ema50']) &
                 (dataframe['volume'] > 0)
             ),
-            'buy'] = 1
+            'enter_long'] = 1
         return dataframe
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         # Sell if RSI is greater than 31 and close is superior to the 25 candle linear regression line
@@ -162,7 +162,7 @@ class epretrace(IStrategy):
                 #(dataframe['senkou_a'] > dataframe['senkou_b']) &
                 (dataframe['volume'] > 0)
             ),
-            'sell'] = 1
+            'exit_long'] = 1
         return dataframe
     def custom_stoploss(self, pair: str, trade: 'Trade', current_time: datetime,
                         current_rate: float, current_profit: float, **kwargs) -> float:

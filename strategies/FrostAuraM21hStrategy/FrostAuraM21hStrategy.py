@@ -102,7 +102,7 @@ class FrostAuraM21hStrategy(IStrategy):
                 (dataframe["slowk"] > 77) &
                 (dataframe["close"] > minimum_coin_price)
             ),
-            'buy'] = 1
+            'enter_long'] = 1
 
         return dataframe
 
@@ -113,6 +113,6 @@ class FrostAuraM21hStrategy(IStrategy):
                 (dataframe["slowd"] < 79) &
                 (dataframe["slowk"] < 77)
             ),
-            'sell'] = 1
+            'exit_long'] = 1
         
         return dataframe

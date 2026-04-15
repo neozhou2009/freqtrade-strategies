@@ -140,7 +140,7 @@ class BBlower(IStrategy):
                   
                 
             ),
-            'entry'] = 1
+            'enter_long'] = 1
 
         return dataframe
 
@@ -163,6 +163,6 @@ class BBlower(IStrategy):
                 
                 
             ),
-            'exit'] = 1        
+            'exit_long'] = 1        
         
         return dataframe

@@ -534,7 +534,7 @@ class true_lambo(IStrategy):
 
 
         conditions = []
-        dataframe.loc[:, 'buy_tag'] = ''
+        dataframe.loc[:, 'enter_tag'] = ''
 
         is_pump_2 = (
                 (dataframe['close'].rolling(48).max() >= (dataframe['close'] * self.buy_pump_2_factor.value ))
@@ -711,48 +711,48 @@ class true_lambo(IStrategy):
 
         ## Non EWO
         conditions.append(is_cofi)                                                   # ~3.21 90.8%
-        dataframe.loc[is_cofi, 'buy_tag'] += 'cofi '
+        dataframe.loc[is_cofi, 'enter_tag'] += 'cofi '
 
         # EWO > 8
         conditions.append(is_vwap)                                                   # ~67.3%
-        dataframe.loc[is_vwap, 'buy_tag'] += 'vwap '
+        dataframe.loc[is_vwap, 'enter_tag'] += 'vwap '
 
         conditions.append(is_V)                                                      # ~67.9%
-        dataframe.loc[is_V, 'buy_tag'] += 'V '
+        dataframe.loc[is_V, 'enter_tag'] += 'V '
 
         # EWO 4 ~ 8
         conditions.append(is_lambo_2)                                                # ~67.7%
-        dataframe.loc[is_lambo_2, 'buy_tag'] += 'lambo_2 '
+        dataframe.loc[is_lambo_2, 'enter_tag'] += 'lambo_2 '
 
         conditions.append(is_clucHA_2)                                               # ~68.2%
-        dataframe.loc[is_clucHA_2, 'buy_tag'] += 'cluc_2 '
+        dataframe.loc[is_clucHA_2, 'enter_tag'] += 'cluc_2 '
 
         conditions.append(is_vwap_2)                                                 # ~67.3%
-        dataframe.loc[is_vwap_2, 'buy_tag'] += 'vwap_2 '
+        dataframe.loc[is_vwap_2, 'enter_tag'] += 'vwap_2 '
 
         conditions.append(is_V_2)                                                    # ~67.9%
-        dataframe.loc[is_V_2, 'buy_tag'] += 'V_2 '
+        dataframe.loc[is_V_2, 'enter_tag'] += 'V_2 '
 
         # EWO -2.5 ~ 4
         conditions.append(is_clucHA_3)                                               # ~68.2%
-        dataframe.loc[is_clucHA_3, 'buy_tag'] += 'cluc_3 '
+        dataframe.loc[is_clucHA_3, 'enter_tag'] += 'cluc_3 '
 
         conditions.append(is_vwap_3)                                                 # ~67.3%
-        dataframe.loc[is_vwap_3, 'buy_tag'] += 'vwap_3 '
+        dataframe.loc[is_vwap_3, 'enter_tag'] += 'vwap_3 '
 
         # EWO -8 ~ -4
         conditions.append(is_clucHA_4)                                               # ~68.2%
-        dataframe.loc[is_clucHA_4, 'buy_tag'] += 'cluc_4 '
+        dataframe.loc[is_clucHA_4, 'enter_tag'] += 'cluc_4 '
 
         conditions.append(is_vwap_4)                                                 # ~67.3%
-        dataframe.loc[is_vwap_4, 'buy_tag'] += 'vwap_4 '
+        dataframe.loc[is_vwap_4, 'enter_tag'] += 'vwap_4 '
 
         ## EWO < -8
         conditions.append(is_gumbo)                                                  # ~2.63 / 90.6% / 41.49%      F   (263 %)
-        dataframe.loc[is_gumbo, 'buy_tag'] += 'gumbo '
+        dataframe.loc[is_gumbo, 'enter_tag'] += 'gumbo '
 
         conditions.append(is_V_5)                                                    # ~67.9%
-        dataframe.loc[is_V_5, 'buy_tag'] += 'V_5 '
+        dataframe.loc[is_V_5, 'enter_tag'] += 'V_5 '
 
         if conditions:
             dataframe.loc[
@@ -760,7 +760,7 @@ class true_lambo(IStrategy):
                             &
                             reduce(lambda x, y: x | y, conditions)
 
-                        , 'buy' ] = 1
+                        , 'enter_long' ] = 1
 
         return dataframe
 

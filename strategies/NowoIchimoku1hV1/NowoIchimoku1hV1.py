@@ -220,16 +220,16 @@ class NowoIchimoku1hV1(IStrategy):
         for i in range(101, len(df)):
             df.loc[i, "buy_allowed"] = df.loc[i - 1, "buy_allowed"]
 
-            if df.loc[i - 1, "buy"]:
+            if df.loc[i - 1, "enter_long"]:
                 df.loc[i, "buy_allowed"] = False
 
             elif not df.loc[i, "is_cloud_green"]:
                 df.loc[i, "buy_allowed"] = True
 
-        df.loc[(df["buy_allowed"] & df["should_buy"]), "buy"] = 1
+        df.loc[(df["buy_allowed"] & df["should_buy"]), "enter_long"] = 1
 
         return df
 
     def populate_exit_trend(self, df: DataFrame, metadata: dict) -> DataFrame:
-        df["sell"] = 0
+        df["exit_long"] = 0
         return df

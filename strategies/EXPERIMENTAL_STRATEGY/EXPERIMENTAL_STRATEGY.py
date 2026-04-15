@@ -134,7 +134,7 @@ class EXPERIMENTAL_STRATEGY(IStrategy):
                 (dataframe['adx'] > 65) &
                 (dataframe['plus_di'] > 0.5)
             ),
-            'buy'] = 1
+            'enter_long'] = 1
 
         return dataframe
 
@@ -158,5 +158,5 @@ class EXPERIMENTAL_STRATEGY(IStrategy):
                 (dataframe['adx'] > 70) &
                 (dataframe['minus_di'] > 0.5)
             ),
-            'sell'] = 1
+            'exit_long'] = 1
         return dataframe

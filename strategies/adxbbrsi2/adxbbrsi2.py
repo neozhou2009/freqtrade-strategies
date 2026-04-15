@@ -85,7 +85,7 @@ class adxbbrsi2(IStrategy):
                     # (dataframe['plus_di'] > dataframe['minus_di'])
 
             ),
-            'buy'] = 1
+            'enter_long'] = 1
         return dataframe
 
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
@@ -103,5 +103,5 @@ class adxbbrsi2(IStrategy):
                 # (dataframe["close"] > dataframe['bb_upperband'])
                 # (dataframe['plus_di'] < dataframe['minus_di'])
             ),
-            'sell'] = 1
+            'exit_long'] = 1
         return dataframe

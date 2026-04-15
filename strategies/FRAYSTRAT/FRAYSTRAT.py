@@ -406,7 +406,7 @@ class FRAYSTRAT(IStrategy):
                 (dataframe['tema'] > dataframe['tema'].shift(1)) &
                 (dataframe['volume'] > 0)  # Make sure Volume is not 0
             ),
-            'buy'] = 1
+            'enter_long'] = 1
         return dataframe
 
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
@@ -440,5 +440,5 @@ class FRAYSTRAT(IStrategy):
                 (dataframe['tema'] < dataframe['tema'].shift(1)) &
                 (dataframe['volume'] > 0)  # Make sure Volume is not 0
             ),
-            'sell'] = 1
+            'exit_long'] = 1
         return dataframe

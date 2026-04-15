@@ -75,7 +75,7 @@ class e6v34(IStrategy):
         if conditions:
             dataframe.loc[
                 reduce(lambda x,y: x&y, conditions),
-                'buy']=1
+                'enter_long']=1
 
         return dataframe
 
@@ -89,6 +89,6 @@ class e6v34(IStrategy):
                 (dataframe['willr'] < self.swill.value) &
                 (dataframe['willr'].shift(1) > self.swill.value)
             ),
-            'sell'] = 1
+            'exit_long'] = 1
 
         return dataframe

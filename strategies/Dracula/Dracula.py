@@ -197,7 +197,7 @@ class Dracula(IStrategy):
         item_buy_logic.append((dataframe["bb_bbt"] > self.buy_bbt.value))
         item_buy_logic.append(lost_protect)
         dataframe.loc[
-            reduce(lambda x, y: x & y, item_buy_logic), ["buy", "buy_tag"]
+            reduce(lambda x, y: x & y, item_buy_logic), ["enter_long", "enter_tag"]
         ] = (1, f"buy_1")
 
         item_buy_logic = []
@@ -210,7 +210,7 @@ class Dracula(IStrategy):
         item_buy_logic.append((dataframe["bb_bbt"] > self.buy_bbt.value))
         item_buy_logic.append(lost_protect)
         dataframe.loc[
-            reduce(lambda x, y: x & y, item_buy_logic), ["buy", "buy_tag"]
+            reduce(lambda x, y: x & y, item_buy_logic), ["enter_long", "enter_tag"]
         ] = (1, f"buy_2")
 
         return dataframe
@@ -264,6 +264,6 @@ class Dracula(IStrategy):
         return None
 
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
-        dataframe.loc[:, "sell"] = 0
+        dataframe.loc[:, "exit_long"] = 0
 
         return dataframe

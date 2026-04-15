@@ -90,7 +90,7 @@ class BBRSIoriginal(IStrategy):
                 #(dataframe['rsi'] > 12) &
                 (dataframe["close"] < dataframe['bb_lowerband3'] )
             ),
-            'entry'] = 1
+            'enter_long'] = 1
         return dataframe
 
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
@@ -106,6 +106,6 @@ class BBRSIoriginal(IStrategy):
                 (dataframe['rsi'] > 75) &
                 (dataframe["close"] > dataframe['bb_middleband'] )
             ),
-            'exit'] = 1
+            'exit_long'] = 1
 
         return dataframe

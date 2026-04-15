@@ -114,7 +114,7 @@ class BBRSIOptimStrategy(IStrategy):
                 (dataframe['rsi'] > 12) & 
                 (dataframe['close'] < dataframe['bb_lowerband_2sd'])
             ),
-            'entry'] = 1
+            'enter_long'] = 1
 
         return dataframe
 
@@ -124,5 +124,5 @@ class BBRSIOptimStrategy(IStrategy):
                 (dataframe['rsi'] > 96) & 
                 (dataframe['close'] > dataframe['bb_lowerband_1sd'])
             ),
-            'exit'] = 1
+            'exit_long'] = 1
         return dataframe

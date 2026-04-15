@@ -119,7 +119,7 @@ class Ichimoku_v37(IStrategy):
                     & (dataframe["cloud_red_1d"] == True)
                 )
             ),
-            "buy",
+            "enter_long",
         ] = 1
 
         return dataframe
@@ -130,7 +130,7 @@ class Ichimoku_v37(IStrategy):
                 (dataframe["ha_4h_close"] < dataframe["senkou_a_1d"])
                 | (dataframe["ha_4h_close"] < dataframe["senkou_b_1d"])
             ),
-            "sell",
+            "exit_long",
         ] = 1
 
         return dataframe

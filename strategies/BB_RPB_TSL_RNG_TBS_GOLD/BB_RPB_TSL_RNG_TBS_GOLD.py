@@ -342,7 +342,7 @@ class BB_RPB_TSL_RNG_TBS_GOLD(IStrategy):
 
 
         conditions = []
-        dataframe.loc[:, 'buy_tag'] = ''
+        dataframe.loc[:, 'enter_tag'] = ''
 
         if self.buy_is_dip_enabled.value:
 
@@ -438,28 +438,28 @@ class BB_RPB_TSL_RNG_TBS_GOLD(IStrategy):
 
         ## condition append
         conditions.append(is_BB_checked)          # ~1.7 89%
-        dataframe.loc[is_BB_checked, 'buy_tag'] += 'bb '
+        dataframe.loc[is_BB_checked, 'enter_tag'] += 'bb '
 
         conditions.append(is_local_uptrend)       # ~3.84 90.2%
-        dataframe.loc[is_local_uptrend, 'buy_tag'] += 'local uptrend '
+        dataframe.loc[is_local_uptrend, 'enter_tag'] += 'local uptrend '
 
         conditions.append(is_ewo)                 # ~2.26 93.5%
-        dataframe.loc[is_ewo, 'buy_tag'] += 'ewo '
+        dataframe.loc[is_ewo, 'enter_tag'] += 'ewo '
 
         conditions.append(is_ewo_2)               # ~3.68 90.3%
-        dataframe.loc[is_ewo_2, 'buy_tag'] += 'ewo2 '
+        dataframe.loc[is_ewo_2, 'enter_tag'] += 'ewo2 '
 
         conditions.append(is_cofi)                # ~3.21 90.8%
-        dataframe.loc[is_cofi, 'buy_tag'] += 'cofi '
+        dataframe.loc[is_cofi, 'enter_tag'] += 'cofi '
 
         conditions.append(is_nfi_32)              # ~2.43 91.3%
-        dataframe.loc[is_nfi_32, 'buy_tag'] += 'nfi 32 '
+        dataframe.loc[is_nfi_32, 'enter_tag'] += 'nfi 32 '
 
         conditions.append(is_nfi_33)              # ~0.11 100%
-        dataframe.loc[is_nfi_33, 'buy_tag'] += 'nfi 33 '
+        dataframe.loc[is_nfi_33, 'enter_tag'] += 'nfi 33 '
 
         if conditions:
-            dataframe.loc[reduce(lambda x, y: x | y, conditions), 'entry' ] = 1
+            dataframe.loc[reduce(lambda x, y: x | y, conditions), 'enter_long' ] = 1
 
         return dataframe
 
@@ -587,7 +587,7 @@ class TrailingBuyStrat2(BB_RPB_TSL_RNG_TBS_GOLD):
         current_time = datetime.now(timezone.utc)
         trailing_duration = current_time - trailing_buy['start_trailing_time']
         if trailing_duration.total_seconds() > self.trailing_expire_seconds:
-            if ((current_trailing_profit_ratio > 0) and (last_candle['entry'] == 1)):
+            if ((current_trailing_profit_ratio > 0) and (last_candle['enter_long'] == 1)):
                 # more than 1h, price under first signal, buy signal still active -> buy
                 return 'force_entry'
             else:
@@ -635,7 +635,7 @@ class TrailingBuyStrat2(BB_RPB_TSL_RNG_TBS_GOLD):
                     trailing_buy_offset = self.trailing_buy_offset(dataframe, pair, current_price)
 
                     if trailing_buy['allow_trailing']:
-                        if (not trailing_buy['trailing_buy_order_started'] and (last_candle['entry'] == 1)):
+                        if (not trailing_buy['trailing_buy_order_started'] and (last_candle['enter_long'] == 1)):
                             # start trailing buy
                             
                             # self.custom_info_trail_buy[pair]['trailing_buy']['trailing_buy_order_started'] = True
@@ -648,7 +648,7 @@ class TrailingBuyStrat2(BB_RPB_TSL_RNG_TBS_GOLD):
                             trailing_buy['trailing_buy_order_started'] = True
                             trailing_buy['trailing_buy_order_uplimit'] = last_candle['close']
                             trailing_buy['start_trailing_price'] = last_candle['close']
-                            trailing_buy['buy_tag'] = last_candle['buy_tag']
+                            trailing_buy['enter_tag'] = last_candle['enter_tag']
                             trailing_buy['start_trailing_time'] = datetime.now(timezone.utc)
                             trailing_buy['offset'] = 0
                             
@@ -708,20 +708,20 @@ class TrailingBuyStrat2(BB_RPB_TSL_RNG_TBS_GOLD):
         if self.trailing_buy_order_enabled and self.config['runmode'].value in ('live', 'dry_run'): 
             last_candle = dataframe.iloc[-1].squeeze()
             trailing_buy = self.trailing_buy(metadata['pair'])
-            if (last_candle['entry'] == 1):
+            if (last_candle['enter_long'] == 1):
                 if not trailing_buy['trailing_buy_order_started']:
                     open_trades = Trade.get_trades([Trade.pair == metadata['pair'], Trade.is_open.is_(True), ]).all()
                     if not open_trades:
                         logger.info(f"Set 'allow_trailing' to True for {metadata['pair']} to start trailing!!!")
                         # self.custom_info_trail_buy[metadata['pair']]['trailing_buy']['allow_trailing'] = True
                         trailing_buy['allow_trailing'] = True
-                        initial_buy_tag = last_candle['buy_tag'] if 'buy_tag' in last_candle else 'buy signal'
-                        dataframe.loc[:, 'buy_tag'] = f"{initial_buy_tag} (start trail price {last_candle['close']})"
+                        initial_buy_tag = last_candle['enter_tag'] if 'enter_tag' in last_candle else 'buy signal'
+                        dataframe.loc[:, 'enter_tag'] = f"{initial_buy_tag} (start trail price {last_candle['close']})"
             else:
                 if (trailing_buy['trailing_buy_order_started'] == True):
                     logger.info(f"Continue trailing for {metadata['pair']}. Manually trigger buy signal!!")
-                    dataframe.loc[:,'entry'] = 1
-                    dataframe.loc[:, 'buy_tag'] = trailing_buy['buy_tag']
+                    dataframe.loc[:,'enter_long'] = 1
+                    dataframe.loc[:, 'enter_tag'] = trailing_buy['enter_tag']
                     # dataframe['entry'] = 1
 
         return dataframe

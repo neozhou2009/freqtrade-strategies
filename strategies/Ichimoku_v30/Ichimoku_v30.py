@@ -57,7 +57,7 @@ class Ichimoku_v30(IStrategy):
                 (dataframe['close'].shift(2) > dataframe['senkou_a']) &
                 (dataframe['close'].shift(2) > dataframe['senkou_b'])
             ),
-            'buy'] = 1
+            'enter_long'] = 1
 
         dataframe.loc[
             (
@@ -65,7 +65,7 @@ class Ichimoku_v30(IStrategy):
                 (dataframe['close'].shift(2) > dataframe['senkou_a']) &
                 (dataframe['close'].shift(2 ) > dataframe['senkou_b'])
             ),
-            'buy'] = 1
+            'enter_long'] = 1
 
         return dataframe
 
@@ -74,6 +74,6 @@ class Ichimoku_v30(IStrategy):
             (
                 (dataframe['CDLEVENINGDOJISTAR'] != 0)
             ),
-            'sell'] = 1
+            'exit_long'] = 1
 
         return dataframe

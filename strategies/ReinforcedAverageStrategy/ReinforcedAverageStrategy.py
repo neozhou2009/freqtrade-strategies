@@ -78,7 +78,7 @@ class ReinforcedAverageStrategy(IStrategy):
                 (dataframe['close'] > dataframe[f'resample_{self.resample_interval}_sma']) &
                 (dataframe['volume'] > 0)
             ),
-            'buy'] = 1
+            'enter_long'] = 1
 
         return dataframe
 
@@ -93,5 +93,5 @@ class ReinforcedAverageStrategy(IStrategy):
                 qtpylib.crossed_above(dataframe['maMedium'], dataframe['maShort']) &
                 (dataframe['volume'] > 0)
             ),
-            'sell'] = 1
+            'exit_long'] = 1
         return dataframe

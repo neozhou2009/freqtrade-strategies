@@ -771,7 +771,7 @@ class BBMod1(IStrategy):
     def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
 
         conditions = []
-        dataframe.loc[:, 'buy_tag'] = ''
+        dataframe.loc[:, 'enter_tag'] = ''
 
         is_dip = (
                 (dataframe[f'rmi_length_{self.buy_rmi_length.value}'] < self.buy_rmi.value) &
@@ -981,16 +981,16 @@ class BBMod1(IStrategy):
 
         # Condition Append
         conditions.append(is_bb_checked)                                           # ~2.32 / 91.1% / 46.27%      D
-        dataframe.loc[is_bb_checked, 'buy_tag'] += 'bb '
+        dataframe.loc[is_bb_checked, 'enter_tag'] += 'bb '
 
         conditions.append(is_local_uptrend)                                        # ~3.28 / 92.4% / 69.72%
-        dataframe.loc[is_local_uptrend, 'buy_tag'] += 'local_uptrend '
+        dataframe.loc[is_local_uptrend, 'enter_tag'] += 'local_uptrend '
 
         conditions.append(is_local_dip)                                            # ~0.76 / 91.1% / 15.54%
-        dataframe.loc[is_local_dip, 'buy_tag'] += 'local_dip '
+        dataframe.loc[is_local_dip, 'enter_tag'] += 'local_dip '
 
         conditions.append(is_ewo)                                                  # ~0.92 / 92.0% / 43.74%      D
-        dataframe.loc[is_ewo, 'buy_tag'] += 'ewo '
+        dataframe.loc[is_ewo, 'enter_tag'] += 'ewo '
 
         # conditions.append(is_ewo_2)                                                 # ~2.86 / 91.5% / 33.31%     D
         # dataframe.loc[is_ewo_2, 'buy_tag'] += 'ewo2 '
@@ -999,13 +999,13 @@ class BBMod1(IStrategy):
         # dataframe.loc[is_r_deadfish, 'buy_tag'] += 'r_deadfish '
 
         conditions.append(is_clucha)                                               # ~7.2 / 92.5% / 97.98%       D
-        dataframe.loc[is_clucha, 'buy_tag'] += 'clucHA '
+        dataframe.loc[is_clucha, 'enter_tag'] += 'clucHA '
 
         conditions.append(is_clucha2)
-        dataframe.loc[is_clucha2, 'buy_tag'] += 'clucHA2 '
+        dataframe.loc[is_clucha2, 'enter_tag'] += 'clucHA2 '
 
         conditions.append(is_cofi)                                                 # ~0.4 / 94.4% / 9.59%        D
-        dataframe.loc[is_cofi, 'buy_tag'] += 'cofi '
+        dataframe.loc[is_cofi, 'enter_tag'] += 'cofi '
 
         # conditions.append(is_gumbo)                                                # ~2.63 / 90.6% / 41.49%      D
         # dataframe.loc[is_gumbo, 'buy_tag'] += 'gumbo '
@@ -1014,44 +1014,44 @@ class BBMod1(IStrategy):
         # dataframe.loc[is_sqzmom, 'buy_tag'] += 'sqzmom '
 
         conditions.append(is_nfi_32)                                               # ~0.78 / 92.0 % / 37.41%     D
-        dataframe.loc[is_nfi_32, 'buy_tag'] += 'nfi_32 '
+        dataframe.loc[is_nfi_32, 'enter_tag'] += 'nfi_32 '
 
         conditions.append(is_nfi_33)                                               # ~0.11 / 100%                D
-        dataframe.loc[is_nfi_33, 'buy_tag'] += 'nfi_33 '
+        dataframe.loc[is_nfi_33, 'enter_tag'] += 'nfi_33 '
 
         conditions.append(is_nfi_38)                                               # ~1.13 / 88.5% / 31.34%      D
-        dataframe.loc[is_nfi_38, 'buy_tag'] += 'nfi_38 '
+        dataframe.loc[is_nfi_38, 'enter_tag'] += 'nfi_38 '
 
         conditions.append(is_nfix_5)                                               # ~0.25 / 97.7% / 6.53%       D
-        dataframe.loc[is_nfix_5, 'buy_tag'] += 'nfix_5 '
+        dataframe.loc[is_nfix_5, 'enter_tag'] += 'nfix_5 '
 
         conditions.append(is_nfix_39)                                              # ~5.33 / 91.8% / 58.57%      D
-        dataframe.loc[is_nfix_39, 'buy_tag'] += 'nfix_39 '
+        dataframe.loc[is_nfix_39, 'enter_tag'] += 'nfix_39 '
 
         conditions.append(is_nfix_49)                                              # ~0.33 / 100% / 0%           D
-        dataframe.loc[is_nfix_49, 'buy_tag'] += 'nfix_49 '
+        dataframe.loc[is_nfix_49, 'enter_tag'] += 'nfix_49 '
 
         conditions.append(is_nfi7_33)                                              # ~0.71 / 91.3% / 28.94%      D
-        dataframe.loc[is_nfi7_33, 'buy_tag'] += 'nfi7_33 '
+        dataframe.loc[is_nfi7_33, 'enter_tag'] += 'nfi7_33 '
 
         conditions.append(is_nfi7_37)                                              # ~0.46 / 92.6% / 17.05%      D
-        dataframe.loc[is_nfi7_37, 'buy_tag'] += 'nfi7_37 '
+        dataframe.loc[is_nfi7_37, 'enter_tag'] += 'nfi7_37 '
 
         conditions.append(is_vwap)
-        dataframe.loc[is_vwap, 'buy_tag'] += 'vwap '
+        dataframe.loc[is_vwap, 'enter_tag'] += 'vwap '
 
         conditions.append(is_local_uptrend2)
-        dataframe.loc[is_local_uptrend2, 'buy_tag'] += 'local_uptrend2 '
+        dataframe.loc[is_local_uptrend2, 'enter_tag'] += 'local_uptrend2 '
 
         if conditions:
             dataframe.loc[
                             reduce(lambda x, y: x | y, conditions),
-                            'entry'] = 1
+                            'enter_long'] = 1
 
         return dataframe
 
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
-        dataframe.loc[(dataframe['volume'] > 0), 'exit'] = 0
+        dataframe.loc[(dataframe['volume'] > 0), 'exit_long'] = 0
         return dataframe
 
 

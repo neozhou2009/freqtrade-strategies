@@ -139,7 +139,7 @@ class wtc(IStrategy):
 
             ),
 
-            'buy'] = 1
+            'enter_long'] = 1
 
         return dataframe
 
@@ -153,5 +153,5 @@ class wtc(IStrategy):
                 & (dataframe['def'].between(self.sell_min.value, self.sell_max.value))
 
             ),
-            'sell'] = 1
+            'exit_long'] = 1
         return dataframe

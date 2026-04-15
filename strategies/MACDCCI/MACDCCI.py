@@ -66,7 +66,7 @@ class MACDCCI(IStrategy):
                 (dataframe['macd'] > dataframe['macdsignal']) &
                 (dataframe['cci-buy'] <= -100.0) # Replace with value from hyperopt.
             ),
-            'buy'] = 1
+            'enter_long'] = 1
 
         return dataframe
 
@@ -77,6 +77,6 @@ class MACDCCI(IStrategy):
                 (dataframe['macd'] < dataframe['macdsignal']) &
                 (dataframe['cci-sell'] >= 200.0) # Replace with value from hyperopt.
             ),
-            'sell'] = 1
+            'exit_long'] = 1
 
         return dataframe

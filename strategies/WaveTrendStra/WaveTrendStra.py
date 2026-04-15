@@ -50,11 +50,11 @@ class WaveTrendStra(IStrategy):
     def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (qtpylib.crossed_above(dataframe["wt1"], dataframe["wt2"]))
-            ,'buy'] = 1
+            ,'enter_long'] = 1
         return dataframe
 
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (qtpylib.crossed_below(dataframe['wt1'], dataframe['wt2']))
-            ,'sell'] = 1
+            ,'exit_long'] = 1
         return dataframe

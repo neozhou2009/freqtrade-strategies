@@ -926,7 +926,7 @@ class BB_RPB_TSL_Tranz(IStrategy):
     def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
 
         conditions = []
-        dataframe.loc[:, 'buy_tag'] = ''
+        dataframe.loc[:, 'enter_tag'] = ''
         
         is_additional_check = (
                 (dataframe['roc_1h'] < self.buy_roc_1h.value) &
@@ -1410,127 +1410,127 @@ class BB_RPB_TSL_Tranz(IStrategy):
 
         ## Condition Append
         conditions.append(is_BB_checked)                                           # ~2.32 / 91.1% / 46.27%      D
-        dataframe.loc[is_BB_checked, 'buy_tag'] += 'bb '
+        dataframe.loc[is_BB_checked, 'enter_tag'] += 'bb '
 
         conditions.append(is_local_uptrend)                                        # ~3.28 / 92.4% / 69.72%
-        dataframe.loc[is_local_uptrend, 'buy_tag'] += 'local_uptrend '
+        dataframe.loc[is_local_uptrend, 'enter_tag'] += 'local_uptrend '
 
         conditions.append(is_local_dip)                                            # ~0.76 / 91.1% / 15.54%
-        dataframe.loc[is_local_dip, 'buy_tag'] += 'local_dip '
+        dataframe.loc[is_local_dip, 'enter_tag'] += 'local_dip '
 
         conditions.append(is_ewo)                                                  # ~0.92 / 92.0% / 43.74%      D
-        dataframe.loc[is_ewo, 'buy_tag'] += 'ewo '
+        dataframe.loc[is_ewo, 'enter_tag'] += 'ewo '
 
         conditions.append(is_ewo_2)                                                 # ~2.86 / 91.5% / 33.31%     D
-        dataframe.loc[is_ewo_2, 'buy_tag'] += 'ewo2 '
+        dataframe.loc[is_ewo_2, 'enter_tag'] += 'ewo2 '
 
         conditions.append(is_r_deadfish)                                           # ~0.99 / 86.9% / 21.93%      D
-        dataframe.loc[is_r_deadfish, 'buy_tag'] += 'r_deadfish '
+        dataframe.loc[is_r_deadfish, 'enter_tag'] += 'r_deadfish '
 
         conditions.append(is_clucHA)                                               # ~7.2 / 92.5% / 97.98%       D
-        dataframe.loc[is_clucHA, 'buy_tag'] += 'clucHA '
+        dataframe.loc[is_clucHA, 'enter_tag'] += 'clucHA '
 
         conditions.append(is_cofi)                                                 # ~0.4 / 94.4% / 9.59%        D
-        dataframe.loc[is_cofi, 'buy_tag'] += 'cofi '
+        dataframe.loc[is_cofi, 'enter_tag'] += 'cofi '
 
         conditions.append(is_gumbo)                                                # ~2.63 / 90.6% / 41.49%      D
-        dataframe.loc[is_gumbo, 'buy_tag'] += 'gumbo '
+        dataframe.loc[is_gumbo, 'enter_tag'] += 'gumbo '
 
         conditions.append(is_sqzmom)                                               # ~3.14 / 92.4% / 64.14%      D
-        dataframe.loc[is_sqzmom, 'buy_tag'] += 'sqzmom '
+        dataframe.loc[is_sqzmom, 'enter_tag'] += 'sqzmom '
 
         conditions.append(is_nfi_13)                                               # ~0.4 / 100%                 D
-        dataframe.loc[is_nfi_13, 'buy_tag'] += 'nfi_13 '
+        dataframe.loc[is_nfi_13, 'enter_tag'] += 'nfi_13 '
 
         conditions.append(is_nfi_32)                                               # ~0.78 / 92.0 % / 37.41%     D
-        dataframe.loc[is_nfi_32, 'buy_tag'] += 'nfi_32 '
+        dataframe.loc[is_nfi_32, 'enter_tag'] += 'nfi_32 '
 
         conditions.append(is_nfi_33)                                               # ~0.11 / 100%                D
-        dataframe.loc[is_nfi_33, 'buy_tag'] += 'nfi_33 '
+        dataframe.loc[is_nfi_33, 'enter_tag'] += 'nfi_33 '
 
         conditions.append(is_nfi_38)                                               # ~1.13 / 88.5% / 31.34%      D
-        dataframe.loc[is_nfi_38, 'buy_tag'] += 'nfi_38 '
+        dataframe.loc[is_nfi_38, 'enter_tag'] += 'nfi_38 '
 
         conditions.append(is_nfix_5)                                               # ~0.25 / 97.7% / 6.53%       D
-        dataframe.loc[is_nfix_5, 'buy_tag'] += 'nfix_5 '
+        dataframe.loc[is_nfix_5, 'enter_tag'] += 'nfix_5 '
 
         conditions.append(is_nfix_39)                                              # ~5.33 / 91.8% / 58.57%      D
-        dataframe.loc[is_nfix_39, 'buy_tag'] += 'nfix_39 '
+        dataframe.loc[is_nfix_39, 'enter_tag'] += 'nfix_39 '
 
         conditions.append(is_nfix_49)                                              # ~0.33 / 100% / 0%           D
-        dataframe.loc[is_nfix_49, 'buy_tag'] += 'nfix_49 '
+        dataframe.loc[is_nfix_49, 'enter_tag'] += 'nfix_49 '
 
         conditions.append(is_nfi7_33)                                              # ~0.71 / 91.3% / 28.94%      D
-        dataframe.loc[is_nfi7_33, 'buy_tag'] += 'nfi7_33 '
+        dataframe.loc[is_nfi7_33, 'enter_tag'] += 'nfi7_33 '
 
         conditions.append(is_nfi7_37)                                              # ~0.46 / 92.6% / 17.05%      D
-        dataframe.loc[is_nfi7_37, 'buy_tag'] += 'nfi7_37 '
+        dataframe.loc[is_nfi7_37, 'enter_tag'] += 'nfi7_37 '
         
         conditions.append(is_nfi_ctt35)                                           # ~2.32 / 91.1% / 46.27%      D
-        dataframe.loc[is_nfi_ctt35, 'buy_tag'] += 'nfi_ctt35 '
+        dataframe.loc[is_nfi_ctt35, 'enter_tag'] += 'nfi_ctt35 '
 
         conditions.append(is_nfi_ctt25)                                        # ~3.28 / 92.4% / 69.72%
-        dataframe.loc[is_nfi_ctt25, 'buy_tag'] += 'nfi_ctt25 '
+        dataframe.loc[is_nfi_ctt25, 'enter_tag'] += 'nfi_ctt25 '
 
         conditions.append(is_nfi_ctt15)                                            # ~0.76 / 91.1% / 15.54%
-        dataframe.loc[is_nfi_ctt15, 'buy_tag'] += 'nfi_ctt15 '
+        dataframe.loc[is_nfi_ctt15, 'enter_tag'] += 'nfi_ctt15 '
 
         conditions.append(is_nfi_10)                                                  # ~0.92 / 92.0% / 43.74%      D
-        dataframe.loc[is_nfi_10, 'buy_tag'] += 'nfi_10 '
+        dataframe.loc[is_nfi_10, 'enter_tag'] += 'nfi_10 '
 
         conditions.append(is_nfix_53)                                               # ~7.2 / 92.5% / 97.98%       D
-        dataframe.loc[is_nfix_53, 'buy_tag'] += 'nfix_53 '
+        dataframe.loc[is_nfix_53, 'enter_tag'] += 'nfix_53 '
 
         conditions.append(is_nfix_52)                                                 # ~0.4 / 94.4% / 9.59%        D
-        dataframe.loc[is_nfix_52, 'buy_tag'] += 'nfix_52 '
+        dataframe.loc[is_nfix_52, 'enter_tag'] += 'nfix_52 '
 
         conditions.append(is_nfix_51)                                                # ~2.63 / 90.6% / 41.49%      D
-        dataframe.loc[is_nfix_51, 'buy_tag'] += 'nfix_51 '
+        dataframe.loc[is_nfix_51, 'enter_tag'] += 'nfix_51 '
 
         conditions.append(is_nfix_48)                                               # ~3.14 / 92.4% / 64.14%      D
-        dataframe.loc[is_nfix_48, 'buy_tag'] += 'nfix_48 '
+        dataframe.loc[is_nfix_48, 'enter_tag'] += 'nfix_48 '
 
         conditions.append(is_nfix_47)                                               # ~0.4 / 100%                 D
-        dataframe.loc[is_nfix_47, 'buy_tag'] += 'nfix_47 '
+        dataframe.loc[is_nfix_47, 'enter_tag'] += 'nfix_47 '
 
         conditions.append(is_nfix_41)                                               # ~0.78 / 92.0 % / 37.41%     D
-        dataframe.loc[is_nfix_41, 'buy_tag'] += 'nfix_41 '
+        dataframe.loc[is_nfix_41, 'enter_tag'] += 'nfix_41 '
 
         conditions.append(is_nfix_38)                                               # ~0.11 / 100%                D
-        dataframe.loc[is_nfix_38, 'buy_tag'] += 'nfix_38 '
+        dataframe.loc[is_nfix_38, 'enter_tag'] += 'nfix_38 '
 
         conditions.append(is_nfix_36)                                               # ~1.13 / 88.5% / 31.34%      D
-        dataframe.loc[is_nfix_36, 'buy_tag'] += 'nfix_36 '
+        dataframe.loc[is_nfix_36, 'enter_tag'] += 'nfix_36 '
 
         conditions.append(is_nfix_204)                                               # ~0.25 / 97.7% / 6.53%       D
-        dataframe.loc[is_nfix_204, 'buy_tag'] += 'nfix_204 '
+        dataframe.loc[is_nfix_204, 'enter_tag'] += 'nfix_204 '
 
         conditions.append(is_nfix_203)                                              # ~5.33 / 91.8% / 58.57%      D
-        dataframe.loc[is_nfix_203, 'buy_tag'] += 'nfix_203 '
+        dataframe.loc[is_nfix_203, 'enter_tag'] += 'nfix_203 '
 
         conditions.append(is_nfix_202)                                              # ~0.33 / 100% / 0%           D
-        dataframe.loc[is_nfix_202, 'buy_tag'] += 'nfix_202 '
+        dataframe.loc[is_nfix_202, 'enter_tag'] += 'nfix_202 '
 
         conditions.append(is_nfix_201)                                              # ~0.71 / 91.3% / 28.94%      D
-        dataframe.loc[is_nfix_201, 'buy_tag'] += 'nfix_201 '
+        dataframe.loc[is_nfix_201, 'enter_tag'] += 'nfix_201 '
 
         conditions.append(is_nfix_34)                                              # ~0.46 / 92.6% / 17.05%      D
-        dataframe.loc[is_nfix_34, 'buy_tag'] += 'nfix_34 '
+        dataframe.loc[is_nfix_34, 'enter_tag'] += 'nfix_34 '
         
         conditions.append(is_nfix_28)                                               # ~0.25 / 97.7% / 6.53%       D
-        dataframe.loc[is_nfix_28, 'buy_tag'] += 'nfix_28 '
+        dataframe.loc[is_nfix_28, 'enter_tag'] += 'nfix_28 '
 
         conditions.append(is_nfix_27)                                              # ~5.33 / 91.8% / 58.57%      D
-        dataframe.loc[is_nfix_27, 'buy_tag'] += 'nfix_27 '
+        dataframe.loc[is_nfix_27, 'enter_tag'] += 'nfix_27 '
 
         conditions.append(is_nfix_19)                                              # ~0.33 / 100% / 0%           D
-        dataframe.loc[is_nfix_19, 'buy_tag'] += 'nfix_19 '
+        dataframe.loc[is_nfix_19, 'enter_tag'] += 'nfix_19 '
 
         conditions.append(is_nfix_11)                                              # ~0.71 / 91.3% / 28.94%      D
-        dataframe.loc[is_nfix_11, 'buy_tag'] += 'nfix_11 '
+        dataframe.loc[is_nfix_11, 'enter_tag'] += 'nfix_11 '
 
         conditions.append(is_nfix_9)                                              # ~0.46 / 92.6% / 17.05%      D
-        dataframe.loc[is_nfix_9, 'buy_tag'] += 'nfix_9 '
+        dataframe.loc[is_nfix_9, 'enter_tag'] += 'nfix_9 '
 
         if conditions:
             dataframe.loc[
@@ -1538,13 +1538,13 @@ class BB_RPB_TSL_Tranz(IStrategy):
                             &
                             reduce(lambda x, y: x | y, conditions)
 
-                        , 'entry' ] = 1
+                        , 'enter_long' ] = 1
 
         return dataframe
 
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
 
-        dataframe.loc[ (dataframe['volume'] > 0), 'exit' ] = 0
+        dataframe.loc[ (dataframe['volume'] > 0), 'exit_long' ] = 0
 
         return dataframe
         
@@ -1640,7 +1640,7 @@ class BB_RPB_TSL_Tranz_TrailingBuy(BB_RPB_TSL_Tranz):
         current_time = datetime.now(timezone.utc)
         trailing_duration = current_time - trailing_buy['start_trailing_time']
         if trailing_duration.total_seconds() > self.trailing_expire_seconds:
-            if ((current_trailing_profit_ratio > 0) and (last_candle['entry'] == 1)):
+            if ((current_trailing_profit_ratio > 0) and (last_candle['enter_long'] == 1)):
                 # more than 1h, price under first signal, buy signal still active -> buy
                 return 'force_entry'
             else:
@@ -1688,7 +1688,7 @@ class BB_RPB_TSL_Tranz_TrailingBuy(BB_RPB_TSL_Tranz):
                     trailing_buy_offset = self.trailing_buy_offset(dataframe, pair, current_price)
 
                     if trailing_buy['allow_trailing']:
-                        if (not trailing_buy['trailing_buy_order_started'] and (last_candle['entry'] == 1)):
+                        if (not trailing_buy['trailing_buy_order_started'] and (last_candle['enter_long'] == 1)):
                             # start trailing buy
                             
                             # self.custom_info_trail_buy[pair]['trailing_buy']['trailing_buy_order_started'] = True
@@ -1701,7 +1701,7 @@ class BB_RPB_TSL_Tranz_TrailingBuy(BB_RPB_TSL_Tranz):
                             trailing_buy['trailing_buy_order_started'] = True
                             trailing_buy['trailing_buy_order_uplimit'] = last_candle['close']
                             trailing_buy['start_trailing_price'] = last_candle['close']
-                            trailing_buy['buy_tag'] = last_candle['buy_tag']
+                            trailing_buy['enter_tag'] = last_candle['enter_tag']
                             trailing_buy['start_trailing_time'] = datetime.now(timezone.utc)
                             trailing_buy['offset'] = 0
                             
@@ -1761,20 +1761,20 @@ class BB_RPB_TSL_Tranz_TrailingBuy(BB_RPB_TSL_Tranz):
         if self.trailing_buy_order_enabled and self.config['runmode'].value in ('live', 'dry_run'): 
             last_candle = dataframe.iloc[-1].squeeze()
             trailing_buy = self.trailing_buy(metadata['pair'])
-            if (last_candle['entry'] == 1):
+            if (last_candle['enter_long'] == 1):
                 if not trailing_buy['trailing_buy_order_started']:
                     open_trades = Trade.get_trades([Trade.pair == metadata['pair'], Trade.is_open.is_(True), ]).all()
                     if not open_trades:
                         logger.info(f"Set 'allow_trailing' to True for {metadata['pair']} to start trailing!!!")
                         # self.custom_info_trail_buy[metadata['pair']]['trailing_buy']['allow_trailing'] = True
                         trailing_buy['allow_trailing'] = True
-                        initial_buy_tag = last_candle['buy_tag'] if 'buy_tag' in last_candle else 'buy signal'
-                        dataframe.loc[:, 'buy_tag'] = f"{initial_buy_tag} (start trail price {last_candle['close']})"
+                        initial_buy_tag = last_candle['enter_tag'] if 'enter_tag' in last_candle else 'buy signal'
+                        dataframe.loc[:, 'enter_tag'] = f"{initial_buy_tag} (start trail price {last_candle['close']})"
             else:
                 if (trailing_buy['trailing_buy_order_started'] == True):
                     logger.info(f"Continue trailing for {metadata['pair']}. Manually trigger buy signal!!")
-                    dataframe.loc[:,'entry'] = 1
-                    dataframe.loc[:, 'buy_tag'] = trailing_buy['buy_tag']
+                    dataframe.loc[:,'enter_long'] = 1
+                    dataframe.loc[:, 'enter_tag'] = trailing_buy['enter_tag']
                     # dataframe['entry'] = 1
 
         return dataframe

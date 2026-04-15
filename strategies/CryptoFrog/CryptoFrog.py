@@ -433,7 +433,7 @@ class CryptoFrog(IStrategy):
                     & (dataframe["volume"] > 0)
                 )
             ),
-            "buy",
+            "enter_long",
         ] = 1
 
         return dataframe
@@ -460,7 +460,7 @@ class CryptoFrog(IStrategy):
                     & (dataframe["volume"] > 0)
                 )
             ),
-            "sell",
+            "exit_long",
         ] = 1
         return dataframe
 

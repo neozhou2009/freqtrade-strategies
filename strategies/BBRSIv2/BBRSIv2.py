@@ -111,7 +111,7 @@ class BBRSIv2(IStrategy):
         return dataframe
 
     def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
-        dataframe.loc[:, "buy_tag"] = ""
+        dataframe.loc[:, "enter_tag"] = ""
         conditions = []
         #        dont_buy_conditions = []
 
@@ -121,7 +121,7 @@ class BBRSIv2(IStrategy):
             )  # Signal: RSI crosses above 35
             & (dataframe["close"] < dataframe["bb_lowerband"])
         )
-        dataframe.loc[RB1, "buy_tag"] += "RB1:BB_LOWER "
+        dataframe.loc[RB1, "enter_tag"] += "RB1:BB_LOWER "
         conditions.append(RB1)
 
         RB2 = (
@@ -130,7 +130,7 @@ class BBRSIv2(IStrategy):
             & (dataframe["tema"] > dataframe["tema"].shift(1))
             & (dataframe["volume"] > 0)  # Make sure Volume is not 0
         )
-        dataframe.loc[RB2, "buy_tag"] += "RB2:RSI<23_ "
+        dataframe.loc[RB2, "enter_tag"] += "RB2:RSI<23_ "
         conditions.append(RB2)
 
         if conditions:

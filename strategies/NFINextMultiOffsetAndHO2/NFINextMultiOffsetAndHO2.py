@@ -4125,12 +4125,12 @@ class NFINextMultiOffsetAndHO2(IStrategy):
             conditions.append(item_buy)
 
         if conditions:
-            dataframe.loc[:, 'buy'] = reduce(lambda x, y: x | y, conditions)
+            dataframe.loc[:, 'enter_long'] = reduce(lambda x, y: x | y, conditions)
 
         return dataframe
 
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
-        dataframe.loc[:, 'sell'] = 0
+        dataframe.loc[:, 'exit_long'] = 0
         return dataframe
 
     def confirm_trade_exit(self, pair: str, trade: "Trade", order_type: str, amount: float,

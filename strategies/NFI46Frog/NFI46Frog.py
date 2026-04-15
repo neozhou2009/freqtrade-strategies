@@ -1382,7 +1382,7 @@ class NFI46Frog(IStrategy):
                     (dataframe['volume'] > 0)                    
                 )
             ),
-            'buy'] = 1
+            'enter_long'] = 1
 
         return dataframe
 

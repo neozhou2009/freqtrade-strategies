@@ -404,7 +404,7 @@ class HarmonicDivergence(IStrategy):
                 # & ema_cross_check(dataframe)
                 & (dataframe['volume'] > 0)  # Make sure Volume is not 0
             ),
-            'buy'] = 1
+            'enter_long'] = 1
 
         return dataframe
 
@@ -419,7 +419,7 @@ class HarmonicDivergence(IStrategy):
             (
                 (dataframe['volume'] > 0)  # Make sure Volume is not 0
             ),
-            'sell'] = 0
+            'exit_long'] = 0
         return dataframe
         
     def custom_exit(self, pair: str, trade: 'Trade', current_time: 'datetime', current_rate: float,

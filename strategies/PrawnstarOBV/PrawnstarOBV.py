@@ -98,7 +98,7 @@ class PrawnstarOBV(IStrategy):
                 (dataframe['obvSma'] > dataframe['obvSma'].shift(5)) &
                 (dataframe['rsi'] < 50)
             ),
-            'buy'] = 1
+            'enter_long'] = 1
 
         return dataframe
 
@@ -111,6 +111,6 @@ class PrawnstarOBV(IStrategy):
         dataframe.loc[
             (
             ),
-            'sell'] = 1
+            'exit_long'] = 1
 
         return dataframe

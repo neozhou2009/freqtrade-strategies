@@ -157,7 +157,7 @@ class mark_strat(IStrategy):
                 ((dataframe['close'] < dataframe['bb_lowerband'])) &
                 (dataframe['volume'] > 0)
             ),
-            'entry'] = 1
+            'enter_long'] = 1
         return dataframe
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         """
@@ -172,5 +172,5 @@ class mark_strat(IStrategy):
                 ((dataframe['close'] > dataframe['bb_middleband'])) &
                 (dataframe['volume'] > 0)
             ),
-            'exit'] = 1
+            'exit_long'] = 1
         return dataframe

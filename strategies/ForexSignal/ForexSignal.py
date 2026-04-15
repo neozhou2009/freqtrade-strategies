@@ -150,7 +150,7 @@ class ForexSignal(IStrategy):
                 (dataframe['ema13'] > dataframe['ema21']) &
                 (dataframe['low'] < dataframe['ema8']) 
             ),
-            'buy'] = 1
+            'enter_long'] = 1
 
         return dataframe
 
@@ -160,5 +160,5 @@ class ForexSignal(IStrategy):
             (
                 (dataframe['ema8'] < dataframe['ema8'].shift(1))
             ),
-            'sell'] = 1
+            'exit_long'] = 1
         return dataframe

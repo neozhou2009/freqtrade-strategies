@@ -194,7 +194,7 @@ class NotAnotherSMAOffsetStrategy(IStrategy):
                     )
                 )
             ),
-            ["buy", "buy_tag"],
+            ["enter_long", "enter_tag"],
         ] = (1, "ewo1")
 
         dataframe.loc[
@@ -219,7 +219,7 @@ class NotAnotherSMAOffsetStrategy(IStrategy):
                 )
                 & (dataframe["rsi"] < 25)
             ),
-            ["buy", "buy_tag"],
+            ["enter_long", "enter_tag"],
         ] = (1, "ewo2")
 
         dataframe.loc[
@@ -242,7 +242,7 @@ class NotAnotherSMAOffsetStrategy(IStrategy):
                     )
                 )
             ),
-            ["buy", "buy_tag"],
+            ["enter_long", "enter_tag"],
         ] = (1, "ewolow")
 
         return dataframe
@@ -279,6 +279,6 @@ class NotAnotherSMAOffsetStrategy(IStrategy):
         )
 
         if conditions:
-            dataframe.loc[reduce(lambda x, y: x | y, conditions), "sell"] = 1
+            dataframe.loc[reduce(lambda x, y: x | y, conditions), "exit_long"] = 1
 
         return dataframe

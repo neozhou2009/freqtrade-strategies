@@ -50,14 +50,14 @@ class Ichimoku_v12(IStrategy):
                 (dataframe['close'] > dataframe['senkou_a']) &
                 (dataframe['close'] > dataframe['senkou_b'])
             ),
-            'buy'] = 1
+            'enter_long'] = 1
 
         dataframe.loc[
             (
                 (dataframe['close'] > dataframe['senkou_a']) &
                 (dataframe['close'] > dataframe['senkou_b'])
             ),
-            'buy'] = 1
+            'enter_long'] = 1
 
         return dataframe
 

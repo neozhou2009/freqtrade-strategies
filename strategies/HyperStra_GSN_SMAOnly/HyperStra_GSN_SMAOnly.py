@@ -238,7 +238,7 @@ class HyperStra_GSN_SMAOnly(IStrategy):
         )
 
         if conditions:
-            dataframe.loc[reduce(lambda x, y: x | y, conditions), 'buy'] = 1
+            dataframe.loc[reduce(lambda x, y: x | y, conditions), 'enter_long'] = 1
         return dataframe
 
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
@@ -273,7 +273,7 @@ class HyperStra_GSN_SMAOnly(IStrategy):
         )
 
         if conditions:
-            dataframe.loc[reduce(lambda x, y: x | y, conditions), 'sell'] = 1
+            dataframe.loc[reduce(lambda x, y: x | y, conditions), 'exit_long'] = 1
         return dataframe
 
     def condition_maker(self, dataframe: DataFrame, indicator: int, indicator_sec: int, real_number: float, operator: str, option: str):

@@ -89,7 +89,7 @@ class Maro4hMacdSd(IStrategy):
             & (dataframe['macdhist'] > dataframe['macdhist'].shift(2))
             &
             (dataframe['corr'] > dataframe['corr_mean'])
-            ),'buy'] = 1
+            ),'enter_long'] = 1
 
         return dataframe
 
@@ -105,6 +105,6 @@ class Maro4hMacdSd(IStrategy):
             (dataframe['macdhist'].shift(2) < dataframe['macdhist'].shift(1))
             &(dataframe['macdhist'] < dataframe['macdhist'].shift(2)) &
             (dataframe['corr_sell'] < dataframe['corr_mean_sell'])
-            ),'sell'] = 1
+            ),'exit_long'] = 1
 
         return dataframe

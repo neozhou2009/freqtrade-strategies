@@ -268,7 +268,7 @@ class Obelisk_Ichimoku_Slow_v1_3(IStrategy):
             & (
                 dataframe["date"].dt.minute == 0
             ),  # when backtesting at 5m/1m only set signal on the hour
-            "buy",
+            "enter_long",
         ] = 1
         return dataframe
 
@@ -278,7 +278,7 @@ class Obelisk_Ichimoku_Slow_v1_3(IStrategy):
             & (
                 dataframe["date"].dt.minute == 0
             ),  # when backtesting at 5m/1m only set signal on the hour
-            "sell",
+            "exit_long",
         ] = 1
         return dataframe
 

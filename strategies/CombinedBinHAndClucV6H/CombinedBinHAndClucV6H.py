@@ -358,7 +358,7 @@ class CombinedBinHAndClucV6H(IStrategy):
         # verbose logging enable only for verbose information or troubleshooting
         if self.cust_log_verbose == True:
             for index, row in dataframe.iterrows():
-                if row['buy'] == 1:               
+                if row['enter_long'] == 1:               
                     buy_cond_details = f"count={int(row['conditions_count'])}/bin={int(row['buy_cond_bin'])}/cluc={int(row['buy_cond_cluc'])}/long={int(row['buy_cond_long'])}"
                     logger.info(f"{metadata['pair']} - candle: {row['date']} - buy condition - details: {buy_cond_details}")
 

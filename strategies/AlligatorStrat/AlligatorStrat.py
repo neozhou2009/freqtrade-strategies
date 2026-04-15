@@ -89,7 +89,7 @@ class AlligatorStrat(IStrategy):
                 # qtpylib.crossed_above(dataframe['macd'], dataframe['macdsignal'])
                 # )
             ),
-            'entry'] = 1
+            'enter_long'] = 1
 
         return dataframe
 
@@ -109,5 +109,5 @@ class AlligatorStrat(IStrategy):
                 qtpylib.crossed_below(dataframe['macd'], dataframe['macdsignal'])
                 # (dataframe['cci'] >= 100.0)
             ),
-            'exit'] = 1
+            'exit_long'] = 1
         return dataframe

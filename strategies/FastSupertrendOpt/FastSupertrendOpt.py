@@ -1,8 +1,8 @@
 """
 Supertrend strategy:
-* Description: Generate a 3 supertrend indicators for 'buy' strategies & 3 supertrend indicators for 'sell' strategies
-               Buys if the 3 'buy' indicators are 'up'
-               Sells if the 3 'sell' indicators are 'down'
+* Description: Generate a 3 supertrend indicators for 'enter_long' strategies & 3 supertrend indicators for 'exit_long' strategies
+               Buys if the 3 'enter_long' indicators are 'up'
+               Sells if the 3 'exit_long' indicators are 'down'
 * Author: @juankysoriano (Juan Carlos Soriano)
 * github: https://github.com/juankysoriano/
 
@@ -110,7 +110,7 @@ class FastSupertrendOpt(IStrategy):
                 )  # The three indicators are 'up' for the current candle
                 & (dataframe["volume"] > 0)  # There is at least some trading volume
             ),
-            "buy",
+            "enter_long",
         ] = 1
 
         return dataframe
@@ -125,7 +125,7 @@ class FastSupertrendOpt(IStrategy):
                 )  # The three indicators are 'down' for the current candle
                 & (dataframe["volume"] > 0)  # There is at least some trading volume
             ),
-            "sell",
+            "exit_long",
         ] = 1
 
         return dataframe

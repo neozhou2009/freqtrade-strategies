@@ -64,12 +64,12 @@ class BbandRsiRolling(IStrategy):
                     (dataframe['close'] < dataframe['bb_lowerband'])
 
             ),
-            'buy'] = 1
+            'enter_long'] = 1
         return dataframe
 
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (
             ),
-            'sell'] = 1
+            'exit_long'] = 1
         return dataframe

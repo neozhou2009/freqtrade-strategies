@@ -136,7 +136,7 @@ class SMAIP3v2(IStrategy):
                     (dataframe['volume'] > 0)
 #                    & dataframe['btc_up']
             ),
-            'buy'] = 1
+            'enter_long'] = 1
         return dataframe
 
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
@@ -149,5 +149,5 @@ class SMAIP3v2(IStrategy):
                     (dataframe['close'] > dataframe['ma_offset_sell']) &
                     (dataframe['volume'] > 0)
             ),
-            'sell'] = 1
+            'exit_long'] = 1
         return dataframe

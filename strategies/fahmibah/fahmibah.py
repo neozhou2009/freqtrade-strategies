@@ -261,7 +261,7 @@ class fahmibah(IStrategy):
 
     def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
-        dataframe.loc[:, "buy_tag"] = ""
+        dataframe.loc[:, "enter_tag"] = ""
 
         lambo1 = (
             bool(self.lambo1_enabled.value)
@@ -272,7 +272,7 @@ class fahmibah(IStrategy):
             & (dataframe["rsi_4"] < self.lambo1_rsi_4_limit.value)
             & (dataframe["rsi_14"] < self.lambo1_rsi_14_limit.value)
         )
-        dataframe.loc[lambo1, "buy_tag"] += "lambo1_"
+        dataframe.loc[lambo1, "enter_tag"] += "lambo1_"
         conditions.append(lambo1)
 
         clucHA = (
@@ -308,15 +308,15 @@ class fahmibah(IStrategy):
                 )
             )
         )
-        dataframe.loc[clucHA, "buy_tag"] += "clucHA_"
+        dataframe.loc[clucHA, "enter_tag"] += "clucHA_"
         conditions.append(clucHA)
 
-        dataframe.loc[reduce(lambda x, y: x | y, conditions), "buy"] = 1
+        dataframe.loc[reduce(lambda x, y: x | y, conditions), "enter_long"] = 1
 
         return dataframe
 
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
-        dataframe.loc[(), "sell"] = 1
+        dataframe.loc[(), "exit_long"] = 1
         return dataframe
 
     def confirm_trade_exit(

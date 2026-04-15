@@ -219,7 +219,7 @@ class SupertrendStrategy(IStrategy):
                 (dataframe['close'] > dataframe['ema90']) &
                 (dataframe['volume'] > 0)
             ),
-            'buy'] = 1
+            'enter_long'] = 1
 
         return dataframe
 
@@ -236,5 +236,5 @@ class SupertrendStrategy(IStrategy):
                 (dataframe['stoch_rsi'] > self.sell_stoch_rsi.value) &
                 (dataframe['volume'] > 0)
             ),
-            'sell'] = 1
+            'exit_long'] = 1
         return dataframe

@@ -332,7 +332,7 @@ class BuyOnly(IStrategy):
                 & (dataframe["tema"] > dataframe["tema"].shift(1))
                 & (dataframe["volume"] > 0)
             ),
-            "buy",
+            "enter_long",
         ] = 1
 
         return dataframe

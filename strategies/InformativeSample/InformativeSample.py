@@ -112,7 +112,7 @@ class InformativeSample(IStrategy):
                 # stake/USDT above sma(stake/USDT, 20)
                 (dataframe['close_15m'] > dataframe['sma20_15m'])
             ),
-            'buy'] = 1
+            'enter_long'] = 1
 
         return dataframe
 
@@ -128,5 +128,5 @@ class InformativeSample(IStrategy):
                 # stake/USDT below sma(stake/USDT, 20)
                 (dataframe['close_15m'] < dataframe['sma20_15m'])
             ),
-            'sell'] = 1
+            'exit_long'] = 1
         return dataframe

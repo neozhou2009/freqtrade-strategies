@@ -58,12 +58,12 @@ class BinHV45HO(IStrategy):
                 dataframe['close'].lt(dataframe['lower'].shift()) &
                 dataframe['close'].le(dataframe['close'].shift())
             ),
-            'buy'] = 1
+            'enter_long'] = 1
         return dataframe
 
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         """
         no sell signal
         """
-        dataframe.loc[:, 'sell'] = 0
+        dataframe.loc[:, 'exit_long'] = 0
         return dataframe

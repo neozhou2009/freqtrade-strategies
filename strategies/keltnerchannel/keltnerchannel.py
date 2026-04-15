@@ -61,7 +61,7 @@ class keltnerchannel(IStrategy):
             & (dataframe["rsi"] > dataframe['hline'])
             ),
 
-            "buy",
+            "enter_long",
         ] = 1
 
         return dataframe
@@ -70,6 +70,6 @@ class keltnerchannel(IStrategy):
         dataframe.loc[
             (qtpylib.crossed_below(dataframe['close'], dataframe['kc_middleband'])),
 
-            "sell",
+            "exit_long",
         ] = 1
         return dataframe

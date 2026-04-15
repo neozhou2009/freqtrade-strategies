@@ -706,7 +706,7 @@ class BigZ04(IStrategy):
         )
 
         if conditions:
-            dataframe.loc[reduce(lambda x, y: x | y, conditions), "buy"] = 1
+            dataframe.loc[reduce(lambda x, y: x | y, conditions), "enter_long"] = 1
 
         return dataframe
 
@@ -718,6 +718,6 @@ class BigZ04(IStrategy):
                 )  # Don't be gready, sell fast
                 & (dataframe["volume"] > 0)  # Make sure Volume is not 0
             ),
-            "sell",
+            "exit_long",
         ] = 0
         return dataframe

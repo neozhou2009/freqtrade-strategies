@@ -71,7 +71,7 @@ class CofiBitStrategy(IStrategy):
                 (dataframe['fastd'] < self.buy_fastx.value) &
                 (dataframe['adx'] > self.buy_adx.value)
             ),
-            'buy'] = 1
+            'enter_long'] = 1
 
         return dataframe
 
@@ -89,6 +89,6 @@ class CofiBitStrategy(IStrategy):
                 (qtpylib.crossed_above(dataframe['fastk'], self.sell_fastx.value)) |
                 (qtpylib.crossed_above(dataframe['fastd'], self.sell_fastx.value))
             ),
-            'sell'] = 1
+            'exit_long'] = 1
 
         return dataframe

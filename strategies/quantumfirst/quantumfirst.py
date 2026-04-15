@@ -139,7 +139,7 @@ class quantumfirst(IStrategy):
                 # (dataframe['fisher_rsi'] < -0.94)
                 (dataframe['fisher_rsi_norma'] < 38.900000000000006)
             ),
-            'entry'] = 1
+            'enter_long'] = 1
 
         return dataframe
 
@@ -161,5 +161,5 @@ class quantumfirst(IStrategy):
                 (dataframe['fisher_rsi'] > 0.3)
             ),
 
-            'exit'] = 1
+            'exit_long'] = 1
         return dataframe

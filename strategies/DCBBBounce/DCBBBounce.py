@@ -216,7 +216,7 @@ class DCBBBounce(IStrategy):
 
         # build the dataframe using the conditions
         if conditions:
-            dataframe.loc[reduce(lambda x, y: x & y, conditions), "buy"] = 1
+            dataframe.loc[reduce(lambda x, y: x & y, conditions), "enter_long"] = 1
 
         return dataframe
 
@@ -229,7 +229,7 @@ class DCBBBounce(IStrategy):
         """
         # if hold, then don't set a sell signal
         if self.sell_hold.value:
-            dataframe.loc[(dataframe["close"].notnull()), "sell"] = 0
+            dataframe.loc[(dataframe["close"].notnull()), "exit_long"] = 0
 
         else:
             conditions = []
@@ -243,6 +243,6 @@ class DCBBBounce(IStrategy):
 
             # build the dataframe using the conditions
             if conditions:
-                dataframe.loc[reduce(lambda x, y: x & y, conditions), "sell"] = 1
+                dataframe.loc[reduce(lambda x, y: x & y, conditions), "exit_long"] = 1
 
         return dataframe

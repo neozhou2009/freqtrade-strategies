@@ -65,7 +65,7 @@ class EMA520015_V17(IStrategy):
 
 
             ),
-            'buy'] = 1
+            'enter_long'] = 1
         return dataframe
 
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
@@ -76,7 +76,7 @@ class EMA520015_V17(IStrategy):
                         
                           
             ),
-            'sell'] = 1
+            'exit_long'] = 1
         return dataframe
         
     def custom_exit(self, pair: str, trade: 'Trade', current_time: 'datetime', current_rate: float, current_profit: float, **kwargs):

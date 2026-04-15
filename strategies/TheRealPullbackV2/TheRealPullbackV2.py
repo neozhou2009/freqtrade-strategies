@@ -101,7 +101,7 @@ class TheRealPullbackV2(IStrategy):
 
         dataframe.loc[
             (dataframe['buy_signal'] > 0),
-            'buy'] = 1
+            'enter_long'] = 1
 
         return dataframe
 
@@ -113,6 +113,6 @@ class TheRealPullbackV2(IStrategy):
                 |
                 (qtpylib.crossed_below(dataframe['close'], dataframe['bb_upperband']))
 
-            ), 'sell'] = 1
+            ), 'exit_long'] = 1
 
         return dataframe

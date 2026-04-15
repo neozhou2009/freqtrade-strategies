@@ -175,7 +175,7 @@ class CombinedBinHAndClucV5Hyperoptable(IStrategy):
                 )
                 & (dataframe["volume"] > 0)  # Make sure Volume is not 0
             ),
-            "buy",
+            "enter_long",
         ] = 1
         return dataframe
 
@@ -186,7 +186,7 @@ class CombinedBinHAndClucV5Hyperoptable(IStrategy):
                 & (dataframe["close"].shift(1) > dataframe["bb_upperband"].shift(1))
                 & (dataframe["volume"] > 0)  # Make sure Volume is not 0
             ),
-            "sell",
+            "exit_long",
         ] = 1
         return dataframe
 

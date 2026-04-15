@@ -182,5 +182,5 @@ class CombinedBinHAndClucHyperV3(IStrategy):
 
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         sell_bb_mid_slow_window = self.sell_bb_mid_slow_window.value if isinstance(self.sell_bb_mid_slow_window, ABC) else self.sell_bb_mid_slow_window
-        dataframe.loc[(dataframe['close'] > dataframe[f'bb_typical_mid_{sell_bb_mid_slow_window}']), 'sell'] = 1
+        dataframe.loc[(dataframe['close'] > dataframe[f'bb_typical_mid_{sell_bb_mid_slow_window}']), 'exit_long'] = 1
         return dataframe

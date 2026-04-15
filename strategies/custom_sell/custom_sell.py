@@ -161,11 +161,11 @@ class custom_sell(IStrategy):
         # BUY6
         if self.buy_signal_buy6.value:
             dataframe.loc[
-                (dataframe["close"] > dataframe["keltner_middle"]), ["buy", "buy_tag"]
+                (dataframe["close"] > dataframe["keltner_middle"]), ["enter_long", "enter_tag"]
             ] = (1, "buy6")
 
         return dataframe
 
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
-        dataframe.loc[:, "sell"] = 0
+        dataframe.loc[:, "exit_long"] = 0
         return dataframe

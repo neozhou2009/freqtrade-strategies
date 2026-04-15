@@ -82,12 +82,12 @@ class adaptive(IStrategy):
                 (dataframe['rsi_84'] < 60) &
                 (dataframe['rsi_112'] < 60)
             ),
-            'buy'] = 1
+            'enter_long'] = 1
         return dataframe
 
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (
             ),
-            'sell'] = 1
+            'exit_long'] = 1
         return dataframe

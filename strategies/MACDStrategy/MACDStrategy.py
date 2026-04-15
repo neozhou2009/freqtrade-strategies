@@ -82,7 +82,7 @@ class MACDStrategy(IStrategy):
                 (dataframe['cci'] <= self.buy_cci.value) &
                 (dataframe['volume'] > 0)  # Make sure Volume is not 0
             ),
-            'buy'] = 1
+            'enter_long'] = 1
 
         return dataframe
 
@@ -98,6 +98,6 @@ class MACDStrategy(IStrategy):
                 (dataframe['cci'] >= self.sell_cci.value) &
                 (dataframe['volume'] > 0)  # Make sure Volume is not 0
             ),
-            'sell'] = 1
+            'exit_long'] = 1
 
         return dataframe

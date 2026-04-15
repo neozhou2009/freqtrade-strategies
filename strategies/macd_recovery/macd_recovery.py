@@ -61,7 +61,7 @@ class macd_recovery(IStrategy):
                     (dataframe['close'] > dataframe['ema200']) &
                     (qtpylib.crossed_above(dataframe['macd'], dataframe['macdsignal']))
             ),
-            'entry'] = 1
+            'enter_long'] = 1
 
         return dataframe
 
@@ -72,6 +72,6 @@ class macd_recovery(IStrategy):
                     (dataframe['macd'] > 0) &
                     (qtpylib.crossed_below(dataframe['macd'], dataframe['macdsignal']))
             ),
-            'exit'] = 1
+            'exit_long'] = 1
 
         return dataframe

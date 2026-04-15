@@ -46,12 +46,12 @@ class XebTradeStrat(IStrategy):
                 (dataframe['ema5'] .shift(1) < dataframe['ema10'].shift(1)) &
                 (dataframe['volume'] > 0)
             ),
-            'buy'] = 1
+            'enter_long'] = 1
         return dataframe
 
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         """
         no sell signal
         """
-        dataframe.loc[:, 'sell'] = 0
+        dataframe.loc[:, 'exit_long'] = 0
         return dataframe

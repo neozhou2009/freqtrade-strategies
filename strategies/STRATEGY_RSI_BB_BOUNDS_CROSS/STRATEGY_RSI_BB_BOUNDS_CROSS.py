@@ -311,7 +311,7 @@ class STRATEGY_RSI_BB_BOUNDS_CROSS(IStrategy):
                 # (dataframe['bb_percent'] < 0.5) & 
                 # (dataframe['rsi_percent'] < 0.5)
             ),
-            'buy'] = 1
+            'enter_long'] = 1
 
         return dataframe
 
@@ -347,6 +347,6 @@ class STRATEGY_RSI_BB_BOUNDS_CROSS(IStrategy):
                 # if ema2 is falling
                 (dataframe['ema2'] < dataframe['ema2'].shift(1))
             ),
-            'sell'] = 1
+            'exit_long'] = 1
         return dataframe
     

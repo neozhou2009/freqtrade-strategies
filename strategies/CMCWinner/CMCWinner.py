@@ -76,7 +76,7 @@ class CMCWinner(IStrategy):
                 (dataframe['mfi'].shift(1) < 20) &
                 (dataframe['cmo'].shift(1) < -50)
             ),
-            'buy'] = 1
+            'enter_long'] = 1
 
         return dataframe
 
@@ -92,5 +92,5 @@ class CMCWinner(IStrategy):
                 (dataframe['mfi'].shift(1) > 80) &
                 (dataframe['cmo'].shift(1) > 50)
             ),
-            'sell'] = 1
+            'exit_long'] = 1
         return dataframe

@@ -432,16 +432,16 @@ class MarketChyperHyperStrategy(IStrategy):
                     >= self.buy_uptrend_total_signal_needed.value
                 )
             ),
-            "buy",
+            "enter_long",
         ] = 1
 
         # Override Buy Signal: When configured buy signals can be completely turned off for each kind of trend
         if not self.buy___trades_when_downwards.value:
-            dataframe.loc[dataframe["trend"] == "downwards", "buy"] = 0
+            dataframe.loc[dataframe["trend"] == "downwards", "enter_long"] = 0
         if not self.buy___trades_when_sideways.value:
-            dataframe.loc[dataframe["trend"] == "sideways", "buy"] = 0
+            dataframe.loc[dataframe["trend"] == "sideways", "enter_long"] = 0
         if not self.buy___trades_when_upwards.value:
-            dataframe.loc[dataframe["trend"] == "upwards", "buy"] = 0
+            dataframe.loc[dataframe["trend"] == "upwards", "enter_long"] = 0
 
         return dataframe
 
@@ -522,7 +522,7 @@ class MarketChyperHyperStrategy(IStrategy):
                     >= self.sell_uptrend_total_signal_needed.value
                 )
             ),
-            "sell",
+            "exit_long",
         ] = 1
 
         return dataframe

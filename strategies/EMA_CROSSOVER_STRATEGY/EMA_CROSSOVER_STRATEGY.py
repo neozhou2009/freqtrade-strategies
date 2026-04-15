@@ -141,7 +141,7 @@ class EMA_CROSSOVER_STRATEGY(IStrategy):
                 # (dataframe['volume'] > 0)  # Make sure Volume is not 0
                 dataframe['ema10'].crossed_above(dataframe['ema100'])
             ),
-            'buy'] = 1
+            'enter_long'] = 1
 
         return dataframe
 
@@ -160,5 +160,5 @@ class EMA_CROSSOVER_STRATEGY(IStrategy):
                 # (dataframe['volume'] > 0)  # Make sure Volume is not 0
                 dataframe['ema100'].crossed_above(dataframe['ema10'])
             ),
-            'sell'] = 1
+            'exit_long'] = 1
         return dataframe

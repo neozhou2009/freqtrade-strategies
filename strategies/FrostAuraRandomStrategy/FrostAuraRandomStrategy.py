@@ -90,7 +90,7 @@ class FrostAuraRandomStrategy(IStrategy):
             (
                 (random_number < self.buy_probability.value if self.buy_prediction_delta_direction.value == '<' else random_number > self.buy_probability.value)
             ),
-            'buy'] = 1
+            'enter_long'] = 1
 
         return dataframe
 
@@ -104,6 +104,6 @@ class FrostAuraRandomStrategy(IStrategy):
             (
                 (random_number < self.sell_probability.value if self.sell_prediction_delta_direction.value == '<' else random_number > self.sell_probability.value)
             ),
-            'sell'] = 1
+            'exit_long'] = 1
 
         return dataframe

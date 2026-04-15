@@ -446,7 +446,7 @@ class MacheteV8b(IStrategy):
             # NOTE: I keep the volume checks of feels like it has not much benifit when trading leverage tokens, maybe im wrong!?
             #(dataframe['vfi'] < 0.0) &
             #(dataframe['volume'] > 0)
-        ,'buy'] = 1
+        ,'enter_long'] = 1
 
         return dataframe
 
@@ -620,7 +620,7 @@ class MacheteV8b(IStrategy):
             #(dataframe['vfi'] < 0.0) &
             #(dataframe['volume'] > 0)
 
-        ,'sell'] = 1
+        ,'exit_long'] = 1
 
         return dataframe
 

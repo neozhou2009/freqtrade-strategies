@@ -102,7 +102,7 @@ class Macd(IStrategy):
                          
                     )
             ),
-            'buy'] = 1
+            'enter_long'] = 1
         return dataframe
 
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
@@ -111,5 +111,5 @@ class Macd(IStrategy):
                     (dataframe['macdhist_1d'] < 0) 
 
             ),
-            'sell'] = 1
+            'exit_long'] = 1
         return dataframe

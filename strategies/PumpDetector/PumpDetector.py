@@ -146,7 +146,7 @@ class PumpDetector(IStrategy):
                 (qtpylib.crossed_above(dataframe['j'],  0)) &   
                 (dataframe['volume'] > 0)  # Make sure Volume is not 0
             ),
-            'buy'] = 1
+            'enter_long'] = 1
 
         return dataframe
 
@@ -159,6 +159,6 @@ class PumpDetector(IStrategy):
                 (qtpylib.crossed_below(dataframe['j'], dataframe['k']) & dataframe['j'] > 50)  )  & 
                 (dataframe['volume'] > 0)  # Make sure Volume is not 0
             ),
-            'sell'] = 1
+            'exit_long'] = 1
         return dataframe
     

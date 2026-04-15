@@ -81,7 +81,7 @@ class RobotradingBody(IStrategy):
                 & (dataframe["body"] > dataframe["body_sma"])
                 & (dataframe["volume"] > 0)
             ),
-            "buy",
+            "enter_long",
         ] = 1
 
         return dataframe
@@ -90,6 +90,6 @@ class RobotradingBody(IStrategy):
 
         dataframe.loc[
             ((dataframe["close"] > dataframe["open"]) & (dataframe["volume"] > 0)),
-            "sell",
+            "exit_long",
         ] = 1
         return dataframe

@@ -122,7 +122,7 @@ class StrategyScalpingFast2(IStrategy):
         # (dataframe['mfi'] < 30) &
         # (dataframe['cci'] < -200)
         if conditions:
-            dataframe.loc[reduce(lambda x, y: x & y, conditions), "buy"] = 1            
+            dataframe.loc[reduce(lambda x, y: x & y, conditions), "enter_long"] = 1            
         return dataframe
 
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
@@ -140,5 +140,5 @@ class StrategyScalpingFast2(IStrategy):
             conditions.append(dataframe["adx"] < self.sell_params['sell-adx-value'])            
 
         if conditions:
-            dataframe.loc[reduce(lambda x, y: x & y, conditions), "sell"] = 1              
+            dataframe.loc[reduce(lambda x, y: x & y, conditions), "exit_long"] = 1              
         return dataframe

@@ -129,7 +129,7 @@ class MontrealStrategy(IStrategy):
                 & (dataframe["close"] < dataframe["bb2_lowerband"])
                 & (dataframe["volume"] > 0)
             ),
-            "buy",
+            "enter_long",
         ] = 1
 
         return dataframe
@@ -146,7 +146,7 @@ class MontrealStrategy(IStrategy):
                 (dataframe["close"] > dataframe["bb2_upperband"])
                 & (dataframe["volume"] > 0)
             ),
-            "sell",
+            "exit_long",
         ] = 1
 
         return dataframe

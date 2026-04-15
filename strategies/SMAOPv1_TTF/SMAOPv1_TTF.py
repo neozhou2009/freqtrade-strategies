@@ -183,7 +183,7 @@ class SMAOPv1_TTF(IStrategy):
         )
 
         if conditions:
-            dataframe.loc[reduce(lambda x, y: x | y, conditions), "buy"] = 1
+            dataframe.loc[reduce(lambda x, y: x | y, conditions), "enter_long"] = 1
 
         return dataframe
 
@@ -210,7 +210,7 @@ class SMAOPv1_TTF(IStrategy):
             )
         )
         if conditions:
-            dataframe.loc[reduce(lambda x, y: x | y, conditions), "sell"] = 1
+            dataframe.loc[reduce(lambda x, y: x | y, conditions), "exit_long"] = 1
 
         return dataframe
 

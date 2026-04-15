@@ -456,7 +456,7 @@ class Dyna_opti(IStrategy):
         if conditions:
             dataframe.loc[
                 reduce(lambda x, y: x & y, conditions),
-                'buy'] = 1
+                'enter_long'] = 1
 
         return dataframe
 
@@ -465,7 +465,7 @@ class Dyna_opti(IStrategy):
     """
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
   
-        dataframe['sell'] = 0
+        dataframe['exit_long'] = 0
 
         return dataframe
 

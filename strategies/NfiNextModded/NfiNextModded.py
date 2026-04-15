@@ -4893,12 +4893,12 @@ class NfiNextModded(IStrategy):
                     (dataframe["close"] <= dataframe["low"].shift().rolling(288).min()) &  # Guard: tema is raising
                     (dataframe['volume'] > 0)  # Make sure Volume is not 0
             ),
-            'buy'] = 1
+            'enter_long'] = 1
 
         return dataframe
 
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
-        dataframe.loc[:, 'sell'] = 0
+        dataframe.loc[:, 'exit_long'] = 0
 
         return dataframe
 

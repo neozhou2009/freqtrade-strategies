@@ -178,7 +178,7 @@ class ActionZone(IStrategy):
                 & (dataframe["close"] > dataframe["fastMA"])  # Price Cross Up
                 & (dataframe["volume"] > 0)  # Make sure Volume is not 0
             ),
-            "entry",
+            "enter_long",
         ] = 1
 
         return dataframe
@@ -196,7 +196,7 @@ class ActionZone(IStrategy):
                 & (dataframe["close"] < dataframe["fastMA"])  # Price Cross Down
                 & (dataframe["volume"] > 0)  # Make sure Volume is not 0
             ),
-            "exit",
+            "exit_long",
         ] = 1
         return dataframe
 

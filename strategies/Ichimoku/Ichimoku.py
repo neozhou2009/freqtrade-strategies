@@ -70,7 +70,7 @@ class Ichimoku(IStrategy):
                 & (dataframe["tenkan"] > dataframe["kijun"])
                 & (dataframe["cloud_red"] == True)
             ),
-            "buy",
+            "enter_long",
         ] = 1
 
         return dataframe
@@ -78,5 +78,5 @@ class Ichimoku(IStrategy):
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         """ """
 
-        dataframe.loc[(), "sell"] = 1
+        dataframe.loc[(), "exit_long"] = 1
         return dataframe

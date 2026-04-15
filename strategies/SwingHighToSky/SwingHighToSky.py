@@ -94,7 +94,7 @@ class SwingHighToSky(IStrategy):
                 (dataframe[f'cci-{self.buy_cciTime.value}'] < self.buy_cci.value) &
                 (dataframe[f'rsi-{self.buy_rsiTime.value}'] < self.buy_rsi.value)
             ),
-            'buy'] = 1
+            'enter_long'] = 1
 
         return dataframe
 
@@ -105,6 +105,6 @@ class SwingHighToSky(IStrategy):
                 (dataframe[f'cci-sell-{self.sell_cciTime.value}'] > self.sell_cci.value) &
                 (dataframe[f'rsi-sell-{self.sell_rsiTime.value}'] > self.sell_rsi.value)
             ),
-            'sell'] = 1
+            'exit_long'] = 1
 
         return dataframe

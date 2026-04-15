@@ -75,7 +75,7 @@ class BBRSI3366(IStrategy):
               #  (dataframe['adx'] > 25) &
                 (dataframe['rsi'] < 33)
             ),
-            'entry'] = 1
+            'enter_long'] = 1
 
         return dataframe
 
@@ -104,5 +104,5 @@ class BBRSI3366(IStrategy):
           #      )) &
           #      (dataframe['fastd'] > 54)
             ),
-            'exit'] = 1
+            'exit_long'] = 1
         return dataframe

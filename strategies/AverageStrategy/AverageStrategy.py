@@ -47,7 +47,7 @@ class AverageStrategy(IStrategy):
             (
                 qtpylib.crossed_above(dataframe['maShort'], dataframe['maMedium'])
             ),
-            'entry'] = 1
+            'enter_long'] = 1
 
         return dataframe
 
@@ -61,5 +61,5 @@ class AverageStrategy(IStrategy):
             (
                 qtpylib.crossed_above(dataframe['maMedium'], dataframe['maShort'])
             ),
-            'exit'] = 1
+            'exit_long'] = 1
         return dataframe

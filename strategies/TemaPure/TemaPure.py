@@ -117,7 +117,7 @@ class TemaPure(IStrategy):
                   
                 
             ),
-            'buy'] = 1
+            'enter_long'] = 1
 
         return dataframe
 
@@ -145,6 +145,6 @@ class TemaPure(IStrategy):
                 
                 
             ),
-            'sell'] = 1        
+            'exit_long'] = 1        
         
         return dataframe

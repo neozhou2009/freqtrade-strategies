@@ -106,7 +106,7 @@ class EMABBRSI(IStrategy):
                
             )
            ,
-            'buy'] = 1
+            'enter_long'] = 1
 
         return dataframe
 
@@ -128,5 +128,5 @@ class EMABBRSI(IStrategy):
                 
                 )
                 ,
-            'sell'] = 1
+            'exit_long'] = 1
         return dataframe

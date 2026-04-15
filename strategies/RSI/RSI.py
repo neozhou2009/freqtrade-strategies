@@ -83,7 +83,7 @@ class RSI(IStrategy):
         :return: DataFrame with buy column
         """
         # rsi_cond = dataframe['rsi_15m'].iloc[-1] <30 and dataframe['rsi_15m'].iloc[-2]<30
-        dataframe.loc[(dataframe['rsi']<30) & (dataframe['rperc']<-80),'buy'] = 1
+        dataframe.loc[(dataframe['rsi']<30) & (dataframe['rperc']<-80),'enter_long'] = 1
         # dataframe.loc[(dataframe['rsi']<=30) & (dataframe['rsi'].iloc[-1] <=30)] = 1
 
         return dataframe
@@ -95,7 +95,7 @@ class RSI(IStrategy):
         :return: DataFrame with buy column
         """
         dataframe.loc[(dataframe['rsi_30m']>70) &
-                            (dataframe['rperc_30m']>-20) ,'sell'] = 1
+                            (dataframe['rperc_30m']>-20) ,'exit_long'] = 1
 
 
         return dataframe

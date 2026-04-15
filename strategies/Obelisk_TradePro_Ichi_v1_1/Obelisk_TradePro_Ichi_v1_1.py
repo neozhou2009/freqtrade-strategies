@@ -138,7 +138,7 @@ class Obelisk_TradePro_Ichi_v1_1(IStrategy):
 
             qtpylib.crossed_above(dataframe['go_long'], 0),
 
-        'buy'] = 1
+        'enter_long'] = 1
 
         return dataframe
 
@@ -150,7 +150,7 @@ class Obelisk_TradePro_Ichi_v1_1(IStrategy):
             | 
             qtpylib.crossed_below(dataframe['close'], dataframe['kijun_sen']),
 
-        'sell'] = 1
+        'exit_long'] = 1
 
         return dataframe
 

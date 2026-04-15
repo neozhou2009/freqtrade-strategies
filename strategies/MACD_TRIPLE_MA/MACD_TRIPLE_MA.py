@@ -67,7 +67,7 @@ class MACD_TRIPLE_MA(IStrategy):
                 (dataframe['sma26'] > dataframe['sma6']) 
 
             ),
-            'buy'] = 1
+            'enter_long'] = 1
         return dataframe
 
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
@@ -79,5 +79,5 @@ class MACD_TRIPLE_MA(IStrategy):
                 (dataframe['sma26'] < dataframe['sma14'])
 
             ),
-            'sell'] = 1
+            'exit_long'] = 1
         return dataframe

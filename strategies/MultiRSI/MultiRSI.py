@@ -58,7 +58,7 @@ class MultiRSI(IStrategy):
                 (dataframe['sma5'] >= dataframe['sma200']) &
                 (dataframe['rsi'] < (dataframe['resample_{}_rsi'.format(self.get_ticker_indicator() * 8)] - 20))
             ),
-            'buy'] = 1
+            'enter_long'] = 1
         return dataframe
 
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
@@ -67,5 +67,5 @@ class MultiRSI(IStrategy):
                 (dataframe['rsi'] > dataframe['resample_{}_rsi'.format(self.get_ticker_indicator()*2)]) &
                 (dataframe['rsi'] > dataframe['resample_{}_rsi'.format(self.get_ticker_indicator()*8)])
             ),
-            'sell'] = 1
+            'exit_long'] = 1
         return dataframe

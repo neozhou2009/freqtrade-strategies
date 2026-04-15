@@ -49,7 +49,7 @@ class MACDRSI200(IStrategy):
                     (dataframe['close'] > dataframe['ema200']) &
                     (qtpylib.crossed_above(dataframe['macd'], dataframe['macdsignal']))
             ),
-            'buy'] = 1
+            'enter_long'] = 1
 
         return dataframe
 
@@ -60,6 +60,6 @@ class MACDRSI200(IStrategy):
                     (dataframe['macd'] > 0) &
                     (qtpylib.crossed_below(dataframe['macd'], dataframe['macdsignal']))
             ),
-            'sell'] = 1
+            'exit_long'] = 1
 
         return dataframe

@@ -117,7 +117,7 @@ class Strategy002(IStrategy):
                 (dataframe['bb_lowerband'] > dataframe['close']) &
                 (dataframe['CDLHAMMER'] == 100)
             ),
-            'buy'] = 1
+            'enter_long'] = 1
 
         return dataframe
 
@@ -132,5 +132,5 @@ class Strategy002(IStrategy):
                 (dataframe['sar'] > dataframe['close']) &
                 (dataframe['fisher_rsi'] > 0.3)
             ),
-            'sell'] = 1
+            'exit_long'] = 1
         return dataframe

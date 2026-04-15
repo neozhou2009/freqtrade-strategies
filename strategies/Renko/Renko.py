@@ -95,13 +95,13 @@ class Renko(IStrategy):
         for index, row in dataframe.iterrows():  
             if row['previous-trend'] == False and row['trend'] == True:
                 last_row = dataframe.loc[dataframe['date'] == row['date']][-1:] 
-                dataframe.loc[dataframe.index== last_row.index.values[0], 'buy'] = 1
+                dataframe.loc[dataframe.index== last_row.index.values[0], 'enter_long'] = 1
             if row['previous-trend'] == True and row['trend'] == True:
                 last_row = dataframe.loc[dataframe['date'] == row['date']][-1:] 
-                dataframe.loc[dataframe.index== last_row.index.values[0], 'buy'] = 1
+                dataframe.loc[dataframe.index== last_row.index.values[0], 'enter_long'] = 1
             else:
                 last_row = dataframe.loc[dataframe['date'] == row['date']][-1:] 
-                dataframe.loc[dataframe.index== last_row.index.values[0], 'sell'] = 1
+                dataframe.loc[dataframe.index== last_row.index.values[0], 'exit_long'] = 1
 
         return dataframe
 

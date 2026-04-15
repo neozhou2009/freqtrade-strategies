@@ -117,7 +117,7 @@ class KC_BB(IStrategy):
                 (dataframe['r_14'] > -90) &
                 (dataframe['ha_closedelta'] > dataframe['ha_close'] * 0.008)
 
-            ,'buy'] = 1
+            ,'enter_long'] = 1
 
         return dataframe
 
@@ -133,7 +133,7 @@ class KC_BB(IStrategy):
                 (dataframe['ha_close'] * 0.99754 > dataframe['bb_middleband2']) &
                 (dataframe['volume'] > 0)
 
-            ,'sell'] = 1
+            ,'exit_long'] = 1
 
         return dataframe
 

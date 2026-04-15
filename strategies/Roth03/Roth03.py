@@ -98,7 +98,7 @@ class Roth03(IStrategy):
                 (dataframe['mfi'] < 20.0)
                 # (dataframe['cci'] <= -57.0)
             ),
-            'buy'] = 1
+            'enter_long'] = 1
 
         return dataframe
 
@@ -119,6 +119,6 @@ class Roth03(IStrategy):
                 (dataframe['mfi'] > 86) &
                 (dataframe['fastd'] > 79)
             ),
-            'sell'] = 1
+            'exit_long'] = 1
 
         return dataframe

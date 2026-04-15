@@ -1006,7 +1006,7 @@ class NFI4Frog(IStrategy):
                     (dataframe['volume'] > 0)                    
                 )
             ),
-            'buy'] = 1
+            'enter_long'] = 1
 
         return dataframe
 
@@ -1135,7 +1135,7 @@ class NFI4Frog(IStrategy):
                     (dataframe['volume'] > 0)                    
                 )
             ),
-            'sell'] = 1
+            'exit_long'] = 1
 
         return dataframe
 

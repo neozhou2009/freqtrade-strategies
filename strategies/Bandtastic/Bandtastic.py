@@ -120,7 +120,7 @@ class Bandtastic(IStrategy):
         if conditions:
             dataframe.loc[
                 reduce(lambda x, y: x & y, conditions),
-                'entry'] = 1
+                'enter_long'] = 1
 
         return dataframe
 
@@ -154,6 +154,6 @@ class Bandtastic(IStrategy):
         if conditions:
             dataframe.loc[
                 reduce(lambda x, y: x & y, conditions),
-                'exit'] = 1
+                'exit_long'] = 1
 
         return dataframe

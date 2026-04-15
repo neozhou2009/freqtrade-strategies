@@ -99,7 +99,7 @@ class INSIDEUP(IStrategy):
                 #when it appears in a downtrend
                 (dataframe['CDL3INSIDE'] >= 0).any() # Bullish
             ),
-            ['buy', 'buy_tag']] = (1, 'buy_3_inside')
+            ['enter_long', 'enter_tag']] = (1, 'buy_3_inside')
 
         return dataframe
 
@@ -107,5 +107,5 @@ class INSIDEUP(IStrategy):
         """
         no sell signal
         """
-        dataframe.loc[:, 'sell'] = 0
+        dataframe.loc[:, 'exit_long'] = 0
         return dataframe

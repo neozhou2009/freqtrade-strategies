@@ -56,7 +56,7 @@ class Ichimoku_v33(IStrategy):
                 (dataframe['close'].shift(2) > dataframe['senkou_a']) &
                 (dataframe['close'].shift(2) > dataframe['senkou_b'])
             ),
-            'buy'] = 1
+            'enter_long'] = 1
 
         dataframe.loc[
             (
@@ -64,7 +64,7 @@ class Ichimoku_v33(IStrategy):
                 (dataframe['close'].shift(2) > dataframe['senkou_a']) &
                 (dataframe['close'].shift(2 ) > dataframe['senkou_b'])
             ),
-            'buy'] = 1
+            'enter_long'] = 1
 
         return dataframe
 
@@ -76,12 +76,12 @@ class Ichimoku_v33(IStrategy):
                 (dataframe['close'] < dataframe['senkou_b']) &
                 (dataframe['cloud_red'] == True)
             ),
-            'sell'] = 1
+            'exit_long'] = 1
 
         dataframe.loc[
             (
                 (dataframe['close'] < dataframe['sar'])
             ),
-            'sell'] = 1
+            'exit_long'] = 1
 
         return dataframe

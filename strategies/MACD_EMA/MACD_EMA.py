@@ -50,7 +50,7 @@ class MACD_EMA(IStrategy):
                 ((dataframe['close'] > dataframe['ema_{}'.format(self.EMA_LONG_TERM)]))
 
             ),
-            'buy'] = 1
+            'enter_long'] = 1
         return dataframe
 
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
@@ -60,5 +60,5 @@ class MACD_EMA(IStrategy):
                 (dataframe['close'] < dataframe['ema_{}'.format(self.EMA_LONG_TERM)])
 
             ),
-            'sell'] = 1
+            'exit_long'] = 1
         return dataframe

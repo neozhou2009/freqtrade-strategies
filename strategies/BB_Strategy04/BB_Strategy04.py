@@ -142,7 +142,7 @@ class BB_Strategy04(IStrategy):
 
                 # (dataframe['volume'] > self.config['stake_amount'])
             ),
-            'entry'] = 1
+            'enter_long'] = 1
 
         return dataframe
 
@@ -160,6 +160,6 @@ class BB_Strategy04(IStrategy):
                 # (dataframe['close'] < dataframe['bb_lowerband1.5'])
                 # (dataframe['volume'] > self.config['stake_amount'])
             ),
-            'exit'] = 1
+            'exit_long'] = 1
 
         return dataframe

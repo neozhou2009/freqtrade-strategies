@@ -134,7 +134,7 @@ class Strategy004(IStrategy):
                 (dataframe['mean-volume'] > 0.75) &
                 (dataframe['close'] > 0.00000100)
             ),
-            'buy'] = 1
+            'enter_long'] = 1
 
         return dataframe
 
@@ -151,5 +151,5 @@ class Strategy004(IStrategy):
                 (dataframe['fastk-previous'] < dataframe['fastd-previous']) &
                 (dataframe['close'] > dataframe['ema5'])
             ),
-            'sell'] = 1
+            'exit_long'] = 1
         return dataframe

@@ -110,7 +110,7 @@ class BBRSINaiveStrategy(IStrategy):
                 # Signal: price is less than lower bb
                 (dataframe['close'] < dataframe['bb_lowerband'])
             ),
-            'entry'] = 1
+            'enter_long'] = 1
 
         return dataframe
 
@@ -121,6 +121,6 @@ class BBRSINaiveStrategy(IStrategy):
                 # Signal: price is greater than mid bb
                 (dataframe['close'] > dataframe['bb_midband'])
             ),
-            'exit'] = 1
+            'exit_long'] = 1
 
         return dataframe

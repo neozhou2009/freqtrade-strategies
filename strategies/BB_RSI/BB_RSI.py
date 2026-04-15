@@ -95,7 +95,7 @@ class BB_RSI(IStrategy):
         """
         dataframe.loc[
             ((dataframe["close"] < dataframe["bb_lowerband"]) & (dataframe["rsi"] > 7)),
-            "entry",
+            "enter_long",
         ] = 1
 
         return dataframe
@@ -111,6 +111,6 @@ class BB_RSI(IStrategy):
                 (dataframe["close"] > dataframe["bb_upperband"])
                 & (dataframe["rsi"] > 74)
             ),
-            "exit",
+            "exit_long",
         ] = 1
         return dataframe

@@ -215,22 +215,22 @@ class NowoIchimoku1hV2(IStrategy):
                            close_above_shifted_conversion_line & \
                            close_above_double_shifted_upper_cloud
 
-        df['buy'] = False
+        df['enter_long'] = False
         df['buy_allowed'] = True
         for row in df.itertuples():
             if row.Index > 100:
                 df.loc[row.Index, 'buy_allowed'] = df.at[row.Index - 1, 'buy_allowed']
 
-                if df.at[row.Index - 1, 'buy']:
+                if df.at[row.Index - 1, 'enter_long']:
                     df.loc[row.Index, 'buy_allowed'] = False
 
                 if not df.at[row.Index, 'is_cloud_green']:
                     df.loc[row.Index, 'buy_allowed'] = True
 
-                df.loc[row.Index, 'buy'] = df.at[row.Index, 'buy_allowed'] & df.at[row.Index, 'should_buy']
+                df.loc[row.Index, 'enter_long'] = df.at[row.Index, 'buy_allowed'] & df.at[row.Index, 'should_buy']
 
         return df
 
     def populate_exit_trend(self, df: DataFrame, metadata: dict) -> DataFrame:
-        df['sell'] = 0
+        df['exit_long'] = 0
         return df

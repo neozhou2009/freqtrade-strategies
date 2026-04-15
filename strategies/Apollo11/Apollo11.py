@@ -168,7 +168,7 @@ class Apollo11(IStrategy):
                 dataframe["s1_ema_xs"] < dataframe["s1_ema_xl"],
                 dataframe["volume"] > 0,
             ]
-            dataframe.loc[reduce(lambda x, y: x & y, conditions), ["entry", "buy_tag"]] = (1, "buy_signal_1")
+            dataframe.loc[reduce(lambda x, y: x & y, conditions), ["enter_long", "enter_tag"]] = (1, "buy_signal_1")
 
         if self.buy_signal_2:
             conditions = [
@@ -176,7 +176,7 @@ class Apollo11(IStrategy):
                 dataframe["close"] < dataframe["s2_ema"],
                 dataframe["volume"] > 0,
             ]
-            dataframe.loc[reduce(lambda x, y: x & y, conditions), ["entry", "buy_tag"]] = (1, "buy_signal_2")
+            dataframe.loc[reduce(lambda x, y: x & y, conditions), ["enter_long", "enter_tag"]] = (1, "buy_signal_2")
 
         if self.buy_signal_3:
             conditions = [
@@ -185,16 +185,16 @@ class Apollo11(IStrategy):
                 dataframe["high"] < dataframe["s3_ema_long"],
                 dataframe["volume"] > 0,
             ]
-            dataframe.loc[reduce(lambda x, y: x & y, conditions), ["entry", "buy_tag"]] = (1, "buy_signal_3")
+            dataframe.loc[reduce(lambda x, y: x & y, conditions), ["enter_long", "enter_tag"]] = (1, "buy_signal_3")
 
         if not all([self.buy_signal_1, self.buy_signal_2, self.buy_signal_3]):
-            dataframe.loc[(), "entry"] = 0
+            dataframe.loc[(), "enter_long"] = 0
 
         return dataframe
 
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         # This is essentailly ignored as we're using strict ROI / Stoploss / TTP sale scenarios
-        dataframe.loc[(), "exit"] = 0
+        dataframe.loc[(), "exit_long"] = 0
         return dataframe
 
     def custom_stoploss(

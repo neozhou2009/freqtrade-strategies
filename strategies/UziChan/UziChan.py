@@ -55,7 +55,7 @@ class UziChan(IStrategy):
                 ((dataframe['close'] < dataframe['uc_low']) | (dataframe['open'] < dataframe['uc_low'])) &
                 (dataframe['co'] > dataframe['co'].shift())
             ),
-            'buy'] = 1
+            'enter_long'] = 1
         return dataframe
 
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
@@ -64,7 +64,7 @@ class UziChan(IStrategy):
                 (dataframe['high'] > dataframe['uc_up']) &
                 (dataframe['co'] > dataframe['co'].shift())
             ),
-            'sell'] = 1
+            'exit_long'] = 1
         return dataframe
      
 
@@ -218,7 +218,7 @@ class UziChanTB(UziChan):
         current_time = datetime.now(timezone.utc)
         trailing_duration = current_time - trailing_buy['start_trailing_time']
         if trailing_duration.total_seconds() > self.trailing_expire_seconds:
-            if ((current_trailing_profit_ratio > 0) and (last_candle['buy'] == 1)):
+            if ((current_trailing_profit_ratio > 0) and (last_candle['enter_long'] == 1)):
                 # more than 1h, price under first signal, buy signal still active -> buy
                 return 'force_entry'
             else:
@@ -264,7 +264,7 @@ class UziChanTB(UziChan):
         current_time = datetime.now(timezone.utc)
         trailing_duration = current_time - trailing_sell['start_trailing_time']
         if trailing_duration.total_seconds() > self.trailing_expire_seconds:
-            if ((current_trailing_sell_profit_ratio > 0) and (last_candle['sell'] == 1)):
+            if ((current_trailing_sell_profit_ratio > 0) and (last_candle['exit_long'] == 1)):
                 # more than 1h, price over first signal, sell signal still active -> sell
                 return 'force_exit'
             else:
@@ -313,13 +313,13 @@ class UziChanTB(UziChan):
                         trailing_buy_offset = self.trailing_buy_offset(dataframe, pair, current_price)
 
                         if trailing_buy['allow_trailing']:
-                            if (not trailing_buy['trailing_buy_order_started'] and (last_candle['buy'] == 1)):
+                            if (not trailing_buy['trailing_buy_order_started'] and (last_candle['enter_long'] == 1)):
                                 # start trailing buy
                                 
                                 trailing_buy['trailing_buy_order_started'] = True
                                 trailing_buy['trailing_buy_order_uplimit'] = last_candle['close']
                                 trailing_buy['start_trailing_price'] = last_candle['close']
-                                trailing_buy['buy_tag'] = last_candle['buy_tag']
+                                trailing_buy['enter_tag'] = last_candle['enter_tag']
                                 trailing_buy['start_trailing_time'] = datetime.now(timezone.utc)
                                 trailing_buy['offset'] = 0
                                 
@@ -389,11 +389,11 @@ class UziChanTB(UziChan):
                     trailing_sell_offset = self.trailing_sell_offset(dataframe, pair, current_price)
 
                     if trailing_sell['allow_sell_trailing']:
-                        if (not trailing_sell['trailing_sell_order_started'] and (last_candle['sell'] == 1)):
+                        if (not trailing_sell['trailing_sell_order_started'] and (last_candle['exit_long'] == 1)):
                             trailing_sell['trailing_sell_order_started'] = True
                             trailing_sell['trailing_sell_order_downlimit'] = last_candle['close']
                             trailing_sell['start_trailing_sell_price'] = trade.open_rate
-                            trailing_sell['sell_tag'] = last_candle['sell_tag']
+                            trailing_sell['exit_tag'] = last_candle['exit_tag']
                             trailing_sell['start_trailing_time'] = datetime.now(timezone.utc)
                             trailing_sell['offset'] = 0
                             
@@ -458,20 +458,20 @@ class UziChanTB(UziChan):
         if self.trailing_buy_order_enabled and self.config['runmode'].value in ('live', 'dry_run'): 
             last_candle = dataframe.iloc[-1].squeeze()
             trailing_buy = self.trailing_buy(metadata['pair'])
-            if (last_candle['buy'] == 1):
+            if (last_candle['enter_long'] == 1):
                 if not trailing_buy['trailing_buy_order_started']:
                     open_trades = Trade.get_trades([Trade.pair == metadata['pair'], Trade.is_open.is_(True), ]).all()
                     if not open_trades:
                         logger.info(f"Set 'allow_trailing' to True for {metadata['pair']} to start trailing!!!")
                         # self.custom_info_trail_buy[metadata['pair']]['trailing_buy']['allow_trailing'] = True
                         trailing_buy['allow_trailing'] = True
-                        initial_buy_tag = last_candle['buy_tag'] if 'buy_tag' in last_candle else 'buy signal'
-                        dataframe.loc[:, 'buy_tag'] = f"{initial_buy_tag} (start trail price {last_candle['close']})"                        
+                        initial_buy_tag = last_candle['enter_tag'] if 'enter_tag' in last_candle else 'buy signal'
+                        dataframe.loc[:, 'enter_tag'] = f"{initial_buy_tag} (start trail price {last_candle['close']})"                        
             else:
                 if (trailing_buy['trailing_buy_order_started'] == True):
                     logger.info(f"Continue trailing for {metadata['pair']}. Manually trigger buy signal!!")
-                    dataframe.loc[:,'buy'] = 1
-                    dataframe.loc[:, 'buy_tag'] = trailing_buy['buy_tag']
+                    dataframe.loc[:,'enter_long'] = 1
+                    dataframe.loc[:, 'enter_tag'] = trailing_buy['enter_tag']
 
         return dataframe
 
@@ -481,7 +481,7 @@ class UziChanTB(UziChan):
 
         if self.trailing_buy_order_enabled and self.abort_trailing_when_sell_signal_triggered and self.config['runmode'].value in ('live', 'dry_run'):
             last_candle = dataframe.iloc[-1].squeeze()
-            if (last_candle['sell'] == 1):
+            if (last_candle['exit_long'] == 1):
                 trailing_buy = self.trailing_buy(metadata['pair'])
                 if trailing_buy['trailing_buy_order_started']:
                     logger.info(f"Sell signal for {metadata['pair']} is triggered!!! Abort trailing")
@@ -490,7 +490,7 @@ class UziChanTB(UziChan):
         if self.trailing_sell_order_enabled and self.config['runmode'].value in ('live', 'dry_run'): 
             last_candle = dataframe.iloc[-1].squeeze()
             trailing_sell = self.trailing_sell(metadata['pair'])
-            if (last_candle['sell'] != 0):
+            if (last_candle['exit_long'] != 0):
                 if not trailing_sell['trailing_sell_order_started']:
                     open_trades = Trade.get_trades([Trade.pair == metadata['pair'], Trade.is_open.is_(True), ]).all()
                     #if not open_trades: 
@@ -498,13 +498,13 @@ class UziChanTB(UziChan):
                         logger.info(f"Set 'allow_SELL_trailing' to True for {metadata['pair']} to start *SELL* trailing")
                         # self.custom_info_trail_buy[metadata['pair']]['trailing_buy']['allow_trailing'] = True
                         trailing_sell['allow_sell_trailing'] = True
-                        initial_sell_tag = last_candle['sell_tag'] if 'sell_tag' in last_candle else 'sell signal'
-                        dataframe.loc[:, 'sell_tag'] = f"{initial_sell_tag} (start trail price {last_candle['close']})"
+                        initial_sell_tag = last_candle['exit_tag'] if 'exit_tag' in last_candle else 'sell signal'
+                        dataframe.loc[:, 'exit_tag'] = f"{initial_sell_tag} (start trail price {last_candle['close']})"
             else:
                 if (trailing_sell['trailing_sell_order_started'] == True):
                     logger.info(f"Continue trailing for {metadata['pair']}. Manually trigger sell signal!")
-                    dataframe.loc[:,'sell'] = 1
-                    dataframe.loc[:, 'sell_tag'] = trailing_sell['sell_tag']
+                    dataframe.loc[:,'exit_long'] = 1
+                    dataframe.loc[:, 'exit_tag'] = trailing_sell['exit_tag']
 
         return dataframe
 

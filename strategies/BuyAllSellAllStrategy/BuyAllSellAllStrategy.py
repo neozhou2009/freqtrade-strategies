@@ -18,11 +18,11 @@ class BuyAllSellAllStrategy(IStrategy):
         return dataframe
 
     def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
-        dataframe["buy"] = np.random.randint(0, 2, size=len(dataframe))
+        dataframe["enter_long"] = np.random.randint(0, 2, size=len(dataframe))
         return dataframe
 
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
-        dataframe["sell"] = 0
+        dataframe["exit_long"] = 0
         return dataframe
 
     def custom_exit(

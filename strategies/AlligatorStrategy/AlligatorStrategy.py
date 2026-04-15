@@ -205,7 +205,7 @@ class AlligatorStrategy(IStrategy):
                 & (dataframe["stoch_rsi"] < self.buy_stoch_rsi.value)
                 & (dataframe["volume"] > 0)
             ),
-            "entry",
+            "enter_long",
         ] = 1
 
         return dataframe
@@ -223,6 +223,6 @@ class AlligatorStrategy(IStrategy):
                 & (dataframe["stoch_rsi"] > self.sell_stoch_rsi.value)
                 & (dataframe["volume"] > 0)
             ),
-            "exit",
+            "exit_long",
         ] = 1
         return dataframe

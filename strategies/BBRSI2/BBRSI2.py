@@ -55,7 +55,7 @@ class BBRSI2(IStrategy):
                 (dataframe['rsi'] > 35)
                 & (dataframe['close'] < dataframe['bb_lowerband'])
             ),
-            'entry'] = 1
+            'enter_long'] = 1
 
         return dataframe
 
@@ -65,6 +65,6 @@ class BBRSI2(IStrategy):
                 (dataframe['rsi'] > 75)
                 & (dataframe['close'] > dataframe['bb_middleband'])
             ),
-            'exit'] = 1
+            'exit_long'] = 1
 
         return dataframe

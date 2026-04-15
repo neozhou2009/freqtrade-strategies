@@ -134,7 +134,7 @@ class Strategy003(IStrategy):
                 (dataframe['fastd'] > dataframe['fastk']) &
                 (dataframe['fastd'] > 0)
             ),
-            'buy'] = 1
+            'enter_long'] = 1
 
         return dataframe
 
@@ -149,5 +149,5 @@ class Strategy003(IStrategy):
                 (dataframe['sar'] > dataframe['close']) &
                 (dataframe['fisher_rsi'] > 0.3)
             ),
-            'sell'] = 1
+            'exit_long'] = 1
         return dataframe

@@ -95,7 +95,7 @@ class SlowPotato(IStrategy):
                 (dataframe['low'] <= dataframe['low'].rolling(1440).mean()) & ## current dataframe is below average low
                 (dataframe['volume'] > 0) # volume above zero
             )
-        ,'buy'] = 1
+        ,'enter_long'] = 1
         return dataframe
 
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
@@ -108,5 +108,5 @@ class SlowPotato(IStrategy):
                 (dataframe['high'] >= dataframe['high'].rolling(1440).mean()) & ## current dataframe is above average high
                 (dataframe['volume'] > 0) # volume above zero
             )
-        ,'sell'] = 1
+        ,'exit_long'] = 1
         return dataframe

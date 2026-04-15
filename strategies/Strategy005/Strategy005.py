@@ -165,7 +165,7 @@ class Strategy005(IStrategy):
                 & (dataframe["fastd"] > self.buy_fastd.value)
                 & (dataframe["fisher_rsi_norma"] < self.buy_fishRsiNorma.value)
             ),
-            "buy",
+            "enter_long",
         ] = 1
 
         return dataframe
@@ -189,6 +189,6 @@ class Strategy005(IStrategy):
             conditions.append(dataframe["fisher_rsi"] > self.sell_fishRsiNorma.value)
 
         if conditions:
-            dataframe.loc[reduce(lambda x, y: x & y, conditions), "sell"] = 1
+            dataframe.loc[reduce(lambda x, y: x & y, conditions), "exit_long"] = 1
 
         return dataframe

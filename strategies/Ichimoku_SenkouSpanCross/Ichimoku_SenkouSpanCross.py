@@ -54,7 +54,7 @@ class Ichimoku_SenkouSpanCross(IStrategy):
                 (dataframe['close'] > dataframe['senkou_b']) &
                 (dataframe['cloud_green'] == True)
             ),
-            'buy'] = 1
+            'enter_long'] = 1
         return dataframe
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
@@ -64,5 +64,5 @@ class Ichimoku_SenkouSpanCross(IStrategy):
                 (dataframe['close'] < dataframe['senkou_b']) &
                 (dataframe['cloud_red'] == True)
             ),
-            'sell'] = 1
+            'exit_long'] = 1
         return dataframe

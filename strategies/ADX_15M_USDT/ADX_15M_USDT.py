@@ -47,7 +47,7 @@ class ADX_15M_USDT(IStrategy):
                     (qtpylib.crossed_above( dataframe['plus_di'],dataframe['minus_di']))
 
             ),
-            'entry'] = 1
+            'enter_long'] = 1
         return dataframe
 
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
@@ -59,5 +59,5 @@ class ADX_15M_USDT(IStrategy):
                     (qtpylib.crossed_above(dataframe['sell-minus_di'], dataframe['sell-plus_di']))
 
             ),
-            'exit'] = 1
+            'exit_long'] = 1
         return dataframe

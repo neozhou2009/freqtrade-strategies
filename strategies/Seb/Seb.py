@@ -184,7 +184,7 @@ class Seb(IStrategy):
                 (dataframe['ha_close'] > dataframe['ema20']) &
                 (dataframe['ha_open'] < dataframe['ha_close'])  # green bar
             ),
-            'buy'] = 1
+            'enter_long'] = 1
 
         return dataframe
 
@@ -200,6 +200,6 @@ class Seb(IStrategy):
                 (dataframe['ha_close'] < dataframe['ema20']) &
                 (dataframe['ha_open'] > dataframe['ha_close'])  # red bar
             ),
-            'sell'] = 1
+            'exit_long'] = 1
         return dataframe
 

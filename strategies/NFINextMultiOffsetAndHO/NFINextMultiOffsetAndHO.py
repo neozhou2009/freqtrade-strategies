@@ -4114,7 +4114,7 @@ class NFINextMultiOffsetAndHO(IStrategy):
                 'sell'
             ] = 1
         else:
-            dataframe.loc[:, "sell"] = 0
+            dataframe.loc[:, "exit_long"] = 0
         return dataframe
 
     def confirm_trade_exit(self, pair: str, trade: "Trade", order_type: str, amount: float,

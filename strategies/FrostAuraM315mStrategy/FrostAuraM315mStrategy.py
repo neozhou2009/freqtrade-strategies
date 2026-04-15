@@ -125,7 +125,7 @@ class FrostAuraM315mStrategy(IStrategy):
                 (dataframe["close"] < dataframe['bb_lowerband3']) &
                 (dataframe["close"] > minimum_coin_price)
             ),
-            'buy'] = 1
+            'enter_long'] = 1
 
         return dataframe
 
@@ -136,6 +136,6 @@ class FrostAuraM315mStrategy(IStrategy):
                 (dataframe['rsi'] > 72) &
                 (dataframe["close"] > dataframe['bb_middleband1'])
             ),
-            'sell'] = 1
+            'exit_long'] = 1
         
         return dataframe

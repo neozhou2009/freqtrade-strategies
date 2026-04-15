@@ -68,7 +68,7 @@ class ASDTSRockwellTrading(IStrategy):
                 (dataframe['macd'] > 0) &
                 (dataframe['macd'] > dataframe['macdsignal'])
             ),
-            'entry'] = 1
+            'enter_long'] = 1
 
         return dataframe
 
@@ -82,5 +82,5 @@ class ASDTSRockwellTrading(IStrategy):
             (
                 (dataframe['macd'] < dataframe['macdsignal'])
             ),
-            'exit'] = 1
+            'exit_long'] = 1
         return dataframe

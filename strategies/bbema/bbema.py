@@ -102,6 +102,6 @@ class bbema(IStrategy):
                 qtpylib.crossed_above(dataframe["ema50"], dataframe["ema10"])
                 # (dataframe['close'] < dataframe['close'].shift(periods=-10))
             ),
-            "sell",
+            "exit_long",
         ] = 1
         return dataframe

@@ -186,7 +186,7 @@ class SuperHV27(IStrategy):
         conditions.append(dataframe["volume"].gt(0))
 
         if conditions:
-            dataframe.loc[reduce(lambda x, y: x & y, conditions), "buy"] = 1
+            dataframe.loc[reduce(lambda x, y: x & y, conditions), "enter_long"] = 1
 
         return dataframe
 
@@ -258,7 +258,7 @@ class SuperHV27(IStrategy):
                     conditions.append(trade_data["biggest_loser"] == True)
 
         if conditions:
-            dataframe.loc[reduce(lambda x, y: x & y, conditions), "sell"] = 1
+            dataframe.loc[reduce(lambda x, y: x & y, conditions), "exit_long"] = 1
 
         return dataframe
 

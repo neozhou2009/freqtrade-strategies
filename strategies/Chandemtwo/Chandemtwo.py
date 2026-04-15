@@ -111,7 +111,7 @@ class Chandemtwo(IStrategy):
                  (dataframe["CMO"]>=0)
                 
             ),
-            'buy'] = 1
+            'enter_long'] = 1
 
         return dataframe
 
@@ -128,5 +128,5 @@ class Chandemtwo(IStrategy):
                 
                 
             ),
-            'sell'] = 1
+            'exit_long'] = 1
         return dataframe

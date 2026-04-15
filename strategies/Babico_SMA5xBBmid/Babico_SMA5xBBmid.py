@@ -53,7 +53,7 @@ class Babico_SMA5xBBmid(IStrategy):
             (
                 qtpylib.crossed_above(dataframe['ema5'], dataframe['bb_mid']) 
             ),
-            'entry'] = 1
+            'enter_long'] = 1
         return dataframe
 
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
@@ -61,5 +61,5 @@ class Babico_SMA5xBBmid(IStrategy):
             (
                 qtpylib.crossed_above(dataframe['bb_mid'], dataframe['ema5']) 
             ),
-            'exit'] = 1
+            'exit_long'] = 1
         return dataframe

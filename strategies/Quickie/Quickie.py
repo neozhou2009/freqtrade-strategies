@@ -64,7 +64,7 @@ class Quickie(IStrategy):
                     (dataframe['sma_200'] > dataframe['close'])
 
             ),
-            'buy'] = 1
+            'enter_long'] = 1
         return dataframe
 
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
@@ -74,5 +74,5 @@ class Quickie(IStrategy):
                     (dataframe['tema'] > dataframe['bb_middleband']) &
                     (dataframe['tema'] < dataframe['tema'].shift(1))
             ),
-            'sell'] = 1
+            'exit_long'] = 1
         return dataframe

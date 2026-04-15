@@ -44,7 +44,7 @@ class Cci(IStrategy):
             (
                     (dataframe['cci'] < -198)
             ),
-            'buy'] = 1
+            'enter_long'] = 1
 
         return dataframe
 
@@ -58,7 +58,7 @@ class Cci(IStrategy):
             (
                     (dataframe['cci'] > 197)
             ),
-            'sell'] = 1
+            'exit_long'] = 1
         return dataframe
 
 

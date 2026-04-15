@@ -50,7 +50,7 @@ class Chispei(IStrategy):
                 (dataframe['mom'] < 15) &
                 (dataframe['fastMA'] > dataframe['slowMA'])
             ),
-            'buy'] = 1
+            'enter_long'] = 1
 
         return dataframe
 
@@ -60,5 +60,5 @@ class Chispei(IStrategy):
                 (dataframe['mom'] < 80) &
                 (dataframe['fastMA'] < dataframe['slowMA'])
             ),
-            'sell'] = 1
+            'exit_long'] = 1
         return dataframe

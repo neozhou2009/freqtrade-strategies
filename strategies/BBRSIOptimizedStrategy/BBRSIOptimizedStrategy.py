@@ -110,7 +110,7 @@ class BBRSIOptimizedStrategy(IStrategy):
                 # (dataframe['rsi'] > 38) &  # Signal: RSI is greater 38
                 (dataframe['close'] < dataframe['bb_lowerband_3sd']) # Signal: price is less than lower bb 2sd
             ),
-            'entry'] = 1
+            'enter_long'] = 1
 
         return dataframe
 
@@ -120,6 +120,6 @@ class BBRSIOptimizedStrategy(IStrategy):
                     (dataframe['rsi'] > 64) &  # Signal: RSI is greater 88
                     (dataframe['close'] > dataframe['bb_midband_1sd']) # Signal: price is greater than mid bb
             ),
-            'exit'] = 1
+            'exit_long'] = 1
 
         return dataframe

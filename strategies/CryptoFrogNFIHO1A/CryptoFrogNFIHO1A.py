@@ -4649,7 +4649,7 @@ class CryptoFrogNFIHO1A(IStrategy):
                     & (dataframe["volume"] > 0)
                 )
             ),
-            "buy",
+            "enter_long",
         ] = 1
 
         conditions = []
@@ -6361,7 +6361,7 @@ class CryptoFrogNFIHO1A(IStrategy):
             conditions.append(dataframe.loc[:, "buy_24_trigger"])
 
         if conditions:
-            dataframe.loc[reduce(lambda x, y: x | y, conditions), "buy"] = 1
+            dataframe.loc[reduce(lambda x, y: x | y, conditions), "enter_long"] = 1
 
         return dataframe
 
@@ -6442,7 +6442,7 @@ class CryptoFrogNFIHO1A(IStrategy):
         )
 
         if conditions:
-            dataframe.loc[reduce(lambda x, y: x | y, conditions), "sell"] = 1
+            dataframe.loc[reduce(lambda x, y: x | y, conditions), "exit_long"] = 1
 
         dataframe.loc[
             (
@@ -6464,7 +6464,7 @@ class CryptoFrogNFIHO1A(IStrategy):
                     & (dataframe["volume"] > 0)
                 )
             ),
-            "sell",
+            "exit_long",
         ] = 1
 
         return dataframe

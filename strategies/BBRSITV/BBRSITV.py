@@ -235,7 +235,7 @@ class BBRSITV(IStrategy):
                 & (dataframe["EWO"] > self.ewo_high.value)
                 & (dataframe["volume"] > 0)
             ),
-            "entry",
+            "enter_long",
         ] = 1
         return dataframe
 
@@ -260,7 +260,7 @@ class BBRSITV(IStrategy):
                 )
                 & (dataframe["volume"] > 0)
             ),
-            "exit",
+            "exit_long",
         ] = 1
         return dataframe
 
@@ -294,7 +294,7 @@ class BBRSITV4(BBRSITV):
                 # &
                 # (dataframe["roc_bbwidth_max"] < 70)
             ),
-            "entry",
+            "enter_long",
         ] = 1
 
         return dataframe
@@ -543,7 +543,7 @@ class BBRSITV5(BBRSITV):
                 # &
                 # (dataframe["roc_bbwidth_max"] < 70)
             ),
-            "entry",
+            "enter_long",
         ] = 1
 
         return dataframe

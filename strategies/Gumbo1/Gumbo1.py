@@ -99,7 +99,7 @@ class Gumbo1(IStrategy):
         # t3 <= ema
         conditions.append(dataframe[f'T3_{self.t3_periods.value}'] <= dataframe['EMA'])
         if conditions:
-            dataframe.loc[reduce(lambda x, y: x & y, conditions), 'buy'] = 1
+            dataframe.loc[reduce(lambda x, y: x & y, conditions), 'enter_long'] = 1
         return dataframe
 
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
@@ -113,7 +113,7 @@ class Gumbo1(IStrategy):
             dataframe[f'T3_{self.t3_periods.value}'] >= dataframe['bb_middleband_40']
         )
         if conditions:
-            dataframe.loc[reduce(lambda x, y: x | y, conditions), 'sell'] = 1
+            dataframe.loc[reduce(lambda x, y: x | y, conditions), 'exit_long'] = 1
         return dataframe
 
 

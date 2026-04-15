@@ -94,7 +94,7 @@ class Hacklemore2(IStrategy):
         if conditions:
             dataframe.loc[
                 reduce(lambda x, y: x & y, conditions),
-                'buy'] = 1
+                'enter_long'] = 1
 
         return dataframe
 
@@ -113,7 +113,7 @@ class Hacklemore2(IStrategy):
             current_profit = active_trade[0].calc_profit_ratio(rate=current_price)
 
             conditions.append(
-                (dataframe['buy'] == 0) &
+                (dataframe['enter_long'] == 0) &
                 (dataframe['dn_trend'] == True) &
                 (dataframe['RMI'] < 30) &
                 (current_profit > -0.03) &
@@ -123,9 +123,9 @@ class Hacklemore2(IStrategy):
         if conditions:
             dataframe.loc[
                 reduce(lambda x, y: x & y, conditions),
-                'sell'] = 1
+                'exit_long'] = 1
         else:
-            dataframe['sell'] = 0
+            dataframe['exit_long'] = 0
       
         return dataframe
 

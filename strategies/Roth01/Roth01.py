@@ -94,7 +94,7 @@ class Roth01(IStrategy):
                 (dataframe['close'] < dataframe['bb_low']) &
                 (dataframe['cci'] <= -57.0)
             ),
-            'buy'] = 1
+            'enter_long'] = 1
 
         return dataframe
 
@@ -116,6 +116,6 @@ class Roth01(IStrategy):
                 #(dataframe['fastk'] < 51)
 
             ),
-            'sell'] = 1
+            'exit_long'] = 1
 
         return dataframe

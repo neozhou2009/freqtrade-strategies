@@ -85,7 +85,7 @@ class RSIv2(IStrategy):
         # rsi_cond = dataframe['rsi_15m'].iloc[-1] <30 and dataframe['rsi_15m'].iloc[-2]<30
         dataframe.loc[(dataframe['rsi']<30) &
                             (dataframe['rperc']<-80) & (dataframe['rsi'].shift(1)<30) &
-                            (dataframe['rperc'].shift(1)<-80),'buy'] = 1
+                            (dataframe['rperc'].shift(1)<-80),'enter_long'] = 1
         return dataframe
 
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
@@ -96,5 +96,5 @@ class RSIv2(IStrategy):
         """
         dataframe.loc[(dataframe['rsi_30m']>70) &
                             (dataframe['rperc_30m']>-20) & (dataframe['rsi_30m'].shift(1)>70) &
-                            (dataframe['rperc_30m'].shift(1)>-20) ,'sell'] = 1
+                            (dataframe['rperc_30m'].shift(1)>-20) ,'exit_long'] = 1
         return dataframe

@@ -38,7 +38,7 @@ class SuperTrendPure(IStrategy):
                 (qtpylib.crossed_above(dataframe["close"], dataframe["st"]))
                 & (dataframe["volume"].gt(0))
             ),
-            "buy",
+            "enter_long",
         ] = 1
 
         return dataframe
@@ -49,7 +49,7 @@ class SuperTrendPure(IStrategy):
                 (qtpylib.crossed_below(dataframe["close"], dataframe["st"]))
                 & (dataframe["volume"].gt(0))
             ),
-            "sell",
+            "exit_long",
         ] = 1
 
         return dataframe

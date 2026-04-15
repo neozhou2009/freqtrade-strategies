@@ -182,7 +182,7 @@ class NotAnotherSMAOffSetStrategy_V2(IStrategy):
                 (dataframe['volume'] > 0)&
                 (dataframe['close'] < (dataframe[f'ma_sell_{self.base_nb_candles_sell.value}'] * self.high_offset.value))
         ),
-        ['buy', 'buy_tag']] = (1, 'ewo1')
+        ['enter_long', 'enter_tag']] = (1, 'ewo1')
                 
         dataframe.loc[
         (
@@ -195,7 +195,7 @@ class NotAnotherSMAOffSetStrategy_V2(IStrategy):
                 (dataframe['volume'] > 0)&
                 (dataframe['close'] < (dataframe[f'ma_sell_{self.base_nb_candles_sell.value}'] * self.high_offset.value))
         ),
-        ['buy', 'buy_tag']] = (1, 'ewo3')
+        ['enter_long', 'enter_tag']] = (1, 'ewo3')
 
 
         dataframe.loc[
@@ -209,7 +209,7 @@ class NotAnotherSMAOffSetStrategy_V2(IStrategy):
                 (dataframe['close'] < (dataframe[f'ma_sell_{self.base_nb_candles_sell.value}'] * self.high_offset.value))&
                 (dataframe['rsi']<25)
         ),
-        ['buy', 'buy_tag']] = (1, 'ewo2')
+        ['enter_long', 'enter_tag']] = (1, 'ewo2')
 
     
         dataframe.loc[
@@ -222,7 +222,7 @@ class NotAnotherSMAOffSetStrategy_V2(IStrategy):
                 (dataframe['volume'] > 0)&
                 (dataframe['close'] < (dataframe[f'ma_sell_{self.base_nb_candles_sell.value}'] * self.high_offset.value))
         ),
-        ['buy', 'buy_tag']] = (1, 'ewolow')
+        ['enter_long', 'enter_tag']] = (1, 'ewolow')
 
         return dataframe
 

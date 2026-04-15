@@ -234,9 +234,9 @@ class MultiMA_TSL(IStrategy):
         )
 
         # 初始化列 - 使用直接赋值避免 pandas SettingWithCopyWarning
-        dataframe["buy_tag"] = ""
+        dataframe["enter_tag"] = ""
         dataframe["buy_copy"] = 0
-        dataframe["buy"] = 0
+        dataframe["enter_long"] = 0
 
         buy_offset_trima = (
             self.buy_condition_trima_enable.value
@@ -250,7 +250,7 @@ class MultiMA_TSL(IStrategy):
             )
         )
         # 使用 assign 方法避免 inplace 操作问题
-        dataframe.loc[buy_offset_trima, "buy_tag"] = dataframe.loc[
+        dataframe.loc[buy_offset_trima, "enter_tag"] = dataframe.loc[
             buy_offset_trima, "buy_tag"
         ].apply(lambda x: x + "trima ")
         conditions.append(buy_offset_trima)
@@ -266,7 +266,7 @@ class MultiMA_TSL(IStrategy):
                 )
             )
         )
-        dataframe.loc[buy_offset_zema, "buy_tag"] = dataframe.loc[
+        dataframe.loc[buy_offset_zema, "enter_tag"] = dataframe.loc[
             buy_offset_zema, "buy_tag"
         ].apply(lambda x: x + "zema ")
         conditions.append(buy_offset_zema)
@@ -280,7 +280,7 @@ class MultiMA_TSL(IStrategy):
         if conditions:
             condition_mask = add_check & reduce(lambda x, y: x | y, conditions)
             dataframe.loc[condition_mask, "buy_copy"] = 1
-            dataframe.loc[condition_mask, "buy"] = 1
+            dataframe.loc[condition_mask, "enter_long"] = 1
 
         return dataframe
 
@@ -316,10 +316,10 @@ class MultiMA_TSL(IStrategy):
         if conditions:
             condition_mask = reduce(lambda x, y: x | y, conditions)
             dataframe.loc[condition_mask, "sell_copy"] = 1
-            dataframe.loc[condition_mask, "sell"] = 1
+            dataframe.loc[condition_mask, "exit_long"] = 1
 
         if not self.config["runmode"].value in ("backtest", "hyperopt"):
-            dataframe["sell"] = 0
+            dataframe["exit_long"] = 0
 
         return dataframe
 

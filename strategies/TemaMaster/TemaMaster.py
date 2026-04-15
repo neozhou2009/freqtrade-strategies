@@ -118,7 +118,7 @@ class TemaMaster(IStrategy):
                 
                 
             ),
-            'buy'] = 1
+            'enter_long'] = 1
 
         return dataframe
 
@@ -135,6 +135,6 @@ class TemaMaster(IStrategy):
 
             # (qtpylib.crossed_below(dataframe["CMO"],-60))
             ),
-            'sell'] = 1        
+            'exit_long'] = 1        
         
         return dataframe

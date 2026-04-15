@@ -79,13 +79,13 @@ class XtraThicc(IStrategy):
                 (dataframe['close'] > dataframe[f"3d-low_{self.inf_timeframe}"]) &
                 (dataframe['close'] < dataframe[f"3d-high_{self.inf_timeframe}"])
             ),
-            'buy'] = 1
+            'enter_long'] = 1
 
         return dataframe
 
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         
-        dataframe['sell'] = 0
+        dataframe['exit_long'] = 0
 
         return dataframe
 

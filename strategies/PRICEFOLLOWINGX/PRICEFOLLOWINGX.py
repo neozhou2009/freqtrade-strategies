@@ -275,7 +275,7 @@ class PRICEFOLLOWINGX(IStrategy):
             # Conditions.append(((abs(last_emalow - last_tema)) / last_tema) > self.ema_sell_pct.value)
 
         if Conditions:
-            dataframe.loc[reduce(lambda x, y: x & y, Conditions), "buy"] = 1
+            dataframe.loc[reduce(lambda x, y: x & y, Conditions), "enter_long"] = 1
 
         return dataframe
 
@@ -316,6 +316,6 @@ class PRICEFOLLOWINGX(IStrategy):
             # conditions.append(((abs(last_emahigh - last_tema)) / last_tema) > self.ema_sell_pct.value)
 
         if conditions:
-            dataframe.loc[reduce(lambda x, y: x & y, conditions), "sell"] = 1
+            dataframe.loc[reduce(lambda x, y: x & y, conditions), "exit_long"] = 1
 
         return dataframe

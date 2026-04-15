@@ -58,8 +58,8 @@ class conny(IStrategy):
         c.evaluate_williams()
         c.evaluate_momentum()
         c.evaluate_adx()
-        dataframe['consensus_buy'] = c.score()['buy']
-        dataframe['consensus_sell'] = c.score()['sell']
+        dataframe['consensus_buy'] = c.score()['enter_long']
+        dataframe['consensus_sell'] = c.score()['exit_long']
 
 
         print(dataframe)
@@ -71,7 +71,7 @@ class conny(IStrategy):
                 (dataframe['consensus_buy'] > 45) &
                 (dataframe['volume'] > 0)
             ),
-            'buy'] = 1
+            'enter_long'] = 1
 
         return dataframe
 
@@ -81,5 +81,5 @@ class conny(IStrategy):
                 (dataframe['consensus_sell'] > 88) &
                 (dataframe['volume'] > 0)
             ),
-            'sell'] = 1
+            'exit_long'] = 1
         return dataframe

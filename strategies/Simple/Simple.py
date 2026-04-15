@@ -63,7 +63,7 @@ class Simple(IStrategy):
                         & (dataframe['rsi'] > 70)  # optional filter, need to investigate
                 )
             ),
-            'buy'] = 1
+            'enter_long'] = 1
         return dataframe
 
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
@@ -72,5 +72,5 @@ class Simple(IStrategy):
             (
                 (dataframe['rsi'] > 80)
             ),
-            'sell'] = 1
+            'exit_long'] = 1
         return dataframe

@@ -84,7 +84,7 @@ class NotAnotherSMAOffsetStrategyLite(IStrategy):
             (dataframe['ewo'] > 0)
             &
             (dataframe['volume'] > 0)
-        ), 'buy'] = 1
+        ), 'enter_long'] = 1
 
         return dataframe
 
@@ -93,6 +93,6 @@ class NotAnotherSMAOffsetStrategyLite(IStrategy):
             (dataframe['close'] > (dataframe[f'ema_{self.base_nb_candles_sell.value}'] * self.high_offset.value))
             &
             (dataframe['volume'] > 0)
-        ), 'sell'] = 1
+        ), 'exit_long'] = 1
 
         return dataframe

@@ -130,10 +130,10 @@ class TDSequentialStrategy(IStrategy):
         :param metadata: Additional information, like the currently traded pair
         :return: DataFrame with buy column
         """
-        dataframe["buy"] = 0
+        dataframe["enter_long"] = 0
         dataframe.loc[((dataframe['exceed_low']) &
                       (dataframe['seq_buy'] > 8))
-                      , 'buy'] = 1
+                      , 'enter_long'] = 1
 
         return dataframe
 
@@ -144,8 +144,8 @@ class TDSequentialStrategy(IStrategy):
         :param metadata: Additional information, like the currently traded pair
         :return: DataFrame with buy columnNA / NaN values
         """
-        dataframe["sell"] = 0
+        dataframe["exit_long"] = 0
         dataframe.loc[((dataframe['exceed_high']) |
                        (dataframe['seq_sell'] > 8))
-                      , 'sell'] = 1
+                      , 'exit_long'] = 1
         return dataframe

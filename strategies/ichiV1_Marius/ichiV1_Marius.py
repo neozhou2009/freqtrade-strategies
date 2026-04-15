@@ -815,7 +815,7 @@ class ichiV1_Marius(IStrategy):
     def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
 
         conditions = []
-        dataframe.loc[:, "buy_tag"] = ""
+        dataframe.loc[:, "enter_tag"] = ""
 
         is_protection = (
             (
@@ -844,7 +844,7 @@ class ichiV1_Marius(IStrategy):
                 & (dataframe["fan_magnitude"] > 0.99)
             )
             conditions.append(tesla)
-            dataframe.loc[tesla, "buy_tag"] += "tesla_"
+            dataframe.loc[tesla, "enter_tag"] += "tesla_"
 
         if conditions:
             dataframe.loc[
@@ -865,7 +865,7 @@ class ichiV1_Marius(IStrategy):
         )
 
         if conditions:
-            dataframe.loc[reduce(lambda x, y: x & y, conditions), "sell"] = 1
+            dataframe.loc[reduce(lambda x, y: x & y, conditions), "exit_long"] = 1
 
         return dataframe
 

@@ -53,7 +53,7 @@ class ONUR(IStrategy):
                 (dataframe["rsi"] < 74)
                 & (dataframe["close"] > dataframe["bb_middleband"])
             ),
-            "buy",
+            "enter_long",
         ] = 1
 
         return dataframe
@@ -63,7 +63,7 @@ class ONUR(IStrategy):
             (
                 # (dataframe['close'] > dataframe['bb_upperband'])
             ),
-            "sell",
+            "exit_long",
         ] = 1
 
         return dataframe

@@ -150,7 +150,7 @@ class Leveraged(IStrategy):
                     )
             )
             ,
-            'buy'] = 1
+            'enter_long'] = 1
 
         return dataframe
 

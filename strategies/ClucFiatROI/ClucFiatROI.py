@@ -153,7 +153,7 @@ class ClucFiatROI(IStrategy):
         conditions.append(dataframe["volume"].gt(0))
 
         if conditions:
-            dataframe.loc[reduce(lambda x, y: x & y, conditions), "buy"] = 1
+            dataframe.loc[reduce(lambda x, y: x & y, conditions), "enter_long"] = 1
 
         return dataframe
 
@@ -168,7 +168,7 @@ class ClucFiatROI(IStrategy):
             & dataframe["ema_fast"].gt(dataframe["close"])
             & dataframe["fisher-rsi"].gt(params["sell-fisher"])
             & dataframe["volume"].gt(0),
-            "sell",
+            "exit_long",
         ] = 1
 
         return dataframe

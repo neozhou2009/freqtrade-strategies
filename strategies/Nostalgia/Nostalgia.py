@@ -7799,12 +7799,12 @@ class Nostalgia(IStrategy):
             conditions.append(reduce(lambda x, y: x & y, item_buy_logic))
 
         if conditions:
-            dataframe.loc[reduce(lambda x, y: x | y, conditions), "buy"] = 1
+            dataframe.loc[reduce(lambda x, y: x | y, conditions), "enter_long"] = 1
 
         return dataframe
 
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
-        dataframe.loc[:, "sell"] = 0
+        dataframe.loc[:, "exit_long"] = 0
         return dataframe
 
     def confirm_trade_exit(

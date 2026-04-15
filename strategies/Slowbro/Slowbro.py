@@ -89,7 +89,7 @@ class Slowbro(IStrategy):
             (
                 qtpylib.crossed_above(dataframe['close'],dataframe[f"30d-low_{self.inf_timeframe}"])
             ),
-            'buy'] = 1
+            'enter_long'] = 1
 
         return dataframe
 
@@ -98,6 +98,6 @@ class Slowbro(IStrategy):
             (
                 qtpylib.crossed_above(dataframe['close'],dataframe[f"30d-high_{self.inf_timeframe}"])
             ),
-            'sell'] = 1
+            'exit_long'] = 1
 
         return dataframe

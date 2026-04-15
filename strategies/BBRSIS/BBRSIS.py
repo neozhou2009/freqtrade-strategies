@@ -114,7 +114,7 @@ class BBRSIS(IStrategy):
                 )
                 & (dataframe["volume"] > 0)
             ),
-            "entry",
+            "enter_long",
         ] = 1
 
         return dataframe
@@ -150,6 +150,6 @@ class BBRSIS(IStrategy):
                 )
                 & (dataframe["volume"] > 0)
             ),
-            "exit",
+            "exit_long",
         ] = 1
         return dataframe

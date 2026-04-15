@@ -155,7 +155,7 @@ class BBandsRSI(IStrategy):
                 (dataframe['close'] < dataframe['bb_lowerband']) &
                 (dataframe['volume'] > 0)  # Make sure Volume is not 0
             ),
-            'entry'] = 1
+            'enter_long'] = 1
 
         return dataframe
 
@@ -171,6 +171,6 @@ class BBandsRSI(IStrategy):
                 (dataframe['rsi'] > 70) &
                 (dataframe['volume'] > 0)  # Make sure Volume is not 0
             ),
-            'exit'] = 1
+            'exit_long'] = 1
         return dataframe
     

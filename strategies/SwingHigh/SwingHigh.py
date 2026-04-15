@@ -55,7 +55,7 @@ class SwingHigh(IStrategy):
                 & (dataframe["cci-buy"] <= -188.0)
                 & (dataframe["volume"] > 0)
             ),
-            "buy",
+            "enter_long",
         ] = 1
 
         return dataframe
@@ -68,7 +68,7 @@ class SwingHigh(IStrategy):
                 & (dataframe["cci-sell"] >= 231.0)
                 & (dataframe["volume"] > 0)
             ),
-            "sell",
+            "exit_long",
         ] = 1
 
         return dataframe

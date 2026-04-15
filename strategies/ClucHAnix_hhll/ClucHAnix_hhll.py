@@ -542,7 +542,7 @@ class ClucHAnix_hhll(IStrategy):
             )
             & (dataframe["hh_48_diff"] > self.buy_hh_diff_48.value)
             & (dataframe["ll_48_diff"] > self.buy_ll_diff_48.value),
-            "buy",
+            "enter_long",
         ] = 1
 
         return dataframe
@@ -588,7 +588,7 @@ class ClucHAnix_hhll(IStrategy):
                 )
             )
             & (dataframe["volume"] > 0),
-            "sell",
+            "exit_long",
         ] = 1
 
         return dataframe
@@ -760,7 +760,7 @@ class ClucHAnix_hhll_TB(ClucHAnix_hhll):
         current_time = datetime.now(timezone.utc)
         trailing_duration = current_time - trailing_buy["start_trailing_time"]
         if trailing_duration.total_seconds() > self.trailing_expire_seconds:
-            if (current_trailing_profit_ratio > 0) and (last_candle["buy"] == 1):
+            if (current_trailing_profit_ratio > 0) and (last_candle["enter_long"] == 1):
                 # more than 1h, price under first signal, buy signal still active -> buy
                 return "force_entry"
             else:
@@ -832,7 +832,7 @@ class ClucHAnix_hhll_TB(ClucHAnix_hhll):
 
                     if trailing_buy["allow_trailing"]:
                         if not trailing_buy["trailing_buy_order_started"] and (
-                            last_candle["buy"] == 1
+                            last_candle["enter_long"] == 1
                         ):
                             # start trailing buy
 
@@ -848,7 +848,7 @@ class ClucHAnix_hhll_TB(ClucHAnix_hhll):
                                 "close"
                             ]
                             trailing_buy["start_trailing_price"] = last_candle["close"]
-                            trailing_buy["buy_tag"] = last_candle["buy_tag"]
+                            trailing_buy["enter_tag"] = last_candle["enter_tag"]
                             trailing_buy["start_trailing_time"] = datetime.now(
                                 timezone.utc
                             )
@@ -957,7 +957,7 @@ class ClucHAnix_hhll_TB(ClucHAnix_hhll):
         ):
             last_candle = dataframe.iloc[-1].squeeze()
             trailing_buy = self.trailing_buy(metadata["pair"])
-            if last_candle["buy"] == 1:
+            if last_candle["enter_long"] == 1:
                 if not trailing_buy["trailing_buy_order_started"]:
                     open_trades = Trade.get_trades(
                         [
@@ -972,11 +972,11 @@ class ClucHAnix_hhll_TB(ClucHAnix_hhll):
                         # self.custom_info_trail_buy[metadata['pair']]['trailing_buy']['allow_trailing'] = True
                         trailing_buy["allow_trailing"] = True
                         initial_buy_tag = (
-                            last_candle["buy_tag"]
-                            if "buy_tag" in last_candle
+                            last_candle["enter_tag"]
+                            if "enter_tag" in last_candle
                             else "buy signal"
                         )
-                        dataframe.loc[:, "buy_tag"] = (
+                        dataframe.loc[:, "enter_tag"] = (
                             f"{initial_buy_tag} (start trail price {last_candle['close']})"
                         )
             else:
@@ -984,8 +984,8 @@ class ClucHAnix_hhll_TB(ClucHAnix_hhll):
                     logger.info(
                         f"Continue trailing for {metadata['pair']}. Manually trigger buy signal!!"
                     )
-                    dataframe.loc[:, "buy"] = 1
-                    dataframe.loc[:, "buy_tag"] = trailing_buy["buy_tag"]
+                    dataframe.loc[:, "enter_long"] = 1
+                    dataframe.loc[:, "enter_tag"] = trailing_buy["enter_tag"]
                     # dataframe['buy'] = 1
 
         return dataframe

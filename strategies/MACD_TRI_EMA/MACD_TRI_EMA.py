@@ -43,7 +43,7 @@ class MACD_TRI_EMA(IStrategy):
                 qtpylib.crossed_above(dataframe["macd"], dataframe["macdsignal"])
                 & (dataframe["close"].shift(1) > dataframe["tema"].shift(1))
             ),
-            "buy",
+            "enter_long",
         ] = 1
         return dataframe
 

@@ -126,7 +126,7 @@ class FixedRiskRewardLoss(IStrategy):
         :return: DataFrame with buy column
         """
         # Allways buys
-        dataframe.loc[:, "buy"] = 1
+        dataframe.loc[:, "enter_long"] = 1
         return dataframe
 
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
@@ -138,5 +138,5 @@ class FixedRiskRewardLoss(IStrategy):
         """
 
         # Never sells
-        dataframe.loc[:, "sell"] = 0
+        dataframe.loc[:, "exit_long"] = 0
         return dataframe

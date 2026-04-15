@@ -116,7 +116,7 @@ class TemaPureNeat(IStrategy):
                   
                 
             ),
-            'buy'] = 1
+            'enter_long'] = 1
 
         return dataframe
 
@@ -134,6 +134,6 @@ class TemaPureNeat(IStrategy):
             ((qtpylib.crossed_below(dataframe["CMO"],-58)))
                 
             ),
-            'sell'] = 1        
+            'exit_long'] = 1        
         
         return dataframe

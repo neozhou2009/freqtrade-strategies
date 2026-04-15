@@ -353,7 +353,7 @@ class BBands(IStrategy):
                 (dataframe['tema'] > dataframe['tema'].shift(1)) &  # Guard: tema is rising
                 (dataframe['volume'] > 0)  # Make sure Volume is not 0
             ),
-            'entry'] = 1
+            'enter_long'] = 1
 
         return dataframe
 
@@ -370,7 +370,7 @@ class BBands(IStrategy):
                 (dataframe['tema'] < dataframe['tema'].shift(1)) &  # Guard: tema is falling
                 (dataframe['volume'] > 0)  # Make sure Volume is not 0
             ),
-            'exit'] = 1
+            'exit_long'] = 1
             
         return dataframe
     

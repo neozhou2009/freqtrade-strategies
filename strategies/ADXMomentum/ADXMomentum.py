@@ -53,7 +53,7 @@ class ADXMomentum(IStrategy):
                     (dataframe['plus_di'] > dataframe['minus_di'])
 
             ),
-            'entry'] = 1
+            'enter_long'] = 1
         return dataframe
 
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
@@ -65,5 +65,5 @@ class ADXMomentum(IStrategy):
                     (dataframe['plus_di'] < dataframe['minus_di'])
 
             ),
-            'exit'] = 1
+            'exit_long'] = 1
         return dataframe

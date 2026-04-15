@@ -127,7 +127,7 @@ class NormalizerStrategyHO2(IStrategy):
         dataframe.loc[
             (dataframe["pct_sum"] < 0.2)
             & (dataframe["volume"] > 0),  # Make sure Volume is not 0
-            "buy",
+            "enter_long",
         ] = 1
         return dataframe
 
@@ -135,6 +135,6 @@ class NormalizerStrategyHO2(IStrategy):
         dataframe.loc[
             (dataframe["pct_sum"] > 8)
             & (dataframe["volume"] > 0),  # Make sure Volume is not 0
-            "sell",
+            "exit_long",
         ] = 1
         return dataframe

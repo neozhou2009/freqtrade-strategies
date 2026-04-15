@@ -4028,8 +4028,8 @@ class NostalgiaForInfinityNext_ChangeToTower_V6(IStrategy):
             if not buy_signal.empty:
                 buy_signal_candle = buy_signal.iloc[-1]
                 buy_tag = (
-                    buy_signal_candle["buy_tag"]
-                    if buy_signal_candle["buy_tag"] != ""
+                    buy_signal_candle["enter_tag"]
+                    if buy_signal_candle["enter_tag"] != ""
                     else "empty"
                 )
         buy_tags = buy_tag.split()
@@ -5219,7 +5219,7 @@ class NostalgiaForInfinityNext_ChangeToTower_V6(IStrategy):
 
     def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
-        dataframe.loc[:, "buy_tag"] = ""
+        dataframe.loc[:, "enter_tag"] = ""
 
         for index in self.buy_protection_params:
             item_buy_protection_list = [True]
@@ -6079,16 +6079,16 @@ class NostalgiaForInfinityNext_ChangeToTower_V6(IStrategy):
 
                 item_buy_logic.append(dataframe["volume"] > 0)
                 item_buy = reduce(lambda x, y: x & y, item_buy_logic)
-                dataframe.loc[item_buy, "buy_tag"] += str(index) + " "
+                dataframe.loc[item_buy, "enter_tag"] += str(index) + " "
                 conditions.append(item_buy)
 
         if conditions:
-            dataframe.loc[:, "buy"] = reduce(lambda x, y: x | y, conditions)
+            dataframe.loc[:, "enter_long"] = reduce(lambda x, y: x | y, conditions)
 
         return dataframe
 
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
-        dataframe.loc[:, "sell"] = 0
+        dataframe.loc[:, "exit_long"] = 0
 
         return dataframe
 

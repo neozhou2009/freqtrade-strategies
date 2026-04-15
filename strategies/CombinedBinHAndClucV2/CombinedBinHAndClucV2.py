@@ -162,7 +162,7 @@ class CombinedBinHAndClucV2(IStrategy):
                     )
                 )
             ),
-            "buy",
+            "enter_long",
         ] = 1
         return dataframe
 
@@ -170,6 +170,6 @@ class CombinedBinHAndClucV2(IStrategy):
         """ """
         dataframe.loc[
             (qtpylib.crossed_below(dataframe["close"], dataframe["bb_upperband"])),
-            "sell",
+            "exit_long",
         ] = 1
         return dataframe

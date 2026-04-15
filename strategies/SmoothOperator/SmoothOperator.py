@@ -168,7 +168,7 @@ class SmoothOperator(IStrategy):
                 # ensure we have an overall uptrend
                 (dataframe['close'] > dataframe['close'].shift())
             ),
-            'buy'] = 1
+            'enter_long'] = 1
 
         return dataframe
 
@@ -201,7 +201,7 @@ class SmoothOperator(IStrategy):
                 )
 
             ),
-            'sell'] = 1
+            'exit_long'] = 1
         return dataframe
 
 

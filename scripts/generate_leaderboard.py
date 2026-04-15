@@ -84,40 +84,97 @@ def main():
     parser.add_argument(
         "--period", default="Custom", help="Period identifier"
     )
+    parser.add_argument(
+        "--vecscore", default=None, help="Path to vecscore_results.json to use directly, bypassing raw backtest inputs"
+    )
     args = parser.parse_args()
 
     registry = load_registry()
     history = load_history()
     results = []
 
-    # Find all backtest result files
-    json_files = sorted(glob.glob(os.path.join(args.input_dir, "*.json")))
-    zip_files = sorted(glob.glob(os.path.join(args.input_dir, "*.zip")))
+    if args.vecscore:
+        if not os.path.exists(args.vecscore):
+            print(f"[!] Vecscore file not found: {args.vecscore}")
+            return
+        print(f"[*] Loading VecScore from {args.vecscore}")
+        with open(args.vecscore, "r") as f:
+            vdata = json.load(f)
+        
+        # Read the raw phase1 results to attach extra metrics like winrate if needed
+        phase1_path = args.vecscore.replace("vecscore_results.json", "phase1_results.json")
+        phase1_map = {}
+        if os.path.exists(phase1_path):
+            with open(phase1_path, "r") as f:
+                p1_data = json.load(f)
+                for r in p1_data.get("results", []):
+                    phase1_map[r["name"]] = r.get("metrics", {})
 
-    print(f"[*] Found {len(json_files)} JSON files and {len(zip_files)} ZIP files")
+        for item in vdata.get("ranked", []):
+            strat_name = item["name"]
+            reg_info = registry.get(strat_name, {})
+            p_inputs = item.get("details", {}).get("P_return", {}).get("inputs", {})
+            r_inputs = item.get("details", {}).get("R_risk", {}).get("inputs", {})
+            e_inputs = item.get("details", {}).get("E_efficiency", {}).get("inputs", {})
+            
+            p1_metrics = phase1_map.get(strat_name, {})
 
-    # Process files
-    for filepath in json_files:
-        if any(x in filepath for x in ["leaderboard.json", "_config.json", ".meta.json"]):
-            continue
-        try:
-            with open(filepath, "r") as f:
-                process_backtest_data(json.load(f), registry, results)
-        except Exception as e:
-            print(f"[!] Error reading {filepath}: {e}")
+            strat_result = {
+                "strategy": strat_name,
+                "category": reg_info.get("style", ["Uncategorized"])[0],
+                "styles": reg_info.get("style", []),
+                "family": reg_info.get("family", strat_name),
+                "complexity": reg_info.get("complexity", 5),
+                "side": reg_info.get("side", "Long"),
+                "indicators": reg_info.get("indicators", []),
+                "timeframe": item.get("timeframe", reg_info.get("timeframe", "unknown")),
+                
+                # Use VecScore directly
+                "composite_score": item["vecscore"],
+                "grade": item.get("grade", "D"),
+                "badge": item.get("badge", ""),
+                "commercial_eligible": item.get("commercial_eligible", False),
+                "is_estimated": item.get("is_estimated", True),
+                
+                # Map metrics to UI fields
+                "cagr": p_inputs.get("roi", 0.0), # UI uses 'cagr' for annualized ROI, here we map 30d ROI directly or handle in UI
+                "sharpe": r_inputs.get("sharpe", 0.0),
+                "max_drawdown_pct": r_inputs.get("max_drawdown", 0.0),
+                "max_drawdown_abs": 0.0,
+                "trades": e_inputs.get("trades_30d", 0),
+                "winrate": p1_metrics.get("win_rate", 0.0),
+                "profit_factor": p_inputs.get("profit_factor", 0.0),
+            }
+            results.append(strat_result)
+    else:
+        # Find all backtest result files
+        json_files = sorted(glob.glob(os.path.join(args.input_dir, "*.json")))
+        zip_files = sorted(glob.glob(os.path.join(args.input_dir, "*.zip")))
 
-    for zip_path in zip_files:
-        data = extract_json_from_zip(zip_path)
-        if data:
-            process_backtest_data(data, registry, results)
+        print(f"[*] Found {len(json_files)} JSON files and {len(zip_files)} ZIP files")
 
-    if not results:
-        print("[!] No results found.")
-        return
+        # Process files
+        for filepath in json_files:
+            if any(x in filepath for x in ["leaderboard.json", "_config.json", ".meta.json"]):
+                continue
+            try:
+                with open(filepath, "r") as f:
+                    process_backtest_data(json.load(f), registry, results)
+            except Exception as e:
+                print(f"[!] Error reading {filepath}: {e}")
 
-    # Calculate Composite Score for each
-    for r in results:
-        r["composite_score"] = calculate_composite_score(r)
+        for zip_path in zip_files:
+            data = extract_json_from_zip(zip_path)
+            if data:
+                process_backtest_data(data, registry, results)
+
+        if not results:
+            print("[!] No results found.")
+            return
+
+        # Calculate Composite Score for each (legacy mode)
+        for r in results:
+            r["composite_score"] = calculate_composite_score(r)
 
     # Sort by composite score
     results.sort(key=lambda x: x["composite_score"], reverse=True)
@@ -191,7 +248,12 @@ def main():
             f.write("|---|---|---|---|---|---|---|---|---|\n")
             for r in cat_results:
                 delta = f"↑{r['rank_delta']}" if r['rank_delta'] > 0 else (f"↓{abs(r['rank_delta'])}" if r['rank_delta'] < 0 else "-")
-                f.write(f"| {r['rank']} | {delta} | {r['strategy']} | **{r['composite_score']}** | {r.get('cagr', 0)*100:.1f}% | {r['sharpe']:.2f} | {r.get('max_drawdown_pct', 0)*100:.1f}% | {r['winrate']*100:.1f}% | {r['trades']} |\n")
+                cagr = (r.get('cagr') or 0) * 100
+                sharpe = r.get('sharpe') or 0
+                max_dd = (r.get('max_drawdown_pct') or 0) * 100
+                winrate = (r.get('winrate') or 0) * 100
+                trades = r.get('trades') or 0
+                f.write(f"| {r['rank']} | {delta} | {r['strategy']} | **{r['composite_score']}** | {cagr:.1f}% | {sharpe:.2f} | {max_dd:.1f}% | {winrate:.1f}% | {trades} |\n")
             f.write("\n")
 
     print(f"[*] Generated Markdown leaderboard at {out_md}")

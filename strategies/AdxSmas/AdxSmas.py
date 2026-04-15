@@ -47,7 +47,7 @@ class AdxSmas(IStrategy):
                     (qtpylib.crossed_above(dataframe['short'], dataframe['long']))
 
             ),
-            'entry'] = 1
+            'enter_long'] = 1
         return dataframe
 
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
@@ -57,5 +57,5 @@ class AdxSmas(IStrategy):
                     (qtpylib.crossed_above(dataframe['long'], dataframe['short']))
 
             ),
-            'exit'] = 1
+            'exit_long'] = 1
         return dataframe

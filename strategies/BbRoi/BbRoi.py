@@ -61,7 +61,7 @@ class BbRoi(IStrategy):
                 & (dataframe["close"] > dataframe["ema200"])
                 & (dataframe["ema20"] > dataframe["ema200"])
             ),
-            "entry",
+            "enter_long",
         ] = 1
         return dataframe
 
@@ -72,6 +72,6 @@ class BbRoi(IStrategy):
                 | (dataframe["close"] < dataframe["bb_middleband"] * 0.97)
                 & (dataframe["open"] > dataframe["close"])  # red bar
             ),
-            "exit",
+            "exit_long",
         ] = 1
         return dataframe

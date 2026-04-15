@@ -67,7 +67,7 @@ class DD(IStrategy):
               #  (dataframe['adx'] > 25) &
                 (dataframe['rsi'] < 40)
             ),
-            'buy'] = 1
+            'enter_long'] = 1
 
         return dataframe
 
@@ -91,5 +91,5 @@ class DD(IStrategy):
           #      )) &
           #      (dataframe['fastd'] > 54)
             ),
-            'sell'] = 1
+            'exit_long'] = 1
         return dataframe

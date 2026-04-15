@@ -221,7 +221,7 @@ class STRATEGY_RSI_BB_CROSS(IStrategy):
                 (dataframe['rsi_percent'] < 0.5) &
                 (dataframe['bb_below_rsi_count'].shift(1))
             ),
-            'buy'] = 1
+            'enter_long'] = 1
 
         return dataframe
 
@@ -243,6 +243,6 @@ class STRATEGY_RSI_BB_CROSS(IStrategy):
                 (dataframe['rsi_percent'] > 0.5) &
                 (dataframe['bb_above_rsi_count'].shift(1))
             ),
-            'sell'] = 1
+            'exit_long'] = 1
         return dataframe
     

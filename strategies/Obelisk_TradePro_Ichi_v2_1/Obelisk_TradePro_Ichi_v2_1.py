@@ -205,7 +205,7 @@ class Obelisk_TradePro_Ichi_v2_1(IStrategy):
 
     def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
 
-        dataframe.loc[qtpylib.crossed_above(dataframe["go_long"], 0), "buy"] = 1
+        dataframe.loc[qtpylib.crossed_above(dataframe["go_long"], 0), "enter_long"] = 1
 
         return dataframe
 
@@ -217,7 +217,7 @@ class Obelisk_TradePro_Ichi_v2_1(IStrategy):
                 (dataframe["tenkan_sen"] < dataframe["kijun_sen"])
                 | (dataframe["close"] < dataframe["kijun_sen"])
             ),
-            "sell",
+            "exit_long",
         ] = 1
 
         return dataframe

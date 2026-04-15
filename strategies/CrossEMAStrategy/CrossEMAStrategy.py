@@ -184,7 +184,7 @@ class CrossEMAStrategy(IStrategy):
                 (dataframe['stoch_rsi'] < self.buy_stoch_rsi.value) &
                 (dataframe['volume'] > 0)
             ),
-            'buy'] = 1
+            'enter_long'] = 1
 
         return dataframe
 
@@ -201,5 +201,5 @@ class CrossEMAStrategy(IStrategy):
                 (dataframe['stoch_rsi'] > self.sell_stoch_rsi.value) &
                 (dataframe['volume'] > 0)
             ),
-            'sell'] = 1
+            'exit_long'] = 1
         return dataframe

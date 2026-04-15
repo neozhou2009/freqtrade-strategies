@@ -78,7 +78,7 @@ class MabStra(IStrategy):
                 (dataframe['buy-fastMA'].div(dataframe['buy-slowMA'])
                     < self.buy_div_max.value)
             ),
-            'buy'] = 1
+            'enter_long'] = 1
 
         return dataframe
 
@@ -94,5 +94,5 @@ class MabStra(IStrategy):
                 (dataframe['sell-slowMA'].div(dataframe['sell-fastMA'])
                     < self.sell_div_max.value)
             ),
-            'sell'] = 1
+            'exit_long'] = 1
         return dataframe

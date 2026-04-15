@@ -58,7 +58,7 @@ class SRsi(IStrategy):
                 (dataframe['k'] >= dataframe['d'])
                 
 	    ),
-            'buy'] = 1
+            'enter_long'] = 1
 
         return dataframe
 
@@ -69,5 +69,5 @@ class SRsi(IStrategy):
                 (dataframe['k'] > 75) &
                 (dataframe['d'] >= dataframe['k'])
             ),
-            'sell'] = 1
+            'exit_long'] = 1
         return dataframe

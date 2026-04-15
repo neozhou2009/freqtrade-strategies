@@ -66,11 +66,11 @@ class redditMA(IStrategy):
         return dataframe
 
     def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
-        dataframe.loc[qtpylib.crossed_above(dataframe['FASTMA'], dataframe['SLOWMA']) ,'entry'] = 1
+        dataframe.loc[qtpylib.crossed_above(dataframe['FASTMA'], dataframe['SLOWMA']) ,'enter_long'] = 1
 
         return dataframe
 
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
-        dataframe.loc[qtpylib.crossed_below(dataframe['FASTMA'], dataframe['SLOWMA']) ,'exit'] = 1
+        dataframe.loc[qtpylib.crossed_below(dataframe['FASTMA'], dataframe['SLOWMA']) ,'exit_long'] = 1
         
         return dataframe

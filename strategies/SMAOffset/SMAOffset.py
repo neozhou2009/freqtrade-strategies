@@ -97,7 +97,7 @@ class SMAOffset(IStrategy):
 					(dataframe['close'] < dataframe['ma_offset_buy']) &
 					(dataframe['volume'] > 0)
 			),
-			'buy'] = 1
+			'enter_long'] = 1
 		return dataframe
 
 	def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
@@ -109,5 +109,5 @@ class SMAOffset(IStrategy):
 					(dataframe['close'] > dataframe['ma_offset_sell']) &
 					(dataframe['volume'] > 0)
 			),
-			'sell'] = 1
+			'exit_long'] = 1
 		return dataframe

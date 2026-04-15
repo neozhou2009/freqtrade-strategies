@@ -49,7 +49,7 @@ class EMAVolume(IStrategy):
                 (qtpylib.crossed_above(dataframe["ema13"], dataframe["ema34"]))
                 & (dataframe["volume"] > dataframe["volume"].rolling(window=10).mean())
             ),
-            "buy",
+            "enter_long",
         ] = 1
 
         return dataframe

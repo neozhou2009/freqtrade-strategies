@@ -60,7 +60,7 @@ class CCIStrategy(IStrategy):
                     & (dataframe['resample_long'] < dataframe['close'])
 
             ),
-            'buy'] = 1
+            'enter_long'] = 1
 
         return dataframe
 
@@ -79,7 +79,7 @@ class CCIStrategy(IStrategy):
                     & (dataframe['resample_medium'] < dataframe['resample_short'])
 
             ),
-            'sell'] = 1
+            'exit_long'] = 1
         return dataframe
 
     def chaikin_mf(self, df, periods=20):

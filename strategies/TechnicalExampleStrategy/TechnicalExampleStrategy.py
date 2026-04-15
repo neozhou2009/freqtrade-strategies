@@ -28,7 +28,7 @@ class TechnicalExampleStrategy(IStrategy):
 
                 )
             ),
-            'buy'] = 1
+            'enter_long'] = 1
         return dataframe
 
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
@@ -37,5 +37,5 @@ class TechnicalExampleStrategy(IStrategy):
             (
                 (dataframe['cmf'] > 0)
             ),
-            'sell'] = 1
+            'exit_long'] = 1
         return dataframe

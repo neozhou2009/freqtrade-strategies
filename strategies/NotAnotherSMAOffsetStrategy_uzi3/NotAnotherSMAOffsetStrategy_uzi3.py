@@ -210,7 +210,7 @@ class NotAnotherSMAOffsetStrategy_uzi3(IStrategy):
                 (dataframe['volume'] > 0) &
                 (dataframe['close'] < (dataframe[f'ma_sell_{self.base_nb_candles_sell.value}'] * self.high_offset.value))
         ),
-        ['buy', 'buy_tag']] = (1, 'ewo1')
+        ['enter_long', 'enter_tag']] = (1, 'ewo1')
 
 
         dataframe.loc[
@@ -223,7 +223,7 @@ class NotAnotherSMAOffsetStrategy_uzi3(IStrategy):
                 (dataframe['close'] < (dataframe[f'ma_sell_{self.base_nb_candles_sell.value}'] * self.high_offset.value))&
                 (dataframe['rsi']<25)
         ),
-        ['buy', 'buy_tag']] = (1, 'ewo2')
+        ['enter_long', 'enter_tag']] = (1, 'ewo2')
 
         dataframe.loc[
         (
@@ -233,7 +233,7 @@ class NotAnotherSMAOffsetStrategy_uzi3(IStrategy):
                 (dataframe['volume'] > 0) &
                 (dataframe['close'] < (dataframe[f'ma_sell_{self.base_nb_candles_sell.value}'] * self.high_offset.value))
         ),
-        ['buy', 'buy_tag']] = (1, 'ewolow')
+        ['enter_long', 'enter_tag']] = (1, 'ewolow')
 
 
         # buy in bull market
@@ -257,7 +257,7 @@ class NotAnotherSMAOffsetStrategy_uzi3(IStrategy):
                 (dataframe['volume'] < (dataframe['volume_mean_slow'].shift(1) * 21)) &
                 (dataframe['volume'] > 0)
         ),
-        ['buy', 'buy_tag']] = (1, 'bb_bull')    
+        ['enter_long', 'enter_tag']] = (1, 'bb_bull')    
 
         return dataframe
 

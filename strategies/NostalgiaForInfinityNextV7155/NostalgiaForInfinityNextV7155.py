@@ -4687,7 +4687,7 @@ class NostalgiaForInfinityNextV7155(IStrategy):
 
     def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
-        dataframe.loc[:, 'buy_tag'] = ''
+        dataframe.loc[:, 'enter_tag'] = ''
 
         for index in self.buy_protection_params:
             item_buy_protection_list = [True]
@@ -5375,16 +5375,16 @@ class NostalgiaForInfinityNextV7155(IStrategy):
 
                 item_buy_logic.append(dataframe['volume'] > 0)
                 item_buy = reduce(lambda x, y: x & y, item_buy_logic)
-                dataframe.loc[item_buy, 'buy_tag'] += f"{index} "
+                dataframe.loc[item_buy, 'enter_tag'] += f"{index} "
                 conditions.append(item_buy)
 
         if conditions:
-            dataframe.loc[:, 'buy'] = reduce(lambda x, y: x | y, conditions)
+            dataframe.loc[:, 'enter_long'] = reduce(lambda x, y: x | y, conditions)
 
         return dataframe
 
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
-        dataframe.loc[:, 'sell'] = 0
+        dataframe.loc[:, 'exit_long'] = 0
 
         return dataframe
 

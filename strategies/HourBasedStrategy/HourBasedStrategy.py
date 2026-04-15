@@ -92,7 +92,7 @@ class HourBasedStrategy(IStrategy):
             (
                 (dataframe['hour'].between(min, max))
             ),
-            'buy'] = 1
+            'enter_long'] = 1
 
         return dataframe
 
@@ -102,5 +102,5 @@ class HourBasedStrategy(IStrategy):
             (
                 (dataframe['hour'].between(min, max))
             ),
-            'buy'] = 1
+            'enter_long'] = 1
         return dataframe

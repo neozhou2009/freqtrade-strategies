@@ -101,7 +101,7 @@ class FiveMinCrossAbove(IStrategy):
                     (qtpylib.crossed_above(dataframe['rsi8'], 30)) &
 					(dataframe['rsi8'] < 41)
             ),
-            'buy'] = 1
+            'enter_long'] = 1
 
         return dataframe
 
@@ -118,5 +118,5 @@ class FiveMinCrossAbove(IStrategy):
                     (dataframe['close'] > 9999999999)
             ),
 
-            'sell'] = 1
+            'exit_long'] = 1
         return dataframe

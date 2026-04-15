@@ -84,7 +84,7 @@ class CustomStoplossWithPSAR(IStrategy):
         :param dataframe: DataFrame
         :return: DataFrame with buy column
         """
-        dataframe.loc[(dataframe["sar"] < dataframe["sar"].shift()), "buy"] = 1
+        dataframe.loc[(dataframe["sar"] < dataframe["sar"].shift()), "enter_long"] = 1
 
         return dataframe
 
@@ -96,5 +96,5 @@ class CustomStoplossWithPSAR(IStrategy):
         :return: DataFrame with buy column
         """
         # Deactivated sell signal to allow the strategy to work correctly
-        dataframe.loc[:, "sell"] = 0
+        dataframe.loc[:, "exit_long"] = 0
         return dataframe

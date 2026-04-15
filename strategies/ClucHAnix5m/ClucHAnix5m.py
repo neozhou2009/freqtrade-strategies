@@ -531,7 +531,7 @@ class ClucHAnix5m(IStrategy):
 
     def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         conditions = []
-        dataframe.loc[:, "buy_tag"] = ""
+        dataframe.loc[:, "enter_tag"] = ""
 
         dataframe[f"ma_buy_{self.ewo_candles_buy.value}"] = ta.EMA(
             dataframe, timeperiod=int(self.ewo_candles_buy.value)
@@ -559,7 +559,7 @@ class ClucHAnix5m(IStrategy):
             & (dataframe["rsi_4"] < int(self.lambo1_rsi_4_limit.value))
             & (dataframe["rsi_14"] < int(self.lambo1_rsi_14_limit.value))
         )
-        dataframe.loc[lambo1, "buy_tag"] += "lambo1_"
+        dataframe.loc[lambo1, "enter_tag"] += "lambo1_"
         conditions.append(lambo1)
 
         lambo2 = (
@@ -571,7 +571,7 @@ class ClucHAnix5m(IStrategy):
             & (dataframe["rsi_4"] < int(self.lambo2_rsi_4_limit.value))
             & (dataframe["rsi_14"] < int(self.lambo2_rsi_14_limit.value))
         )
-        dataframe.loc[lambo2, "buy_tag"] += "lambo2_"
+        dataframe.loc[lambo2, "enter_tag"] += "lambo2_"
         conditions.append(lambo2)
 
         local_uptrend = (
@@ -594,7 +594,7 @@ class ClucHAnix5m(IStrategy):
                 > dataframe["close"] * self.local_trend_closedelta.value / 1000
             )
         )
-        dataframe.loc[local_uptrend, "buy_tag"] += "local_uptrend_"
+        dataframe.loc[local_uptrend, "enter_tag"] += "local_uptrend_"
         conditions.append(local_uptrend)
 
         nfi_32 = (
@@ -605,7 +605,7 @@ class ClucHAnix5m(IStrategy):
             & (dataframe["close"] < dataframe["sma_15"] * self.nfi32_sma_factor.value)
             & (dataframe["cti"] < self.nfi32_cti_limit.value)
         )
-        dataframe.loc[nfi_32, "buy_tag"] += "nfi_32_"
+        dataframe.loc[nfi_32, "enter_tag"] += "nfi_32_"
         conditions.append(nfi_32)
 
         ewo_1 = (
@@ -628,7 +628,7 @@ class ClucHAnix5m(IStrategy):
                 )
             )
         )
-        dataframe.loc[ewo_1, "buy_tag"] += "ewo1_"
+        dataframe.loc[ewo_1, "enter_tag"] += "ewo1_"
         conditions.append(ewo_1)
 
         ewo_low = (
@@ -650,7 +650,7 @@ class ClucHAnix5m(IStrategy):
                 )
             )
         )
-        dataframe.loc[ewo_low, "buy_tag"] += "ewo_low_"
+        dataframe.loc[ewo_low, "enter_tag"] += "ewo_low_"
         conditions.append(ewo_low)
 
         cofi = (
@@ -662,7 +662,7 @@ class ClucHAnix5m(IStrategy):
             & (dataframe["adx"] > self.cofi_adx.value)
             & (dataframe["EWO"] > self.cofi_ewo_high.value)
         )
-        dataframe.loc[cofi, "buy_tag"] += "cofi_"
+        dataframe.loc[cofi, "enter_tag"] += "cofi_"
         conditions.append(cofi)
 
         clucHA = (
@@ -698,14 +698,14 @@ class ClucHAnix5m(IStrategy):
                 )
             )
         )
-        dataframe.loc[clucHA, "buy_tag"] += "clucHA_"
+        dataframe.loc[clucHA, "enter_tag"] += "clucHA_"
         conditions.append(clucHA)
 
         dataframe.loc[
             is_btc_safe  # broken?
             & is_pump_safe
             & reduce(lambda x, y: x | y, conditions),
-            "buy",
+            "enter_long",
         ] = 1
 
         return dataframe
@@ -724,7 +724,7 @@ class ClucHAnix5m(IStrategy):
                 > dataframe["bb_middleband"]
             )
             & (dataframe["volume"] > 0),
-            "sell",
+            "exit_long",
         ] = 1
 
         return dataframe
@@ -852,7 +852,7 @@ class ClucHAnix_BB_RPB_MOD2_ROI_DYNAMIC_TB(ClucHAnix5m):
         current_time = datetime.now(timezone.utc)
         trailing_duration = current_time - trailing_buy["start_trailing_time"]
         if trailing_duration.total_seconds() > self.trailing_expire_seconds:
-            if (current_trailing_profit_ratio > 0) and (last_candle["buy"] == 1):
+            if (current_trailing_profit_ratio > 0) and (last_candle["enter_long"] == 1):
                 # more than 1h, price under first signal, buy signal still active -> buy
                 return "force_entry"
             else:
@@ -924,7 +924,7 @@ class ClucHAnix_BB_RPB_MOD2_ROI_DYNAMIC_TB(ClucHAnix5m):
 
                     if trailing_buy["allow_trailing"]:
                         if not trailing_buy["trailing_buy_order_started"] and (
-                            last_candle["buy"] == 1
+                            last_candle["enter_long"] == 1
                         ):
                             # start trailing buy
 
@@ -933,7 +933,7 @@ class ClucHAnix_BB_RPB_MOD2_ROI_DYNAMIC_TB(ClucHAnix5m):
                                 "close"
                             ]
                             trailing_buy["start_trailing_price"] = last_candle["close"]
-                            trailing_buy["buy_tag"] = last_candle["buy_tag"]
+                            trailing_buy["enter_tag"] = last_candle["enter_tag"]
                             trailing_buy["start_trailing_time"] = datetime.now(
                                 timezone.utc
                             )
@@ -1042,7 +1042,7 @@ class ClucHAnix_BB_RPB_MOD2_ROI_DYNAMIC_TB(ClucHAnix5m):
         ):
             last_candle = dataframe.iloc[-1].squeeze()
             trailing_buy = self.trailing_buy(metadata["pair"])
-            if last_candle["buy"] == 1:
+            if last_candle["enter_long"] == 1:
                 if not trailing_buy["trailing_buy_order_started"]:
                     open_trades = Trade.get_trades(
                         [
@@ -1057,11 +1057,11 @@ class ClucHAnix_BB_RPB_MOD2_ROI_DYNAMIC_TB(ClucHAnix5m):
                         # self.custom_info_trail_buy[metadata['pair']]['trailing_buy']['allow_trailing'] = True
                         trailing_buy["allow_trailing"] = True
                         initial_buy_tag = (
-                            last_candle["buy_tag"]
-                            if "buy_tag" in last_candle
+                            last_candle["enter_tag"]
+                            if "enter_tag" in last_candle
                             else "buy signal"
                         )
-                        dataframe.loc[:, "buy_tag"] = (
+                        dataframe.loc[:, "enter_tag"] = (
                             f"{initial_buy_tag} (start trail price {last_candle['close']})"
                         )
             else:
@@ -1069,8 +1069,8 @@ class ClucHAnix_BB_RPB_MOD2_ROI_DYNAMIC_TB(ClucHAnix5m):
                     logger.info(
                         f"Continue trailing for {metadata['pair']}. Manually trigger buy signal!!"
                     )
-                    dataframe.loc[:, "buy"] = 1
-                    dataframe.loc[:, "buy_tag"] = trailing_buy["buy_tag"]
+                    dataframe.loc[:, "enter_long"] = 1
+                    dataframe.loc[:, "enter_tag"] = trailing_buy["enter_tag"]
                     # dataframe['buy'] = 1
 
         return dataframe

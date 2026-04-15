@@ -2378,7 +2378,7 @@ class BigZ0307HO(IStrategy):
                 )
                 & (dataframe["volume"] > 0)
             ),
-            "buy",
+            "enter_long",
         ] = 1
 
         return dataframe
@@ -2459,7 +2459,7 @@ class BigZ0307HO(IStrategy):
         )
 
         if conditions:
-            dataframe.loc[reduce(lambda x, y: x | y, conditions), "sell"] = 1
+            dataframe.loc[reduce(lambda x, y: x | y, conditions), "exit_long"] = 1
 
         return dataframe
 

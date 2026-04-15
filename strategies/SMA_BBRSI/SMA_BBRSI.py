@@ -426,7 +426,7 @@ class SMA_BBRSI(IStrategy):
 
         if dont_buy_conditions:
             for condition in dont_buy_conditions:
-                dataframe.loc[condition, 'buy'] = 0
+                dataframe.loc[condition, 'enter_long'] = 0
 
         return dataframe
 

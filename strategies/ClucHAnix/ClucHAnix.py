@@ -235,7 +235,7 @@ class ClucHAnix(IStrategy):
                     )
                 )
             ),
-            "buy",
+            "enter_long",
         ] = 1
 
         return dataframe
@@ -254,7 +254,7 @@ class ClucHAnix(IStrategy):
                 > dataframe["bb_middleband"]
             )
             & (dataframe["volume"] > 0),
-            "sell",
+            "exit_long",
         ] = 1
 
         return dataframe

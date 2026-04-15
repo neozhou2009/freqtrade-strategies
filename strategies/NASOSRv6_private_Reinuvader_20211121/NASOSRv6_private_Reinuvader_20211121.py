@@ -405,7 +405,7 @@ class NASOSRv6_private_Reinuvader_20211121(IStrategy):
                     (dataframe['close'] < (
                             dataframe[f'ma_sell_{self.base_nb_candles_sell.value}'] * self.high_offset.value))
             ),
-            ['buy', 'buy_tag']] = (1, 'ewo1')
+            ['enter_long', 'enter_tag']] = (1, 'ewo1')
 
         dataframe.loc[
             (
@@ -417,7 +417,7 @@ class NASOSRv6_private_Reinuvader_20211121(IStrategy):
                     (dataframe['close'] < (dataframe[f'ma_sell_{self.base_nb_candles_sell.value}'] * self.high_offset.value)) &
                     (dataframe['rsi'] < 25)
             ),
-            ['buy', 'buy_tag']] = (1, 'ewo2')
+            ['enter_long', 'enter_tag']] = (1, 'ewo2')
 
 
         dataframe.loc[
@@ -429,7 +429,7 @@ class NASOSRv6_private_Reinuvader_20211121(IStrategy):
                     (dataframe['close'] < (
                             dataframe[f'ma_sell_{self.base_nb_candles_sell.value}'] * self.high_offset.value))
             ),
-            ['buy', 'buy_tag']] = (1, 'ewolow')
+            ['enter_long', 'enter_tag']] = (1, 'ewolow')
 
         # This produces around 0.85% - 1.0% profitable trades but long durations so decided against it.
         # dataframe.loc[
@@ -447,7 +447,7 @@ class NASOSRv6_private_Reinuvader_20211121(IStrategy):
 
         if dont_buy_conditions:
             for condition in dont_buy_conditions:
-                dataframe.loc[condition, 'buy'] = 0
+                dataframe.loc[condition, 'enter_long'] = 0
 
         # This does not fit well the protections for EWO buys.
         dataframe.loc[
@@ -469,7 +469,7 @@ class NASOSRv6_private_Reinuvader_20211121(IStrategy):
                      )
                  )
             ),
-            ['buy', 'buy_tag']] = (1, 'clucHA')
+            ['enter_long', 'enter_tag']] = (1, 'clucHA')
 
         # This does not fit well the protections for EWO buys.
         dataframe.loc[
@@ -512,7 +512,7 @@ class NASOSRv6_private_Reinuvader_20211121(IStrategy):
                     )
                 )
             ),
-            ['buy', 'buy_tag']] = (1, 'zema')
+            ['enter_long', 'enter_tag']] = (1, 'zema')
 
         return dataframe
 
