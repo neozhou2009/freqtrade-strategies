@@ -1,5 +1,5 @@
 {
-    "max_open_trades": 3,
+    "max_open_trades": 6,
     "stake_currency": "USDT",
     "stake_amount": "unlimited",
     "tradable_balance_ratio": 0.99,
@@ -46,10 +46,43 @@
             "TRX/USDT",
             "DOT/USDT",
             "LTC/USDT",
-            "BNB/USDT"
+            "AVAX/USDT",
+            "MATIC/USDT",
+            "LINK/USDT",
+            "UNI/USDT",
+            "ATOM/USDT",
+            "AAVE/USDT",
+            "MKR/USDT",
+            "SNX/USDT",
+            "COMP/USDT",
+            "SUSHI/USDT",
+            "YFI/USDT",
+            "CRV/USDT",
+            "1INCH/USDT",
+            "ENJ/USDT",
+            "MANA/USDT",
+            "SAND/USDT",
+            "AXS/USDT",
+            "GALA/USDT",
+            "ILV/USDT",
+            "ALICE/USDT",
+            "CHR/USDT",
+            "COTI/USDT",
+            "DAR/USDT",
+            "DYDX/USDT",
+            "APE/USDT",
+            "GMX/USDT",
+            "OP/USDT",
+            "ARB/USDT",
+            "IMX/USDT",
+            "BLUR/USDT",
+            "APEGE/USDT"
         ],
         "pair_blacklist": [
-            "BNB/.*"
+            "BNB/.*",
+            "(BTCUP|BTCDOWN|ETHUP|ETHDOWN|SOLUP|SOLDOWN).*",
+            "(.*3L|.*3S|.*5L|.*5S|.*2L|.*2S|.*1L|.*1S)$",
+            ".*(_PRE|BEAR|BULL)/.*"
         ]
     },
     "pairlists": [
