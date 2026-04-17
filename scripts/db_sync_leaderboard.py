@@ -25,7 +25,34 @@ K3S_PG_SVC      = os.getenv("K3S_PG_SVC",      "mx-postgres-ha-postgresql-ha-pgp
 K3S_PG_NS       = os.getenv("K3S_PG_NS",       "infra")
 
 
-def _k3s_db_url() -> str:
+def _get_k3s_credentials():
+    """Retrieve database password from K8s secrets if not provided in environment."""
+    user = os.getenv("K3S_PG_USER", os.getenv("POSTGRES_USER", "quantrading"))
+    password = os.getenv("K3S_PG_PASSWORD", os.getenv("POSTGRES_PASSWORD"))
+    
+    if not password:
+        # Try different possible secret locations/keys used in marketxpress
+        secret_configs = [
+            ("infra", "quantrading-secrets", "POSTGRES_PASSWORD"),
+            ("infra", "quantrading-secrets", "postgres-password"),
+            ("quantrading", "quantrading-secrets", "postgresql-password"),
+        ]
+        import base64
+        for ns, name, key in secret_configs:
+            try:
+                cmd = ["kubectl", "-n", ns, "get", "secret", name, f"-o=jsonpath={{.data.{key}}}"]
+                b64 = subprocess.check_output(cmd, stderr=subprocess.DEVNULL, timeout=5).decode().strip()
+                if b64:
+                    password = base64.b64decode(b64).decode().strip()
+                    logger.info(f"Retrieved database password from secret {ns}/{name}:{key}")
+                    break
+            except:
+                continue
+    
+    return user, (password or "quantrading123")
+
+
+def _k3s_db_url(user, password) -> str:
     """Resolve the pgpool ClusterIP via kubectl."""
     try:
         ip = subprocess.check_output(
@@ -36,8 +63,58 @@ def _k3s_db_url() -> str:
         ).decode().strip()
         if not ip or ip == "None":
             return None
-        return f"postgresql://{K3S_PG_USER}:{K3S_PG_PASSWORD}@{ip}:5432/{K3S_PG_DB}"
+        return f"postgresql://{user}:{password}@{ip}:5432/{K3S_PG_DB}"
     except:
+        return None
+
+
+_PF_PROCESS = None
+def _ensure_port_forward(user, password):
+    """Attempt to establish a port-forward to the DB if unreachable."""
+    global _PF_PROCESS
+    local_url = f"postgresql://{user}:{password}@localhost:5432/{K3S_PG_DB}"
+    
+    # Try existing connection (maybe someone else established a PF)
+    try:
+        conn = psycopg2.connect(local_url, connect_timeout=1)
+        conn.close()
+        return local_url
+    except:
+        pass
+
+    # Start PF
+    logger.info(f"Port 5432 unreachable. Attempting automatic port-forward to {K3S_PG_SVC}...")
+    try:
+        import atexit
+        import time
+        cmd = ["kubectl", "port-forward", f"svc/{K3S_PG_SVC}", "5432:5432", "-n", K3S_PG_NS]
+        _PF_PROCESS = subprocess.Popen(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        
+        # Register cleanup
+        def cleanup():
+            if _PF_PROCESS:
+                logger.info("Cleaning up port-forward process...")
+                _PF_PROCESS.terminate()
+        atexit.register(cleanup)
+        
+        # Wait for readiness
+        time_waited = 0
+        while time_waited < 10:
+            time.sleep(1)
+            time_waited += 1
+            try:
+                conn = psycopg2.connect(local_url, connect_timeout=1)
+                conn.close()
+                logger.info("Automatic port-forward established and reachable.")
+                return local_url
+            except:
+                if _PF_PROCESS.poll() is not None:
+                    break
+        
+        logger.warning("Port-forward was started but connection failed.")
+        return None
+    except Exception as e:
+        logger.error(f"Failed to launch kubectl port-forward: {e}")
         return None
 
 
@@ -48,6 +125,7 @@ def _resolve_db_url(env: str, explicit_db: str | None) -> str:
     if "DATABASE_URL" in os.environ:
         return os.environ["DATABASE_URL"]
 
+    user, password = _get_k3s_credentials()
     potential_urls = []
     
     # 1. Identify which URLs to probe based on env flag
@@ -55,10 +133,10 @@ def _resolve_db_url(env: str, explicit_db: str | None) -> str:
         # Standard local Postgres
         potential_urls.append(("local", LOCAL_DB_URL))
         # K3s credentials on localhost (handles port-forwarding)
-        potential_urls.append(("local-port-forward", f"postgresql://{K3S_PG_USER}:{K3S_PG_PASSWORD}@localhost:5432/{K3S_PG_DB}"))
+        potential_urls.append(("local-port-forward", f"postgresql://{user}:{password}@localhost:5432/{K3S_PG_DB}"))
     
     if env in ("auto", "k3s"):
-        k3s_url = _k3s_db_url()
+        k3s_url = _k3s_db_url(user, password)
         if k3s_url:
             potential_urls.append(("k3s-cluster", k3s_url))
 
@@ -72,10 +150,15 @@ def _resolve_db_url(env: str, explicit_db: str | None) -> str:
         except Exception:
             continue
     
-    # 3. If no probe succeeded but an environment was explicitly chosen, return it anyway
+    # 3. If nothing works and we are in auto/k3s, try to establish port-forward
+    if env in ("auto", "k3s"):
+        url = _ensure_port_forward(user, password)
+        if url: return url
+
+    # 4. If no probe succeeded but an environment was explicitly chosen, return it anyway
     if env == "local": return LOCAL_DB_URL
     if env == "k3s": 
-        url = _k3s_db_url()
+        url = _k3s_db_url(user, password)
         if url: return url
         
     return LOCAL_DB_URL # Final fallback
