@@ -291,7 +291,7 @@ class Stinkfist(IStrategy):
         dir = np.where(dir_1 == 1, dir_1, np.nan)
         dir = np.where(dir_2 == -1, dir_2, dir_1)
 
-        res = Series(dir).fillna(method='ffill').to_numpy()
+        res = Series(dir, index=dataframe.index).ffill().to_numpy()
 
         return res
 

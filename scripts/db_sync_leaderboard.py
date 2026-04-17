@@ -26,44 +26,59 @@ K3S_PG_NS       = os.getenv("K3S_PG_NS",       "infra")
 
 
 def _k3s_db_url() -> str:
-    """Resolve the pgpool ClusterIP via kubectl and return the connection URL."""
+    """Resolve the pgpool ClusterIP via kubectl."""
     try:
         ip = subprocess.check_output(
             ["kubectl", "get", "svc", K3S_PG_SVC, "-n", K3S_PG_NS,
              "-o", "jsonpath={.spec.clusterIP}"],
             stderr=subprocess.DEVNULL,
-            timeout=10,
+            timeout=5,
         ).decode().strip()
-        if not ip:
-            raise RuntimeError("empty ClusterIP returned by kubectl")
+        if not ip or ip == "None":
+            return None
         return f"postgresql://{K3S_PG_USER}:{K3S_PG_PASSWORD}@{ip}:5432/{K3S_PG_DB}"
-    except Exception as e:
-        raise RuntimeError(f"Could not resolve k3s pgpool ClusterIP: {e}")
+    except:
+        return None
 
 
 def _resolve_db_url(env: str, explicit_db: str | None) -> str:
-    """Return the DB URL for the requested environment."""
-    # Explicit --db flag always wins
+    """Determine the best DB URL to use by probing reachability."""
     if explicit_db:
         return explicit_db
-    # DATABASE_URL env var wins over auto-detection (but not over --db)
     if "DATABASE_URL" in os.environ:
         return os.environ["DATABASE_URL"]
 
-    if env == "local":
-        return LOCAL_DB_URL
-    if env == "k3s":
-        return _k3s_db_url()
-    # env == "auto": probe local first, fall back to k3s
-    try:
-        test = psycopg2.connect(LOCAL_DB_URL, connect_timeout=3)
-        test.close()
-        logger.info("Auto-detected: local PostgreSQL is reachable")
-        return LOCAL_DB_URL
-    except Exception:
-        pass
-    logger.info("Local PostgreSQL not reachable — trying k3s cluster...")
-    return _k3s_db_url()
+    potential_urls = []
+    
+    # 1. Identify which URLs to probe based on env flag
+    if env in ("auto", "local"):
+        # Standard local Postgres
+        potential_urls.append(("local", LOCAL_DB_URL))
+        # K3s credentials on localhost (handles port-forwarding)
+        potential_urls.append(("local-port-forward", f"postgresql://{K3S_PG_USER}:{K3S_PG_PASSWORD}@localhost:5432/{K3S_PG_DB}"))
+    
+    if env in ("auto", "k3s"):
+        k3s_url = _k3s_db_url()
+        if k3s_url:
+            potential_urls.append(("k3s-cluster", k3s_url))
+
+    # 2. Probe each URL with a short timeout
+    for label, url in potential_urls:
+        try:
+            conn = psycopg2.connect(url, connect_timeout=1)
+            conn.close()
+            logger.info(f"Connected to database via {label}")
+            return url
+        except Exception:
+            continue
+    
+    # 3. If no probe succeeded but an environment was explicitly chosen, return it anyway
+    if env == "local": return LOCAL_DB_URL
+    if env == "k3s": 
+        url = _k3s_db_url()
+        if url: return url
+        
+    return LOCAL_DB_URL # Final fallback
 
 
 # Legacy default (used only when --db flag is parsed with its argparse default)
