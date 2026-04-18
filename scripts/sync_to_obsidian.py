@@ -51,10 +51,11 @@ source: strategies/{name}/{name}.py
 - **复杂度**: {complexity}/10
 - **时间框架**: {timeframe}
 
-## 📈 30天回测表现
+## 📈 {test_days}天回测表现
 | 指标 | 数值 |
 |------|------|
 | ROI | {roi:.2%} |
+| 年化收益 | {annualized_roi:.2%} |
 | Sharpe | {sharpe:.2f} |
 | MaxDD | {max_dd:.2%} |
 | Win率 | {winrate:.2%} |
@@ -192,8 +193,8 @@ def get_vecscore_metrics(name, vecscore_data, phase1_data):
     result = {
         "vecscore": 0, "grade": "D", "grade_icon": "❌", "grade_meaning": "不合格",
         "p_score": 0, "r_score": 0, "s_score": 0, "t_score": 0, "e_score": 0,
-        "roi": 0, "sharpe": 0, "max_dd": 0.5, "winrate": 0, "trades": 0,
-        "commercial": False, "is_estimated": True
+        "roi": 0, "annualized_roi": 0, "sharpe": 0, "max_dd": 0.5, "winrate": 0, "trades": 0,
+        "commercial": False, "is_estimated": True, "test_days": 30
     }
 
     # 从vecscore结果提取
@@ -232,6 +233,11 @@ def get_vecscore_metrics(name, vecscore_data, phase1_data):
                 result["max_dd"] = metrics.get("max_drawdown", 0.5) or 0.5
                 result["winrate"] = metrics.get("win_rate", 0) or 0
                 result["trades"] = metrics.get("trades", 0) or 0
+                
+                meta_days = data.get("meta", {}).get("days", 30)
+                result["test_days"] = meta_days
+                if meta_days > 0:
+                    result["annualized_roi"] = (result["roi"] / meta_days) * 365
                 break
 
     return result
@@ -282,7 +288,9 @@ def generate_strategy_card(name, reg_info, vecscore_data, phase1_data, family_gr
         market=reg_info.get("market", "Unknown"),
         side=reg_info.get("side", "Long"),
         complexity=reg_info.get("complexity", 5),
+        test_days=metrics["test_days"],
         roi=metrics["roi"],
+        annualized_roi=metrics["annualized_roi"],
         sharpe=metrics["sharpe"],
         max_dd=metrics["max_dd"],
         winrate=metrics["winrate"],
