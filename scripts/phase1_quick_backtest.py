@@ -29,8 +29,8 @@ VecAlpha Phase 1: 快速回测初筛
     # 并行运行（N 个工作进程）
     python scripts/phase1_quick_backtest.py --workers 4
 
-    # 预演模式（不实际运行回测，只显示将要测试的策略）
-    python scripts/phase1_quick_backtest.py --dry-run
+    # 限制最多测试 N 个策略
+    python scripts/phase1_quick_backtest.py --limit 100
 """
 
 import os
@@ -50,8 +50,8 @@ from threading import Lock
 # 配置
 # ──────────────────────────────────────────────────────────────────────────────
 
-# 回测时间范围：最近 30 天
-BACKTEST_DAYS = 30
+# 默认回测时间范围：最近 30 天
+DEFAULT_BACKTEST_DAYS = 30
 
 # 最小交易次数（少于此值标记为"从不入场"）
 MIN_TRADES = 3
@@ -73,10 +73,10 @@ DOCKER_IMAGE = "neozhou2009/freqtrade-full:latest"
 # 工具函数
 # ──────────────────────────────────────────────────────────────────────────────
 
-def get_timerange() -> str:
-    """生成最近 BACKTEST_DAYS 天的时间范围字符串"""
+def get_timerange(days: int) -> str:
+    """生成最近 days 天的时间范围字符串"""
     end = datetime.now()
-    start = end - timedelta(days=BACKTEST_DAYS)
+    start = end - timedelta(days=days)
     return f"{start.strftime('%Y%m%d')}-{end.strftime('%Y%m%d')}"
 
 
@@ -354,10 +354,16 @@ def main():
         help="断点续跑：跳过已有结果的策略（读取已有 output 文件）",
     )
     parser.add_argument(
+        "--days",
+        type=int,
+        default=DEFAULT_BACKTEST_DAYS,
+        help=f"回测天数（默认: {DEFAULT_BACKTEST_DAYS}）",
+    )
+    parser.add_argument(
         "--limit",
         type=int,
-        default=0,
-        help="限制最多测试 N 个策略（0=不限制，调试用）",
+        default=100,
+        help="限制最多测试 N 个策略（默认: 100，0=不限制）",
     )
 
     args = parser.parse_args()
@@ -422,8 +428,8 @@ def main():
         return
 
     # ── 生成 timerange ────────────────────────────────────────
-    timerange = get_timerange()
-    print(f"📅 回测时间范围: {timerange}（最近 {BACKTEST_DAYS} 天）")
+    timerange = get_timerange(args.days)
+    print(f"📅 回测时间范围: {timerange}（最近 {args.days} 天）")
     print(f"🔬 共 {len(candidate_names)} 个策略待测试\n")
 
     if args.dry_run:
@@ -529,7 +535,7 @@ def main():
         "meta": {
             "generated_at": datetime.now().isoformat(),
             "timerange": timerange,
-            "days": BACKTEST_DAYS,
+            "days": args.days,
             "total_tested": len(all_results),
             "pass_count": len(passed),
             "fail_count": len(failed),

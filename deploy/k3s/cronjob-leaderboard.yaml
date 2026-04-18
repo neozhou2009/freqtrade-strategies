@@ -1,0 +1,47 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: leaderboard-auto-updater
+  namespace: quantrading
+spec:
+  # 每天凌晨 2 点执行
+  schedule: "0 2 * * *"
+  # 保留成功 3 次、失败 1 次的历史记录
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          # 使用已安装 freqtrade 与 psycopg2 的镜像
+          containers:
+          - name: updater
+            image: neozhou2009/freqtrade-full:latest
+            imagePullPolicy: IfNotPresent
+            # 执行命令
+            command: ["/bin/bash", "-c"]
+            args:
+              - |
+                git pull origin main && \
+                python3 scripts/run_pipeline.py --vecscore-mode fast && \
+                python3 scripts/generate_leaderboard.py --vecscore user_data/vecscore_results.json && \
+                python3 scripts/db_sync_leaderboard.py --env k3s
+            env:
+              - name: POSTGRES_USER
+                value: "quantrading"
+              - name: POSTGRES_PASSWORD
+                valueFrom:
+                  secretKeyRef:
+                    name: quantrading-secrets
+                    key: postgres-password
+              - name: K3S_PG_SVC
+                value: "mx-postgres-ha-postgresql-ha-pgpool.infra.svc.cluster.local"
+            # 挂载策略代码与行情数据的 PVC
+            volumeMounts:
+            - name: strategy-storage
+              mountPath: /freqtrade/user_data
+          restartPolicy: OnFailure
+          volumes:
+          - name: strategy-storage
+            persistentVolumeClaim:
+              claimName: strategy-pvc

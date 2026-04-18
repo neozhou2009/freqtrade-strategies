@@ -266,6 +266,7 @@ def main():
             "'auto' = try local first then k3s (default)"
         ),
     )
+    parser.add_argument("--check", action="store_true", help="Check database status (list periods and strategy counts)")
     args = parser.parse_args()
 
     # 1. Resolve DB URL
@@ -282,6 +283,30 @@ def main():
     except Exception as e:
         logger.error(f"Failed to connect to database: {e}")
         return
+
+    # Check mode: just list existing data and exit
+    if args.check:
+        try:
+            with conn.cursor() as cur:
+                query = "SELECT period, COUNT(*), MAX(updated_at) FROM public.strategy_leaderboard GROUP BY period ORDER BY period"
+                cur.execute(query)
+                rows = cur.fetchall()
+                print("\n" + "═"*70)
+                print(f" 📊 数据库排行榜统计摘要")
+                print("═"*70)
+                print(f"  {'时段 (Period)':<20} | {'策略数量':<8} | {'最后同步时间'}")
+                print("  " + "-"*65)
+                if not rows:
+                    print("  (当前数据库中无记录)")
+                for period, count, last_update in rows:
+                    last_update_str = last_update.strftime('%Y-%m-%d %H:%M:%S') if last_update else "N/A"
+                    print(f"  {period:<20} | {count:^8} | {last_update_str}")
+                print("═"*70 + "\n")
+        except Exception as e:
+            logger.error(f"Failed to query database: {e}")
+        finally:
+            conn.close()
+            return
 
     # 2. Find all leaderboard_*.json files
     json_files = glob.glob(os.path.join(args.dir, "leaderboard_*.json"))

@@ -1,4 +1,24 @@
 #!/usr/bin/env python3
+"""
+VecAlpha排行榜生成工具
+
+主要功能:
+  1. 读取 VecScore 评分结果或原始回测 JSON/ZIP 结果
+  2. 综合评估 CAGR, Sharpe, Drawdown, WinRate 等指标计算复合分数
+  3. 支持策略分级 (S/A/B/C/D) 和商用资格标记
+  4. 跟踪历史排名变动 (Rank Delta)
+  5. 生成前端 JSON、Markdown 报表和历史快照
+
+使用示例:
+    # 使用 Phase 2 的 VecScore 结果生成前 100 名排行榜
+    python3 scripts/generate_leaderboard.py --vecscore user_data/vecscore_results.json --limit 100
+
+    # 指定回测时段名称
+    python3 scripts/generate_leaderboard.py --vecscore user_data/vecscore_results.json --period "2024Q4"
+
+    # 处理文件夹下所有的原始回测结果
+    python3 scripts/generate_leaderboard.py --input-dir user_data/backtest_results
+"""
 import os
 import json
 import glob
@@ -74,18 +94,30 @@ def calculate_composite_score(strat: dict) -> float:
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Generate Leaderboard from Freqtrade Backtests"
+        description="VecAlpha 排行榜生成工具",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog=__doc__
     )
     parser.add_argument(
         "--input-dir",
         default="user_data/backtest_results",
-        help="Directory containing backtest files",
+        help="[模式1] 包含原始回测结果文件 (.json/.zip) 的目录 (默认: user_data/backtest_results)",
     )
     parser.add_argument(
-        "--period", default="Custom", help="Period identifier"
+        "--period", 
+        default="Custom", 
+        help="时段标识符，如 'Last 30 Days' 或 '2024Q4' (用于生成文件名和标题)",
     )
     parser.add_argument(
-        "--vecscore", default=None, help="Path to vecscore_results.json to use directly, bypassing raw backtest inputs"
+        "--vecscore", 
+        default=None, 
+        help="[模式2] 直接指定 vecscore_results.json 路径（推荐模式，可跳过原始回测处理）",
+    )
+    parser.add_argument(
+        "--limit", 
+        type=int, 
+        default=100, 
+        help="限制输出的策略数量 (默认: 100, 设置为 0 则输出全部)",
     )
     args = parser.parse_args()
 
@@ -102,9 +134,13 @@ def main():
             vdata = json.load(f)
         
         # Read the raw phase1 results to attach extra metrics like winrate if needed
-        phase1_path = args.vecscore.replace("vecscore_results.json", "phase1_results.json")
+        # Handle both: vecscore_results.json → phase1_results.json
+        #          and: vecscore_results_1y.json → phase1_results_1y.json
+        import re as _re
+        phase1_path = _re.sub(r'vecscore_results(_[^.]+)?', lambda m: f'phase1_results{m.group(1) or ""}', args.vecscore)
         phase1_map = {}
         if os.path.exists(phase1_path):
+            print(f"[*] Loading Phase 1 metrics from {phase1_path}")
             with open(phase1_path, "r") as f:
                 p1_data = json.load(f)
                 for r in p1_data.get("results", []):
@@ -191,7 +227,7 @@ def main():
         r["rank_delta"] = prev_rank - rank if prev_rank else 0
         current_rankings[r["strategy"]] = rank
 
-    # Save snapshot to history
+    # Save snapshot to history (all ranked strategies for accurate tracking)
     history["snapshots"].append({
         "generated_at": datetime.now().isoformat(),
         "period": args.period,
@@ -200,6 +236,11 @@ def main():
     # Keep only last 10 snapshots
     history["snapshots"] = history["snapshots"][-10:]
     save_history(history)
+
+    # Apply limit for final output
+    if args.limit > 0 and len(results) > args.limit:
+        print(f"[*] Truncating output to top {args.limit} strategies.")
+        results = results[:args.limit]
 
     # Calculate Summary Stats
     summary = {

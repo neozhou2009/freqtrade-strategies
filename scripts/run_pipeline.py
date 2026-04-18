@@ -42,15 +42,17 @@ from pathlib import Path
 
 SCRIPT_DIR   = Path(__file__).parent.resolve()
 PROJECT_ROOT = SCRIPT_DIR.parent
+USER_DATA    = PROJECT_ROOT / "user_data"
 
 PHASE0_SCRIPT  = SCRIPT_DIR / "static_filter.py"
 PHASE1_SCRIPT  = SCRIPT_DIR / "phase1_quick_backtest.py"
 PHASE2_SCRIPT  = SCRIPT_DIR / "vecscore.py"
 LEADERBOARD    = SCRIPT_DIR / "generate_leaderboard.py"
 
-PHASE0_OUTPUT  = PROJECT_ROOT / "user_data" / "static_filter_result.json"
-PHASE1_OUTPUT  = PROJECT_ROOT / "user_data" / "phase1_results.json"
-PHASE2_OUTPUT  = PROJECT_ROOT / "user_data" / "vecscore_results.json"
+# 这些将在 main 中根据 suffix 动态调整
+PHASE0_OUTPUT  = USER_DATA / "static_filter_result.json"
+PHASE1_OUTPUT  = USER_DATA / "phase1_results.json"
+PHASE2_OUTPUT  = USER_DATA / "vecscore_results.json"
 
 
 # ──────────────────────────────────────────────────────────────────────────────
@@ -203,8 +205,24 @@ def main():
     parser.add_argument(
         "--phase1-limit",
         type=int,
-        default=0,
-        help="Phase 1 限制策略数（0=不限制，调试用）",
+        default=100,
+        help="Phase 1 限制策略数（默认: 100，设置为 0 则不限制数据量）",
+    )
+    parser.add_argument(
+        "--days",
+        type=int,
+        default=30,
+        help="回测天数 (默认: 30)",
+    )
+    parser.add_argument(
+        "--strategies",
+        nargs="+",
+        help="指定仅测试这些策略（会透传给 Phase 1 和 Phase 2），用于针对性测试单个策略",
+    )
+    parser.add_argument(
+        "--suffix",
+        default="",
+        help="输出文件后缀 (例如 '7d', '1y')，用于区分不同时段的结果",
     )
     parser.add_argument(
         "--dry-run",
@@ -213,6 +231,14 @@ def main():
     )
 
     args = parser.parse_args()
+
+    # Phase 0 静态分析与时段无关，始终使用固定文件名
+    # 只有 Phase 1/2 的中间结果才需要按时段隔离
+    global PHASE1_OUTPUT, PHASE2_OUTPUT
+    if args.suffix:
+        s = f"_{args.suffix}"
+        PHASE1_OUTPUT = USER_DATA / f"phase1_results{s}.json"
+        PHASE2_OUTPUT = USER_DATA / f"vecscore_results{s}.json"
 
     python_exe = sys.executable
 
@@ -257,7 +283,7 @@ def main():
 
     if not results.get("phase0"):
         print("\n❌ Phase 0 失败，中止流水线")
-        return
+        sys.exit(1)
 
     # ═══════════════════════════════════════════════════════
     # Phase 1: 快速回测初筛
@@ -286,14 +312,18 @@ def main():
         print(f"   提示: 可以先用 --phase1-limit 50 测试前 50 个")
 
         cmd = [python_exe, str(PHASE1_SCRIPT)]
+        cmd += ["--days", str(args.days)]
+        cmd += ["--output", str(PHASE1_OUTPUT)]          # 显式指定输出路径（含后缀）
+        cmd += ["--filter-result", str(PHASE0_OUTPUT)]  # 显式指定 Phase 0 输入
         if args.workers > 1:
             cmd += ["--workers", str(args.workers)]
         if args.resume_phase1:
             cmd += ["--resume"]
         if args.no_docker:
             cmd += ["--no-docker"]
-        if args.phase1_limit > 0:
-            cmd += ["--limit", str(args.phase1_limit)]
+        if args.strategies:
+            cmd += ["--strategies"] + args.strategies
+        cmd += ["--limit", str(args.phase1_limit)]
 
         if args.dry_run:
             print(f"[预演] 将执行: {' '.join(str(c) for c in cmd)}")
@@ -311,7 +341,7 @@ def main():
 
     if not results.get("phase1"):
         print("\n❌ Phase 1 失败，中止流水线")
-        return
+        sys.exit(1)
 
     # ═══════════════════════════════════════════════════════
     # Phase 2: VecScore 评分
@@ -329,9 +359,13 @@ def main():
         cmd = [
             python_exe, str(PHASE2_SCRIPT),
             "--mode", args.vecscore_mode,
+            "--phase1", str(PHASE1_OUTPUT),   # 显式指定输入
+            "--output", str(PHASE2_OUTPUT),   # 显式指定输出
         ]
         if args.no_docker:
             cmd += ["--no-docker"]
+        if args.strategies:
+            cmd += ["--strategies"] + args.strategies
 
         if args.dry_run:
             print(f"[预演] 将执行: {' '.join(str(c) for c in cmd)}")
@@ -339,6 +373,10 @@ def main():
         else:
             ok, _ = run_phase("Phase 2 VecScore", cmd)
             results["phase2"] = ok
+
+    if not results.get("phase2"):
+        print("\n❌ Phase 2 失败，中止流水线")
+        sys.exit(1)
 
     if args.stop_after == "phase2":
         print("\n🛑 --stop-after phase2，流水线在此停止")
@@ -370,8 +408,8 @@ def main():
         print(f"    {exists}  {label}: {path.relative_to(PROJECT_ROOT)}")
 
     print()
-    print("🔜 下一步：将 vecscore_results.json 集成到前端 leaderboard.json")
-    print(f"   运行: python scripts/generate_leaderboard.py --vecscore user_data/vecscore_results.json")
+    print("🔜 下一步：将生成的评分记录同步到排行榜")
+    print(f"   运行: python scripts/generate_leaderboard.py --vecscore {PHASE2_OUTPUT.relative_to(PROJECT_ROOT)}")
 
 
 if __name__ == "__main__":
