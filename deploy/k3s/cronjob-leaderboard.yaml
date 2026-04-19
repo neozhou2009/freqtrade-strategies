@@ -29,6 +29,10 @@ spec:
                 git fetch origin commercial
                 git reset --hard FETCH_HEAD
               fi
+              
+              # Flatten strategies into /workdir/user_data/strategies so pipeline can find them
+              mkdir -p /workdir/user_data/strategies
+              find /workdir/strategies -name "*.py" -exec cp {} /workdir/user_data/strategies/ \;
             volumeMounts:
             - name: strategy-storage
               mountPath: /workdir
