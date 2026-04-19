@@ -27,7 +27,7 @@ spec:
                 git clone --single-branch --branch commercial --depth 1 https://github.com/neozhou2009/freqtrade-strategies.git .
               else
                 git fetch origin commercial
-                git reset --hard origin/commercial
+                git reset --hard FETCH_HEAD
               fi
             volumeMounts:
             - name: strategy-storage

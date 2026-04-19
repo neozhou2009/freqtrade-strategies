@@ -58,7 +58,6 @@ update_period() {
     
     local CMD=(
         python3 scripts/run_pipeline.py
-        --skip-phase0
         --days "$days"
         --suffix "$suffix"
         --workers "$WORKERS"
