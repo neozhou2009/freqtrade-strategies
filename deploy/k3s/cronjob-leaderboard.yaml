@@ -7,12 +7,14 @@ spec:
   # 温哥华时间每天 12:20 执行（测试用，之后改为正式时间）
   schedule: "20 12 * * *"
   timeZone: "America/Vancouver"
+  concurrencyPolicy: Forbid
   successfulJobsHistoryLimit: 3
-  failedJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 2
   jobTemplate:
     spec:
       # 给数据下载 + 回测足够时间
       activeDeadlineSeconds: 7200
+      backoffLimit: 2
       template:
         spec:
           initContainers:
@@ -42,9 +44,17 @@ spec:
             image: neozhou2009/freqtrade-full:latest
             imagePullPolicy: IfNotPresent
             workingDir: /workdir
+            resources:
+              requests:
+                cpu: "1000m"
+                memory: "2Gi"
+              limits:
+                cpu: "2000m"
+                memory: "4Gi"
             command: ["/bin/bash", "-c"]
             args:
             - |
+              # 注意：建议将 psycopg2-binary 构建进 Docker 镜像中以提高稳定性
               pip install --no-cache-dir psycopg2-binary
               bash scripts/auto_update_all_periods.sh --all --mode fast
             env:

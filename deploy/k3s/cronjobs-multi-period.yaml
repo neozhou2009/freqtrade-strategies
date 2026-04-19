@@ -1,0 +1,265 @@
+# ==============================================================================
+# VecAlpha 策略排行榜多周期独立调度配置 (已展开)
+# ==============================================================================
+
+# --- 1. 每日任务 (1w + 1m) ---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: leaderboard-daily
+  namespace: quantrading
+spec:
+  schedule: "20 12 * * *"  # 每天 12:20
+  timeZone: "America/Vancouver"
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 2
+  jobTemplate:
+    spec:
+      activeDeadlineSeconds: 3600
+      backoffLimit: 1
+      template:
+        spec:
+          initContainers:
+          - name: sync-code
+            image: alpine/git
+            command: ["/bin/sh", "-c"]
+            args:
+            - |
+              cd /workdir
+              if [ ! -d .git ]; then
+                git clone --single-branch --branch commercial --depth 1 https://github.com/neozhou2009/freqtrade-strategies.git .
+              else
+                git fetch origin commercial
+                git reset --hard FETCH_HEAD
+              fi
+              mkdir -p /workdir/user_data/strategies
+              find /workdir/strategies -name "*.py" -exec cp {} /workdir/user_data/strategies/ \;
+            volumeMounts:
+            - name: strategy-storage
+              mountPath: /workdir
+          containers:
+          - name: updater
+            image: neozhou2009/freqtrade-full:latest
+            imagePullPolicy: IfNotPresent
+            workingDir: /workdir
+            resources:
+              requests:
+                cpu: "1000m"
+                memory: "2Gi"
+              limits:
+                cpu: "2000m"
+                memory: "4Gi"
+            command: ["/bin/bash", "-c"]
+            args:
+            - "bash scripts/auto_update_all_periods.sh --daily --mode fast"
+            env:
+              - name: POSTGRES_USER
+                value: "quantrading"
+              - name: POSTGRES_PASSWORD
+                valueFrom:
+                  secretKeyRef:
+                    name: quantrading-secrets
+                    key: POSTGRES_PASSWORD
+              - name: K3S_PG_SVC
+                value: "mx-postgres-ha-postgresql-ha-pgpool.infra.svc.cluster.local"
+            volumeMounts:
+            - name: strategy-storage
+              mountPath: /workdir
+          restartPolicy: OnFailure
+          volumes:
+          - name: strategy-storage
+            persistentVolumeClaim:
+              claimName: strategy-pvc
+
+---
+
+# --- 2. 每二、五任务 (3m) ---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: leaderboard-3m
+  namespace: quantrading
+spec:
+  schedule: "0 2 * * 2,5"
+  timeZone: "America/Vancouver"
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 2
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      activeDeadlineSeconds: 7200
+      backoffLimit: 1
+      template:
+        spec:
+          initContainers:
+          - name: sync-code
+            image: alpine/git
+            command: ["/bin/sh", "-c"]
+            args:
+            - |
+              cd /workdir
+              git fetch origin commercial && git reset --hard FETCH_HEAD
+              find /workdir/strategies -name "*.py" -exec cp {} /workdir/user_data/strategies/ \;
+            volumeMounts:
+            - name: strategy-storage
+              mountPath: /workdir
+          containers:
+          - name: updater
+            image: neozhou2009/freqtrade-full:latest
+            workingDir: /workdir
+            resources:
+              requests:
+                cpu: "1500m"
+                memory: "4Gi"
+              limits:
+                cpu: "2500m"
+                memory: "6Gi"
+            command: ["/bin/bash", "-c"]
+            args: ["bash scripts/auto_update_all_periods.sh --period 3m --mode fast"]
+            env:
+              - name: POSTGRES_USER
+                value: "quantrading"
+              - name: POSTGRES_PASSWORD
+                valueFrom:
+                  secretKeyRef:
+                    name: quantrading-secrets
+                    key: POSTGRES_PASSWORD
+              - name: K3S_PG_SVC
+                value: "mx-postgres-ha-postgresql-ha-pgpool.infra.svc.cluster.local"
+            volumeMounts:
+            - name: strategy-storage
+              mountPath: /workdir
+          restartPolicy: OnFailure
+          volumes:
+          - name: strategy-storage
+            persistentVolumeClaim:
+              claimName: strategy-pvc
+
+---
+
+# --- 3. 每周六任务 (6m) ---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: leaderboard-6m
+  namespace: quantrading
+spec:
+  schedule: "0 2 * * 6"
+  timeZone: "America/Vancouver"
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 2
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      activeDeadlineSeconds: 14400
+      backoffLimit: 1
+      template:
+        spec:
+          initContainers:
+          - name: sync-code
+            image: alpine/git
+            command: ["/bin/sh", "-c"]
+            args:
+            - |
+              cd /workdir
+              git fetch origin commercial && git reset --hard FETCH_HEAD
+              find /workdir/strategies -name "*.py" -exec cp {} /workdir/user_data/strategies/ \;
+            volumeMounts:
+            - name: strategy-storage
+              mountPath: /workdir
+          containers:
+          - name: updater
+            image: neozhou2009/freqtrade-full:latest
+            workingDir: /workdir
+            resources:
+              requests:
+                cpu: "2000m"
+                memory: "6Gi"
+              limits:
+                cpu: "3000m"
+                memory: "8Gi"
+            command: ["/bin/bash", "-c"]
+            args: ["bash scripts/auto_update_all_periods.sh --period 6m --mode fast"]
+            env:
+              - name: POSTGRES_USER
+                value: "quantrading"
+              - name: POSTGRES_PASSWORD
+                valueFrom:
+                  secretKeyRef:
+                    name: quantrading-secrets
+                    key: POSTGRES_PASSWORD
+              - name: K3S_PG_SVC
+                value: "mx-postgres-ha-postgresql-ha-pgpool.infra.svc.cluster.local"
+            volumeMounts:
+            - name: strategy-storage
+              mountPath: /workdir
+          restartPolicy: OnFailure
+          volumes:
+          - name: strategy-storage
+            persistentVolumeClaim:
+              claimName: strategy-pvc
+
+---
+
+# --- 4. 每月 1号任务 (1y) ---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: leaderboard-1y
+  namespace: quantrading
+spec:
+  schedule: "0 6 1 * *"
+  timeZone: "America/Vancouver"
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      activeDeadlineSeconds: 28800
+      backoffLimit: 1
+      template:
+        spec:
+          initContainers:
+          - name: sync-code
+            image: alpine/git
+            command: ["/bin/sh", "-c"]
+            args:
+            - |
+              cd /workdir
+              git fetch origin commercial && git reset --hard FETCH_HEAD
+              find /workdir/strategies -name "*.py" -exec cp {} /workdir/user_data/strategies/ \;
+            volumeMounts:
+            - name: strategy-storage
+              mountPath: /workdir
+          containers:
+          - name: updater
+            image: neozhou2009/freqtrade-full:latest
+            workingDir: /workdir
+            resources:
+              requests:
+                cpu: "3000m"
+                memory: "8Gi"
+              limits:
+                cpu: "4000m"
+                memory: "10Gi"
+            command: ["/bin/bash", "-c"]
+            args: ["bash scripts/auto_update_all_periods.sh --period 1y --mode fast"]
+            env:
+              - name: POSTGRES_USER
+                value: "quantrading"
+              - name: POSTGRES_PASSWORD
+                valueFrom:
+                  secretKeyRef:
+                    name: quantrading-secrets
+                    key: POSTGRES_PASSWORD
+              - name: K3S_PG_SVC
+                value: "mx-postgres-ha-postgresql-ha-pgpool.infra.svc.cluster.local"
+            volumeMounts:
+            - name: strategy-storage
+              mountPath: /workdir
+          restartPolicy: OnFailure
+          volumes:
+          - name: strategy-storage
+            persistentVolumeClaim:
+              claimName: strategy-pvc
