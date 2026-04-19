@@ -4,28 +4,44 @@ metadata:
   name: leaderboard-auto-updater
   namespace: quantrading
 spec:
-  # 每天凌晨 2 点执行
-  schedule: "0 2 * * *"
-  # 保留成功 3 次、失败 1 次的历史记录
+  # 温哥华时间每天 12:20 执行（测试用，之后改为正式时间）
+  schedule: "20 12 * * *"
+  timeZone: "America/Vancouver"
   successfulJobsHistoryLimit: 3
   failedJobsHistoryLimit: 1
   jobTemplate:
     spec:
+      # 给数据下载 + 回测足够时间
+      activeDeadlineSeconds: 7200
       template:
         spec:
-          # 使用已安装 freqtrade 与 psycopg2 的镜像
+          initContainers:
+          # Step 1: 同步最新代码
+          - name: sync-code
+            image: alpine/git
+            command: ["/bin/sh", "-c"]
+            args:
+            - |
+              cd /workdir
+              if [ ! -d .git ]; then
+                git clone --single-branch --branch commercial --depth 1 https://github.com/neozhou2009/freqtrade-strategies.git .
+              else
+                git fetch origin commercial
+                git reset --hard origin/commercial
+              fi
+            volumeMounts:
+            - name: strategy-storage
+              mountPath: /workdir
+          # Step 3: 运行回测流水线
           containers:
           - name: updater
             image: neozhou2009/freqtrade-full:latest
             imagePullPolicy: IfNotPresent
-            # 执行命令
+            workingDir: /workdir
             command: ["/bin/bash", "-c"]
             args:
-              - |
-                git pull origin main && \
-                python3 scripts/run_pipeline.py --vecscore-mode fast && \
-                python3 scripts/generate_leaderboard.py --vecscore user_data/vecscore_results.json && \
-                python3 scripts/db_sync_leaderboard.py --env k3s
+            - |
+              bash scripts/auto_update_all_periods.sh --all --mode fast
             env:
               - name: POSTGRES_USER
                 value: "quantrading"
@@ -33,15 +49,15 @@ spec:
                 valueFrom:
                   secretKeyRef:
                     name: quantrading-secrets
-                    key: postgres-password
+                    key: POSTGRES_PASSWORD
               - name: K3S_PG_SVC
                 value: "mx-postgres-ha-postgresql-ha-pgpool.infra.svc.cluster.local"
-            # 挂载策略代码与行情数据的 PVC
             volumeMounts:
             - name: strategy-storage
-              mountPath: /freqtrade/user_data
+              mountPath: /workdir
           restartPolicy: OnFailure
           volumes:
           - name: strategy-storage
             persistentVolumeClaim:
               claimName: strategy-pvc
+
