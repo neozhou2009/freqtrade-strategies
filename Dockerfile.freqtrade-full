@@ -1,2 +1,2 @@
 FROM freqtradeorg/freqtrade:stable
-RUN pip install TA-Lib finta ta scikit-optimize arrow psycopg2-binary
+RUN pip install TA-Lib finta ta scikit-optimize arrow psycopg2-binary redis msgpack-python requests
