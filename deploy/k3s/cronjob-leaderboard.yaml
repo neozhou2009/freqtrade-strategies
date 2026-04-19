@@ -45,6 +45,7 @@ spec:
             command: ["/bin/bash", "-c"]
             args:
             - |
+              pip install --no-cache-dir psycopg2-binary
               bash scripts/auto_update_all_periods.sh --all --mode fast
             env:
               - name: POSTGRES_USER
